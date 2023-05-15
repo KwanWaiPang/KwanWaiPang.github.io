@@ -37,6 +37,18 @@
     background-position: center;
     }
 
+    .evio-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .evio-container_image {
+      height: auto;
+      max-width: 45%; /* 图片最大宽度为页面宽度的一半 */
+    }
+
     .first-container {
         display: flex;
         justify-content: center;
@@ -87,6 +99,12 @@
 <h1>Research Works</h1>
 <ul>
     <li>Event-based VO/VIO/SLAM (<a href="https://github.com/arclab-hku/Event_based_VO-VIO-SLAM" target="_blank">Github Link</a>). </li>
+
+    <div class="evio-container">
+        <img class="evio-container_image" src="Image/PLEVIO.gif" alt="Animated Image 1">
+        <img class="evio-container_image" src="Image/ESVIO.gif" alt="Animated Image 2">
+    </div>
+
 
     <li>Optical camera communications for indoor positioning, Internet-of-Things, and robotics (<a href="https://blog.csdn.net/gwplovekimi/article/details/125801118?spm=1001.2014.3001.5502" target="_blank">Blog Link</a>). </li>
     <div style="text-align:center;">
