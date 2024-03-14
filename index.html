@@ -69,28 +69,31 @@
       margin-bottom: 10px;  /* 元素下方的空白区域的大小 */
       margin-top: 10px;
       width: 100%; /* 宽度为屏幕尺寸的100% */
-      height: 40vh; /* 高度为屏幕尺寸的40%，使用视窗高度单位 vh */
-      justify-content: center;
+      height: 45vh; /* 高度为屏幕尺寸的40%，使用视窗高度单位 vh */
     }
 
     .patent-left {
       flex: 1;
-<!--      margin-right: 10px; /* 文字与图片/PDF之间的间距 */-->
     }
 
-    .patent-middle,
+    .patent-middle
+    {
+        width:25%
+    }
+
     .patent-right {
-         width: auto;
-         height: 40vh;
-         margin-right: 10px; /* 文字与图片/PDF之间的间距 */
-      <!--      flex-basis: 20%; /* 初始宽度 */-->
-     <!--      max-width: 20%-->
+        width:25%
     }
 
-    .patent-img,
-    .patent-pdf {
+    .patent-img
+    {
       width: auto; /* 让宽度自适应 */
-      height: 40vh;
+      height: 100%;
+    }
+
+    .patent-pdf {
+      width: 100%; /* 让宽度自适应 */
+      height: 100%;
     }
 
     </style>
