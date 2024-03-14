@@ -68,9 +68,9 @@
       display: flex;
       margin-bottom: 10px;  /* 元素下方的空白区域的大小 */
       margin-top: 10px;
-<!--      height: 400px; /* 设置 patent-intro 的高度，可以根据实际情况调整 */-->
       width: 100%; /* 宽度为屏幕尺寸的100% */
-      height: 45vh; /* 高度为屏幕尺寸的40%，使用视窗高度单位 vh */
+      height: 40vh; /* 高度为屏幕尺寸的40%，使用视窗高度单位 vh */
+      justify-content: center;
     }
 
     .patent-left {
@@ -80,14 +80,17 @@
 
     .patent-middle,
     .patent-right {
-      flex-basis: 20%; /* 初始宽度 */
-<!--      margin-right: 10px; /* 文字与图片/PDF之间的间距 */-->
+         width: auto;
+         height: 40vh;
+         margin-right: 10px; /* 文字与图片/PDF之间的间距 */
+      <!--      flex-basis: 20%; /* 初始宽度 */-->
+     <!--      max-width: 20%-->
     }
 
     .patent-img,
     .patent-pdf {
       width: auto; /* 让宽度自适应 */
-      height: 100%;
+      height: 40vh;
     }
 
     </style>
