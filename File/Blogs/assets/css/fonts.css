@@ -1,0 +1,20 @@
+/* 全局字体样式 */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* 标题样式 */
+/* h1 {
+  color: blue;
+} */
+
+/* 段落样式 */
+/* p {
+  font-size: 16px;
+} */
+
+.bottom-footer {
+  display: grid;
+  place-items: center;
+  min-height: 100vh; /* 设置最小高度为视窗高度 */
+}
