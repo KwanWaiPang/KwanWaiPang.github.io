@@ -68,97 +68,112 @@
   <!-- Body -->
   <body class="fixed-top-nav ">
 
-    <!-- Header -->
-    <header>
+<!-- Header -->
+<header>
+<!-- Nav Bar -->
+<nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+  <div class="container">
+    
+  <!-- Navbar Toggle -->
+  <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar top-bar"></span>
+    <span class="icon-bar middle-bar"></span>
+    <span class="icon-bar bottom-bar"></span>
+  </button>
 
-      <!-- Nav Bar -->
-      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
-        <div class="container">
-          
-          <!-- Navbar Toggle -->
-          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar top-bar"></span>
-            <span class="icon-bar middle-bar"></span>
-            <span class="icon-bar bottom-bar"></span>
-          </button>
+  <div class="collapse navbar-collapse text-right" id="navbarNav">
+    <ul class="navbar-nav ml-auto flex-nowrap">
+      <li class="nav-item ">
+        <a class="nav-link" href="https://github.com/KwanWaiPang" target="_blank">Github</a>
+      </li>
 
-          <div class="collapse navbar-collapse text-right" id="navbarNav">
-            <ul class="navbar-nav ml-auto flex-nowrap">
-                <li class="nav-item ">
-                  <a class="nav-link" href="https://github.com/KwanWaiPang" target="_blank">Github</a>
-                </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="https://blog.csdn.net/gwplovekimi" target="_blank">CSDN Blog</a>
+      </li>
 
-                <li class="nav-item ">
-                  <a class="nav-link" href="https://blog.csdn.net/gwplovekimi" target="_blank">CSDN Blog</a>
-                </li>
+      <li class="nav-item ">
+        <a class="nav-link" href="https://space.bilibili.com/499377825?spm_id_from=333.1007.0.0" target="_blank">Bilibili</a>
+      </li>
 
-                <li class="nav-item ">
-                  <a class="nav-link" href="https://space.bilibili.com/499377825?spm_id_from=333.1007.0.0" target="_blank">Bilibili</a>
-                </li>
+      <!-- 可以下拉菜单-->
+      <li class="nav-item dropdown">
+        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Event-based Vision</a>
+        <ul class="dropdown-menu">
+          <li class="nav-item">
+            <a href="Poster/esim.html" class="dropdown-item">Event Camera Simulator</a>
+          </li>
 
-<!--                可以下拉菜单-->
-                <li class="nav-item dropdown">
-                  <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Event-based Vision</a>
-                  <ul class="dropdown-menu">
-                    <li class="nav-item">
-                      <a href="Poster/esim.html" class="dropdown-item">Event Camera Simulator</a>
-                    </li>
+          <li class="nav-item">
+            <a href="Poster/Sensor_Synchronization.html" class="dropdown-item">Sensors Synchronization</a>
+          </li>
 
-                    <li class="nav-item">
-                      <a href="Poster/Sensor_Synchronization.html" class="dropdown-item">Sensors Synchronization</a>
-                    </li>
+          <li class="nav-item">
+            <a href="https://github.com/arclab-hku/Event_based_VO-VIO-SLAM" target="_blank" class="dropdown-item">HKU-Dataset</a>
+          </li>
 
-                    <li class="nav-item">
-                      <a href="https://github.com/arclab-hku/Event_based_VO-VIO-SLAM" target="_blank" class="dropdown-item">HKU-Dataset</a>
-                    </li>
+          <li class="nav-item">
+            <a href="https://arclab-hku.github.io/ecmd/" target="_blank" class="dropdown-item">ECMD dataset</a>
+          </li>
 
-                    <li class="nav-item">
-                      <a href="https://arclab-hku.github.io/ecmd/" target="_blank" class="dropdown-item">ECMD dataset</a>
-                    </li>
+        </ul>
+      </li>
 
-                  </ul>
-                </li>
+      <li class="nav-item dropdown">
+        <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">SLAM</a>
+        <ul class="dropdown-menu">
+          <li class="nav-item">
+            <a href="https://blog.csdn.net/gwplovekimi/category_12633639.html?spm=1001.2014.3001.5482" target="_blank" class="dropdown-item">Survey for Dynamic SLAM</a>
+          </li>
 
-              <li class="nav-item dropdown">
-                <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Deep Learning</a>
-                <ul class="dropdown-menu">
+          <li class="nav-item">
+            <a href="https://blog.csdn.net/gwplovekimi/article/details/119711762?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">Implementation of Several LiDAR-SLAM</a>
+          </li>
 
-                  <li class="nav-item">
-                    <a href="https://blog.csdn.net/gwplovekimi/category_12633639.html?spm=1001.2014.3001.5482" target="_blank" class="dropdown-item">3D Gaussian Splatting (3DGS)</a>
-                  </li>
+          <li class="nav-item">
+            <a href="https://blog.csdn.net/gwplovekimi/article/details/139318827?spm=1001.2014.3001.5501" target="_blank" class="dropdown-item">Survey for 3DGS-SLAM</a>
+          </li>
+        </ul>
+      </li>
 
-                  <li class="nav-item">
-                    <a href="https://blog.csdn.net/gwplovekimi/article/details/83041627?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">Super Resolution</a>
-                  </li>
+    <li class="nav-item dropdown">
+      <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Deep Learning</a>
+      <ul class="dropdown-menu">
 
-                </ul>
-              </li>
+        <li class="nav-item">
+          <a href="https://blog.csdn.net/gwplovekimi/category_12633639.html?spm=1001.2014.3001.5482" target="_blank" class="dropdown-item">3D Gaussian Splatting (3DGS)</a>
+        </li>
 
-              <li class="nav-item dropdown">
-                <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Li-Fi</a>
-                <ul class="dropdown-menu">
+        <li class="nav-item">
+          <a href="https://blog.csdn.net/gwplovekimi/article/details/83041627?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">Super Resolution</a>
+        </li>
 
-                  <li class="nav-item">
-                    <a href="https://blog.csdn.net/gwplovekimi/article/details/125801118?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">VLC for IoT and Robotics</a>
-                  </li>
+      </ul>
+    </li>
 
-                  <li class="nav-item">
-                    <a href="https://blog.csdn.net/gwplovekimi/article/details/136630493?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">2024 Li-Fi Annual Conference</a>
-                  </li>
+    <li class="nav-item dropdown">
+      <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle" data-toggle="dropdown">Li-Fi</a>
+      <ul class="dropdown-menu">
 
-                  <li class="nav-item">
-                    <a href="https://blog.csdn.net/gwplovekimi/article/details/129078532" target="_blank" class="dropdown-item">2023 Li-Fi Annual Conference</a>
-                  </li>
+        <li class="nav-item">
+          <a href="https://blog.csdn.net/gwplovekimi/article/details/125801118?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">VLC for IoT and Robotics</a>
+        </li>
 
-                </ul>
-              </li>
+        <li class="nav-item">
+          <a href="https://blog.csdn.net/gwplovekimi/article/details/136630493?spm=1001.2014.3001.5502" target="_blank" class="dropdown-item">2024 Li-Fi Annual Conference</a>
+        </li>
 
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+        <li class="nav-item">
+          <a href="https://blog.csdn.net/gwplovekimi/article/details/129078532" target="_blank" class="dropdown-item">2023 Li-Fi Annual Conference</a>
+        </li>
+
+      </ul>
+    </li>
+    </ul>
+  </div>
+</div>
+</nav>
+</header>
 
     <!-- Content -->
     <div class="container mt-5">
