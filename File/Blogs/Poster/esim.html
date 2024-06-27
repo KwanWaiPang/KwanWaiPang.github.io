@@ -105,11 +105,9 @@
             Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
           </p>
         </header>
-
-        <p><br></p>
-
 <article>
 <!-- 插入博客内容-->
+<p><br></p>
 <h1>引言</h1>
 <p><br></p>
 <p>
@@ -194,7 +192,40 @@
 
 </p>
 
+<p><br></p>
+<h1>采用HKU数据集进行real-event data与sim-event data对比</h1>
+<p><br></p>
+<p>
+对于python环境中，如果没有预先安装ros，则需要先安装一下的ros的python库。
+<pre>
+  pip install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag
 
+  pip install rosbag_pandas
+
+  pip install cv_bridge
+
+  pip install sensor_msgs --extra-index-url https://rospypi.github.io/simple/
+
+  pip install geometry_msgs --extra-index-url https://rospypi.github.io/simple
+</pre>
+<ul>
+  <li> 读入rosbag并可视化image及其对应的event：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/read_rosbag.ipynb" target="_blank">Link</a></li>
+
+  <li> 读入rosbag,然后将其中的10张图片生成event,同时与10张图片期间的真实的event进行可视化对比：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/generate_sim_event.ipynb" target="_blank">Link</a></li>
+
+  <li> 在上面的基础上，改为先对10张图片进行上采样（learning model）然后再生成sim event：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/upsampled_generate_sim_event.ipynb" target="_blank">Link</a></li>
+</ul>
+
+</p>
+
+<p><br></p>
+<h1>采用TartanAir生成event 数据集</h1>
+<p><br></p>
+<p>
+
+
+
+</p>
 
 <p><br></p>
 <h1>参考资料及代码链接</h1>
