@@ -227,8 +227,23 @@
 <h1>采用TartanAir生成event 数据集</h1>
 <p><br></p>
 <p>
-
-
+首先需要下载<a href="https://theairlab.org/tartanair-dataset/" target="_blank">TartanAir</a>中所有的数据,采用工具链接<a href="https://github.com/castacks/tartanair_tools" target="_blank">tartanair_tools</a>。
+<pre>
+  cd thirdparty/tartanair_tools/
+  pip install boto3 #需要安装依赖~
+  python download_training.py --output-dir ../../datasets --rgb --depth --only-left
+</pre>
+然后采用下面的代码来实现把TartanAir的数据转换成event数据：
+<pre>conda activate vid2e
+  #解压文件（此步骤可以省略，因为下面的convert_tartan.py文件已经实现了）
+  unzip filename.zip -d foldername
+  unzip datasets/abandonedfactory_Easy_image_left.zip -d datasets/TartanAir
+  
+  #进行数据的转换，获取event
+  pip install hdf5plugin
+  python scripts/convert_tartan.py --dirsfile=datasets/converted.txt  
+</pre>
+关于convert_tartan.py的代码实现请见：<a href="https://github.com/KwanWaiPang/DEVO_comment/blob/main/scripts/convert_tartan.py" target="_blank">Code Link</a>
 
 </p>
 
@@ -237,6 +252,7 @@
 <p><br></p>
 <ul>
   <li> 代码链接<a href="https://github.com/KwanWaiPang/ESIM_comment" target="_blank">ESIM_comment</a> and <a href="https://github.com/KwanWaiPang/DEVO_comment" target="_blank">DEVO_comment</a>. </li>
+  <li> 采用pdb对python代码进行debug：<a href="https://blog.csdn.net/m0_51111980/article/details/115429829" target="_blank">Link</a></li>
 </ul>
 
 
