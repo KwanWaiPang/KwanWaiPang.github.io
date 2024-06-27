@@ -119,7 +119,7 @@
 </p>
 
 <p><br></p>
-<h1>配置setup</h1>
+<h1>配置及测试</h1>
 <p><br></p>
 <p>
   首先，构建一个新的conda环境，然后安装所需的依赖项。
@@ -169,10 +169,10 @@
   #然后重启ipynb的kernel，在终端安装更快：pip install ipykernel 
 </pre>
 <ul>
-  <li> 用ESIM生成event并用不同的event representation来可视化请见：<a href="../assets/img/ESIM/evaluating_event_representation.ipynb" target="_blank">Link</a></li>
+  <li> 用ESIM生成event并用不同的event representation来可视化请见：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/evaluating_event_representation.ipynb" target="_blank">Link</a></li>
 </ul>
 
-
+进一步地，采用Adaptive Upsampling来上采样图像，然后再用图像来生成event数据。
 
 下载图像插值upsampled的模型,在调用usampled代码的时候会自动加载这个模型来使用（详细请见代码）。PS：对于帧率较低图像数据（fps<60）都应该先采用上采样对原始的图片或视频数据进行插值。
 <!-- 插入代码 -->
@@ -181,7 +181,17 @@
   wget https://rpg.ifi.uzh.ch/data/VID2E/pretrained_models.zip
   #解压
   unzip pretrained_models.zip
+
+  device=cpu
+  # device=cuda:0
+  python upsampling/upsample.py --input_dir=example/original --output_dir=example/upsampled --device=$device
+  #输入的数据目录为example/original，输出数据目录为example/upsampled
 </pre>
+
+<ul>
+  <li> 用ipynb记录的upsampling+ESIM请见：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/upsample_esim.ipynb" target="_blank">Link</a></li>
+</ul>
+
 </p>
 
 
