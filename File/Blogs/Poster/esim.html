@@ -167,7 +167,7 @@
   #然后重启ipynb的kernel，在终端安装更快：pip install ipykernel 
 </pre>
 <ul>
-  <li> 用ESIM生成event并用不同的event representation来可视化请见：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/evaluating_event_representation.ipynb" target="_blank">Link</a></li>
+  <li> 用ESIM生成event并用不同的event representation来可视化请见：<a href="https://github.com/KwanWaiPang/ESIM_comment/blob/main/esim_torch/test/evaluating_event_representation.ipynb" target="_blank">Link</a></li>
 </ul>
 
 进一步地，采用Adaptive Upsampling来上采样图像，然后再用图像来生成event数据。
@@ -187,7 +187,7 @@
 </pre>
 
 <ul>
-  <li> 用ipynb记录的upsampling+ESIM请见：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/upsample_esim.ipynb" target="_blank">Link</a></li>
+  <li> 用ipynb记录的upsampling+ESIM请见：<a href="https://github.com/KwanWaiPang/ESIM_comment/blob/main/upsample_esim.ipynb" target="_blank">Link</a></li>
 </ul>
 
 </p>
@@ -208,14 +208,19 @@
 
   pip install geometry_msgs --extra-index-url https://rospypi.github.io/simple
 </pre>
+接下来通过3个ipynb文件来进行实验：
 <ul>
-  <li> 读入rosbag并可视化image及其对应的event：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/read_rosbag.ipynb" target="_blank">Link</a></li>
+  <li> 读入rosbag并可视化image及其对应的event：<a href="" target="_blank">Link</a></li>
 
-  <li> 读入rosbag,然后将其中的10张图片生成event,同时与10张图片期间的真实的event进行可视化对比：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/generate_sim_event.ipynb" target="_blank">Link</a></li>
+  <li> 读入rosbag,然后将其中的10张图片生成event,同时与10张图片期间的真实的event进行可视化对比：<a href="https://github.com/KwanWaiPang/ESIM_comment/blob/main/rosbag_reading/generate_sim_event.ipynb" target="_blank">Link</a></li>
 
-  <li> 在上面的基础上，改为先对10张图片进行上采样（learning model）然后再生成sim event：<a href="https://github.com/KwanWaiPang/KwanWaiPang.github.io/blob/main/File/Blogs/assets/img/ESIM/upsampled_generate_sim_event.ipynb" target="_blank">Link</a></li>
+  <li> 在上面的基础上，改为先对10张图片进行上采样（learning model）然后再生成sim event：<a href="https://github.com/KwanWaiPang/ESIM_comment/blob/main/rosbag_reading/upsampled_generate_sim_event.ipynb" target="_blank">Link</a></li>
 </ul>
-
+总结实验效果如下图所示：
+<figure style="text-align: center;">
+  <img style="width: 100%;" src="../assets/img/ESIM/realevent_vs_simevent.png" alt="Image description">
+  <figcaption>真实的事件数据 VS 仿真的事件数据</figcaption>
+</figure>
 </p>
 
 <p><br></p>
