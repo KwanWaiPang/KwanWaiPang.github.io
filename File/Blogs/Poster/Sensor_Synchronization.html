@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    body {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    p { /* 文字对齐 */
+        text-align: justify;
+        text-align-last: left;
+        text-justify: inter-word;
+    }
+    </style>
+
+  <!-- Head -->
+  <head>    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Technology Blog</title>
+    <meta name="author" content="Kwan Wai-Pang " />
+    <meta name="description" content="Technology Blog of Kwan Wai-Pang" />
+    <meta name="keywords" content="Event-based Vision, SLAM, Robotics" />
+
+    <!-- OpenGraph -->
+    <meta property="og:site_name" content="My Technology Blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="My Technology Blog  | Home" />
+    <meta property="og:description" content="My Technology Blog.
+" />
+    
+    <meta property="og:locale" content="en" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Home" />
+    <meta name="twitter:description" content="Technology Blog of Kwan Wai-Pang" />
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Barriecito&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/PASTIE.css" media="none" id="highlight_theme_light" />
+
+    <!-- Styles -->
+    
+    <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css">
+    <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
+    <link rel="stylesheet" href="/assets/css/fonts.css">
+    
+    <!-- Dark Mode -->
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+                <li class="nav-item ">
+                  <a class="nav-link" href="../My_Blog.html">Homepage</a>
+                </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Content -->
+    <div class="container mt-5">
+      <!-- home.html -->
+      <div class="post">
+        <header class="post-header">
+          <h1 align="center" class="post-title">
+           <span style="font-weight: 600;">Sensors Synchronization</span>
+          </h1>
+          <p><br></p>
+          <p class="desc">
+            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
+          </p>
+        </header>
+
+        <p><br></p>
+
+<article>
+<!-- 插入博客内容-->
+  <h1>1. Abstract</h1>
+  <p>
+    In this report, we will provide a brief overview of our sensor synchronization process.
+    This primarily involves synchronizing event cameras, synchronizing different types of sensors, and synchronizing onboard computers across multiple platforms.
+  </p>
+
+  <h1>2. The Synchronization of Event Cameras</h1>
+  <p>
+    The event camera has an additional synchronization interface, called as "sync connectors", as shown in the figure below. (Using DAVIS346 as example reference to <a href="https://inivation.com/wp-content/uploads/2019/08/DAVIS346.pdf">Link</a>,
+    same as DVXplorer <a href="https://inivation.com/wp-content/uploads/2023/03/DVXplorer.pdf">Link</a>).
+  </p>
+
+  <figure style="text-align: center;">
+    <img style="width: 60%;" src="../assets/img/Sensor_Synchronization/syns_connectors.png" alt="Image description">
+    <figcaption>Fig. 1. Sync connector pinouts on DAVIS 346</figcaption>
+  </figure>
+
+  <p>
+    The synchronization connectors are HiRose HR10A-7R-4P (male, SYNC OUTPUT) and HR10A-7R-4S (female, SYNC INPUT) connectors. Cables should use the matching connectors HR10A-7P-4S (female) and HR10A-7P-4P (male).
+    Please note that to keep full electrical isolation between different cameras, the cable should not be shielded, or if it is, the shield should not connect one end of the cable to the other.
+    Input signals can be 3.3V or 5V, depending on the VDD_IN supplied externally, output signals are 5V, as is VDD_OUT.
+    If you chain cameras together for synchronization, the clock and VDD will be 5V, for example.
+  </p>
+  <!--        <br>-->
+  <p>
+    Therefore, utilizing this sync connector, we connected four event cameras together (two DAVIS346 and two DVXplorer) as shown in the diagram below.
+    Additionally, we replaced the event camera ROS driver <a href="https://gitlab.com/inivation/dv/dv-ros">Code</a> provided by Invitation Company with our own driver <a href="https://github.com/arclab-hku/Event_based_VO-VIO-SLAM/tree/main/driver_code/dv-ros-master">Code</a>.
+  </p>
+
+  <figure style="text-align: center;">
+    <img style="width: 60%;" src="../assets/img/Sensor_Synchronization/four_event_camera.jpg" alt="Image description">
+    <figcaption>Fig. 2. Sync connector pinouts on DAVIS 346</figcaption>
+  </figure>
+
+  <p>
+    There are two key parameter in the driver code of event camera for synchronization, <mark>syncDevices</mark> and <mark> waitForSync </mark>
+  </p>
+
+  <div class="code-box">
+    <code> &lt;rosparam param=&quot;syncDevices&quot;&gt;["series number of your event camera"]&lt;/rosparam&gt; </code>
+  </div>
+
+  <p>
+    A list of other cameras connected with synchronization cable to this camera, If this list is empty, the camera node will not properly synchronize them.
+  </p>
+
+  <div class="code-box">
+    <code>&lt;param name=&quot;waitForSync&quot; value=&quot;true&quot;/&gt;</code>
+  </div>
+
+  <p>
+    This means that it does not publish data until synchronization is complete.
+    The launch file of our event camera synchronization can be seen in <a href="https://github.com/arclab-hku/Event_based_VO-VIO-SLAM/tree/main/driver_code/dv-ros-master/dv_ros_visualization/launch">Link</a>.
+    We use an event camera as "master" while the other three event cameras is waiting on list.
+    Through the series number of the event camera to avoid mis-match.
+  </p>
+
+  <iframe src="//player.bilibili.com/player.html?aid=869034367&bvid=BV1xV4y1B7qF&cid=1141562890&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 60%; height: 40vh;"></iframe>
+
+  <p>
+    Furthermore, to validate the synchronization effect, we simultaneously started four event cameras, recorded a rosbag, and then outputted the rostopic, as shown in the figure below.
+    It can be observed that "/DAVIS346 left/events: 4482", "/DAVIS346 right/events: 4482", "/DVXplorer left/events: 4483", and "/DVXplorer right/events: 4480".
+    The data volume from all four event cameras is similar.
+    Additionally, from the video demo, it can be seen that when the event cameras are started, there is a waiting period until all of them have finished initializing.
+    Moreover, the difference in data volume between "/DAVIS346 left/events" and "/DAVIS346 left/imu" is only 1, and both are recorded at 1000Hz.
+  </p>
+
+  <figure style="text-align: center;">
+    <img style="width: 60%;" src="../assets/img/Sensor_Synchronization/number_of_event_after_synchronization.png" alt="Image description">
+    <figcaption>Fig. 3. The rosbag information for the four event cameras</figcaption>
+  </figure>
+
+
+  <h1>3. The Synchronization of Multi Sensors</h1>
+
+  <figure style="text-align: center;">
+    <img style="width: 60%;" src="../assets/img/Sensor_Synchronization/structure_of_syns.png" alt="Image description">
+    <figcaption>Fig. 4. The Structure of Our Sensors Synchronization</figcaption>
+  </figure>
+
+  <h3>3.1. The Synchronization of Two Onboard Computer</h3>
+  <p>
+    Firstly, we install the PTP.
+  </p>
+
+  <div class="code-box">
+    <code>sudo apt install ptpd</code>
+  </div>
+
+  <p>
+    Choose a machine to serve as the master node and initiate the following on it (where eth0 is the selected network interface for synchronization, please note that it requires the connected switch to support the PTP protocol):
+  </p>
+
+  <div class="code-box">
+    <code>sudo ptpd -M -i eth0</code>
+  </div>
+
+  <p>
+    On the remaining slave nodes, initiate the following:
+  </p>
+
+  <div class="code-box">
+    <code>sudo ptpd -g -i eth0</code>
+  </div>
+
+  <p>
+    If the "-C" parameter is added to both the master and slave, it will run in the foreground and print the output. For example, on the master side:
+  </p>
+
+  <div class="code-box">
+    <code>sudo ptpd -g -i eth0 -C</code>
+  </div>
+
+  <br>
+
+  <figure style="text-align: center;">
+    <img style="width: 60%;" src="../assets/img/Sensor_Synchronization/ptpd_syns.png" alt="Image description">
+    <figcaption>The screenshot of the PTPD</figcaption>
+  </figure>
+
+  <h3>3.2 The Synchronization of Event Camera and Standard Camera </h3>
+  <p>
+    After synchronizing the clock cycles between two onboard computers, we set the image publishing frequency of DAVIS346 on onboard computer A to 20Hz, and the publishing frequency of the industrial camera on onboard computer B to 20Hz as well.
+    Then, we placed a stopwatch in front of both cameras.
+    We observed the stopwatch values for image topics with the same timestamps from both cameras.
+    After multiple verifications, we concluded that the time difference between the DAVIS346 on onboard computer A and the industrial camera on onboard computer B, directly capturing images, was within 10ms, which aligns with our expectations.
+  </p>
+
+  <figure style="text-align: center;">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_camera_synchronization.jpg" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/image_synchronization.jpg" alt="Image description">
+    <figcaption>Fig. 5. Synchronization Testing between the Event Camera (left) and the Standard Camera (right) </figcaption>
+  </figure>
+
+  <p>
+    We further test the synchronization between the event and image data streams in DAVIS346 as following:
+  </p>
+
+  <figure style="text-align: center;">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_1.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_2.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_3.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_4.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_5.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_6.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_7.png" alt="Image description">
+    <img style="width: 48%;" src="../assets/img/Sensor_Synchronization/event_vs_image_8.png" alt="Image description">
+    <figcaption>Fig. 6. Synchronization Testing between the Event and Image from DAVIS346 </figcaption>
+  </figure>
+
+  <br>
+  <iframe src="//player.bilibili.com/player.html?aid=229390210&bvid=BV168411o7BJ&cid=1152522995&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 60%; height: 40vh;"></iframe>
+
+  <h3>3.3. The Synchronization of Other Sensors</h3>
+  <p>
+    Our sensor platform can be seen as following:
+  </p>
+
+  <figure style="text-align: center;">
+    <img style="width: 60%;" src="../assets/img/Sensor_Synchronization/four_event_camera_platform.jpg" alt="Image description">
+    <figcaption>Fig. 7. Sensor Setup</figcaption>
+  </figure>
+
+
+  <h4>Tips:</h4>
+  <ul>
+    <li>
+      <p>
+        Event cameras are sensitive to infrared light, enabling them to detect the brightness changes caused by LiDAR with the right wavelength.
+      </p>
+    </li>
+  </ul>
+
+  <p>
+    To alleviate disturbance from the LiDAR on the event camera, we add an infrared filter on the lens surface of the DAVIS346 camera.
+    As can be seen from the video, we demonstrate that two event cameras with infrared filter while the other two event cameras without infrared filter.
+  </p>
+
+  <iframe src="//player.bilibili.com/player.html?aid=399299383&bvid=BV15o4y1u7Up&cid=1147844860&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 60%; height: 40vh;"></iframe>
+
+
+</article>
+
+</div>
+</div>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/ecmd/assets/js/masonry.js" type="text/javascript"></script>
+
+  <!-- Medium Zoom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="/ecmd/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script src="/ecmd/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+</body>
+</html>
+
