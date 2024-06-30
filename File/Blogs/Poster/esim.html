@@ -244,6 +244,7 @@
   python scripts/convert_tartan.py --dirsfile=datasets/converted.txt  
 </pre>
 关于convert_tartan.py的代码实现请见：<a href="https://github.com/KwanWaiPang/DEVO_comment/blob/main/scripts/convert_tartan.py" target="_blank">Code Link</a>
+</p>
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -297,7 +298,11 @@
 
   <figcaption>TartanAir中image与sim-event的可视化对比(右侧三栏为sim-event分别为upsample，或不upsample按10fps以及25fps帧率生成的)</figcaption>
 </figure>
-
+<p>
+从实验效果可见，进行了上采样（约为1.2 X 10<sup>11</sup>）后并不见得得到更好的效果，因此在实际应用中需要根据具体的情况来选择是否进行上采样。
+对于上采样的情况，可以理解为在原有的数据上进行了一定的插值，从而得到了更多的事件数据，进而让累计成一帧的事件量更加的丰富。
+而实际上事件量（或者说一帧下的事件量）并没有如此之多。
+至于采用10fps或25fps帧率产生的事件，应该仅仅受到ESIM代码中无事件响应时间的大小限制，两者的效果并没有太大的差异(分别为2.0 X 10<sup>10</sup>以及1.7 X 10<sup>10</sup>)。
 </p>
 
 <p><br></p>
@@ -313,10 +318,10 @@
 
 
 <p><br></p>
-<h1>参考资料及代码链接</h1>
+<h1>参考资料</h1>
 <p><br></p>
 <ul>
-  <li> 代码链接<a href="https://github.com/KwanWaiPang/ESIM_comment" target="_blank">ESIM_comment</a> and <a href="https://github.com/KwanWaiPang/DEVO_comment" target="_blank">DEVO_comment</a>. </li>
+  <li> 具体的实现代码请见链接<a href="https://github.com/KwanWaiPang/ESIM_comment" target="_blank">ESIM_comment</a> and <a href="https://github.com/KwanWaiPang/DEVO_comment" target="_blank">DEVO_comment</a>. </li>
   <li> 采用pdb对python代码进行debug：<a href="https://blog.csdn.net/qq_43799400/article/details/122582895" target="_blank">Link</a></li>
 </ul>
 
