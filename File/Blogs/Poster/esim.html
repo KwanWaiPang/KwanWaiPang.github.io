@@ -305,6 +305,18 @@
 至于采用10fps或25fps帧率产生的事件，应该仅仅受到ESIM代码中无事件响应时间的大小限制，两者的效果并没有太大的差异(分别为2.0 X 10<sup>10</sup>以及1.7 X 10<sup>10</sup>)。
 </p>
 
+<h3>采用多线程处理</h3>
+<p>
+  进一步地，通过多线程处理来加速数据的生成，具体的代码实现请见：<a href="https://github.com/KwanWaiPang/DEVO_comment/blob/main/scripts/process_training_data.py" target="_blank">代码链接</a>
+  同时，将原始的事件以<mark>.h5</mark>格式保存，以便后续的训练。
+  并将事件及图像数据以视频流的形式保存出来~
+</p>
+
+<figure style="text-align: center;">
+  <img style="width: 100%;" src="../assets/img/ESIM/multi_thread.png" alt="Image description">
+  <figcaption>多线程处理实现在4个GPU上同时生成event</figcaption>
+</figure>
+
 <p><br></p>
 <h1>采用Gazebo来仿真event camera</h1>
 <p><br></p>
