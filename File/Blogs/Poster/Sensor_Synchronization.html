@@ -115,7 +115,14 @@
     In this report, we will provide a brief overview of our sensor synchronization process.
     This primarily involves synchronizing event cameras, synchronizing different types of sensors, and synchronizing onboard computers across multiple platforms.
   </p>
-
+  <p>
+  😀For the details of Event Cameras calibration, please refer to:
+  <ul>
+    <li> Achieving image reconstruction from event streams, and then using the Kalibr toolbox for camera-and-IMU calibration: <a href="https://arclab-hku.github.io/ecmd/calibration/" target="_blank">Link</a></li>
+    <li>Using dv-gui for camera-and-IMU calibration: <a href="https://blog.csdn.net/gwplovekimi/article/details/121637241?spm=1001.2014.3001.5501" target="_blank">Link</a></li>
+    <li>Assuming that the event camera is consistent with the image camera in pixel coordination, use the Kalibr toolbox to calibrate the image sensor: <a href="https://blog.csdn.net/gwplovekimi/article/details/120948986" target="_blank">Link</a></li>
+  </ul> 
+  </p>
   <h1>2. The Synchronization of Event Cameras</h1>
   <p>
     The event camera has an additional synchronization interface, called as "sync connectors", as shown in the figure below. (Using DAVIS346 as example reference to <a href="https://inivation.com/wp-content/uploads/2019/08/DAVIS346.pdf">Link</a>,
