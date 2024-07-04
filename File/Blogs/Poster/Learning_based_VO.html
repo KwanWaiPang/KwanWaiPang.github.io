@@ -221,10 +221,95 @@ Experiments:
 <h3><a href="https://arxiv.org/pdf/1709.06841" target="_blank">UnDeepVO: Monocular Visual Odometry through Unsupervised Deep Learning</a></h3>
 ICRA2018
 <br>
-Motivations:
+<!-- Motivations:
+<ul>
+  <li><p>
 
+  </p></li>  
+</ul> -->
 
+Contributions:
+<ul>
+  <li>
+    estimate the 6-DoF pose of a monocular camera and the depth of its view (both tracking and mapping).
+  </li>  
+  <li>
+    unsupervised scheme: train with unlabeled datasets and can be applied to localization scenarios (through the spatial and temporal geometric constraint). 
+  </li> 
+  <li>
+    absolute scale recovery for both pose and dense depth: train UnDeepVO by using stereo image pairs to recover the scale but test it by using consecutive monocular images.
+  </li> 
+</ul>
 
+Some key-points:
+<ul>
+  <li>
+    <font color="#FF0000">stereo image training without the need of labeled datasets</font>.
+  </li>  
+  <li><p>
+    Since rotation (represented by Euler angles) has high nonlinearity, it is usually difficult to train compared with translation.
+    For supervised training, a popular solution is to give a bigger weight to the rotational loss as a way of normalization.
+  </p></li>
+</ul>
+
+Methodology:
+<ul>
+  <li><p>
+    The pose estimator is a CNN architecture.
+    <br>
+    In order to better train the rotation with unsupervised learning, the authors decouple the translation and the rotation with two separate groups of fully-connected layers after the last convolution layer. 
+    This enables the network to introduce a weight normalizing the rotation and the translation predictions for better performance.
+  </p></li>  
+  <li><p>
+    The depth estimator is an encoder-decoder architecture.
+    <br>
+    Instead of produce the disparity images, it directly predicts the depth maps.
+  </p></li>  
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704215256.png" alt="Image description">
+  </div>
+    <figcaption> <p>
+      After training with unlabeled stereo images, UnDeepVO can simultaneously perform visual odometry and depth estimation with monocular images. The estimated 6-DoF poses and depth maps are both scaled without the need for scale postprocessing.
+    </p></figcaption>
+</figure>
+
+<li>Loss are built on geometric constraints.</li>
+  <p>
+  Its total loss includes spatial image losses and temporal image losses.
+  <font color="#FF0000">The spatial image losses drive the network to recover scaled depth maps by using stereo image pairs, 
+  while the temporal image losses are designed to minimize the errors on camera motion by using two consecutive monocular images.
+  </font>
+  <br>
+  As shown in following Figure, utilizing both spatial and temporal geometric consistencies of a stereo image sequence to formulate the loss function. 
+  The red points in one image all have the corresponding ones in another. 
+  <br>
+  Spatial geometric consistency represents the geometric projective constraint between the corresponding points in left-right image pairs, while temporal geometric consistency represents the geometric projective constraint between the corresponding points in two consecutive monocular images (similar to the re-projection or BA?)
+  <br>
+  By using these constraints to construct the loss function and minimizing them all together, the UnDeepVO learns to estimate scaled 6-DoF poses and depth maps in an end-to-end unsupervised manner.
+</p>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704222218.png" alt="Image description">
+  </div>
+    <figcaption> <p>
+      Training scheme of UnDeepVO. The pose and depth
+estimators take stereo images as inputs to estimate 6-DoF
+poses and depth maps, respectively. The total loss including
+spatial losses and temporal losses can then be calculated
+based on raw RGB images, estimated depth maps and poses.
+    </p></figcaption>
+</figure>
+
+Experiments:
+<ul>
+  <li><p>
+    better than ORB-SLAM2
+  </p></li>  
+</ul>
 
 
 <p><br></p>
