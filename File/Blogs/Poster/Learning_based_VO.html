@@ -98,21 +98,28 @@
       <div class="post">
         <header class="post-header">
           <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">Paper Survey for the Learning-based VO</span>
+           <span style="font-weight: 600;">Paper Survey: Learning-based VO</span>
           </h1>
           <p><br></p>
-          <!-- <p>
-            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
-          </p> -->
         </header>
-
-        <p><br></p>
 
 <article>
 <!-- 插入博客内容-->
 <h1>Abstract</h1>
+<p>
 This blog is about the paper survey and analysis for learning-based VO, VIO and SLAM.
 This blog is based on the paper reading and my personal understanding, which is only for self-record rather than any commercial purposes.
+
+<br>
+As shown in following figure, a classic VO pipeline, which typically consists of camera calibration, feature detection, feature matching (or tracking), outlier rejection (e.g., RANSAC), motion estimation, scale estimation and local optimization (Bundle Adjustment), has been developed and broadly considered as a golden rule to follow. 
+However, the traditional VO pipeline is not robust enough to handle the challenging scenarios, such as dynamic environments, illumination changes, textureless scenes, etc.
+<figure style="text-align: center;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/典型的VO框架.png" alt="Image description">
+    <figcaption>
+    The framework of the traditional VO system.
+    </figcaption>
+</figure>
+</p>
 
 <p><br></p>
 <h3><a href="https://arxiv.org/pdf/1709.08429" target="_blank">Deepvo: Towards end-to-end visual odometry with deep recurrent convolutional neural networks</a></h3>
@@ -123,23 +130,48 @@ Motivations:
 <ul>
   <li> Most of existing VO algorithms need to be carefully designed and specifically fine-tuned to work well in different environments. </li>
   <li> Some prior knowledge is also required to recover an <font color="#FF0000">absolute scale</font>  for monocular VO. </li>
+  <li> <p>
+    Most of the deep learning architectures are designed to tackle recognition and classification problems (extract high-level appearance information).
+    While learning the appearance representation limited the VO to function only in trained environments and seriously hinders the generalization ability.
+  </p></li>
+  <li><font color="#FF0000">VO heavily rely on geometric features rather than the appearance ones</font></li>
+  <li> <p>
+  VO algorithm ideally should model motion dynamics by examining the changes and connections on a <strong>sequence of images</strong> rather than processing a single image. This means we need sequential learning, which the CNNs are inadequate to.
+  But Recurrent Convolution Neural Networks (RCNNs) can be used to model the <font color="#FF0000">sequential dynamics and relations</font>.
+</p></li>
 </ul>
 
 Contributions:
 <ul>
-  <li> end-to-end framework using deep Recurrent Convolution Neural Networks (RCNNs). </li>
+  <li> <font color="#FF0000">The first</font> end-to-end framework using deep Neural Networks. </li>
   <li> infers poses directly from a sequence of raw RGB images (or videos) </li>
-  <li>  Based on the RCNNs, it not only automatically learns <font color="#FF0000">effective feature representation</font> for the VO problem through CNN, but also implicitly <font color="#FF0000">models sequential dynamics and relations </font> using deep Recurrent Neural Networks. </li>  
+  <li> Key-point: be generalized to new environments by using the geometric feature representation learnt by CNN </li>
+  <li>  <p>
+    Based on the RCNNs, it not only automatically learns <font color="#FF0000">effective feature representation</font> for the VO problem through CNN, but also implicitly <font color="#FF0000">models sequential dynamics and relations </font> using deep Recurrent Neural Networks.
+    </p> </li>  
 </ul>
 
 <figure style="text-align: center;">
 <div style="margin-bottom: 10px;">
   <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704191626.png" alt="Image description">
-  <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704191824.png" alt="Image description">
 </div>
-  <figcaption>Framework, <a href="https://epiception.github.io/assets/Projects/deep_event_vo.pdf" target="_blank">DeepEvent-VO</a> use the same framework.
-  </figcaption>
+  <figcaption> <p>
+    The framework of the proposed method. 
+    RCNN takes a sequence of RGB images (video) as input and learns features by CNN for RNN based sequential modelling to estimate poses.
+  </p>
+  <a href="https://epiception.github.io/assets/Projects/deep_event_vo.pdf" target="_blank">DeepEvent-VO</a> use the same framework.
+</figcaption>
 </figure>
+
+Methodology:
+<ul>
+  <li>  </li>
+</ul>
+
+Experiments:
+<ul>
+  <li> only done on the KITTI dataset. </li>
+</ul>
 
 </p>
 
