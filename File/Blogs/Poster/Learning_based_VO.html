@@ -134,7 +134,13 @@ Motivations:
     Most of the deep learning architectures are designed to tackle recognition and classification problems (extract high-level appearance information).
     While learning the appearance representation limited the VO to function only in trained environments and seriously hinders the generalization ability.
   </p></li>
-  <li><font color="#FF0000">VO heavily rely on geometric features rather than the appearance ones</font></li>
+  <li><p>
+    <font color="#FF0000">VO heavily rely on geometric features rather than the appearance ones.</font>
+    Because a trained CNN model serves as an appearance “map” of the scene, it needs to be re-trained or at least fine-tuned for a new environment.
+    This seriously hampers the technique for widespread usage, which is also one of the biggest difficulties when applying deep learning for VO.
+    Therefore, some works need to estimate the optical flow or depth map to get the geometric features.
+    This leads to a two-stage pipeline and also requires the pre-processed optical flow or depth map as input, which is not end-to-end.
+  </p></li>
   <li> <p>
   VO algorithm ideally should model motion dynamics by examining the changes and connections on a <strong>sequence of images</strong> rather than processing a single image. This means we need sequential learning, which the CNNs are inadequate to.
   But Recurrent Convolution Neural Networks (RCNNs) can be used to model the <font color="#FF0000">sequential dynamics and relations</font>.
@@ -165,19 +171,68 @@ Contributions:
 
 Methodology:
 <ul>
-  <li>  </li>
+  <li><p> It is composed of CNN for geometric feature extraction and RNN for sequential learning (modelling the dynamics and relations among a sequence of CNN features). </p></li>
 </ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704191824.png" alt="Image description">
+  </div>
+    <figcaption> 
+      Architecture of the RCNN based monocular VO system
+  </figcaption>
+  </figure>
+
+  <ul>
+    <li> <p>It seems that the <mark>geometric feature extraction</mark> is just a manual explanation, since the network doesn't have any supervise label for this <mark>geometric feature</mark>, how to ensure the CNN network learn the <mark>geometric feature</mark>.</p></li>
+    <li> <p>Cost Function</p></li>
+  </ul>
+  <p>
+    The input is the RGB image while the target is the pose of the camera.
+    The pose is represented by the 6-DOF transformation matrix. 
+    The cost function is the Mean Square Error (MSE) between the predicted pose (positions and orientations) and the ground truth pose.
+  </p>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704213130.png" alt="Image description">
+    </div>
+      <figcaption> 
+        Note: using quaternion degrades the orientation estimate, therefore Euler angles should be better.
+    </figcaption>
+  </figure>
 
 Experiments:
 <ul>
   <li> only done on the KITTI dataset. </li>
+  <li> worse than the traditional methods. </li>
 </ul>
+
+<!-- Marks:
+<ul>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/83474593" target="_blank">what is RNN</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84647354" target="_blank">what is Normalization</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84539021" target="_blank">different kinds of Normalization</a></li>
+</ul> -->
 
 </p>
 
 <p><br></p>
+<h3><a href="https://arxiv.org/pdf/1709.06841" target="_blank">UnDeepVO: Monocular Visual Odometry through Unsupervised Deep Learning</a></h3>
+ICRA2018
+<br>
+Motivations:
+
+
+
+
+
+<p><br></p>
 <h1>Reference</h1>
 <ul>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/83474593" target="_blank">what is RNN</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84647354" target="_blank">what is Normalization</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84539021" target="_blank">different kinds of Normalization</a></li>
   <li> <a href="https://blog.csdn.net/qin_liang/article/details/132868855" target="_blank">Learned-Based VO 梳理（USTC Paper Reading）</a> </li>
   <li> <a href="https://blog.csdn.net/qin_liang/article/details/132708994" target="_blank">深度学习相关VO梳理</a> </li>
 </ul>
