@@ -286,9 +286,8 @@ Methodology:
   As shown in following Figure, utilizing both spatial and temporal geometric consistencies of a stereo image sequence to formulate the loss function. 
   The red points in one image all have the corresponding ones in another. 
   <br>
-  Spatial geometric consistency represents the geometric projective constraint between the corresponding points in left-right image pairs, while temporal geometric consistency represents the geometric projective constraint between the corresponding points in two consecutive monocular images (similar to the re-projection or BA?)
+  <mark>Spatial geometric consistency</mark> represents the geometric projective constraint between the corresponding points in left-right image pairs, while <mark>temporal geometric consistency</mark> represents the geometric projective constraint between the corresponding points in two consecutive monocular images (similar to the re-projection or BA?)
   <br>
-  By using these constraints to construct the loss function and minimizing them all together, the UnDeepVO learns to estimate scaled 6-DoF poses and depth maps in an end-to-end unsupervised manner.
 </p>
 
 <figure style="text-align: center;">
@@ -303,6 +302,40 @@ spatial losses and temporal losses can then be calculated
 based on raw RGB images, estimated depth maps and poses.
     </p></figcaption>
 </figure>
+
+<p>
+<mark>Spatial Image Losses</mark>, including the left-right photometric consistency loss, disparity consistency loss and pose consistency loss.
+</p>
+(i) Photometric Consistency Loss:
+<ul>
+<li>using the following figure, we can calculate the horizontal distance (or disparity) between the stereo images using the depth value of the network</li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704224924.png" alt="Image description">
+  </div>
+    <figcaption>
+     calculating the horizontal distance (or disparity) between the corresponding points in the left and right images.
+    </figcaption>
+</figure>
+<li>using the previous horizontal distance map, we can synthesize one image from the other through “spatial transformer”. And then the combination of an L1 norm and an SSIM term is used to construct the left-right photometric consistency loss: </li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704225536.png" alt="Image description">
+  </div>
+    <figcaption>
+    </figcaption>
+</figure>
+</ul>
+
+(i) Photometric Consistency Loss:
+<ul>
+  <li><p>
+  </p></li>  
+</ul>
+
+<!-- https://blog.csdn.net/phy12321/article/details/109579166 -->
+<!-- https://blog.csdn.net/qin_liang/article/details/132868855 -->
+
 
 Experiments:
 <ul>
