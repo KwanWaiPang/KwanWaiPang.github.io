@@ -308,16 +308,20 @@ based on raw RGB images, estimated depth maps and poses.
 </p>
 (i) Photometric Consistency Loss:
 <ul>
-<li>using the following figure, we can calculate the horizontal distance (or disparity) between the stereo images using the depth value of the network</li>
+<li>Assume p<SUB>L</SUB>(u<SUB>L</SUB>, v<SUB>L</SUB>) is a pixel in the left image and p<SUB>R</SUB>(u<SUB>R</SUB>, v<SUB>R</SUB>) is its corresponding pixel in the right image. 
+Then, we have the spatial constraint u<SUB>L</SUB> = u<SUB>R</SUB> and v<SUB>l</SUB> = v<SUB>R</SUB> +D<SUB>P</SUB>.</li>
+<li>using the following figure, we can calculate the horizontal distance between the stereo images using the depth value of the network</li>
+
+😀 <a href="https://blog.csdn.net/qq_40918859/article/details/123984329" target="_blank">principle of stereo depth calculation</a>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704224924.png" alt="Image description">
   </div>
     <figcaption>
-     calculating the horizontal distance (or disparity) between the corresponding points in the left and right images.
+     calculating the horizontal distance D<SUB>P</SUB> (or disparity) between the corresponding points in the left and right images.
     </figcaption>
 </figure>
-<li>using the previous horizontal distance map, we can synthesize one image from the other through “spatial transformer”. And then the combination of an L1 norm and an SSIM term is used to construct the left-right photometric consistency loss: </li>
+<li>using the previous horizontal distance map D<SUB>P</SUB>, we can synthesize one image from the other through “spatial transformer”. And then the combination of an L1 norm and an SSIM term is used to construct the left-right photometric consistency loss: </li>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240704225536.png" alt="Image description">
@@ -327,20 +331,46 @@ based on raw RGB images, estimated depth maps and poses.
 </figure>
 </ul>
 
-(i) Photometric Consistency Loss:
+(ii) Disparity Consistency Loss:
 <ul>
   <li><p>
+    Through the horizontal distance map D<SUB>P</SUB>, we can calculate the disparity map.
   </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240705095420.png" alt="Image description">
+    </div>
+      <figcaption><p>
+        The depth map is generated from the network.
+        The horizontal distance map D<SUB>P</SUB> is calculated from the depth map.
+        Through the horizontal distance map D<SUB>P</SUB>, we can calculate the disparity map.
+        AKA. the disparity map can be obtained from the depth map of the network.
+        While the disparity map of left and right images should be consistent.
+        (I think the description in the original paper is not clear enough, this is my understanding)
+      </p></figcaption>
+  </figure>
 </ul>
 
-<!-- https://blog.csdn.net/phy12321/article/details/109579166 -->
-<!-- https://blog.csdn.net/qin_liang/article/details/132868855 -->
+(iii) Pose Consistency Loss:
+<ul>
+  <li><p>
+    both left and right images are taken from the same camera, the transformations between the left and right images should be basically identical.
+  </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240705100606.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+</ul>
+
 
 
 Experiments:
 <ul>
   <li><p>
-    better than ORB-SLAM2
+    better than ORB-SLAM2 in KITTI dataset.
   </p></li>  
 </ul>
 
