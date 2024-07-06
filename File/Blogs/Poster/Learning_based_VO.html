@@ -437,6 +437,21 @@ Contributions:
 <a href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Yin_GeoNet_Unsupervised_Learning_CVPR_2018_paper.pdf" target="_blank">Geonet: Unsupervised learning of dense depth, optical flow and camera pose</a>
 <br>
 CVPR2018
+<br>
+Contributions:
+<ul>
+  <li><p>
+    Jointly learning three components: depth, optical flow, and camera pose (VO), using divide-and-conquer strategy.
+    <br>
+    Most of the natural scenes are comprised of rigid static surfaces. 
+    Their projected 2D image motion between video frames can be fully determined by the depth structure and camera motion. 
+    Meanwhile, dynamic objects commonly exist in such scenes and usually possess the characteristics of large displacement and disarrangement
+  </p></li>  
+  <li>geometric consistency loss through forward-backward (or left-right) consistency check. </li>
+  <li><p>Concept of dynamic VO: 
+    The 2D projection image of a static background between image frames is entirely determined by depth structure and camera motion, and can be simulated using optical flow to capture camera motion. 
+    While the motion of a dynamic target is determined by both camera motion and its own motion</p></li>
+</ul>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240705111854.png" alt="Image description">
