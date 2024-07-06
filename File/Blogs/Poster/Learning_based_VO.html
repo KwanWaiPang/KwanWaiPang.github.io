@@ -425,13 +425,14 @@ Contributions:
     More details about the multi-view re-projectioin constraint can be found in the paper.
   </p></li>  
   <li><p>
-    forward-backward flow-consistency constraint (idea is from the GeoNet, read the following 详情): provides additional supervision to image areas and improves the robustness and generalization ability of the model.
+    forward-backward flow-consistency constraint (idea is from the GeoNet): provides additional supervision to image areas and improves the robustness and generalization ability of the model.
     <br>
     It works as self-supervision and regularization.
     Through some strategies, we can get the dense flow field from k to k+1, while the dense flow field in k+1 can be estimated from the network. Therefore, minimize these two flow fields can provide additional supervision.
   </p></li>  
 </ul>
 
+🤔The GeoNet：
 <details>
 <a href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Yin_GeoNet_Unsupervised_Learning_CVPR_2018_paper.pdf" target="_blank">Geonet: Unsupervised learning of dense depth, optical flow and camera pose</a>
 <br>
@@ -444,7 +445,8 @@ CVPR2018
     </p></figcaption>
 </figure>
 </details>
-
+<br>
+Methodology:
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240705104043.png" alt="Image description">
@@ -483,7 +485,7 @@ NIPS2024
 
 
 
-There are some event-based works developed based on the DPVO:
+😊There are some event-based works developed based on the DPVO:
 <details>
   <li><a href="https://arxiv.org/pdf/2312.09800" target="_blank">Deep event visual odometry</a></li>
   <br>
