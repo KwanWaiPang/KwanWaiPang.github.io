@@ -597,11 +597,26 @@ Motivations:
     <br>
     While the direct-based methods separate 3D motion from depth estimation, but compute 3D motion using only image gradients in the form of normal flow. 
   </p></li>
+  <li><p>all the optical flow algorithms have large errors in regions of non-uniform gradient distributions. This should be common sense since the assumptions of the optical flow is the brightness constancy and the motion smoothness (should be equal to the gradient constancy).
+  </p></li>
 </ul>
 <p>
   Therefore, this paper design a network for normal flow estimation (create the direct constraints).
+  Through the differentiable optimization layer to estimate the camera pose from the normal flow.
+  What's more, it also highlights the robustness and cross-dataset generalizability without any fine-tuning or re-training. 
 </p>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708123253.png" alt="Image description">
+  </div>
+    <figcaption>
+      <p>
+        The NFlowNet and the PoseNet are trained firstly.
+        Then the whole network is trained in self-supervision fashion via the refinement loss.
+        </p>
+    </figcaption>
+</figure>
 
 
 
