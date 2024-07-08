@@ -499,30 +499,39 @@ NIPS2021
   On the other hand, compared to direct SLAM, the optical flow prediction module of the DROID-SLAM supports global BA, whereas direct-based methods cannot perform global BA between two frames that are far away from each other.
   </p></li>
   <li><p>Truly realize high accuracy pose estimation and based on their previous work RAFT(for optical flow tracking).</p></li>
-</ul>
-<details>
-  <a href="https://arxiv.org/pdf/2003.12039" target="_blank">Raft: Recurrent all-pairs field transforms for optical flow</a>
 
-  <figure style="text-align: center;">
-    <div style="margin-bottom: 10px;">
-      <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708102007.png" alt="Image description">
-    </div>
-      <figcaption><p>
-      </p></figcaption>
-  </figure>
-</details>
+  <details>
+    <a href="https://arxiv.org/pdf/2003.12039" target="_blank">Raft: Recurrent all-pairs field transforms for optical flow</a>
+  
+    <figure style="text-align: center;">
+      <div style="margin-bottom: 10px;">
+        <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708102007.png" alt="Image description">
+      </div>
+        <figcaption><p>
+        </p></figcaption>
+    </figure>
+  </details>
 
-
+<li><p>
+  Key components: recurrent iterative updates, building on the RAFT, iteratively update the camera poses and depth. While each update is produced by differentiable dense bundle adjustment (DBA) layer.
+</p></li>
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708105119.png" alt="Image description">
   </div>
-    <figcaption><p>
-    </p></figcaption>
+    <figcaption>
+      update operator. It acts on edges in the frame graph, predicting flow revisions which are mapped to depth and pose update through the DBA layer.
+    </figcaption>
 </figure>
 
+</ul>
 
+Experiments:
+<ul>
+  <li>high robustness and good generalization ability: EuRoC, TUM-RGND, TartanAir, ETH-3D</li>  
+  <li>outperform the ORB-SLAM3 in EuRoC using monocular or stereo input</li>.
+</ul>
 
 
 
