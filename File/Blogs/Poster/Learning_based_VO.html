@@ -513,7 +513,12 @@ NIPS2021
   </details>
 
 <li><p>
-  Key components: recurrent iterative updates, building on the RAFT, iteratively update the camera poses and depth. While each update is produced by differentiable dense bundle adjustment (DBA) layer.
+  The feature extraction: is borrowed from the RAFT, which is composed of two separate networks: a feature network and a context network. T
+  The feature network is used to build the set of correlation volumes, while the context features are feed into the network during each application of the update operator.
+</p></li>
+
+<li><p>
+  The update operator: recurrent iterative updates, building on the RAFT, iteratively update the camera poses and depth. While each update is produced by differentiable dense bundle adjustment (DBA) layer.
 </p></li>
 
 <figure style="text-align: center;">
@@ -522,6 +527,15 @@ NIPS2021
   </div>
     <figcaption>
       update operator. It acts on edges in the frame graph, predicting flow revisions which are mapped to depth and pose update through the DBA layer.
+    </figcaption>
+</figure>
+
+<li>Dense Bundle Adjustment Layer (DBA): create the loss between the projected points and the predicted point of the update operator </li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708112414.png" alt="Image description">
+  </div>
+    <figcaption>
     </figcaption>
 </figure>
 
@@ -534,12 +548,33 @@ Experiments:
 </ul>
 
 
-
-
 <p><br></p>
 <h3><a href="https://proceedings.mlr.press/v155/wang21h/wang21h.pdf" target="_blank">Tartanvo: A generalizable learning-based vo</a></h3>
 CoRL2021
 <br>
+
+Contributions:
+<ul>
+  <li> <p>Pose the question: <mark>why haven’t we seen the deep learning models outperform geometry-based methods yet?</mark>
+    <br>
+    The first reason is the diversity of the training data.
+    <br>
+    The second reason is that most of the learning-based method ignore some fundamental nature of the problem which is well formulated in geometry-based VO theories. For example, the scale ambiguity, take the intrinsic parameters into consideration, etc.
+  </p></li>  
+  <li><p>
+    <strong>Only</strong>. using <a href="https://theairlab.org/tartanair-dataset/" target="_blank">TartanAir</a> data for training, so that: generalizes to multiple datasets and real-world scenarios (e.g. EuRoC, KITTI), outperforms the geometry-based methods in challenging scenarios.
+  </p></li>  
+  <li<p>
+    An up-to-scale loss function and the intrinsics layer (IL).
+  </p></li>  
+</ul>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708114901.png" alt="Image description">
+  </div>
+    <figcaption>
+    </figcaption>
+</figure>
 
 
 <p><br></p>
