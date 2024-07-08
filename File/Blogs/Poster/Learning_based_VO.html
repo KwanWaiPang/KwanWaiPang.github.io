@@ -98,7 +98,7 @@
       <div class="post">
         <header class="post-header">
           <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">Paper Survey: Learning-based VO</span>
+           <span style="font-weight: 600;">Paper Survey: Learning-based VO and VIO</span>
           </h1>
           <p><br></p>
         </header>
@@ -109,8 +109,10 @@
 <p>
 This blog is about the paper survey and analysis for learning-based VO, VIO and SLAM.
 This blog is based on the paper reading and my personal understanding, which is only for self-record rather than any commercial purposes.
+</p>
 
-<br>
+<h2>Learning-based VO</h2>
+<p>
 As shown in following figure, a classic VO pipeline, which typically consists of camera calibration, feature detection, feature matching (or tracking), outlier rejection (e.g., RANSAC), motion estimation, scale estimation and local optimization (Bundle Adjustment), has been developed and broadly considered as a golden rule to follow. 
 However, the traditional VO pipeline is not robust enough to handle the challenging scenarios, such as dynamic environments, illumination changes, textureless scenes, etc.
 <figure style="text-align: center;">
@@ -658,6 +660,29 @@ An extension of DROID-SLAM
   <li><a href="https://rpg.ifi.uzh.ch/docs/Arxiv23_Pellerito.pdf" target="_blank">End-to-end Learned Visual Odometry with Events and Frames</a></li>
 </details>
 
+<p><br></p>
+<h2>Learning-based VIO</h2>
+<p>
+  The above mentioned methods are learning-based VO that use only the visual information.
+  It is wellknown that including an additional inertial measurement unit (IMU) can enhance the robustness of visual SLAM methods.
+  What's more, the IMU can estimate the absolute scale of the motion, it is easier to estimate the up-to-scale pose.
+</p>
+
+<p><br></p>
+<h3><a href="https://ojs.aaai.org/index.php/AAAI/article/view/11215" target="_blank">Vinet: Visual-inertial odometry as a sequence-to-sequence learning problem</a></h3>
+<br>
+AAAI2017
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/1906.11435" target="_blank">Deepvio: Self-supervised deep learning of monocular visual inertial odometry using 3d geometric constraints</a></h3>
+<br>
+IROS2019
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/2309.13814" target="_blank">DVI-SLAM: A dual visual inertial SLAM network</a></h3>
+<br>
+
+
 
 <!-- Motivations:
 <ul>
@@ -665,8 +690,6 @@ An extension of DROID-SLAM
 
   </p></li>  
 </ul> -->
-
-
 
 <p><br></p>
 <h1>Reference</h1>
