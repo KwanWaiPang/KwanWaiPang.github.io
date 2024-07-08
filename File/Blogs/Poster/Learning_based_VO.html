@@ -681,7 +681,28 @@ IROS2019
 <p><br></p>
 <h3><a href="https://arxiv.org/pdf/2309.13814" target="_blank">DVI-SLAM: A dual visual inertial SLAM network</a></h3>
 <br>
+Contributions:
+<ul>
+  <li><p>
+    integrate both photometric factor and re-projection factor into the end-to-end differentiable structure through multi-factor data association module. (feature-based + direct-based)
+  </p></li>  
+  <li>The output is camera pose (rotation and translation), depth map, and IMU motion (velocity, ba, bg).
+  </li>
+  <li><p>
+    feature-metric factor (served as the direct-based method?)
+  </p></li>  
+</ul>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240708170446.png" alt="Image description">
+  </div>
+    <figcaption><p>
+      the re-projection factor dominates at the early stage of BA optimization to get a good initialization and avoid getting stuck in local minima. 
+      In the later stage, both the feature-metric factor and re-projection factor smoothly steer the joint optimization towards a true minimum. 
+      The network also dynamically adjusts the confidence map of IMU factor. 
+    </p></figcaption>
+</figure>
 
 
 <!-- Motivations:
