@@ -490,8 +490,23 @@ Methodology:
 <h3><a href="https://proceedings.neurips.cc/paper/2021/file/89fcd07f20b6785b92134bd6c1d0fa42-Paper.pdf" target="_blank">DROID-SLAM: Deep Visual SLAM for Monocular,Stereo, and RGB-D Cameras</a></h3>
 NIPS2021
 <br>
+<ul>
+  <li><p>
+  In the perspective of mapping, DROID-SLAM employs a "stitched predictive optical flow + DBA + Upsample" approach, it significantly enhances the generalization of a pre-trained model across various scenarios compared to the existing depth estimation networks.
+  </p></li>
+  <li><p>
+  In the perspective of localization, different from feature-based SLAM methods, DROID-SLAM fully utilizes 1/8 down-sampled RGB information and predicts optical flow using a pre-trained model, this eliminates the need for feature matching. 
+  On the other hand, compared to direct SLAM, the optical flow prediction module of the DROID-SLAM supports global BA, whereas direct-based methods cannot perform global BA between two frames that are far away from each other.
+  </p></li>
+  <li><p>Truly realize high accuracy pose estimation and based on their previous work RAFT(for optical flow tracking).</p></li>
+</ul>
+<details>
+  <a href="https://arxiv.org/pdf/2003.12039" target="_blank">Raft: Recurrent all-pairs field transforms for optical flow</a>
+</details>
 
-Truly high accuracy pose estimation and based on RAFT.
+
+
+
 
 
 <p><br></p>
@@ -512,6 +527,7 @@ CVPR2022
 <h3><a href="https://proceedings.neurips.cc/paper_files/paper/2023/file/7ac484b0f1a1719ad5be9aa8c8455fbb-Paper-Conference.pdf" target="_blank">Deep patch visual odometry</a></h3>
 NIPS2024
 <br>
+An extension of DROID-SLAM
 <ul>
   <li><p>
     <a href="https://blog.csdn.net/gwplovekimi/article/details/139436796?spm=1001.2014.3001.5501" target="_blank">The evaluation and setup of the DPVO</a>
