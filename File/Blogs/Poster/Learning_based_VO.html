@@ -687,7 +687,7 @@ Contributions:
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240709144117.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709144117.png" alt="Image description">
   </div>
     <figcaption><p>
       LSTM processing the pose output at camera-rate and an IMU LSTM processing data at the IMU rate.
@@ -739,7 +739,7 @@ Methodology:
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240709150331.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709150331.png" alt="Image description">
   </div>
     <figcaption><p>
     </p></figcaption>
@@ -750,7 +750,7 @@ Methodology:
   <a href="https://blog.csdn.net/gwplovekimi/article/details/116943603" target="_blank">My CSDN blog for the understanding of SO3, SE3 and the so3, se3</a>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 100%;" src="../assets/img/learning_based_VO/微信图片_20240709160404.png" alt="Image description">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信图片_20240709160404.png" alt="Image description">
     </div>
       <figcaption><p>
       </p></figcaption>
@@ -766,12 +766,40 @@ Contributions:
 <ul>
   <li><p>
     DROID-SLAM+IMU: utilizes Bundle Adjustment (BA) and recurrent field transforms (RFT) to achieve accurate and robust state estimation.
+    <br>
+    minimize the re-projection errors of dense depth maps using the prediction of RFT as targets (DROID-SLAM and RAFT).
   </p></li>
   <li><p>
-    using the fisheye images.
+    using the fisheye images, integration of multi-camera inputs.
+  </p></li>
+  <li><p>
+    loop closure: the wide FoV of the fisheye camera allows the system to find more potential loop closures, and powered by the broad convergence basin of RFT, it can perform very wide loop closing with little overlap.
+  </p></li>
+  <li><p>
+    Proposed semi-pose-graph BA method to avoid the expensive full global BA.
   </p></li>
 </ul>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709172150.png" alt="Image description">
+  </div>
+    <figcaption>
+      builds based on DROID-SLAM and extends it to a multi-camera VI-SLAM system.
+    </figcaption>
+</figure>
+
+<ul>
+  <li><p>
+    Despite only being trained on the TartanAir dataset of pinhole images, the pre-trained model by DROID-SLAM has excellent generalization ability on fisheye images. Therefore, the author use the pre-trained model without further fine-tuning.
+   </p> </li>
+  <li>
+    The IMU initialization is adopted from ORB-SLAM3.
+  </li>
+  <li>
+    marginalization is not considered.
+  </li>
+</ul>
 
 
 <p><br></p>
@@ -869,7 +897,7 @@ Methodology:
 </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240709105753.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709105753.png" alt="Image description">
   </div>
     <figcaption><p>
     </p></figcaption>
@@ -918,7 +946,7 @@ Contributions:
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/learning_based_VO/DBA-Fusion.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/DBA-Fusion.png" alt="Image description">
   </div>
     <figcaption><p>
     </p></figcaption>
@@ -927,7 +955,7 @@ Contributions:
 key-points:
 <ul>
   <li><p>
-    More details of the code-comment and the testing can be seen in <a href="***" target="_blank">Link</a>.
+    More details of the code-comment and the testing can be seen in <a href="https://github.com/KwanWaiPang/DBA-Fusion_comment" target="_blank">Link</a>.
   </p></li>
   <li><p>
     The visual-inertial initialization is same as DVI-SLAM (also adopted from VINS-Mono).
@@ -940,7 +968,7 @@ key-points:
 Experiments, no bad~:
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/learning_based_VO/DBA-Fusion_result.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/DBA-Fusion_result.png" alt="Image description">
   </div>
     <figcaption><p>
     </p></figcaption>
