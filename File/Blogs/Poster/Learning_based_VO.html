@@ -757,6 +757,20 @@ Methodology:
   </figure>
 </details>
 
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/2306.01173" target="_blank">Bamf-slam: bundle adjusted multi-fisheye visual-inertial slam using recurrent field transforms</a></h3>
+ICRA2023
+<br>
+Contributions:
+<ul>
+  <li><p>
+    DROID-SLAM+IMU: utilizes Bundle Adjustment (BA) and recurrent field transforms (RFT) to achieve accurate and robust state estimation.
+  </p></li>
+</ul>
+
+
+
 <p><br></p>
 <h3><a href="https://arxiv.org/pdf/2309.13814" target="_blank">DVI-SLAM: A dual visual inertial SLAM network</a></h3>
 <br>
@@ -887,10 +901,16 @@ Motivations:
 Contributions:
 <ul>
   <li><p>
-    Tightly integrate the trainable deep dense bundle adjustment (DBA) with multi-sensor information through a factor graph.
+    This work proposed the <strong>generic factor graph framework</strong> to tightly integrate the trainable deep dense bundle adjustment (DBA) with multi-sensor information through a factor graph.
     <br>
-    The Hessian information derived from DBA is fed into a generic factor graph for multi-sensor fusion, which employs a sliding window and supports probabilistic marginalization
-  </p></li>    
+    The Hessian information derived from DBA is fed into a generic factor graph for multi-sensor fusion, which employs a sliding window and supports probabilistic marginalization.
+    <br>
+    for enhancing the learning-based visual SLAM through multi-sensor fusion.
+  </p></li>  
+
+  <li><p>  
+    Flexibly fuses a trainable visual SLAM with multi-sensor information (e.g. IMU, wheel odometry, GPS, etc.).
+  </p></li>  
 </ul>
 
 <figure style="text-align: center;">
@@ -901,6 +921,27 @@ Contributions:
     </p></figcaption>
 </figure>
 
+key-points:
+<ul>
+  <li><p>
+    More details of the code-comment and the testing can be seen in <a href="***" target="_blank">Link</a>.
+  </p></li>
+  <li><p>
+    The visual-inertial initialization is same as DVI-SLAM (also adopted from VINS-Mono).
+  </p></li>
+  <li><p>
+    For the learning-based visual process, aka. the recurrent optical flow is from the network which is pre-trained in the DROID-SLAM.
+  </p></li> 
+</ul>
+
+Experiments, no bad~:
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/DBA-Fusion_result.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
 
 
 <p><br></p>
