@@ -749,7 +749,7 @@ Methodology:
 </figure>
 
 <p>
-  <li>Final loss</li>
+  <li>Final residual to get the pose</li>
 </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -758,6 +758,38 @@ Methodology:
     <figcaption><p>
     </p></figcaption>
 </figure>
+
+<p>
+  <li>Final loss</li>
+  Including the pose loss, flow loss, re-projection loss, and feature-metric loss.
+  <br>
+  (i) The pose loss is the distance between ground truth pose and the predicted pose, 
+  <br>
+  (ii) The low flow loss is the distance between the predicted flow and GT flow which is converted from GT pose and depth. 
+  <br>
+  (iii) Re-projection loss and feature-metric loss are the distances of the re-projection error and feature-metric error.
+  <br>
+  The network is required to be trained in three state with supervision of the pose, GT flow.
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/learning_based_VO/微信截图_20240709105753.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Initialization</li>
+  DVI-SLAM initialization follows the VINS-Mono method.
+  <br>
+  Firstly, multiple keyframes are collected to build a frame graph, and camera pose and inverse depth states are optimized by DBA layer.
+  <br>
+  Then initialize the gravity direction and IMU motion according to the estimated camera pose and IMU pre-integration result.
+  For the monocular visual and inertial streams, the absolute scale is also initialized. 
+  <br>
+  Finally, minimize re-projection residual, feature-metric residual, and inertial residual with DBA layer to refine camera pose, motion, and inverse depth.
+</p>
 
 <!-- Motivations:
 <ul>
