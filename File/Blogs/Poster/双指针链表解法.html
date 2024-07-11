@@ -125,6 +125,8 @@
 </figure>
 
 原本我的解法是用递归去做的，对应的复杂度是<mark>O(n+m)</mark>
+<br>
+<details>
 <pre><code>
 /**
  * Definition for singly-linked list.
@@ -176,7 +178,8 @@ public:
     }
 };
 </code></pre>
-
+</details>
+<br>
 此处改为采用双指针去解。时间复杂度应该是一样的，但是空间复杂度不一样。上面的递归的空间复杂度为<mark>O(n+m)</mark>。递归调用 mergeTwoLists 函数时需要消耗栈空间，栈空间的大小取决于递归调用的深度。
 而用双指针来解题，空间复杂度为<mark>O(1)</mark>。因为只需要常数的空间来存放若干变量。
 <br>理解过程如下动图所示：
@@ -188,65 +191,119 @@ public:
     <figcaption><p>
     </p></figcaption>
 </figure>
-
+<br>
+<details>
 <pre>
 <code>
   /**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution {
-public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        // 创建一个空的链表作为输出
-        ListNode* result=new ListNode(0);//第一个是占位符，头节点不要，返回的为result->next
-        ListNode* p=result;//创建指向这个链表的指针
-
-        // 创建分别指向两个链表的指针
-        ListNode* p1=list1;
-        ListNode* p2=list2;
-
-        while(p1!=nullptr && p2!=nullptr)
-        {
-            if(p1->val < p2->val)//若p1当前的值小于p2,赋值p1
-            {
-                // p->val=p1->val;
-                // p->next=p2;
-                p->next=p1;
-                p1=p1->next;//p1继续递推
-            }
-            else//若p1当前的值大于p2，赋值p2
-            {
-                // p->val=p2->val;
-                // p->next=p1;
-                 p->next=p2;
-                p2=p2->next;//p2继续递推
-            }
-            p=p->next;//p也继续递推
-        }
-
-        if(p1!=nullptr)//若1还没结束，接到末尾
-        {
-            p->next=p1;
-        }
-
-        if(p2!=nullptr)//若2还没结束。接到末尾
-        {
-            p->next=p2;
-        }
-
-        // return result;//这种方式会超时？？？
-        return result->next;//注意返回的为除第一个以外的
-    }
-};
+  * Definition for singly-linked list.
+  * struct ListNode {
+  *     int val;
+  *     ListNode *next;
+  *     ListNode() : val(0), next(nullptr) {}
+  *     ListNode(int x) : val(x), next(nullptr) {}
+  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+  * };
+  */
+ class Solution {
+ public:
+     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+         // 创建一个空的链表作为输出
+         ListNode* result=new ListNode(0);//第一个是占位符，头节点不要，返回的为result->next
+         ListNode* p=result;//创建指向这个链表的指针
+ 
+         // 创建分别指向两个链表的指针
+         ListNode* p1=list1;
+         ListNode* p2=list2;
+ 
+         while(p1!=nullptr && p2!=nullptr)
+         {
+             if(p1->val < p2->val)//若p1当前的值小于p2,赋值p1
+             {
+                 p->next=p1;
+                 p1=p1->next;//p1继续递推
+             }
+             else//若p1当前的值大于p2，赋值p2
+             {
+                  p->next=p2;
+                 p2=p2->next;//p2继续递推
+             }
+             p=p->next;//p也继续递推
+         }
+ 
+         if(p1!=nullptr)//若1还没结束，接到末尾
+         {
+             p->next=p1;
+         }
+ 
+         if(p2!=nullptr)//若2还没结束。接到末尾
+         {
+             p->next=p2;
+         }
+ 
+         return result->next;//注意返回的为除第一个以外的
+     }
+ };
 </code>
 </pre>
+</details>
+注意上面解法返回的是<mark>result->next</mark>。另外一种解法可以直接返回<mark>result</mark>：
+<details>
+  <pre>
+  <code>
+    /**
+    * Definition for singly-linked list.
+    * struct ListNode {
+    *     int val;
+    *     ListNode *next;
+    *     ListNode() : val(0), next(nullptr) {}
+    *     ListNode(int x) : val(x), next(nullptr) {}
+    *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+    * };
+    */
+   class Solution {
+   public:
+       ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+           if(list1==nullptr && list2==nullptr)
+               return list1;
+           // 创建一个空的链表作为输出
+           ListNode* result=new ListNode(0);
+           ListNode* p=result;//创建指向这个链表的指针
+   
+           // 创建分别指向两个链表的指针
+           ListNode* p1=list1;
+           ListNode* p2=list2;
+   
+           while(p1!=nullptr && p2!=nullptr)
+           {
+               if(p1->val < p2->val)//若p1当前的值小于p2,赋值p1
+               {
+                   p->val=p1->val;
+                   p1=p1->next;//p1继续递推
+               }
+               else//若p1当前的值大于p2，赋值p2
+               {
+                   p->val=p2->val;
+                   p2=p2->next;//p2继续递推
+               }
+               p->next=new ListNode();// 初始化  以防止空指针访问
+               p=p->next;//p也继续递推
+   
+           }
+   
+           if(p1!=nullptr || p2!=nullptr)//若有没空的，接到末尾
+           {
+               ListNode *no_empty= (p1==nullptr? p2: p1);//非空的一个
+               p->val=no_empty->val;
+               p->next=no_empty->next;
+           }
+   
+           return result;
+       }
+   };
+  </code>
+  </pre>
+  </details>
 
 
 <p><br></p>
