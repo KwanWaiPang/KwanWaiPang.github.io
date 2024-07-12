@@ -484,8 +484,102 @@ public:
           }
       };
     </code></pre>
-  </details>
+</details>
 
+
+<p><br></p>
+<h1>3. 合并 k 个有序链表</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 70%;" src="../assets/img/微信截图_20240712210011.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+<p>
+  第一眼最基本的解法就是遍历用两两合并的方式。对于vector长度为k，每个链表最长的长度为n。第一次合并后，长度为n，第二次合并后为2n。第三次为3n，依次类推O（（1+k）k/2*n）那么就是O（k<sup>2</sup>*n）。空间复杂度为O（1）.
+</p>
+<details>
+  <pre><code>
+    /**
+    * Definition for singly-linked list.
+    * struct ListNode {
+    *     int val;
+    *     ListNode *next;
+    *     ListNode() : val(0), next(nullptr) {}
+    *     ListNode(int x) : val(x), next(nullptr) {}
+    *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+    * };
+    */
+   class Solution {
+   public:
+   
+       ListNode* mergeTwoLists(ListNode* lists1, ListNode* lists2)
+       {
+           ListNode* result=new ListNode(0);
+           ListNode* p=result;//指向结果的指针
+           ListNode* p1=lists1;
+           ListNode* p2=lists2;
+   
+           while(p1!=nullptr && p2!=nullptr)
+           {
+               if(p1->val<p2->val)
+               {
+                   p->next=p1;
+                   p1=p1->next;
+               }
+               else
+               {
+                   p->next=p2;
+                   p2=p2->next;
+               }
+               p=p->next;
+           }
+   
+           if(p1!=nullptr || p2!=nullptr)
+           {
+               ListNode* no_empty=(p1!=nullptr)? p1:p2;
+               p->next=no_empty;
+           }
+   
+   
+   
+           return result->next;
+       }
+   
+       ListNode* mergeKLists(vector<ListNode*>& lists) {
+           //最直接的方法就是把它分解为多个两个链表的合并
+           // 时间复杂度应该是O（n^2）,空间复杂度还是O（1）
+           ListNode* result=nullptr;//初始化为空
+           for(int i=0;i<lists.size();i++)
+           {
+               result=mergeTwoLists(result, lists[i]);
+           }
+           return result;
+           
+       }
+   };
+    </code></pre>
+</details>
+<p>
+更优的解法则是采用优先队列的思路，从k个链表的头节点的指针中来找最小的放入
+<br>
+时间复杂度是O(kn*logk)。空间复杂度则由于用了优先队列，优先队列中的元素不超过 k 个，故渐进空间复杂度为 O(k)
+<br>
+关于cpp中优先级队列如何使用，请见下面
+</p>
+<details>
+  
+</details>
+
+
+<p><br></p>
+<h1>参考资料</h1>
+<ul>
+  <li><a href="https://www.bilibili.com/video/BV1q94y1X7vy/?vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">解说视频</a></li>
+  <li><a href="https://labuladong.online/algo/essential-technique/linked-list-skills-summary/" target="_blank">双指针技巧秒杀七道链表题目</a></li>
+  <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
+</ul>
 
 <p><br></p>
 什么是双向链表(跟单向链表很像)？
@@ -498,16 +592,6 @@ public:
       </p></figcaption>
   </figure>
 </details>
-
-
-
-<p><br></p>
-<h1>参考资料</h1>
-<ul>
-  <li><a href="https://www.bilibili.com/video/BV1q94y1X7vy/?vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">解说视频</a></li>
-  <li><a href="https://labuladong.online/algo/essential-technique/linked-list-skills-summary/" target="_blank">双指针技巧秒杀七道链表题目</a></li>
-  <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
-</ul>
 
 
 </article>
