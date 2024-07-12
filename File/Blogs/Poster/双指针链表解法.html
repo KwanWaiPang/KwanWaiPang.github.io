@@ -114,7 +114,20 @@
 <article>
 <!-- 插入博客内容-->
 
-什么是链表？
+什么是链表？直观地通过代码解析如下：
+<pre>
+<code>
+ //Definition for singly-linked list.
+ struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode() : val(0), next(nullptr) {}
+     ListNode(int x) : val(x), next(nullptr) {}
+     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ };
+</code>
+</pre>
+
 <details>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
