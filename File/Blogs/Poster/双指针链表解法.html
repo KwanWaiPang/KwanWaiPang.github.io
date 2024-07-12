@@ -139,7 +139,7 @@
 </details>
 
 <p><br></p>
-<h1>合并两个有序链表</h1>
+<h1>1. 合并两个有序链表</h1>
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -334,7 +334,7 @@ public:
 </details>
 
 <p><br></p>
-<h1>分隔链表</h1>
+<h1>2. 分隔链表</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 70%;" src="../assets/img/微信截图_20240712193005.png" alt="Image description">
@@ -400,6 +400,10 @@ public:
 
 <p>
 下面解法则是直接在循环的时候就断开原链表的每个节点的next指针。
+<br>
+原因是采用的是链表赋值，那么原来的链表的next指针可能就继续指向其他节点，这样就很容易形成类似环路的结构。所以在赋值的时候，需要把原链表的每个节点的next指针断开，置为空。
+（PS：若通过val关键字赋值，而不是用next指针赋值，那也可以解决）
+<br>
 总的来说，如果我们需要把原链表的节点接到新链表上，而不是 new 新节点来组成新链表的话，那么断开节点和原链表之间的链接可能是必要的。但凡遇到这种情况，就把原链表的节点断开，这样就不会出错了。
 </p>
 <details>
@@ -428,8 +432,46 @@ public:
                   // head=head->next;//原链表一直递推
                   // 断开原链表的每个节点的next指针
                   ListNode *temp = head->next;
-                  head->next=nullptr;
+                  head->next=nullptr;//把原链表的每个节点的next指针断开，置为空
                   head=temp;
+              }
+              
+              //最后再把bigger->next原来的链表中（链接两个链表）
+              if(bigger->next!=nullptr)
+              {
+                  p_result->next=bigger->next;
+              }
+      
+              return result->next;
+          }
+      };
+    </code></pre>
+  </details>
+<p>下面就是上面提到的，通过new ListNode来给指针赋值，那么就不需要每次额外断掉</p>
+<details>
+  <pre><code>
+    class Solution {
+      public:
+          ListNode* partition(ListNode* head, int x) {
+      
+              ListNode* result=new ListNode(0);//result->next就为结果
+              ListNode* p_result=result;//指结果的指针
+              ListNode* bigger=new ListNode(0);//bigger->next（存放大于目标值的链表）
+              ListNode* p_bigger=bigger;//指向存放大于目标值的链表
+      
+              while(head!=nullptr)//一直遍历直到最后
+              {
+                  if(head->val<x)
+                  {
+                      p_result->next=new ListNode(head->val);
+                      p_result=p_result->next;//继续递推
+                  }
+                  else//就是大于等于值x的
+                  {
+                      p_bigger->next=new ListNode(head->val);
+                      p_bigger=p_bigger->next;//继续递推
+                  }
+                  head=head->next;//原链表一直递推
               }
               
               //最后再把bigger->next原来的链表中
