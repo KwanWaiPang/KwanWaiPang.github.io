@@ -550,9 +550,11 @@ public:
   </code></pre>
 </details>
 <p>
-更优的解法则是采用优先队列的思路，从k个链表的头节点的指针中来找最小的放入
+更优的解法则是采用优先队列的思路，从k个链表的头节点的指针中来找最小的放入。
 <br>
-时间复杂度是O(kn*logk)。空间复杂度则由于用了优先队列，优先队列中的元素不超过 k 个，故渐进空间复杂度为 O(k)
+优先队列 pq 中的元素个数最多是 k，所以一次 poll 或者 add 方法的时间复杂度是 O(logk)。
+<br>
+所有的链表节点都会被加入和弹出 pq，所以算法整体时间复杂度是O(n*logk)。空间复杂度则由于用了优先队列，优先队列中的元素不超过 k 个，故渐进空间复杂度为 O(k)
 </p>
 
 <p>
@@ -587,7 +589,7 @@ public:
                   pq_group.pop();//头个元素弹出
                   p_result->next=smallest_node;//赋值
       
-                  if(smallest_node->next!=nullptr)//若不为空
+                  if(smallest_node->next!=nullptr)//若不为空，则加到队列中
                   {
                       pq_group.push(smallest_node->next);
                   }
@@ -645,6 +647,67 @@ public:
       };
   </code></pre>
 </details>
+
+<p><br></p>
+<h1>4. 单链表的倒数第 k 个节点</h1>
+<p>
+  对于这类型的题目，最直接的方式当然就是先遍历一次得到链表的长度为n，然后再遍历一次得到倒数第k个节点（也就是正数的第n-k+1个节点）。
+  但这样做的话需要两次遍历，能否<strong>只遍历一次呢？</strong>
+  <br>
+  思路请见下图：
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 90%;" src="../assets/img/微信截图_20240723190616.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+<p>
+  解题的代码如下，时间复杂度为O（N），空间复杂度为O（N）如果不额外用一个虚拟节点的话，空间复杂度为O（1）。
+</p>
+<details>
+  <pre><code>
+    /**
+    * Definition for singly-linked list.
+    * struct ListNode {
+    *     int val;
+    *     ListNode *next;
+    *     ListNode() : val(0), next(nullptr) {}
+    *     ListNode(int x) : val(x), next(nullptr) {}
+    *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+    * };
+    */
+   class Solution {
+   public:
+       ListNode* removeNthFromEnd(ListNode* head, int n) {
+   
+           ListNode* result=new ListNode(-1);//虚拟节点头，最后返回的为result->next
+           ListNode* p_result=result;//指向结果的指针
+           // 双指针法解题，遍历一次即可找到倒数第n个节点
+           ListNode* p1=head;//第一个指针，先指向head
+           for(int i=0;i<n;i++)//走n次
+           {
+               p1=p1->next;//指向它的下一个节点
+           }
+           
+           ListNode* p2=head;//第二个指针，先指向head，并且跟p1一起走
+           while(p1!=nullptr)//一直往前走，直到到终点
+           {
+               p_result->next=p2;
+               p1=p1->next;//指向它的下一个节点
+               p2=p2->next;//p2跟随p1一起走
+               p_result=p_result->next;//跟随一起走
+           }
+           //此时，p2指向的就是倒数第n个，也就是顺数第size()-n+1个,
+           p_result->next=p2->next;//直接跳过第size()-n+1个
+   
+           return result->next;
+       }
+   };
+  </code></pre>
+</details>
+
 
 <p><br></p>
 <h1>参考资料</h1>
