@@ -767,14 +767,150 @@ public:
 </code></pre>
 </details>
 
-
-
 <p><br></p>
 <h1>5. 快慢指针获取判断链表是否包含环</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/微信截图_20240723195438.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
 <p>
   如果 fast 最终能正常走到链表末尾，说明链表中没有环；如果 fast 走着走着竟然和 slow 相遇了，那肯定是 fast 在链表中转圈了，说明链表中含有环。
+  时间复杂度为O（N）与空间为O（1）
 </p>
-
+<details>
+  <pre><code>
+    /**
+    * Definition for singly-linked list.
+    * struct ListNode {
+    *     int val;
+    *     ListNode *next;
+    *     ListNode(int x) : val(x), next(NULL) {}
+    * };
+    */
+   class Solution {
+   public:
+       bool hasCycle(ListNode *head) {
+       // 如果 fast 最终能正常走到链表末尾，说明链表中没有环；
+       // 如果 fast 走着走着竟然和 slow 相遇了，那肯定是 fast 在链表中转圈了，说明链表中含有环。
+           ListNode* p_fast=head;//快指针走两步
+           ListNode* p_slow=head;//慢指针走一步
+   
+           while(p_fast!=NULL && p_fast->next!=NULL)
+           {
+               p_fast=p_fast->next->next;
+               p_slow=p_slow->next;
+               if(p_fast==p_slow)
+                   return true;
+           }
+   
+           return false;//能走出来
+           
+       }
+   };
+  </code></pre>
+  </details>
+<p>
+  也可以采用hash table的形式来查看当前的节点是否已经访问过，如果访问过则说明有环，时间复杂度为O（N），空间复杂度为O（N）
+</p>
+<details>
+  <pre><code>
+    class Solution {
+      public:
+          bool hasCycle(ListNode *head) {
+      
+              unordered_map<ListNode *, int> ListNode_map;
+              while(head!=NULL)
+              {
+                  ListNode_map[head]++;
+                  if(ListNode_map[head]>1)//找到了一样的节点
+                      return true;
+                  head=head->next;
+              }
+      
+              return false;
+          }
+      };
+  </code></pre>
+  </details>
+<p>进阶版：如果链表中含有环，如何计算这个环的起点？</p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/微信截图_20240723201154.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+<p>此题用哈希表解更加简单，空间复杂度与时间复杂度都是O(N)</p>
+<details>
+  <pre><code>
+    class Solution {
+      public:
+          ListNode *detectCycle(ListNode *head) {
+      
+              unordered_map<ListNode *, int> group;
+              while(head!=NULL)
+              {
+                  group[head]++;
+                  if(group[head]>1)//找到了回环
+                      return head;
+                  head=head->next;
+              }
+              return NULL;
+          }
+      };
+  </code></pre>
+  </details>
+<p>若要采用快慢指针，思路相对比较绕，请见图例。
+  <br>注意跟哈希表不一样，快慢指针只是找到环的相遇点，而不是环的起点。快慢指针是通过判断是否有相遇点确定是否为环。而哈希表则是直接找到环的起点。</p>
+<details>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/微信截图_20240723213212.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+  <pre><code>
+    class Solution {
+      public:
+          ListNode *detectCycle(ListNode *head) {
+      
+              ListNode* p_fast=head;//快指针走两步
+              ListNode* p_slow=head;//慢指针走一步
+      
+              // 先判断链表是否包含环
+              while(p_fast!=NULL && p_fast->next!=NULL)
+              {
+                  p_fast=p_fast->next->next;
+                  p_slow=p_slow->next;
+                  if(p_fast==p_slow)
+                      break;//不能直接返回p_slow,因为只是单纯的找到相遇点，而并非环的起点
+              }
+      
+              // 如果遍历到了终点,那就是没有回环
+              if (p_fast==NULL || p_fast->next==NULL)
+                  return NULL;
+              
+              //否则,此时的p_fast与p_slow都是指向相遇点的.
+              // 当他们相遇时，p_fast走了2k，而p_slow走了k。p_fast多走的k步其实就是在环中转圈圈。
+              // 所以环长度必然为k
+              // 设相遇点距环起点为m。那么p_slow与p_fast再走k-m必然到环起点
+              // 而head走k-m也必然到环起点（此处请见图解析）
+              p_slow=head;//将p_slow重新指回起点,而此时p_fast是指向相遇点的
+              while(p_fast!=p_slow)//直到找到相遇点
+              {
+                  // 快慢指针同步前进，相交点就是环起点
+                  p_slow=p_slow->next;
+                  p_fast=p_fast->next;
+              }
+              return p_slow;
+          }
+      };
+  </code></pre>
+  </details>
 
 
 
