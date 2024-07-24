@@ -117,6 +117,354 @@
         </header>
 <article>
 <!-- 插入博客内容-->
+<h1>引言</h1>
+<p>栈类型的题目应该是面试中比较常见的，毕竟思路对了基本马上可以做出来。关键其实只是对于堆的思路的理解。此处在总结栈类型的题目的时候也把队列也一并介绍
+  <ul>
+    <li>栈（stack）是先入后出的</li>
+    <li>队列（queue）是先入先出的</li>
+    <li>双端队列（dueue）则是两端都可了~</li>
+  </ul>
+  更直观的请见下图
+  <figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/stack/微信截图_20240724202708.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+下图更加直观的展示了栈和队列的区别
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 50%;" src="../assets/img/stack/微信截图_20240724202520.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+下面则详细的列举了定义及函数的使用：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/stack/微信截图_20240724202941.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+</p>
+
+<p><br></p>
+<h1>有效括号</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/stack/微信截图_20240724203520.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        bool isValid(string s) {
+            stack&ltchar&gt group;
+            for(int i=0;i&lts.size();i++)
+            {
+                if(s[i]=='(' || s[i]=='[' || s[i]=='{')
+                    group.push(s[i]);
+                else
+                {
+                    if(!group.empty())//若不为空
+                    {
+                        if(
+                            (s[i]==')' && group.top()=='(')
+                            ||(s[i]==']' && group.top()=='[')
+                            ||(s[i]=='}' && group.top()=='{')
+                          )
+                            group.pop();//找了就删掉
+                        else //找不到匹配的就不是
+                            return false;
+                    }
+                    else
+                        return false;
+                }
+            }
+            if(group.size()) //结束后如果是空的，
+                return false;
+            else
+                return true;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>最长有效括号</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/stack/微信截图_20240724204408.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        int longestValidParentheses(string s) {
+            int max_len=0;//最长的结果
+            stack&ltint&gt index;
+            index.push(-1);
+            for(int i=0;i&lts.size();i++)
+            {
+                // 注意：输入只有左右括号
+                if(s[i]=='(')
+                    index.push(i);//放入当前的index
+                else//当为右括号的时候
+                {
+                    index.pop();//先删除，由于最开始push了-1
+                    if(index.empty())//当前右括号前面没有东西
+                    {
+                        index.push(i);//这其实就是进行了下一次的操作了
+                    }
+                    else
+                    {
+                        // 通过index来记录长度
+                        max_len=max(max_len,i-index.top());
+                    }
+                }
+            }
+            return max_len;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>移掉K位数字</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/stack/微信截图_20240724205235.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>需要先解读题目，数字应该是顺序不变的。那要保证尽量递增的形式.且要避免前导为0（也就是栈为空时，0不要放入）</p>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        string removeKdigits(string num, int k) {
+            stack&ltchar&gt stack_char;
+            for(int i=0;i&ltnum.size();i++)
+            {
+                while(!stack_char.empty() && k&gt0 && stack_char.top()>num[i])
+                {
+                    // 当盏不为空，且盏顶的元素大于当前的元素的时候，把栈顶的元素去掉。放入当前的元素
+                    stack_char.pop();
+                    k--;//计数值自减
+                }
+                if(stack_char.empty() && num[i]=='0')//避免了前导为0
+                    continue;//跳过第一个为0
+                stack_char.push(num[i]);//每次都将当前值放入
+            }
+    
+            string result;//记录结果
+            while(!stack_char.empty())
+            {
+                if(k&gt0)//如果还需要继续删除位数
+                    k--;
+                else //只有当不需要去除数字的时候才加入
+                    result+=stack_char.top();//注意这个比下面的空间复杂度耕地
+                    // result=stack_char.top()+result; //每次赋值导致更高的内存消耗
+                stack_char.pop();//弹出栈顶
+            }
+            reverse(result.begin(), result.end());//stl中的reverse函数，需要反转一下。因为栈是逆过来的
+            return result.empty()? "0":result;
+    
+        }
+    };
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h1>去掉重复字母</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/stack/微信截图_20240724210452.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        string removeDuplicateLetters(string s) {       
+           //先通过unordered_map记录每个字符出现了多少次
+           unordered_map&ltchar,int&gt map;
+           for(auto str:s)
+                map[str]++;
+    
+            stack&ltchar&gt stack_str;//定义一个栈
+            unordered_map&ltchar,int&gt map_stack;//用于记录这个字符是否在栈中
+            for(int i=0;i&lts.size();i++)
+            {
+                if(map_stack[s[i]]&gt0)//当前已经存在于stack中了
+                {
+                    map[s[i]]--;
+                    continue;
+                }
+                //否则就是不存在了~
+                while(!stack_str.empty() && stack_str.top()&gts[i] && map[stack_str.top()]&gt0)
+                {//当前盏不为空，且top的元素大于s[i]，且stack_str.top()元素数量大于0，也就是后面还有
+                    map_stack[stack_str.top()]=0;//记录（不在栈中）
+                    stack_str.pop();//出栈
+                }
+                stack_str.push(s[i]);//入栈
+                map_stack[s[i]]=1;//入栈记录
+                map[s[i]]--;//也要记录
+            }
+    
+           string output_str;
+           while(!stack_str.empty())
+           {
+                output_str=stack_str.top()+output_str;//注意顺序就不需要采用reverse
+                stack_str.pop();
+           }
+           return output_str;
+        }
+    };
+</code></pre>
+</details>
+<p>上面方法虽然通过栈可以解决，但是却很容易出错，还需要额外记录。因此下面给出用string的解法。其实也是用了栈的思想，只是用了string可以用其函数find这样可以简化操作</p>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        string removeDuplicateLetters(string s) {
+            // 注意要求是字典序最小其不能打乱字符，单纯的unordered_map解决不了~
+            // 对于输入bcabc。第一个是b放入，第二个发现是c，b&ltc,也将c放入
+            // 当遇到a，少于c,且a后面有c，所以c删掉。小于b，所以b删掉。
+           
+           //先通过unordered_map记录每个字符出现了多少次
+           unordered_map&ltchar,int&gt map;
+           for(auto str:s)
+           {
+                map[str]++;
+           }
+    
+           string output_str;
+           for(int i=0;i&lts.size();i++)
+           {    
+                //说明当前字符已经存在了，故此不再插入
+                if(output_str.find(s[i])!=string::npos)
+                {
+                    map[s[i]]--;//记录这个字符的数目减一，因为没有加入
+                    continue;
+                }
+    
+                //如果没有找到
+                //且栈内不为空，且即将进栈的元素小于当前栈顶的元素，同时当前栈顶的元素也不是最后一个（map中还有）
+                while(!output_str.empty() && output_str.back()&gts[i] && map[output_str.back()]&gt0)
+                {
+                    output_str.pop_back();//就可以删掉（相当于出栈）
+                }
+                output_str.push_back(s[i]);//入栈操作
+                map[s[i]]--;//入栈后减一。
+           }
+           return output_str;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>简化路径</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/stack/微信截图_20240724211759.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        string simplifyPath(string path) {
+            vector&ltstring&gt str_group;
+            string temp_str;
+    
+            if(path.back()!='/')
+                path=path+'/';//在结尾处加上'/'方便对路径的字母进行分组放于str_group中
+    
+            for(int i=0;i&ltpath.size();i++)//进行路径的分割
+            {
+                if(path[i]=='/') //遇到斜杆
+                {
+                    if(!temp_str.empty())//如果不为空就push到vector中
+                    {
+                        str_group.push_back(temp_str);
+                        temp_str.clear();//清空一下
+                    }
+                }
+                else
+                    temp_str=temp_str+path[i];
+            }//这样就实现了以斜杆划分,并且不包含斜杆
+    
+            stack&ltstring&gt path_stack;//定义栈
+            for(int i=0;i&ltstr_group.size();i++)//遍历分割后的路径
+            {
+                string temp_str=str_group[i];;
+                if(!temp_str.empty())
+                {
+                    if(temp_str==".")//若为一个点，不处理
+                    {}
+                    else if (temp_str=="..")//如果连续两个点，那么就是要切换到上一级目录
+                    {
+                        if(!path_stack.empty())//如果栈不为空，就把栈顶删掉
+                            path_stack.pop();
+                    }
+                    else//上面都不满足，就应该是正常字符，所以输入作为路径
+                        path_stack.push(temp_str); //放入栈中
+                }
+            }
+    
+            //最终结果存放到string中
+            string output_str;
+            while(!path_stack.empty())
+            {
+                output_str = "/" + path_stack.top() + output_str;//注意顺序,加到当前的前面
+                path_stack.pop();
+            }
+            return output_str.empty()? "/":output_str;
+        }
+    };
+</code></pre>
+</details>
+
+<!-- <details>
+<summary>Click to expand the code</summary>
+<pre><code>
+</code></pre>
+</details> -->
+
+<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
+
+<!-- <figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  -->
 
 
 <p><br></p>
