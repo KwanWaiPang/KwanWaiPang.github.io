@@ -968,6 +968,168 @@ public:
   <br>
   关于递归类题目的介绍，请见博客<a href="../Poster/递归类题目.html">Link</a>
 </p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/Listnode/微信截图_20240724183423.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<pre><code>
+  class Solution {
+    public:
+        // 采用递归的解法
+        ListNode* addTwoNumbers(ListNode* l1, ListNode* l2, int carry=0) {//carry 为进位
+    
+            ListNode* result=new ListNode(0);//链表指针初始化为0
+    
+            if(l1==nullptr && l2==nullptr) //如果两者都为空，那么就结束
+                return carry? new ListNode(carry):nullptr; //carry为空就没有，不为空就返回carry值生成的节点
+            
+            //保证l1是最长的
+            if(l1==nullptr && l2!=nullptr)
+                swap(l1,l2);
+    
+            carry=carry+l1->val+(l2 ? l2->val : 0);
+    
+            result->val=carry%10;// 每个节点保存一个数位
+    
+            carry=carry/10;//除10代表进位(存在l2为空)
+    
+            //用递归迭代（注意题目正好是反过来的）
+            result->next=addTwoNumbers(l1->next,l2? l2->next:nullptr,carry);//由于保证了l1是最长的，只需要避免l2从空指针中访问next
+            
+            return result;
+            //时间与空间复杂度均为O(N+M)
+    
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724184408.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>解决方法等效于在链表的头部插入一个节点，时间复杂度为O（N）：</p>
+<details>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724185003.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+<pre><code>
+  class Solution {
+    public:
+        void calculate(ListNode* head, ListNode* &result)
+        {
+            if(head==nullptr)//到达末端
+            {
+                return;//返回
+            }
+    
+            //若不为空，创建节点并且赋值
+            ListNode* newNode = new ListNode(head->val);
+            newNode->next = result; // 反转链表，将新节点的next指向前一个节点
+            // 注意不能result->next=result，这会导致无限循环，故此需要一个中间遍历来赋值
+            result = newNode; // 更新结果链表头节点
+    
+            // 递归处理下一个节点
+            calculate(head->next, result);
+        }
+    
+        ListNode* reverseList(ListNode* head) {
+            // ListNode* result=new ListNode();//这样做的话初始化为0而不是空
+            ListNode* result=nullptr;//初始化为空指针
+            // 采用递归的方式
+            calculate(head, result);
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+
+<p><br></p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724185147.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>关键点在于右指针如何让递归回到改回到的点：</p>
+<details>
+<pre><code>
+  class Solution {
+    public:
+    
+        void calculate(ListNode* head, const int left, const int right,ListNode* &result, int index)
+        {
+            if(head==nullptr)//到达了终点（head为空）
+                return;//为空则返回
+            
+            if(index<left)//此时还不需要反转，顺序即可
+            {
+                ListNode* newlistnode=new ListNode(head->val);//用当前值创建链表。
+                result=newlistnode;//result为当前的值
+                calculate(head->next,left,right,result->next,index+1);//计算各自的下一个指针
+            }       
+            else if(index>=left && index<=right)//需要倒序
+            {
+                ListNode* newlistnode=new ListNode(head->val);//当前的值
+                newlistnode->next=result;//当前的result作为next
+                result=newlistnode;//获取当前的值（此处类似在节点头插入一个节点）
+                calculate(head->next,left,right,result,index+1);
+            }
+            else if(index>right)//要恢复回顺序
+            {
+                // *关键：此时result的指针还是位于left上;要让它回到right上
+                // if(index<=right+(right-left+1))
+                //     calculate(head,left,right,result->next,index+1);//指针递增
+                // else//回到right上了
+                // {
+                //     result=head;//最后全部赋值
+                //     return;
+                // }
+    
+                // 让result的指针前进到right
+                int temp_int=right-left;
+                ListNode* p_result=result;
+                while(temp_int)
+                {
+                    p_result=p_result->next;
+                    temp_int--;
+                }
+                p_result->next=head;//将最后的全部直接赋值
+                return;
+            }
+        }
+    
+        ListNode* reverseBetween(ListNode* head, int left, int right) {
+    
+            ListNode* result=nullptr;//创建空的链表
+            int index=1;//从1开始
+            //用迭代的解法
+            calculate(head,left,right,result,index);
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+<!-- <details>
+<pre><code>
+</code></pre>
+</details> -->
+
 
 <p><br></p>
 <h1>参考资料</h1>
