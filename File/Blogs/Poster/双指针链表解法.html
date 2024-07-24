@@ -963,11 +963,84 @@ public:
   </details>
 
 <p><br></p>
-<h1>7. 其他链表类题目</h1>
+<h1>7. 删除排序链表中的重复元素</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724193035.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>由于是已经排序的链表，最直接的思路应该是两两对比，如果遇到相同的就跳过去</p>
+<details>
+<pre><code>
+  class Solution {
+    public:
+        ListNode* deleteDuplicates(ListNode* head) {
+    
+            ListNode* p=head;//定义指向节点的指针
+            while(p!=nullptr && p->next!=nullptr)//循环一直到最后一个(同时避免第一个是空的)
+            {
+                if(p->val==p->next->val)//若当前的跟下一个是一样的
+                {
+                    p->next=p->next->next;//相当于删掉了下一个
+                    continue;//到下一次循环，判断删掉当前后的下一个作为当前与它的下一个
+                }
+                else//不相同，那么就返回
+                    p=p->next;//指针指向下一个节点，继续迭代
+            } 
+    
+            return head;//时间复杂度为O（N）
+        }
+    };
+</code></pre>
+</details>
+<p>也可以采用快慢针法，具体见下动态解析以及代码：</p>
+<details>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/Listnode/2.gif" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+</figure> 
+<pre><code>
+  class Solution {
+    public:
+        ListNode* deleteDuplicates(ListNode* head) {
+    
+            //定义快慢指针
+            ListNode* slow=head;
+            ListNode* fast=head;
+    
+            while(fast!=nullptr)//一直遍历
+            {
+                if(slow->val!=fast->val)//如果不等，慢指针的下一个就指向快指针
+                {
+                    slow->next=fast;
+                    slow=slow->next;//慢指针继续走了
+                }
+                //如果相等，慢指针就不走了
+                fast=fast->next;
+            }
+            // 最后一个需要断开
+            if (slow!=nullptr)
+                slow->next=nullptr;
+    
+            return head;//时间复杂度为O（N）
+        }
+    };
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h1>8. 其他链表类题目</h1>
 <p>除了上述的采用双指针法解决的链表类题目外，大部分的链表类题目其实都可以用递归来解决的。接下来逐一介绍
   <br>
   关于递归类题目的介绍，请见博客<a href="../Poster/递归类题目.html">Link</a>
 </p>
+<h3>两数相加</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="../assets/img/Listnode/微信截图_20240724183423.png" alt="Image description">
@@ -1009,6 +1082,7 @@ public:
 </details>
 
 <p><br></p>
+<h3>反转链表</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724184408.png" alt="Image description">
@@ -1055,7 +1129,6 @@ public:
     };
 </code></pre>
 </details>
-
 
 <p><br></p>
 <figure style="text-align: center;">
@@ -1124,6 +1197,134 @@ public:
     };
 </code></pre>
 </details>
+
+<p><br></p>
+<h3>两两交换链表中的节点</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724194709.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>此题有两个解决的思路。第一是递归，也是最简单的：</p>
+<details>
+<pre><code>
+  class Solution {
+    public:
+        ListNode* swapPairs(ListNode* head) {
+            // 解法：递归
+            if(head==nullptr || head->next==nullptr)
+                return head;
+            
+            ListNode* currentnode=new ListNode(head->val);//获取当前节点
+            currentnode->next = swapPairs(head->next->next);//而当前节点由于将会放在下一个，因此它的下一个为递归获得的下下个
+            ListNode* nextnode=head->next;//获取下一个节点
+            nextnode->next=currentnode;//当前节点为下一个节点的下一个节点
+            return nextnode;
+        }
+    };
+</code></pre>
+</details>
+<p>下面是等效的写法，也是递归的思路：</p>
+<details>
+<pre><code>
+  class Solution {
+    public:
+        ListNode* swapPairs(ListNode* head) {
+            // 解法：递归
+            if(head==nullptr || head->next==nullptr)
+                return head;
+            
+            ListNode* currentnode=head->next;//将下一个节点作为当前节点
+            head->next=swapPairs(head->next->next);//然后把原本的当前节点的下个节点指定为递归的结果，就是下下个节点
+            // head->next=swapPairs(currentnode->next);//这个也可以，但不利于理解
+            currentnode->next=head;//而原本的节点则为当前节点的下一个节点的
+            return currentnode;
+        }
+    };
+</code></pre>
+</details>
+
+<p>第二个思路则是用指针遍历，逐一赋值，细心处理也可以避免出错，也很直接</p>
+<details>
+<pre><code>
+  class Solution {
+    public:
+        ListNode* swapPairs(ListNode* head) {
+            
+            // 解法2：链表迭代遍历以及，查询以及替换
+            ListNode* p=head;//指向节点的指针
+            while(p!=nullptr && p->next!=nullptr)//一直遍历到最后一个节点
+            {
+                ListNode* currentnode=new ListNode(p->val);//获取当前的节点
+                currentnode->next=p->next->next;//链接上下两个节点
+    
+                ListNode* nextnode=new ListNode(p->next->val);//获取下一个节点
+                p->val=nextnode->val;//当前点赋值下一个点的值     
+                p->next=currentnode;//而当前点的下一个则链接上原本的当前点       
+    
+                p=p->next->next;//跳两个，如果跳过两个后为空就跳出
+            }
+            return head;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h3>移除链表元素</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/Listnode/微信截图_20240724201034.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>解题思路很简单，其实就是基本的去除链表某个元素而已~</p>
+<details>
+<pre><code>
+  class Solution {
+    public:
+        ListNode* removeElements(ListNode* head, int val) {
+    
+            ListNode* p=head;//作为迭代的指针
+    
+            // 改为永远判断下一个
+            while(p!=nullptr && p->next!=nullptr)
+            {
+                auto nextnode=p->next;
+                if(nextnode->val==val)//若下一个节点为目标值
+                {
+                    p->next=p->next->next;
+                }
+                else
+                {
+                    p=p->next;//一直迭代
+                }
+            }
+            
+            // 最后检查第一个（不要漏了~）
+            if(head!=nullptr && head->val==val)
+            {
+                ListNode* newnode=head->next;
+                head=newnode;
+            }
+            
+            return head;
+    
+        }
+    };
+</code></pre>
+</details>
+
+<!-- <figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  -->
 
 <!-- <details>
 <pre><code>
