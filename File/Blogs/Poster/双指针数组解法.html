@@ -7,7 +7,7 @@
         text-align-last: left;
         text-justify: inter-word;
     }
-    </style>
+  </style>
 
 <!-- Head -->
 <head>    <!-- Metadata, OpenGraph and Schema.org -->
@@ -53,9 +53,15 @@
 
   <!-- Styles -->
 
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css">
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css"> -->
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css"> -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/new_css_js/cpp-highlight/styles/gradient-dark.css">
+  <script src="../assets/new_css_js/cpp-highlight/highlight.js"></script>    <!--引入代码高亮js库-->
+
+  <script>hljs.initHighlightingOnLoad();
+  </script>
 
   <!-- Dark Mode -->
 
@@ -82,9 +88,13 @@
 
           <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto flex-nowrap">
-                <li class="nav-item ">
-                  <a class="nav-link" href="../My_Blog.html">Homepage</a>
-                </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="../My_Blog.html">Homepage</a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="nav-link" href="../Poster/cpp算法学习笔记.html">Learning Algorithm</a>
+              </li>
 
             </ul>
           </div>
@@ -98,7 +108,7 @@
       <div class="post">
         <header class="post-header">
           <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">算法学习笔记及基于各种编程语言的开发记录</span>
+           <span style="font-weight: 600;">双指针数组解法</span>
           </h1>
           <p><br></p>
           <!-- <p>
@@ -108,105 +118,40 @@
 <article>
 <!-- 插入博客内容-->
 
-
-<h3>引言</h3>
-<p>本文汇总了本人学习算法以及刷Leetcode题目的过程中的一些笔记，主要是基于C++的实现。
-  具体代码运行及测试请见<a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a>
+<p>
+  之前博客介绍了采用双指针法来解决链表类题目<sup><a href="../Poster/双指针链表解法.html">Link</a></sup>。
+  本博文主要介绍用双指针法来解决数组类题目，并且把数组类相关的解题思路也放在此博客中。
   <br>
-  此外，本博文还记录了本人采用不同编程语言开发的一些项目，包括ROS，Android，Pytorch等。
+  在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类：<strong>左右指针</strong>和<strong>快慢指针</strong>。
+  <ul>
+    <li>左右指针: 两个指针相向而行或者相背而行。</li>
+    <li>快慢指针：两个指针同向而行，一快一慢。</li>
+  </ul>
+  虽然在数组中并没有真正意义上的指针，但可以把索引当做数组中的指针，这样也可以在数组中施展双指针技巧，
 </p>
 
 <p><br></p>
-<div class="news">
-  <h3>算法学习博客列表</h3>
-  <div class="table-responsive">
-    <table class="table table-sm table-borderless">
-      <tr>
-        <th scope="row"><a href="../Poster/栈类型题目.html">栈类型题目</a></th>
-      </tr>
-      
-      <tr>
-        <th scope="row"><a href="../Poster/双指针链表解法.html">双指解决链表类题目</a></th>
-      </tr>
+<h1>参考资料</h1>
+<ul>
+  <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
 
-      <tr>
-        <th scope="row"><a href="../Poster/双指针数组解法.html">双指解决数组类题目</a></th>
-      </tr>
+  <li><a href="https://labuladong.online/algo/essential-technique/array-two-pointers-summary/" target="_blank">双指针技巧秒杀七道数组题目</a></li>
 
-      <tr>
-        <th scope="row"><a href="../Poster/递归类题目.html">递归类题目</a></th>
-      </tr>
+  <li><a href="https://www.bilibili.com/video/BV1iG411W7Wm/?vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">解说视频</a></li>
 
-      <tr>
-        <th scope="row"><a href="../Poster/二叉树类题目.html">二叉树类题目</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/动态规划.html">动态规划</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/string及其函数的使用.html">string及其函数的使用</a></th>
-      </tr>
-
-    </table>
-  </div> 
-</div>
-
-
+</ul>
 <p><br></p>
-<div class="news">
-  <h3>不同编程语言开发项目</h3>
-  <div class="table-responsive">
-    <table class="table table-sm table-borderless">
-     
-      <tr>
-        <th scope="row">C/C++</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_9361572.html" target="_blank">机器人操作系统（ROS）开发博客汇总</a>
-          <br>
-          <a href="https://blog.csdn.net/gwplovekimi/article/details/133878460?spm=1001.2014.3001.5501" target="_blank">基于STM32的VLC驱动调制芯片模组</a>及驱动代码<sup><a href="https://github.com/R-C-Group/new_vlc_ble_coding" target="_blank">1</a>, <a href="https://github.com/R-C-Group/Big_power_VLC_driver" target="_blank">2</a></sup></a>
-        </td>
-      </tr>
-
-      <tr>
-        <th scope="row">Python</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_8231479.html" target="_blank">Low-level vision and Pytorch博客汇总</a>
-        </td>
-      </tr>
-
-      <tr>
-        <th scope="row">Java</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_9860500.html" target="_blank">Android 开发博客汇总</a>
-          <br>
-          <a href="../Poster/Self_develop_APP.html">自研的APP展示</a>
-        </td>
-      </tr>
-
-    </table>
-  </div> 
-</div>
-
-<p><br></p>
-<p><br></p>
-<p><br></p>
-
-</article>
-</div>
-</div>
 
 </article>
 </div>
 </div>
 
 <!-- Footer -->    
-<!-- <footer class="nofixed-bottom">
+<footer class="nofixed-bottom">
 <div class="container mt-0" style="width:100%;text-align:center;">
   Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
 </div>
-</footer>  -->
+</footer> 
 
     <!-- JavaScripts -->
     <!-- jQuery -->
