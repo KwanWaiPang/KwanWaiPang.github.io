@@ -134,11 +134,62 @@
 <h1>1. 删除有序数组中的重复项</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/array/微信截图_20240725232617.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<p>对于此代码，原本有两个解法：</p>
+<details>
+<summary>解法1：采用unique函数。时间复杂度O(Nlogn)，空间复杂度为O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int removeDuplicates(vector<int>& nums) {
+    
+        sort(nums.begin(),nums.end());
+    
+        // 解法1:时间复杂度O(Nlogn)，空间复杂度为O（1）
+        // 采用unique来“去除”容器或者数组中相邻元素的重复出现的元素
+        auto iter=unique(nums.begin(),nums.end());//返回一个指向去重后序列末尾的迭代器。
+        // unique 并不会改变容器的大小，只是将不重复的元素移到前面，返回去重后末尾的迭代器（最后一个不重复元素）
+        // 去重过程：不停的把后面不重复的元素移到前面来，也可以说是用不重复的元素占领重复元素的位置。
+        return iter-nums.begin();//这就是不重复的元素的个数
+        }
+    };    
+</code></pre>
+</details>
+
+<details>
+<summary> 解法2：采用键值对,时间复杂度为O（n），由于需要一个键值对，空间复杂度估计也是O（n）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int removeDuplicates(vector&ltint&gt& nums) {
+    
+            // 解法2：采用键值对,时间复杂度为O（n）
+            map<int,int> group;//会自动根据键的大小进行排序，而输入的数组本身就是递增的。所以可以使用
+            for(int i=0;i&ltnums.size();i++)
+            {
+                group[nums[i]]++;
+            }
+    
+            nums.clear();//清空，需要重新放入，用于验证
+            for(auto value:group)//遍历map中的每个对
+            {
+                nums.push_back(value.first);//获取键
+            }
+    
+            return nums.size();
+        }
+    };
+    
+</code></pre>
+</details>
+
+
+
+
 
 
 <!-- <details>
