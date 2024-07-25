@@ -196,6 +196,31 @@
   <br>
   这样，就保证了 <mark>nums[初始点..slow]</mark> 都是无重复的元素，当 fast 指针遍历完整个数组 nums 后，<mark>nums[初始点..slow]</mark> 就是整个数组去重之后的结果。
 </p>
+<details>
+<summary>Click to expand the code. 时间复杂度为O（n），空间复杂度为O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int removeDuplicates(vector&ltint&gt& nums) {
+    
+            //采用双指针法（快慢指针）时间复杂度为O（n），空间复杂度为O（1）
+            int slow=0, fast=0;
+            while(fast!=nums.size())//遍历整个数组
+            {
+                if(nums[slow]!=nums[fast])//找到不等的
+                {
+                    slow++;//slow自增
+                    nums[slow]=nums[fast];//进行赋值
+                }
+                fast++;
+            }
+    
+            return slow+1;//这个就是排在前面的不重复的size（注意要+1）
+        }
+    };
+    
+</code></pre>
+</details>
 
 
 <!-- <details>
