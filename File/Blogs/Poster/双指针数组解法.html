@@ -135,8 +135,6 @@
 </p>
 
 <p><br></p>
-<h1>采用快慢指针法来解数组类题目</h1>
-<p><br></p>
 <h1>1. 删除有序数组中的重复项</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -346,7 +344,199 @@
 </details>
 
 <p><br></p>
-<h1>采用二分法（左右指针法）来解数组类题目</h1>
+<h1>4. 两数之和 </h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726211539.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>左右指针,时间复杂度应该为O（N），空间复杂度应该为O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        vector<int> twoSum(vector&ltint&gt& numbers, int target) {
+    
+             // 由于数组已经按照非递减顺序排序，故此可以用左右指针法
+             int left=0, right=numbers.size()-1;
+             while(left&ltright)
+             {
+                int sum=numbers[left]+numbers[right];
+                if(sum==target)//找到了
+                {
+                    return vector&ltint&gt{left+1, right+1};//索引从1开始
+                }
+                else if(sum&lttarget)
+                {
+                    left++;//让值大一些
+                }
+                else if(sum&gttarget)
+                {
+                    right--;//让值小一些
+                }
+    
+             }
+             return vector&ltint&gt{ -1, -1};//找不到
+        }
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>用hash table (时间复杂度为O（N）)</summary>
+<pre><code>
+  class Solution {
+    public:
+        vector<int> twoSum(vector<int>& numbers, int target) {
+            
+            int value_a,value_b;
+            vector&ltint&gt result;
+            // 用hash table (时间复杂度可以降为O（N）)
+            unordered_map&ltint, int&gt hash_able;//(具体的值、坐标)
+            for(int i=0;i&ltnumbers.size();i++)
+            {
+                auto it=hash_able.find(target-numbers[i]);//寻找这个值的另一半
+                // 如果找到了，
+                if(it!=hash_able.end())
+                {
+                    int index_1=it->second;
+                    int index_2=i;
+                    // 注意返回的为坐标值（且下标开始为1）
+                    result.push_back(index_1+1);
+                    result.push_back(index_2+1);
+                    break;
+                }
+                hash_able[numbers[i]]=i;//若没找到，就继续放入hash table
+            }
+            
+            return result;
+    
+        }
+    };
+</code></pre>
+</details>
+
+<p>相类似的题目还有下题（几乎一样，只是下标索引从1开始）：</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726211841.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>解法1：用hash table (时间复杂度为O（N）)</summary>
+<pre><code>
+  class Solution {
+    public:
+        vector<int> twoSum(vector<int>& nums, int target) {
+            
+            int value_a,value_b;
+            vector&ltint&gt result;
+            // 用hash table (时间复杂度可以降为O（N）)
+            unordered_map&ltint, int&gt hash_able;//(具体的值、坐标)
+            for(int i=0;i&ltnums.size();i++)
+            {
+                auto it=hash_able.find(target-nums[i]);//寻找这个值的另一半
+                // 如果找到了，
+                if(it!=hash_able.end())
+                {
+                    int index_1=it->second;
+                    int index_2=i;
+                    // 注意返回的为坐标值
+                    result.push_back(index_1);
+                    result.push_back(index_2);
+                    break;
+                }
+                hash_able[nums[i]]=i;//若没找到，就继续放入hash table
+            }
+            
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>解法2： 暴力匹配的解法（时间复杂度为O（N^2））这必然非最优解了🤭</summary>
+<pre><code>
+  class Solution {
+    public:
+        vector<int> twoSum(vector<int>& nums, int target) {
+            
+            int value_a,value_b;
+            vector&ltint&gt result;
+            // 暴力匹配的解法（时间复杂度为O（N^2））
+            for(int i=0;i&ltnums.size();i++)
+            {
+                value_a=nums[i];
+                for(int j=i+1;j&ltnums.size();j++)
+                {
+                    value_b=nums[j];
+                    if(value_a+value_b==target)
+                    {
+                        result.push_back(i);
+                        result.push_back(j);
+                        break;
+                    }
+                }
+            }
+            
+            return result;
+        }
+    };
+    
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>5.反转数组 </h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726215126.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>最简单的就是采用reverse函数了~时间复杂度O(n)</summary>
+<pre><code>
+  class Solution {
+    public:
+        void reverseString(vector<char>& s) {
+            //采用reverse函数
+            reverse(s.begin(),s.end());
+        }
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>但是还是采用双指针法来看看,时间复杂度O(n),空间复杂度为O（1）跟上面一样</summary>
+<pre><code>
+  class Solution {
+    public:
+        void reverseString(vector&ltchar&gt& s) {
+    
+            int left=0, right=s.size()-1;
+            while(left&ltright)//等于的时候不处理了
+            {
+                char temp=s[left];//用个中间变量来赋值~
+                s[left]=s[right];
+                s[right]=temp;
+                left++;
+                right--;
+            }       
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>采用二分法来解数组类题目</h1>
 <p>
   二分法其实就是左右双指针法的一种特殊情况，即两个指针分别指向数组的两端，然后根据题目的要求，每次将指针移动到中间，然后根据中间的值来判断下一步应该移动哪个指针。
   更多关于二分法的介绍请见博客<sup><a href="../Poster/二分法.html" target="_blank">Link</a></sup>。
