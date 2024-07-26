@@ -122,6 +122,10 @@
   之前博客介绍了采用双指针法来解决链表类题目<sup><a href="../Poster/双指针链表解法.html">Link</a></sup>。
   本博文主要介绍用双指针法来解决数组类题目，并且把数组类相关的解题思路也放在此博客中。
   <br>
+  数组与链表是最基本的两种数据结构，其他均可以由这两种构成。
+  链表是用离散的内存块存储数据，而数组是用连续的内存块存储数据。
+  因此，对于数组，只需要直知道内存空间首地址（也就是数组名），通过索引即可访问任意元素。
+  <br>
   在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类：<strong>左右指针</strong>和<strong>快慢指针</strong>。
   <ul>
     <li>左右指针: 两个指针相向而行或者相背而行。</li>
@@ -231,6 +235,114 @@
 
 <p><br>对于前面的解法1和解法2，特别是解法1，除非比较熟悉cpp的函数，不然一般不懂使用，所以更建议实际解题的时候用算法去解题而不是用库函数取巧🤭
 而类似的题目链表类博客中有记录了，给出了两个解法（见Leetcode中83题）</p>
+
+<p><br></p>
+<h1>2.移除元素（原地删除而非上面的换位置）</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726203514.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>解法1：数组函数的使用，时间复杂度O(Nlogn+N)；空间复杂度O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int removeElement(vector&ltint&gt& nums, int val) {
+    
+            // 先进行排序,排序后只需要对找到对应值的位置进行删除即可
+            sort(nums.begin(),nums.end());//时间复杂度为O（nlogn）
+            auto index=find(nums.begin(),nums.end(),val);//返回的是指针（时间复杂度为O（n））
+    
+            if(index!=nums.end())//代表找到了
+            {
+                //从找到的位置开始，到结尾
+                for(auto it=index;it!=nums.end();)
+                {
+                    if(*it==val)
+                    {
+                        it = nums.erase(it);//直接删掉
+                    }
+                    else
+                        break;
+                }
+            }
+    
+            return nums.size();//返回的是nums 中与 val 不同的元素的数量
+        }
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>解法2：快慢指针，其实跟上面题1的思路是一样的。时间复杂度为O（n），空间复杂度为O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int removeElement(vector&ltint&gt& nums, int val) {
+    
+           int slow=0, fast=0;
+           while(fast!=nums.size())
+           {
+                if(nums[fast]!=val)//不等
+                {
+                    nums[slow]=nums[fast];
+                    slow++;
+                }
+                fast++;
+           }
+           return slow;
+            //此处与有序数组去重的解法有一个细节差异：
+            // 先给 nums[slow] 赋值然后再slow++
+            // nums[0..slow-1] 是不包含值为 val 的元素的，最后的结果数组长度就是 slow
+        }
+    };
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h1>3.移动零</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726205549.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>类似上面的解法，只是改为vector以及没有返回值。时间复杂度为O（n），空间复杂度为O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        void moveZeroes(vector&ltint&gt& nums) {
+    
+            // 快慢指针
+            int slow=0,fast=0;
+    
+            while(fast!=nums.size())
+            {
+                if(nums[fast]!=0)//若不为零
+                {
+                    nums[slow]=nums[fast];
+                    slow++;
+                }
+                fast++;
+            }
+    
+            while(slow!=nums.size())
+            {//由于没有返回值，把后面的也赋值为0
+                nums[slow]=0;
+                slow++;
+            }
+        }
+    };
+</code></pre>
+</details>
+
 
 <!-- <details>
 <summary>Click to expand the code</summary>

@@ -1023,7 +1023,7 @@ public:
                 //如果相等，慢指针就不走了
                 fast=fast->next;
             }
-            // 最后一个需要断开
+            // 最后一个需要断开（自动释放掉不要的内存/不要的节点）
             if (slow!=nullptr)
                 slow->next=nullptr;
     
