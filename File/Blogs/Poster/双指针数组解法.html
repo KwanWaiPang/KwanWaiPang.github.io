@@ -138,7 +138,7 @@
 <h1>1. 删除有序数组中的重复项</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240725232617.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240725232617.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -204,7 +204,7 @@
 <summary>Click to expand the code. 时间复杂度为O（n），空间复杂度为O（1）</summary>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/1.gif" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/1.gif" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -240,7 +240,7 @@
 <h1>2.移除元素（原地删除而非上面的换位置）</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726203514.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240726203514.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -307,7 +307,7 @@
 <h1>3.移动零</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726205549.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240726205549.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -347,7 +347,7 @@
 <h1>4. 两数之和 </h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726211539.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240726211539.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -422,7 +422,7 @@
 <p>相类似的题目还有下题（几乎一样，只是下标索引从1开始）：</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726211841.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240726211841.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -496,7 +496,7 @@
 <h1>5.反转数组 </h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726215126.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240726215126.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -539,14 +539,14 @@
 <h1>6.最长回文子串  </h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/array/微信截图_20240726232426.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/array/微信截图_20240726232426.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure> 
 
 <details>
-<summary>回文子串的判断应该是经典的动态规划的题目，但是复杂度是O（N^2）</summary>
+<summary>回文子串的判断应该是经典的动态规划的题目，但是复杂度是O（N^2）。空间复杂度是O（N^2）（存储动态规划状态需要的空间。）</summary>
 <pre><code>
   class Solution {
     public:
@@ -596,8 +596,42 @@
 </code></pre>
 </details>
 <details>
-<summary>采用双指针解法</summary>
+<summary>采用双指针解法,时间复杂度是O（N^2）更上面一样的。但空间复杂度更小，为O（1）</summary>
 <pre><code>
+  class Solution {
+    public:
+    
+        // 对于以left与right为中心的最长回文子串
+        // 通过左右指针向两边扩散
+        string function(string s, int left, int right)
+        {
+            //确保不越界以及相等
+            while(left>=0 && right&lts.size() &&s[left]==s[right])
+            {
+                left--;
+                right++;
+            }
+            //若不等的话，会跳出来。所以应该是当前的left+1到right为目标结果
+            return s.substr(left+1,right-(left+1));
+        }
+    
+        string longestPalindrome(string s) {
+            
+            string result="";
+            for(int i=0;i&lts.size();i++)
+            {
+                //以i为中心的，奇数字符串
+                string s1=function(s,i,i);
+                //以i为中心的，偶数字符串
+                string s2=function(s,i,i+1);
+    
+                // 保存最长的
+                result= result.size()&gts1.size()? result:s1;
+                result= result.size()&gts2.size()? result:s2;
+            }
+            return result;
+        }
+    };
 </code></pre>
 </details>
 
@@ -629,7 +663,7 @@
 <h1></h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
