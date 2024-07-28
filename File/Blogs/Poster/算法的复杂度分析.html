@@ -7,7 +7,7 @@
         text-align-last: left;
         text-justify: inter-word;
     }
-    </style>
+  </style>
 
 <!-- Head -->
 <head>    <!-- Metadata, OpenGraph and Schema.org -->
@@ -53,9 +53,15 @@
 
   <!-- Styles -->
 
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css">
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css"> -->
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css"> -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/new_css_js/cpp-highlight/styles/gradient-dark.css">
+  <script src="../assets/new_css_js/cpp-highlight/highlight.js"></script>    <!--引入代码高亮js库-->
+
+  <script>hljs.initHighlightingOnLoad();
+  </script>
 
   <!-- Dark Mode -->
 
@@ -82,9 +88,13 @@
 
           <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto flex-nowrap">
-                <li class="nav-item ">
-                  <a class="nav-link" href="../My_Blog.html">Homepage</a>
-                </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="../My_Blog.html">Homepage</a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="nav-link" href="../Poster/cpp算法学习笔记.html">Learning Algorithm</a>
+              </li>
 
             </ul>
           </div>
@@ -98,127 +108,81 @@
       <div class="post">
         <header class="post-header">
           <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">算法学习笔记及基于各种编程语言的开发记录</span>
+           <span style="font-weight: 600;">算法的复杂度分析</span>
           </h1>
-          <p><br></p>
-          <!-- <p>
-            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
-          </p> -->
         </header>
 <article>
 <!-- 插入博客内容-->
-
-
-<h3>引言</h3>
-<p>本文汇总了本人学习算法以及刷Leetcode题目的过程中的一些笔记，主要是基于C++的实现。
-  具体代码运行及测试请见<a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a>
+<p><br></p>
+ <p>
+  在算法设计中，追求以下两个层面的目标：
+  <ul>
+    <li>找到问题的解法</li>
+    <li>找到最优/尽可能高效的解法</li>
+  </ul>
+  那么也就是说，在能够解决问题的前提下，算法效率已成为衡量算法优劣的主要评价指标。主要包含两个维度：时间复杂度(时间效率)和空间复杂度(空间效率)。
+  最直接的方式肯定是通过实际测试来评估的，但是会受到诸如硬件等影响。为此，理论推算也极为重要。
   <br>
-  此外，本博文还记录了本人采用不同编程语言开发的一些项目汇总，包括ROS，Android，Pytorch等。
+  所谓的理论推算算法的效率，也就是复杂度分析，它是通过分析算法运行所需的时间和空间资源与输入数据大小之间的关系。它描述了随着输入数据大小的增加，算法执行所需时间和空间的增长趋势。
+ </p>
+
+<p><br></p>
+<h1>算法的时间复杂度</h1>
+<p>
+注意：时间复杂度由最高阶的项来决定。这是因为在𝑛 趋于无穷大时，最高阶的项将发挥主导作用，其他项的影响都可以忽略。
+<details>
+<summary>如下图所示为不同操作数量对应的时间复杂度。</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/complexity_analysis/微信截图_20240728234928.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+</details>
+
 </p>
 
 <p><br></p>
-<div class="news">
-  <h3>算法学习博客列表</h3>
-  <div class="table-responsive">
-    <table class="table table-sm table-borderless">
-      <tr>
-        <th scope="row"><a href="../Poster/栈类型题目.html">栈类型题目</a></th>
-      </tr>
-      
-      <tr>
-        <th scope="row"><a href="../Poster/双指针链表解法.html">双指解决链表类题目</a>、<a href="../Poster/双指针数组解法.html">双指解决数组/Vector类题目</a></th>
-      </tr>
+<h1>算法的空间复杂度</h1>
 
-      <!-- <tr>
-        <th scope="row"><a href="../Poster/双指针数组解法.html">双指解决数组/Vector类题目</a></th>
-      </tr> -->
 
-      <tr>
-        <th scope="row"><a href="../Poster/滑动窗口算法.html">滑动窗口算法</a></th>
-      </tr>
+<!-- <details>
+<summary>Click to expand the code</summary>
+<pre><code>
+</code></pre>
+</details> -->
 
-      <tr>
-        <th scope="row"><a href="../Poster/二分法.html">二分法</a></th>
-      </tr>
+<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 
-      <tr>
-        <th scope="row"><a href="../Poster/递归类题目.html">递归类题目</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/二叉树类题目.html">二叉树类题目</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/动态规划.html">动态规划</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/string及其函数的使用.html">string及其函数的使用</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/算法的复杂度分析.html">算法的复杂度分析</a></th>
-      </tr>
-
-    </table>
-  </div> 
-</div>
-
+<!-- <p><br></p>
+<h1></h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/complexity_analysis/" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  -->
 
 <p><br></p>
-<div class="news">
-  <h3>不同编程语言开发项目汇总</h3>
-  <div class="table-responsive">
-    <table class="table table-sm table-borderless">
-     
-      <tr>
-        <th scope="row">C/C++</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_9361572.html" target="_blank">机器人操作系统（ROS）开发博客汇总</a>
-          <br>
-          <a href="https://blog.csdn.net/gwplovekimi/article/details/133878460?spm=1001.2014.3001.5501" target="_blank">基于STM32的VLC驱动调制芯片模组</a>及驱动代码<sup><a href="https://github.com/R-C-Group/new_vlc_ble_coding" target="_blank">1</a>, <a href="https://github.com/R-C-Group/Big_power_VLC_driver" target="_blank">2</a></sup></a>
-        </td>
-      </tr>
-
-      <tr>
-        <th scope="row">Python</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_8231479.html" target="_blank">Low-level vision and Pytorch博客汇总</a>
-        </td>
-      </tr>
-
-      <tr>
-        <th scope="row">Java</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_9860500.html" target="_blank">Android 开发博客汇总</a>
-          <br>
-          <a href="../Poster/Self_develop_APP.html">自研的APP展示</a>
-        </td>
-      </tr>
-
-    </table>
-  </div> 
-</div>
-
-<p><br></p>
-<p><br></p>
-<p><br></p>
+<h1>参考资料</h1>
+<ul>
+  <li><a href="https://labuladong.online/algo/essential-technique/complexity-analysis/" target="_blank">算法时空复杂度分析实用指南</a></li>
+  <li>书籍《Hello 算法 C++语言版》</li>
+</ul>
 
 </article>
 </div>
 </div>
 
-</article>
-</div>
-</div>
-
-<!-- Footer -->    
-<!-- <footer class="nofixed-bottom">
+<!-- Footer --> 
+<p><br></p>   
+<footer class="nofixed-bottom">
 <div class="container mt-0" style="width:100%;text-align:center;">
   Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
 </div>
-</footer>  -->
+</footer> 
 
     <!-- JavaScripts -->
     <!-- jQuery -->
