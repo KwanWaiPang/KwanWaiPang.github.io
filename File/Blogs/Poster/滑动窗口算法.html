@@ -126,10 +126,28 @@
   <br>
   如果用暴力解的话，需要嵌套 for 循环这样穷举所有子数组，时间复杂度是 <mark>O(N^2)</mark>：
   <pre><code>
-    for (int i = 0; i  &lt nums.length; i++) {
-      for (int j = i; j  &lt nums.length; j++) {
-          // nums[i, j] 是一个子数组
+  for (int i = 0; i  &lt nums.length; i++) {
+    for (int j = i; j  &lt nums.length; j++) {
+        // nums[i, j] 是一个子数组
+    }
+  }
+  </code></pre>
+  而所谓的滑动窗口算法，其实就是维护一个窗口，不断滑动，然后更新答案，时间复杂度是 <mark>O(N)</mark>：
+  <pre><code>
+  int left = 0, right = 0;
+
+  while (right &lt nums.size()) {
+      // 增大窗口
+      window.addLast(nums[right]);//插入右侧的数组
+      right++;
+      
+      while (window needs shrink) {
+          // 缩小窗口
+          window.removeFirst(nums[left]);//从左侧删除数组
+          left++;
       }
+
+      //虽然是两个while循环，但是left与right都只增不减，所以字符串/数组中的每个元素都只会进入窗口一次，然后被移出窗口一次，不会说有某些元素多次进入和离开窗口，所以算法的时间复杂度就和字符串/数组的长度成正比。（感觉是O（2N）也就是相当于O（N））
   }
   </code></pre>
 </p>
