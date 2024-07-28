@@ -140,8 +140,62 @@
 </p></figcaption>
 </figure> 
 </details>
-
 </p>
+
+<p>
+  根据输入的数据大小（n），常见的时间复杂度有：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/complexity_analysis/微信截图_20240728235149.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+  <details>
+    <summary>他们的数学曲线表达如下</summary>
+    <figure style="text-align: center;">
+      <div style="margin-bottom: 10px;">
+        <img style="width: 80%;" src="../assets/img/complexity_analysis/微信截图_20240728235217.png" alt="Image description">
+      </div>
+    <figcaption><p>
+    </p></figcaption>
+    </figure> 
+    </details>
+</p>
+
+<p><br></p>
+<h3>1. 常数阶𝑂(1)</h3>
+<p>操作数量与输入数据大小𝑛 无关，即不随着𝑛 的变化而变化。在以下函数中，尽管操作数量size 可能很大，但由于其与输入数据大小𝑛 无关，因此时间复杂度仍为𝑂(1)</p>
+<pre><code>
+  int constant(int n) {
+    int count = 0;
+    int size = 100000;
+    for (int i = 0; i &lt size; i++)//操作数量与输入数据大小𝑛无关
+        count++;
+    return count;
+    }
+</code></pre>
+
+<p><br></p>
+<h3>2. 线性阶𝑂(𝑛)</h3>
+<p>线性阶的操作数量相对于输入数据大小𝑛 以线性级别增长。例如，遍历数组和遍历链表等操作的时间复杂度均为𝑂(𝑛) ，其中𝑛 为数组或链表的长度。
+  如下代码所示：</p>
+<pre><code>
+  int Linear(int n) {
+    int count = 0;
+    for (int i = 0; i &lt n; i++)//操作数量与输入数据大小𝑛相关
+        count++;
+    return count;
+    }
+</code></pre>
+
+<p><br></p>
+<h3>3. 平方阶𝑂(𝑛<sup>2</sup>)</h3>
+<p>平方阶的操作数量相对于输入数据大小𝑛 以平方级别增长。
+  平方阶通常出现在嵌套循环中，外层循环和内层循环的时间复杂度都为𝑂(𝑛) ，因此总体的时间复杂度为𝑂(𝑛<sup>2</sup>) ：</p>
+
+
+
 
 <p><br></p>
 <h1>算法的空间复杂度</h1>
