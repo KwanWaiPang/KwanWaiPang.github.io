@@ -271,7 +271,7 @@ int expRecur(int n) {
 <pre><code>
 int logarithmic(int n) {
   int count = 0;
-  while (n > 1) {
+  while (n &gt 1) {
     n = n / 2;//每轮缩减一半
     count++;
   }
@@ -288,6 +288,35 @@ int logarithmic(int n) {
   <figcaption><p>
   </p></figcaption>
   </figure> 
+</p>
+
+<details>
+  <summary>与指数阶类似，对数阶也常出现于<strong>递归函数</strong>中：</summary>
+<pre><code>
+int logRecur(int n) {
+  if (n &lt= 1)
+    return 0;
+  return logRecur(n / 2) + 1;//每轮递归缩减一半
+}
+</code></pre>
+</details>
+
+<p><br></p>
+<h3>6. 线性对数阶𝑂(𝑛log𝑛)</h3>
+<p>
+  主流的排序算法如<strong>快速排序、归并排序、堆排序</strong>等的时间复杂度通常都是𝑂(𝑛log𝑛) 。
+  线性对数阶常出现于嵌套循环中，两层循环的时间复杂度分别为𝑂(log 𝑛) 和𝑂(𝑛) 。相关代码如下：
+<pre><code>
+int linearLogRecur(int n) {
+  if (n &lt= 1)
+    return 1;
+  int count = linearLogRecur(n / 2) + linearLogRecur(n / 2);//每轮递归缩减一半，对数𝑂(log 𝑛)
+  for (int i = 0; i &lt n; i++) {
+    count++; //而每次递归后，内嵌循环的时间复杂度为𝑂(𝑛)
+  }
+  return count;
+}
+</code></pre>
 </p>
 
 
