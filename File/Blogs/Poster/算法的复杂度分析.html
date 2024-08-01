@@ -348,6 +348,81 @@ int factorialRecur(int n) {
 
 <p><br></p>
 <h1>算法的空间复杂度</h1>
+<p>
+  空间复杂度（space complexity）用于衡量算法占用内存空间随着数据量变大时的增长趋势。
+  这个概念与时间复杂度非常类似，只需将“运行时间”替换为“占用内存空间”。
+  <br>
+  一般情况下，空间复杂度的统计范围是“暂存空间”加上“输出空间”。暂存空间可以进一步划分为三个部分:
+  <ul>
+    <li>暂存数据：用于保存算法运行过程中的各种常量、变量、对象等。</li>
+    <li>栈帧空间：用于保存调用函数的上下文数据。系统在每次调用函数时都会在栈顶部创建一个栈帧，函数返回后，栈帧空间会被释放。</li>
+    <li>指令空间：用于保存编译后的程序指令，在实际统计中<strong>通常忽略不计</strong>。</li>
+  </ul>
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/complexity_analysis/微信截图_20240801220154.png" alt="Image description">
+  </div>
+<figcaption>
+  一般情况下应该是暂存数据作为使用空间的大小，但是对于递归函数，需要注意统计栈帧空间（递归结束前是一直有占用空间的~）
+</figcaption>
+</figure> 
+<p>
+  常见的空间复杂度类型如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/complexity_analysis/微信截图_20240801220658.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+  </p>
+
+<p><br></p>
+<h3>1. 常数阶𝑂(1)</h3>
+<p>常数阶常见于数量与输入数据大小 𝑛 无关的常量、变量、对象。
+  <br>
+  注意：在循环中初始化变量或调用函数而占用的内存，在进入下一循环后就会被释放，因此不会累积占用空间，空间复杂度仍为 𝑂(1) ：
+</p>
+<pre><code>
+int func() {
+  // 执行某些操作
+  return 0;
+}
+
+/* 常数阶 */
+void constant(int n) {
+  // 常量、变量、对象占用 O(1) 空间
+  const int a = 0;
+  int b = 0;
+  vector&ltint&gt nums(10000);//虽然很大，但仍然是常数阶，与输入无关
+  ListNode node(0);
+  
+  // 循环中的变量占用 O(1) 空间（每次调用进入下一次循环会释放）
+  for (int i = 0; i &lt n; i++) {
+    int c = 0;
+  }
+  
+  // 循环中的函数占用 O(1) 空间（每次调用进入下一次循环会释放）
+  for (int i = 0; i &lt n; i++) {
+    func();
+  }
+}
+</code></pre>
+
+<p><br></p>
+<h3>2. 线性阶𝑂(𝑛)</h3>
+
+<p><br></p>
+<h3>3. 平方阶𝑂(𝑛<sup>2</sup>)</h3>
+
+<p><br></p>
+<h3>4. 指数阶𝑂(2<sup>𝑛</sup>)</h3>  
+
+<p><br></p>
+<h3>5. 对数阶𝑂(log𝑛)</h3>
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
