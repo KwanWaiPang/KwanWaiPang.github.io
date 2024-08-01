@@ -147,6 +147,8 @@
   </p></figcaption>
   </figure> 
 
+  对于时间复杂度，实际上采用的是“最差时间复杂度”对应函数渐近上界，因此使用 𝑂 记号表示。
+  如果采用“最佳时间复杂度”，则是对应函数渐近下界，用 Ω 记号表示。
 </p>
 
 <p><br></p>
@@ -319,18 +321,40 @@ int linearLogRecur(int n) {
 </code></pre>
 </p>
 
+<p><br></p>
+<h3>7. 阶乘阶𝑂(𝑛！)</h3>
+<p>
+  阶乘阶对应数学上的“全排列”问题。给定 𝑛 个互不重复的元素，求其所有可能的排列方案，方案数量为：
+  <br>
+  <mark>𝑛！=𝑛×(n-1)×(n-2)×...×2×1 </mark>
+  以阶乘阶比指数阶增长得更快，在 𝑛 较大时也是不可接受的。
+  如下代码所示：
+</p>
+
+<pre><code>
+/* 阶乘阶（递归实现） */
+int factorialRecur(int n) {
+  if (n == 0)
+    return 1;
+  int count = 0;
+  // 从 1 个分裂出 n 个
+  for (int i = 0; i &lt n; i++) {
+    count += factorialRecur(n - 1);
+  }
+  return count;
+}
+</code></pre>
+
 
 <p><br></p>
 <h1>算法的空间复杂度</h1>
 
-
+<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
 <pre><code>
 </code></pre>
 </details> -->
-
-<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 
 <!-- <p><br></p>
 <h1></h1>
