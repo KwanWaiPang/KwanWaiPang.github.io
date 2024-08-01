@@ -164,19 +164,18 @@
       auto window = ...
       
       int left = 0, right = 0;
-      while (right < s.size()) {
+      while (right &lt s.size()) {
           // c 是将移入窗口的字符
           char c = s[right];
           window.add(c);
           // 增大窗口
           right++;
           // 进行窗口内数据的一系列更新
-          ...
+          ...//进行窗口数据的更新
   
-          // *** debug 输出的位置 ***
-          // 注意在最终的解法代码中不要 print
-          // 因为 IO 操作很耗时，可能导致超时
-          printf("window: [%d, %d)\n", left, right);
+          // *** debug 输出窗口的位置 ***
+          // 注意在最终的解法代码中不要 print， 因为 IO 操作很耗时，可能导致超时
+          //printf("window: [%d, %d)\n", left, right);
           // ***********************
   
           // 判断左侧窗口是否要收缩
@@ -187,11 +186,23 @@
               // 缩小窗口
               left++;
               // 进行窗口内数据的一系列更新
-              ...
+              ...//进行窗口数据的更新
           }
       }
   }
 </code></pre>
+
+<p><br></p>
+<h1>1. 最小覆盖子串</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/silding_window/微信截图_20240801231055.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
@@ -204,7 +215,7 @@
 <h1></h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/silding_windows/" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/silding_window/" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
