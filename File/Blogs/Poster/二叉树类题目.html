@@ -115,6 +115,96 @@
 <article>
 <!-- 插入博客内容-->
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/binary_tree/微信图片_20240802183641.jpg" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<p><br></p>
+<h1>1. 经典的二叉树遍历题目</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240802183934.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>根据首页图片中关于二叉树遍历的思路，用递归解题。时间复杂度和空间复杂度都是O（N）：</summary>
+<pre><code>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+ 
+     void calculate(TreeNode* root, vector&ltint&gt &result)//注意以地址的方式来传递参数
+     {
+         if(root==nullptr)
+             return;
+ 
+         result.push_back(root->val);//前序遍历的位置
+         calculate(root->left,result);
+         calculate(root->right,result);
+     }
+ 
+     vector&ltint&gt preorderTraversal(TreeNode* root) {
+         vector&ltint&gt result;        
+         //用递归的形式去解算
+         calculate(root, result);
+         return result;
+     }
+ };
+</code></pre>
+</details>
+
+<details>
+<summary>此外，也可以用栈解题。时间复杂度也是O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        vector&ltint&gt preorderTraversal(TreeNode* root) {
+            vector&ltint&gt result;        
+            
+            // 解法：用堆栈的形式，复杂度为O（N）
+            stack&ltTreeNode*&gt stack_tree;
+            //要先确保root不为空指针
+            if(root==nullptr)
+                return result;
+            stack_tree.push(root);
+            while(!stack_tree.empty())//当堆不为空，那就是还有，所以继续
+            {
+                TreeNode* top=stack_tree.top();//获取栈顶
+                stack_tree.pop();
+                result.push_back(top->val);//放入
+                // 通过测试来判断顺序~
+                if(top->right!=nullptr)
+                    stack_tree.push(top->right);
+                if(top->left!=nullptr)
+                    stack_tree.push(top->left);
+            }
+    
+            return result;
+        }
+    };
+    
+</code></pre>
+</details>
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
@@ -126,7 +216,7 @@
 <h1></h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/binary_tree/" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -136,6 +226,7 @@
 <h1>参考资料</h1>
 <ul>
   <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
+  <li><a href="https://labuladong.online/algo/essential-technique/binary-tree-summary/" target="_blank">二叉树</a></li>
 </ul>
 
 </article>
