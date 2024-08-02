@@ -204,6 +204,82 @@
 </code></pre>
 </details>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240802185433.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>用递归解题最直接，复杂度跟上面一样，放对了递归的位置，结果就自然出来了~</summary>
+<pre><code>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void calculate(TreeNode* root, vector&ltint&gt &result)
+     {
+         if(root==nullptr)
+             return;
+         
+         calculate(root->left,result);
+         result.push_back(root->val);//注意位置
+         calculate(root->right,result);
+     }
+ 
+     vector&ltint&gt inorderTraversal(TreeNode* root) {
+         vector&ltint&gt result;
+ 
+          // 解法1：递归（中序遍历就是先左后中再右，从例子中，3才到2，所以先3）
+         calculate(root,result);
+         return result;
+     }
+ };
+</code></pre>
+</details>
+<details>
+<summary>也可以采用栈的思路去解题，但是相对复杂一些，要考虑细致读取顺序</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        vector&ltint&gt inorderTraversal(TreeNode* root) {
+            vector&ltint&gt result;
+    
+             // 解法2：堆栈
+            stack&ltTreeNode*&gt stack_int;
+            while(!stack_int.empty() || root!=nullptr)
+            {
+                //从最左开始，左中右
+               while(root!=nullptr)
+               {
+                    stack_int.push(root);
+                    root=root->left;//相当与先将所有的左节点放入栈中，直到根节点
+               }
+               root=stack_int.top();//获取栈顶
+               stack_int.pop();//删掉
+               result.push_back(root->val);
+               root = root->right;//下一次就从它的右边开始检查~
+    
+            }
+    
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
