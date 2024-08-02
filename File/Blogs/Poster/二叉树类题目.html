@@ -280,6 +280,57 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h3>深入理解前中后序</h3>
+<pre><code>
+  void traverse(TreeNode* root) {//其实就是一个能够遍历二叉树的函数（类似于链表）也就是一个递归
+    if (root == nullptr) {
+        return;
+    }
+    // 前序位置
+    traverse(root->left);
+    // 中序位置
+    traverse(root->right);
+    // 后序位置
+}
+</code></pre>
+
+<p>所谓前序位置，就是刚进入一个节点（元素）的时候，而后序位置就是即将离开一个节点（元素）的时候。
+  如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240802202544.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+
+  前序位置的代码在刚刚进入一个二叉树节点的时候执行；
+  <br>
+  后序位置的代码在将要离开一个二叉树节点的时候执行；
+  <br>
+  中序位置的代码在一个二叉树节点左子树都遍历完，即将开始遍历右子树的时候执行。
+  <br>如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240802202847.png" alt="Image description">
+    </div>
+  <figcaption>
+    每个节点都有「唯一」属于自己的前中后序位置，所以前中后序遍历是遍历二叉树过程中处理每一个节点的三个特殊时间点。
+  </figcaption>
+  </figure> 
+</p>
+
+<p><br></p>
+<h1>2. 二叉树的最大深度</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240802203146.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
