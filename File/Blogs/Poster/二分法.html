@@ -113,7 +113,77 @@
         </header>
 <article>
 <!-- 插入博客内容-->
+<p>
+基本的二分法的架构如下代码块所示：
+  </p>
+<pre><code>
+  int binarySearch(vector&ltint&gt& nums, int target) {
+    int left = 0, right = nums.size() - 1;
 
+    while(left &lt= right) {
+        int mid = left + (right - left) / 2;//这与(left + right) / 2 的结果相同，只是为了防止太大导致溢出
+        if (nums[mid] == target) {
+            ...
+        } else if (nums[mid] &lt target) {
+            left = mid + 1;
+        } else if (nums[mid] &gt target) {
+            right = mid - 1;
+        }
+    }
+    return ...;
+}
+</code></pre>
+
+<p><br></p>
+<h1>1.寻找一个数</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dichotomy/微信截图_20240802153201.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>最直接的解法用find函数,时间复杂度应该是O（N），空间复杂度为O（1）</summary>
+<pre><code>
+  class Solution {
+public:
+    int search(vector&ltint&gt& nums, int target) {
+        auto result=find(nums.begin(),nums.end(),target);
+        if (result&ltnums.end())
+            return result-nums.begin();
+        return -1;
+    }
+};
+</code></pre>
+</details>
+
+<details>
+<summary>二分法：时间复杂度为O(logn)，空间复杂度为O（1）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int search(vector&ltint&gt& nums, int target) {
+            //已经排序好的了
+            int left=0, right=nums.size()-1;
+            while(left&lt=right)//注意有等号，由于right的初始化，决定了采用的实际上是闭区间
+            {
+                int middle=(left+right)/2;
+    
+                if(nums[middle]==target)
+                    return middle;
+                else if(nums[middle]&gttarget)//证明target在左半区
+                    right=middle-1;//注意：由于搜索区间是闭区间，[left, mid-1]
+                else if(nums[middle]&lttarget)
+                    left=middle+1;//注意，[mid+1, right] 
+                // mid已经搜索过了，不避开会导致超时~
+            }
+            return -1;
+        }
+    };
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
