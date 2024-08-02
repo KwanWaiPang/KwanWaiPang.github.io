@@ -185,6 +185,110 @@ public:
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>2. 左侧边界与右侧边界的二分法查找</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dichotomy/微信截图_20240802160234.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>要解决这道题，明确以下三种二分法的思路(这个所谓的思路感觉有点问题~按着做容易出错，还是以上题为架构看如何逼近边界较好)</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 50%;" src="../assets/img/dichotomy/微信截图_20240802160619.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 50%;" src="../assets/img/dichotomy/微信截图_20240802160636.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 50%;" src="../assets/img/dichotomy/微信截图_20240802160642.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+</details>
+
+<details>
+<summary>Click to expand the code,时间复杂度： O(logn),空间复杂度：O(1) </summary>
+<pre><code>
+  class Solution {
+    public:
+        int left_bound(vector&ltint&gt& nums, int target) 
+        {
+            int left=0, right=nums.size()-1;
+    
+            while(left&lt=right)
+            {
+                int mid=(left+right)/2;
+                int value=nums[mid];
+                if(value&lttarget)//target应该在右半区
+                    left=mid+1;//中间已经算过了
+                else if(value&gttarget)//应该在左半区
+                    right=mid-1;//中间已经算过了
+                else if(value==target)
+                    right=mid-1;//一直递推收紧右侧的边界以锁定左侧边界，
+                    // 下一个中间值必然是大于或等于，因此可以做到锁定一直更新right
+            }
+            // 注意要先判断是否有数据越界的情况
+            if(left&lt0  || left&gt=nums.size())
+                return -1;
+            // 判断一下 nums[left] 是不是 target
+            return nums[left] == target ? left : -1;
+    
+        }
+        int right_bound(vector&ltint&gt& nums, int target) 
+        {
+            int left=0, right=nums.size()-1;
+    
+            while(left&lt=right)
+            {
+                int mid=(left+right)/2;
+                int value=nums[mid];
+                if(value&lttarget)//target应该在右半区
+                    left=mid+1;//中间已经算过了
+                else if(value&gttarget)//应该在左半区
+                    right=mid-1;//中间已经算过了
+                else if(value==target)
+                    left=mid+1;//一直地推左侧以锁定右侧的边界
+                    // 下一个中间值，必然是小于等于，因此一直推直到锁定右边
+            }
+            
+            // 确保不要越界
+            if(right&lt0  || right&gt=nums.size())
+                return -1;
+    
+            // 判断一下 nums[right] 是不是 target
+            return nums[right] == target ? right : -1;
+    
+        }
+        vector&ltint&gt searchRange(vector&ltint&gt& nums, int target) {
+    
+            // 左侧边界与右侧边界的二分法查找
+            int left=left_bound(nums,target);
+            if(left==-1)
+                return vector&ltint&gt{-1,-1};
+            int right=right_bound(nums,target);
+    
+            return vector&ltint&gt{left,right};
+        }
+    };
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
