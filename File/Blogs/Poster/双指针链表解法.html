@@ -26,8 +26,9 @@
   <meta property="og:site_name" content="My Technology Blog" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Kwan Wai-Pang | Personal Blog" />
-  <meta property="og:description" content="Welcome 😊
-" />
+  <meta property="og:description" content="Welcome to My Blog of Two Pointers 😊" />
+  <meta property="og:image" content="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg" />
+
 
   <meta property="og:locale" content="en" />
 
@@ -1151,7 +1152,7 @@ public:
             if(head==nullptr)//到达了终点（head为空）
                 return;//为空则返回
             
-            if(index<left)//此时还不需要反转，顺序即可
+            if(index&ltleft)//此时还不需要反转，顺序即可
             {
                 ListNode* newlistnode=new ListNode(head->val);//用当前值创建链表。
                 result=newlistnode;//result为当前的值
