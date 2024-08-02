@@ -330,6 +330,44 @@
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>时间复杂度：O(n)，其中 n 为二叉树节点的个数。空间复杂度：O(height)，其中 height 表示二叉树的高度。递归函数需要栈空间，而栈空间取决于递归的深度，</summary>
+<pre><code>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int traverse(TreeNode* root)
+     {
+         if(root==nullptr)//到达跟节点
+             return 0;
+         
+         //前序的位置
+         int left=traverse(root->left);//左侧的树的深度
+         //中序的位置
+         int right=traverse(root->right);//右侧的树的深度
+         //后序的位置
+         return max(left,right)+1;//// 整棵树的最大深度等于左右子树的最大深度取最大值。然后再加上根节点自己
+
+         //为什么在后序呢？
+         //要首先利用递归函数的定义算出左右子树的最大深度，
+         //然后推出原树的最大深度，主要逻辑自然放在后序位置。
+     }
+     int maxDepth(TreeNode* root) {
+         return  traverse(root);
+     }
+ };
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
