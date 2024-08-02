@@ -345,6 +345,56 @@
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>跟上面两题很类似，只是形式不一样而已~所以结题思路跟复杂度都一样</summary>
+<pre><code>
+  class Solution {
+    public:
+        vector&ltint&gt findAnagrams(string s, string p) {
+            unordered_map&ltchar,int&gt window,target;
+    
+            for(char c:p)
+                target[c]++;
+    
+            int left=0,right=0;
+            vector&ltint&gt result;
+            int num_vail=0;
+    
+            while(right&lts.size())
+            {
+                char in_window=s[right];
+                right++;
+                if(target.count(in_window))
+                {
+                    window[in_window]++;
+                    if(window[in_window]==target[in_window])
+                        num_vail++;
+                }
+    
+                //缩小左边窗口的条件
+                if(right-left&gt=p.size())
+                {
+                    //判断是否成功获得结果
+                    if(num_vail==target.size())
+                    {
+                        result.push_back(left);
+                    }
+    
+                    char out_window=s[left];
+                    left++;
+                    if(target.count(out_window))
+                    {
+                        if(window[out_window]==target[out_window])
+                            num_vail--;
+                        window[out_window]--;
+                    }
+                }
+            }
+            return result;
+        }
+    };
+</code></pre>
+</details>
 
 
 
