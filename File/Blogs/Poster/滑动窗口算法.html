@@ -201,6 +201,75 @@
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        string minWindow(string s, string t) {
+            // 先简单翻译一下题目:要在 S(source) 中找到包含 T(target) 中全部字母的一个子串，
+            // 且这个子串一定是所有可能子串中最短的
+    
+            unordered_map&ltchar,int&gtwindow, target;
+    
+            // 确认target中的元素
+            for(char c:t)
+            {
+                target[c]++;
+            }
+    
+            //定义左指针与右指针
+            int left=0,right=0;
+    
+            //定义窗口中是目标的字符种类。因为有可能有多个
+            int num_vail=0;// 记录window中的字符满足need条件的字符个数(注意不能是总的数目)
+    
+            //截取的最小字符串，起点索引及长度
+            int start_index=0, min_len=INT_MAX;//将长度定义为最大的整数值，如果被修改了就是更新了
+    
+            while(right&lts.size())
+            {
+                char c=s[right];//将要加入到窗口中的
+                // 增大窗口
+                right++;//左闭右开，目前右边的值是不取的
+                window[c]++;
+    
+                // 接下来进行窗口的数据更新
+                if(target.count(c))//如果这是需要的
+                {
+                    // window[c]++;//此处无所谓，跟下面对称即可
+                    if(window[c]==target[c])//如果字符每个种类的数目满足了
+                        num_vail++;
+                }
+    
+    
+                while(num_vail==target.size())//当满足找到全部目标值，开始移动左指针
+                {
+                    //此时已经满足，为此进行覆盖
+                    if(right-left&ltmin_len)
+                    {
+                        start_index=left;
+                        min_len=right-left;
+                    }
+    
+                    char d=s[left];//将要移除窗口的
+                    left++;//缩小窗口
+    
+                    //进行窗口数据更新
+                    if(target.count(d))//如果这是需要的
+                    {
+                        if(window[d]==target[d])//每种字母只减一次
+                            num_vail--;
+                        // window[d]--;//从窗口中拿掉这个字符
+                    }
+                    window[d]--;//从窗口中拿掉这个字符
+                }
+            }
+            return min_len==INT_MAX ? "" : s.substr(start_index,min_len);
+        }
+    };
+</code></pre>
+</details>
 
 
 
