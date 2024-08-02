@@ -235,14 +235,15 @@
                 window[c]++;
     
                 // 接下来进行窗口的数据更新
-                if(target.count(c))//如果这是需要的
+                if(target.count(c))//如果在target有这个字符（注意要通过count来算是否存在才可以，通过访问值不行~）
                 {
                     // window[c]++;//此处无所谓，跟下面对称即可
                     if(window[c]==target[c])//如果字符每个种类的数目满足了
                         num_vail++;
                 }
     
-    
+                //当 valid == need.size() 时，说明 T 中所有字符已经被覆盖，已经得到一个可行的覆盖子串，
+                //现在应该开始收缩窗口了，以便得到「最小覆盖子串」。
                 while(num_vail==target.size())//当满足找到全部目标值，开始移动左指针
                 {
                     //此时已经满足，为此进行覆盖
@@ -270,6 +271,70 @@
     };
 </code></pre>
 </details>
+
+<p><br></p>
+<h1>2.字符串的排列</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/silding_window/微信截图_20240802135443.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.解法跟上面一样，时间复杂度和空间复杂度也和上面一样~</summary>
+<pre><code>
+  class Solution {
+    public:
+        bool checkInclusion(string s1, string s2) {
+            // 采用滑动窗口算法
+            unordered_map&ltchar,int&gt window, target;
+    
+            for(char c:s1)
+                target[c]++;
+            
+            // 定义窗口的左右两个指针
+            int left=0, right=0;
+            int num_vail=0;
+    
+            while(right&lts2.size())
+            {
+                char c=s2[right];
+                right++;
+                
+                if(target.count(c))//如果是目标字符
+                {
+                    window[c]++;//放入窗口中
+                    if(window[c]==target[c])
+                        num_vail++;
+                }
+    
+                //判断左边窗口是否应该收缩
+                while(right-left&gt=s1.size())//尺寸更大了就应该缩小左边的窗口直到相等
+                {//一旦缩减了左边的窗口，就不等于目标值，说明他们中间有其他字符，因此当前不对了
+                    //先判断是否目标
+                    if(num_vail==target.size())
+                        return true;
+    
+                    char d=s2[left];
+                    left++;
+    
+                    if(target.count(d))//如果是目标字符
+                    {
+                        if(window[d]==target[d])
+                            num_vail--;
+                        window[d]--;//从窗口删除
+                    }
+                }
+    
+            }
+            return false;//如果上面循环没有true跳出
+    
+        }
+    };
+</code></pre>
+</details>
+
 
 
 
