@@ -309,11 +309,12 @@
                         num_vail++;
                 }
     
-                //判断左边窗口是否应该收缩
+                //判断左边窗口是否应该收缩（由于是全全排列，需要保证长度是一样的）
                 while(right-left&gt=s1.size())//尺寸更大了就应该缩小左边的窗口直到相等
+                //if(right-left>=s1.size())//用if也是一样的！！！由于维护的是一个定长的窗口，因此每次都前进一个字符而已~
                 {//一旦缩减了左边的窗口，就不等于目标值，说明他们中间有其他字符，因此当前不对了
                     //先判断是否目标
-                    if(num_vail==target.size())
+                    if(num_vail==target.size())//合法的排列
                         return true;
     
                     char d=s2[left];
