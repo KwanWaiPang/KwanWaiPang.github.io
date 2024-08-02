@@ -191,6 +191,13 @@
       }
   }
 </code></pre>
+<p>滑动窗口算法最关键的是下面三个点：
+  <ul>
+    <li>1、什么时候应该扩大窗口？</li>
+    <li>2、什么时候应该缩小窗口？</li>
+    <li>3、什么时候应该更新答案？</li>
+    </ul>
+</p>
 
 <p><br></p>
 <h1>1. 最小覆盖子串</h1>
@@ -396,7 +403,114 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>4.无重复字符的最长子串</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/silding_window/微信截图_20240802144921.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>
+  原本的解法有两个：
+</p>
+<details>
+<summary>解法1：暴力匹配，时间复杂度为O（N<sup>2</sup>）</summary>
+<pre><code>
+class Solution {
+  public:
+      int lengthOfLongestSubstring(string s) {
+          string temp_str;
+          size_t max_len=0;//注意不是int
+  
+          // 暴力匹配
+          for(int i=0; i&lts.size();i++)
+          {
+              temp_str=s[i];//当前字符串
+              for(int j=i+1; j&lts.size();j++)
+              {
+                  if(temp_str.find(s[j])!=temp_str.npos)//注意终点位置为npos
+                  {//不为终点，那么就是找到了
+                      max_len=max(max_len,temp_str.size());//保留最长的
+                      break;//跳出当前循环
+                  }
+                  //找不到,那么就添加
+                  temp_str=temp_str+s[j];//一直添加
+  
+              }
+              max_len=max(max_len,temp_str.size());//最后一个测试
+          }
+          return max_len;
+      }
+  };
+</code></pre>
+</details>
 
+<details>
+<summary>解法2：采用hash table，时间复杂度为O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int lengthOfLongestSubstring(string s) {
+            string temp_str;
+            size_t max_len=0;//注意不是int
+    
+            //用hash table复杂度为O（n）
+            unordered_map&ltchar,int&gt map;//传入的为字符及对应的索引
+            for(int i=0;i&lts.size();i++) 
+            {
+                if(map.find(s[i])!=map.end())//不为尾部，那么就是找到了
+                {
+                    int index=map[s[i]];//获取找到的索引
+                    i=index+1;//下一次从它的下一个开始
+                    max_len=max(max_len,map.size());//记录最大值
+                    map.clear();//清空掉，重新算
+                }
+                map[s[i]]=i;//记录当前字符及其索引
+            }
+            max_len=max(max_len,map.size());//最后出来的时候再次double check
+            return max_len;
+        }
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>解法3：采用滑动窗口算法。时间复杂度为O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int lengthOfLongestSubstring(string s) {
+            
+            unordered_map&ltchar,int&gt window;
+            int max_len=0;//注意不是int
+    
+            int left=0,right=0;
+    
+            while(right&lts.size())
+            {
+                char in=s[right];
+                right++;
+                window[in]++;//将元素放入window中
+    
+                //缩小左边窗口的条件
+                while(window[in]&gt1)//重复了因此需要进一步缩小窗口
+                {
+                    char out=s[left];
+                    left++;
+                    window[out]--;
+                }
+                
+                // 每次循环都会更新这个，因此在进入上面循环之前，保留了最大的~
+                //而收缩完则可以保证窗口中必然没有重复的元素
+                max_len=max(max_len,(right-left));
+            }
+            return max_len;        
+        }
+    };
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
