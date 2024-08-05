@@ -301,6 +301,48 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240805214857.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+
+<details>
+<summary>Click to expand the code。时间复杂度O（N），空间复杂度为O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int climbStairs(int n) {
+            // n个阶梯对应多少种方法(一共n+1个元素)，也就是状态dp
+    
+            if(n&lt3)//要大于等于3才适用于动态规划的问题～
+                return n;
+    
+            // 时间复杂度O（N），空间复杂度为O（N）
+    
+            // step1：定义dp表
+            int dp[n+1];//n个状态，对应n+1数组
+    
+            // step2：定义初始状态
+            dp[0]=0;
+            dp[1]=1;
+            dp[2]=2;//一次性两级，或两次1级
+    
+            // step3：状态转移方程
+            for(int i=3;i&ltn+1;i++)//注意数组是到n+1
+            {
+                //第n级。有n-1或n-2决定
+                dp[i]=dp[i-1]+dp[i-2];//状态转移方程。
+            }
+    
+            return dp[n];//最后返回第n阶梯的时候的解决方案
+        }
+    };
+</code></pre>
+</details>
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 
 <!-- <details>
