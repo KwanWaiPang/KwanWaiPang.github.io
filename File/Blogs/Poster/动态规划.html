@@ -402,7 +402,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code。时间复杂度O（N），空间复杂度为O（N）</summary>
+<summary>解法1：动态规划Click to expand the code。时间复杂度O（N），空间复杂度为O（N）</summary>
 <pre><code>
   class Solution {
     public:
@@ -444,6 +444,78 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
                 return n;
             
             return fib(n-1)+fib(n-2);
+    
+        }
+    };
+</code></pre>
+</details>
+
+<p>
+  上面递归方法如果改为带有【备忘录】的写法，时间复杂度就会降低到O（N），所谓的备忘录写法其实就是对于每个结果都先记录着，如果这个结果被计算过了，就不重新计算，直接获值。也就是说动态规划其实就是相当于带有【备忘录】的递归。只是一个是自下而上，一个是自上而下。
+  </p>
+<details>
+<summary>带有【备忘录】的递归</summary>
+<pre><code>
+  class Solution {
+    public:
+        // 带着备忘录进行递归
+        int dp(int memo[], int n) {
+            
+            if (n == 0 || n == 1) 
+                return n;//递归终止
+    
+            if (memo[n] != 0)  // 已经计算过，不用再计算了
+                return memo[n];
+                
+            memo[n] = dp(memo, n - 1) + dp(memo, n - 2);
+            return memo[n];
+        }
+        
+        int fib(int n) {
+    
+            int memo[n + 1];
+            memset(memo, 0, sizeof(memo));// 备忘录全初始化为 0
+            // 进行带备忘录的递归
+            return dp(memo, n);
+    
+        }    
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>对于上面解法1的动态规划解法。进一步的把空间复杂度降为 O(1)。当前状态 n 只和之前的 n-1, n-2 两个状态有关，其实并不需要那么长的一个 DP table 来存储所有的状态</summary>
+<pre><code>
+  class Solution {
+    public:
+        int fib(int n) {
+    
+            //首先只有大于2才适用
+            if(n&lt2)
+                return n;
+            
+            //step1：定义dp表
+            // int dp[n+1]; //对应于状态n
+    
+            // step2：状态的初始化
+            // dp[0]=0;
+            // dp[1]=1;
+            int dp_i_2=0;
+            int dp_i_1=1;
+    
+            // step3:自下而上，推到状态方程
+            for(int i=2;i&ltn+1;i++)
+            {
+                // dp[i]=dp[i-1]+dp[i-2];//后面的每一项数字都是前面两项数字的和
+                int dp_i=dp_i_1+dp_i_2;
+    
+                // 滚动更新
+                dp_i_2=dp_i_1;
+                dp_i_1=dp_i;
+            }
+    
+            // return dp[n];
+            return dp_i_1;
     
         }
     };
