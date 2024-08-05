@@ -522,6 +522,64 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>4.零钱兑换</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240805222949.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.此题的难点就是用什么作为状态，如何确定dp表。</summary>
+<pre><code>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+    
+            if(coins.size()==0)
+                return -1;
+    
+            // // step!:确定状态，建立dp表。唯一可能的状态就是amount了
+            // int dp[amount+1];//状态amount时,需要的最小的硬币的数量
+            // // 注意初始化为amount + 1 ，因为凑成 amount 金额的硬币数最多只可能等于 amount（全用 1 元面值的硬币）
+            // // 所以初始化为 amount + 1 就相当于初始化为正无穷
+            vector&ltint&gt dp(amount + 1, amount + 1);//这个写法正确且简单
+    
+            // step2：确立初始状态
+            dp[0]=0;
+            // for(int i=1;i&ltamount+1;i++)
+            // {
+            //     dp[i]=amount+1;
+            // }
+    
+            // step3: 确定状态转移方程
+            for(int n=0; n&ltamount+1; n++)
+            {
+                for(int each_coin:coins)
+                {
+                    // 减去当前的面值小于0，那么当前面值不适用,跳过使用下一个试试
+                    if(n-each_coin&lt0)
+                    {
+                        continue;
+                    }
+                    else//若当前面值可以用
+                    {
+                        //当前n的最小值由当前n(不选硬币)
+                        // 以及
+                        // 当前面值选择这个硬币，那么就是n减去each_coin的组成
+                      dp[n]=min(dp[n],1+dp[n-each_coin]);
+                    }
+    
+                }
+            }
+            return (dp[amount]==amount+1)? -1: dp[amount];
+        }
+    };
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 
