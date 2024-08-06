@@ -158,6 +158,52 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>z字型变换</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/微信截图_20240806195833.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code。我的解法的时间和空间复杂度都为O（N）思路很简单。就是定义一个size为numRows的Vector.每一个元素为string，按照z变换的索引来把每个字符放到该在的vector元素上。最后输出依次叠加即可~</summary>
+<pre><code>
+  class Solution {
+    public:
+        string convert(string s, int numRows) {
+    
+            if(numRows&lt2)
+                return s;
+            
+            //按行索引来存到vector中
+            vector&ltstring&gt result_group (numRows);//一共就numRows个元素
+            int i=0;//代表索引。
+            int flag=1;//控制索引的移动
+    
+            for(auto c:s)
+            {
+                result_group[i]+=c;//在对应行上加字符
+                if(i==numRows-1 && flag==1)
+                    flag=-1;
+                if(i==0 && flag==-1)
+                    flag=1;
+                i+=flag;
+            }
+    
+            string result;
+            for(int i=0;i&ltnumRows;i++)
+                result+=result_group[i];
+    
+            return result;
+            
+        }
+    };
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
