@@ -591,8 +591,48 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p></figcaption>
 </figure> 
 
+<details>
+<summary>Click to expand the code。用了两个for循环，时间复杂度为O（N<sup>2</sup>）,空间复杂度为O（N）也就是存储的dp表</summary>
+<pre><code>
+  class Solution {
+    public:
+        int lengthOfLIS(vector&ltint&gt& nums) {
+    
+            // step1：定义dp表。状态变量应该就是n=nums.size()了吧，也是唯一的变量
+            int n=nums.size();
+            int dp[n];
+    
+            // step2：确定初始状态
+            for(int i=0; i&ltn;i++)
+            {
+                dp[i]=1;//自身，长度就是1了
+            }
+    
+            // step3:状态转移方程
+            // 对于状态dp[i]。以及在i前的状态j。
+            // 若nums【i】&gtnums【j】.那么dp【i】为dp【i】（其他值）与dp【j】+1之间的最值
+            int max_len=1;
+            for(int i=0;i&ltn;i++)
+            {
+                for(int j=0;j&lti;j++)
+                {
+                    if(nums[i]&gtnums[j]) //注意nums只能访问到n-1
+                        dp[i]=max(dp[i], dp[j]+1);//循环的其他j也参与了对比的。只是只记录最大值
+                }
+                max_len=max(max_len,dp[i]);//dp[i]为最大的
+            }
+    
+            return max_len;//不能直接返回dp[n-1]，因为这是n-1位置时最大的，不是全部最大的~
+        }
+    };
+</code></pre>
+</details>
+
 <p>
   通过本例与上面样例4可以发现。寻找动态规划的状态转移方程的通用技巧：数学归纳法！
+  <br>
+  所谓的数学归纳法其实就是。比如我们想证明一个数学结论，那么我们先假设这个结论在 k &lt n 时成立，然后根据这个假设，想办法推导证明出 k = n 的时候此结论也成立。如果能够证明出来，那么就说明这个结论对于 k 等于任何数都成立。
+
 </p>
 
 
