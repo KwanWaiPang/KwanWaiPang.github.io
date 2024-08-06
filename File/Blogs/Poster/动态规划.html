@@ -378,9 +378,13 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             {
                 for(int j=1;j&ltword2.size()+1;j++)
                 {
-                    if(word1[i-1]==word2[j-1])//如果两个字符相等,退化为dp【i-1】【j-1】
+                    if(word1[i-1]==word2[j-1])//如果两个字符相等,退化为dp【i-1】【j-1】（相当于什么都不做）
                         dp[i][j]=dp[i-1][j-1];
-                    else //如果不相等：删掉j，删掉i,替换.(+1为本次操作数)
+                    else //如果不相等：
+                        //增加/插入新的值：可以理解为【i+1】与【j】一样了。那么就是退化为【i】与【j-1】对比了~
+                        //删除i：就相当于用i的上一个状态了【i-1】与【j】对比
+                        //替换：那么就相当于只用对比前一个状态了【i-1】与【j-1】对比
+                        //(+1为本次操作数)
                         dp[i][j]=min(min(dp[i][j-1],dp[i-1][j]),dp[i-1][j-1])+1;
                 }
             }
