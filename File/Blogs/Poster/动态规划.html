@@ -636,7 +636,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p>
 
 <p><br></p>
-<h1>6. 二维动态规划之——俄罗斯套娃信封问题</h1>
+<h1>6. 俄罗斯套娃信封问题</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240806214015.png" alt="Image description">
@@ -644,6 +644,92 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>此题相当于上面题目的二维版本，但是需要对数组先进行排列。但是leetcode上下面代码运行会超时，只能通过85/87.时间复杂度为O（N<sup>2</sup>）,空间复杂度为O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        // // 要设置为静态成员函数
+        // static bool compareFunction(vector<int>& a, vector<int>& b)
+        // {
+        //     return a[0]==b[0]? a[1]&gtb[1] : a[0] &gt b[0];
+        // }
+        int maxEnvelopes(vector&ltvector&ltint&gt&gt& envelopes) {
+    
+            // //注意需要先对数组进行排序
+            // sort(envelopes.begin(),envelopes.end(),compareFunction);
+            // 也可以采用lambda表达式
+            sort(envelopes.begin(), envelopes.end(), [](vector&ltint&gt& a, vector&ltint&gt& b) {
+                return a[0] == b[0] ? a[1]&gtb[1] : a[0] &gt b[0];
+            });
+    
+            // step1: 定义dp表
+            int n=envelopes.size();
+            // int dp[n];
+            vector&ltint&gt dp(n,1);
+    
+            // // step2:初始化状态
+            // for(int i=0;i &lt n;i++)
+            // {
+            //     dp[i]=1;//最小的可能为1
+            // }
+    
+            int max_num=0;
+            for(int i=0;i &lt n;i++)//当前信封
+            {
+                for(int j=0; j &lt i;j++)//另一个信封
+                {
+                    // 当不满足要求
+                    if(envelopes[i][0]&ltenvelopes[j][0] && envelopes[i][1]&ltenvelopes[j][1])
+                    {
+                        dp[i]=max(dp[i], dp[j]+1);
+                    }
+                }
+                max_num=max(max_num,dp[i]);
+            }
+    
+            return max_num;
+        }
+    };
+</code></pre>
+</details>
+<details>
+<summary>Click to expand the code。二分法解题将复杂度降低为O（NlogN）</summary>
+<pre><code>
+  class Solution {
+    public:
+        int maxEnvelopes(vector&ltvector&ltint&gt&gt& envelopes) {
+            // 先按照宽度升序排序，如果宽度相同，则按高度降序排序
+            sort(envelopes.begin(), envelopes.end(), [](const vector&ltint&gt& a, const vector&ltint&gt& b) {
+                return a[0] == b[0] ? a[1] &gt b[1] : a[0] &lt b[0];
+            });
+    
+            // 用一个数组来存放高度的最长递增子序列
+            vector&ltint&gt lis;
+    
+            // 对每一个信封的高度进行处理
+            for (const vector&ltint&gt& envelope : envelopes) {
+                int height = envelope[1];
+    
+                // 使用二分查找找到第一个不小于当前高度的位置
+                auto it = lower_bound(lis.begin(), lis.end(), height);
+    
+                // 如果没有找到，说明当前高度是目前最大的，直接添加到 lis 中
+                if (it == lis.end()) {
+                    lis.push_back(height);
+                } else {
+                    // 否则，用当前高度替换掉找到的位置的值
+                    *it = height;
+                }
+            }
+    
+            // lis 的长度即为最长递增子序列的长度，也就是最多信封嵌套的数量
+            return lis.size();
+        }
+    };
+    
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
