@@ -115,6 +115,80 @@
         </header>
 <article>
 <!-- 插入博客内容-->
+<p><br></p>
+<p>
+  回溯算法和二叉树的递归（DFS） 算法非常类似，本质上就是一种暴力穷举算法。
+  回溯算法和 DFS 算法的细微差别是：回溯算法是在遍历「树枝」，DFS 算法是在遍历「节点」。
+  <br>
+  其核心就是 for 循环里面的递归，在递归调用之前「做选择」，在递归调用之后「撤销选择」。
+</p>
+<pre><code>
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+</code></pre>
+
+<p><br></p>
+<h1>全排列</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240807230409.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。递归的时间复杂度为O（N！）加上递归中每个有for循环，故此应该是O（N*N！）。空间复杂度应该是O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        void calculate(vector&ltint&gt& num, int first_index, vector&ltvector&ltint&gt&gt &result, const int len)
+        {
+            //遍历完了，退出
+            if(first_index==len-1) //当index等于最后一个字节时，把对调后的num放入结果中
+            {
+                result.push_back(num);
+                return;
+            }
+    
+            // first_index可以理解为固定不变的位置
+            for(int i=first_index;i&ltlen;i++)
+            {
+                swap(num[i],num[first_index]);//变换顺序
+                calculate(num, first_index+1, result,len);//下一次计算
+                swap(num[first_index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
+            }
+            
+        }
+    
+        vector&ltvector&ltint&gt&gt permute(vector&ltint&gt& nums) {
+    
+            //采用递归的方法时间复杂度为O（N！）
+            vector&ltvector&ltint&gt&gt result;
+            calculate(nums,0, result,nums.size());
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h1>N 皇后问题</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
