@@ -124,7 +124,7 @@
 <h1>提莫攻击</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/Simulation_algorithm/微信截图_20240805203450.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/微信截图_20240805203450.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -162,7 +162,7 @@
 <h1>z字型变换</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/微信截图_20240806195833.png" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/微信截图_20240806195833.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -203,6 +203,59 @@
     };
 </code></pre>
 </details>
+
+<p><br></p>
+<h1>外观数列</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/微信截图_20240807220941.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>采用递归的解法：由于递归中带有for循环，时间复杂度为O（N<sup>2</sup>）,空间复杂度为递归的栈空间</summary>
+<pre><code>
+  class Solution {
+    public:
+        string countAndSay(int n) {
+    
+            if(n==1)
+                return "1";
+            
+            string input_str=countAndSay(n-1);//每次输入的为上一个的结果
+            int temp_num=1;//初始化为1
+            char temp_char=input_str[0];
+            string result;
+            for(int i=1;i&ltinput_str.size();i++)
+            {
+                if(input_str[i]==temp_char)//还是等于结果的
+                {
+                    temp_num++;
+                }
+                else
+                {
+                    result=result+to_string(temp_num)+temp_char;
+                    //然后重置一下
+                    temp_char=input_str[i];//新的字符
+                    temp_num=1;//当前为1个
+                }
+            }
+    
+            //出来的结果再加一次
+            result=result+to_string(temp_num)+temp_char;
+    
+            return result;
+        }
+    };
+</code></pre>
+</details>
+<p>由于数量只有30个，还有一种解法是打表直接输出全部结果😂,时间复杂度为O(1)，空间复杂度为O(C×M)。其中 C 是 N 是上界，在本题中 C=30，M 为生成的字符串中的最大长度。
+  <br>
+  但类似这种可以拆分为子问题的解题思路最直接其实还是递归~
+</p>
+
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
