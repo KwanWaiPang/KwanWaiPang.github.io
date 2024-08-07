@@ -324,8 +324,37 @@
 
 <p>
   二叉树的遍历分为递归遍历（DFS）和层序遍历（FBS）。
-  对于递归遍历（DFS）本质上就是递归算法。也就说博客<sup><a href="../Poster/递归类题目.html">Link</a></sup>中提到的大部分二叉树的算法都可以用递归来解决的缘由。
+  </br>
+  对于递归遍历（DFS）本质上就是递归算法。也就说博客<sup><a href="../Poster/递归类题目.html">Link</a></sup>中提到的大部分二叉树的算法都可以用递归来解决的缘由。上面介绍的前中后序遍历都是递归遍历的一种。
+  </br>
+  对于二叉树的层序遍历，顾名思义，就是一层一层地遍历二叉树。这个遍历方式需要借助队列来实现。
   </p>
+<details>
+<summary>代码框架如下(🙋‍暂时还没用到过，也没有理解很透彻)：</summary>
+<pre><code>
+  void levelOrderTraverse(TreeNode* root) {
+    if (root == nullptr) {
+        return;
+    }
+    std::queue&ltTreeNode*&gt q;
+    q.push(root);
+    while (!q.empty()) {
+        TreeNode* cur = q.front();
+        q.pop();
+        // 访问 cur 节点
+        std::cout &lt&lt cur->val &lt&lt std::endl;
+
+        // 把 cur 的左右子节点加入队列
+        if (cur->left != nullptr) {
+            q.push(cur->left);
+        }
+        if (cur->right != nullptr) {
+            q.push(cur->right);
+        }
+    }
+}
+</code></pre>
+</details>
 
 <p><br></p>
 <h1>2. 二叉树的最大深度</h1>
