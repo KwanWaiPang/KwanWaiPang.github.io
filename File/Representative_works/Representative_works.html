@@ -1,165 +1,267 @@
-<!DOCTYPE html>
-<!-- 学习html：https://www.w3school.com.cn/html/html_jianjie.asp -->
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Representative Works of Kwan Wai-Pang</title>
-</head>
-
-<style>
-    body {
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: 10%;
-        margin-right: 10%;
-    }
-
-    p {
-        text-align: justify;
-        text-align-last: left;
-        text-justify: inter-word;
-    }
-
-    .paper-pdf{
-        width:80%;
+  <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
+  <style type="text/css">
+  /* Design Credits: Jon Barron and Deepak Pathak and Abhishek Kar and Saurabh Gupta*/
+  a {
+  color: #1772d0;
+  text-decoration:none;
+  }
+  a:focus, a:hover {
+  color: #f09228;
+  text-decoration:none;
+  }
+  body,td,th {
+    font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 400
+  }
+  heading {
+    font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+    font-size: 17px; /* 19 */
+    font-weight: 600 /* 1000 */
+  }
+  hr
+  {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+  strong {
+    font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600 /* 800 */
+  }
+  strongred {
+    font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+    color: 'red' ;
+    font-size: 16px
+  }
+  sectionheading {
+    font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: 600
+  }
+  pageheading {
+    font-family: 'Titillium Web', Verdana, Helvetica, sans-serif;
+    font-size: 38px;
+    font-weight: 400
+  }
+  .ImageBorder
+  {
+      border-width: 1px;
+      border-color: Black;
+  }
+  .paper-pdf{
+        width:100%;
         height:80vh;
         display: flex; /* 让容器水平居中 */
         margin: auto;
     }
+  </style>
 
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Kwan Wai-Pang</title>
+<meta name="author" content="Kwan Wai-Pang " />
+<meta name="description" content="Personal Blog of Kwan Wai-Pang" />
+<meta name="keywords" content="Event-based Vision, SLAM, Robotics" />
 
+<!-- OpenGraph 用于更新页面-->
+<meta property="og:site_name" content="My Technology Blog" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Kwan Wai-Pang | Personal Blog" />
+<meta property="og:description" content="Welcome 😊" />
+<meta property="og:image" content="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg" />
+
+<meta property="og:locale" content="en" />
+
+
+<!-- Bootstrap & MDB -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+<!-- Fonts & Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Barriecito&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700">
+
+<!-- Code Syntax Highlighting -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/PASTIE.css" media="none" id="highlight_theme_light" /> -->
+
+<!-- <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic' rel='stylesheet' type='text/css'> -->
+<!-- <script type="text/javascript" src="./js/js/hidebib.js"></script> -->
+ <!-- Start : Google Analytics Code -->
+ <!-- <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview');
+    </script> -->
+  <!-- End : Google Analytics Code -->
+  <!-- Scramble Script by Jeff Donahue -->
+  <!-- <script src="./js/js/scramble.js"></script> -->
+</head>
+
+<!-- Styles -->
+<!-- 下面为网页的略缩图 -->
+<link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
+
+<!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css"> -->
+<link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
+<link rel="stylesheet" href="/assets/css/fonts.css">
+
+<!-- Dark Mode -->
+
+</head>
+ 
 <body>
+<!-- 下面插入内容 -->
+<table width="900" border="0" align="center" border="0" cellspacing="0" cellpadding="20">
+  <tr><td>
 
-<!--**************************************************-->
-<h1>EVI-SAM: Robust, Real-time, Tightly-coupled Event-Visual-Inertial State Estimation and 3D Dense Mapping</h1>
-<p>
-    <strong>First Author</strong></br>
-    2024, Advanced Intelligent Systems, Journal Impact Factor: 7.4;
-    </br><a href="https://onlinelibrary.wiley.com/doi/10.1002/aisy.202400243" target="_blank">Download Link</a>;
-</p>
-<iframe class="paper-pdf" src="papers/EVI-SAM：Robust, Real-time, Tightly-coupled Event-Visual-Inertial State Estimation and 3D Dense Mapping.pdf"></iframe>
+    <p><br></p>   
+    <p align="center">
+        <pageheading>Kwan Wai-Pang's Representative Works</pageheading><br>
+    </p>
+    <p><br></p>   
 
-<!--**************************************************-->
-<h1>PL-EVIO：Robust Monocular Event-based Visual Inertial Odometry with Point and Line Features</h1>
-<p>
-    <strong>First Author</strong></br>
-    2023, IEEE Transactions on Automation Science and Engineering, Journal Impact Factor: 5.6;
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/10287884" target="_blank">Download Link</a>; Simultaneously present in ICRA2024;
-</p>
-<iframe class="paper-pdf" src="papers/PL-EVIO：Robust Monocular Event-based Visual Inertial Odometry with Point and Line Features.pdf"></iframe>
+  <!-- <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10">
+    <tr><td><sectionheading>&nbsp;&nbsp;Publications</sectionheading></td></tr>
+  </table> -->
 
-<!--**************************************************-->
-<h1>ECMD: An Event-Centric Multisensory Driving Dataset for SLAM</h1>
-<p>
-    <strong>Co-First Author</strong></br>
-    2023, IEEE Transactions on Intelligent Vehicles, Journal Impact Factor: 8.2;
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/10342726" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/ECMD：An Event-Centric Multisensory Driving Dataset for SLAM.pdf"></iframe>
+  
+  <table width="100%" align="center" border="0" cellspacing="0" cellpadding="15">
+    <!-- 下面插入内容论文的内容 -->
 
-<!--**************************************************-->
-<h1>ESVIO：Event-based Stereo Visual Inertial Odometry</h1>
-<p>
-    <strong>Co-First Author</strong></br>
-    2023, IEEE Robotics and Automation Letters, Journal Impact Factor: 5.2;
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/10107754" target="_blank">Download Link</a>; Simultaneously present in IROS2023;
-</p>
-<iframe class="paper-pdf" src="papers/ESVIO：Event-based Stereo Visual Inertial Odometry.pdf"></iframe>
+    <!-- EVI-SAM: Robust, Real-time, Tightly-coupled Event-Visual-Inertial State Estimation and 3D Dense Mapping -->
+    <tr>
+        <td width="40%" valign="top" align="center">
+          <iframe src="//player.bilibili.com/player.html?aid=409509294&bvid=BV12G411Y7Ye&cid=1360570795&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <!-- <a href=" ">
+        <video playsinline autoplay loop muted src="https://www.bilibili.com/video/BV12G411Y7Ye/?spm_id_from=333.788" poster="./loading-icon.gif" alt="sym" width="90%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+        </a> -->
+      </td>
 
-<!--**************************************************-->
-<h1>Monocular Event Visual Inertial Odometry based on Event-corner using Sliding Windows Graph-based Optimization</h1>
-<p>
-    <strong>First Author</strong></br>
-    2022, IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2022);
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/9981970" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/Monocular Event Visual Inertial Odometry Based on Event-Corner Using Sliding Windows Graph-Based Optimization.pdf"></iframe>
+        <td width="60%" valign="top">
+            <p><a href=" ">
+            <heading>EVI-SAM: Robust, Real-time, Tightly-coupled Event-Visual-Inertial State Estimation and 3D Dense Mapping</heading></a><br>
+            <strong>First Author</strong><br>
+            2024, Advanced Intelligent Systems, Journal Impact Factor: 7.4;<br>
+            </p>
 
-<!--**************************************************-->
-<h1>Robot Localization and Navigation Using Visible Light Positioning and SLAM Fusion</h1>
-<p>
-    <strong>First Author</strong></br>
-    2021 IEEE/OSA Journal of Lightwave Technology, Journal Impact Factor: 4.7;
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/9541016" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/Robot Localization and Navigation Using Visible Light Positioning and SLAM Fusion.pdf"></iframe>
+            <div class="paper">
+            <!-- <a href=" ">github</a> | -->
+            <a href="https://www.bilibili.com/video/BV1za4y1d76c/?spm_id_from=333.999.0.0" target="_blank">Video</a> |
+            <a href="https://github.com/arclab-hku/Event_based_VO-VIO-SLAM/blob/main/EVI-SAM/data_srcipt.md" target="_blank">Mapping DataSet</a> |
+            <a href="https://onlinelibrary.wiley.com/doi/10.1002/aisy.202400243" target="_blank">Download Link</a> 
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <details>
+                <summary>PDF</summary>
+                <iframe class="paper-pdf" src="papers/EVI-SAM：Robust, Real-time, Tightly-coupled Event-Visual-Inertial State Estimation and 3D Dense Mapping.pdf"></iframe>
+            </details>
+        </td>
+    </tr>
 
-<!--**************************************************-->
-<h1>Robust Robotic Localization Using Visible Light Positioning and Inertial Fusion</h1>
-<p>
-    <strong>First Author</strong>; <a href="ESI Hightly Cited Paper 1.png" target="_blank">ESI Hightly Cited Paper</a></br>
-    2022 IEEE Sensors Journal, Journal Impact Factor: 4.3;
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/9330552" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/Robust Robotic Localization Using Visible Light Positioning and Inertial Fusion.pdf"></iframe>
+    <!-- PL-EVIO：Robust Monocular Event-based Visual Inertial Odometry with Point and Line Features -->
+    <tr>
+        <td width="40%" valign="top" align="center"><a href=" ">
+        <video poster="https://kwanwaipang.github.io/Poster_files/PLEVIO.gif" alt="sym" width="90%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+        </a></td>
 
-<!--**************************************************-->
-<h1>High-Accuracy Robot Indoor Localization Scheme Based on Robot Operating System Using Visible Light Positioning</h1>
-<p>
-    <strong>First Author</strong></br>
-    2020 IEEE Photonics Journal, Journal Impact Factor: 2.4;</br>
-    We developed the world's first robot positioning system using VLP.
-    </br><a href="https://ieeexplore.ieee.org/abstract/document/9040589" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/High-Accuracy Robot Indoor Localization Scheme Based on Robot Operating System Using Visible Light Positioning.pdf"></iframe>
+        <td width="60%" valign="top">
+            <p><a href=" ">
+            <heading>PL-EVIO：Robust Monocular Event-based Visual Inertial Odometry with Point and Line Features</heading></a><br>
+            <strong>First Author</strong><br>
+            2023, IEEE Transactions on Automation Science and Engineering, Journal Impact Factor: 5.6;<br>
+            </p>
 
-<!--**************************************************-->
-<h1>High accuracy, 6-DoF simultaneous localization and calibration using visible light positioning</h1>
-<p>
-    <strong>Corresponding Author</strong></br>
-    2022 IEEE/OSA Journal of Lightwave Technology, Journal Impact Factor: 4.7;
-    </br><a href="https://ieeexplore.ieee.org/document/9857575" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/High accuracy, 6-DoF simultaneous localization and calibration using visible light positioning.pdf"></iframe>
+            <div class="paper">
+            <!-- <a href=" ">github</a> | -->
+            <a href="https://www.bilibili.com/video/BV12t4y1L7eK/?spm_id_from=333.999.0.0" target="_blank">Video</a> |
+            <a href="../Blogs/Poster/ICRA2024_presentation.html" target="_blank">ICRA Presentation</a> |
+            <a href="https://ieeexplore.ieee.org/abstract/document/10287884" target="_blank">Download Link</a> 
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <details>
+                <summary>PDF</summary>
+                <iframe class="paper-pdf" src="papers/PL-EVIO：Robust Monocular Event-based Visual Inertial Odometry with Point and Line Features.pdf"></iframe>
+            </details>
+        </td>
+    </tr>
 
-<!--**************************************************-->
-<h1>VWR-SLAM Tightly-coupled SLAM System Based on Visible Light Positioning Landmark, Wheel Odometer and RGB-D Camera</h1>
-<p>
-    <strong>Corresponding Author</strong></br>
-    2022 IEEE Transactions on Instrumentation and Measurement, Journal Impact Factor: 5.6;
-    </br><a href="https://ieeexplore.ieee.org/document/10003174" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/VWR-SLAM Tightly-coupled SLAM System Based on Visible Light Positioning Landmark, Wheel Odometer and RGB-D Camera.pdf"></iframe>
+  </table>
+  <hr/>
+  
+  <footer class="nofixed-bottom">
+    <div class="container mt-0" style="width:100%;text-align:center;">
+        Please refer to <a href="https://scholar.google.com/citations?user=fUU5Cv0AAAAJ&hl=en&oi=ao" target="_blank">Google Scholar</a> for the complete list of my publications
+    </div>
+  </footer> 
 
-<!--**************************************************-->
-<h1>Multirobot Cooperative Localization Based on Visible Light Positioning and Odometer</h1>
-<p>
-    <strong>Co-First and Corresponding Author</strong></br>
-    2021 IEEE Transactions on Instrumentation and Measurement, Journal Impact Factor: 5.6;
-    </br><a href="https://ieeexplore.ieee.org/document/9447720" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/Multirobot Cooperative Localization Based on Visible Light Positioning and Odometer.pdf"></iframe>
 
-<!--**************************************************-->
-<h1>The LED-ID Detection and Recognition Method Based on Visible Light Positioning Using Proximity Method</h1>
-<p>
-    <strong>Corresponding Author</strong>; <a href="ESI Hightly Cited Paper 2.png" target="_blank">ESI Hightly Cited Paper</a> </br>
-    2018 IEEE Photonics Journal, Journal Impact Factor: 2.4;
-    </br><a href="https://ieeexplore.ieee.org/document/8302893" target="_blank">Download Link</a>
-</p>
-<iframe class="paper-pdf" src="papers/The LED-ID Detection and Recognition Method Based on Visible Light Positioning Using Proximity Method.pdf"></iframe>
+  </td></tr>
+</table>
+
+<script xml:space="preserve" language="JavaScript">
+hideallbibs();
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('material_review_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('ieee_iot_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('acm_turc_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('aog_mcts_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('pragmatics_marl_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('collab_marl_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('rma_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('energyloco_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('navloco_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('maniploco_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('parkour_abs');
+</script>
+<script xml:space="preserve" language="JavaScript">
+  hideblock('AeCoM_abs');
+</script>
+
+<!-- 下面为网页的略缩图 -->
+<link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
+
 
 </body>
-
-<script>
-    // 获取所有的iframe元素
-    var iframes = document.querySelectorAll('.paper-pdf');
-
-    // 遍历所有的iframe元素
-    iframes.forEach(function(iframe) {
-        // 获取iframe的src属性
-        var src = iframe.getAttribute('src');
-
-        // 如果src属性存在
-        if (src) {
-            // 给src添加参数
-            src += '#toolbar=0&navpanes=0&scrollbar=0';
-
-            // 更新iframe的src属性
-            iframe.setAttribute('src', src);
-        }
-    });
-</script>
 
 </html>
