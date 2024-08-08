@@ -150,11 +150,11 @@
           <!-- <iframe src="//player.bilibili.com/player.html?aid=409509294&bvid=BV12G411Y7Ye&cid=1360570795&p=1" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
           <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
             <!-- 加载中的动图 -->
-            <img id="loadingImage" src="./loading-icon.gif" alt="Loading..." 
+            <img id="loadingImage1" src="./loading-icon.gif" alt="Loading..." 
                  style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
             
             <!-- iframe 用于嵌入 Bilibili 视频 -->
-            <iframe id="videoIframe" 
+            <iframe id="videoIframe1" 
                     src="//player.bilibili.com/player.html?aid=409509294&bvid=BV12G411Y7Ye&cid=1360570795&p=1" 
                     title="Bilibili video player" 
                     frameborder="0" 
@@ -313,11 +313,11 @@
   <!-- <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=714632834&bvid=BV1JX4y137Q7&cid=311016735&p=1" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
   <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
     <!-- 加载中的动图 -->
-    <img id="loadingImage" src="./loading-icon.gif" alt="Loading..." 
+    <img id="loadingImage2" src="./loading-icon.gif" alt="Loading..." 
          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
     
     <!-- iframe 用于嵌入 Bilibili 视频 -->
-    <iframe id="videoIframe" 
+    <iframe id="videoIframe2" 
             src="//player.bilibili.com/player.html?isOutside=true&aid=714632834&bvid=BV1JX4y137Q7&cid=311016735&p=1" 
             title="Bilibili video player" 
             frameborder="0" 
@@ -658,31 +658,25 @@ hideallbibs();
   });
 </script>
 
-<!-- <script>
+<script>
   // 当 iframe 加载完成后执行
-  document.getElementById('videoIframe').onload = function() {
+  document.getElementById('videoIframe1').onload = function() {
       // 隐藏加载中的动图
-      document.getElementById('loadingImage').style.display = 'none';
+      document.getElementById('loadingImage1').style.display = 'none';
       // 显示 iframe
-      document.getElementById('videoIframe').style.display = 'block';
+      document.getElementById('videoIframe1').style.display = 'block';
   };
-</script> -->
+</script>
 
 <script>
-  // 获取所有的 iframe 和对应的加载动图（上面只是单个的）
-  const iframes = document.querySelectorAll('.videoIframe');
-  const loadingImages = document.querySelectorAll('.loadingImage');
-  
-  // 为每个 iframe 绑定 onload 事件
-  iframes.forEach((iframe, index) => {
-      iframe.onload = function() {
-          // 隐藏对应的加载动图
-          loadingImages[index].style.display = 'none';
-          // 显示 iframe
-          iframe.style.display = 'block';
-      };
-  });
-  </script>
+  // 当 iframe 加载完成后执行
+  document.getElementById('videoIframe2').onload = function() {
+      // 隐藏加载中的动图
+      document.getElementById('loadingImage2').style.display = 'none';
+      // 显示 iframe
+      document.getElementById('videoIframe2').style.display = 'block';
+  };
+</script>
 
 <!-- 下面为网页的略缩图 -->
 <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
