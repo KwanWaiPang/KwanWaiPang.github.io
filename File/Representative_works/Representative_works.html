@@ -601,6 +601,27 @@ hideallbibs();
   hideblock('AeCoM_abs');
 </script>
 
+<!-- 删掉PDF的工具栏 -->
+<script>
+  // 获取所有的iframe元素
+  var iframes = document.querySelectorAll('.paper-pdf');
+
+  // 遍历所有的iframe元素
+  iframes.forEach(function(iframe) {
+      // 获取iframe的src属性
+      var src = iframe.getAttribute('src');
+
+      // 如果src属性存在
+      if (src) {
+          // 给src添加参数
+          src += '#toolbar=0&navpanes=0&scrollbar=0';
+
+          // 更新iframe的src属性
+          iframe.setAttribute('src', src);
+      }
+  });
+</script>
+
 <!-- 下面为网页的略缩图 -->
 <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
 
