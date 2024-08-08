@@ -658,7 +658,7 @@ hideallbibs();
   });
 </script>
 
-<script>
+<!-- <script>
   // 当 iframe 加载完成后执行
   document.getElementById('videoIframe').onload = function() {
       // 隐藏加载中的动图
@@ -666,7 +666,23 @@ hideallbibs();
       // 显示 iframe
       document.getElementById('videoIframe').style.display = 'block';
   };
-</script>
+</script> -->
+
+<script>
+  // 获取所有的 iframe 和对应的加载动图
+  const iframes = document.querySelectorAll('.videoIframe');
+  const loadingImages = document.querySelectorAll('.loadingImage');
+  
+  // 为每个 iframe 绑定 onload 事件
+  iframes.forEach((iframe, index) => {
+      iframe.onload = function() {
+          // 隐藏对应的加载动图
+          loadingImages[index].style.display = 'none';
+          // 显示 iframe
+          iframe.style.display = 'block';
+      };
+  });
+  </script>
 
 <!-- 下面为网页的略缩图 -->
 <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
