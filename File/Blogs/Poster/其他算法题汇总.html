@@ -7,7 +7,7 @@
         text-align-last: left;
         text-justify: inter-word;
     }
-    </style>
+  </style>
 
 <!-- Head -->
 <head>    <!-- Metadata, OpenGraph and Schema.org -->
@@ -26,7 +26,7 @@
   <meta property="og:site_name" content="My Technology Blog" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Kwan Wai-Pang | Personal Blog" />
-  <meta property="og:description" content="Welcome to My Blog of Algorithm 😊" />
+  <meta property="og:description" content="Welcome 😊" />
   <meta property="og:image" content="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg" />
 
   <meta property="og:locale" content="en" />
@@ -53,11 +53,17 @@
 
   <!-- Styles -->
 
-  <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
+    <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
 
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css">
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css"> -->
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css"> -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/new_css_js/cpp-highlight/styles/gradient-dark.css">
+  <script src="../assets/new_css_js/cpp-highlight/highlight.js"></script>    <!--引入代码高亮js库-->
+
+  <script>hljs.initHighlightingOnLoad();
+  </script>
 
   <!-- Dark Mode -->
 
@@ -84,9 +90,13 @@
 
           <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto flex-nowrap">
-                <li class="nav-item ">
-                  <a class="nav-link" href="../My_Blog.html">Homepage</a>
-                </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="../My_Blog.html">Homepage</a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="nav-link" href="../Poster/cpp算法学习笔记.html">Learning Algorithm</a>
+              </li>
 
             </ul>
           </div>
@@ -100,163 +110,148 @@
       <div class="post">
         <header class="post-header">
           <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">算法学习笔记及基于各种编程语言的开发记录</span>
+           <span style="font-weight: 600;">其他算法题汇总</span>
           </h1>
-          <p><br></p>
-          <!-- <p>
-            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
-          </p> -->
         </header>
 <article>
 <!-- 插入博客内容-->
 
-<h3>引言</h3>
-<p>本博文汇总了本人学习算法以及刷Leetcode、牛客网等题目的过程中的一些笔记，主要是基于C++的实现。
-  具体代码运行及测试请见<a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a>
-  <br>
-  此外，本博文还记录了本人采用不同编程语言开发的一些项目汇总，包括ROS，Android，Pytorch等。
-</p>
-
 <p><br></p>
-<h3>My Github</h3>
-<p>欢迎访问我的 <a href="https://github.com/KwanWaiPang" target="_blank">Github</a></p>
+<h1>整数与罗马数字的转换</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20240808222442.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 
-<picture>
-  <!-- <source
-    srcset="https://github-readme-stats-one-bice.vercel.app/api?username=KwanWaiPang&show_icons=true&theme=default&count_private=true&role=OWNER,ORGANIZATION_MEMBER&hide=6"
-    media="(prefers-color-scheme: dark)"
-  />
-  <source
-    srcset="https://github-readme-stats-one-bice.vercel.app/api?username=KwanWaiPang&show_icons=true&theme=default&count_private=true&role=OWNER,ORGANIZATION_MEMBER&hide=6"
-    media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
-  /> -->
-  <img src="https://github-readme-stats-one-bice.vercel.app/api?username=KwanWaiPang&show_icons=true&theme=default&count_private=true&role=OWNER,ORGANIZATION_MEMBER&hide=prs,issues" />
-  <!-- <img src="https://streak-stats.demolab.com/?user=KwanWaiPang&count_private=true&role=OWNER,ORGANIZATION_MEMBER" /> -->
-
-  <img height=350 src="https://github-readme-stats.vercel.app/api/top-langs/?username=KwanWaiPang&layout=donut&langs_count=6&hide=CMake" />
-</picture>
-
-<p><br></p>
-<div class="news">
-  <h3>算法学习博客列表</h3>
-  <div class="table-responsive">
-    <table class="table table-sm table-borderless">
-      <tr>
-        <th scope="row"><a href="../Poster/栈类型题目.html">堆栈</a></th>
-      </tr>
-      
-      <tr>
-        <th scope="row"><a href="../Poster/双指针链表解法.html">链表双指法</a>、<a href="../Poster/双指针数组解法.html">数组/Vector双指法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/滑动窗口算法.html">滑动窗口算法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/二分法.html">二分法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/二叉树类题目.html">二叉树</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/回溯算法.html">回溯算法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/递归类题目.html">递归算法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/动态规划.html">动态规划算法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/模拟算法.html">模拟算法</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/其他算法题汇总.html">string及其它特殊函数的使用</a></th>
-      </tr>
-
-      <tr>
-        <th scope="row"><a href="../Poster/算法的复杂度分析.html">算法的复杂度分析</a></th>
-      </tr>
-
-    </table>
-  </div> 
-</div>
-
-
-<p><br></p>
-<div class="news">
-  <h3>不同编程语言开发项目汇总</h3>
-  <div class="table-responsive">
-    <table class="table table-sm table-borderless">
-
-      <style>
-        .table td, .table th {
-          vertical-align: middle; /* 使单元格内容垂直居中 */
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+  class Solution {
+    public:
+        // 通过vector穷举了所有的可能性(由于不同的千百十位对应不同的字符,故此穷举最直接)
+        vector&ltpair&ltint, string&gt&gt group = {
+            {1000, "M"},
+            {900, "CM"},
+            {500, "D"},
+            {400, "CD"},
+            {100, "C"},
+            {90, "XC"},
+            {50, "L"},
+            {40, "XL"},
+            {10, "X"},
+            {9, "IX"},
+            {5, "V"},
+            {4, "IV"},
+            {1, "I"},
+        };//顺序很重要!
+        
+        string intToRoman(int num) {
+            string output_str;
+            
+            // 遍历这个group
+            for(int i=0;i&ltgroup.size();i++)//长度固定因此复杂度为O(1)
+            {
+                // 注意遍历是从大到小减的~
+                while(num&gt=group[i].first)//通过while循环,取完了,i再变
+                {
+                    output_str+=group[i].second;
+                    num=num-group[i].first;
+                }
+    
+                if(num==0)
+                    break;
+            }
+            return output_str;
         }
-      </style>
-     
-      <tr>
-        <th scope="row">C/C++</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_9361572.html" target="_blank">机器人操作系统（ROS）开发博客汇总</a>
-          <br>
-          <a href="https://blog.csdn.net/gwplovekimi/article/details/133878460?spm=1001.2014.3001.5501" target="_blank">基于STM32的VLC驱动调制芯片模组</a>及驱动代码<sup><a href="https://github.com/R-C-Group/new_vlc_ble_coding" target="_blank">1</a>, <a href="https://github.com/R-C-Group/Big_power_VLC_driver" target="_blank">2</a></sup></a>
-          <br>
-          <a href="https://github.com/arclab-hku/ESVIO" target="_blank">开源项目：双目事件视觉惯性里程计</a>
-          <br>
-          <a href="https://github.com/KwanWaiPang/Mono-VINS-DenseMapping" target="_blank">开源项目：单目稠密三维重建</a>
-          <br>
+    };
+</code></pre>
+</details>
 
-        </td>
-      </tr>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20240808223003.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>跟上面很类似，只是反过来由罗马变为阿拉伯数字而已~</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        unordered_map&ltchar, int&gt define_group=//注意是从小到大
+        {
+            {'I',1},
+            {'V',5},
+            {'X',10},
+            {'L',50},
+            {'C',100},
+            {'D',500},
+            {'M',1000}
+        };
+    
+        int romanToInt(string s) {
+    
+            int num_value=0;
+            for(int i=0;i&lts.size();i++)
+            {
+                // 若字符串的当前位对应的数字小于下一位对应的数字(对应特殊的4,9等等)
+                if(define_group[s[i]]&ltdefine_group[s[i+1]])
+                {
+                    num_value+=define_group[s[i+1]]-define_group[s[i]];
+                    i=i+1;//当前位和下一位都算了，可以跳过
+                }
+                else//反之,则是当前位和下一位相同
+                    num_value+=define_group[s[i]];//直接获取值
+            }
+    
+            // num_value=num_value+define_group[s[s.size()-1]];//最后一个加上
+            return num_value;
+    
+        }
+    };
+</code></pre>
+</details>
 
-      <tr>
-        <th scope="row">Python</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_8231479.html" target="_blank">Low-level vision and Pytorch博客汇总</a>
-          <br>
-        </td>
-      </tr>
 
-      <tr>
-        <th scope="row">Java</th>
-        <td>
-          <a href="https://blog.csdn.net/gwplovekimi/category_9860500.html" target="_blank">Android 开发博客汇总</a>
-          <br>
-          <a href="../Poster/Self_develop_APP.html">自研的APP展示</a>
-          <br>
-        </td>
-      </tr>
+<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
+<!-- <details>
+<summary>Click to expand the code</summary>
+<pre><code>
+</code></pre>
+</details> -->
 
-    </table>
-  </div> 
-</div>
+<!-- <p><br></p>
+<h1></h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  -->
 
 <p><br></p>
-<p><br></p>
-<p><br></p>
+<h1>参考资料</h1>
+<ul>
+  <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
+</ul>
 
 </article>
 </div>
 </div>
 
-</article>
-</div>
-</div>
-
-<!-- Footer -->    
-<!-- <footer class="nofixed-bottom">
+<!-- Footer --> 
+<p><br></p>   
+<footer class="nofixed-bottom">
 <div class="container mt-0" style="width:100%;text-align:center;">
   Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
 </div>
-</footer>  -->
+</footer> 
 
     <!-- JavaScripts -->
     <!-- jQuery -->
