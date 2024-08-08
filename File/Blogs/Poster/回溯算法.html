@@ -253,7 +253,85 @@ def backtrack(路径, 选择列表):
   </div>
 <figcaption><p>
 </p></figcaption>
-</figure> 
+</figure>
+<details>
+<summary>Click to expand the code。时间复杂度是O（N！）回溯算法中对应着For循环。空间复杂度：O(N)是递归栈，但是还有O（N<sup>2</sup>）是存放的结果占用的空间</summary>
+<pre><code>
+  // 本题本质上就是，决策树的每一层表示棋盘上的每一行；每个节点可以做出的选择是，在该行的任意一列放置一个皇后
+
+  class Solution {
+  public:
+      // 输入棋盘边长 n，返回所有合法的放置
+      vector&ltvector&ltstring&gt&gt solveNQueens(int n) {
+  
+          // 每个字符串代表一行，字符串列表代表一个棋盘
+          // '.' 表示空，'Q' 表示皇后，初始化空棋盘
+          vector<string> board(n, string(n, '.'));//将其初始化为空棋盘
+          // 注意,对于board为n个string,每个string为n个字符
+  
+          vector&ltvector&ltstring&gt&gt result;//结果
+          backtrack(board,result, 0);//一开始row为0
+          return result;
+      }
+  
+      // 路径：board 中小于 row 的那些行都已经成功放置了皇后
+      // 选择列表：第 row 行的所有列都是放置皇后的选择
+      // 结束条件：row 超过 board 的最后一行
+      void backtrack(vector&ltstring&gt& board, vector&ltvector&ltstring&gt&gt& result, int row) 
+      {
+          //结束的条件
+          if(row==board.size())
+          {
+              result.push_back(board);//将当前的结果返回
+          }
+  
+          //对于当前row的每一列
+          for (int col = 0; col &lt board.size(); col++)
+          {
+              //先判断是否合法(也就是说是否可以在board[row][col]上放置皇后)
+              if (!isValid(board, row, col))
+              {
+                  continue;//若无效,那么就是当前位置不应该方
+              }
+              board[row][col]='Q';// 做选择
+              backtrack(board,result, row+1);//回溯算法
+              board[row][col]='.';// 撤销选择
+  
+          }
+  
+      }
+  
+      // 判断是否可以在 board[row][col] 放置皇后
+      bool isValid(vector&ltstring&gt& board, int row, int col) 
+      {
+  
+          //先检查在这一行前,当前列是否有皇后放置了
+          for(int i=0;i&ltrow;i++)
+          {
+              if (board[i][col]=='Q')//存在皇后
+                  return false;
+          }
+  
+          // 检查右上方.右上方就是当前row-1,col+1
+          for(int i=row-1, j=col+1; i&gt=0 && j&ltboard.size(); i--, j++)
+          {
+              if (board[i][j]=='Q')//存在皇后
+                  return false;
+          }
+  
+          //检查左上方.右上方就是当前row-1,col-1
+          for(int i=row-1, j=col-1; i&gt=0 && j&gt=0; i--, j--)
+          {
+              if (board[i][j]=='Q')//存在皇后
+                  return false;
+          }
+  
+          return true;//都不满足则是true
+  
+      }
+  };
+</code></pre>
+</details> 
 
 
 
