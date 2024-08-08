@@ -143,6 +143,114 @@
 </p>
 
 <p><br></p>
+<h1>全排列</h1>
+<p>
+  正确的解题思路是：每次固定一个位置，然后对剩下的数字进行全排列，直到遍历完所有的数字。  
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807230409.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。注意：此题的全排列问题不包含重复的数字，下一题则是包含重复数字。递归的时间复杂度为O（N！）加上递归中每个有for循环，故此应该是O（N*N！）。空间复杂度应该是O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        void calculate(vector&ltint&gt& num, int first_index, vector&ltvector&ltint&gt&gt &result, const int len)
+        {
+            //遍历完了，退出
+            if(first_index==len-1) //当index等于最后一个字节时，把对调后的num放入结果中
+            {
+                result.push_back(num);
+                return;
+            }
+    
+            // first_index可以理解为固定不变的位置
+            for(int i=first_index;i&ltlen;i++)
+            {
+                swap(num[i],num[first_index]);//变换顺序
+                calculate(num, first_index+1, result,len);//下一次计算
+                swap(num[first_index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
+            }
+            
+        }
+    
+        vector&ltvector&ltint&gt&gt permute(vector&ltint&gt& nums) {
+    
+            //采用递归的方法时间复杂度为O（N！）
+            vector&ltvector&ltint&gt&gt result;
+            calculate(nums,0, result,nums.size());
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+<details>
+<summary>此题也符合二叉树博文<sup><a href="./二叉树类题目.html" target="_blank">Link</a></sup>中前序与后序遍历的思维，只是在对应的位置执行前序与后序的操作</summary>
+<pre><code>
+  void traverse(TreeNode* root) {
+    for (TreeNode* child : root->childern) {
+        // 前序位置需要的操作
+        traverse(child);
+        // 后序位置需要的操作
+    }
+}
+</code></pre>
+</details>
+
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807231905.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题与上面不同的是包含了重复的字母，因此全排列可能包含重复的序列，故此需要去重。其余的解题思路跟上面是一样的</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        void calculate(vector&ltint&gt& nums, vector&ltvector&ltint&gt&gt &result, int first_index, const int len)
+        {
+            if(first_index==len-1)//到达了尾部
+            {
+                result.push_back(nums);
+                return;
+            }
+    
+            set&ltint&gt flag;//用于记录每次是否遍历过（在set中每个元素的值都唯一，因此可以判定当前这个数字有没有出现过！）
+            for(int i=first_index;i&ltlen;i++)
+            {
+                //满足某些情况下，跳过不处理
+                if(
+                    flag.find(nums[i])!=flag.end()//如果找到一样的
+                ) 
+                    continue;//就不处理了，跳过
+                flag.insert(nums[i]);//每次插入新的
+                swap(nums[i], nums[first_index]);//调换位置
+                calculate(nums, result, first_index+1,len); // first_index可以理解为固定不变的位置，变的i为与其兑换进行全排列
+                swap(nums[i], nums[first_index]);//换回来，继续下次
+                
+            }
+        }
+    
+    
+        vector&ltvector&ltint&gt&gt permuteUnique(vector&ltint&gt& nums) {
+            vector&ltvector&ltint&gt&gt result;
+            calculate(nums, result, 0, nums.size());
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
 <h1>其他有意思的递归类题目汇总</h1>
 
 <p><br></p>
