@@ -310,7 +310,22 @@
 <!-- Robot Localization and Navigation Using Visible Light Positioning and SLAM Fusion -->
 <tr>
   <td width="40%" valign="top" align="center"><a href=" ">
-  <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=714632834&bvid=BV1JX4y137Q7&cid=311016735&p=1" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <!-- <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=714632834&bvid=BV1JX4y137Q7&cid=311016735&p=1" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+  <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
+    <!-- 加载中的动图 -->
+    <img id="loadingImage" src="./loading-icon.gif" alt="Loading..." 
+         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+    
+    <!-- iframe 用于嵌入 Bilibili 视频 -->
+    <iframe id="videoIframe" 
+            src="//player.bilibili.com/player.html?isOutside=true&aid=714632834&bvid=BV1JX4y137Q7&cid=311016735&p=1" 
+            title="Bilibili video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 15px; display: none;">
+    </iframe>
+</div>
   </a></td>  
 
   <td width="60%" valign="top">
