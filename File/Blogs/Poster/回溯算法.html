@@ -692,7 +692,7 @@ def backtrack(路径, 选择列表):
     
                 each_result.push_back(candidates[i]);//前序
                 // 由于可以多次选择,因此无需+1,每次都重新看
-                backtrack(results,candidates,target-candidates[i],each_result,i);//无需i+1
+                backtrack(results,candidates,target-candidates[i],each_result,i);//无需i+1，那么当前的就可以被再次选择
                 each_result.pop_back();//后序
             }
     
@@ -714,10 +714,11 @@ def backtrack(路径, 选择列表):
 
 <p><br></p>
 <h3>8.子集（元素无重可复选）</h3>
-
+<p>此类型目前还没找到例题</p>
 
 <p><br></p>
 <h3>9.排列（元素无重可复选）</h3>
+<p>此类型目前还没找到例题</p>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
