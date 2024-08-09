@@ -520,6 +520,55 @@ def backtrack(路径, 选择列表):
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>Click to expand the code。组合跟子集问题时很类似的，故此解法基本一样~注意对于剩余target值的管理。等于0时返回，小于0时没必要继续计算，否则浪费计算时间~</summary>
+<pre><code>
+  class Solution {
+    public:
+        void backtrack(vector&ltint&gt& candidates, int target, vector&ltvector&ltint&gt&gt& results,vector&ltint&gt& each_result, int index)
+        {
+            // 定义结束标致,当target为0时
+            if(target==0)
+            {
+                results.push_back(each_result);
+                return;
+            }
+            
+            // 遍历整个数组
+            for(int i=index;i&ltcandidates.size(); i++)
+            {
+                // 满足条件进行剪枝,以此去重
+                if(i&gtindex && candidates[i]==candidates[i-1])//若当前值等于上一个值.同时除掉最开始的index以保证每次选重复值的第一个
+                    continue;
+    
+                if(target-candidates[i]<0)//超出了(再继续计算已经没有意义了)
+                    return; //或者break
+                    
+                //前序
+                each_result.push_back(candidates[i]);
+    
+                backtrack(candidates, target-candidates[i],results,each_result,i+1);//注意不要漏掉每次减candidates[i]
+    
+                each_result.pop_back();//后序的位置上删掉
+    
+            }
+        }
+    
+        vector&ltvector&ltint&gt&gt combinationSum2(vector&ltint&gt& candidates, int target) {
+            // 存在重复的数字,但不能包含重复的组合(顺序变化不算)
+            
+            //先进行排序,这样有利于去重
+            sort(candidates.begin(),candidates.end());
+    
+            vector&ltvector&ltint&gt&gt results;
+            vector&ltint&gt each_result;
+            backtrack(candidates, target,results,each_result,0);
+            
+            return results;
+        }
+    };
+</code></pre>
+</details>
 
 
 
