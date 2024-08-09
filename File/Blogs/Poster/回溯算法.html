@@ -312,7 +312,7 @@ def backtrack(路径, 选择列表):
 <p><br></p>
 <h1>排列/组合/子集问题</h1>
 
-<h3>子集（元素无重不可复选）</h3>
+<h3>1.子集（元素无重不可复选）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240808221517.png" alt="Image description">
@@ -361,7 +361,7 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>组合（元素无重不可复选）</h3>
+<h3>2.组合（元素无重不可复选）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240809202147.png" alt="Image description">
@@ -410,7 +410,7 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>排列（元素无重不可复选）</h3>
+<h3>3.排列（元素无重不可复选）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807230409.png" alt="Image description">
@@ -454,7 +454,7 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>子集（元素可重不可复选）</h3>
+<h3>4.子集（元素可重不可复选）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240809203607.png" alt="Image description">
@@ -512,7 +512,7 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>组合（元素可重不可复选）</h3>
+<h3>5.组合（元素可重不可复选）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240809205515.png" alt="Image description">
@@ -570,6 +570,72 @@ def backtrack(路径, 选择列表):
 </code></pre>
 </details>
 
+<p><br></p>
+<h3>6.排列（元素可重不可复选）</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807231905.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题与上面1中的第46题不同的是包含了重复的字母，因此全排列可能包含重复的序列，故此需要去重。其余的解题思路跟上面是一样的</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        void calculate(vector&ltint&gt& nums, vector&ltvector&ltint&gt&gt &result, int first_index, const int len)
+        {
+            if(first_index==len-1)//到达了尾部
+            {
+                result.push_back(nums);
+                return;
+            }
+    
+            set&ltint&gt flag;//用于记录每次是否遍历过（在set中每个元素的值都唯一，因此可以判定当前这个数字有没有出现过！）
+            for(int i=first_index;i&ltlen;i++)
+            {
+                //满足某些情况下，跳过不处理
+                if(
+                    flag.find(nums[i])!=flag.end()//如果找到一样的
+                ) 
+                    continue;//就不处理了，跳过
+                flag.insert(nums[i]);//每次插入新的
+                swap(nums[i], nums[first_index]);//调换位置
+                calculate(nums, result, first_index+1,len); // first_index可以理解为固定不变的位置，变的i为与其兑换进行全排列
+                swap(nums[i], nums[first_index]);//换回来，继续下次
+                
+            }
+        }
+    
+    
+        vector&ltvector&ltint&gt&gt permuteUnique(vector&ltint&gt& nums) {
+            vector&ltvector&ltint&gt&gt result;
+            calculate(nums, result, 0, nums.size());
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h3>7.子集（元素无重可复选）</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+
+<p><br></p>
+<h3>8.组合（元素无重可复选）</h3>
+
+
+<p><br></p>
+<h3>9.排列（元素无重可复选）</h3>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
