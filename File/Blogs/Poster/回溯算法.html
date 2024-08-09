@@ -320,6 +320,196 @@ def backtrack(路径, 选择列表):
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>Click to expand the code.时间复杂度为O(N*2<sup>N</sup>),空间复杂度为O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        // 定义回溯算法
+        void backtrack(vector&ltint&gt& nums,  vector&ltint&gt& track, vector&ltvector&ltint&gt&gt& result, int index)
+        {
+            // 没有终止条件，每次应该就是把当前的track放入result中
+            result.push_back(track);//放入结果
+    
+            for(int i=index;i&ltnums.size();i++)
+            {
+                // 前序的位置
+                track.push_back(nums[i]);//放入
+    
+                // 回溯函数调用(这里index+1，表示不允许重复使用当前数字)
+                backtrack(nums, track, result, i+1);//注意是i+1
+    
+                // 后序的位置
+                track.pop_back();// 拿出来最后一个
+            }
+    
+        }
+    
+        vector&ltvector&ltint&gt&gt subsets(vector&ltint&gt& nums) {
+    
+            // 注意：解集不能包含重复的子集。也就是不考虑顺序
+            vector&ltvector&ltint&gt&gt result;//最终的结果
+            vector&ltint&gt track;//每次结果
+    
+            backtrack(nums, track, result, 0);
+            return result;
+    
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h3>组合（元素无重不可复选）</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240809202147.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>与上一题的解题思路几乎一样</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        void backtrack(const int n, const int k, vector&ltvector&ltint&gt&gt& results, vector&ltint&gt& each_result, int index)
+        {
+            // 结束条件,当size为k时
+            if(each_result.size()==k)
+            {
+                results.push_back(each_result);
+            }
+    
+            // 遍历整个数组
+            for(int i=index; i&lt=n;i++)//注意时闭区间,包含了n
+            {
+                // 前序位置
+                each_result.push_back(i);
+    
+                // 回溯
+                backtrack(n,k,results,each_result,i+1);//i的下一个
+    
+                //后序位置
+                each_result.pop_back();//插入的用完后删掉
+            }
+        }
+    
+        vector&ltvector&ltint&gt&gt combine(int n, int k) {
+    
+            vector&ltvector&ltint&gt&gt results;
+            vector&ltint&gt each_result;
+            backtrack(n,k,results,each_result,1);//index为索引到的数字,从1开始
+            return results;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h3>排列（元素无重不可复选）</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807230409.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。注意：此题的全排列问题不包含重复的数字，下一题则是包含重复数字。递归的时间复杂度为O（N！）加上递归中每个有for循环，故此应该是O（N*N！）。空间复杂度应该是O（N）</summary>
+<pre><code>
+  class Solution {
+    public:
+        void calculate(vector&ltint&gt& num, int first_index, vector&ltvector&ltint&gt&gt &result, const int len)
+        {
+            //遍历完了，退出
+            if(first_index==len-1) //当index等于最后一个字节时，把对调后的num放入结果中
+            {
+                result.push_back(num);
+                return;
+            }
+    
+            // first_index可以理解为固定不变的位置
+            for(int i=first_index;i&ltlen;i++)
+            {
+                swap(num[i],num[first_index]);//变换顺序
+                calculate(num, first_index+1, result,len);//下一次计算
+                swap(num[first_index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
+            }
+            
+        }
+    
+        vector&ltvector&ltint&gt&gt permute(vector&ltint&gt& nums) {
+    
+            //采用递归的方法时间复杂度为O（N！）
+            vector&ltvector&ltint&gt&gt result;
+            calculate(nums,0, result,nums.size());
+            return result;
+        }
+    };
+</code></pre>
+</details>
+
+<p><br></p>
+<h3>子集（元素可重不可复选）</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240809203607.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>通过新增的if判据，来实现元素虽然存在重复,但是最终结果不能管顺序。空间复杂度：O(n)。临时数组 t 的空间代价是 O(n)，递归时栈空间的代价为 O(n)。
+  而时间复杂度。首先sort排序的时间复杂度为：回溯的时间复杂度为O(2<sup>N</sup>),然后遍历每个字符，所以应该是O（N*2<sup>N</sup>）至于前面排序sort的时间复杂度也是O（N），因此总的时间复杂度为O（N*2<sup>N</sup>）
+</summary>
+<pre><code>
+  class Solution {
+    public:
+    
+        void backtrack(vector<int>& nums, vector<vector<int>>& results, vector<int>& each_result, int index)
+        {
+            //没有结束条件,每次直接返回
+            results.push_back(each_result);
+    
+            //遍历每个字符
+            for(int i=index;i<nums.size();i++)
+            {   
+                // 注意要对i>index才执行 ( 剪枝逻辑，值相同的相邻树枝，只遍历第一条)
+                if(i>index && nums[i-1]==nums[i])//若当前跟上一个一样,那么就不执行
+                    continue;//不执行
+    
+                //前序位置
+                each_result.push_back(nums[i]);
+    
+                // 回溯前,先if判断当前结果是否出现过
+                // if(find(results.begin(),results.end(),each_result)==results.end())//若找不到(这样做不行)
+                    backtrack(nums, results,each_result,i+1);
+    
+                //后序位置,放入后删掉
+                each_result.pop_back();
+    
+            }
+        }
+    
+    
+        vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+            // 元素虽然存在重复,但是最终结果不能管顺序
+            sort(nums.begin(),nums.end());//排序一下
+            vector<vector<int>> results;
+            vector<int> each_result;
+            backtrack(nums, results,each_result,0);//索引从0开始
+    
+            return results;
+    
+        }
+    };
+</code></pre>
+</details>
 
 
 
