@@ -620,18 +620,100 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>7.子集（元素无重可复选）</h3>
+<h3>7.组合（元素无重可复选）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/backtrack" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/backtrack/微信截图_20240809215456.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>原本采用递归的解法</summary>
+<pre><code>
+  class Solution {
+    public:
+        void calculate(vector&ltvector&ltint&gt&gt& result_group,vector&ltint&gt& candidates, int target, vector&ltint&gt& temp, int index)
+        {
+            if(index==candidates.size())
+                return;//最后一个了，跳出
+            
+            if(target==0)//找到了(放入结果并退出)
+            {
+                result_group.push_back(temp);
+                return;
+            }
+    
+            calculate(result_group,candidates,target,temp,index+1);//遍历每一个index
+    
+            // 同一个index下，遍历计算(会通过上面的更新)
+            if(target-candidates[index]&gt=0)//大于0，可以继续计算
+            {
+                temp.push_back(candidates[index]);
+                calculate(result_group,candidates,target-candidates[index],temp,index);
+                temp.pop_back();//当前计算完就删掉
+            }
+        }
+    
+        vector&ltvector&ltint&gt&gt combinationSum(vector&ltint&gt& candidates, int target) {
+            //没有重复的数组,可以重复选择
+    
+            vector&ltvector&ltint&gt&gt result_group;
+            vector&ltint&gt temp;
+            // 不同于两数之和或三数之和，数目可以是随意的。
+            // 采用递归的解法，对于选择了第i位，target=target-candidates[i],继续从candidates中找，直到target=0
+            calculate(result_group,candidates,target,temp,0);
+            return result_group;
+            
+        }
+    };
+</code></pre>
+</details>
 
+<details>
+<summary>上面方法的思路是可以实现的，但是不成体系，为此用回溯的框架看看</summary>
+<pre><code>
+  class Solution {
+    public:
+        void backtrack(vector&ltvector&ltint&gt&gt& results,vector&ltint&gt& candidates, int target, vector&ltint&gt& each_result, int index)
+        {
+            
+            // 定义结束条件
+            if(target==0)//找到了(放入结果并退出)
+            {
+                results.push_back(each_result);
+                return;
+            }
+    
+            for(int i=index;i&ltcandidates.size();i++)
+            {
+                if(target-candidates[i]&lt0)//接下来就无法算了,为此跳过这个节点
+                    continue;
+    
+                each_result.push_back(candidates[i]);//前序
+                // 由于可以多次选择,因此无需+1,每次都重新看
+                backtrack(results,candidates,target-candidates[i],each_result,i);//无需i+1
+                each_result.pop_back();//后序
+            }
+    
+        }
+    
+        vector&ltvector&ltint&gt&gt combinationSum(vector&ltint&gt& candidates, int target) {
+            //没有重复的数组,可以重复选择
+    
+            vector&ltvector&ltint&gt&gt results;
+            vector&ltint&gt each_result;
+    
+            backtrack(results,candidates,target,each_result,0);
+            return results;
+            
+        }
+    };
+</code></pre>
+</details>
 
 <p><br></p>
-<h3>8.组合（元素无重可复选）</h3>
+<h3>8.子集（元素无重可复选）</h3>
 
 
 <p><br></p>
