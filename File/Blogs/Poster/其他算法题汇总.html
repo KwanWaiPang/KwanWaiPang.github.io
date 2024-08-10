@@ -317,6 +317,104 @@ int main() {
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>明明的随机数</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20240810213107.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。此题的关键是set的使用</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <set>
+    using namespace std;
+    
+    int main() {
+        set<int> input_group;//set默认自动排序，从小到大
+        int totally_num;
+        cin>>totally_num;//输入的总的数字数目
+        int input_value;
+        while (cin >> input_value) { 
+            input_group.insert(input_value);//插入，自动排序
+        }
+    
+        // 注意set的使用是需要指针取值的
+        for(auto it=input_group.begin();it!=input_group.end();it++)
+            std::cout<<*it<<std::endl;
+    }
+    // 更多关于set容器的使用：
+    // begin()     　　 ,返回set容器的第一个元素
+    // end() 　　　　 ,返回set容器的最后一个元素
+    // clear()   　　     ,删除set容器中的所有的元素
+    // empty() 　　　,判断set容器是否为空
+    // max_size() 　 ,返回set容器可能包含的元素最大个数
+    // size() 　　　　 ,返回当前set容器中的元素个数
+    
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>字符串分隔</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20240810214410.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+        
+        while(cin>> input_str)
+        {
+            string temp;
+            for(int i=0;i<input_str.size();i++)
+            {
+                if(temp.size()==8)//等于8
+                {
+                    std::cout<<temp<<std::endl;//输出
+                    temp.clear();//清空
+                }
+                temp+=input_str[i];
+            }
+            if(temp.size()!=0)//也就是最后还有
+            {
+                while(temp.size()!=8)
+                    temp+='0';//一直添加0
+                std::cout<<temp<<std::endl;//输出
+            }
+    
+        }
+    
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>进制转换</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20240810214556.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 
 
 
