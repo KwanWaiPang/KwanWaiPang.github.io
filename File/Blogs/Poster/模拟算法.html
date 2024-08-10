@@ -255,6 +255,85 @@
   但类似这种可以拆分为子问题的解题思路最直接其实还是递归~
 </p>
 
+<p><br></p>
+<h1>数青蛙</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/微信截图_20240810191614.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。时间复杂度为O（N），空间复杂度为O（1）.用计数法最简单</summary>
+<pre><code>
+  class Solution {
+    public:
+        int minNumberOfFrogs(string croakOfFrogs) {
+    
+            // croak为一只青蛙完整的叫声
+    
+            //用计数器，分别计算每个字符发了多少
+            int c=0, r=0, o=0, a=0,k=0;
+            int num_frog=0;
+    
+            for(auto _str:croakOfFrogs)
+            {
+                if(_str=='c')
+                {
+                    if(k&gt0)
+                        k--;//若前面有青蛙发过k，那么就是前面那只
+                    else//前面没有k
+                        num_frog++;//增加一只青蛙
+                    c++;//发了声音，自加
+                }
+                else if (_str=='r')
+                {
+                    if(c&gt0)
+                        c--;
+                    else //若前面没有c，那么就是不符合要求
+                        return -1;
+                    r++;//发了r
+                }
+                else if (_str=='o')
+                {
+                    if(r&gt0)
+                        r--;
+                    else //若前面没有r，那么就是不符合要求
+                        return -1;
+                    o++;//发了o
+                }
+                else if (_str=='a')
+                {
+                    if(o&gt0)
+                        o--;
+                    else //若前面没有o，那么就是不符合要求
+                        return -1;
+                    a++;//发了a
+                }
+                else if (_str=='k')
+                {
+                    if(a&gt0)
+                        a--;
+                    else //若前面没有a，那么就是不符合要求
+                        return -1;
+                    k++;//发了k
+                }
+            }
+            // 遍历完后。如果全部都为0，那么正好发完音
+            if(c==0
+                &&r==0
+                &&o==0
+                &&a==0
+                &&k&gt=1) //最后的k应该是大于等于1（由于k可能是不受到c影响的）
+                return num_frog;
+            else
+                return -1;
+        }
+    };
+</code></pre>
+</details> 
+
 
 
 
