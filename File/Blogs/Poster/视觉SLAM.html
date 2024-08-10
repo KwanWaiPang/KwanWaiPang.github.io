@@ -147,8 +147,8 @@
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 45%;" src="../assets/img/SLAM/定位.gif" alt="Image description">
-    <img style="width: 45%;" src="../assets/img/SLAM/三维重建.gif" alt="Image description">
+    <img style="width: 45%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/定位.gif" alt="Image description">
+    <img style="width: 45%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/三维重建.gif" alt="Image description">
   </div>
 <figcaption>
   SLAM：Simultaneous Localization and Mapping
@@ -161,7 +161,7 @@
 <summary>关于他们二者的关系，看下面手写的笔记吧</summary>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810172202.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810172202.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -180,7 +180,7 @@
   SLAM中的地图表示方式有很多种，主要包括拓扑地图、几何地图、语义地图、特征地图等。下面将分别介绍这几种地图。</p>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810181632.png" alt="Image description">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810181632.png" alt="Image description">
     </div>
   <figcaption><p>
   </p></figcaption>
@@ -193,7 +193,7 @@
 </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240810180507.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810180507.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -216,7 +216,7 @@
   </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810181458.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810181458.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -228,7 +228,7 @@
 </figure> 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810181747.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810181747.png" alt="Image description">
   </div>
 <figcaption>带激光强度的点云地图（左）和纹理信息的点云地图（右）</figcaption>
 </figure> 
@@ -237,7 +237,7 @@
 <h3>面元（Surfel）</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810182343.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810182343.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -254,7 +254,7 @@
 <p>栅格地图（Grid Map）将空间划分为均匀的网格，每个网格存储一个值，表征地图的属性。一种常见的方式，用三种状态：占用、空闲、未知，表示某个栅格是否被占用，这种表达方式称作“占用栅格地图”（Occupancy Grid Map），机器人导航常用栅格地图，在“空闲”栅格中规划运动轨迹。一般来说，栅格地图指的是二维平面地图。</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810182020.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810182020.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -265,7 +265,7 @@
 <p>体素地图（Voxel Map）可以理解为三维的栅格地图，当然也包括占用体素地图（Occupancy Grid Map）。如果是无人机这类的导航，一般需要用到3D的栅格地图。和点云地图相比，体素地图的“分辨率”更低，对点云地图进行了离散化。</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810182140.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810182140.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -280,7 +280,7 @@
 <p>高程地图（Elevation Map）也称2.5D地图。如果是平坦地面、二维场景，用栅格地图就可以；如果是无人机，需要用到三维场景体素地图；但如果是无人车在非平坦路面运行、或者是四足/轮式机器人在野外的行进，需要对地形进行建模，常用的方式就是高程地图。在栅格地图的基础上增加了一个维度即高度。</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810182512.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810182512.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -288,7 +288,9 @@
 
 <p><br></p> 
 <h3>神经辐射场地图（Neural Radiance Fields, NeRF）</h3>
-<p>神经辐射场地图（Neural Radiance Fields, NeRF）是一种新兴的三维场景表示和渲染技术，通过神经网络隐式地表示三维空间中的颜色和密度场。</p>
+<p>神经辐射场地图（Neural Radiance Fields, NeRF）是一种新兴的三维场景表示和渲染技术，通过神经网络隐式地表示三维空间中的颜色和密度场。
+  更多关于NeRF的介绍，请见博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/135083274?spm=1001.2014.3001.5501" target="_blank">Link</a></sup>.
+</p>
 
 
 <p><br></p> 
@@ -298,14 +300,14 @@
 </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810181131.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810181131.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure> 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240810181219.png" alt="Image description">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810181219.png" alt="Image description">
   </div>
 <figcaption>带语义信息的点云地图（左）和带语义信息的拓扑地图（右）</figcaption>
 </figure> 
