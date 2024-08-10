@@ -445,6 +445,36 @@ int main() {
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<details>
+<summary>Click to expand the code。注意16进制就是要乘16次幂（pow(16,n)）。输入的为字符串，每次对比是字符'0'和'9'</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    #include <cmath>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        cin>>input_str;
+    
+        int output_result=0;
+        for(int i=input_str.size()-1;i>=0;i--)//从最后一位开始吧
+        {
+            if(input_str[i]>='0' && input_str[i]<='9')//注意要对比的是字符
+                output_result+=(input_str[i]-'0')*pow(16,input_str.size()-1-i);//16的i次方对应16进制
+            else if(input_str[i]>='A' && input_str[i]<='F')
+                output_result+=(input_str[i]-'A'+10)*pow(16,input_str.size()-1-i);
+            else//忽略“0x”前缀
+                break;//跳出
+        }
+        std::cout<<output_result<<std::endl;
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
 
 
 
