@@ -217,9 +217,11 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h1><font color="#00FF00">相对简单的题目</font></h1>
 
 <p><br></p>
-<h1></h1>
+<h1>字符串最后一个单词的长度</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/others/微信截图_20240810205327.png" alt="Image description">
@@ -228,7 +230,7 @@
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code，trick：输入为空格的时候就停止输入</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
 #include <iostream>
@@ -245,6 +247,77 @@ int main() {
 </script>
 </code></pre>
 </details>
+
+<p><br></p>
+<h1>计算某字符出现次数</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20240810211045.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>注意不区分大小写，需要调用tolower（）函数转换成小写。时间复杂度为O（N），空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        getline(cin,input_str);//获取一整行
+        char target;
+        cin >> target;
+        target=tolower(target);//不区分大小写
+    
+        int num_result=0;
+        for(char _str:input_str)
+        {
+            if(tolower(_str)==target)//不区分大小写
+                num_result++;
+        }
+    
+        std::cout<< num_result<<std::endl;
+    
+    }
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>下面方法采用hash table，也可以，但是空间复杂度应该是O（N），时间复杂度一样</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    #include <unordered_map>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        getline(cin,input_str);//获取一整行
+        char target;
+        cin >> target;
+        target=tolower(target);//不区分大小写
+    
+        unordered_map<char, int> input_group;
+        for(char _str:input_str)
+        {
+            input_group[tolower(_str)]++;
+        }
+    
+        std::cout<< input_group[target]<<std::endl;
+    
+    }
+</script>
+</code></pre>
+</details>
+
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
