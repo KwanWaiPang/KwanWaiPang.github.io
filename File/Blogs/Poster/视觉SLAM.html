@@ -161,6 +161,15 @@
 </figcaption>
 </figure> 
 
+<p><br></p> 
+<h1>Perspective Projection Model</h1>
+<p>对于视觉SLAM，首先肯定是先需要了解相机的成像模型的，这里用下图直观显示：</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811102920.png" alt="Image description">
+  </div>
+<figcaption> 更多关于针孔相机模型及单应性矩阵的介绍请见博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/115736744" target="_blank">Link</a></sup> </figcaption>
+</figure> 
 
 
 <p><br></p> 
@@ -214,7 +223,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
  对于下公式。向量φ=（φ1，φ2，φ3）反应了R的导数性质，故称它在SO(3)上的原点 φ0 附近的正切空间上。这个φ正是李群大SO(3)对应的李代数小so(3)。
  <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810190755.png" alt="Image description">
+    <img style="width: 30%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810190755.png" alt="Image description">
   </div>
 <figcaption>指数映射
 </figcaption>
@@ -233,6 +242,29 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 </figure> 
 </details>
 
+
+
+<p><br></p> 
+<h1>对极几何</h1>
+<p>
+  用下图来直观的显示对极约束。表示的是一个运动的相机在两个不同位置的成像。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811110057.png" alt="Image description">
+    </div>
+  <figcaption>
+    左右两个平行四边形分别是相机在不同位置的成像平面<br>
+    C0, C1分别是两个位置中相机的光心，也就是针孔相机模型中的针孔
+    <br>P是空间中的一个三维点，p0, p1分别是P点在不同成像平面上对应的像素点
+  </figcaption>
+  </figure> 
+
+
+</p>
+
+
+
+
 <p><br></p> 
 <h1>非线性优化</h1>
 <h3>什么是雅可比矩阵</h3>
@@ -249,8 +281,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
     <div style="margin-bottom: 10px;">
       <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240810181632.png" alt="Image description">
     </div>
-  <figcaption><p>
-  </p></figcaption>
+  <figcaption>  </figcaption>
   </figure> 
 
 <p><br></p> 
@@ -470,7 +501,7 @@ LOAM系列算法的解读与复现demo请见博客<sup><a href="https://blog.csd
 
 
 <p><br></p> 
-<h1>参考资料</h1>
+<h1>参考资料 <a href="./course.html" target="_blank">😊</a> </h1>
 <ul>
   <li><p>
     <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzIxOTczOTM4NA==&scene=1&album_id=1361700104461467649&count=3#wechat_redirect" target="_blank">视觉SLAM入门</a>
