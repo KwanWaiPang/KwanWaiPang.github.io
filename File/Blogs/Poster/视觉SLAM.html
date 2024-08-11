@@ -431,6 +431,7 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
 
 <p><br></p>
 <h3>QR分解</h3>
+<p>
 当A是非奇异的实矩阵，实矩阵A能够表示成一个正交矩阵Q（Q<sup>T</sup>Q=I）与上三角矩阵R的积，A=Q*R称为A的QR分解。如下图所示:
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -438,10 +439,36 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
   </div>
 <figcaption>  </figcaption>
 </figure> 
+</p>
 
+<p><br></p>
+<h3>LDLT分解</h3>
+<p>对称矩阵A可以分解成一个下三角矩阵L（Lower下）和一个对角矩阵D（Diagonal对角线）以及一个下三角矩阵L的转置LT三个矩阵相乘的形式。如下式
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811165604.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+
+</p>
 
 <p><br></p>
 <h3>SVD分解</h3>
+<p>
+矩阵的奇异值分解（SVD）在最优化问题、特征值问题、最小二乘问题及广义逆问题中有巨大作用，奇异值分解将QR分解推广到任意的实矩阵，不要求矩阵式可逆，也不要求是方阵。奇异值和特征值相似的重要意义，都是为了提取出矩阵的主要特征。假设A是一个m∗n阶矩阵，如此则存在一个分解m阶正交矩阵U、非负对角阵Σ和n阶正交矩阵V使得下式满足：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811165816.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure>
+
+Σ对角线上的元素Σi,i即为A的奇异值。而且一般来说，我们会将Σ上的值按从大到小的顺序排列（可以理解为特征值从大到小）。
+
+</p>
+
+
 
 <p><br></p>
 <h3>什么是雅可比矩阵</h3>
