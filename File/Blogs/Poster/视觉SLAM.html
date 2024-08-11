@@ -167,7 +167,7 @@
 <p>对于视觉SLAM，首先肯定是先需要了解相机的成像模型的，这里用下图直观显示：</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811102920.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811102920.png" alt="Image description">
   </div>
 <figcaption> 更多关于针孔相机模型及单应性矩阵的介绍请见博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/115736744" target="_blank">Link</a></sup> </figcaption>
 </figure> 
@@ -253,7 +253,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   用下图来直观的显示对极约束。表示的是一个运动的相机在两个不同位置的成像。
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811110057.png" alt="Image description">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811110057.png" alt="Image description">
     </div>
   <figcaption>
     左右两个平行四边形分别是相机在不同位置的成像平面<br>
@@ -273,7 +273,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   根据向量叉乘（是与向量 a, b都垂直的向量，其方向通过右手定则决定）以及向量的点乘（a·b=|a||b|cosθ），可以得到下面的公式：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 40%;" src="../assets/img/SLAM/微信截图_20240811140731.png" alt="Image description">
+      <img style="width: 40%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811140731.png" alt="Image description">
     </div>
   <figcaption>
   </figcaption>
@@ -281,7 +281,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   最左边向量C0-p0就可以用p0表示，向量C0-C1就是光心C1相对于C0的平移，记为t， 向量C1-p1，可以用 Rp1 来表示（R 为从C1坐标系到C0坐标系的旋转矩阵），那么上述公式可以表示为：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 40%;" src="../assets/img/SLAM/微信截图_20240811141011.png" alt="Image description">
+      <img style="width: 40%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811141011.png" alt="Image description">
     </div>
   <figcaption>这就是所谓的对极约束！
   </figcaption>
@@ -289,7 +289,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 把中间部分拿出来，记为下面的公式。也就是所谓的本质矩阵或本征矩阵（Essential Matrix）
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 30%;" src="../assets/img/SLAM/微信截图_20240811141143.png" alt="Image description">
+    <img style="width: 30%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811141143.png" alt="Image description">
   </div>
 <figcaption>
 </figcaption>
@@ -297,7 +297,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 因此就有下面公式：
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 30%;" src="../assets/img/SLAM/微信截图_20240811141225.png" alt="Image description">
+    <img style="width: 30%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811141225.png" alt="Image description">
   </div>
 <figcaption>
 </figcaption>
@@ -318,21 +318,21 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   如下图所示，两个不同的相机拍摄同一个平面。
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142522.png" alt="Image description">
+      <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811142522.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
   对于前面提到的投射模型，可以得到下面的公式：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142731.png" alt="Image description">
+      <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811142731.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
   简化一下表达形式，把中间部分记做M矩阵，如下：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142759.png" alt="Image description">
+      <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811142759.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -340,14 +340,14 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   M矩阵是一个4 x 4 的矩阵，如果空间点在同一个平面上的话，我们可以看做 zw = 0，这样M矩阵就变成了一个 3 x 3的矩阵，对于两个不同的相机，像素坐标和空间点坐标可以写成如下的表示，其中M是3 x 3的矩阵：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142905.png" alt="Image description">
+      <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811142905.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
   把上面两个式子合并一下就得到了下面这个式子，其中的H就是单应矩阵。H矩阵的两边是两张图像对应的匹配点对。也就是说单应矩阵H把三维空间中同一平面的点在两个相机的成像图片坐标进行了映射。
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142956.png" alt="Image description">
+      <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811142956.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -381,7 +381,7 @@ Bundle Adjustment(BA)中文有多种翻译法：光束法平叉、束调整、�
 </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811154128.png" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811154128.png" alt="Image description">
   </div>
 <figcaption>  </figcaption>
 </figure> 
@@ -468,7 +468,7 @@ Bundle Adjustment(BA)中文有多种翻译法：光束法平叉、束调整、�
   当然也有四角网格。如下图所示。
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 100%;" src="../assets/img/SLAM/微信截图_20240811143524.png" alt="Image description">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811143524.png" alt="Image description">
     </div>
   <figcaption><p>
   </p></figcaption>
