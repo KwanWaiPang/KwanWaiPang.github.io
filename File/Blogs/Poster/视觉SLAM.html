@@ -382,8 +382,63 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 
 </p>
 
+
+<p><br></p>
+<h2>矩阵分解</h2>
+<p>
+矩阵分解就是分解成正交矩阵、对角矩阵、三角矩阵，矩阵分解的几何意义就是把一个线性变换分解开来，分别是缩放，切边和旋转。矩阵因子的作用就是要把缩放，切边和旋转分解出来理解一个矩阵的作用。
+</p>
+<details>
+  <summary>矩阵分解中常用矩阵</summary>
+  <p><br></p>
+<h3>矩阵分解中常用矩阵</h3>
+<p><br></p>
+<h4>正交矩阵</h4>
+如果一个矩阵和它的转置矩阵的乘积为单位矩阵， 那么这个矩阵就是正交矩阵。
+<br>
+为什么叫正交矩阵？把正交矩阵写成向量的形式， 那么这些向量除了自己和自己的点积为1，其他任意两个不同向量之间的点积全部为0.而向量点积为0的情况叫正交。
+正交矩阵其实就可以理解成一组基，也就是坐标系。因此矩阵分解中都希望直接转换成正交矩阵相乘的形式。
+<br>
+PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811161756.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure> 
+
+<p><br></p>
+<h4>对角矩阵</h4>
+<p>乘以一个对角矩阵，好比对每个坐标轴进行缩放，包括方向，和压缩。正数的乘法：正数好比在原方向上的缩放， 大于1，表示伸长，小于1，表示缩小。负数的乘法：负数表示反反向。零的乘法：零表示空间压缩。
+  </p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 50%;" src="../assets/img/SLAM/微信截图_20240811162808.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+
+<p><br></p>
+<h4>三角矩阵</h4>
+分为上三角矩阵与下三角矩阵。上三角矩阵的作用好比进行右上的切变，水平的斜拉。下三角矩阵：同样是切边，不过是往左下切边，垂直方向的下拉。直观理解请见下图
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 90%;" src="../assets/img/SLAM/上下三角矩阵.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure> 
+</details>
+
 <p><br></p>
 <h3>QR分解</h3>
+当A是非奇异的实矩阵，实矩阵A能够表示成一个正交矩阵Q（Q<sup>T</sup>Q=I）与上三角矩阵R的积，A=Q*R称为A的QR分解。如下图所示:
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 50%;" src="../assets/img/SLAM/微信截图_20240811163235.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure> 
+
 
 <p><br></p>
 <h3>SVD分解</h3>
