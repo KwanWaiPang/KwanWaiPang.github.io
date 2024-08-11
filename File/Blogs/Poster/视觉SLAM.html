@@ -371,11 +371,20 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   <br>
   在发现了BA是稀疏的后，其计算就可以加速了，因此图优化就成为了SLAM的主流方法。
   图优化里的图就是数据结构里的图，一个图由若干个顶点（vertex），以及连接这些顶点的边（edge）组成。在SLAM中，顶点一般表示机器人的位姿或者地图中的特征点，边一般表示两个顶点之间的约束关系。
-  </p>
+</p>
 
-  <h2>Bundle Adjustment（BA）</h2>
-
-
+<p><br></p> 
+<h2>Bundle Adjustment（BA）</h2>
+<p>
+Bundle Adjustment(BA)中文有多种翻译法：光束法平叉、束调整、捆集调整、捆绑调整等。BA的本质是一个优化模型，其目的是最小化重投影误差（Re-projection Error）。
+而通常使用的是窗口BA，它将当前图像和之前的n-1幅图像帧作为一个窗口进行优化，这样不仅可以跟踪前一个相机位姿还可以跟踪更之前的相机位姿，保证当前和前n-1个相机位姿一致。因此，窗口BA可以减小漂移。窗口大小n的选择决定了计算复杂度，选择较小的窗口数量可以限制优化的参数的数量，使得实时BA成为可能。
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811154128.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure> 
 
 <p><br></p> 
 <h1>SLAM中的各种地图表达方式</h1>
