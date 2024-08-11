@@ -367,7 +367,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   （m为约束项也就是方程数，n为未知数）
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811160421.png" alt="Image description">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811160421.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -375,7 +375,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   样例如下图：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 50%;" src="../assets/img/SLAM/微信截图_20240811160853.png" alt="Image description">
+      <img style="width: 50%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811160853.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -406,7 +406,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811161756.png" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811161756.png" alt="Image description">
   </div>
 <figcaption>  </figcaption>
 </figure> 
@@ -417,7 +417,7 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
   </p>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 50%;" src="../assets/img/SLAM/微信截图_20240811162808.png" alt="Image description">
+      <img style="width: 50%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811162808.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -427,7 +427,7 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
 分为上三角矩阵与下三角矩阵。上三角矩阵的作用好比进行右上的切变，水平的斜拉。下三角矩阵：同样是切边，不过是往左下切边，垂直方向的下拉。直观理解请见下图
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 90%;" src="../assets/img/SLAM/上下三角矩阵.png" alt="Image description">
+    <img style="width: 90%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/上下三角矩阵.png" alt="Image description">
   </div>
 <figcaption>  </figcaption>
 </figure> 
@@ -439,7 +439,7 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
 当A是非奇异的实矩阵，实矩阵A能够表示成一个正交矩阵Q（Q<sup>T</sup>Q=I）与上三角矩阵R的积，A=Q*R称为A的QR分解。如下图所示:
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 50%;" src="../assets/img/SLAM/微信截图_20240811163235.png" alt="Image description">
+    <img style="width: 50%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811163235.png" alt="Image description">
   </div>
 <figcaption>  </figcaption>
 </figure> 
@@ -450,7 +450,7 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
 <p>对称矩阵A可以分解成一个下三角矩阵L（Lower下）和一个对角矩阵D（Diagonal对角线）以及一个下三角矩阵L的转置LT三个矩阵相乘的形式。如下式
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811165604.png" alt="Image description">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811165604.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -463,7 +463,7 @@ PS：正交矩阵，并不改变物体的形状，但是进行了旋转。
 矩阵的奇异值分解（SVD）在最优化问题、特征值问题、最小二乘问题及广义逆问题中有巨大作用，奇异值分解将QR分解推广到任意的实矩阵，不要求矩阵式可逆，也不要求是方阵。奇异值和特征值相似的重要意义，都是为了提取出矩阵的主要特征。假设A是一个m∗n阶矩阵，如此则存在一个分解m阶正交矩阵U、非负对角阵Σ和n阶正交矩阵V使得下式满足：
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811165816.png" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811165816.png" alt="Image description">
   </div>
 <figcaption>  </figcaption>
 </figure>
@@ -476,7 +476,7 @@ SVD解决了特征值分解中只能针对方阵而没法对更一般矩阵进�
 奇异值有个突出的性质：在大部分情况下，当把矩阵Σ里的奇异值按从大到小的顺序排列以后，就会发现，奇异值σ减小的速度特别快。在很多时候，前10%甚至前1%的奇异值的和就占了全部奇异值和的99%以上。换句话说，大部分奇异值都很小，基本没什么用。既然这样，那我们就可以用前面r个奇异值来对这个矩阵做近似。因此上面的矩阵问题就可以转化为一个低秩矩阵的问题。
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811170606.png" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811170606.png" alt="Image description">
   </div>
 <figcaption> 其中，r≪m，r≪n。这样可以大大降低计算量和存储量 </figcaption>
 </figure>
