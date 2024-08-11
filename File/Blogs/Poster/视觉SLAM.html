@@ -175,6 +175,7 @@
 
 <p><br></p> 
 <h1>李群与李代数</h1>
+<details>
 旋转矩阵和乘法就构成了旋转矩阵群(SO(3)特殊正交群)，变换矩阵和乘法也构成了变换矩阵群（SE（3）特殊欧氏群）。
 对于群而言，满足乘法的封闭性但是不满足加法的封闭性。
 <figure style="text-align: center;">
@@ -243,6 +244,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 </figure> 
 </details>
 
+</details>
 
 
 <p><br></p> 
@@ -259,10 +261,50 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
     <br>P是空间中的一个三维点，p0, p1分别是P点在不同成像平面上对应的像素点
   </figcaption>
   </figure> 
-
+</p>
+<details>
+  <summary>详细解析请展开</summary>
+<p>
+  对于上图的左侧的图，如果将点P沿着C0-p0所在的直线移动，会发现P在左边相机的成像一直不变，都是p0，但是P在右边相机的成像点p1是一直在变化的。
+  <br>
+  C0-C1-P-p0-p1都是在同一个平面上的，可以想象C0-C1-P组成的平面是一个三角尺，它所在的平面称之为极平面（epipolar plane）。
+  其中和成像平面相交的直线称之为极线（epipolar line），两个光心C0, C1和成像平面的交点叫做极点（epipole）。
+  <br>
+  根据向量叉乘（是与向量 a, b都垂直的向量，其方向通过右手定则决定）以及向量的点乘（a·b=|a||b|cosθ），可以得到下面的公式：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 40%;" src="../assets/img/SLAM/微信截图_20240811140731.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+  最左边向量C0-p0就可以用p0表示，向量C0-C1就是光心C1相对于C0的平移，记为t， 向量C1-p1，可以用 Rp1 来表示（R 为从C1坐标系到C0坐标系的旋转矩阵），那么上述公式可以表示为：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 40%;" src="../assets/img/SLAM/微信截图_20240811141011.png" alt="Image description">
+    </div>
+  <figcaption>这就是所谓的对极约束！
+  </figcaption>
+  </figure> 
+把中间部分拿出来，记为下面的公式。也就是所谓的本质矩阵或本征矩阵（Essential Matrix）
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 30%;" src="../assets/img/SLAM/微信截图_20240811141143.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+因此就有下面公式：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 30%;" src="../assets/img/SLAM/微信截图_20240811141225.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
 
 </p>
-
+</details>
 
 
 
@@ -274,8 +316,6 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 
 <p><br></p> 
 <h1>SLAM中的各种地图表达方式</h1>
-<!-- <details>
-  <summary>展开查看</summary> -->
 <p>
   SLAM中的地图表示方式有很多种，主要包括拓扑地图、几何地图、语义地图、特征地图等。下面将分别介绍这几种地图。</p>
   <figure style="text-align: center;">
@@ -285,6 +325,8 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   <figcaption>  </figcaption>
   </figure> 
 
+  <details>
+<summary>展开查看</summary>
 <p><br></p> 
 <h2>拓扑地图（Topological Map）</h2>
 <p>
@@ -416,7 +458,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   </div>
 <figcaption>带语义信息的点云地图（左）和带语义信息的拓扑地图（右）</figcaption>
 </figure> 
-<!-- </details> -->
+</details>
 
 
 
@@ -497,14 +539,16 @@ LOAM系列算法的解读与复现demo请见博客<sup><a href="https://blog.csd
   <img width="50%" src="https://github-readme-stats.vercel.app/api/pin/?username=KwanWaiPang&repo=CMax-SLAM-comment "/>
   <!-- <img width="50%" src="https://github-readme-stats.vercel.app/api/pin/?username=KwanWaiPang&repo=DEVO_comment"/> -->
 </div>
-</details>
 
 <p><br></p> 
 <h2>LiFi-based SLAM</h2>
 <p> LiFi-based SLAM是一种基于可见光通信的SLAM技术，通过可见光通信实现定位和建图。LiFi-based SLAM的优势在于它不受电磁干扰，安全性高，且可以实现高精度的定位。LiFi-based SLAM的应用场景包括室内定位、导航、Localization-based Services等。</p>
 <div class="evio-container">
-  <iframe width="100%" height="300" src="//player.bilibili.com/player.html?isOutside=true&aid=983500021&bvid=BV15t4y1t7yS&cid=777013703&p=1&autoplay=0" title="Bilibili video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="100%" height="350" src="//player.bilibili.com/player.html?isOutside=true&aid=983500021&bvid=BV15t4y1t7yS&cid=777013703&p=1&autoplay=0" title="Bilibili video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
+
+
+</details>
 
 
 <p><br></p> 
