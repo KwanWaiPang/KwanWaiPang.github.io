@@ -146,8 +146,9 @@
 <p>
   从事SLAM领域的研发已经接近5年了，但是对于一些基础的概念和知识点仍然不够清晰。因此，我决定写一篇博客来总结一下视觉SLAM的基础知识，主要为了巩固相关的知识体系。
   本博文的内容主要参考了《SLAM十四讲》和视觉SLAM入门系列文章。其余参考资料也会在文末列出。
-  本博文仅供本人学习记录用，不做任何商业用途。本博文会不定期更新，如有错误或者不足之处，欢迎指正
-  <a href="../assets/img/SLAM/course.html" target="_blank">😊</a>
+  本博文仅供本人学习记录用，不做任何商业用途。
+  <!-- 本博文会不定期更新，如有错误或者不足之处，欢迎指正 -->
+  <!-- <a href="../assets/img/course.html" target="_blank">😊</a> -->
   <br>
   视觉SLAM目前主要有两大方向：基于学习的方法和基于几何的方法。本博文主要介绍基于几何方法的视觉SLAM。而learning-based的其实也是以几何的方法为基础，更多关于learning-based VO/SLAM的介绍请见博客<sup><a href="./Learning_based_VO.html" target="_blank">Link</a></sup>.
 </p>
@@ -358,8 +359,39 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 
 <p><br></p> 
 <h1>非线性优化</h1>
+
+<p><br></p>
+<h2>SLAM中的最小二乘问题</h2>
+<p>
+  见下图。一般在视觉SLAM中后端优化就是约束项大于未知数的个数（超定问题），采用最小二乘问题求解。
+  （m为约束项也就是方程数，n为未知数）
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/SLAM/微信截图_20240811160421.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+
+  样例如下图：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 50%;" src="../assets/img/SLAM/微信截图_20240811160853.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+
+</p>
+
+<p><br></p>
+<h3>QR分解</h3>
+
+<p><br></p>
+<h3>SVD分解</h3>
+
+<p><br></p>
 <h3>什么是雅可比矩阵</h3>
 
+<p><br></p>
 <h3>什么是Hessian矩阵</h3>
 
 <p><br></p> 
@@ -374,14 +406,14 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 </p>
 
 <p><br></p> 
-<h2>Bundle Adjustment（BA）</h2>
+<h1>Bundle Adjustment（BA）</h1>
 <p>
 Bundle Adjustment(BA)中文有多种翻译法：光束法平叉、束调整、捆集调整、捆绑调整等。BA的本质是一个优化模型，其目的是最小化重投影误差（Re-projection Error）。
 而通常使用的是窗口BA，它将当前图像和之前的n-1幅图像帧作为一个窗口进行优化，这样不仅可以跟踪前一个相机位姿还可以跟踪更之前的相机位姿，保证当前和前n-1个相机位姿一致。因此，窗口BA可以减小漂移。窗口大小n的选择决定了计算复杂度，选择较小的窗口数量可以限制优化的参数的数量，使得实时BA成为可能。
 </p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811154128.png" alt="Image description">
+    <img style="width: 90%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811154128.png" alt="Image description">
   </div>
 <figcaption>  </figcaption>
 </figure> 
@@ -549,7 +581,7 @@ Bundle Adjustment(BA)中文有多种翻译法：光束法平叉、束调整、�
 
 
 <p><br></p> 
-<h1>SLAM系列demo展示</h1>
+<h1>SLAM系列demo展示  <a href="../assets/img/course.html" target="_blank">😊</a> </h1>
 <details>
   <summary>展开查看</summary>
 <p><br></p> 
@@ -640,16 +672,13 @@ LOAM系列算法的解读与复现demo请见博客<sup><a href="https://blog.csd
 <p><br></p> 
 <h1>参考资料 </h1>
 <ul>
-  <li><p>
-    <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzIxOTczOTM4NA==&scene=1&album_id=1361700104461467649&count=3#wechat_redirect" target="_blank">视觉SLAM入门</a>
-  </p></li>  
-
+  <li><p><a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&__biz=MzIxOTczOTM4NA==&scene=1&album_id=1361700104461467649&count=3#wechat_redirect" target="_blank">视觉SLAM入门</a></p></li>  
   <li><p>《SLAM十四讲》</p></li>
-
   <li><p> <a href="https://blog.csdn.net/gwplovekimi/article/details/116992188" target="_blank">学习笔记之——非线性优化的解读</a></p></li>  
-
   <li><a href="https://mp.weixin.qq.com/s/eoef9iNsUcF2DiVfIM0sRQ" target="_blank">原来如此！简单总结SLAM中的各种地图</a></li>
   <li><a href="https://blog.csdn.net/jdy_lyy/article/details/119259128" target="_blank">SLAM基础——聊一聊信息矩阵</a></li>
+  <li><a href="https://blog.csdn.net/wangshuailpp/article/details/80209863" target="_blank">视觉SLAM常见的QR分解SVD分解等矩阵分解方式求解满秩和亏秩最小二乘问题（最全的方法分析总结）</a></li>
+  
 </ul>
 
 </article>
