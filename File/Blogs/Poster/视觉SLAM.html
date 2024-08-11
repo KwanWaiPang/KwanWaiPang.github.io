@@ -263,7 +263,7 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   </figure> 
 </p>
 <details>
-  <summary>详细解析请展开</summary>
+  <summary>详细推导请展开</summary>
 <p>
   对于上图的左侧的图，如果将点P沿着C0-p0所在的直线移动，会发现P在左边相机的成像一直不变，都是p0，但是P在右边相机的成像点p1是一直在变化的。
   <br>
@@ -307,6 +307,54 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 </details>
 
 
+<p><br></p> 
+<h1>单应矩阵（homography matrix）</h1>
+<p>
+  单应矩阵描述的就是：同一个平面的点在不同图像之间的映射关系。
+  </p>
+<details>
+<summary>详情请展开</summary>
+<p>
+  如下图所示，两个不同的相机拍摄同一个平面。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142522.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+  对于前面提到的投射模型，可以得到下面的公式：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142731.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+  简化一下表达形式，把中间部分记做M矩阵，如下：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142759.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+
+  M矩阵是一个4 x 4 的矩阵，如果空间点在同一个平面上的话，我们可以看做 zw = 0，这样M矩阵就变成了一个 3 x 3的矩阵，对于两个不同的相机，像素坐标和空间点坐标可以写成如下的表示，其中M是3 x 3的矩阵：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142905.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+  把上面两个式子合并一下就得到了下面这个式子，其中的H就是单应矩阵。H矩阵的两边是两张图像对应的匹配点对。也就是说单应矩阵H把三维空间中同一平面的点在两个相机的成像图片坐标进行了映射。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/SLAM/微信截图_20240811142956.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+
+  </p>
+</details>
+
 
 <p><br></p> 
 <h1>非线性优化</h1>
@@ -325,8 +373,8 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   <figcaption>  </figcaption>
   </figure> 
 
-  <details>
-<summary>展开查看</summary>
+<details>
+<summary>关于各种地图的表征形式请展开查看</summary>
 <p><br></p> 
 <h2>拓扑地图（Topological Map）</h2>
 <p>
