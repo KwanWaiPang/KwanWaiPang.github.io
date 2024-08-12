@@ -287,6 +287,9 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
   <figcaption>这就是所谓的对极约束！
   </figcaption>
   </figure> 
+
+<p><br></p>
+<h2>本质矩阵/本征矩阵（Essential Matrix）</h2>
 把中间部分拿出来，记为下面的公式。也就是所谓的本质矩阵或本征矩阵（Essential Matrix）
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -303,6 +306,22 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 <figcaption>
 </figcaption>
 </figure> 
+
+<p><br></p>
+<h2>基础矩阵（Fundamental Matrix）</h2>
+<p>
+对于上面对极几何的本质矩阵（Essential Matrix）加上相机内参K，就可以得到基础矩阵（Fundamental Matrix）。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 50%;" src="../assets/img/SLAM/WX20240812-095829@2x.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+
+基础矩阵是三阶的，最高自由度为9，然后其满足尺度等价性（因为图像坐标是通过齐次坐标表示，因此矩阵同乘一个常数，最后求得的坐标其实是一致的，可以理解为H 33 = 1 作为默认约束），因此自由度减一。
+再其次其满足不可逆矩阵的性质，行列式为零的约束等式，因此自由度再减一，因此基础矩阵的自由度为7。
+</p>
 
 </p>
 </details>
@@ -365,9 +384,11 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
 <p>
   见下图。一般在视觉SLAM中后端优化就是约束项大于未知数的个数（超定问题），采用最小二乘问题求解。
   （m为约束项也就是方程数，n为未知数）
+<details>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811160421.png" alt="Image description">
+      <img style="width: 90%;" src="../assets/img/SLAM/WX20240812-101043@2x.png" alt="Image description">
+      <img style="width: 90%;" src="https://kwanwaipang.github.io/SLAM_DEMO/SLAM_Introduction/微信截图_20240811160421.png" alt="Image description">
     </div>
   <figcaption>  </figcaption>
   </figure> 
@@ -379,6 +400,46 @@ SLAM目的就是优化求解相机的这个最佳的位姿T（变换矩阵），
     </div>
   <figcaption>  </figcaption>
   </figure> 
+
+</details>
+
+</p>
+
+<p><br></p>
+<h3>什么是雅可比矩阵</h3>
+<p>
+雅可比矩阵就是一阶偏导数矩阵。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/SLAM/WX20240812-101536@2x.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure> 
+</p>
+
+<p><br></p>
+<h3>什么是Hessian矩阵</h3>
+<p>
+  海森矩阵（Hessian matrix 或 Hessian）是一个自变量为向量的实值函数的二阶偏导数组成的方块矩阵。对于下面函数有：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="../assets/img/SLAM/WX20240812-101642@2x.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+ 
+Hessian矩阵在最大似然（MLE）问题中被认为约等于信息矩阵，所以一般也会将Hessian矩阵直接当做信息矩阵对待。
+那么什么是信息矩阵呢？
+<details>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="../assets/img/SLAM/WX20240812-102415@2x.png" alt="Image description">
+    </div>
+  <figcaption>  </figcaption>
+  </figure> 
+</details>
+协方差的逆=信息矩阵。
+直观理解就是：系统可能有很多传感器，传感器精度越高，对应的information matrix里面的系数会很大（这里是越大越好，因为它是协方差矩阵的逆矩阵），系数越大代表权重越高，表达的信息越多，在优化的过程中就越会被重视。
 
 </p>
 
@@ -486,15 +547,14 @@ SVD解决了特征值分解中只能针对方阵而没法对更一般矩阵进�
 
 
 <p><br></p>
-<h2>为什么Ax=0的解为最小奇异值对应的向量</h2>
-也就是解超定方程Ax=0（此处的A就是最小二乘法中的）
-
-
-<p><br></p>
-<h3>什么是雅可比矩阵</h3>
-
-<p><br></p>
-<h3>什么是Hessian矩阵</h3>
+<h2>Ax=0的解为最小奇异值对应的向量</h2>
+SLAM中三角化地图点，PnP等一些问题都是求解超定方程Ax=0（此处的A就是最小二乘法中的A）A是 m*n的矩阵，且m>n。 
+而这个方程的非零解就是A<sup>T</sup>A的最小特征值和对应的特征向量.
+至于原因，推导过程稍微有点参考资料
+<sup>
+  <a href="https://blog.csdn.net/jdy_lyy/article/details/117171934?spm=1001.2014.3001.5502" target="_blank">1</a>,
+  <a href="https://zhuanlan.zhihu.com/p/138232238" target="_blank">2</a>
+</sup>
 
 <p><br></p> 
 <h1>图优化（Graph-based Optimization）</h1>
@@ -780,8 +840,8 @@ LOAM系列算法的解读与复现demo请见博客<sup><a href="https://blog.csd
   <li><a href="https://mp.weixin.qq.com/s/eoef9iNsUcF2DiVfIM0sRQ" target="_blank">原来如此！简单总结SLAM中的各种地图</a></li>
   <li><a href="https://blog.csdn.net/jdy_lyy/article/details/119259128" target="_blank">SLAM基础——聊一聊信息矩阵</a></li>
   <li><a href="https://blog.csdn.net/wangshuailpp/article/details/80209863" target="_blank">视觉SLAM常见的QR分解SVD分解等矩阵分解方式求解满秩和亏秩最小二乘问题（最全的方法分析总结）</a></li>
-  <li><a href="https://zhuanlan.zhihu.com/p/138232238" target="_blank">解超定方程 Ax=0</a></li>
-  <li><a href="https://blog.csdn.net/jdy_lyy/article/details/117171934?spm=1001.2014.3001.5502" target="_blank">矩阵（二）：为什么Ax=0的解为最小奇异值对应的向量？</a></li>
+  <!-- <li><a href="https://zhuanlan.zhihu.com/p/138232238" target="_blank">解超定方程 Ax=0</a></li> -->
+  <!-- <li><a href="https://blog.csdn.net/jdy_lyy/article/details/117171934?spm=1001.2014.3001.5502" target="_blank">矩阵（二）：为什么Ax=0的解为最小奇异值对应的向量？</a></li> -->
   
 </ul>
 
