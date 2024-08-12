@@ -127,7 +127,7 @@
 <p><br></p>
 <header class="post-header">
   <h1 align="center" class="post-title">
-    <span style="font-weight: 600;">string及其他算法题汇总</span>
+    <span style="font-weight: 600;">string、Hash Table及其他算法题汇总</span>
   </h1>
 </header>
 
@@ -246,6 +246,64 @@
 </code></pre>
 </details>
 
+
+<p><br></p>
+<h1>Hash Table</h1>
+<p>
+  unordered_map内部的元素是无序的，即插入的顺序和输出的顺序不一定相同。而map内部的元素是有序的，它是按照元素的键值大小进行排序，所以它的内部元素是有序的。
+  <details>
+    <summary>定义</summary>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/WechatIMG1103.jpeg" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+  </details>
+  </p>
+<h2>合并表记录</h2>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/others/WX20240812-183719.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <map>
+    using namespace std;
+    
+    int main() {
+        
+        int row;
+    
+        cin>>row;
+    
+        // 定义一个hash table
+        // unordered_map<int, int> result_group;//里面存储是无序的
+        map<int, int> result_group;
+        int index, value;
+        while(cin>>index>>value)
+        {
+            result_group[index]+=value;
+        }
+    
+        for(auto it=result_group.begin();it!=result_group.end();it++)
+        {
+            std::cout<<it->first<<" "<<it->second<<std::endl;
+        }
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
 <p><br></p>
 <h1><font color="#00FF00">相对简单的题目</font></h1>
 
@@ -318,6 +376,7 @@ int main() {
 
 <details>
 <summary>下面方法采用hash table，也可以，但是空间复杂度应该是O（N），时间复杂度一样</summary>
+
 <pre><code>
 <script type='text/html' style='display:block'>
   #include <iostream>
@@ -471,6 +530,121 @@ int main() {
         std::cout<<output_result<<std::endl;
     }
     // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>质数及质因数</h2>
+<p>质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240812-180547.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <cmath>
+  #include <iostream>
+  using namespace std;
+  
+  int main() {
+  
+      long intput_value;
+      cin >> intput_value;
+      // 质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数
+  
+      //注意从2开始，1不能算。
+      // 注意：一个数的质因数不会超过它的算术平方根
+      for (long i = 2; i <= sqrt(intput_value); i++) { ////从小到大的质因子，质因子不会超过它的开方
+  
+          //能整除掉，就是当前是质因子
+          while (intput_value % i == 0) { //那么需要将其全部除完再继续下一步
+              std::cout << i << " ";
+              intput_value = intput_value / i; //去掉当前的质数因子后的值
+          }
+      }
+      //结束后，如果最后一个值还是大于1，那么它也是质数因子
+      if (intput_value > 1)
+          std::cout << intput_value << std::endl;
+  }
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h2>提取不重复的整数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240812-185421.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        
+        string input_str, result_str;
+        getline(cin,input_str);
+    
+        int a[10]={0};//用于记录当前值是否出现
+        for(int i=input_str.size()-1;i>=0;i--)
+        {
+            if(a[(input_str[i]-'0')]==0)
+            {
+                result_str+=input_str[i];
+                a[(input_str[i]-'0')]++;
+            }
+        }
+    
+        std::cout<<result_str;
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h2>string颠倒：数字颠倒</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240812-190344.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <string>
+  #include <algorithm> //调用reverse
+  using namespace std;
+  
+  int main() {
+      string input_str;
+  
+      cin>>input_str;
+  
+      reverse(input_str.begin(),input_str.end());
+  
+      std::cout<<input_str;
+  
+  }
 </script>
 </code></pre>
 </details>
