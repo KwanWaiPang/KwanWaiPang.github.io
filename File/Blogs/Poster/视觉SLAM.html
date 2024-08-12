@@ -441,6 +441,14 @@ Hessian矩阵在最大似然（MLE）问题中被认为约等于信息矩阵，�
 协方差的逆=信息矩阵。
 直观理解就是：系统可能有很多传感器，传感器精度越高，对应的information matrix里面的系数会很大（这里是越大越好，因为它是协方差矩阵的逆矩阵），系数越大代表权重越高，表达的信息越多，在优化的过程中就越会被重视。
 
+Hessian矩阵在最小二乘问题中其实就是H矩阵。对于下面最小二乘问题，展开有：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/SLAM/WX20240812-103745@2x.png" alt="Image description">
+  </div>
+<figcaption>  </figcaption>
+</figure> 
+其中的最后一项J<sup>T</sup>WJ就是H矩阵。Hessian矩阵其实说白了就是 E对于状态变量 x的二阶偏导数。而H矩阵是对Hessian矩阵的近似, 主要是为了加速计算。
 </p>
 
 
