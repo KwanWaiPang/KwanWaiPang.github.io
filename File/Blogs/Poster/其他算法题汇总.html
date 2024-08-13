@@ -726,8 +726,78 @@ int main() {
 </code></pre>
 </details>
 
-
-
+<p><br></p>
+<h2>字符串：坐标移动</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240813-104301.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <string>
+  #include <vector>
+  using namespace std;
+  
+  int main() {
+      string input_str;
+      getline(cin,input_str);
+  
+      vector<string> group;
+      string temp_str;
+      for(int i=0;i<input_str.size();i++)
+      {
+          if(input_str[i]==';')//分割
+          {
+              //判断是否合法
+              if(temp_str.size()<=3)//三位以内
+              {
+                  group.push_back(temp_str);
+              }
+              temp_str.clear();
+              continue;//当前跳过
+          }
+          temp_str+=input_str[i];
+      }
+  
+      int x=0,y=0;//也可以用一个数组来存。int XY[2] = {0, 0};
+      for(int i=0;i<group.size();i++)
+      {
+          string temp_str=group[i];
+          int temp_value=0;
+          if (temp_str.size()==2 && temp_str[1]>='0' && temp_str[1]<='9')
+          {
+              temp_value=temp_str[1]-'0';
+          }
+          else if(temp_str.size()==3 && temp_str[1]>='0' && temp_str[1]<='9' && temp_str[2]>='0' && temp_str[2]<='9') 
+          {
+              temp_value=(temp_str[1]-'0')*10+(temp_str[2]-'0');
+          }
+          if(temp_value!=0)
+          {
+              if(temp_str[0]=='A')
+                  x=x-temp_value;
+              else if(temp_str[0]=='D')
+                  x=x+temp_value;
+              else if(temp_str[0]=='W')
+                  y=y+temp_value;
+              else if(temp_str[0]=='S')
+                  y=y-temp_value;
+  
+          }
+      }
+      std::cout<<x<<","<<y;
+  
+  }
+    
+</script>
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
