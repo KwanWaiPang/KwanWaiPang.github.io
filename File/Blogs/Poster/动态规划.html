@@ -851,6 +851,89 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 
+<p><br></p>
+<h1>合唱队：最长递增子序列与最长递减子序列的结合</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-134758.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <vector>
+  using namespace std;
+  
+  int main() {
+      int N;//N位同学
+      cin>>N;
+  
+      vector<int> height_group;
+      int temp;
+      while(cin>>temp)
+      {
+          height_group.push_back(temp);
+      }
+      // 中间从两边递减，因此可以理解为是从左到右：最长递增子序列。从右向左：最长递减子序列
+  
+      //step1:定义dp表。第N-1个同学，最长序列为dp【N-1】
+      //step2:初始化状态为第0个同学，初始化为1,也就是自身的长度
+      vector<int> dp1(N,1);
+      
+      // 从左到右：最长递增子序列
+      // step3:状态转移方程
+      //对于第i个同学，对比j同学（j为0～i）
+      for(int i=0;i<N;i++)
+      {
+          for(int j=0;j<i;j++)
+          {   
+              //只要j小于i就参加对比。j大于i的就删除（不处理）
+              if(height_group[i]>height_group[j])
+                  dp1[i]=max(dp1[i],dp1[j]+1);
+          }
+      }//最终获得第i个同学，最长递增子序列
+  
+      // 从右向左：最长递减子序列
+      //step1:定义dp表。第N-1个同学，最长序列为dp【N-1】
+      //step2:初始化状态为第0个同学，初始化为1,也就是自身的长度
+      vector<int> dp2(N,1);
+      
+      // step3:状态转移方程
+      //对于第i个同学，对比j同学（j为0～i）
+      for(int i=N-1;i>=0;i--)
+      {
+          for(int j=N-1;j>i;j--)
+          {   
+              //只要j大于i就参加对比。j小于于i的就删除（不处理）
+              if(height_group[j]<height_group[i])//j在i的后面，j比i小，那么就是递减
+                  dp2[i]=max(dp2[i],dp2[j]+1);
+          }
+      }//最终获得第i个同学，最长递减子序列
+  
+      //
+      int maxLength = 0;
+      //遍历这些同学
+      for (int  i = 0; i < N; i++){
+          //dp1[i]为第i个同学，从左到右的最长递增子序列
+          //dp2[i] 为第i个同学，从i开始的最长递减子序列
+          if (maxLength < dp1[i] + dp2[i] - 1)//i为分割点，因此需要-1
+          {
+              maxLength = dp1[i] + dp2[i] - 1;
+              //这里的i就是划分中点
+          }
+      }
+      std::cout << N - maxLength << endl;
+      
+  }
+  
+</script>
+</code></pre>
+</details>
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
