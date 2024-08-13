@@ -800,6 +800,92 @@ int main() {
 </details>
 
 
+<p><br></p>
+<h2>密码验证合格程序</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240813-112026.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <string>
+  using namespace std;
+  
+  int main() {
+      string input_str;
+      while(cin>>input_str)
+      {
+          //条件1:长度超过8位
+          if(input_str.size()<=8)
+          {
+              std::cout<<"NG"<<std::endl;
+              continue;//长度小于8直接跳出，执行下一次
+          }
+  
+          // 条件2：包括大小写字母.数字.其它符号,以上四种至少三种
+          int big=0, small=0, num=0, other=0;
+          for(int i=0;i<input_str.size();i++)
+          {
+              if(input_str[i]>='a' && input_str[i]<='z')
+                  small=1;
+              else if(input_str[i]>='A' && input_str[i]<='Z')
+                  big=1;
+              else if(input_str[i]>='0' && input_str[i]<='9')
+                  num=1; 
+              else if (input_str[i]!=' ')
+                  other=1;////其他情况且不为空格
+                  
+              if((big+small+num+other)>=3)
+                  break;//满足就退出当前循环
+          }
+          if((big+small+num+other)<3)
+          {
+              std::cout<<"NG"<<std::endl;
+              continue;//不满足条件2，执行下一次
+          }
+  
+          // 条件3:不能有长度大于2的包含公共元素的子串重复 
+          bool repeat_flag=false;
+          for(int i=0;i<input_str.size()-6;i++)
+          {
+              string sub_i=input_str.substr(i,3);
+              for(int j=i+3;j<input_str.size()-3;j++)
+              {
+                  string sub_j=input_str.substr(j,3);
+                  if(sub_i==sub_j)
+                  {
+                      repeat_flag=true;
+                      break;
+                  }
+              }
+              // string sub_str=input_str.substr(i,3);//大于2，就是3啦～
+              // if(input_str.find(sub_str)!=input_str.npos)//找到了。不能用find因为全部找必然找到。。。。
+              // {
+              //     repeat_flag=true;
+              //     break;
+              // }
+          }
+          if(repeat_flag)
+          {
+              std::cout<<"NG"<<std::endl;
+              continue;//不满足条件2，执行下一次
+          }
+          std::cout<<"OK"<<std::endl;
+  
+      }
+  }
+    
+</script>
+</code></pre>
+</details>
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
