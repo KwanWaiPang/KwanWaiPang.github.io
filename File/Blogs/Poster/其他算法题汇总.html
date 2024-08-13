@@ -400,7 +400,7 @@
 
 
 <p><br></p>
-<h1><font color="#00FF00">相对简单的题目</font></h1>
+<h1><font color="#00FF00">string相关的题目</font></h1>
 
 <p><br></p>
 <h2>字符串最后一个单词的长度</h2>
@@ -816,6 +816,56 @@ int main() {
       {
           std::cout<<temp<<std::endl;
       }
+  }
+</script>
+</code></pre>
+</details>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240813-141455.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>这题难度要大很多，关键是构建一个vector，先按字母的顺序存放字母。然后当遇到字母的时候，再次从vector中拿出来（对于同字母的大小写，按输入的顺序进行放入，也按输入的顺序进行取出）。注意通过处理原输入，可以避免处理其他不变的情况</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <string>
+  #include <vector>
+  using namespace std;
+  
+  int main() {
+      string input_str;
+  
+      getline(cin,input_str);
+      vector<char> group;//存放着26个字母
+      for(int i=0;i<26;i++)
+      {
+          for(int j=0;j<input_str.size();j++)
+          {
+              if((input_str[j]-'a'==i) || (input_str[j]-'A'==i))//对应的位置上存字母
+                  group.push_back(input_str[j]);
+          }
+      }
+  
+      for(int i=0, k=0; i<input_str.size(), k<group.size();i++)
+      {
+          if(
+              (input_str[i]>='a' && input_str[i]<='z')
+              ||(input_str[i]>='A' && input_str[i]<='Z')
+          )
+          {
+              // 是字母，则优先填上面i值小的，也就是位于更前的字母
+              input_str[i]=group[k];
+              k++;//下次就填下一个
+          }
+      }
+  
+  
+      std::cout<<input_str;//直接在输入的基础上修改，这样就可以只处理字母的情况
   }
 </script>
 </code></pre>
