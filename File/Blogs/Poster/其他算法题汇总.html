@@ -664,7 +664,7 @@ int main() {
 
 
 <p><br></p>
-<h2>质数及质因数</h2>
+<h2>质数/素数及质因数</h2>
 <p>质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -701,6 +701,109 @@ int main() {
       if (intput_value > 1)
           std::cout << intput_value << std::endl;
   }
+</script>
+</code></pre>
+</details>
+
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240814-120043.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题较难，在做的时候也是根据答案一步一步做的，首先设计了判断是否素数的判据（给出两种写法）。其次这里用递归获取最长的素数伴侣，又涉及到选择与否，更像是回溯算法，稍微有点复杂了～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    #include <cmath>
+    using namespace std;
+    
+    //如果一个数是素数，只有1和本身可以被整除
+    // bool isprime(const int value) {
+    //     for(int i=2;i<=sqrt(value);i++)
+    //     {
+    //         if(value%i==0)
+    //             return false;
+    //     }
+    //     return true;
+    // }
+    
+    // 一个数的质因数不会超过它的算术平方根
+    
+    // 对于判断是否素数，下面写法更好
+    bool isprime(const int value) {
+        for (int i = 2; i * i <= value; i++) {
+            if (value % i == 0) //如果被整除了
+                return false;
+        }
+        return true;
+    }
+    
+    bool find(int odd, vector<int>& evens, vector<bool>& evens_used,
+              vector <int>& match_evens) {
+        //遍历所有的偶数
+        for (int i = 0; i < evens.size(); i++) {
+            //如果当前偶数没有被用过，且它跟奇数之和是素数
+            if (!evens_used[i] && isprime(odd + evens[i])) 
+            {
+                evens_used[i] = true; //标记以及被用了
+                //如果这个偶数，还没匹配到奇数，或者已经匹配了，但是还有其他奇数匹配的选择
+                if (match_evens[i] == 0 ||
+                    find(match_evens[i], evens, evens_used, match_evens)) 
+                {
+                    match_evens[i] = odd;//匹配到的基数
+                    return true;
+                }
+    
+            }
+        }
+        return false;
+    }
+    
+    int main() {
+        int num_int;
+        cin >> num_int;//输入的数的数目
+    
+        // 偶数+偶数=偶数，必不是素数，因此素数只能是奇数+偶数
+        vector<int> int_group(num_int);
+        vector<int> evens;//存偶数
+        vector<int> odds;//存奇数
+        for (int i = 0; i < num_int; i++) {
+            cin >> int_group[i];
+            //同时记录奇数与偶数
+            if (int_group[i] % 2 == 0) //若能被2整除（为偶数）
+                evens.push_back(int_group[i]);
+            else
+                odds.push_back(int_group[i]);
+        }
+    
+        int count = 0;
+        //缺少奇数或者偶数无法构成素数
+        if (evens.size() == 0 || odds.size() == 0) {
+            std::cout << count << std::endl;
+            return 0;//跳出下面的
+        }
+    
+        //统计每个偶数，匹配的是哪个奇数
+        vector<int> match_evens(evens.size(), 0);
+    
+        //遍历所有的奇数
+        for (int i = 0; i < odds.size(); i++) {
+            vector<bool> evens_used(evens.size(), false); //每一轮都将偶数是否用过记为0
+    
+            //对每个基数进行匹配（进行递归）
+            if (find(odds[i], evens, evens_used, match_evens)) //最优的匹配的偶数对
+                count++;
+        }
+        std::cout << count << std::endl;
+    
+        
+        return 0;
+    }
 </script>
 </code></pre>
 </details>
@@ -1079,6 +1182,158 @@ int main() {
 </script>
 </code></pre>
 </details>
+
+
+<p><br></p>
+<h2>查找兄弟单词</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240814-113949.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。时间复杂度：O(nlogm)，其中n为单词总数，m为最大单词的长度。logm为排序算法的复杂度。空间复杂度是O（N）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <string>
+  #include <vector>
+  #include <algorithm>
+  using namespace std;
+  
+  int main() {
+      int N;
+      cin>>N;
+  
+      string temp_str;
+      int i=0;
+      vector<string> input_group;
+      while(cin>>temp_str)//遇到空格会停下来
+      {
+          input_group.push_back(temp_str);
+          i++;
+          if (i==N+1)
+              break;//字符满了
+      }
+  
+      int index;
+      cin>>index;//按照字典顺序排序后的第k个兄弟单词
+      string target=input_group[N];//最后一个就是target
+      string sort_target=input_group[N];
+      sort(sort_target.begin(),sort_target.end());
+  
+      vector<string> result_group;
+      //遍历
+      for(int i=0;i<input_group.size()-1;i++)//不找最后一个
+      {
+          string temp=input_group[i];
+          if(temp==target)
+              continue;//一模一样的，不是兄弟词
+          if(temp.size()!=target.size())//size不一样的也不是
+              continue;
+          
+          string sort_temp=input_group[i];
+          sort(sort_temp.begin(),sort_temp.end());
+          if(sort_temp==sort_target)//排序后一样
+              result_group.push_back(temp);
+      }
+      std::cout<<result_group.size()<<std::endl;
+      if(index<result_group.size())
+      {
+          sort(result_group.begin(),result_group.end());
+          std::cout<<result_group[index-1];
+      }
+  }
+    
+</script>
+</code></pre>
+</details>
+
+
+
+<p><br></p>
+<h2>字符串加解密</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240814-122553.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。注意循环中用else if不然就会一直处理，一直叠加。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+       string input_str1, input_str2;
+       cin>>input_str1;
+       cin>>input_str2;
+       for(int i=0;i<input_str1.size();i++)
+       {
+            if(input_str1[i]>='0' && input_str1[i]<='9')
+            {
+                if(input_str1[i]=='9')
+                    input_str1[i]='0';
+                else 
+                    input_str1[i]=char( (input_str1[i]-'0'+1)+'0');
+            }
+            else if(input_str1[i]>='a' && input_str1[i]<='z')
+            {
+                if(input_str1[i]=='z')
+                    input_str1[i]='A';
+                else 
+                    input_str1[i]=char( (input_str1[i]-'a'+1)+'A');
+            }
+            else if(input_str1[i]>='A' && input_str1[i]<='Z')
+            {
+                if(input_str1[i]=='Z')
+                    input_str1[i]='a';
+                else 
+                    input_str1[i]=char( (input_str1[i]-'A'+1)+'a');
+            }
+       }
+    
+        for(int i=0;i<input_str2.size();i++)
+        {
+            if(input_str2[i]>='0' && input_str2[i]<='9')
+            {
+                if(input_str2[i]=='0')
+                    input_str2[i]='9';
+                else 
+                    input_str2[i]=char( (input_str2[i]-'0'-1)+'0');
+            }
+            else if(input_str2[i]>='a' && input_str2[i]<='z')
+            {
+                if(input_str2[i]=='a')
+                    input_str2[i]='Z';
+                else 
+                    input_str2[i]=char( (input_str2[i]-'a'-1)+'A');
+            }
+            else if(input_str2[i]>='A' && input_str2[i]<='Z')
+            {
+                if(input_str2[i]=='A')
+                    input_str2[i]='z';
+                else 
+                    input_str2[i]=char( (input_str2[i]-'A'-1)+'a');
+            }
+        }
+    
+        std::cout<<input_str1<<std::endl<<input_str2;//直接返回就避免了其他字符的改变了
+    }
+</script>
+</code></pre>
+</details>
+
+
+
+
+
 
 
 
