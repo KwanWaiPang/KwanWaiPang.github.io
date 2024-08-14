@@ -691,6 +691,68 @@
 </code></pre>
 </details>
 
+<details>
+<summary>下面是动态规划的解法～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        //本质上就是求最长的回文子串。可以采用动态规划或者双指针法
+    
+        string input_str, result_str;
+        getline(cin,input_str);
+    
+        //step1:定义dp表，对于起点为i终点为j的dp[i][j]是否为回文串
+        // i，j为字符的索引
+        vector< vector <bool> > dp(input_str.size(), vector<bool> (input_str.size(),false));
+    
+        //step2:初始化dp表：当i=j的时候，回文子串为自身，也就是true
+        // for(int i=0;i<input_str.size();i++)
+        // {
+        //     for(int j=0;j<input_str.size();j++)
+        //     {
+        //         if(i==j)
+        //             dp[i][j]=true;
+        //     }
+        // }
+        for(int i=0;i<input_str.size();i++)
+        {
+            int j=i; //自身都是回文子串
+            dp[i][j]=true;
+        }  
+    
+        int max_len=0;
+        // step3:状态转移方程
+        for(int i=input_str.size()-1;i>=0;i--)//从右往左
+        {
+            for(int j=i+1;j<input_str.size();j++)//从左往右
+            {
+                if(input_str[i]==input_str[j])//若相等，就检查下一个状态
+                {
+                    if(j<=i+2)//如果此时到达边界（aba）或（aa）的情况
+                        dp[i][j]=true;
+                    else//否则就继续缩小范围
+                        dp[i][j]=dp[i+1][j-1];//往内缩小
+                }
+                else//若不等，那么就不是回文子串
+                    dp[i][j]=false;
+    
+                if(dp[i][j]==true)//若当前为回文子串
+                {
+                    if(j-i+1>max_len)
+                        max_len=j-i+1;//如果是回文子串且长度大于记录值,则更新
+                }
+            }
+        }
+    
+        std::cout<<max_len<<std::endl;
+    }
+</script>
+</code></pre>
+</details>
 
 
 <p><br></p>
