@@ -7,6 +7,26 @@
         text-align-last: left;
         text-justify: inter-word;
     }
+    #toc {
+      background: #f4f4f4;
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      /* margin-bottom: 20px; */
+      max-width: 100%; /* 限制目录框架的最大宽度 */
+      word-wrap: break-word; /* 强制超长单词换行 */
+      position: relative;
+      margin-left: auto; /* 使目录框架在页面中居右 */
+      margin-right: auto; /* 使目录框架在页面中居右 */
+      box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+  }
+  }
+  #toc ul {
+      list-style-type: none;
+      padding-left: 0; /* 去除默认的列表内边距 */
+  }
+  #toc ul ul {
+      margin-left: 20px; /* 子目录项的缩进 */
+  }
   </style>
 
 <!-- Head -->
@@ -104,15 +124,23 @@
       </nav>
     </header>
 
-    <!-- Content -->
-    <div class="container mt-5">
-      <!-- home.html -->
-      <div class="post">
-        <header class="post-header">
-          <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">动态规划算法</span>
-          </h1>
-        </header>
+<header class="post-header">
+  <h1 align="center" class="post-title">
+    <span style="font-weight: 600;">动态规划算法</span>
+  </h1>
+</header>
+
+<!-- Content -->
+<div class="container mt-5">
+<!-- home.html -->
+<div class="post">
+
+<!-- 插入目录 -->
+<div id="toc">
+  <h8>目录</h8>
+  <ul></ul>
+</div>
+
 <article>
 <!-- 插入博客内容-->
 <p>
@@ -154,7 +182,7 @@
 </details>
 
 <p><br></p>
-<h1>1. 爬楼梯</h1>
+<h1>爬楼梯</h1>
 <p>首先通过经典的爬楼梯问题，导出其对应的动态规划解法</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -345,7 +373,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
-<h1>2.编辑距离</h1>
+<h1>编辑距离</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805215323.png" alt="Image description">
@@ -397,7 +425,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
-<h1>3. 斐波那契数列</h1>
+<h1>斐波那契数列</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805220055.png" alt="Image description">
@@ -527,7 +555,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
-<h1>4.零钱兑换</h1>
+<h1>零钱兑换</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805222949.png" alt="Image description">
@@ -585,7 +613,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
-<h1>5. 最长递增子序列</h1>
+<h1>最长递增子序列</h1>
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -640,7 +668,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p>
 
 <p><br></p>
-<h1>6. 俄罗斯套娃信封问题</h1>
+<h1>俄罗斯套娃信封问题</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240806214015.png" alt="Image description">
@@ -934,6 +962,111 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+
+<p><br></p>
+<h1>最长回文子串  </h1>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/array/WX20240814-190830.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+  <summary>动态规划解法，时间复杂度与空间复杂度都是O（N^2）</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+      #include <iostream>
+      #include <vector>
+      using namespace std;
+      
+      int main() {
+          //本质上就是求最长的回文子串。可以采用动态规划或者双指针法
+      
+          string input_str, result_str;
+          getline(cin,input_str);
+      
+          //step1:定义dp表，对于起点为j终点为i的dp[j][i]是否为回文串
+          // i，j为字符的索引
+          //step2:初始化dp表：全部为false
+          vector< vector <bool> > dp(input_str.size(), vector<bool> (input_str.size(),false));
+      
+          int max_len=0;
+          // step3:状态转移方程
+          for(int i=0;i<input_str.size();i++)
+          {
+              for(int j=0;j<=i;j++)
+              {
+                  if(i==j)//自身必然为回文子串。//对应aba的情况，基数位
+                      dp[j][i]=true;//注意是j～i
+                  else if(i==j+1)//对应偶数位，回文子串
+                  {
+                      dp[j][i]=(input_str[i]==input_str[j]);
+                  }
+                  else//其他情况
+                      dp[j][i]= (input_str[i]==input_str[j]) && dp[j+1][i-1];//从小范围到大范围
+      
+                  if(dp[j][i]==true)//若当前为回文子串
+                  {
+                      if(i-j+1>max_len)
+                          max_len=i-j+1;//如果是回文子串且长度大于记录值,则更新
+                  }
+              }
+          }
+      
+          std::cout<<max_len<<std::endl;
+      }
+  </script>
+  </code></pre>
+</details>
+
+<details>
+  <summary>Click to expand the code。也可以采用双指针解法。时间复杂度是O（N^2）更上面一样的。但空间复杂度更小，为O（1）</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+      #include <iostream>
+      using namespace std;
+      
+      // 对于以left与right为中心的最长回文子串
+      // 通过左右指针向两边扩散
+      string function(string s, int left, int right)
+      {
+          //确保不越界以及相等
+          while(left>=0 && right<s.size() &&s[left]==s[right])
+          {
+              left--;
+              right++;
+          }
+          //若不等的话，会跳出来。所以应该是当前的left+1到right为目标结果
+          return s.substr(left+1,right-(left+1));
+      }
+      
+      int main() {
+          //本质上就是求最长的回文子串。可以采用动态规划或者双指针法
+      
+          string input_str, result_str;
+          getline(cin,input_str);
+      
+          for(int i=0;i<input_str.size();i++)
+          {
+              //以i为中心的，奇数字符串
+              string s1=function(input_str,i,i);
+              //以i为中心的，偶数字符串
+              string s2=function(input_str,i,i+1);
+      
+              // 保存最长的
+              result_str= result_str.size()>s1.size()? result_str:s1;
+              result_str= result_str.size()>s2.size()? result_str:s2;
+          }
+      
+          std::cout<<result_str.size();
+      }
+  </script>
+  </code></pre>
+  </details>
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
@@ -1004,6 +1137,25 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- 下面是插入目录的 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toc = document.querySelector("#toc ul");
+        const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+        headers.forEach(header => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+            header.setAttribute("id", id);
+            a.setAttribute("href", `#${id}`);
+            a.textContent = header.textContent;
+            li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -754,6 +754,54 @@
 </code></pre>
 </details>
 
+<details>
+  <summary>下面的动态规划解法更容易理解些～</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+      #include <iostream>
+      #include <vector>
+      using namespace std;
+      
+      int main() {
+          //本质上就是求最长的回文子串。可以采用动态规划或者双指针法
+      
+          string input_str, result_str;
+          getline(cin,input_str);
+      
+          //step1:定义dp表，对于起点为j终点为i的dp[j][i]是否为回文串
+          // i，j为字符的索引
+          //step2:初始化dp表：全部为false
+          vector< vector <bool> > dp(input_str.size(), vector<bool> (input_str.size(),false));
+      
+          int max_len=0;
+          // step3:状态转移方程
+          for(int i=0;i<input_str.size();i++)
+          {
+              for(int j=0;j<=i;j++)
+              {
+                  if(i==j)//自身必然为回文子串。//对应aba的情况，基数位
+                      dp[j][i]=true;//注意是j～i
+                  else if(i==j+1)//对应偶数位，回文子串
+                  {
+                      dp[j][i]=(input_str[i]==input_str[j]);
+                  }
+                  else//其他情况
+                      dp[j][i]= (input_str[i]==input_str[j]) && dp[j+1][i-1];//从小范围到大范围
+      
+                  if(dp[j][i]==true)//若当前为回文子串
+                  {
+                      if(i-j+1>max_len)
+                          max_len=i-j+1;//如果是回文子串且长度大于记录值,则更新
+                  }
+              }
+          }
+      
+          std::cout<<max_len<<std::endl;
+      }
+  </script>
+  </code></pre>
+</details>
+
 
 <p><br></p>
 <h1>采用二分法来解数组类题目</h1>
