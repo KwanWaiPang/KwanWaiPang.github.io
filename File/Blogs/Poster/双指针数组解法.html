@@ -638,6 +638,60 @@
 </code></pre>
 </details>
 
+<p>下面是几乎一样的题目</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/array/WX20240814-190830.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。先给出双指针解法，跟上面几乎一样～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    // 对于以left与right为中心的最长回文子串
+    // 通过左右指针向两边扩散
+    string function(string s, int left, int right)
+    {
+        //确保不越界以及相等
+        while(left>=0 && right<s.size() &&s[left]==s[right])
+        {
+            left--;
+            right++;
+        }
+        //若不等的话，会跳出来。所以应该是当前的left+1到right为目标结果
+        return s.substr(left+1,right-(left+1));
+    }
+    
+    int main() {
+        //本质上就是求最长的回文子串。可以采用动态规划或者双指针法
+    
+        string input_str, result_str;
+        getline(cin,input_str);
+    
+        for(int i=0;i<input_str.size();i++)
+        {
+            //以i为中心的，奇数字符串
+            string s1=function(input_str,i,i);
+            //以i为中心的，偶数字符串
+            string s2=function(input_str,i,i+1);
+    
+            // 保存最长的
+            result_str= result_str.size()>s1.size()? result_str:s1;
+            result_str= result_str.size()>s2.size()? result_str:s2;
+        }
+    
+        std::cout<<result_str.size();
+    }
+</script>
+</code></pre>
+</details>
+
+
 
 <p><br></p>
 <h1>采用二分法来解数组类题目</h1>

@@ -1332,6 +1332,58 @@ int main() {
 
 
 
+<p><br></p>
+<h2>字符串反转</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240814-185433.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        getline(cin,input_str);
+    
+        vector<string> group_str;
+        string temp="";
+        for(int i=0;i<input_str.size();i++)
+        {
+            if(input_str[i]>='a' && input_str[i]<='z'
+            || input_str[i]>='A' && input_str[i]<='Z' )
+            {
+                temp+=input_str[i];
+            }
+            else if(!temp.empty())//且不为空
+            {
+                group_str.push_back(temp);
+                temp.clear();
+            }
+        }
+        //最后一个也放入
+        if(!temp.empty())//且不为空
+        {
+            group_str.push_back(temp);
+            temp.clear();
+        }
+    
+        for(int i=group_str.size()-1;i>=0;i--)
+            std::cout<<group_str[i]<<" ";
+    }
+    
+</script>
+</code></pre>
+</details>
 
 
 
