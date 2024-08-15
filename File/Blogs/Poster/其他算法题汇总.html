@@ -1759,6 +1759,58 @@ int main() {
 </details>
 
 
+<p><br></p>
+<h2>蛇形矩阵</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240815-205335.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.关键是如何填矩阵的思路～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        int input_value;
+    
+        cin>>input_value;
+    
+        //直接创建一个矩阵来遍历
+        vector< vector <int>> matrix (input_value,vector<int>(input_value,0));
+        int value=1;
+        for(int x=0;x<input_value;x++)
+        {
+            int k=0;
+            for(int y=x;y>=0;y--)
+            {
+                matrix[y][k]=value;
+                value++;
+                k++;
+            }
+        }
+    
+        for(int i=0;i<input_value;i++)
+        {
+            for(int j=0;j<input_value;j++)
+            {
+                if(matrix[i][j]!=0)
+                    std::cout<<matrix[i][j]<<" ";
+            }
+            std::cout<<std::endl;
+        }
+    
+    }
+    
+</script>
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
