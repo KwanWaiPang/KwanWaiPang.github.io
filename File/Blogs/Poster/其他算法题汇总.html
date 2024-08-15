@@ -248,7 +248,300 @@
 
 
 <p><br></p>
-<h1>Hash Table</h1>
+<h1>进制转换</h1>
+<p>进制转换是非常经典的题目，其实关键点都是十进制与其他进制相互转换而已～</p>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810214556.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。注意16进制就是要乘16次幂（pow(16,n)）。输入的为字符串，每次对比是字符'0'和'9'</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    #include <cmath>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        cin>>input_str;
+    
+        int output_result=0;
+        for(int i=input_str.size()-1;i>=0;i--)//从最后一位开始吧
+        {
+            if(input_str[i]>='0' && input_str[i]<='9')//注意要对比的是字符
+                output_result+=(input_str[i]-'0')*pow(16,input_str.size()-1-i);//16的i次方对应16进制
+            else if(input_str[i]>='A' && input_str[i]<='F')
+                output_result+=(input_str[i]-'A'+10)*pow(16,input_str.size()-1-i);
+            else//忽略“0x”前缀
+                break;//跳出
+        }
+        std::cout<<output_result<<std::endl;
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>二进制求和</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240815-184153.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary> 要用string来结题才可以，如果先转换为十进制然后相加可能出现越界情况.时间复杂度, O(Max(M,N)) </summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        int binarytoten(string input_str)
+        {
+            int output_value=0;
+            for(int i=input_str.size()-1;i>=0;i--)//倒序
+            {
+                output_value+=(input_str[i]=='1'? 1:0)*pow(2,input_str.size()-1-i);
+            }
+            return output_value;
+        }
+    
+        string tentobinary(int input_value)
+        {
+            if(input_value==0)
+                return "0";
+            string output_str;
+            while(input_value!=0)
+            {
+                output_str+=to_string(input_value%2);//获取余数
+                input_value=input_value/2;//整除
+            }
+            reverse(output_str.begin(), output_str.end());//倒序输出
+            return output_str;
+        }
+    
+        string addBinary(string a, string b) {
+            
+            //先转换为十进制然后相加再转二进制（但是如果输入长度很长就会越界~）
+            // string output_str=tentobinary(binarytoten(a)+binarytoten(b));
+    
+            string output_str;
+            //先将输入进行倒序
+            reverse(a.begin(), a.end());
+            reverse(b.begin(), b.end());
+            if(b.size()>a.size())
+                swap(a,b);//确保a是长序列
+    
+            int jinwei=0;
+            for(int i=0;i<b.size();i++)
+            {
+                int temp=(a[i]=='1'? 1:0)+ (b[i]=='1'? 1:0)+jinwei;
+                if(temp>1)
+                {
+                    jinwei=1;
+                    output_str+=to_string((temp-2));//进位了
+                }
+                else
+                {
+                    jinwei=0;
+                    output_str+=to_string((temp));//没有进位
+                }
+            }
+            //计算完b剩余的a序列
+            for(int i=b.size();i<a.size();i++)
+            {
+                int temp=(a[i]=='1'? 1:0)+jinwei;
+                if(temp>1)
+                {
+                    jinwei=1;
+                    output_str+=to_string((temp-2));//进位了
+                }
+                else
+                {
+                    jinwei=0;
+                    output_str+=to_string((temp));//没有进位
+                }
+            }
+            if(jinwei!=0)
+                output_str+='1';
+            reverse(output_str.begin(), output_str.end());//倒序输出
+            return output_str;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+
+<p><br></p>
+<h2>在内存中存储时1个数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/WX20240812-192806.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题实际上就是转换为二进制</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <string>
+  using namespace std;
+  
+  int main() {
+      int input_value;
+  
+      cin>>input_value;
+      int num_result=0;
+      //转换为二进制
+      while(input_value!=0)
+      {
+          if(input_value%2==1)//余数
+              num_result++;
+          input_value=input_value/2;//整除的结果
+      }
+      std::cout<<num_result;
+  }
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>整数与ip地址之间的转换</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240815-121535.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题包含了十进制转2进制；2进制转10进制。注意n进制转10进制都是pow（n，第几位）逢n进位，故此满一位就是要乘n。细节的地方主要是分组+0的讨论。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    #include <vector>
+    #include <algorithm>
+    #include <cmath>
+    using namespace std;
+    
+    
+    string tenTobrinary(long int value)
+    {
+        if(value==0)
+            return "0";//若一开始就为0，就返回0
+        string result;
+        while(value!=0)//还没除尽
+        {
+            int yushu=value%2;//余数
+            result+=to_string(yushu);
+            value=value/2;//整除，下一次继续算
+        }
+        reverse(result.begin(),result.end());//注意存放顺序发生了变化啦
+        return result;
+    }
+    
+    long int brinaryToten(string input_str)
+    {
+        long int result=0;
+        
+        for(int i=input_str.size()-1;i>=0;i--)//倒序
+        {
+            result+=(input_str[i]=='1'? 1:0)*pow(2,input_str.size()-1-i);//二进制应该是乘2，满2就递增一位
+        }
+        return result;
+    }
+    
+    int main() {
+        string input_str1;
+        long int input_value;
+        getline(cin,input_str1);
+        cin>>input_value;
+        
+        vector<string> group;
+        string temp;
+        for(int i=0;i<input_str1.size();i++)
+        {
+            if(input_str1[i]=='.')
+            {
+                group.push_back(temp);
+                temp.clear();
+            }
+            else {
+                temp+=input_str1[i];
+            }
+        }
+        //最后一个也要放入
+        group.push_back(temp);
+    
+        string output_str;
+        for(int i=0;i<group.size();i++)
+        {
+            int temp_value=stoi(group[i]);
+            string temp_str=tenTobrinary(temp_value);
+            // 进行加0的操作
+            int num_zero=8-temp_str.size();
+            while(num_zero!=0)
+            {
+                temp_str='0'+temp_str;
+                num_zero--;
+            }
+            output_str+=temp_str;//全部累加
+        }
+    
+        long int result_value=brinaryToten(output_str);
+    
+        std::cout<<result_value<<std::endl;
+    
+        //先转为二进制
+        string input_str2=tenTobrinary(input_value);
+        int num_zero=32-input_str2.size();
+        while(num_zero!=0)
+        {
+            input_str2='0'+input_str2;//在前面补0
+            num_zero--;
+        }
+        vector<string> group_out;
+        //然后每8位输出一个group
+        // 正确处理每8位分组
+        for(int i = 0; i < input_str2.size(); i += 8)
+        {
+            string temp_str = input_str2.substr(i, 8);
+            group_out.push_back(temp_str);
+        }
+    
+        string result_str;
+        for(int i=0;i<group_out.size();i++)
+        {
+            int value=brinaryToten(group_out[i]);
+            result_str+=to_string(value)+'.';
+        }
+    
+        std::cout<<result_str.substr(0,result_str.size()-1);//去掉最后一个点
+    
+    }
+    
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>Hash Table相关题目</h1>
 <p>
   unordered_map内部的元素是无序的，即插入的顺序和输出的顺序不一定相同。而map内部的元素是有序的，它是按照元素的键值大小进行排序，所以它的内部元素是有序的。
   <details>
@@ -400,199 +693,7 @@
 
 
 <p><br></p>
-<h1><font color="#00FF00">string相关的题目</font></h1>
-
-<p><br></p>
-<h2>进制转换</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810214556.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code。注意16进制就是要乘16次幂（pow(16,n)）。输入的为字符串，每次对比是字符'0'和'9'</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <string>
-    #include <cmath>
-    using namespace std;
-    
-    int main() {
-        string input_str;
-    
-        cin>>input_str;
-    
-        int output_result=0;
-        for(int i=input_str.size()-1;i>=0;i--)//从最后一位开始吧
-        {
-            if(input_str[i]>='0' && input_str[i]<='9')//注意要对比的是字符
-                output_result+=(input_str[i]-'0')*pow(16,input_str.size()-1-i);//16的i次方对应16进制
-            else if(input_str[i]>='A' && input_str[i]<='F')
-                output_result+=(input_str[i]-'A'+10)*pow(16,input_str.size()-1-i);
-            else//忽略“0x”前缀
-                break;//跳出
-        }
-        std::cout<<output_result<<std::endl;
-    }
-    // 64 位输出请用 printf("%lld")
-</script>
-</code></pre>
-</details>
-
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/WX20240812-192806.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>此题实际上就是转换为二进制</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-  #include <string>
-  using namespace std;
-  
-  int main() {
-      int input_value;
-  
-      cin>>input_value;
-      int num_result=0;
-      //转换为二进制
-      while(input_value!=0)
-      {
-          if(input_value%2==1)//余数
-              num_result++;
-          input_value=input_value/2;//整除的结果
-      }
-      std::cout<<num_result;
-  }
-</script>
-</code></pre>
-</details>
-
-
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/others/WX20240815-121535.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>此题包含了十进制转2进制；2进制转10进制。注意n进制转10进制都是pow（n，第几位）逢n进位，故此满一位就是要乘n。细节的地方主要是分组+0的讨论。</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-    #include <iostream>
-    #include <string>
-    #include <vector>
-    #include <algorithm>
-    #include <cmath>
-    using namespace std;
-    
-    
-    string tenTobrinary(long int value)
-    {
-        if(value==0)
-            return "0";//若一开始就为0，就返回0
-        string result;
-        while(value!=0)//还没除尽
-        {
-            int yushu=value%2;//余数
-            result+=to_string(yushu);
-            value=value/2;//整除，下一次继续算
-        }
-        reverse(result.begin(),result.end());//注意存放顺序发生了变化啦
-        return result;
-    }
-    
-    long int brinaryToten(string input_str)
-    {
-        long int result=0;
-        
-        for(int i=input_str.size()-1;i>=0;i--)//倒序
-        {
-            result+=(input_str[i]=='1'? 1:0)*pow(2,input_str.size()-1-i);//二进制应该是乘2，满2就递增一位
-        }
-        return result;
-    }
-    
-    int main() {
-        string input_str1;
-        long int input_value;
-        getline(cin,input_str1);
-        cin>>input_value;
-        
-        vector<string> group;
-        string temp;
-        for(int i=0;i<input_str1.size();i++)
-        {
-            if(input_str1[i]=='.')
-            {
-                group.push_back(temp);
-                temp.clear();
-            }
-            else {
-                temp+=input_str1[i];
-            }
-        }
-        //最后一个也要放入
-        group.push_back(temp);
-    
-        string output_str;
-        for(int i=0;i<group.size();i++)
-        {
-            int temp_value=stoi(group[i]);
-            string temp_str=tenTobrinary(temp_value);
-            // 进行加0的操作
-            int num_zero=8-temp_str.size();
-            while(num_zero!=0)
-            {
-                temp_str='0'+temp_str;
-                num_zero--;
-            }
-            output_str+=temp_str;//全部累加
-        }
-    
-        long int result_value=brinaryToten(output_str);
-    
-        std::cout<<result_value<<std::endl;
-    
-        //先转为二进制
-        string input_str2=tenTobrinary(input_value);
-        int num_zero=32-input_str2.size();
-        while(num_zero!=0)
-        {
-            input_str2='0'+input_str2;//在前面补0
-            num_zero--;
-        }
-        vector<string> group_out;
-        //然后每8位输出一个group
-        // 正确处理每8位分组
-        for(int i = 0; i < input_str2.size(); i += 8)
-        {
-            string temp_str = input_str2.substr(i, 8);
-            group_out.push_back(temp_str);
-        }
-    
-        string result_str;
-        for(int i=0;i<group_out.size();i++)
-        {
-            int value=brinaryToten(group_out[i]);
-            result_str+=to_string(value)+'.';
-        }
-    
-        std::cout<<result_str.substr(0,result_str.size()-1);//去掉最后一个点
-    
-    }
-    
-</script>
-</code></pre>
-</details>
+<h1><font color="#00FF00">其他string相关的题目</font></h1>
 
 
 <p><br></p>
@@ -1504,8 +1605,158 @@ int main() {
 </code></pre>
 </details>
 
-
-
+<p><br></p>
+<h2>字符串相乘</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240815-184913.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>这个解法相对比较直接，就是把乘法的计算过程跟加的过程用代码实现了～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        string addstring(string num1, string num2) {
+    
+        if(num1.size()<num2.size())
+            swap(num1,num2);//确保1为最长的
+        // 倒序
+        reverse(num1.begin(),num1.end());
+        reverse(num2.begin(),num2.end());
+        int temp=0;//记录进位
+        string output_str;
+        for(int i=0;i<num1.size();i++)
+        {
+            if(i<num2.size())
+            {
+                int num1_val=int (num1[i]-'0');
+                int num2_val=int (num2[i]-'0');
+                int value=num1_val+num2_val+temp;
+                temp=value/10;//整除10记录进位
+                output_str+=('0'+value%10);//余数为个位
+            }
+            else if(temp!=0)
+            {
+                int num1_val=int (num1[i]-'0');
+                int value=num1_val+temp;
+                temp=value/10;//整除10记录进位
+                output_str+=('0'+value%10);//余数为个位
+            }
+            else
+                output_str+=num1[i];
+        }
+        if(temp != 0)
+            output_str += ('0' + temp); // 处理最高位的进位
+        reverse(output_str.begin(),output_str.end());//最后记得倒序
+        return output_str;
+    
+    }
+    
+    string multiply(string num1, string num2) {
+        if(num1.size()<num2.size())
+            swap(num1,num2);//确保2为短的
+        // 倒序
+        reverse(num1.begin(),num1.end());
+        reverse(num2.begin(),num2.end());
+        int temp=0;//记录进位
+        string output_str="0";
+        for(int i=0;i<num2.size();i++)
+        {
+            if(num2[i]!='0')
+            {
+                string current_result;
+                for(int j=0;j<num1.size();j++)
+                {  //num1*num2
+                    int num2_val=int (num2[i]-'0');
+                    int num1_val=int (num1[j]-'0');
+                    int value=num1_val*num2_val+temp;
+                    temp=value/10;//整除10记录进位
+                    current_result+=('0'+value%10);//余数为个位
+                }
+                while(temp!=0)//若进位不为0
+                {
+                    int value=temp;
+                    temp=value/10;//整除10记录进位
+                    current_result+=('0'+value%10);//余数为个位
+                }
+                reverse(current_result.begin(),current_result.end());
+                int num_zero=i;
+                while(num_zero)
+                {
+                    current_result+='0';
+                    num_zero--;
+                }
+                output_str=addstring(output_str,current_result);
+            }
+        }
+        
+        return output_str;
+    }
+    };
+    
+</script>
+</code></pre>
+</details>
+<details>
+<summary>也可以采用下图所示的双指针法的思路解题。时间复杂度为O（n*m），空间复杂度为O（n+m）</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 45%;" src="../assets/img/others/multply_string.gif" alt="Image description">
+    <img style="width: 45%;" src="../assets/img/others/multply_string.jpg" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        string multiply(string num1, string num2) {
+    
+            int size_1=num1.size();
+            int size_2=num2.size();
+    
+            vector<int> result(size_1+size_2,0);//result的最大位数为num1+num2
+    
+            for(int i=num1.size()-1;i>=0;i--)//从最小位开始
+            {
+                for(int j=num2.size()-1;j>=0;j--)
+                {
+                    int temp_value=(num1[i]-'0')*(num2[j]-'0');
+                    int shiwei=i+j;
+                    int gewei=i+j+1;
+                    temp_value+=result[gewei];
+                    result[gewei]=temp_value%10;//进位后剩余的（此处的个位已经用了～）
+                    result[shiwei]+=temp_value/10; //进位的数目
+                }
+            }
+    
+            // 接下来将result转为string
+            bool flag=false;//直到遇到第一个非零
+            string result_str;
+            for(int i=0;i<result.size();i++)
+            {
+                if(result[i]!=0 && flag==false)
+                    flag=true;
+                
+                if(flag==true)
+                    result_str+=to_string(result[i]);
+            }
+    
+            if (result_str.empty())//那么结果就是0
+                return "0";
+    
+            return result_str;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
 
 
 
