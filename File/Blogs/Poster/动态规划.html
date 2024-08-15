@@ -975,7 +975,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </figure> 
 
 <details>
-  <summary>动态规划解法，时间复杂度与空间复杂度都是O（N^2）</summary>
+  <summary>动态规划解法，时间复杂度与空间复杂度都是O（N^2）。对于此类形的题目，定义的dp表应该为dp[j][i]：j代表了起点，i代表了终点。对比是否回文子串的过程就是dp[j][i]=(i++j && dp[j+1][i-1]).同时注意奇数与偶数的情况（aba与aa都是回文子串）</summary>
   <pre><code>
   <script type='text/html' style='display:block'>
       #include <iostream>

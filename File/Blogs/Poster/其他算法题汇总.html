@@ -663,6 +663,126 @@ int main() {
 </details>
 
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240815-121535.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题包含了十进制转2进制；2进制转10进制。注意n进制转10进制都是pow（n，第几位）逢n进位，故此满一位就是要乘n。细节的地方主要是分组+0的讨论。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    #include <vector>
+    #include <algorithm>
+    #include <cmath>
+    using namespace std;
+    
+    
+    string tenTobrinary(long int value)
+    {
+        if(value==0)
+            return "0";//若一开始就为0，就返回0
+        string result;
+        while(value!=0)//还没除尽
+        {
+            int yushu=value%2;//余数
+            result+=to_string(yushu);
+            value=value/2;//整除，下一次继续算
+        }
+        reverse(result.begin(),result.end());//注意存放顺序发生了变化啦
+        return result;
+    }
+    
+    long int brinaryToten(string input_str)
+    {
+        long int result=0;
+        
+        for(int i=input_str.size()-1;i>=0;i--)//倒序
+        {
+            result+=(input_str[i]=='1'? 1:0)*pow(2,input_str.size()-1-i);//二进制应该是乘2，满2就递增一位
+        }
+        return result;
+    }
+    
+    int main() {
+        string input_str1;
+        long int input_value;
+        getline(cin,input_str1);
+        cin>>input_value;
+        
+        vector<string> group;
+        string temp;
+        for(int i=0;i<input_str1.size();i++)
+        {
+            if(input_str1[i]=='.')
+            {
+                group.push_back(temp);
+                temp.clear();
+            }
+            else {
+                temp+=input_str1[i];
+            }
+        }
+        //最后一个也要放入
+        group.push_back(temp);
+    
+        string output_str;
+        for(int i=0;i<group.size();i++)
+        {
+            int temp_value=stoi(group[i]);
+            string temp_str=tenTobrinary(temp_value);
+            // 进行加0的操作
+            int num_zero=8-temp_str.size();
+            while(num_zero!=0)
+            {
+                temp_str='0'+temp_str;
+                num_zero--;
+            }
+            output_str+=temp_str;//全部累加
+        }
+    
+        long int result_value=brinaryToten(output_str);
+    
+        std::cout<<result_value<<std::endl;
+    
+        //先转为二进制
+        string input_str2=tenTobrinary(input_value);
+        int num_zero=32-input_str2.size();
+        while(num_zero!=0)
+        {
+            input_str2='0'+input_str2;//在前面补0
+            num_zero--;
+        }
+        vector<string> group_out;
+        //然后每8位输出一个group
+        // 正确处理每8位分组
+        for(int i = 0; i < input_str2.size(); i += 8)
+        {
+            string temp_str = input_str2.substr(i, 8);
+            group_out.push_back(temp_str);
+        }
+    
+        string result_str;
+        for(int i=0;i<group_out.size();i++)
+        {
+            int value=brinaryToten(group_out[i]);
+            result_str+=to_string(value)+'.';
+        }
+    
+        std::cout<<result_str.substr(0,result_str.size()-1);//去掉最后一个点
+    
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
+
 <p><br></p>
 <h2>质数/素数及质因数</h2>
 <p>质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数</p>
