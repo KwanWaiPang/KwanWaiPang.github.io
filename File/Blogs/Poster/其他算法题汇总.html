@@ -403,193 +403,6 @@
 <h1><font color="#00FF00">string相关的题目</font></h1>
 
 <p><br></p>
-<h2>字符串最后一个单词的长度</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810205327.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code，trick：输入为空格的时候就停止输入</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-#include <iostream>
-#include <string>
-using namespace std;
-
-int main() {
-    string input_str;
-    while (cin >> input_str) { //不停的输入，遇到空格会中断，下次再输入，因此最终保留是最后一个
-    }
-    std::cout<<input_str.size()<<std::endl;
-}
-// 64 位输出请用 printf("%lld")
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h2>计算某字符出现次数</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810211045.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>注意不区分大小写，需要调用tolower（）函数转换成小写。时间复杂度为O（N），空间复杂度为O（1）</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <string>
-    using namespace std;
-    
-    int main() {
-        string input_str;
-    
-        getline(cin,input_str);//获取一整行
-        char target;
-        cin >> target;
-        target=tolower(target);//不区分大小写
-    
-        int num_result=0;
-        for(char _str:input_str)
-        {
-            if(tolower(_str)==target)//不区分大小写
-                num_result++;
-        }
-    
-        std::cout<< num_result<<std::endl;
-    
-    }
-</script>
-</code></pre>
-</details>
-
-<details>
-<summary>下面方法采用hash table，也可以，但是空间复杂度应该是O（N），时间复杂度一样</summary>
-
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <string>
-    #include <unordered_map>
-    using namespace std;
-    
-    int main() {
-        string input_str;
-    
-        getline(cin,input_str);//获取一整行
-        char target;
-        cin >> target;
-        target=tolower(target);//不区分大小写
-    
-        unordered_map<char, int> input_group;
-        for(char _str:input_str)
-        {
-            input_group[tolower(_str)]++;
-        }
-    
-        std::cout<< input_group[target]<<std::endl;
-    
-    }
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h2>明明的随机数</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810213107.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code。此题的关键是set的使用</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <set>
-    using namespace std;
-    
-    int main() {
-        set<int> input_group;//set默认自动排序，从小到大
-        int totally_num;
-        cin>>totally_num;//输入的总的数字数目
-        int input_value;
-        while (cin >> input_value) { 
-            input_group.insert(input_value);//插入，自动排序
-        }
-    
-        // 注意set的使用是需要指针取值的
-        for(auto it=input_group.begin();it!=input_group.end();it++)
-            std::cout<<*it<<std::endl;
-    }
-    // 更多关于set容器的使用：
-    // begin()     　　 ,返回set容器的第一个元素
-    // end() 　　　　 ,返回set容器的最后一个元素
-    // clear()   　　     ,删除set容器中的所有的元素
-    // empty() 　　　,判断set容器是否为空
-    // max_size() 　 ,返回set容器可能包含的元素最大个数
-    // size() 　　　　 ,返回当前set容器中的元素个数
-    
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h2>字符串分隔</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810214410.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <string>
-    using namespace std;
-    
-    int main() {
-        string input_str;
-        
-        while(cin>> input_str)
-        {
-            string temp;
-            for(int i=0;i<input_str.size();i++)
-            {
-                if(temp.size()==8)//等于8
-                {
-                    std::cout<<temp<<std::endl;//输出
-                    temp.clear();//清空
-                }
-                temp+=input_str[i];
-            }
-            if(temp.size()!=0)//也就是最后还有
-            {
-                while(temp.size()!=8)
-                    temp+='0';//一直添加0
-                std::cout<<temp<<std::endl;//输出
-            }
-    
-        }
-    
-    }
-    // 64 位输出请用 printf("%lld")
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
 <h2>进制转换</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -782,7 +595,6 @@ int main() {
 </details>
 
 
-
 <p><br></p>
 <h2>质数/素数及质因数</h2>
 <p>质数又称素数。一个大于1的自然数，除了1和它自身外，不能被其他自然数整除的数叫做质数</p>
@@ -924,6 +736,193 @@ int main() {
         
         return 0;
     }
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>字符串最后一个单词的长度</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810205327.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code，trick：输入为空格的时候就停止输入</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string input_str;
+    while (cin >> input_str) { //不停的输入，遇到空格会中断，下次再输入，因此最终保留是最后一个
+    }
+    std::cout<<input_str.size()<<std::endl;
+}
+// 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>计算某字符出现次数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810211045.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>注意不区分大小写，需要调用tolower（）函数转换成小写。时间复杂度为O（N），空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        getline(cin,input_str);//获取一整行
+        char target;
+        cin >> target;
+        target=tolower(target);//不区分大小写
+    
+        int num_result=0;
+        for(char _str:input_str)
+        {
+            if(tolower(_str)==target)//不区分大小写
+                num_result++;
+        }
+    
+        std::cout<< num_result<<std::endl;
+    
+    }
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>下面方法采用hash table，也可以，但是空间复杂度应该是O（N），时间复杂度一样</summary>
+
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    #include <unordered_map>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+    
+        getline(cin,input_str);//获取一整行
+        char target;
+        cin >> target;
+        target=tolower(target);//不区分大小写
+    
+        unordered_map<char, int> input_group;
+        for(char _str:input_str)
+        {
+            input_group[tolower(_str)]++;
+        }
+    
+        std::cout<< input_group[target]<<std::endl;
+    
+    }
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>明明的随机数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810213107.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。此题的关键是set的使用</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <set>
+    using namespace std;
+    
+    int main() {
+        set<int> input_group;//set默认自动排序，从小到大
+        int totally_num;
+        cin>>totally_num;//输入的总的数字数目
+        int input_value;
+        while (cin >> input_value) { 
+            input_group.insert(input_value);//插入，自动排序
+        }
+    
+        // 注意set的使用是需要指针取值的
+        for(auto it=input_group.begin();it!=input_group.end();it++)
+            std::cout<<*it<<std::endl;
+    }
+    // 更多关于set容器的使用：
+    // begin()     　　 ,返回set容器的第一个元素
+    // end() 　　　　 ,返回set容器的最后一个元素
+    // clear()   　　     ,删除set容器中的所有的元素
+    // empty() 　　　,判断set容器是否为空
+    // max_size() 　 ,返回set容器可能包含的元素最大个数
+    // size() 　　　　 ,返回当前set容器中的元素个数
+    
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>字符串分隔</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810214410.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        string input_str;
+        
+        while(cin>> input_str)
+        {
+            string temp;
+            for(int i=0;i<input_str.size();i++)
+            {
+                if(temp.size()==8)//等于8
+                {
+                    std::cout<<temp<<std::endl;//输出
+                    temp.clear();//清空
+                }
+                temp+=input_str[i];
+            }
+            if(temp.size()!=0)//也就是最后还有
+            {
+                while(temp.size()!=8)
+                    temp+='0';//一直添加0
+                std::cout<<temp<<std::endl;//输出
+            }
+    
+        }
+    
+    }
+    // 64 位输出请用 printf("%lld")
 </script>
 </code></pre>
 </details>
