@@ -304,21 +304,87 @@
   但类似这种可以拆分为子问题的解题思路最直接其实还是递归~
 </p>
 
+<p><br></p>
+<h1>统计每个月兔子的总数</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/recursion_algorithm/WX20240815-211410.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int callback(int num_moonth)//求每个月兔子数
+    {
+        if(num_moonth<=2)//月数少于2时为1只
+            return 1;
+        
+        return callback(num_moonth-1)+callback(num_moonth-2);//返回前两个月相加
+        //旧兔子每个月生一只；新兔子每两个月就变成一只旧兔子
+    }
+    
+    int main() {
+        int N;
+        cin>>N;
+    
+        int totally=callback(N);
+        std::cout<<totally;
+    }
+    
+</script>
+</code></pre>
+</details>
+<details>
+<summary>上面递归算法的思路有点不是太直接，也可以采用下面直接计算</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int N;
+        cin>>N;
+    
+        int num1=1;//1个月的兔子数
+        int num2=0;//2个月的兔子数
+        int num3=0;//3大于个月的兔子数
+        for(int i=1;i<N;i++)
+        {
+            num3=num3+num2;//两个月长大一个月就是3个月+原本三个月的兔子数
+            num2=num1;//原本一个月的，长大了一个月
+            num1=num3;//由当前3个月的新生出的
+    
+        }
+        std::cout<<num1+num2+num3;
+    }
+    
+</script>
+</code></pre>
+</details> 
 
 
+
+<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
+
+</script>
 </code></pre>
 </details> -->
-
-<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 
 <!-- <p><br></p>
 <h1></h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/recursion_algorithm/" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/recursion_algorithm" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>

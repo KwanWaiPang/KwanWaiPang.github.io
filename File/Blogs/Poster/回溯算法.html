@@ -497,6 +497,7 @@ def backtrack(路径, 选择列表):
   而时间复杂度。首先sort排序的时间复杂度为：回溯的时间复杂度为O(2<sup>N</sup>),然后遍历每个字符，所以应该是O（N*2<sup>N</sup>）至于前面排序sort的时间复杂度也是O（N），因此总的时间复杂度为O（N*2<sup>N</sup>）
 </summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
     
@@ -537,6 +538,7 @@ def backtrack(路径, 选择列表):
     
         }
     };
+  </script>
 </code></pre>
 </details>
 
@@ -598,6 +600,75 @@ def backtrack(路径, 选择列表):
     };
 </code></pre>
 </details>
+
+<p><br></p>
+<h4>称砝码</h4>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/WX20240815-222620.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
+    
+    
+    void backtrack(vector<int>& nums, vector<int>& results, int each_result, int index)
+    {
+        //没有结束条件,每次直接返回
+        results.push_back(each_result);//空也是一种选择
+    
+        //遍历每个字符
+        for(int i=index;i<nums.size();i++)
+        {   
+            //前序位置
+            each_result+=nums[i];//将当前砝码放入
+    
+            //先判断当前结果是否已经存在了～
+            if(find(results.begin(),results.end(),each_result)==results.end())//找不到，才放
+                backtrack(nums, results,each_result,i+1);
+    
+            //后序位置,放入后删掉
+            each_result-=nums[i];
+    
+        }
+    }
+    
+    
+    int main() {
+        //采用回溯算法：为元素可重不可复选
+        int N;
+        cin>>N;
+        vector<int> group;
+        int temp_value, temp_num;
+        while(cin>>temp_value>>temp_num)
+        {
+            while(temp_num)
+            {
+                group.push_back(temp_value);
+                temp_num--;
+            }
+        }
+    
+        vector<int> results;
+        int each_result=0;
+        backtrack(group, results,each_result,0);//索引从0开始
+    
+        std::cout<<results.size()<<std::endl;
+    
+    }
+</script>
+</code></pre>
+</details>
+
 
 <p><br></p>
 <h3>6.排列（元素可重不可复选）</h3>
