@@ -693,6 +693,71 @@
 
 
 <p><br></p>
+<h4>称砝码</h4>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/WX20240815-222620.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>一开始是想着用回溯算法去解的，但是复杂度比较高，且剪枝策略不正确，改为hash table来算吧～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    #include<unordered_set> //无序集合， 每次加构成的新重量加入集合，集合会自动去重
+    using namespace std;
+    
+    int main() {
+        int num;//多少种砝码
+        cin >> num;
+        vector<int> weight;//每种的重量
+        for (int i = 0; i < num; i++) {
+            int value;
+            cin >> value;
+            weight.push_back(value);
+        }
+    
+        vector<int> num_each_wight;//每种重量的个数
+        for (int i = 0; i < num; i++) {
+            int value;
+            cin >> value;
+            num_each_wight.push_back(value);
+        }
+    
+        unordered_set<int> result_set;//hash table用于去重
+        result_set.insert(0);//先插入0，0也是一种结果
+    
+        //遍历各种砝码
+        for(int n=0;n<num;n++)
+        {
+            int num_of_current_weight=num_each_wight[n];
+            int currrent_weight=weight[n];
+            //当前重量的数量用完前
+            for(int i=1;i<=num_of_current_weight;i++)
+            {
+                auto temp=result_set;
+                for(auto it=temp.begin();it!=temp.end();it++)
+                {
+                    result_set.insert(*it+currrent_weight);//遍历当前插入的结果，分别加当前的砝码。反正去重了
+                }
+            }
+        }
+    
+        std::cout<<result_set.size()<<std::endl;
+    
+    }
+</script>
+</code></pre>
+</details>
+
+
+
+
+<p><br></p>
 <h1><font color="#00FF00">其他string相关的题目</font></h1>
 
 
