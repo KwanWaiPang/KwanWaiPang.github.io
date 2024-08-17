@@ -1955,6 +1955,80 @@ print(str(result))
 
 
 <p><br></p>
+<h2>高精度整数加法</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240817-184153.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+  <summary>最简单就是采用python解题～</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+    str1=input()
+    str2=input()
+    str3=str1+'+'+str2
+    result=eval(str3)
+    print(str(result))
+  </script>
+  </code></pre>
+  </details>
+
+  <details>
+  <summary>此处也给出cpp的解法,处理好进位以及字符串的反转即可～</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+    #include <algorithm>
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        string str1, str2, result_str;
+        cin>>str1>>str2;
+    
+        if(str1.size()<str2.size())
+            swap(str1,str2);//保证str1是最长的
+        
+        //先反转过来
+        reverse(str1.begin(),str1.end());
+        reverse(str2.begin(),str2.end());
+    
+        int temp_jinwei=0;
+        for(int i=0;i<str2.size();i++)
+        {
+            int temp_value=(str1[i]-'0')+(str2[i]-'0')+temp_jinwei;
+            result_str+=('0'+temp_value%10);//进位后余值
+            temp_jinwei=temp_value/10;//进位
+        }
+    
+        if(str1.size()>str2.size())
+        {
+            for(int i=str2.size();i<str1.size();i++)
+            {
+                int temp_value=(str1[i]-'0')+temp_jinwei;
+                result_str+=('0'+temp_value%10);//进位后余值
+                temp_jinwei=temp_value/10;//进位
+            }
+        }
+    
+        while(temp_jinwei!=0)
+        {
+            int temp_value=+temp_jinwei;
+            result_str+=('0'+temp_value%10);//进位后余值
+            temp_jinwei=temp_value/10;//进位
+        }
+        reverse(result_str.begin(),result_str.end());
+        std::cout<<result_str;
+    }
+  </script>
+  </code></pre>
+  </details>
+
+
+<p><br></p>
 <h2>蛇形矩阵</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
