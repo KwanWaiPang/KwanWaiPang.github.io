@@ -2006,6 +2006,46 @@ print(str(result))
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>挑7</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240817-182516.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    #include <algorithm>
+    using namespace std;
+    
+    int main() {
+        int range;
+        cin>>range;
+    
+        int result_num=0;
+        for(int i=1;i<=range;i++)//注意从1开始
+        {
+            if(i%7==0)//可以整除7，注意不要考虑0的情况
+                result_num++;
+            else
+            {
+                string temp=to_string(i);
+                if(find(temp.begin(),temp.end(),'7')!=temp.end())//找到了
+                    result_num++;
+            }
+        }
+        std::cout<<result_num;
+    
+    }   
+</script>
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
