@@ -468,7 +468,45 @@
 </code></pre>
 </details> 
 
-
+<p><br></p>
+<h1>完全数计算</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240817-183404.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>直接按照题目要求实现数学过程</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int num;
+        cin>>num;
+    
+        int count_result=0;
+    
+        for(int i=1;i<=num;i++)
+        {
+            //每个进行判断
+            int sum=0;
+            for(int j=1;j<=i/2;j++)//注意：除了自身，那么最大应该只到一半
+            {
+                if(i%j==0)//能整除
+                    sum+=j;//和
+            }
+            if(sum==i)//因子只和相等
+                count_result++;
+        }
+        std::cout<<count_result;
+    }
+</script>
+</code></pre>
+</details> 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
