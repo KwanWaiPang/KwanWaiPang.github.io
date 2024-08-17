@@ -368,6 +368,69 @@
 </code></pre>
 </details> 
 
+<p><br></p>
+<h1>迷宫问题</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/recursion_algorithm/WX20240817-150719.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    vector<pair<int, int> > result;
+    void obtains(vector<vector<int>>& matrix, int row, int col, int x, int y, vector<pair<int,int>>& paths)
+    {
+        //将当前点推入paths中
+        paths.push_back(make_pair(x,y));
+        matrix[x][y]=1;//经过部分设置为1，表示后续不能经过
+        if(x==row-1 && y==col-1)//到达终点
+        {
+            result=paths;
+            return;//退出
+        }
+        //递归的往四个方向搜(没有越界且可以走的)
+        if(x-1>=0 && matrix[x-1][y]==0)
+           obtains(matrix, row, col,x-1,y,paths);
+        if(x+1<row && matrix[x+1][y]==0)
+           obtains(matrix, row, col,x+1,y,paths);
+        if(y-1>=0 && matrix[x][y-1]==0)
+           obtains(matrix, row, col,x,y-1,paths);
+        if(y+1<col && matrix[x][y+1]==0)
+           obtains(matrix, row, col,x,y+1,paths);
+        
+        paths.pop_back();//如果都不通过,证明这个点是走不通的删掉最后的这个点
+        // matrix[i][j] = 0;//恢复乱标记
+    
+    }
+    
+    int main() {
+        int row, col;
+        cin >> row >> col;//输入数组的行数，列数
+        //获取迷宫矩阵
+        vector<vector<int>> matrix (row, vector<int>(col,0));
+        for(int x=0;x<row;x++)
+            for(int y=0;y<col;y++)
+                cin>>matrix[x][y];
+    
+        //记录走了的路径
+        vector<pair<int,int>> paths;
+        obtains(matrix, row, col,0,0,paths);
+    
+        for(int i=0;i<result.size(); i++)
+            cout << "(" << result[i].first << "," << result[i].second << ")" << endl;
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details> 
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->

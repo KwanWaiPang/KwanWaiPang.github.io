@@ -701,7 +701,6 @@
 <figcaption><p>
 </p></figcaption>
 </figure>
-
 <details>
 <summary>一开始是想着用回溯算法去解的，但是复杂度比较高，且剪枝策略不正确，改为hash table来算吧～</summary>
 <pre><code>
@@ -753,6 +752,71 @@
 </script>
 </code></pre>
 </details>
+
+<p><br></p>
+<h2>hash table的思维，vector的解法：名字的漂亮度</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240817-152825.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>此题是hash table的思维，但是hash table不好进行排序，因此用vector代替，对应位置<mark>each_string[each_char-'a']</mark>填入即可实现计数</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
+    
+    int main() {
+        int num;
+        cin>>num;
+    
+        string temp;
+        vector<string> input_group;
+        for(int i=0;i<num;i++)
+        {
+            cin>>temp;
+            input_group.push_back(temp);
+        }
+    
+        for(int i=0;i<num;i++)
+        {
+            //采用hash table计算每个字母的数目，但是不好进行排序
+            // 且仅由小写字母组成。为此可以用vector代替
+            vector<int> each_string (26,0);
+            string input_str=input_group[i];
+    
+            for(auto each_char:input_str)
+            {
+                each_string[each_char-'a']++;
+            }
+    
+            sort(each_string.begin(),each_string.end());
+            int result_value=0;
+            for(int i=25;i>=0;i--)
+            {
+                if(each_string[i]==0)
+                    break;//由于是递减，后续都为空的啦
+                result_value+=each_string[i]*(i+1);//分数就是最大26，依次跟着i递减
+            }
+            std::cout<<result_value<<std::endl;
+        }
+    
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
+
+
+
 
 
 
