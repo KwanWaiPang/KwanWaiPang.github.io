@@ -710,6 +710,7 @@ public:
 </p>
 <details>
   <pre><code>
+  <script type='text/html' style='display:block'>
     /**
     * Definition for singly-linked list.
     * struct ListNode {
@@ -747,8 +748,78 @@ public:
            return result->next;
        }
    };
+  </script>
   </code></pre>
 </details>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 70%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/WX20240817-172403.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<details>
+<summary>双指针法提取链表倒数第k个值</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <cstddef>
+    #include <iostream>
+    using namespace std;
+    
+    struct ListNode{
+        int val;
+        ListNode* next;
+        //定义构造函数
+        ListNode(): val(0), next(nullptr) {}
+        ListNode(int value): val(value), next(nullptr) {}
+        ListNode(int value, ListNode* next): val(value), next(next) {}
+    
+    };
+    
+    
+    int main() {
+        int num;
+        while(cin>>num)
+        {
+            // cin>>num;
+            ListNode* head=new ListNode(0);//虚拟的节点头，因此result为head->next
+            ListNode* p_head=head;
+            while(num--)
+            {
+                int temp;
+                cin>>temp;
+                ListNode* newnode=new ListNode(temp);
+                p_head->next=newnode;
+    
+                p_head=p_head->next;//一直递推
+            }//注意此时num已经减完了
+    
+            ListNode* p_1=head->next;
+            int k;
+            cin>>k;//输入获取倒数第k个值
+            while(k--)
+            {
+                p_1=p_1->next;//先让其走k步
+            }
+            ListNode* p_2=head->next;//初始化第二个指针
+            while(p_1!=nullptr)
+            {
+                // 再两个一起走，走到p1终点
+                p_1=p_1->next;
+                p_2=p_2->next;
+            }
+    
+            std::cout<<p_2->val<<std::endl;//输出此时p2指向的值
+        }
+    }
+    
+</script>
+</code></pre>
+</details> 
+
+
 
 <p><br></p>
 <h1>4. 快慢指针获取单链表的中点</h1>
