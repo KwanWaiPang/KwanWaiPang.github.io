@@ -2022,6 +2022,104 @@ print(str(result))
 </details>
 
 
+<p><br></p>
+<h2>成绩排序</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240817-215305.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>stable_sort 和 sort的区别在于 前者作排序可以使原来的"相同"的值在序列中的相对位置不变</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
+    
+    bool high_to_low(pair<string, int> g1, pair<string, int> g2) {
+        return g1.second > g2.second;
+    }
+    
+    bool low_to_high(pair<string, int> g1, pair<string, int> g2) {
+        return g1.second < g2.second;
+    }
+    
+    int main() {
+        int n, flag;
+        vector<pair<string, int>> group;
+        while (cin >> n >> flag) {
+            for (int i = 0; i < n; i++) {
+                string name;
+                // getline(cin, name);//获取一整行，所以出错了
+                int value;
+                // cin >> value;
+                cin >> name >> value;
+                auto temp=make_pair(name, value);
+                group.push_back(temp);
+            }
+    
+            if (flag) //1表示从低到高
+            //要用stable_sort,不然分数相同可能排序不对：
+            // stable_sort 和 sort的区别在于 前者作排序可以使原来的"相同"的值在序列中的相对位置不变
+                stable_sort(group.begin(), group.end(), low_to_high);
+            else
+                stable_sort(group.begin(), group.end(), high_to_low);
+    
+            for (int i = 0; i < n; i++) {//输出成绩单
+                cout << group[i].first << " " << group[i].second << endl;
+            }
+    
+        }
+    }
+    
+    // #include<iostream>
+    // #include<string>
+    // #include<vector>
+    // #include<algorithm>
+    // using namespace std;
+    
+    // struct user {//用户结构
+    //     string name;//姓名
+    //     int score;//分数
+    // };
+    
+    // bool compare0(user a, user b) {
+    //     return a.score  > b.score ;
+    // }
+    
+    // bool compare1(user a, user b) {
+    //     return a.score < b.score;
+    // }
+    
+    // int main() {
+    //     int n, flag;
+    //     while (cin >> n >> flag) {
+    //         vector<user> userForm;
+    //         for (int i = 0; i < n; i++) {//输入成绩单
+    //             user temp;
+    //             cin >> temp.name >> temp.score ;
+    //             userForm.push_back(temp);
+    //         }
+    //         if (flag) { //从低到高排序
+    //             stable_sort(userForm.begin(), userForm.end(), compare1);//重载稳定排序
+    //         } else { //从高到低排序
+    //             stable_sort(userForm.begin(), userForm.end(), compare0);//重载稳定排序
+    //         }
+    //         for (int i = 0; i < n; i++) {//输出成绩单
+    //             cout << userForm[i].name << " " << userForm[i].score << endl;
+    //         }
+    //     }
+    //     return 0;
+    // } 
+  
+</script>
+</code></pre>
+</details>
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
