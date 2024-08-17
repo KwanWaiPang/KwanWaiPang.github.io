@@ -7,6 +7,26 @@
         text-align-last: left;
         text-justify: inter-word;
     }
+    #toc {
+      background: #f4f4f4;
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      /* margin-bottom: 20px; */
+      max-width: 100%; /* 限制目录框架的最大宽度 */
+      word-wrap: break-word; /* 强制超长单词换行 */
+      position: relative;
+      margin-left: auto; /* 使目录框架在页面中居右 */
+      margin-right: auto; /* 使目录框架在页面中居右 */
+      box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+  }
+  }
+  #toc ul {
+      list-style-type: none;
+      padding-left: 0; /* 去除默认的列表内边距 */
+  }
+  #toc ul ul {
+      margin-left: 20px; /* 子目录项的缩进 */
+  }
   </style>
 
 <!-- Head -->
@@ -105,18 +125,26 @@
       </nav>
     </header>
 
-    <!-- Content -->
-    <div class="container mt-5">
-      <!-- home.html -->
-      <div class="post">
-        <header class="post-header">
-          <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">递归类题目</span>
-          </h1>
-          <!-- <p>
-            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
-          </p> -->
-        </header>
+<header class="post-header">
+  <h1 align="center" class="post-title">
+    <span style="font-weight: 600;">递归类题目</span>
+  </h1>
+  <!-- <p>
+    Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
+  </p> -->
+</header>
+
+<!-- Content -->
+<div class="container mt-5">
+<!-- home.html -->
+<div class="post">
+
+  <!-- 插入目录 -->
+<div id="toc">
+  <h8>目录</h8>
+  <ul></ul>
+</div>
+    
 <article>
 <!-- 插入博客内容-->
 
@@ -254,7 +282,7 @@
 <h1>其他有意思的递归类题目汇总</h1>
 
 <p><br></p>
-<h3>外观数列</h3>
+<h2>外观数列</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/微信截图_20240807220941.png" alt="Image description">
@@ -305,7 +333,7 @@
 </p>
 
 <p><br></p>
-<h1>统计每个月兔子的总数</h1>
+<h2>统计每个月兔子的总数</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/recursion_algorithm/WX20240815-211410.png" alt="Image description">
@@ -369,7 +397,7 @@
 </details> 
 
 <p><br></p>
-<h1>迷宫问题</h1>
+<h2>迷宫问题</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/recursion_algorithm/WX20240817-150719.png" alt="Image description">
@@ -431,6 +459,109 @@
 </script>
 </code></pre>
 </details> 
+
+<p><br></p>
+<h2>放苹果</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/recursion_algorithm/WX20240817-202503.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int f(int m, int n) {
+        if (m < 0 || n < 0)//苹果或盘子之一小于0，就无法再往下了
+            return 0;
+        else if (m == 1 || n == 1)
+            return 1;
+        else
+            return f(m, n - 1) + f(m - n, n);
+    }
+    
+    int main() {
+        int m, n;
+        while (cin >> m >> n) { // 注意 while 处理多个 case
+            cout << f(m, n) << endl;
+        }
+    }
+    /*
+    放苹果分为两种情况，一种是有盘子为空，一种是每个盘子上都有苹果。
+    令(m,n)表示将m个苹果放入n个盘子中的摆放方法总数。
+    1.假设有一个盘子为空，则(m,n)问题转化为将m个苹果放在n-1个盘子上，即求得(m,n-1)即可
+    2.假设所有盘子都装有苹果，则每个盘子上至少有一个苹果，即最多剩下m-n个苹果，问题转化为将m-n个苹果放到n个盘子上
+    即求(m-n，n)
+    */
+</script>
+</code></pre>
+</details> 
+
+<p><br></p>
+<h2>24点游戏算法</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/recursion_algorithm/WX20240817-213216.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。vector删除中间某个元素：<mark>rest.erase(rest.begin() + i)</mark></summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    bool calculate(vector<int> value_group, double totally_value) {
+        //递归终止的条件
+        if (value_group.empty()) {
+            if (totally_value == 24)
+                return true;
+            else
+                return false;
+        }
+        //遍历每组数字
+        for (int i = 0; i < value_group.size(); i++) 
+        {
+            auto rest = value_group;
+            // vector删除中间某个元素
+            rest.erase(rest.begin() + i);//去掉一个后，剩余的数字组合
+            //分别 进行加减乘除4种运算
+           if (calculate(rest, totally_value + value_group[i]) 
+            || calculate(rest, totally_value - value_group[i])
+            || calculate(rest, totally_value * value_group[i])
+            || calculate(rest, totally_value / value_group[i]))
+                return true;
+        }
+        return false;
+    }
+    
+    int main() {
+        vector <int> value_group;
+        for (int i = 0; i < 4; i++) {
+            int value;
+            cin >> value;
+            value_group.push_back(value);
+        }
+    
+        //递归算法
+        if (calculate(value_group, 0))
+            std::cout << "true" << std::endl;
+        else
+            std::cout << "false" << std::endl;
+    }
+    
+</script>
+</code></pre>
+</details>
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
@@ -501,6 +632,26 @@
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- 下面是插入目录的 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toc = document.querySelector("#toc ul");
+        const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+        headers.forEach(header => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+            header.setAttribute("id", id);
+            a.setAttribute("href", `#${id}`);
+            a.textContent = header.textContent;
+            li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+    });
+</script>
+
 
 </body>
 </html>

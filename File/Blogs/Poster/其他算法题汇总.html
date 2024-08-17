@@ -1976,6 +1976,51 @@ print(str(result))
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>查找两个字符串a,b中的最长公共子串</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240817-211852.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.关键点是字符串中找子字符串的用法<mark>str_2.find(temp_str)!=string::npos</mark></summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <algorithm>
+  using namespace std;
+  
+  int main() {
+      string str_1, str_2;
+  
+      cin>>str_1>>str_2;
+      if(str_1.size()>str_2.size())
+          swap(str_1,str_2);//确保str_1是短的序列
+      
+      string result_str;
+      //从最长的开始选（要用size_t而不是int）
+      for(size_t len=str_1.size(); len>=0; len--)
+      {
+          for(int i=0;i<=(str_1.size()-len);i++)
+          {
+              string temp_str=str_1.substr(i,len);
+              if(str_2.find(temp_str)!=string::npos)//找到了,注意找字符串与找字节不一样
+              // find(str_2.begin(),str_2.end(),char);
+              {
+                  std::cout<<temp_str;
+                  return 0;
+              }
+          }
+      }
+  }
+    
+</script>
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
