@@ -7,6 +7,26 @@
         text-align-last: left;
         text-justify: inter-word;
     }
+    #toc {
+      background: #f4f4f4;
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      /* margin-bottom: 20px; */
+      max-width: 100%; /* 限制目录框架的最大宽度 */
+      word-wrap: break-word; /* 强制超长单词换行 */
+      position: relative;
+      margin-left: auto; /* 使目录框架在页面中居右 */
+      margin-right: auto; /* 使目录框架在页面中居右 */
+      box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+  }
+  }
+  #toc ul {
+      list-style-type: none;
+      padding-left: 0; /* 去除默认的列表内边距 */
+  }
+  #toc ul ul {
+      margin-left: 20px; /* 子目录项的缩进 */
+  }
   </style>
 
 <!-- Head -->
@@ -105,19 +125,27 @@
       </nav>
     </header>
 
-    <!-- Content -->
-    <div class="container mt-5">
-      <!-- home.html -->
-      <div class="post">
-        <header class="post-header">
-          <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">采用双指针来解链表相关的题目</span>
-          </h1>
-          <p><br></p>
-          <!-- <p>
-            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
-          </p> -->
-        </header>
+<header class="post-header">
+  <h1 align="center" class="post-title">
+    <span style="font-weight: 600;">采用双指针来解链表相关的题目</span>
+  </h1>
+  <p><br></p>
+  <!-- <p>
+    Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
+  </p> -->
+</header>
+
+<!-- Content -->
+<div class="container mt-5">
+  <!-- home.html -->
+  <div class="post">
+
+<!-- 插入目录 -->
+<div id="toc">
+  <h8>目录</h8>
+  <ul></ul>
+</div>
+
 <article>
 <!-- 插入博客内容-->
 
@@ -1321,6 +1349,104 @@ public:
 </code></pre>
 </details>
 
+
+<p><br></p>
+<h3>从单向链表中删除指定值的节点</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/WX20240817-161342.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>题目其实跟上面的移除链表元素一样，难点其实在于输入数据的管理以及构建链表的过程～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    struct ListNode
+    {
+        int val;
+        ListNode *next;
+        // 构造函数
+        ListNode() :val(0), next(nullptr) {}
+        ListNode(int value) :val(value), next(nullptr) {}
+        ListNode(int value, ListNode *next) :val(value), next(next) {}
+    };
+    
+    int main() {
+        int totally_num, first_val;
+        cin>>totally_num>>first_val;
+    
+        //创建虚拟头链表
+        ListNode *head=new ListNode();
+        head->val=first_val;
+        totally_num--;//第一个应该去掉（关键！）
+    
+        int aft,pre;
+        while(totally_num--)
+        {
+            cin>>aft>>pre;
+            ListNode *newnode=new ListNode(aft);
+    
+            ListNode *p_head=head;
+            while(p_head!=nullptr)
+            {
+                if(p_head->val==pre)//找到了
+                {
+                    break;
+                }
+                else
+                    p_head=p_head->next;//一直递推
+            }
+    
+            if(p_head!=nullptr)//上面找到对应值啦
+            {
+                auto temp=p_head->next;//原本的下一个值
+                p_head->next=newnode;
+                newnode->next=temp;
+            }
+        }
+    
+        int target_value;
+        cin>>target_value;
+        ListNode *p_head=head;
+        while(p_head!=nullptr && p_head->next!=nullptr)//永远判断下一个
+        {
+            auto nextnode=p_head->next;
+            if(nextnode->val==target_value)//找到了
+            {
+                p_head->next=p_head->next->next;//将当前的下一个指向下下个
+            }
+            else
+            {
+                p_head=p_head->next;//一直递推
+            }
+        }
+    
+        //最后检查头节点
+        if(head!=nullptr && head->val==target_value)
+        {
+            ListNode* newnode=head->next;
+            head=newnode;
+        }
+    
+        //最后逐输出
+        while(head!=nullptr)
+        {
+            std::cout<<head->val<<" ";
+            head=head->next;//一直递推
+        }
+    
+    }
+    
+</script>
+</code></pre>
+</details> 
+
 <!-- <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/" alt="Image description">
@@ -1407,6 +1533,25 @@ public:
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- 下面是插入目录的 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toc = document.querySelector("#toc ul");
+        const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+        headers.forEach(header => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+            header.setAttribute("id", id);
+            a.setAttribute("href", `#${id}`);
+            a.textContent = header.textContent;
+            li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+    });
+</script>
 
 </body>
 </html>
