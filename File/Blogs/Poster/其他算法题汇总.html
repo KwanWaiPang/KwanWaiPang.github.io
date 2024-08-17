@@ -1887,6 +1887,18 @@ int main() {
 </code></pre>
 </details>
 
+<details>
+  <summary>用python的eval函数求解就无敌简单😱</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+class Solution:
+def multiply(self, num1: str, num2: str) -> str:
+    str_all=num1+'*'+num2
+    return str(eval(str_all))
+  </script>
+  </code></pre>
+  </details>
+
 
 <p><br></p>
 <h2>蛇形矩阵</h2>
@@ -1940,6 +1952,40 @@ int main() {
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>python求解字符串的四则运算</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240817-162939.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>此题如果用cpp去解的话有点繁琐，为此改为用python，几句代码即可！</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+
+  # Python2
+  # raw_input( ) 将所有输入作为字符串看待，返回字符串类型。
+  # input( ) 只能接收"数字"的输入，在对待纯数字输入时具有自己的特性，它返回所输入的数字的类型（ int, float ）。
+  
+  # 在 Python3.x 中 raw_input( ) 和 input( ) 进行了整合，去除了 raw_input( )，仅保留了 input( ) 函数，其接收任意任性输入，将所有输入默认为字符串处理，并返回字符串类型。
+  
+  input_str = input()
+  # 把其中的不规则括号都变为普通括号
+  input_str.replace("[", "(")
+  input_str.replace("{", "(")
+  input_str.replace("]", ")")
+  input_str.replace("}", ")")
+  #  eval是Python的一个内置函数，功能十分强大，这个函数的作用是，返回传入字符串的表达式的结果。就是说：将字符串当成有效的表达式 来求值 并 返回计算结果。
+  result=eval(input_str)#返回传入字符串的表达式的结果
+  print(result)
+  
+</script>
+</code></pre>
+</details>
+<p>同理，上面字符串相乘也是可以类似的用</p>
 
 
 
