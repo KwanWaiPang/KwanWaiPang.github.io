@@ -751,6 +751,104 @@ def backtrack(路径, 选择列表):
 <h3>9.排列（元素无重可复选）</h3>
 <p>此类型目前还没找到例题</p>
 
+
+<p><br></p>
+<h1>有限制的回溯算法：火车进站</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/WX20240818-145611.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。有两种选择的回溯算法，或者说有限制的回溯算法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    #include <stack>
+    #include <algorithm>
+    using namespace std;
+    
+    void backtrack(vector<int>& input_group, stack<int>& path, vector<int>& each_result, vector<vector<int>>& results, int index)
+    {
+        //若栈为空,且所有车都进站了为终止条件
+        if(index==input_group.size() && path.empty())
+        {
+            results.push_back(each_result);//把出站的方案记录
+            return;
+        }
+    
+        //火车还可以进栈
+        if(index<=input_group.size()-1)
+        {
+            //执行选择1:将火车开入栈
+            path.push(input_group[index]);
+    
+            backtrack(input_group,path,each_result,results,index+1);//一辆车进入栈了，因此index要递增
+    
+            //撤销选择，就是出栈（此处不需要记录）
+            path.pop();
+        }
+    
+        //若有火车可以先出栈
+        if(!path.empty())
+        {
+            //执行选择2:将火车开出栈
+            each_result.push_back(path.top());//记录出栈的结果
+            path.pop();//出栈
+    
+            backtrack(input_group,path,each_result,results,index);//回溯调用
+    
+            //撤销出栈的选择
+            path.push(each_result.back());//把结果放回去（也就是此时each_result中最新的一个）
+            each_result.pop_back();
+        }
+            
+    
+    }
+    
+    int main() {
+        int N;
+        cin>>N;//一共的火车数
+        vector<int> input_group;
+    
+        int temp;
+        for(int i=0;i<N;i++)
+        {
+            cin>>temp;
+            input_group.push_back(temp);
+        }
+    
+        //只需要输出出站的方案，且为全部，因此用回溯算法
+    
+        stack<int> path;
+        vector<vector<int>> results;
+        vector<int> each_result;
+    
+        backtrack(input_group,path,each_result,results,0);
+    
+        sort(results.begin(),results.end());
+    
+        for(int i=0;i<results.size();i++)
+        {
+            auto temp= results[i];
+            for(int j=0;j<temp.size();j++)
+            {
+                std::cout<<temp[j]<<" ";
+            }
+            std::cout<<std::endl;
+        }
+    
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
+
 <p><br></p>
 <h1>总结：回溯算法与递归算法的区别</h1>
 <p>
@@ -794,6 +892,7 @@ void dfs(...) {
     ...
 }
   </code></pre>
+  
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
