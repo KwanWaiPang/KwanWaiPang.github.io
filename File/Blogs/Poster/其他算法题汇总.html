@@ -440,6 +440,56 @@
 </details>
 
 <p><br></p>
+<h2>求最大连续bit数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240818-161820.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+  <summary>跟上一题是很像的，注意是要注意设计循环迭代求最值都需要对比一下最后一个</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+      #include <iostream>
+      using namespace std;
+      
+      int main() {
+         int input_value;
+         cin>>input_value;//输入数字
+      
+         //直接计算，而不是先转二进制再算
+         int max_num=0;
+         int temp=0;
+         while(input_value)//整除不为0还可以继续计算
+         {
+              if(input_value%2==1)//是1
+              {
+                  temp++;
+              }
+              else //为0，那么就相当于1中断了，需要重新计算
+              {
+                  if(temp>max_num)
+                      max_num=temp;
+                  temp=0;
+              }
+      
+              input_value=input_value/2;//整除后的结果下次再继续算
+         }
+         //最后一个算一下（注意每次对比最值都应该check最后一个）
+         if(temp>max_num)
+              max_num=temp;
+      
+         std::cout<<max_num;
+      }
+      
+  </script>
+  </code></pre>
+  </details>
+
+
+<p><br></p>
 <h2>整数与ip地址之间的转换</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
