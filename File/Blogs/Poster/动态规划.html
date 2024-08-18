@@ -425,6 +425,93 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
+<h1>字符串通配符</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240818-104800.png" alt="Image description">
+  </div> 
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code，跟字符串编辑距离很像</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <cctype>
+    #include <iostream>
+    #include <algorithm>
+    using namespace std;
+    
+    int main() {
+        string str_1, str_2;
+        cin>>str_1>>str_2;
+        // 不区分大小写的匹配结果.先全部转换为小写
+        // transform(str_1.begin(),str_1.end(),str_1.begin(),::tolower);
+        // transform(str_2.begin(),str_2.end(),str_2.begin(),::tolower);
+    
+    
+        // step1:创建dp表。str1中的第i个字符与第j个字符对比
+        bool dp[str_1.size()+1][str_2.size()+1];
+    
+        //step2:初始化dp表，如果有一个为0，那么都不是通配
+        dp[0][0]=true;
+        for(int i=1;i<str_1.size()+1;i++)
+        {
+            if(str_1[i-1]=='*')//注意查看是否为*的情况
+                dp[i][0]=dp[i-1][0];
+            else
+                dp[i][0]=false;
+        }
+        for(int j=1;j<str_2.size()+1;j++)
+        {
+            dp[0][j]=false;
+        }
+    
+        // step3:进行自下而上的状态转移，推导状态转移方程
+        for(int i=1;i<str_1.size()+1;i++)
+        {
+            for(int j=1;j<str_2.size()+1;j++)
+            {
+                // if(str_1[i-1]==str_2[j-1])//若两者相同
+                if(tolower(str_1[i-1])==tolower(str_2[j-1]))//若两者小写相同（忽略大小写）
+                {
+                    dp[i][j]=dp[i-1][j-1];//那么就退化为上一个的对比
+                }
+                else//不等
+                {
+                    if(str_1[i-1]=='*'
+                        && 
+                        (
+                        (str_2[j-1]>='0' && str_2[j-1]<='9') || (str_2[j-1]>='a' && str_2[j-1]<='z')
+                            ))//匹配0个或以上的字符（注：能被*和?匹配的字符仅由英文字母和数字0到9组成，下同）
+                    {
+                        dp[i][j]=dp[i-1][j-1] || dp[i][j-1] || dp[i-1][j];
+                    }
+                    else if(str_1[i-1]=='?'
+                    && 
+                    (
+                    (str_2[j-1]>='0' && str_2[j-1]<='9') || (str_2[j-1]>='a' && str_2[j-1]<='z')
+                        ))//匹配1个字符
+                    {
+                        dp[i][j]=dp[i-1][j-1];//那么就退化为上一个的对比
+                    }
+                    else
+                        dp[i][j]=false;//那么就直接是false了
+                }
+            }
+        }
+        if(dp[str_1.size()][str_2.size()])
+            std::cout<<"true";
+        else
+            std::cout<<"false";
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
 <h1>斐波那契数列</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -1065,92 +1152,6 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   </script>
   </code></pre>
   </details>
-
-<p><br></p>
-<h1>字符串通配符</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240818-104800.png" alt="Image description">
-  </div> 
-<figcaption><p>
-</p></figcaption>
-</figure>
-<details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-    #include <cctype>
-    #include <iostream>
-    #include <algorithm>
-    using namespace std;
-    
-    int main() {
-        string str_1, str_2;
-        cin>>str_1>>str_2;
-        // 不区分大小写的匹配结果.先全部转换为小写
-        // transform(str_1.begin(),str_1.end(),str_1.begin(),::tolower);
-        // transform(str_2.begin(),str_2.end(),str_2.begin(),::tolower);
-    
-    
-        // step1:创建dp表。str1中的第i个字符与第j个字符对比
-        bool dp[str_1.size()+1][str_2.size()+1];
-    
-        //step2:初始化dp表，如果有一个为0，那么都不是通配
-        dp[0][0]=true;
-        for(int i=1;i<str_1.size()+1;i++)
-        {
-            if(str_1[i-1]=='*')//注意查看是否为*的情况
-                dp[i][0]=dp[i-1][0];
-            else
-                dp[i][0]=false;
-        }
-        for(int j=1;j<str_2.size()+1;j++)
-        {
-            dp[0][j]=false;
-        }
-    
-        // step3:进行自下而上的状态转移，推导状态转移方程
-        for(int i=1;i<str_1.size()+1;i++)
-        {
-            for(int j=1;j<str_2.size()+1;j++)
-            {
-                // if(str_1[i-1]==str_2[j-1])//若两者相同
-                if(tolower(str_1[i-1])==tolower(str_2[j-1]))//若两者小写相同（忽略大小写）
-                {
-                    dp[i][j]=dp[i-1][j-1];//那么就退化为上一个的对比
-                }
-                else//不等
-                {
-                    if(str_1[i-1]=='*'
-                        && 
-                        (
-                        (str_2[j-1]>='0' && str_2[j-1]<='9') || (str_2[j-1]>='a' && str_2[j-1]<='z')
-                            ))//匹配0个或以上的字符（注：能被*和?匹配的字符仅由英文字母和数字0到9组成，下同）
-                    {
-                        dp[i][j]=dp[i-1][j-1] || dp[i][j-1] || dp[i-1][j];
-                    }
-                    else if(str_1[i-1]=='?'
-                    && 
-                    (
-                    (str_2[j-1]>='0' && str_2[j-1]<='9') || (str_2[j-1]>='a' && str_2[j-1]<='z')
-                        ))//匹配1个字符
-                    {
-                        dp[i][j]=dp[i-1][j-1];//那么就退化为上一个的对比
-                    }
-                    else
-                        dp[i][j]=false;//那么就直接是false了
-                }
-            }
-        }
-        if(dp[str_1.size()][str_2.size()])
-            std::cout<<"true";
-        else
-            std::cout<<"false";
-    }
-    
-</script>
-</code></pre>
-</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
