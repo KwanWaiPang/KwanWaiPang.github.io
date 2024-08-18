@@ -1151,8 +1151,94 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
       }
   </script>
   </code></pre>
-  </details>
+</details>
 
+<p><br></p>
+<h1>公共子串计算</h1>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240818-113759.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>最简单直接了当的方法应该是从最长的序列开始递减计算</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        string str_1, str_2;
+        cin>>str_1>>str_2;
+    
+        if(str_1.size()>str_2.size())
+            swap(str_1,str_2);//确保1为最短
+    
+        for(size_t len=str_1.size();len>=0;len--)
+        {
+            for(int i=0;i<=str_1.size()-len;i++)
+            {
+                string temp=str_1.substr(i,len);
+                if(str_2.find(temp)!=string::npos)//找到了
+                {
+                    std::cout<<temp.size();
+                    return 0;
+                }
+            }
+        }
+        std::cout<<"-1";
+    }
+</script>
+</code></pre>
+</details> 
+
+<details>
+<summary>这里也给出动态规划的解法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        string str_1, str_2;
+        cin>>str_1>>str_2;
+    
+        //step1:定义dp表。dp【i】【j】为对比第i与j个字符，为公共子串的长度
+        int dp[str_1.size()+1][str_2.size()+1];
+    
+        // step2:初始化状态
+        dp[0][0]=0;
+        for(int i=1;i<str_1.size()+1;i++)
+            dp[i][0]=0;
+        for(int j=1;j<str_2.size()+1;j++)
+            dp[0][j]=0;
+    
+        int max_len=0;//多加个记录会简单很多～
+        //进行状态转移
+        for(int i=1;i<str_1.size()+1;i++)
+        {
+            for(int j=1;j<str_2.size()+1;j++)
+            {
+                if(str_1[i-1]==str_2[j-1])//相等
+                {
+                    dp[i][j]=dp[i-1][j-1]+1;
+                }
+                else {
+                    dp[i][j]=0;//不等，那么最长的公共子串长度为0
+                }
+                if(dp[i][j]>max_len)
+                    max_len=dp[i][j];
+            }
+        }
+    
+        std::cout<<max_len;
+    }
+</script>
+</code></pre>
+</details> 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>

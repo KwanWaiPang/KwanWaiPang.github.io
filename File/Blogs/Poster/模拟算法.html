@@ -814,6 +814,66 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h1> 计算日期到天数转换</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240818-111810.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>闰年是可以整除4但不能整除100</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <map>
+    using namespace std;
+    
+    map<int, int> moonth_days
+    {
+        {1,31},
+        {2,28},//2月先统一为28天
+        {3,31},
+        {4,30},
+        {5,31},
+        {6,30},
+        {7,31},
+        {8,31},
+        {9,30},
+        {10,31},
+        {11,30},
+        {12,31}
+    };
+
+    //或：int moonth[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    int main() {
+        int year, moonth,day;
+        cin>>year>>moonth>>day;
+    
+        int result=day;
+    
+        for(int i=1;i<moonth;i++)
+        {
+            result+=moonth_days[i];
+        }
+    
+        if(moonth>2)
+        {
+            //根据年份判断，2月是否29，若是就要加1
+            if(year%4==0 && year%100!=0)//闰年是可以整除4但不能整除100？（公历年份是4的倍数，且不是100的倍数的）
+                result+=1;
+        }
+    
+        std::cout<<result;
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
