@@ -875,6 +875,48 @@
 </details>
 
 
+<p><br></p>
+<h1> 尼科彻斯定理</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240818-140703.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>数学归纳法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <cmath>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        int num;
+        cin>>num;
+    
+        //由数学归纳法可得，为num的平方为中心点,num个奇数
+        string result;
+        int middle_index=pow(num,2);
+        int start_index=middle_index-num;
+        int end_index=middle_index+num;
+    
+        for(int i=start_index;i<=end_index;i++)
+        {
+            if(i%2!=0)//为基数
+                result+=to_string(i)+'+';
+        }
+    
+        std::cout<<result.substr(0,result.size()-1);//去掉最后一个+号
+    }
+    
+</script>
+</code></pre>
+</details> 
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
