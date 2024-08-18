@@ -7,6 +7,26 @@
         text-align-last: left;
         text-justify: inter-word;
     }
+    #toc {
+      background: #f4f4f4;
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      /* margin-bottom: 20px; */
+      max-width: 100%; /* 限制目录框架的最大宽度 */
+      word-wrap: break-word; /* 强制超长单词换行 */
+      position: relative;
+      margin-left: auto; /* 使目录框架在页面中居右 */
+      margin-right: auto; /* 使目录框架在页面中居右 */
+      box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+  }
+  }
+  #toc ul {
+      list-style-type: none;
+      padding-left: 0; /* 去除默认的列表内边距 */
+  }
+  #toc ul ul {
+      margin-left: 20px; /* 子目录项的缩进 */
+  }
   </style>
 
 <!-- Head -->
@@ -104,21 +124,29 @@
       </nav>
     </header>
 
-    <!-- Content -->
-    <div class="container mt-5">
-      <!-- home.html -->
-      <div class="post">
-        <header class="post-header">
-          <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">栈类型题目</span>
-          </h1>
-          <p><br></p>
-          <!-- <p>
-            Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
-          </p> -->
-        </header>
+<header class="post-header">
+  <h1 align="center" class="post-title">
+    <span style="font-weight: 600;">栈类型题目</span>
+  </h1>
+  <!-- <p>
+    Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
+  </p> -->
+</header>
+
+<!-- Content -->
+<div class="container mt-5">
+<!-- home.html -->
+<div class="post">
+
+<!-- 插入目录 -->
+<div id="toc">
+  <h8>目录</h8>
+  <ul></ul>
+</div>
+      
 <article>
 <!-- 插入博客内容-->
+<p><br></p>
 <h1>引言</h1>
 <p>栈类型的题目应该是面试中比较常见的，毕竟思路对了基本马上可以做出来。关键其实只是对于堆的思路的理解。此处在总结栈类型的题目的时候也把队列也一并介绍
   <ul>
@@ -452,17 +480,91 @@
 </code></pre>
 </details>
 
+
+<p><br></p>
+<h1>矩阵乘法计算量估算</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/stack/WX20240818-100907.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。时间复杂度和空间复杂度都为O（N）关键点是：1、每对括号包含两个矩阵。2、矩阵的乘法数量应该是<mark>matrix_1.second*matrix_2.second*matrix_1.first</mark>也就是三个不一样的数字相乘啦</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <utility>
+    #include <vector>
+    #include <stack>
+    using namespace std;
+    
+    int main() {
+        int num;
+        cin>>num;
+        vector<pair<int,int>>matrix_group;
+        for(int i=0;i<num;i++)
+        {
+            int a,b;
+            cin>>a>>b;
+            auto each=make_pair(a, b);
+            matrix_group.push_back(each);
+        }
+        string input_str;
+        cin>>input_str;
+    
+        stack<pair<int,int>> string_stack;//定义一个栈来存行列
+        int result=0;
+        for(int i=0,j=0;i<input_str.size();i++)
+        {
+            if(input_str[i]=='(')//找到一个左括号，先入栈
+            {
+                int do_nothing;
+            }
+            else if(input_str[i]==')')//找到一个右括号，先出栈2个，必然为2个！！！！！
+            {
+                if(!string_stack.empty())
+                {
+                    auto matrix_2=string_stack.top();
+                    string_stack.pop();//取出后删掉
+                    auto matrix_1=string_stack.top();
+                    string_stack.pop();//取出后删掉
+                    //注意矩阵乘法的数目，
+                    result+=matrix_1.second*matrix_2.second*matrix_1.first;//matrix_1.second=matrix_2.first
+                    auto each_new=make_pair(matrix_1.first, matrix_2.second);
+                    string_stack.push(each_new);
+                }
+            }
+            else {//入栈
+                string_stack.push(matrix_group[j]);
+                j++;
+            }
+        }
+        std::cout<<result;
+    }
+    
+</script>
+</code></pre>
+</details> 
+
+
 <!-- <details>
 <summary>Click to expand the code</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
+
+</script>
 </code></pre>
 </details> -->
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 
-<!-- <figure style="text-align: center;">
+<!-- <p><br></p>
+<h1></h1>
+<figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/stack/" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -517,6 +619,25 @@
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+   <!-- 下面是插入目录的 -->
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toc = document.querySelector("#toc ul");
+        const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+        headers.forEach(header => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+            header.setAttribute("id", id);
+            a.setAttribute("href", `#${id}`);
+            a.textContent = header.textContent;
+            li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+    });
+</script>
 
 </body>
 </html>

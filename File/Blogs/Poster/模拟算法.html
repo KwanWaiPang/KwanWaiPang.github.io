@@ -708,6 +708,75 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h2> 矩阵乘法</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240818-091801.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.数组中的矩阵运算</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int x, y,z;
+        cin>>x>>y>>z;
+    
+        int a[x][y], b[y][z], result[x][z];
+    
+        for(int i=0;i<x;i++)
+        {
+            for(int j=0;j<y;j++)
+            {
+                cin>>a[i][j];
+            }
+        }
+    
+        for(int j=0;j<y;j++)
+        {
+            for(int k=0;k<z;k++)
+            {
+                cin>>b[j][k];
+            }
+        }
+    
+        for(int i=0;i<x;i++)
+        {
+            for(int k=0;k<z;k++)
+            {
+                int sum=0;
+                for(int j=0;j<y;j++)
+                {
+                    sum+=a[i][j]*b[j][k];
+                }
+                result[i][k]=sum;
+            }
+        }
+    
+        for(int i=0;i<x;i++)
+        {
+            for(int k=0;k<z;k++)
+            {
+                std::cout<<result[i][k]<<" ";
+            }
+            std::cout<<endl;
+        }
+    
+    
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details>
+
+
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
