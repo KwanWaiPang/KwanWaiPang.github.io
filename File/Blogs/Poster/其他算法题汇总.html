@@ -158,6 +158,9 @@
   //下面写法是跟容器类的find函数一样的
   find(str_2.begin(),str_2.end(),temp_char)!=str_2.end();//找到返回位置，否则返回end
 
+  //寻找某个字符的索引位置
+  int index=input_str.find('/');
+
 </script>
 </code></pre>
 
@@ -830,10 +833,136 @@
 </details>
 
 
+<p><br></p>
+<h2>set与map自动排列：整型数组合并</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240818-151049.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.两种解法均可～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <map>
+    #include <set>
+    using namespace std;
+    
+    int main() {
+        // map<int, int>input_group;//自动按照key排序了
+        set<int> input_group;//也是按key顺序排序的
+        int n1,n2;
+        int temp;
+        cin>>n1;
+        while(n1--)
+        {
+            cin>>temp;
+            // input_group[temp]++;
+            input_group.insert(temp);
+        }
+    
+        cin>>n2;
+        while(n2--)
+        {
+            cin>>temp;
+            // input_group[temp]++;
+            input_group.insert(temp);
+        }
+    
+        for(auto it=input_group.begin();it!=input_group.end();it++)
+            std::cout<<*it;
+    
+    }
+</script>
+</code></pre>
+</details>
 
 
-
-
+<p><br></p>
+<h2>set通过.count(each_str)来代替find寻值：字符串字符匹配</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240818-153344.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <set>
+    #include <algorithm>
+    using namespace std;
+    
+    int main() {
+        string str1,str2;
+        cin>>str1>>str2;
+    
+        // 注意是均出现过，而不是寻找一样顺序的
+        set<char> gruop;
+        for(auto each_str:str1)
+            gruop.insert(each_str);
+    
+        for(auto each_str:str2)
+        {
+            if(find(gruop.begin(),gruop.end(),each_str)!=gruop.end())
+                gruop.erase(each_str);//能找到就删掉
+        }
+    
+        if(gruop.empty())
+            std::cout<<"true";//都能找到
+        else
+         std::cout<<"false";
+    }
+    // 64 位输出请用 printf("%lld")
+</script>
+</code></pre>
+</details> 
+<details>
+<summary>Click to expand the code,第二种解法其实就是换个思路，感觉差不多～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <set>
+    #include <algorithm>
+    using namespace std;
+    
+    int main() {
+        string str1,str2;
+        cin>>str2>>str1;
+    
+        if(str1.size()<str2.size())
+            swap(str1,str2);//保证1为长序列。
+    
+        // 注意是均出现过，而不是寻找一样顺序的
+        set<char> gruop;
+        for(auto each_str:str1)
+            gruop.insert(each_str);
+    
+        //若短序列中出现了长序列没有出现的字符，那么就是短字符串的有字符未在长字符串中出现过
+        bool flag=true;
+        for(auto each_str:str2)
+        {
+            if(!gruop.count(each_str))//没找到
+            {
+                flag=false;
+                break;
+            }
+        }
+    
+        if(flag)
+            std::cout<<"true";//都能找到
+        else
+            std::cout<<"false";
+    }
+</script>
+</code></pre>
+</details> 
 
 
 

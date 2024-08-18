@@ -916,6 +916,47 @@
 </code></pre>
 </details> 
 
+<p><br></p>
+<h1> 将真分数分解为埃及分数</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240818-155129.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。最简单的解法～～～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    int main() {
+        //由于子需要输出一个结果，那么最直接的其实就是所有的分子只和，分母不变！
+        string input_str;
+        while(cin>>input_str)
+        {
+            int index=input_str.find('/');
+    
+            string fenzi=input_str.substr(0,index);//不包含index
+            string fenmu=input_str.substr(index+1,input_str.size()-index-1);
+            int num=stoi(fenzi);
+            string result;
+            while(num--)
+            {
+                result+="1/"+fenmu+'+';
+            }
+    
+            std::cout<<result.substr(0, result.size()-1)<<std::endl;
+        }
+    }
+    
+</script>
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
