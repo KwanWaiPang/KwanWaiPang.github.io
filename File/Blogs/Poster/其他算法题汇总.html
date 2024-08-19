@@ -162,7 +162,7 @@
   int index=input_str.find('/');
 
   //输出double的小数点
-  //fixed 操作符可能最重要的还是当它与 setprecision 操作符一起使用时，setprecision 即可以以一种新的方式显示。它将指定浮点数字的小数点后要显示的位数，而不是要显示的总有效数位数
+  //fixed 操作符与 setprecision 操作符一起使用时。将指定浮点数字的小数点后要显示的位数，而不是要显示的总有效数位数
   std::cout<<fixed <<setprecision(1)<<average;//固定一位小数（必须要有fixed）
 
 </script>
@@ -1102,6 +1102,59 @@
 </script>
 </code></pre>
 </details> 
+
+
+<p><br></p>
+<h2>将map转换为vector进行排序：字符统计</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240819-220315.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <map>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
+    
+    bool comparefunction(pair<char,int>a, pair<char,int>b)
+    {
+        if (a.second == b.second) { //当出现次数相同时
+            return a.first < b.first; //输出ASCII码较小的字符
+        }
+        return a.second > b.second;
+    }
+    
+    int main() {
+        string input_str;
+        cin>>input_str;
+        map<char,int> group;//map会自动按照key值排序
+        for(int i=0;i<input_str.size();i++)
+        {
+            group[input_str[i]]++;
+        }
+    
+        // 将 map 的内容复制到 vector 中
+        vector<pair<char, int>> copy_group(group.begin(), group.end());//初始化一个vector数组
+    
+        sort(copy_group.begin(),copy_group.end(),comparefunction);
+    
+        for(auto each:copy_group)
+        {
+            std::cout<<each.first;
+        }
+    }
+    
+</script>
+</code></pre>
+</details> 
+
 
 
 
@@ -2468,6 +2521,55 @@ print(str(result))
 </script>
 </code></pre>
 </details> 
+
+
+<p><br></p>
+<h2>自守数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240819-213013.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <cmath>
+    using namespace std;
+    
+    int main() {
+        int N;
+        cin>>N;
+        int num_count=0;
+        for(int i=0;i<=N;i++)
+        {
+            int temp_value=pow(i,2);//获取它的平方
+            string str_i=to_string(i);//当前数转换为字符
+            string str_temp=to_string(temp_value);//平方数转换为字符
+            //判断尾数是否相同
+            bool flag=true;
+            for(int i=0;i<str_i.size();i++)
+            {
+                if(str_i[i]!=str_temp[str_temp.size()-str_i.size()+i])
+                {
+                    flag=false;//有不等就是false
+                }
+            }
+            if(flag)//最终都是相同的
+                num_count++;
+    
+        }
+    
+        std::cout<<num_count;
+    }
+    
+</script>
+</code></pre>
+</details> 
+
 
 
 

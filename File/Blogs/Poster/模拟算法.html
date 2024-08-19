@@ -958,6 +958,99 @@
 </details>
 
 
+<p><br></p>
+<h1>等差数列</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240819-213916.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int n;
+        cin>>n;
+        int a1=2;
+        int d=3;//公差为3
+        int sum=0;
+        // sum=n*a1+n*(n-1)*d/2;//等差数列求和公式
+    
+        sum=a1;
+        n=n-1;//第一个放入
+        while(n--)
+        {
+            a1+=3;//每次加3;
+            sum+=a1;
+        }
+    
+        std::cout<<sum;
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h1>求解立方根</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240819-213916.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。关键点在于要考虑负号以及小数的情况。且浮点数<mark>left<=right</mark>会无限运行，需要给个小范围的阈值</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iomanip>
+    #include <iostream>
+    #include <cmath>
+    using namespace std;
+    
+    int main() {
+       double value;
+       cin>>value;
+    
+       //二分法
+    
+       //由于是开立方根，所以存在为负号的情况
+       //同时需要考虑小数的情况    
+       double left=min(-1.0, value);
+       double right=max(1.0, value);
+       double middle;//就是结果
+    //    while(left<=right)//由于是浮点数，为此永远都很接近不会相等
+        while(abs(right-left)>0.01)//因此给0.01。毕竟小数点保留1位而已（注意是相减大于某个小数）
+       {
+            middle=(left+right)/2.0;
+            double result=pow(middle,3);
+            if(result<value)
+            {
+                left=middle;
+            }
+            else if(result>value)
+            {
+                right=middle;
+            }
+            else//相等
+                break;
+       }
+       std::cout<<fixed<<setprecision(1)<<middle;
+    }
+    
+</script>
+</code></pre>
+</details>
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
