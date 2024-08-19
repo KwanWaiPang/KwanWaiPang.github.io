@@ -162,7 +162,8 @@
   int index=input_str.find('/');
 
   //输出double的小数点
-  std::cout<<fixed <<setprecision(1)<<average;//固定一位小数
+  //fixed 操作符可能最重要的还是当它与 setprecision 操作符一起使用时，setprecision 即可以以一种新的方式显示。它将指定浮点数字的小数点后要显示的位数，而不是要显示的总有效数位数
+  std::cout<<fixed <<setprecision(1)<<average;//固定一位小数（必须要有fixed）
 
 </script>
 </code></pre>
