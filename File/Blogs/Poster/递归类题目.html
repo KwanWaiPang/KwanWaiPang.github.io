@@ -562,6 +562,71 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>数组分组</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/recursion_algorithm/WX20240819-112814.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.关键是分解问题的思路～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    bool callback(int sum3, int sum5, vector<int> other, int index)
+    {
+        //递归终止的条件
+        if(index==other.size())
+        {
+            return sum3==sum5;//最终检查两个是否相等
+        }
+    
+        //要么加到3上，要么加到5上
+        return callback(sum3+other[index],sum5,other,index+1) || callback(sum3,sum5+other[index],other,index+1) ;
+    
+    }
+    
+    int main() {
+        int N;
+        cin>>N;
+    
+        //由于所有5的倍数必须在其中一个组中，所有3的倍数在另一个组中。
+        // 因此可以将输入先分为三个组，
+        int sum3=0;
+        int sum5=0;
+        vector<int> other;//其他数先放other中
+    
+        int temp;
+        while(N--)
+        {
+            cin>>temp;
+            if(temp%5==0)//5的倍数
+                sum5+=temp;
+            else if(temp%3==0)//3的倍数在另一个组中（不包括5的倍数）
+                sum3+=temp;
+            else
+                other.push_back(temp);
+        
+        }
+    
+        if(callback(sum3,sum5,other,0))
+        {
+            std::cout<<"true";
+        }
+        else {
+            std::cout<<"false";
+        }
+    }
+    
+</script>
+</code></pre>
+</details> 
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->

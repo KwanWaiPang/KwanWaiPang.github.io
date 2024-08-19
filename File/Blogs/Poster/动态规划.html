@@ -372,6 +372,61 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+
+<p><br></p>
+<h1>走方格的方案数</h1>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240819-105641.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。最基本的动态规划问题～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int n,m;
+        cin>>n>>m;//n为横向的格子数，m为竖向的格子数
+    
+        // step1:定义dp表，走到第i和j个格子的走法
+        int dp[n+1][m+1];
+    
+        //step2:初始化dp表，为0
+        dp[0][0]=0;//走法为0,不用走
+    
+        for(int i=1;i<n+1;i++)
+        {
+            dp[i][0]=1;//从00到i0只有一种走法，就是一直往右
+        }
+    
+        for(int j=1;j<m+1;j++)
+        {
+            dp[0][j]=1;//从00到0j只有一种走法，就是一直往下
+        }
+    
+        // step3:进行状态转移
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<m+1;j++)
+            {
+                dp[i][j]=dp[i-1][j]+dp[i][j-1];//只由这两种走法决定
+            }
+        }
+    
+        std::cout<<dp[n][m];
+        
+    }
+    
+</script>
+</code></pre>
+</details>
+
 <p><br></p>
 <h1>编辑距离</h1>
 <figure style="text-align: center;">
@@ -1239,6 +1294,10 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </script>
 </code></pre>
 </details> 
+
+
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>

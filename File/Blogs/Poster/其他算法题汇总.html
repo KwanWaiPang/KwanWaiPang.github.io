@@ -266,6 +266,91 @@
 </details>
 
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240819-120441.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>人民币的转换比罗马数字难多了，主要是还要考虑不同位的念法不一样。此处单纯给出代码，还没理思路～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include<iostream>
+    #include<string>
+    #include<vector>
+    using namespace std;
+    const vector<string> helper1 = {"零","壹","贰","叁","肆","伍","陆","柒","捌","玖"};
+    const vector<string> helper2 = {"元", "万", "亿"};
+    const vector<string> helper3 = {"", "拾", "佰", "仟"};
+    string parts(int num){
+        string str;
+        if(num > 0 && num <= 9)
+            str += helper1[num];
+        else if(num >= 10 && num <= 19){
+            if(num % 10 == 0)
+                str += helper3[1];
+            else
+                str += helper3[1] + helper1[num%10];
+        }else if(num >= 20 && num <= 99){
+            if(num % 10 == 0)
+                str += helper1[num/10] + helper3[1];
+            else
+                str += helper1[num/10] + helper3[1] + helper1[num%10];
+        }else if(num >= 100 && num <= 999){
+            if(num % 100 == 0)
+                str += helper1[num/100] + helper3[2];
+            else if(num % 100 <= 9)
+                str += helper1[num/100] + helper1[0] + helper1[num%100];
+            else
+                str += helper1[num/100] + helper3[2] + parts(num % 100);
+        }else if(num >= 1000 && num <= 9999){
+            if(num % 1000 == 0)
+                str += helper1[num/1000] + helper3[3];
+            else if(num % 1000 <= 99)
+                str += helper1[num/1000] + helper3[3] + helper1[0] + parts(num % 1000);
+            else
+                str += helper1[num/1000] + helper3[3] + parts(num % 1000);
+        }
+        return str;
+    }
+    int main(){
+        double money;
+        while (cin >> money){
+            money += 0.0001; // 此处+0.0001防止double转换int产生误差
+            // 分两步，第一步处理整数
+            int data = static_cast<int>(money);
+            vector<int> vec;
+            string res = "人民币";
+            while (data){
+                vec.push_back(data % 10000);
+                data /= 10000;
+            }
+            for (int i = vec.size() - 1; i >= 0; --i){
+                res += parts(vec[i]);
+                res += helper2[i];
+                if (i != 0 && i - 1 >= 0 && vec[i - 1] <= 999 && vec[i - 1] != 0)
+                    res += helper1[0];
+            }
+            // 第二步处理小数
+            int deci = static_cast<int>((money - static_cast<int>(money)) * 100);
+            if (deci == 0)
+                res += "整";
+            else if (deci < 10)
+                res += helper1[deci] + "分";
+            else if (deci % 10 == 0)
+                res += helper1[deci / 10] + "角";
+            else
+                res += helper1[deci / 10] + "角" + helper1[deci % 10] + "分";
+            cout << res << endl;
+        }
+        return 0;
+    }
+</script>
+</code></pre>
+</details>
+
 <p><br></p>
 <h1>进制转换</h1>
 <p>进制转换是非常经典的题目，其实关键点都是十进制与其他进制相互转换而已～</p>
@@ -2314,6 +2399,73 @@ print(str(result))
 </script>
 </code></pre>
 </details>
+
+<p><br></p>
+<h2>在字符串中找出连续最长的数字串</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240819-111335.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    #include <algorithm>
+    using namespace std;
+    
+    bool Comparefunction(string a, string b)
+    {
+        return a.size()>b.size();
+    }
+    
+    int main() {
+        string input_str;
+        while(cin>>input_str)
+        {
+            vector<string> group;
+            string temp;
+            for(int i=0;i<input_str.size();i++)
+            {
+                if(input_str[i]>='0' && input_str[i]<='9')//为数字
+                {
+                    temp+=input_str[i];
+                }
+                else//不为数字
+                {
+                    if(!temp.empty())//且不为空
+                    {
+                        group.push_back(temp);
+                        temp.clear();//清空
+                    }
+                }
+            }
+            //不要漏掉最后一个
+            if(!temp.empty())//且不为空
+            {
+                group.push_back(temp);
+                temp.clear();//清空
+            }
+    
+            sort(group.begin(),group.end(),Comparefunction);//排序
+            for(int i=0;i<group.size();i++)
+            {
+                if(group[i].size()==group[0].size())//长度一样
+                    std::cout<<group[i];
+            }
+            std::cout<<","<<group[0].size()<<std::endl;
+        }
+    }
+    
+</script>
+</code></pre>
+</details> 
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
