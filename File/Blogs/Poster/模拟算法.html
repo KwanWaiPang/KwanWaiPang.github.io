@@ -1099,6 +1099,94 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>Nim游戏</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240820-184201.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool canWinNim(int n) {
+            //数序归纳法：
+            // 我先手，一次可以拿1～3。要保证对手拿前有4块石头，这样无论它拿多少，最后都是我拿的。
+    
+            //必然为4的倍数.若可以整除4那么就我赢，否则对手赢
+            if(n%4==0)//整除了4，我先拿则必然输
+                return false;
+            return true;
+            // return (n%4!=0);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>石头游戏</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240820-184201.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool stoneGame(vector<int>& piles) {
+            //解法1:先蒙一个true，毕竟题目给的案例都是true，可能一蒙就对了，或者至少一半。
+    
+            //首先：石头的堆的数量为偶数，所以你们两人拿走的堆数一定是相同的。石头的总数为奇数，也就是你们最后不可能拥有相同多的石头，一定有胜负之分。
+            // 先手的必胜（毕竟题目说了，发挥最佳水平，提前算好就可以了！）
+            return true;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h1>灯泡开关</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/Simulation_algorithm/WX20240820-195800.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>没有很理解这个过程，单纯做一个记录吧</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int bulbSwitch(int n) {
+            // 数学归纳法：
+            // 将所有的灯泡从左到右依次编号为 1,2,⋯,n，
+            // 对于第 k 个灯泡，它被切换的次数恰好就是 k 的约数个数。如果 k 有偶数个约数，那么最终第 k 个灯泡的状态为暗；如果 k 有奇数个约数，那么最终第 k 个灯泡的状态为亮。
+    
+            return (int) sqrt(n);
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
