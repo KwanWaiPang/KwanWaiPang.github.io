@@ -159,15 +159,47 @@ result = []
 def backtrack(路径, 选择列表):
     if 满足结束条件:
         result.add(路径)
-        return
+        return //这也是一种回退
     
     for 选择 in 选择列表:
-        做选择：前序位置
+        做选择（尝试做这个选择）：前序位置
 
         backtrack(路径, 选择列表)
 
-        撤销选择：后序位置
+        撤销选择（退回到之前状态）：后序位置
 </code></pre>
+<p>下面框架更清晰些：</p>
+<pre><code>
+<script type='text/html' style='display:block'>
+  //state 表示问题的当前状态（或者说路径），choices 表示当前状态下可以做出的选择
+  void backtrack(State *state, vector<Choice *> &choices, vector<State *> &results) 
+  {
+    // 判断是否为解（也就是回溯终止的条件～）
+    if (isSolution(state)) 
+    {
+        recordSolution(state, results); // 记录解 
+        return;// 不再继续搜索
+    }
+
+    // 遍历所有选择
+    for (Choice choice : choices) 
+    {
+      // (如有)剪枝:判断选择是否合法
+      if (isValid(state, choice)) 
+      {
+          // 尝试:做出选择，更新状态 （将选择列表放入当前状态或者路径中）
+          makeChoice(state, choice); 
+
+          backtrack(state, choices, res); 
+          
+          // 回退:撤销选择，恢复到之前的状态 （将上面放入的选择从当前状态或者路径中拿掉）
+          undoChoice(state, choice);
+      }
+    }
+  }
+</script>
+</code></pre>
+
 
 <p><br></p>
 <h1>N 皇后问题</h1>
@@ -896,7 +928,86 @@ void dfs(...) {
 }
   </code></pre>
   
-
+  <p><br></p>
+  <h1>回溯与二叉树的遍历</h1>
+  <p>给定一棵二叉树，搜索并记录所有值为 7 的节点，请返回节点列表。
+    <br>对于此题，如果直接用二叉树的递归遍历，代码如下：
+  <pre><code>
+  <script type='text/html' style='display:block'>
+    void preOrder(TreeNode *root) {
+      if (root == nullptr) {
+          return;
+      }
+  
+      //在前序的位置上
+      if (root->val == 7) { 
+          // 记录解
+          res.push_back(root);//记录的为节点列表
+      }
+  
+      preOrder(root->left);
+      preOrder(root->right);
+  }
+  </script>
+  </code></pre>
+  
+  在二叉树中搜索所有值为 7 的节点，请返回根节点到这些节点的路径：
+  <pre><code>
+    <script type='text/html' style='display:block'>
+      void preOrder(TreeNode *root) 
+      {
+        //到达就返回
+        if (root == nullptr) {
+            return;
+        }
+  
+        // 尝试 
+        path.push_back(root);//在每次“尝试”中，通过将当前节点添加进 path 来记录路径;
+        
+        //记录结果及回溯调用
+        if (root->val == 7) {
+            // 记录解
+            res.push_back(path);
+        }
+        preOrder(root->left); 
+        preOrder(root->right); 
+  
+        // 回退 
+        path.pop_back();//在“回退”前，将该节点从 path 中弹出，以恢复本次尝试之前的状态。
+  }
+    </script>
+    </code></pre>
+  
+    进一步地，回溯问题通常包含一个或多个约束条件，约束条件通常可用于“剪枝”。
+    <br>
+    在二叉树中搜索所有值为 7 的节点，请返回根节点到这些节点的路径，并要求路径中不包含值为 3 的 节点。
+  <pre><code>
+  <script type='text/html' style='display:block'>
+    void preOrder(TreeNode *root) 
+    {
+      // 剪枝（若值为3，就不会放入了）
+      if (root == nullptr || root->val == 3) 
+      {
+        return; 
+      }
+      
+      // 尝试 
+      path.push_back(root); 
+  
+      //不为7的时候虽然不记录结果，但是放到了path中了！！！
+      if (root->val == 7) {
+        // 记录解
+        res.push_back(path);
+      }
+      preOrder(root->left); 
+      preOrder(root->right); 
+      
+      // 回退 path.pop_back();
+    }
+  </script>
+  </code></pre>
+  
+  </p>
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
