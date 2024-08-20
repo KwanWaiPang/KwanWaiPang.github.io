@@ -148,7 +148,6 @@
 <p>
   回溯算法和二叉树的递归（DFS） 算法非常类似，本质上就是一种暴力穷举算法。
   它的核心思想是从一个初始状态出发，暴力搜索所有可能的解决方案，当找到正确解的时候就将其记录，直到找到所有。
-  <!-- 回溯算法和 DFS 算法的细微差别是：回溯算法是在遍历「树枝」，DFS 算法是在遍历「节点」。 -->
   <br>
   注意：回溯算法跟动态规划一样，都是一种穷举的方式，但是不一样的是，动态规划一般是求最值（最优解），而回溯算法一般是求所有的可行解而非最值。
   <br>
@@ -168,6 +167,7 @@ def backtrack(路径, 选择列表):
 
         撤销选择（退回到之前状态）：后序位置
 </code></pre>
+
 <p>下面框架更清晰些：</p>
 <pre><code>
 <script type='text/html' style='display:block'>
@@ -499,7 +499,7 @@ def backtrack(路径, 选择列表):
             // first_index可以理解为固定不变的位置
             for(int i=first_index;i&ltlen;i++)
             {
-                swap(num[i],num[first_index]);//变换顺序
+                swap(num[i],num[first_index]);//变换num中两个索引的顺序
                 calculate(num, first_index+1, result,len);//下一次计算
                 swap(num[first_index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
             }
@@ -929,9 +929,12 @@ void dfs(...) {
   </code></pre>
   
   <p><br></p>
-  <h1>回溯与二叉树的遍历</h1>
-  <p>给定一棵二叉树，搜索并记录所有值为 7 的节点，请返回节点列表。
-    <br>对于此题，如果直接用二叉树的递归遍历，代码如下：
+  <h2>回溯与二叉树的递归</h2>
+<p>  回溯算法和 二叉树的递归（DFS） 算法的细微差别是：回溯算法是在遍历「树枝」，DFS 算法是在遍历「节点」。
+    通过下题来理解这个观点：
+  <br>
+  给定一棵二叉树，搜索并记录所有值为 7 的节点，请返回节点列表。
+    对于此题，如果直接用二叉树的递归遍历，代码如下：
   <pre><code>
   <script type='text/html' style='display:block'>
     void preOrder(TreeNode *root) {
