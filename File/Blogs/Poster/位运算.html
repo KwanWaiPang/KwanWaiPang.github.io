@@ -126,7 +126,7 @@
 
 <header class="post-header">
   <h1 align="center" class="post-title">
-    <span style="font-weight: 600;">题目</span>
+    <span style="font-weight: 600;">位运算</span>
   </h1>
 </header>
 
@@ -144,6 +144,126 @@
 <article>
 <!-- 插入博客内容-->
 
+<p><br></p>
+<h1>异或运算</h1>
+<p>异或运算有以下三个性质</p>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/others/WX20240820-211356.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<h2>数组中只出现一次的数字</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240820-211115.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.时间复杂度为O（N），空间复杂度为O（1）.如果是用hash table空间复杂度是O（N）不满足题目要求，虽然也可以run通所有的样例</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int singleNumber(vector<int>& nums) {
+    
+            // 时间复杂度为O（N），空间复杂度为O（1）常数量
+            int result=0;//由于第一个就要参与计算，所以必须初始化
+            for(auto num:nums)
+                result=result^num;
+            
+            return result;
+    
+            //下面方法也可行，但是时间与空间复杂度均为O（N）不满足题目要求
+            // unordered_map<int, int> group;
+            
+            // for(int i=0;i<nums.size();i++)
+            // {
+            //     group[nums[i]]++;
+            // }
+    
+            // int result;
+            // for(auto it=group.begin();it!=group.end();it++)
+            // {
+            //     if(it->second==1)
+            //         result= it->first;
+            // }
+    
+            // return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>丢失的数字</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/WX20240820-212148.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code，用异或解题～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int missingNumber(vector<int>& nums) {
+    
+           //用异或来求
+            int result=0;
+    
+            // a与a异或为0
+            //异或满足交换律和结合律
+            // 那么把这个result与数组内的每个值进行疑惑，就可以得出缺少哪个
+            for(int i=0;i<nums.size();i++)
+            {
+                //如果是一一对应的时候i^nums[i]=0，其余的只要存在都必然能交换找到匹配的
+                result=result^(i^nums[i]);
+            }
+    
+            // 实际上的元素的值应该是到nums.size()而不是nums.size()-1
+            int new_value= nums.size();
+            result=result^new_value;
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。另外一种解法就是等差数列求和～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int missingNumber(vector<int>& nums) {
+    
+            //等差数列求和公式
+            int value=nums.size()*(nums.size()+1)/2;
+    
+            int sum=0;
+            for(auto num:nums)
+                sum+=num;
+    
+            return value-sum;//就能找出缺少的那个数
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
@@ -158,7 +278,7 @@
 <h1></h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/others" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
