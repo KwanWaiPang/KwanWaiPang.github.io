@@ -1296,6 +1296,69 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details> 
 
 
+<p><br></p>
+<h1>Redraiment的走法</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240820-100411.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    int main() {
+        int n;
+        cin>>n;
+        int temp;
+        vector<int> group;
+        while(cin>>temp)
+        {
+            group.push_back(temp);
+        }
+    
+        //step1:确定dp表。dp[i]为对于第i阶，最多走多少步过来的
+        int dp[n+1];
+    
+        // step2:初始化dp表：在每一轮里面初始化
+    
+        //step3:进行状态转移
+        int max_step=0;
+        for(int i=1;i<n+1;i++)
+        {
+            dp[i]=1;//每阶走了多少步都初始化为1，就是在当前阶不动，
+    
+            //由于涉及到了前面是怎么的情况，为此必须遍历i之前的对比计算
+            for(int j=1;j<i;j++)//查看第j阶前面的情况
+            {
+                if(group[j-1]<group[i-1])//若小于i，那么就是可以从j走过来，故此+1
+                {
+                    dp[i]=max(dp[i],dp[j]+1);
+                }//反之，不能从i走到j
+                else
+                    dp[i]=max(dp[i],1);//只能在当前格,不走
+            }
+            //一圈对比完后，判断最大值
+            if(dp[i]>max_step)
+            {
+                max_step=dp[i];
+            }
+        }
+    
+        std::cout<<max_step;
+    
+    }
+    
+</script>
+</code></pre>
+</details>
+
 
 
 
