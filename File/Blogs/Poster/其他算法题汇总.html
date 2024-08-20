@@ -165,6 +165,10 @@
   //fixed 操作符与 setprecision 操作符一起使用时。将指定浮点数字的小数点后要显示的位数，而不是要显示的总有效数位数
   std::cout<<fixed <<setprecision(1)<<average;//固定一位小数（必须要有fixed）
 
+
+  //平时sort是从小到大排列，如果想从大到小排列，可以这样
+  sort(nums.begin(),nums.end(),greater<int>());//从大到小排列，当然也可以自定义函数来实现～
+
 </script>
 </code></pre>
 

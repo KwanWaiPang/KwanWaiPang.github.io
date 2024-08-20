@@ -937,6 +937,83 @@ class Solution {
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>有限制/有选择的回溯算法：括号生成</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack/WX20240820-163241.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>对于括号合法性的判断，主要是借助「栈」(详情请见博客<sup><a href="./栈类型题目.html">Link</a></sup>)，而对于括号的生成，一般都要利用回溯算法 进行暴力穷举。</p>
+<details>
+<summary>Click to expand the code。关键的解题点或者说约束点在于：对于一个「合法」的括号字符串组合 p，必然对于任何 0 <= i < len(p) 都有：子串 p[0..i] 中左括号的数量都大于或等于右括号的数量</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        void back(int n, int num_left, int num_right, string& path, vector<string>& result)
+        {
+            //回溯终止条件
+            if(num_left==num_right && num_left==n)
+            {
+                result.push_back(path);
+                return;
+            }
+    
+            //选择1:放入左括号
+            if(num_left<n)//可以放入左括号
+            {
+                // 选择
+                path.push_back('(');
+                num_left++;
+    
+                back(n, num_left, num_right, path, result);
+                
+                //撤销选择
+                path.pop_back();
+                num_left--;
+    
+            }
+    
+    
+            // 选择2:放入右括号
+            if(num_right<n)//可以放入右括号
+            {
+                if(num_left>num_right)//才是真正可以放入右括号。放完之后，num_left>=num_right
+                {
+                    path.push_back(')');
+                    num_right++;
+    
+                    back(n, num_left, num_right, path, result);
+    
+                    //撤销选择
+                    num_right--;
+                    path.pop_back();
+                }
+            }
+    
+        }
+    
+        vector<string> generateParenthesis(int n) {
+            // 1、一个「合法」括号组合的左括号数量一定等于右括号数量。
+            // 2、对于一个「合法」的括号字符串组合 p，必然对于任何 0 <= i < len(p) 都有：子串 p[0..i] 中左括号的数量都大于或等于右括号的数量。
+    
+            string path;
+            vector<string> results;
+            int num_left=0,num_right=0;
+            back(n, num_left, num_right, path, results);
+    
+            return results;
+    
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+
 
 <p><br></p>
 <h1>解数独</h1>
@@ -1026,6 +1103,375 @@ class Solution {
             backtrack(board,0,0);
         }
     };
+</script>
+</code></pre>
+</details> 
+
+
+<p><br></p>
+<h1>划分为k个相等的子集</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack/WX20240820-170620.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>下面方法可以解决，但是计算量较大，没有办法通过所有的测试案例，即使添加了排序也不行</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        bool backtrack(vector<int>& nums,vector<int>& path, int index, int target)
+        {
+            // 递归终止条件
+            if(index==nums.size())//放完了
+            {
+                //path中每个数字都是target
+                for(int i=0;i<path.size();i++)
+                {
+                    if(path[i]!=target)
+                        return false;
+                }
+    
+                return true;//通过全部检查那么就是true
+            }
+    
+            //选择的列表，放入第几个桶
+            for(int i=0;i<path.size();i++)
+            {
+                //进行剪枝
+                if(path[i]+nums[index]>target)//已经满了
+                    continue;
+                
+                //才可以放
+                //做选择，放入第i个桶
+                path[i]+=nums[index];
+    
+                if(backtrack(nums,path,index+1,target))//回溯开始处理下一个index+1
+                    return true;//一找到马上返回true
+    
+                //撤销选择
+                path[i]-=nums[index];
+    
+    
+            }
+            return false;//全部尝试完都不行，那就false
+    
+        }
+    
+        bool canPartitionKSubsets(vector<int>& nums, int k) {
+    
+            if(nums.size()<k)
+                return false;//根本没法分
+    
+            //首先根据nums与k可以确定每个子集的和为多少
+            int sum=0;
+            for(int i=0;i<nums.size();i++)
+            {
+                sum+=nums[i];
+            }
+            if(sum%k!=0)//若整除不了k，那么就是不满足
+                return false;
+            int average=sum/k;//必然要整除，因为每个桶内都是整数
+    
+            vector<int> path(k,0);//每个桶的数字之和
+            //由于只需要返回true与false，此处相当于没有result
+            int target=average;//每个桶数字的目标值。初始化为目标值，一直递减，等于0就是结果
+    
+            // 添加排序的结果可以更快的触发回溯中的剪枝，进而加快
+            sort(nums.begin(),nums.end(),greater<int>());//从大到小排列（把大的数放前面）
+    
+            return backtrack(nums,path,0,target);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。换个思路去实现，也不行，当然可以加上index，让i从index开始，这样可以通过更多样例，但最终还是超时</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        bool backtrack(vector<int>& nums, int k, int each_path, vector<bool>& used,int target)//index改为是球的索引
+        {
+            if(k==0)//全部桶都放满了
+                return true;
+            
+            if(each_path==target)//当前桶放满了
+            {
+                each_path=0;//下个桶要置0
+                // 装满了当前桶，递归穷举下一个桶的选择
+                // 让下一个桶从 nums[0] 开始选数字
+                return backtrack(nums,k-1,each_path,used,target);
+            }
+    
+            for(int i=0;i<nums.size();i++)
+            {
+                //剪肢:若这个球被用过了，或者超过阈值
+                if(used[i]==true || each_path+nums[i]>target)//当前球不能放
+                    continue;
+                
+                //做选择
+                each_path+=nums[i];
+                used[i]=true;//标记这个球被用过了
+    
+                if( backtrack(nums,k,each_path,used,target))
+                {
+                    return true;//若此次是结果就马上返回
+                }
+    
+                //撤销选择
+                each_path-=nums[i];
+                used[i]=false;
+            }
+            return false;//一轮下来也没有结果，就是false
+    
+        }
+    
+        bool canPartitionKSubsets(vector<int>& nums, int k) {
+    
+            if(nums.size()<k)
+                return false;//根本没法分
+    
+            //首先根据nums与k可以确定每个子集的和为多少
+            int sum=0;
+            for(int i=0;i<nums.size();i++)
+            {
+                sum+=nums[i];
+            }
+            if(sum%k!=0)//若整除不了k，那么就是不满足
+                return false;
+            int average=sum/k;//必然要整除，因为每个桶内都是整数
+    
+            vector<bool> used(nums.size(),false);//用于确认这个球是否被使用过
+            int each_path=0;//每个桶的结果（由于在递归中会被判断，为此必须进行初始化！）
+            int target=average;//每个桶数字的目标值。
+    
+            return backtrack(nums,k,each_path,used,target);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。下面就是让i从index开始，这样可以通过更多样例，但最终还是超时</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        bool backtrack(vector<int>& nums, int k, int each_path, vector<bool>& used, int index, int target)//index改为是球的索引
+        {
+            if(k==0)//全部桶都放满了
+                return true;
+            
+            if(each_path==target)//当前桶放满了
+            {
+                each_path=0;//下个桶要置0
+                index=0;
+                // 装满了当前桶，递归穷举下一个桶的选择
+                // 让下一个桶从 nums[0] 开始选数字
+                return backtrack(nums,k-1,each_path,used,index,target);
+            }
+    
+            for(int i=index;i<nums.size();i++)
+            {
+                //剪肢:若这个球被用过了，或者超过阈值
+                if(used[i]==true || each_path+nums[i]>target)//当前球不能放
+                    continue;
+                
+                //做选择
+                each_path+=nums[i];
+                used[i]=true;//标记这个球被用过了
+    
+                if( backtrack(nums,k,each_path,used,i+1,target))
+                {
+                    return true;//若此次是结果就马上返回
+                }
+    
+                //撤销选择
+                each_path-=nums[i];
+                used[i]=false;
+            }
+            return false;//一轮下来也没有结果，就是false
+    
+        }
+    
+        bool canPartitionKSubsets(vector<int>& nums, int k) {
+    
+            if(nums.size()<k)
+                return false;//根本没法分
+    
+            //首先根据nums与k可以确定每个子集的和为多少
+            int sum=0;
+            for(int i=0;i<nums.size();i++)
+            {
+                sum+=nums[i];
+            }
+            if(sum%k!=0)//若整除不了k，那么就是不满足
+                return false;
+            int average=sum/k;//必然要整除，因为每个桶内都是整数
+    
+            vector<bool> used(nums.size(),false);//用于确认这个球是否被使用过
+            int each_path=0;//每个桶的结果（由于在递归中会被判断，为此必须进行初始化！）
+            int target=average;//每个桶数字的目标值。
+    
+            return backtrack(nums,k,each_path,used,0,target);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。下面是最终的解决方法，参考别人的代码，找到了新的剪枝的策略！！！</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        bool backtrack(vector<int>& nums,vector<int>& path, int index, int target)
+        {
+            // 递归终止条件
+            if(index==nums.size())//放完了
+            {
+                // 其实这个地方不需要判断，因为当 index == num.length 时，所有球已经按要求装入所有桶，所以肯定是一个满足要求的解
+                // //判断path中每个数字都是target
+                // for(int i=0;i<path.size();i++)
+                // {
+                //     if(path[i]!=target)
+                //         return false;
+                // }
+    
+                return true;//通过全部检查那么就是true
+            }
+    
+            //选择的列表，放入第几个桶
+            for(int i=0;i<path.size();i++)
+            {
+                //剪枝2: 如果当前桶和上一个桶内的元素和相等，则跳过
+                // 原因：如果元素和相等，那么 nums[index] 选择上一个桶和选择当前桶可以得到的结果是一致的
+                if (i > 0 && path[i] == path[i - 1]) 
+                    continue;//参考思路：https://leetcode.cn/problems/partition-to-k-equal-sum-subsets/solutions/1/by-lfool-d9o7
+
+                //进行剪枝
+                if(path[i]+nums[index]>target)//已经满了
+                    continue;
+                
+                //才可以放
+                //做选择，放入第i个桶
+                path[i]+=nums[index];
+    
+                if(backtrack(nums,path,index+1,target))//回溯开始处理下一个index+1
+                    return true;//一找到马上返回true
+    
+                //撤销选择
+                path[i]-=nums[index];
+    
+    
+            }
+            return false;//全部尝试完都不行，那就false
+    
+        }
+    
+        bool canPartitionKSubsets(vector<int>& nums, int k) {
+    
+            if(nums.size()<k)
+                return false;//根本没法分
+    
+            //首先根据nums与k可以确定每个子集的和为多少
+            int sum=0;
+            for(int i=0;i<nums.size();i++)
+            {
+                sum+=nums[i];
+            }
+            if(sum%k!=0)//若整除不了k，那么就是不满足
+                return false;
+            int average=sum/k;//必然要整除，因为每个桶内都是整数
+    
+            vector<int> path(k,0);//每个桶的数字之和
+            //由于只需要返回true与false，此处相当于没有result
+            int target=average;//每个桶数字的目标值。初始化为目标值，一直递减，等于0就是结果
+    
+            // 添加排序的结果可以更快的触发回溯中的剪枝，进而加快
+            sort(nums.begin(),nums.end(),greater<int>());//从大到小排列（把大的数放前面）
+    
+            return backtrack(nums,path,0,target);
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+<p><br></p>
+<p>这题其实跟下面牛客网的题目很像，只是牛客网的这道题要求3的倍数和5的倍数不能放一起。通过递归即可解决～</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/recursion_algorithm/WX20240819-112814.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.关键是分解问题的思路～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    #include <vector>
+    using namespace std;
+    
+    bool callback(int sum3, int sum5, vector<int> other, int index)
+    {
+        //递归终止的条件
+        if(index==other.size())
+        {
+            return sum3==sum5;//最终检查两个是否相等
+        }
+    
+        //要么加到3上，要么加到5上
+        return callback(sum3+other[index],sum5,other,index+1) || callback(sum3,sum5+other[index],other,index+1) ;
+    
+    }
+    
+    int main() {
+        int N;
+        cin>>N;
+    
+        //由于所有5的倍数必须在其中一个组中，所有3的倍数在另一个组中。
+        // 因此可以将输入先分为三个组，
+        int sum3=0;
+        int sum5=0;
+        vector<int> other;//其他数先放other中
+    
+        int temp;
+        while(N--)
+        {
+            cin>>temp;
+            if(temp%5==0)//5的倍数
+                sum5+=temp;
+            else if(temp%3==0)//3的倍数在另一个组中（不包括5的倍数）
+                sum3+=temp;
+            else
+                other.push_back(temp);
+        
+        }
+    
+        if(callback(sum3,sum5,other,0))
+        {
+            std::cout<<"true";
+        }
+        else {
+            std::cout<<"false";
+        }
+    }
+    
 </script>
 </code></pre>
 </details> 
