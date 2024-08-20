@@ -938,6 +938,98 @@ class Solution {
 </details>
 
 
+<p><br></p>
+<h1>解数独</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/backtrack/WX20240820-162253.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code.这个回溯算法需要带return bool的，一找到结果马上停止进一步搜索。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool vailed_function(vector<vector<char>>& board, int i, int j, char value) 
+        {
+            for (int n = 0; n < 9; n++) {
+                // 判断行是否存在重复
+                if (board[i][n] == value) return false;
+                // 判断列是否存在重复
+                if (board[n][j] == value) return false;
+                // // 判断 3 x 3 方框是否存在重复
+                // if (board[(i/3)*3 + n/3][(j/3)*3 + n%3] == value)
+                //     return false;
+            }
+    
+            // // //查看矩阵范围(以3为一个大格)
+            for(int x=(i/3)*3;x<(i/3+1)*3;x++)//整除3
+            {
+                for(int y=(j/3)*3;y<(j/3+1)*3;y++)
+                {
+                    if(board[x][y]==value)
+                        return false;
+                }
+            }
+            return true;//上面都通过了就是true
+        }
+    
+        //此回溯需要有返回值
+        bool backtrack(vector<vector<char>>& board, int i, int j) 
+        {
+            //回溯的终止条件：到达了边缘
+            if(i==board.size())//注意i=9是越界了～
+            {
+                return true;//填完了～
+            }
+    
+            //按照列索引
+            if(j==board[0].size())//当前列满了
+            {
+                return backtrack(board,i+1,0);//j回0
+            }
+    
+            // 如果有预设数字，不用我们穷举（不要漏了）
+            if (board[i][j] != '.') {
+                return backtrack(board, i, j + 1);
+            } 
+    
+            //遍历选择列表（注意只填1～9）
+            for(char value='1';value<='9';value++)
+            {
+                //进行剪枝判断是否有误
+                if(vailed_function(board,i,j,value)==false)
+                    continue;//若不满足条件就跳掉
+                
+                //做选择
+                board[i][j]=value;
+    
+                if(backtrack(board,i,j+1))//回溯调用
+                {
+                    return true;// 如果找到一个可行解，立即结束
+                }
+    
+                //撤销选择
+                board[i][j]='.';//注意恢复为"."就是撤销选择
+            }
+            
+            // 穷举完 1~9，依然没有找到可行解，此路不通
+            return false;
+        }
+        void solveSudoku(vector<vector<char>>& board) {
+            //输入为9*9的键盘，空白格用 '.' 表示。
+            // 需要在原地修改棋盘，将空白格子填上数字，得到一个可行解。
+    
+            backtrack(board,0,0);
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
 
 <p><br></p>
 <h1>总结：回溯算法与递归算法的区别</h1>
