@@ -485,37 +485,92 @@ def backtrack(路径, 选择列表):
 <details>
 <summary>Click to expand the code。注意：此题的全排列问题不包含重复的数字，下一题则是包含重复数字。递归的时间复杂度为O（N！）加上递归中每个有for循环，故此应该是O（N*N！）。空间复杂度应该是O（N）</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
+class Solution {
+  public:
+      void calculate(vector<int>& num, int index, vector<vector<int>> &results)
+      {
+          //遍历完了，退出
+          if(index==num.size()-1) //当index等于最后一个字节时，把对调后的num放入结果中(是否减1结果一样～)
+          {
+              results.push_back(num);
+              return;
+          }
+  
+          // index可以理解为一直递增，避免重复使用
+          for(int i=index;i<num.size();i++)
+          {
+              //做选择
+              swap(num[i],num[index]);//变换num中两个索引的顺序，只是采用swap代替了path数组，少了一个中间变量
+
+              calculate(num, index+1, results);//下一次计算，注意是index+1。
+
+              //撤销选择
+              swap(num[index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
+          }
+          
+      }
+  
+      vector<vector<int>> permute(vector<int>& nums) {
+  
+          //采用递归的方法时间复杂度为O（N！）
+          vector<vector<int>> results;
+          calculate(nums,0, results);
+          return results;
+      }
+  };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>下面代码跟上面的区别只是上面通过索引index以及swap来保证交互的两个不会重复被用，此处用vector<bool>来记录是否被用过。本质上是一样的。以及递归空间复杂度也是O(N)所以并没有差别～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
   class Solution {
     public:
-        void calculate(vector&ltint&gt& num, int first_index, vector&ltvector&ltint&gt&gt &result, const int len)
+    
+        void backtrack(vector<int>& nums, vector<bool>& used, vector<int>& path,vector<vector<int>>& results)
         {
-            //遍历完了，退出
-            if(first_index==len-1) //当index等于最后一个字节时，把对调后的num放入结果中
+            //回溯回调的终止条件
+            if(path.size()==nums.size())//全部用完了
             {
-                result.push_back(num);
+                results.push_back(path);
                 return;
             }
     
-            // first_index可以理解为固定不变的位置
-            for(int i=first_index;i&ltlen;i++)
+            for(int i=0;i<nums.size();i++)//从列表中选择
             {
-                swap(num[i],num[first_index]);//变换num中两个索引的顺序
-                calculate(num, first_index+1, result,len);//下一次计算
-                swap(num[first_index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
+                if(used[i]==true)
+                    continue;//若当前已经被用过了。就剪枝
+    
+                //前序位置做选择
+                path.push_back(nums[i]);
+                used[i]=true;//标记用过
+    
+                backtrack(nums, used, path,results);
+    
+                //后序位置撤销选择
+                path.pop_back();
+                used[i]=false;//撤销标记
             }
-            
         }
     
-        vector&ltvector&ltint&gt&gt permute(vector&ltint&gt& nums) {
+        vector<vector<int>> permute(vector<int>& nums) {
     
-            //采用递归的方法时间复杂度为O（N！）
-            vector&ltvector&ltint&gt&gt result;
-            calculate(nums,0, result,nums.size());
-            return result;
+            vector<bool> used(nums.size(),false);//用于标记当前元素是否被使用过
+            vector<vector<int>> results;//记录所有的结果
+            vector<int> path;//记录每次的结果
+    
+            backtrack(nums, used, path,results);
+            return results;
+    
         }
     };
+</script>
 </code></pre>
-</details>
+</details> 
+
 
 <p><br></p>
 <h3>4.子集（元素可重不可复选）</h3>
