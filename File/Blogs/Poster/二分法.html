@@ -293,6 +293,56 @@ public:
 </details>
 
 
+<p><br></p>
+<h1>求最小公倍数</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/WX20240820-091533.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。a*b一定是a、b的公倍数，但不一定是最小的</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    #include <iostream>
+    using namespace std;
+    
+    int main() {
+        int a, b;
+        cin>>a>>b;
+    
+        // // 方法1:暴力匹配
+        for(int i=max(a,b); ;i++)//从较大者开始
+        {
+            int beishu=i;
+            if(beishu%a==0 && beishu%b==0)
+            {
+                std::cout<<beishu;
+                return 0;
+            }
+        }
+    
+        // //方法2:最小公倍数一定是较大者的整数倍
+        // //a*b一定是a、b的公倍数，但不一定是最小的
+        // for(int i=1;i<=min(a,b);i++)
+        // {
+        //     int beishu=i*max(a,b);//较大者的整数倍。最大也是到min(a,b)*max(a,b)
+        //     if(beishu%a==0 && beishu%b==0)
+        //     {
+        //         std::cout<<beishu;
+        //         return 0;
+        //     }
+        // }
+    
+    }
+</script>
+</code></pre>
+</details>
+
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
