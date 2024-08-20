@@ -709,6 +709,66 @@
 </details>
 
 <p><br></p>
+<h2>高效寻找素数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/WX20240817-200604.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool isPrimes(int input_value)
+        {
+                
+            //素数只能被自身和1整除
+            for(int i=2;i*i<=input_value;i++)
+            {
+                if(input_value%i==0)//能被整除
+                    return false;
+            }
+            return true;
+        }
+    
+        int countPrimes(int n) {
+            if(n<2)
+                return 0;
+            int result=0;
+    
+            vector<bool> isPrimegroup(n, true);//初始化全部为true
+            for (int i = 2; i < n; i++) 
+            {
+                if (isPrimegroup[i]) //如果i是素数
+                {
+                    result++;
+                    //那么全部的j=2*i;j=j+i都不是素数
+                    for (int j = 2 * i; j < n; j += i) {
+                        isPrimegroup[j] = false;
+                    }
+                }
+            }
+            
+            // //这种做法是最基本的，但会超时
+            // for(int i=2;i<n;i++)//从2开始
+            // {
+            //     if(isPrimes(i))//是数素就统计一下
+            //         result++;
+            // }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
 <h1> 矩阵乘法</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
