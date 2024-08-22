@@ -428,18 +428,19 @@
 </figure> 
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。时间与空间复杂度都是O（N）</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
   class Solution {
     public:
         string simplifyPath(string path) {
-            vector&ltstring&gt str_group;
+    
+            // if(path.back()!='/')
+            //     path=path+'/';//在结尾处加上'/'方便对路径的字母进行分组放于str_group中
+
+            vector<string> str_group;
             string temp_str;
-    
-            if(path.back()!='/')
-                path=path+'/';//在结尾处加上'/'方便对路径的字母进行分组放于str_group中
-    
-            for(int i=0;i&ltpath.size();i++)//进行路径的分割
+            for(int i=0;i<path.size();i++)//进行路径的分割
             {
                 if(path[i]=='/') //遇到斜杆
                 {
@@ -452,13 +453,16 @@
                 else
                     temp_str=temp_str+path[i];
             }//这样就实现了以斜杆划分,并且不包含斜杆
+            //存入最后一个
+            if(!temp_str.empty())
+                str_group.push_back(temp_str);//若不为空，存进去（不要漏掉了！！！）
     
-            stack&ltstring&gt path_stack;//定义栈
-            for(int i=0;i&ltstr_group.size();i++)//遍历分割后的路径
+            stack<string> path_stack;//定义栈
+            for(int i=0;i<str_group.size();i++)//遍历分割后的路径
             {
                 string temp_str=str_group[i];;
-                if(!temp_str.empty())
-                {
+                // if(!temp_str.empty())//作为double check
+                // {
                     if(temp_str==".")//若为一个点，不处理
                     {}
                     else if (temp_str=="..")//如果连续两个点，那么就是要切换到上一级目录
@@ -468,7 +472,7 @@
                     }
                     else//上面都不满足，就应该是正常字符，所以输入作为路径
                         path_stack.push(temp_str); //放入栈中
-                }
+                // }
             }
     
             //最终结果存放到string中
@@ -478,18 +482,19 @@
                 output_str = "/" + path_stack.top() + output_str;//注意顺序,加到当前的前面
                 path_stack.pop();
             }
-            return output_str.empty()? "/":output_str;
+            return output_str.empty()? "/":output_str;//若为空那么只有一个斜杆
         }
     };
+</script>
 </code></pre>
-</details>
+</details> 
 
 
 <p><br></p>
 <h1>矩阵乘法计算量估算</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/stack/WX20240818-100907.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/stack/WX20240818-100907.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -522,7 +527,7 @@
         int result=0;
         for(int i=0,j=0;i<input_str.size();i++)
         {
-            if(input_str[i]=='(')//找到一个左括号，先入栈
+            if(input_str[i]=='(')//找到一个左括号，不做任何操作
             {
                 int do_nothing;
             }
