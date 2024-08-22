@@ -309,10 +309,11 @@
                 if(k&gt0)//如果还需要继续删除位数
                     k--;
                 else //只有当不需要去除数字的时候才加入
-                    result+=stack_char.top();//注意这个比下面的空间复杂度耕地
+                    result+=stack_char.top();//注意这个比下面的空间复杂度更低
                     // result=stack_char.top()+result; //每次赋值导致更高的内存消耗
                 stack_char.pop();//弹出栈顶
             }
+            //栈是反过来的因此需要反转一下
             reverse(result.begin(), result.end());//stl中的reverse函数，需要反转一下。因为栈是逆过来的
             return result.empty()? "0":result;
     
