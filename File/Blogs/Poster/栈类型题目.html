@@ -237,36 +237,39 @@
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。保持栈底元素为当前已经遍历过的元素中「最后一个没有被匹配的右括号的下标」这样才是连续成对的。空间复杂度和时间复杂度都为O（N）</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
   class Solution {
     public:
-        int longestValidParentheses(string s) {
-            int max_len=0;//最长的结果
-            stack&ltint&gt index;
-            index.push(-1);
-            for(int i=0;i&lts.size();i++)
+        int longestValidParentheses(string s) {//输入为只包含 '(' 和 ')' 的字符串
+    
+            int max_len=0;//最长有效（格式正确且连续）
+            stack<int> stack_index;//记录index索引的
+    
+            stack_index.push(-1);//初始化先push一个-1的索引。作为「最后一个没有被匹配的右括号的下标」
+    
+            //左右括号成一对，记录的是当前的右括号与上一个不成对的右括号
+            for(int i=0;i<s.size();i++)
             {
-                // 注意：输入只有左右括号
-                if(s[i]=='(')
-                    index.push(i);//放入当前的index
-                else//当为右括号的时候
+                if(s[i]==')')//若是右括号
                 {
-                    index.pop();//先删除，由于最开始push了-1
-                    if(index.empty())//当前右括号前面没有东西
+                    stack_index.pop();//删掉这个右括号前一个的左括号（弹出一个栈顶表示匹配了当前的括号！）
+                    if(!stack_index.empty())//若不为空
                     {
-                        index.push(i);//这其实就是进行了下一次的操作了
+                        int range=i-stack_index.top();
+                        max_len=max(max_len,range);//记录连续的～
                     }
-                    else
-                    {
-                        // 通过index来记录长度
-                        max_len=max(max_len,i-index.top());
-                    }
+                    else//若为空说明：当前的右括号为没有被匹配的左括号，我们将其下标放入栈中来更新我们之前提到的「最后一个没有被匹配的右括号的下标」
+                        stack_index.push(i);//存入，这个右括号的索引。为当前最后一个没有被匹配的右括号（下次会先删除）
                 }
+                else
+                    stack_index.push(i);//存入左括号的索引
             }
             return max_len;
         }
     };
+</script>
 </code></pre>
 </details>
 
