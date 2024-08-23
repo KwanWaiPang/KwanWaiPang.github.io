@@ -1216,7 +1216,7 @@ class Solution {
 </details>
 
 <p><br></p>
-<h3>反转链表</h3>
+<h3>反转链表：全部</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/微信截图_20240724184408.png" alt="Image description">
@@ -1299,8 +1299,39 @@ class Solution {
 </script>
 </code></pre>
 </details>
+<details>
+<summary>下面更好理解～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        ListNode* reverseList(ListNode* head) {
+    
+            if(head==nullptr || head->next==nullptr)
+                return head;
+            
+            ListNode *pre=nullptr,*cur=head;
+            while(cur!=nullptr)
+            {
+                ListNode *nxt=cur->next;
+    
+                //上一个放到当前的下一个去，进行节点的反转
+                cur->next=pre;
+    
+                // 更新节点的位置
+                pre=cur;//当前变为下一次的上一个
+                cur=nxt;//下一个放到当前
+            }
+    
+            return pre;
+        }
+    };
+</script>
+</code></pre>
+</details> 
 
 <p><br></p>
+<h3>反转链表：范围内</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/微信截图_20240724185147.png" alt="Image description">
@@ -1369,6 +1400,71 @@ class Solution {
   <!-- </script> -->
 </code></pre>
 </details>
+
+<p><br></p>
+<h3>K个一组反转链表</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/WX20240823-214906.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+
+  class Solution {
+    public:
+        //反转a到b的节点(其实就是head到null的变化版本)
+        ListNode* reverseab(ListNode* a, ListNode* b)
+        {
+            if(a==nullptr || a->next==nullptr)
+                return a;
+    
+            ListNode *pre=nullptr, *cur=a;
+            while(cur!=b)
+            {
+                ListNode *nxt=cur->next;//获取当前的下一个
+                //逐个节点反转
+                cur->next=pre;//将上一个放到当前的下一个去
+    
+                //更新节点的位置
+                pre=cur;//当前这个已经变为上一个了（下次用）
+                cur=nxt;//当前的下一个变为当前个
+    
+            }
+            return pre;//返回反转后的节点头
+        }
+    
+        ListNode* reverseKGroup(ListNode* head, int k) {
+            //满足k个反转，不满足k的部分不反转
+    
+            ListNode *a=head;
+            ListNode *b=head;
+            //让b走k步
+            for(int i=0;i<k;i++)
+            {
+                if(b==nullptr)//先检查，不足k个不需要反转
+                    return head;//不需要反转，直接返回
+                b=b->next;
+            }
+    
+            // 反转a～b之间的 k 个元素
+            ListNode *newHead = reverseab(a, b);//注意里面进行了反转，故此a->next应该指向递归的新结果
+            // 递归反转后续链表并连接起来
+            a->next=reverseKGroup(b, k);//可以理解为上面把a～b改为了b～a为此应该是a->next接下一个
+    
+            return newHead;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 
 <p><br></p>
 <h3>两两交换链表中的节点</h3>
