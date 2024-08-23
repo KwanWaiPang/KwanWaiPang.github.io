@@ -221,6 +221,7 @@
 <details>
 <summary>解法1：采用unique函数。时间复杂度O(Nlogn)，空间复杂度为O（1）</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         int removeDuplicates(vector<int>& nums) {
@@ -235,19 +236,21 @@
         return iter-nums.begin();//这就是不重复的元素的个数
         }
     };    
+  </script>
 </code></pre>
 </details>
 
 <details>
 <summary> 解法2：采用键值对,时间复杂度为O（n），由于需要一个键值对，空间复杂度估计也是O（n）</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
-        int removeDuplicates(vector&ltint&gt& nums) {
+        int removeDuplicates(vector<int>& nums) {
     
             // 解法2：采用键值对,时间复杂度为O（n）
             map<int,int> group;//会自动根据键的大小进行排序，而输入的数组本身就是递增的。所以可以使用
-            for(int i=0;i&ltnums.size();i++)
+            for(int i=0;i<nums.size();i++)
             {
                 group[nums[i]]++;
             }
@@ -261,7 +264,7 @@
             return nums.size();
         }
     };
-    
+  </script>
 </code></pre>
 </details>
 
@@ -428,7 +431,7 @@
 <pre><code>
   class Solution {
     public:
-        vector<int> twoSum(vector&ltint&gt& numbers, int target) {
+        vector&ltint&gt twoSum(vector&ltint&gt& numbers, int target) {
     
              // 由于数组已经按照非递减顺序排序，故此可以用左右指针法
              int left=0, right=numbers.size()-1;
@@ -460,7 +463,7 @@
 <pre><code>
   class Solution {
     public:
-        vector<int> twoSum(vector<int>& numbers, int target) {
+        vector&ltint&gt twoSum(vector&ltint&gt& numbers, int target) {
             
             int value_a,value_b;
             vector&ltint&gt result;
@@ -502,7 +505,7 @@
 <pre><code>
   class Solution {
     public:
-        vector<int> twoSum(vector<int>& nums, int target) {
+        vector&ltint&gt twoSum(vector&ltint&gt& nums, int target) {
             
             int value_a,value_b;
             vector&ltint&gt result;
@@ -535,7 +538,7 @@
 <pre><code>
   class Solution {
     public:
-        vector<int> twoSum(vector<int>& nums, int target) {
+        vector&ltint&gt twoSum(vector&ltint&gt& nums, int target) {
             
             int value_a,value_b;
             vector&ltint&gt result;
@@ -576,7 +579,7 @@
 <pre><code>
   class Solution {
     public:
-        void reverseString(vector<char>& s) {
+        void reverseString(vector&ltchar&gt& s) {
             //采用reverse函数
             reverse(s.begin(),s.end());
         }
