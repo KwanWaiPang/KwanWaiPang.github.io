@@ -899,10 +899,11 @@ class Solution {
 </figure>
 <p>
   如果 fast 最终能正常走到链表末尾，说明链表中没有环；如果 fast 走着走着竟然和 slow 相遇了，那肯定是 fast 在链表中转圈了，说明链表中含有环。
-  时间复杂度为O（N）与空间为O（1）
 </p>
 <details>
+  <summary>时间复杂度为O（N）与空间为O（1）</summary>
   <pre><code>
+    <script type='text/html' style='display:block'>
     /**
     * Definition for singly-linked list.
     * struct ListNode {
@@ -931,13 +932,14 @@ class Solution {
            
        }
    };
+  </script>
   </code></pre>
   </details>
-<p>
-  也可以采用hash table的形式来查看当前的节点是否已经访问过，如果访问过则说明有环，时间复杂度为O（N），空间复杂度为O（N）
-</p>
+
 <details>
+  <summary>也可以采用hash table的形式来查看当前的节点是否已经访问过，如果访问过则说明有环，时间复杂度为O（N），空间复杂度为O（N）</summary>
   <pre><code>
+    <script type='text/html' style='display:block'>
     class Solution {
       public:
           bool hasCycle(ListNode *head) {
@@ -954,6 +956,7 @@ class Solution {
               return false;
           }
       };
+    </script>
   </code></pre>
   </details>
 <p>进阶版：如果链表中含有环，如何计算这个环的起点？</p>
