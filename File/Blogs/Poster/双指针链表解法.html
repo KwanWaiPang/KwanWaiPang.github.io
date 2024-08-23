@@ -377,14 +377,14 @@ public:
     <figcaption><p>
     </p></figcaption>
 </figure>
-<p>
-看到这道题的时候，第一个解决思路如下。将原链表一分为2，然后把大的链表放在小的链表后。通过两个链表，一个用来存放小于阈值的，另外一个用来存放大于阈值的。最后再把两个链表合并起来。
+<details>
+  <summary>
+    看到这道题的时候，第一个解决思路如下。将原链表一分为2，然后把大的链表放在小的链表后。通过两个链表，一个用来存放小于阈值的，另外一个用来存放大于阈值的。最后再把两个链表合并起来。
 <br>
 注意需要<mark> p_bigger->next = nullptr; </mark>来处理尾节点，避免循环引用。由于当前节点p_bigger复用的是原链表head的节点，而其 next 指针可能指向一个小于 x 的节点，需要切断这个引用。
 <br>
 时间复杂度为O（n），空间复杂度为O（1）
-</p>
-<details>
+  </summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   /**
@@ -435,16 +435,17 @@ public:
   </code></pre>
 </details>
 
-<p>
-下面解法则是直接在循环的时候就断开原链表的每个节点的next指针。
-<br>
-原因是采用的是链表赋值，那么原来的链表的next指针可能就继续指向其他节点，这样就很容易形成类似环路的结构。所以在赋值的时候，需要把原链表的每个节点的next指针断开，置为空。
-（PS：若通过val关键字赋值，而不是用next指针赋值，那也可以解决）
-<br>
-总的来说，如果我们需要把原链表的节点接到新链表上，而不是 new 新节点来组成新链表的话，那么断开节点和原链表之间的链接可能是必要的。但凡遇到这种情况，就把原链表的节点断开，这样就不会出错了。
-</p>
 <details>
+  <summary>
+      下面解法则是直接在循环的时候就断开原链表的每个节点的next指针。
+      <br>
+      原因是采用的是链表赋值，那么原来的链表的next指针可能就继续指向其他节点，这样就很容易形成类似环路的结构。所以在赋值的时候，需要把原链表的每个节点的next指针断开，置为空。
+      （PS：若通过val关键字赋值，而不是用next指针赋值，那也可以解决）
+      <br>
+      总的来说，如果我们需要把原链表的节点接到新链表上，而不是 new 新节点来组成新链表的话，那么断开节点和原链表之间的链接可能是必要的。但凡遇到这种情况，就把原链表的节点断开，这样就不会出错了。
+  </summary>
   <pre><code>
+  <script type='text/html' style='display:block'>
     class Solution {
       public:
           ListNode* partition(ListNode* head, int x) {
@@ -452,7 +453,7 @@ public:
               ListNode* result=new ListNode(0);//result->next就为结果
               ListNode* p_result=result;//指结果的指针
               ListNode* bigger=new ListNode(0);//bigger->next（存放大于目标值的链表）
-              ListNode* p_bigger=bigger;//指向存放大于目标值的链表
+              ListNode* p_bigger=bigger;//指向存放大于等于目标值的链表
       
               while(head!=nullptr)//一直遍历直到最后
               {
@@ -482,11 +483,14 @@ public:
               return result->next;
           }
       };
+    </script>
     </code></pre>
-  </details>
-<p>下面就是上面提到的，通过new ListNode来给指针赋值，那么就不需要每次额外断掉</p>
+</details>
+
 <details>
+  <summary>下面就是上面提到的，通过new ListNode来给指针赋值，那么就不需要每次额外断掉</summary>
   <pre><code>
+    <script type='text/html' style='display:block'>
     class Solution {
       public:
           ListNode* partition(ListNode* head, int x) {
@@ -520,6 +524,7 @@ public:
               return result->next;
           }
       };
+    </script>
     </code></pre>
 </details>
 
