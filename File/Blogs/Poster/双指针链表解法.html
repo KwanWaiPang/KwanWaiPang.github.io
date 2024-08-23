@@ -967,9 +967,10 @@ class Solution {
       <figcaption><p>
       </p></figcaption>
   </figure>
-<p>此题用哈希表解更加简单，空间复杂度与时间复杂度都是O(N)</p>
 <details>
+  <summary>此题用哈希表解更加简单，空间复杂度与时间复杂度都是O(N)</summary>
   <pre><code>
+    <script type='text/html' style='display:block'>
     class Solution {
       public:
           ListNode *detectCycle(ListNode *head) {
@@ -985,6 +986,7 @@ class Solution {
               return NULL;
           }
       };
+    </script>
   </code></pre>
   </details>
 <p>若要采用快慢指针，思路相对比较绕，请见图例。
@@ -998,6 +1000,7 @@ class Solution {
       </p></figcaption>
   </figure>
   <pre><code>
+    <script type='text/html' style='display:block'>
     class Solution {
       public:
           ListNode *detectCycle(ListNode *head) {
@@ -1033,6 +1036,7 @@ class Solution {
               return p_slow;
           }
       };
+    </script>
   </code></pre>
   </details>
 
@@ -1047,8 +1051,9 @@ class Solution {
 </figure>
 <p>
   最直接的解题思路应该是使用哈希集合存储链表节点，然后遍历另一个链表，看是否有相同的节点。时间复杂度为O（m+n），空间复杂度为O（m）或O（n）。
-  <br>此处只看双指针法。解题思路见下图。时间复杂度为时间复杂度：O(m+n)，空间复杂度为O（1）</p>
+  </p>
 <details>
+  <summary>此处只看双指针法。解题思路见下图。时间复杂度为时间复杂度：O(m+n)，空间复杂度为O（1）</summary>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/微信截图_20240723220051.png" alt="Image description">
@@ -1057,6 +1062,7 @@ class Solution {
       </p></figcaption>
   </figure>
   <pre><code>
+    <script type='text/html' style='display:block'>
     class Solution {
       public:
           ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
@@ -1079,6 +1085,7 @@ class Solution {
               
           }
       };
+    </script>
   </code></pre>
   </details>
 
@@ -1091,9 +1098,10 @@ class Solution {
 <figcaption><p>
 </p></figcaption>
 </figure> 
-<p>由于是已经排序的链表，最直接的思路应该是两两对比，如果遇到相同的就跳过去</p>
 <details>
+  <summary>由于是已经排序的链表，最直接的思路应该是两两对比，如果遇到相同的就跳过去</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         ListNode* deleteDuplicates(ListNode* head) {
@@ -1104,7 +1112,7 @@ class Solution {
                 if(p->val==p->next->val)//若当前的跟下一个是一样的
                 {
                     p->next=p->next->next;//相当于删掉了下一个
-                    continue;//到下一次循环，判断删掉当前后的下一个作为当前与它的下一个
+                    continue;//（可以不要！）到下一次循环，判断删掉当前后的下一个作为当前与它的下一个
                 }
                 else//不相同，那么就返回
                     p=p->next;//指针指向下一个节点，继续迭代
@@ -1113,10 +1121,12 @@ class Solution {
             return head;//时间复杂度为O（N）
         }
     };
+  </script>
 </code></pre>
 </details>
-<p>也可以采用快慢针法，具体见下动图解析以及代码：</p>
+
 <details>
+  <summary>也可以采用快慢针法，具体见下动图解析以及代码：</summary>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/2.gif" alt="Image description">
@@ -1125,6 +1135,7 @@ class Solution {
   </p></figcaption>
 </figure> 
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         ListNode* deleteDuplicates(ListNode* head) {
@@ -1145,11 +1156,12 @@ class Solution {
             }
             // 最后一个需要断开（自动释放掉不要的内存/不要的节点）
             if (slow!=nullptr)
-                slow->next=nullptr;
+                slow->next=nullptr;//由于前面并不是断掉节点的，最后一个slow可能是指向fast的下一个，所以需要断开
     
             return head;//时间复杂度为O（N）
         }
     };
+  </script>
 </code></pre>
 </details>
 
@@ -1170,6 +1182,7 @@ class Solution {
 </figure> 
 <details>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         // 采用递归的解法
@@ -1198,6 +1211,7 @@ class Solution {
     
         }
     };
+  </script>
 </code></pre>
 </details>
 
@@ -1210,8 +1224,8 @@ class Solution {
 <figcaption><p>
 </p></figcaption>
 </figure> 
-<p>解决方法等效于在链表的头部插入一个节点，时间复杂度为O（N）：</p>
 <details>
+  <summary>解决方法等效于在链表的头部插入一个节点，时间复杂度为O（N）：</summary>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Listnode/微信截图_20240724185003.png" alt="Image description">
@@ -1220,6 +1234,7 @@ class Solution {
   </p></figcaption>
   </figure> 
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         void calculate(ListNode* head, ListNode* &result)
@@ -1247,6 +1262,41 @@ class Solution {
             return result;
         }
     };
+  </script>
+</code></pre>
+</details>
+
+<details>
+<summary>解法2:虽然写了很多指针，但是思路很清晰</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        ListNode* reverseList(ListNode* head) {
+    
+            if(head==nullptr || head->next==nullptr)
+                return head;//如果就是一个空指针或就只有一个值那么直接返回～
+            
+            ListNode *pre= nullptr, *cur=head, *nxt=head->next;
+            while(cur!=nullptr)
+            {
+                //逐个节点反转
+                cur->next=pre;
+    
+                //更新指针的位置
+                pre=cur;
+                cur=nxt;
+                if(nxt!=nullptr)
+                {
+                    nxt=nxt->next;
+                }
+    
+            }
+    
+            return pre;// // 返回反转后的头结点
+        }
+    };
+</script>
 </code></pre>
 </details>
 
@@ -1258,9 +1308,10 @@ class Solution {
 <figcaption><p>
 </p></figcaption>
 </figure> 
-<p>关键点在于右指针如何让递归回到改回到的点：</p>
 <details>
+  <summary>关键点在于右指针如何让递归回到改回到的点：</summary>
 <pre><code>
+  <!-- <script type='text/html' style='display:block'> -->
   class Solution {
     public:
     
@@ -1315,6 +1366,7 @@ class Solution {
             return result;
         }
     };
+  <!-- </script> -->
 </code></pre>
 </details>
 
@@ -1327,9 +1379,11 @@ class Solution {
 <figcaption><p>
 </p></figcaption>
 </figure> 
-<p>此题有两个解决的思路。第一是递归，也是最简单的：</p>
+<p>此题有两个解决的思路:</p>
 <details>
+  <summary>第一是递归，也是最简单的：</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         ListNode* swapPairs(ListNode* head) {
@@ -1344,11 +1398,14 @@ class Solution {
             return nextnode;
         }
     };
+  </script>
 </code></pre>
 </details>
-<p>下面是等效的写法，也是递归的思路：</p>
+
 <details>
+  <summary>下面是等效的写法，也是递归的思路：</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         ListNode* swapPairs(ListNode* head) {
@@ -1363,12 +1420,14 @@ class Solution {
             return currentnode;
         }
     };
+  </script>
 </code></pre>
 </details>
 
-<p>第二个思路则是用指针遍历，逐一赋值，细心处理也可以避免出错，也很直接</p>
 <details>
+  <summary>第二个思路则是用指针遍历，逐一赋值，细心处理也可以避免出错，也很直接</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         ListNode* swapPairs(ListNode* head) {
@@ -1389,6 +1448,7 @@ class Solution {
             return head;
         }
     };
+  </script>
 </code></pre>
 </details>
 
