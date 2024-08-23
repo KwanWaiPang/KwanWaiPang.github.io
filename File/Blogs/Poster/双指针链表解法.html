@@ -755,7 +755,7 @@ class Solution {
                p_result=p_result->next;//跟随一起走
            }
            //此时，p2指向的就是倒数第n个，也就是顺数第size()-n+1个,
-           p_result->next=p2->next;//直接跳过第size()-n+1个
+           p_result->next=p2->next;//直接跳过当前p2指向的目标点
    
            return result->next;
        }
@@ -842,9 +842,11 @@ class Solution {
     <figcaption><p>
     </p></figcaption>
 </figure>
-<p>同样是双指针法，慢指针走一步，快指针走两步，这样当快指针走到终点时，慢指针就是中间点。代码如下：</p>
+<p>同样是双指针法，慢指针走一步，快指针走两步，这样当快指针走到终点时，慢指针就是中间点。</p>
 <details>
+  <summary>代码如下：</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
   /**
   * Definition for singly-linked list.
   * struct ListNode {
@@ -879,9 +881,10 @@ class Solution {
          // result->next=p_slow;
  
          // return result->next;
-         return p_slow;//这样可以减少空间复杂度为O(1),而时间复杂度均为O（N）
+         return p_slow;//这样可以减少空间复杂度为O(1)，不用额外保留一个result,而时间复杂度均为O（N）
      }
  };
+ </script>
 </code></pre>
 </details>
 
