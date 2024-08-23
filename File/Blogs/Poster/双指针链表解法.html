@@ -212,7 +212,7 @@ public:
             if(list1->val<=list2->val)
             {
                 result_list->val=list1->val;
-                list1=list1->next;
+                list1=list1->next;//迭代到下一个指针
             }
             else
             {
@@ -281,7 +281,7 @@ public:
          {
              if(p1->val < p2->val)//若p1当前的值小于p2,赋值p1
              {
-                 p->next=p1;
+                 p->next=p1;//永远都是放到next中，这样就可以避免下一次访问空指针
                  p1=p1->next;//p1继续递推
              }
              else//若p1当前的值大于p2，赋值p2
@@ -386,6 +386,7 @@ public:
 </p>
 <details>
 <pre><code>
+<script type='text/html' style='display:block'>
   /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -403,7 +404,7 @@ public:
         ListNode* result=new ListNode(0);//result->next就为结果
         ListNode* p_result=result;//指结果的指针
         ListNode* bigger=new ListNode(0);//bigger->next（存放大于目标值的链表）
-        ListNode* p_bigger=bigger;//指向存放大于目标值的链表
+        ListNode* p_bigger=bigger;//指向存放大于等于目标值的链表
 
         while(head!=nullptr)//一直遍历直到最后
         {
@@ -412,7 +413,7 @@ public:
                 p_result->next=head;
                 p_result=p_result->next;//继续递推
             }
-            else//就是大于等于值x的
+            else//就是大于等于值x的（可以理解为将大于等于目标值的放在新指针上，最后再放到结果中）
             {
                 p_bigger->next=head;
                 p_bigger=p_bigger->next;//继续递推
@@ -430,6 +431,7 @@ public:
         return result->next;
     }
 };
+</script>
   </code></pre>
 </details>
 
