@@ -588,7 +588,7 @@ class Solution {
 
 <details>
 <summary>通过新增的if判据，来实现元素虽然存在重复,但是最终结果不能管顺序。空间复杂度：O(n)。临时数组 t 的空间代价是 O(n)，递归时栈空间的代价为 O(n)。
-  而时间复杂度。首先sort排序的时间复杂度为：回溯的时间复杂度为O(2<sup>N</sup>),然后遍历每个字符，所以应该是O（N*2<sup>N</sup>）至于前面排序sort的时间复杂度也是O（N），因此总的时间复杂度为O（N*2<sup>N</sup>）
+  而时间复杂度。首先sort排序的时间复杂度为：O（N）回溯的时间复杂度为O(2<sup>N</sup>),然后遍历每个字符，所以应该是O（N*2<sup>N</sup>）至于前面排序sort的时间复杂度也是O（N），因此总的时间复杂度为O（N*2<sup>N</sup>）
 </summary>
 <pre><code>
   <script type='text/html' style='display:block'>
@@ -704,6 +704,57 @@ class Solution {
 <figcaption><p>
 </p></figcaption>
 </figure> 
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            void backtrack(vector<int>& nums, vector<int>& path, vector<vector<int>>& results, vector<bool>& used)
+            {
+                // 回溯终止的条件，当当前存满了，就放入results
+                if(path.size()==nums.size())
+                {
+                    results.push_back(path);
+                    return;
+                }
+        
+                for(int i=0;i<nums.size();i++)
+                {
+                    if(used[i]==true)
+                        continue;//用过了
+                    
+                    if(i>0 && nums[i]==nums[i-1] && used[i-1]==false)//跟上一个相同，那么结果会一样，也剪枝。注意额外的约束是used[i-1]==false
+                        continue;// 如果前面的相邻相等元素没有用过，则跳过。如果用了就是当前轮再次添加而已～
+        
+                    // if(i>0 && nums[i]==nums[i-1] && used[i-1]==true)//这也可以通过，只是测试更久一些，注意：上一个是否用过来决定当前是否跳过
+                    //     continue;
+                    
+                    //做选择
+                    used[i]=true;
+                    path.push_back(nums[i]);
+        
+                    backtrack(nums, path,results,used);
+        
+                    // 撤销选择
+                    used[i]=false;
+                    path.pop_back();
+                }
+            }
+            vector<vector<int>> permuteUnique(vector<int>& nums) {
+                vector<vector<int>> results;
+                vector<int> path;
+                vector<bool> used(nums.size(),false);
+                sort(nums.begin(),nums.end());//排序。 让相同的元素靠在一起
+                backtrack(nums, path,results,used);
+                return results;
+            }
+        };
+</script>
+</code></pre>
+</details>
+
 <details>
 <summary>此题与上面1中的第46题不同的是包含了重复的字母，因此全排列可能包含重复的序列，故此需要去重。其余的解题思路跟上面是一样的</summary>
 <pre><code>
