@@ -334,49 +334,53 @@ while(left &lt right) 的终止条件是 left == right，写成区间的形式�
 
 
 <p><br></p>
-<h1>求最小公倍数</h1>
+<h1>求解立方根</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/WX20240820-091533.png" alt="Image description">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/Simulation_algorithm/WX20240819-223830.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code。a*b一定是a、b的公倍数，但不一定是最小的</summary>
+<summary>Click to expand the code。关键点在于要考虑负号以及小数的情况。且浮点数<mark>left<=right</mark>会无限运行，需要给个小范围的阈值</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
+    #include <iomanip>
     #include <iostream>
+    #include <cmath>
     using namespace std;
     
     int main() {
-        int a, b;
-        cin>>a>>b;
+       double value;
+       cin>>value;
     
-        // // 方法1:暴力匹配
-        for(int i=max(a,b); ;i++)//从较大者开始
-        {
-            int beishu=i;
-            if(beishu%a==0 && beishu%b==0)
+       //二分法
+    
+       //由于是开立方根，所以存在为负号的情况
+       //同时需要考虑小数的情况    
+       double left=min(-1.0, value);
+       double right=max(1.0, value);
+       double middle;//就是结果
+    //    while(left<=right)//由于是浮点数，为此永远都很接近不会相等
+        while(abs(right-left)>0.01)//因此给0.01。毕竟小数点保留1位而已（注意是相减大于某个小数）
+       {
+            middle=(left+right)/2.0;
+            double result=pow(middle,3);
+            if(result<value)
             {
-                std::cout<<beishu;
-                return 0;
+                left=middle;
             }
-        }
-    
-        // //方法2:最小公倍数一定是较大者的整数倍
-        // //a*b一定是a、b的公倍数，但不一定是最小的
-        // for(int i=1;i<=min(a,b);i++)
-        // {
-        //     int beishu=i*max(a,b);//较大者的整数倍。最大也是到min(a,b)*max(a,b)
-        //     if(beishu%a==0 && beishu%b==0)
-        //     {
-        //         std::cout<<beishu;
-        //         return 0;
-        //     }
-        // }
-    
+            else if(result>value)
+            {
+                right=middle;
+            }
+            else//相等
+                break;
+       }
+       std::cout<<fixed<<setprecision(1)<<middle;
     }
+    
 </script>
 </code></pre>
 </details>
