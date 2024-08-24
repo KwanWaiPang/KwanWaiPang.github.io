@@ -205,7 +205,7 @@ def backtrack(路径, 选择列表):
 <h1>N 皇后问题</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240808190934.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240808190934.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -222,10 +222,10 @@ def backtrack(路径, 选择列表):
   
           // 每个字符串代表一行，字符串列表代表一个棋盘
           // '.' 表示空，'Q' 表示皇后，初始化空棋盘
-          vector<string> board(n, string(n, '.'));//将其初始化为空棋盘
+          vector&ltstring&gt board(n, string(n, '.'));//将其初始化为空棋盘
           // 注意,对于board为n个string,每个string为n个字符
   
-          vector&ltvector&ltstring&gt&gt result;//结果
+          vector&ltvector&ltstring&gt&gt result;//结果(存放的所有结果)
           backtrack(board,result, 0);//一开始row为0
           return result;
       }
@@ -238,11 +238,11 @@ def backtrack(路径, 选择列表):
           //结束的条件
           if(row==board.size())
           {
-              result.push_back(board);//将当前的结果返回
+              result.push_back(board);//将当前的结果存放
           }
   
           //对于当前row的每一列
-          for (int col = 0; col &lt board.size(); col++)
+          for (int col = 0; col &lt board[0].size(); col++)
           {
               //先判断是否合法(也就是说是否可以在board[row][col]上放置皇后)
               if (!isValid(board, row, col))
@@ -250,7 +250,7 @@ def backtrack(路径, 选择列表):
                   continue;//若无效,那么就是当前位置不应该方
               }
               board[row][col]='Q';// 做选择
-              backtrack(board,result, row+1);//回溯算法
+              backtrack(board,result, row+1);//回溯算法(一行一行的放，故此下面只需要检查列不用检查行)
               board[row][col]='.';// 撤销选择
   
           }
@@ -258,10 +258,12 @@ def backtrack(路径, 选择列表):
       }
   
       // 判断是否可以在 board[row][col] 放置皇后
+      //因为皇后是一行一行从上往下放的，所以左下方，右下方和正下方不用检查（还没放皇后）；
+      //因为一行只会放一个皇后，所以每行不用检查。也就是最后只用检查上面，左上，右上三个方向。
       bool isValid(vector&ltstring&gt& board, int row, int col) 
       {
   
-          //先检查在这一行前,当前列是否有皇后放置了
+          //先检查在这一行前,当前列是否有皇后放置了（固定了列，行变，就是一列）
           for(int i=0;i&ltrow;i++)
           {
               if (board[i][col]=='Q')//存在皇后
@@ -289,9 +291,10 @@ def backtrack(路径, 选择列表):
 </code></pre>
 </details> 
 
+<p><br></p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240808220523.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240808220523.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
