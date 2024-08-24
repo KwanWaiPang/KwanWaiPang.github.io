@@ -445,6 +445,63 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>3. 二叉树的直径</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/WX20240824-113023.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。其实只是在二叉树的最大深度的基础上的一个小拓展而已～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int max_len=0;
+     int traverse(TreeNode* root)
+     {
+         if(root==nullptr)//到达根节点就返回
+             return 0;
+ 
+         int left_depth=traverse(root->left);//左边的深度
+         int right_depth=traverse(root->right);//右边的深度
+ 
+         //获取此树的直径
+         int dim=left_depth+right_depth;
+         max_len=max(max_len,dim);
+ 
+         // 后序位置上计算当前节点的最大的深度
+         return max(right_depth,left_depth)+1;
+ 
+         
+     }
+     int diameterOfBinaryTree(TreeNode* root) {
+         // 每一条二叉树的「直径」长度，就是一个节点的左右子树的最大深度之和。
+         // 也就是应该在后序的位置上统计当前树的最大深度
+         traverse(root);
+         return max_len;
+ 
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
