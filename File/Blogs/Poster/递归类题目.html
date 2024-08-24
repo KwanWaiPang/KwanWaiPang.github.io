@@ -583,14 +583,14 @@
             else
                 return false;
         }
-        //遍历每组数字
+        //遍历每组数字（任意一个开始都要遍历）
         for (int i = 0; i < value_group.size(); i++) 
         {
             auto rest = value_group;
             // vector删除中间某个元素
             rest.erase(rest.begin() + i);//去掉一个后，剩余的数字组合
             //分别 进行加减乘除4种运算
-           if (calculate(rest, totally_value + value_group[i]) 
+           if (calculate(rest, totally_value + value_group[i]) //value_group[i]是当前删掉
             || calculate(rest, totally_value - value_group[i])
             || calculate(rest, totally_value * value_group[i])
             || calculate(rest, totally_value / value_group[i]))
