@@ -977,6 +977,65 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
+<h1>下降路径最小和</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240825-143229.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minFallingPathSum(vector<vector<int>>& matrix) {
+    
+            //step1:定义dp表：dp【i】【j】=当前第i行与第j列时最小的路径和
+            vector<vector<int>> dp(matrix.size(),vector<int>(matrix.size(),0));
+    
+            // step2:初始化dp表，实际上应该是位于当前网格的值的大小
+            for(int j=0;j<matrix.size();j++)
+            {
+                dp[0][j]=matrix[0][j];//初始化第一行即可。
+            }
+    
+            //step3:进行状态转移
+            for(int i=1;i<matrix.size();i++)
+            {
+                for(int j=0;j<matrix.size();j++)//注意处理j边界的方式
+                {
+                    // 当前列正上方
+                    int minAbove = dp[i-1][j];
+    
+                    if (j > 0) // 可以对比左上方元素
+                        minAbove = min(minAbove, dp[i-1][j-1]);
+                    
+                    if (j < matrix.size() - 1) // 可以对比右上方元素
+                        minAbove = min(minAbove, dp[i-1][j+1]);
+                    
+                    dp[i][j] = matrix[i][j] + minAbove;
+                }
+            }
+    
+            //最后再统计最后一行的最小值
+            int min_value=INT_MAX;
+            for(int j=0;j<matrix.size();j++)
+            {
+                if(dp[matrix.size()-1][j]<min_value)//最后一行
+                    min_value=dp[matrix.size()-1][j];
+            }
+            return min_value;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
 <h1>超级动态规划问题：购物单</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
