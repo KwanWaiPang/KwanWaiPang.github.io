@@ -606,7 +606,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <details>
-<summary>用递归的思路解题也很简单。但是这个递归调用次数类似于计算一棵二叉树的节点数，树的高度为𝑛所以时间复杂度为O（2<sup>N</sup>）。空间复杂度主要由递归调用的栈空间决定。每次递归调用都会占用一定的栈空间，递归的最大深度为𝑛，因此空间复杂度为：𝑂(N)</summary>
+<summary>用递归的思路解题也很简单。但是这个递归调用次数类似于计算一棵二叉树的节点数，树的高度为𝑛所以总的子树数目是O（2<sup>N</sup>），对应的时间复杂度为O（2<sup>N</sup>）。空间复杂度主要由递归调用的栈空间决定。每次递归调用都会占用一定的栈空间，递归的最大深度为𝑛，因此空间复杂度为：𝑂(N)</summary>
 <pre><code>
   class Solution {
     public:
@@ -629,10 +629,11 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <details>
 <summary>带有【备忘录】的递归</summary>
 <pre><code>
+<script type='text/html' style='display:block'>
   class Solution {
     public:
         // 带着备忘录进行递归
-        int dp(int memo[], int n) {
+        int dp(vector<int> &memo, int n) {
             
             if (n == 0 || n == 1) 
                 return n;//递归终止
@@ -646,13 +647,14 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
         
         int fib(int n) {
     
-            int memo[n + 1];
-            memset(memo, 0, sizeof(memo));// 备忘录全初始化为 0
+            vector<int> memo(n+1,0);// 备忘录全初始化为 0
+
             // 进行带备忘录的递归
             return dp(memo, n);
     
         }    
     };
+</script>
 </code></pre>
 </details>
 
@@ -704,6 +706,18 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<p>
+  此处引出动态规划问题中状态以及选择量的确定过程：
+<br>
+<strong>1、确定「状态」，也就是原问题和子问题中会变化的变量。</strong> 
+由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case （凑够了目标金额，为0）靠近，所以唯一的「状态」就是目标金额 amount。
+<br>
+<strong>2、确定「选择」，也就是导致「状态」产生变化的行为。</strong>
+目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是的「选择」。
+<br>
+<strong>3、明确 dp 数组的定义。</strong>
+就本题来说，状态只有一个，即对应凑出目标金额所需的「最少硬币数量」。
+</p>
 <details>
 <summary>Click to expand the code.此题的难点就是用什么作为状态，如何确定dp表。</summary>
 <pre><code>
