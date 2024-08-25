@@ -850,12 +850,44 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     };
 </code></pre>
 </details>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int lengthOfLIS(vector<int>& nums) {
+    
+            //step1:定义dp表:为dp[i]=对于以 nums[i] 这个数结尾的最长递增子序列的长度
+            // 故此应该是dp大小是nums.size()而不是nums.size()+1
+            vector<int> dp(nums.size(), 1);
+            //step2:初始化dp表，为1，以 nums[i] 结尾的最长递增子序列起码要包含它自己，也就是自身长度1
+    
+            //step3:状态转移方程
+            int max_len=0;
+            for(int i=0;i<nums.size();i++)
+            {
+                for(int j=0;j<i;j++)//由于不改变顺序，故此需要遍历的是i之前的
+                {//// 寻找 nums[0..i-1] 中比 nums[i] 小的元素
+                    if(nums[i]>nums[j])//对于nums[j]<nums[i]的情况，子序列的长度肯定就是dp[j]+1
+                        dp[i]=max(dp[i],dp[j]+1);//相当于把i之前的每一个都对比了～
+                }
+                if(dp[i]>max_len)
+                    max_len=dp[i];
+            }
+    
+            return max_len;
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
 
 <p>
-  通过本例与上面样例4可以发现。寻找动态规划的状态转移方程的通用技巧：数学归纳法！
+  通过本例可以发现。寻找动态规划的状态转移方程的通用技巧：数学归纳法！
   <br>
   所谓的数学归纳法其实就是。比如我们想证明一个数学结论，那么我们先假设这个结论在 k &lt n 时成立，然后根据这个假设，想办法推导证明出 k = n 的时候此结论也成立。如果能够证明出来，那么就说明这个结论对于 k 等于任何数都成立。
-
 </p>
 
 <p><br></p>
