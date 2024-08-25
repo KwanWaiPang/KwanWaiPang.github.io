@@ -766,6 +766,42 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     };
 </code></pre>
 </details>
+<details>
+<summary>下面可能更好理解</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+            
+            // step1:定义dp表，代表对于需要的金额i，dp【i】状态为[最少的硬币个数]
+            vector<int> dp(amount+1, 0);//当目标金额为 i 时，至少需要 dp[i] 枚硬币凑出
+    
+            // step2:确定初始状态，当总金额为0的时候，最小的硬币数量为0
+            dp[0]=0;
+    
+            // step3：进行状态转移
+            for(int i=1;i<amount+1;i++)//遍历所有状态的所有取值
+            {
+                dp[i]=amount+1;//每一轮对其进行初始化，初始化为每个面值为1元的硬币+1，那么就是最大的。也是全部的最大
+                for(auto each_coin:coins)//选择对应的面值
+                {
+                    if(i-each_coin<0)//剪枝，当前硬币面值太大了
+                        continue;
+                    else
+                        dp[i]=min(dp[i],dp[i-each_coin]+1);//不选这个面值，或者选这个面值，两种情况的最小
+                }
+            }
+    
+            if(dp[amount]==amount+1)//没有面值合适,故此没有发生变化～
+                return -1;
+            else
+                return dp[amount];
+        }
+    };
+</script>
+</code></pre>
+</details>
 
 <p><br></p>
 <h1>最长递增子序列</h1>
