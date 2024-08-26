@@ -1494,6 +1494,158 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 
+<p><br></p>
+<h1>0-1背包问题</h1>
+<p>
+  题目：给你一个可装载重量为 W 的背包和 N 个物品，每个物品有重量和价值两个属性。其中第 i 个物品的重量为 wt[i]，价值为 val[i]。现在让你用这个背包装物品，每个物品只能用一次，在不超过被包容量的前提下，最多能装的价值是多少？
+  </p>
+<p>
+  首先要明确两点，「状态」和「选择」。
+  <li>对于状态，如何才能描述一个问题局面？只要给几个物品和一个背包的容量限制，就形成了一个背包问题呀。所以状态有两个，就是「背包的容量」和「可选择的物品」。</li>
+  <li>对于选择，选择就是「装进背包」或者「不装进背包」。只有两种。</li>
+  确定了状态与选择，那么基本主体的框架就出来了：
+<pre><code>
+  <script type='text/html' style='display:block'>
+    for 状态1 in 状态1的所有取值：
+      for 状态2 in 状态2的所有取值：
+          for ...
+              dp[状态1][状态2][...] = 择优(选择1，选择2...)
+  </script>
+  </code></pre>
+
+  第一步需要明确dp数组的定义。
+  上述状态定义为两个，一个二维的dp数组，dp[i][w] 的定义如下：对于前 i 个物品，当前背包的容量为 w，这种情况下可以装的最大价值是 dp[i][w]。
+  <br>
+  第二步需要确定初始的状态。那么就是<mark>dp[0][..] = dp[..][0] = 0</mark>，因为没有物品或者背包没有空间的时候，能装的最大价值就是 0。
+  <br>
+  第三步就是确定状态转移方程（其实也就是上面「首先」的时候完成的了）
+  <li>dp[i][w] 表示：对于前 i 个物品（从 1 开始计数），当前背包的容量为 w 时，这种情况下可以装下的最大价值是 dp[i][w]</li>
+  <li>如果没有把这第 i 个物品装入背包，那么很显然，最大价值 dp[i][w] 应该等于 dp[i-1][w]，继承之前的结果。</li>
+  <li>如果把这第 i 个物品装入了背包，那么 dp[i][w] 应该等于 val[i-1] + dp[i-1][w - wt[i-1]]。 </li>
+  ⚠️由于数组索引从 0 开始，而定义中的 i 是从 1 开始计数的，所以 val[i-1] 和 wt[i-1] 表示第 i 个物品的价值和重量。
+<pre><code>
+<script type='text/html' style='display:block'>
+int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
+  assert(N == wt.size());
+
+  //step1:初始化dp表
+  vector<vector<int>> dp(N + 1, vector<int>(W + 1));
+
+  //step2:初始化状态（其实也就是上面初始化为0，为此不用操作）
+  dp[0][..] = 0
+  dp[..][0] = 0
+  
+  //step3:进行状态转移
+  for (int i = 1; i <= N; i++) {
+    for (int w = 1; w <= W; w++) {
+        //注意是否有这种剪枝的情况
+        if (w - wt[i - 1] < 0) {
+            // 这种情况下只能选择不装入背包
+            dp[i][w] = dp[i - 1][w];
+        } else {
+            // 装入或者不装入背包，择优
+            dp[i][w] = max(
+                dp[i - 1][w - wt[i-1]] + val[i-1], //把物品 i 装进背包
+                dp[i - 1][w] //不把物品 i 装进背包
+            );
+        }
+    }
+}
+  return dp[N][W]
+</script>
+</code></pre>
+</p>
+
+<p><br></p>
+<h2>背包问题变体之子集分割/子集背包问题</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-092925.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>用递归的思路去解题不是不行，数组多了就会超出时间限制，当然也可以用回溯算法中的“划分为k个相等的子集”（还没尝试）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool callback(vector<int>& nums, int sum1, int smu2, int index)
+        {
+            // 递归终止条件
+            if(index==nums.size())
+                return sum1==smu2;
+    
+            return callback(nums,sum1+nums[index], smu2, index+1) || callback(nums,sum1, smu2+nums[index], index+1); 
+        }
+    
+        bool canPartition(vector<int>& nums) {
+    
+            return callback(nums,0,0,0);
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+<details>
+<summary>采用动态规划</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool canPartition(vector<int>& nums) {
+            
+            int sum=0;
+            for(auto num:nums)
+                sum+=num;
+            
+            if(sum%2!=0)//若不能被2整除，那就直接false
+                return false;// 和为奇数时，不可能划分成两个和相等的集合
+            
+            int target=sum/2;
+    
+            //step1: 定义dp表：dp【i】【j】=对于第i个物品，当前和值为j，若为true就是刚好分完，若为false就是还没分完
+            // 状态：第i个数，j为当前存放的值和
+            // 选择：第i个数选择放与不放
+           bool dp[nums.size()+1][target+1];
+    
+           //step2:初始化状态方程
+            // j==0相当于装满了，可以理解为true了，正好分配成功了   
+           for(int i=0;i<nums.size()+1;i++)
+           {
+                dp[i][0]=true;
+           }
+    
+           //i==0，那就是没有数据，但是j！=0那么就是没分完，但是没得分了，所以为false
+           for(int j=1;j<target+1;j++)
+           {
+                dp[0][j]=false;
+           }
+    
+            //step3:进行状态转移
+            for(int i=1;i<nums.size()+1;i++)
+            {
+                for(int j=1;j<target+1;j++)
+                {
+                    if(j<nums[i-1])//那么就是当前数字不取，那么就是跟上一个状态一样
+                        dp[i][j]=dp[i-1][j];
+                    else
+                    {
+                        //取或者不取这个数字只要有一个为true都是true
+                        dp[i][j]= dp[i-1][j-nums[i-1]] || dp[i-1][j];
+                    }
+                }
+            }
+    
+            return dp[nums.size()][target];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
@@ -1523,6 +1675,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   <li><a href="https://labuladong.online/algo/essential-technique/dynamic-programming-framework-2/" target="_blank">动态规划解题套路框架</a></li>
   <li><a href="https://www.bilibili.com/video/BV1XV411Y7oE/?vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">动态规划问题的讲解视频</a></li>
   <li><a href="https://labuladong.online/algo/dynamic-programming/faq-summary/" target="_blank">最优子结构原理和 dp 数组遍历方向</a></li>
+  <li><a href="https://labuladong.online/algo/dynamic-programming/knapsack1/" target="_blank">0-1背包问题</a></li>
 </ul>
 
 </article>
