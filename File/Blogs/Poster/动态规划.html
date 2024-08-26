@@ -435,30 +435,33 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <figcaption><p>
 </p></figcaption>
 </figure> 
+<p>解决两个字符串的动态规划问题，一般都是用两个指针 i, j 分别指向两个字符串的最后，然后一步步往前移动，缩小问题的规模。</p>
 <details>
 <summary>Click to expand the code。（此题中，注释相对比较规范化了动态规划问题的解题~）时间复杂度O（M*N），空间复杂度为O（M*N）</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
+
   class Solution {
     public:
         int minDistance(string word1, string word2) {
             // 解法：动态规划
-            // 步骤1：创建动态规划的数组，dp[i][j]代表第i-1和j-1个字符的对比
+            // 步骤1：创建动态规划的数组，dp[i][j]代表第i-1和j-1个字符的对比的情况下，最短的编辑距离～
             int dp[word1.size()+1][word2.size()+1];
     
             // 步骤1：初始化数组：当某个数组为0，另一个操作数就等于另外一个的size
-            for(int i=0;i&ltword1.size()+1;i++)
+            for(int i=0;i<word1.size()+1;i++)
             {
                 dp[i][0]=i;
             }
-            for(int j=0;j&ltword2.size()+1;j++)
+            for(int j=0;j<word2.size()+1;j++)
             {
                 dp[0][j]=j;
             }
     
             // 步骤二：定义状态转移方程
-            for(int i=1;i&ltword1.size()+1;i++)
+            for(int i=1;i<word1.size()+1;i++)
             {
-                for(int j=1;j&ltword2.size()+1;j++)
+                for(int j=1;j<word2.size()+1;j++)
                 {
                     if(word1[i-1]==word2[j-1])//如果两个字符相等,退化为dp【i-1】【j-1】（相当于什么都不做）
                         dp[i][j]=dp[i-1][j-1];
@@ -475,6 +478,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     
         }
     };
+  </script>
 </code></pre>
 </details>
 
