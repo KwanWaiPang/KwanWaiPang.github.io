@@ -200,6 +200,15 @@
   
   // 根据元素值查找索引，时间复杂度 O(N)
   int index = find(arr.begin(), arr.end(), 666) - arr.begin();
+
+  //交换两个index的元素
+  swap(arr[i], arr[j]);
+
+  //求index i到j之间的最大值
+  int max = *max_element(arr.begin() + i, arr.begin() + j + 1);
+
+  //求index i到j之间的最小值
+  int min = *min_element(arr.begin() + i, arr.begin() + j + 1);
 </script>
 </code></pre>
 
