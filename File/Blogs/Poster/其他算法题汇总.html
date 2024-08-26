@@ -173,6 +173,10 @@
 
   采用"//"来代替'/'，因为'/'是转义字符，会出现问题
 
+  int n; cin>>n;
+  cin.ignore();  // 忽略 cin>>n 后的换行符
+  string input_str; getline(cin,input_str);
+
 </script>
 </code></pre>
 
