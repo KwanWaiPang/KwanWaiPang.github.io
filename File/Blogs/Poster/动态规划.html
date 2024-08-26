@@ -1705,6 +1705,62 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </details>
 
 
+<p><br></p>
+<h1>最小路径和</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240826160245.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。dp表的初始化容易出错，对于第i行第j列的dp标索引应该从0开始，从1开始其实也可以只是对应处理更加复杂而已~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minPathSum(vector<vector<int>>& grid) {
+    
+            // step1：定义dp表，dp[i][j]表示当前位置的最小路径数值和
+            // 状态：当前位于第i行第j列（注意从0开始）
+            // 选择：（除了第一行和第一列外）向下或向右
+            vector<vector<int>> dp(grid.size(), vector<int>(grid[0].size(),0));
+            
+            // step2:初始化dp表：i或j等于0的情况
+            dp[0][0]=grid[0][0];
+    
+            // 注意！第一行和第一列仅仅有一种选择，而不是两种最小
+            for(int i=1;i<grid.size();i++)
+            {
+                dp[i][0]=grid[i][0]+dp[i-1][0];
+            }
+    
+            for(int j=1;j<grid[0].size();j++)
+            {
+                dp[0][j]=grid[0][j]+dp[0][j-1];
+            }
+    
+    
+            // step3：进行状态转移
+            for(int i=1;i<grid.size();i++)
+            {
+                for(int j=1;j<grid[0].size();j++)
+                {
+                    //当前的值+(上一状态从上下来的或者从左过来的最小值)
+                    dp[i][j]=grid[i][j]+min(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+    
+            return dp[grid.size()-1][grid[0].size()-1];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
