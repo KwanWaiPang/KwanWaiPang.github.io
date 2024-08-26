@@ -1760,6 +1760,66 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>地下城游戏</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240826161711.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>第一次解题的时候，想着把最小路径和改为最大路径和然后简单的对结果值进行修正希望达到最优。但实际上运行发现会选择运行28的结果。所以应该做到是损失最小，也就是负数之和最大，但是这个思路也不对，实际上就是同时考虑补充和扣减，与其如此，还不如换个思路，从右下角到左上角</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int calculateMinimumHP(vector<vector<int>>& dungeon) {
+            // 反过来的思路，初始化血量为1，从右下角走到左上角
+    
+            // step1:定义dp表：dp[i][j]= 这个格子走到右下角所需要的最小生命值
+            // 状态为第i行和第j列（从dungeon.size()-1与dungeon[0].size()-1开始索引）
+            // 选择为： 向左 或 向上 移动一步
+            vector<vector<int>> dp(dungeon.size()+1, vector<int>(dungeon[0].size()+1, INT_MAX));;
+            
+            // step2:初始化dp表为int的最大值，这样索引可以避免考虑最后一列和最后一行复杂的情况
+            dp[dungeon.size()][dungeon[0].size()]=1;//到最后一格的时候刚好是一滴血
+            dp[dungeon.size()-1][dungeon[0].size()]=1;
+            dp[dungeon.size()][dungeon[0].size()-1]=1;
+            
+           for(int i=dungeon.size()-1;i>=0;i--)
+           {
+                for(int j=dungeon[0].size()-1;j>=0;j--)
+                {
+                    // 选择两个去向中较小的一个，也就是下一个时刻最小需要多少
+                    int temp=min(dp[i+1][j],dp[i][j+1]);//可以保持从最小值从取，那么当前temp-dungeon[i][j]也是最小的情况。但是由于不能等于0，故此最小是1或者是temp-dungeon[i][j]
+    
+                    dp[i][j]=max(temp-dungeon[i][j],1);//要么保留1血量，要么就是当前剩余的
+                    // 若dungeon[i][j]为负，那么当前应该是-dungeon[i][j]+temp，这样才可以保证能走到下一个
+                    //  若dungeon[i][j]为正，那么当前只需要1就可以了，因为补充了
+                }
+           }
+    
+           return dp[0][0];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>加权最短路径</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 70%;" src="../assets/img/dynamic_programming/微信截图_20240826174852.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
