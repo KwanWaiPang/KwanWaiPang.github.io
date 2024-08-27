@@ -1824,7 +1824,7 @@ int main() {
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code。时间复杂度：O(nlogm)，其中n为单词总数，m为最大单词的长度。logm为排序算法的复杂度。空间复杂度是O（N）</summary>
+<summary>Click to expand the code。时间复杂度：O(nlogm)，其中n为单词总数，m为最大单词的长度。logm为排序算法的复杂度。空间复杂度是O（N）注意最后一个单词才是目标，审题最重要！！！</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   #include <iostream>
@@ -2130,18 +2130,19 @@ int main() {
             int size_1=num1.size();
             int size_2=num2.size();
     
-            vector<int> result(size_1+size_2,0);//result的最大位数为num1+num2
+            vector<int> result(size_1+size_2,0);//两数相乘的结果最大位数为num1.size()+num2.size()
     
             for(int i=num1.size()-1;i>=0;i--)//从最小位开始
             {
                 for(int j=num2.size()-1;j>=0;j--)
                 {
                     int temp_value=(num1[i]-'0')*(num2[j]-'0');
+                    //存放的位置应该也是逆着看的，为此小的是十位，大的是个位
                     int shiwei=i+j;
                     int gewei=i+j+1;
-                    temp_value+=result[gewei];
+                    temp_value+=result[gewei];//当前的值+当前个位处的值
                     result[gewei]=temp_value%10;//进位后剩余的（此处的个位已经用了～）
-                    result[shiwei]+=temp_value/10; //进位的数目
+                    result[shiwei]+=temp_value/10; //进位的数目+当前十位的值
                 }
             }
     
@@ -2150,7 +2151,7 @@ int main() {
             string result_str;
             for(int i=0;i<result.size();i++)
             {
-                if(result[i]!=0 && flag==false)
+                if(result[i]!=0 && flag==false)//去掉第一个0
                     flag=true;
                 
                 if(flag==true)
