@@ -756,6 +756,83 @@ class Solution {
 </details>
 
 <details>
+<summary>也有一种情况是只需要输出一共的排列的数的，但用results数组的size会导致内存不够，为此用int来代替~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+
+void backtrack(vector<char>& group, vector<char>& path, int& results, vector<bool>& used)
+{
+    // 回溯的终止条件~
+    if(path.size() == group.size())
+    {
+        results++;
+        return;
+    }
+
+    // 可以选择的列表
+    for(int i = 0; i < group.size(); i++)
+    {
+        if(used[i]==true)//判断是否被用过
+        {
+            continue;
+        }
+
+        // 剪枝避开重复的元素
+        if(i > 0 && group[i] == group[i - 1] && used[i - 1]==false)
+        {
+            continue;
+        }
+
+        // 做选择
+        path.push_back(group[i]);
+        used[i] = true;
+        
+        backtrack(group, path, results, used);
+
+        // 撤销选择
+        path.pop_back();
+        used[i] = false;
+    }
+}
+
+int main()
+{
+    //输入只包含大写字母的字符串S
+    string S;
+    cin >> S;
+    
+    vector<char> group;
+    for(auto c : S)
+    {
+        group.push_back(c);
+    }
+    
+    sort(group.begin(),group.end());
+    // 采用回溯算法
+    vector<char> path;//
+    //vector<vector<char>> results;
+    int results=0;
+    
+    vector<bool> used(group.size(), false);//是否使用过
+
+    backtrack(group, path, results, used);
+
+    //把结果输出
+    std::cout<<results;
+    
+    return 0;
+}
+</script>
+</code></pre>
+</details>
+
+<details>
 <summary>此题与上面1中的第46题不同的是包含了重复的字母，因此全排列可能包含重复的序列，故此需要去重。其余的解题思路跟上面是一样的</summary>
 <pre><code>
   class Solution {
