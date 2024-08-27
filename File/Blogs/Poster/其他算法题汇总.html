@@ -2335,16 +2335,16 @@ print(str(result))
         //直接创建一个矩阵来遍历
         vector< vector <int>> matrix (input_value,vector<int>(input_value,0));
         int value=1;
-        for(int x=0;x<input_value;x++)
-        {
-            int k=0;
-            for(int y=x;y>=0;y--)
+       for(int k=0;k<input_value;k++)//k决定了每次x从哪里开始
+       {
+            int y=0;
+            for(int x=k;x>=0;x--)//每次x减小
             {
-                matrix[y][k]=value;
+                matrix[x][y]=value;
                 value++;
-                k++;
+                y++;//每次y必然增加
             }
-        }
+       }
     
         for(int i=0;i<input_value;i++)
         {
@@ -2356,8 +2356,7 @@ print(str(result))
             std::cout<<std::endl;
         }
     
-    }
-    
+    }    
 </script>
 </code></pre>
 </details>
