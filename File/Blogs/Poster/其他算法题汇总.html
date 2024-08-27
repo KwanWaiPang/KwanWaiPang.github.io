@@ -189,6 +189,8 @@
   map<int,int>对应的是有序的（从小到大），unordered_map<int,int>对应的是无序的
   map<int, string, greater<int>> group;//从大到小排列
   set<int>对应的是有序的（从小到大），unordered_set<int>对应的是无序的
+  //将map转换为vector
+  vector<pair<int,int>> vec(group.begin(),group.end());
 
 </script>
 </code></pre>
