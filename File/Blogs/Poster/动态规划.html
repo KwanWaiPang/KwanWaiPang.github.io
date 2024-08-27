@@ -520,13 +520,13 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <h1>字符串通配符</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240818-104800.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240818-104800.png" alt="Image description">
   </div> 
 <figcaption><p>
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code，跟字符串编辑距离很像</summary>
+<summary>Click to expand the code，跟字符串编辑距离很像，只是有了其他字符因此对初始化会有影响！</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
     #include <cctype>
@@ -549,11 +549,14 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
         dp[0][0]=true;
         for(int i=1;i<str_1.size()+1;i++)
         {
-            if(str_1[i-1]=='*')//注意查看是否为*的情况
+            if(str_1[i-1]=='*')//对于星号的情况不能全部为true，因为可能出现*A*的情况
                 dp[i][0]=dp[i-1][0];
+            else if(str_1[i-1]=='?')//匹配1个字符
+              dp[i][0]=dp[i-1][0];
             else
                 dp[i][0]=false;
         }
+        //对于i=0的情况，可以通过初始化全部为false那就不用再初始化了
         for(int j=1;j<str_2.size()+1;j++)
         {
             dp[0][j]=false;
@@ -577,6 +580,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
                         (str_2[j-1]>='0' && str_2[j-1]<='9') || (str_2[j-1]>='a' && str_2[j-1]<='z')
                             ))//匹配0个或以上的字符（注：能被*和?匹配的字符仅由英文字母和数字0到9组成，下同）
                     {
+                      //此处也并非有*就马上为true，反推初始化也不应该出现有*就为true
                         dp[i][j]=dp[i-1][j-1] || dp[i][j-1] || dp[i-1][j];
                     }
                     else if(str_1[i-1]=='?'
