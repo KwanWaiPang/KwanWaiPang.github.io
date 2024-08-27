@@ -858,7 +858,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共的数目，是背包问题！</summary>
+<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共有多少数目可以填满，可以转换为背包问题</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -898,6 +898,47 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             }
             
             return dp[coins.size()][amount];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>当然也可以不用背包问题的思路去解题！但是思路相对有点绕~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int change(int amount, vector<int>& coins) {
+    
+            //不用背包问题的思路去解决~
+    
+            // step1:定义dp表：dp[i]=当前金额为i时，总的硬币组合方案
+            // 状态：当前的金额，i，需要为amount+1
+            //选择：用或不用第i个金币（有条件，必须要满足当前金额i大于这个金币的数值）
+            vector<int> dp (amount+1,0);
+    
+            //step2：初始化dp
+            dp[0]=1;//当金额为0的时候，方案数为1
+            // 其余情况均初始化为0，组合方案为0（注意涉及到循环运算的时候需要预先给值）
+    
+            //step3 进行状态转移
+            //每种金币都可以选
+            for(auto each_coin:coins)
+            {
+                //首先对于这个面值的金币，i至少等于each_coin
+                for(int i=each_coin;i<amount+1;i++)
+                {
+                    //故此，当前状态的数目等于上一次使用这个面值的金币在加一次这个面值
+                    dp[i]+=dp[i-each_coin];
+                    // 而由于统计一共的方法数目，因此需要把其他时候的也加入。这就意味着必须初始化dp[i]=0
+                }
+    
+            }
+    
+            return dp[amount];
     
         }
     };
