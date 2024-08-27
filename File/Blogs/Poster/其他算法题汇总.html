@@ -186,6 +186,10 @@
 
   n进制转10进制都是pow（n，第几位）逢n进位
 
+  map<int,int>对应的是有序的（从小到大），unordered_map<int,int>对应的是无序的
+  map<int, string, greater<int>> group;//从大到小排列
+  set<int>对应的是有序的（从小到大），unordered_set<int>对应的是无序的
+
 </script>
 </code></pre>
 
@@ -242,6 +246,53 @@
     };
 </code></pre>
 </details>
+
+<details>
+<summary>穷举的时候，用map也可以，但是map默认是按key从小到大排列了的，改一下即可~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        // 穷举了所有的可能性(由于不同的千百十位对应不同的字符,故此穷举最直接)
+    map<int, string, greater<int>> group = {
+            {1000, "M"},
+            {900, "CM"},
+            {500, "D"},
+            {400, "CD"},
+            {100, "C"},
+            {90, "XC"},
+            {50, "L"},
+            {40, "XL"},
+            {10, "X"},
+            {9, "IX"},
+            {5, "V"},
+            {4, "IV"},
+            {1, "I"},
+        };//顺序很重要!
+        
+        string intToRoman(int num) {
+            string output_str;
+            
+            // 遍历这个group
+            for(auto it=group.begin(); it!=group.end();it++)//长度固定因此复杂度为O(1)
+            {
+                // 注意遍历是从大到小减的~
+                while(num>=it->first)//通过while循环,取完了,i再变
+                {
+                    output_str+=it->second;
+                    num=num-it->first;
+                }
+    
+                if(num==0)
+                    break;
+            }
+            return output_str;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -748,7 +799,7 @@
 <summary>Click to expand the code</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-  #include <iostream>
+    #include <iostream>
     #include <map>
     using namespace std;
     
@@ -860,7 +911,7 @@
           }
           else if(input_str[i]>='a' && input_str[i]<='z')
           {
-              out_str+=to_string(group[input_str[i]]);
+              out_str+=to_string(group[input_str[i]]);//注意要转换为字符串
           }
           else
               out_str+=input_str[i];//数字和其它的符号都不做变换。
@@ -919,7 +970,7 @@
             //当前重量的数量用完前
             for(int i=1;i<=num_of_current_weight;i++)
             {
-                auto temp=result_set;
+                auto temp=result_set;//注意由于下面要使用，此处应该copy一份来遍历
                 for(auto it=temp.begin();it!=temp.end();it++)
                 {
                     result_set.insert(*it+currrent_weight);//遍历当前插入的结果，分别加当前的砝码。反正去重了
@@ -996,7 +1047,7 @@
 
 
 <p><br></p>
-<h2>set与map自动排列：整型数组合并</h2>
+<h2>set与map自动升值排列：整型数组合并</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/WX20240818-151049.png" alt="Image description">
