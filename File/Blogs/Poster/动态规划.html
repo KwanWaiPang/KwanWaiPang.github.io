@@ -371,13 +371,44 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+<details>
+<summary>下面是等效的~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int climbStairs(int n) {
+    
+            // step1:定义dp表：dp[i]=第i级时，一共的方案数
+            // 状态：当前在第i阶
+            // 选择：由上一阶或上两阶获取的
+            int dp[n+1];
+    
+            // step2：初始化dp表
+            dp[0]=1;
+            dp[1]=1;
+            
+            // step3:进行状态转移
+            for(int i=2;i<n+1;i++)
+            {
+                dp[i]=dp[i-1]+dp[i-2];
+            }
+    
+            return dp[n];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 
 <p><br></p>
 <h1>走方格的方案数</h1>
 
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240819-105641.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240819-105641.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -392,8 +423,11 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     int main() {
         int n,m;
         cin>>n>>m;//n为横向的格子数，m为竖向的格子数
+        //注意是（0，1，2，。。。n）和（0，1，2，。。。m）一共是n+1和m+1个格子
     
-        // step1:定义dp表，走到第i和j个格子的走法
+        // step1:定义dp表，dp[i][j]:走到第i和j个格子的走法（注意是走法而不是一共走了多少格子）
+        //状态：当前位于第i行第j列（注意从0开始）
+        //选择：向右走或者向下走
         int dp[n+1][m+1];
     
         //step2:初始化dp表，为0
@@ -469,7 +503,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
                         //增加/插入新的值：可以理解为【i+1】与【j】一样了。那么就是退化为【i】与【j-1】对比了~
                         //删除i：就相当于用i的上一个状态了【i-1】与【j】对比
                         //替换：那么就相当于只用对比前一个状态了【i-1】与【j-1】对比
-                        //(+1为本次操作数)
+                        //注意不要漏了+1（为本次操作数)
                         dp[i][j]=min(min(dp[i][j-1],dp[i-1][j]),dp[i-1][j-1])+1;
                 }
             }
