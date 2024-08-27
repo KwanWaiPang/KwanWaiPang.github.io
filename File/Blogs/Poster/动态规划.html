@@ -753,6 +753,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <br>
 <strong>1、确定「状态」，也就是原问题和子问题中会变化的变量。</strong> 
 由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case （凑够了目标金额，为0）靠近，所以唯一的「状态」就是目标金额 amount。
+（ps：）
 <br>
 <strong>2、确定「选择」，也就是导致「状态」产生变化的行为。</strong>
 目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是的「选择」。
@@ -763,6 +764,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <details>
 <summary>Click to expand the code.此题的难点就是用什么作为状态，如何确定dp表。</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         int coinChange(vector<int>& coins, int amount) {
@@ -806,6 +808,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             return (dp[amount]==amount+1)? -1: dp[amount];
         }
     };
+  </script>
 </code></pre>
 </details>
 <details>
@@ -839,6 +842,63 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
                 return -1;
             else
                 return dp[amount];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>零钱兑换 II</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-102658.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共的数目，是背包问题！</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int change(int amount, vector<int>& coins) {
+    
+            //step1: 定义dp表：dp[i][j]为第i个硬币,当前的金额数为j,有多少种方法可以放满
+            // 若只使用 coins 中的前 i 个（i 从 1 开始计数）硬币的面值，若想凑出金额 j，有 dp[i][j] 种凑法。
+            // 状态：第i个硬币，现在的金额数
+            // 选择：用或不用当前的硬币
+            int dp[coins.size()+1][amount+1];
+    
+            // step2:初始化状态（base case最重要）
+            for(int i=0;i<coins.size()+1;i++)
+            {
+                dp[i][0]=1;//对于目标金额为0，什么都不做就是一种做法，直接可以凑出
+            }
+    
+            for(int j=1;j<amount+1;j++)
+            {
+                dp[0][j]=0;//没有金币了，但是面值不为0，那么肯定凑不出，就为0
+            }
+    
+            // step3:进行状态转移
+            for(int i=1;i<coins.size()+1;i++)
+            {
+                for(int j=1;j<amount+1;j++)
+                {
+                    if(j<coins[i-1])//那么就是不能选当前的硬币
+                        dp[i][j]=dp[i-1][j];
+                    else
+                    {
+                        //不放以及放，各一种做法，结果应该为两者之和.但是对于放了，你还可以从i个中选，因为金币的数量是无限的！
+                        dp[i][j]=dp[i-1][j]+dp[i][j-coins[i-1]];
+                    }
+                }
+            }
+            
+            return dp[coins.size()][amount];
+    
         }
     };
 </script>
