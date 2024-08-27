@@ -155,7 +155,7 @@
   //寻找字符和字符串
   str_2.find(temp_str)!=string::npos;//找到返回位置，否则返回npos
   str_2.find(temp_char)!=string::npos;//找到返回位置，否则返回npos
-  //下面写法是跟容器类的find函数一样的
+  //下面写法是跟容器类的find函数一样的（但只是寻找字符）
   find(str_2.begin(),str_2.end(),temp_char)!=str_2.end();//找到返回位置，否则返回end
 
   //寻找某个字符的索引位置
@@ -177,6 +177,11 @@
   int n; cin>>n;
   cin.ignore();  // 忽略 cin>>n 后的换行符
   string input_str; getline(cin,input_str);
+
+  //转换为string
+  to_string(123);//转换为字符串
+  stoi("123");//转换为int
+  stol("123");//转换为long int
 
 </script>
 </code></pre>
@@ -267,6 +272,7 @@
                 // 若字符串的当前位对应的数字小于下一位对应的数字(对应特殊的4,9等等)
                 if(define_group[s[i]]&ltdefine_group[s[i+1]])
                 {
+                    //逐个遍历，逐个相加即可~
                     num_value+=define_group[s[i+1]]-define_group[s[i]];
                     i=i+1;//当前位和下一位都算了，可以跳过
                 }
@@ -405,7 +411,6 @@
         }
         std::cout<<output_result<<std::endl;
     }
-    // 64 位输出请用 printf("%lld")
 </script>
 </code></pre>
 </details>
@@ -421,7 +426,7 @@
 </figure> 
 
 <details>
-<summary> 要用string来结题才可以，如果先转换为十进制然后相加可能出现越界情况.时间复杂度, O(Max(M,N)) </summary>
+<summary> 要用string来解题才可以，如果先转换为十进制然后相加可能出现越界情况.时间复杂度, O(Max(M,N)) </summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -493,9 +498,10 @@
                     output_str+=to_string((temp));//没有进位
                 }
             }
+            //不要漏了最后一个进位
             if(jinwei!=0)
                 output_str+='1';
-            reverse(output_str.begin(), output_str.end());//倒序输出
+            reverse(output_str.begin(), output_str.end());//倒序输出（前面倒序处理了，不要漏了！）
             return output_str;
     
         }
@@ -529,11 +535,11 @@
       cin>>input_value;
       int num_result=0;
       //转换为二进制
-      while(input_value!=0)
+      while(input_value!=0)//还没除尽
       {
           if(input_value%2==1)//余数
               num_result++;
-          input_value=input_value/2;//整除的结果
+          input_value=input_value/2;//整除的结果，下次再继续用
       }
       std::cout<<num_result;
   }
