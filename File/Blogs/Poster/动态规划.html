@@ -461,6 +461,67 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
+<h1>下降路径最小和</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240825-143229.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。时间与空间复杂度都是O（N<sup>2</sup>）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minFallingPathSum(vector<vector<int>>& matrix) {
+    
+            //step1:定义dp表：dp【i】【j】=当前第i行与第j列时最小的路径和
+            //状态：当前第i行与第j列
+            //选择：由上一行的三个元素决定（三个元素最小的一个，但根据列数不一样，三个元素有条件选择）
+            vector<vector<int>> dp(matrix.size(),vector<int>(matrix.size(),0));
+    
+            // step2:初始化dp表，实际上应该是位于当前网格的值的大小
+            for(int j=0;j<matrix.size();j++)
+            {
+                dp[0][j]=matrix[0][j];//初始化第一行即可。（由于是从第一行的任意点开始的）
+            }
+    
+            //step3:进行状态转移
+            for(int i=1;i<matrix.size();i++)
+            {
+                for(int j=0;j<matrix.size();j++)//注意处理j边界的方式
+                {
+                    // 当前列正上方
+                    int minAbove = dp[i-1][j];
+    
+                    if (j > 0) // 可以对比左上方元素
+                        minAbove = min(minAbove, dp[i-1][j-1]);
+                    
+                    if (j < matrix.size() - 1) // 可以对比右上方元素
+                        minAbove = min(minAbove, dp[i-1][j+1]);
+                    
+                    //上方三个的最小值+当前网格的值
+                    dp[i][j] = matrix[i][j] + minAbove;
+                }
+            }
+    
+            //最后再统计最后一行的最小值，才可以获得总的最小值
+            int min_value=INT_MAX;
+            for(int j=0;j<matrix.size();j++)
+            {
+                if(dp[matrix.size()-1][j]<min_value)//最后一行
+                    min_value=dp[matrix.size()-1][j];
+            }
+            return min_value;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
 <h1>编辑距离</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -993,13 +1054,13 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     };
 </code></pre>
 </details>
-<p>
+<!-- <p>
   通过本例可以发现。寻找动态规划的状态转移方程的通用技巧：数学归纳法！
   <br>
   所谓的数学归纳法其实就是。比如我们想证明一个数学结论，那么我们先假设这个结论在 k &lt n 时成立，然后根据这个假设，想办法推导证明出 k = n 的时候此结论也成立。如果能够证明出来，那么就说明这个结论对于 k 等于任何数都成立。
-</p>
+</p> -->
 <details>
-  <summary>Click to expand the code</summary>
+  <summary>Click to expand the code（用vector方便初始化，且涉及到循环对比的，需要先初始化，不然就会取空的时候的地址！）</summary>
   <pre><code>
   <script type='text/html' style='display:block'>
     class Solution {
@@ -1008,16 +1069,18 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
       
               //step1:定义dp表:为dp[i]=对于以 nums[i] 这个数结尾的最长递增子序列的长度
               // 故此应该是dp大小是nums.size()而不是nums.size()+1
+              //状态：以 nums[i] 这个数结尾
+              //选择：i之前的数进行判断
               vector<int> dp(nums.size(), 1);
               //step2:初始化dp表，为1，以 nums[i] 结尾的最长递增子序列起码要包含它自己，也就是自身长度1
       
               //step3:状态转移方程
-              int max_len=0;
+              int max_len=0;//用于记录整个序列中最长的，因为状态对应的只是当前字符
               for(int i=0;i<nums.size();i++)
               {
                   for(int j=0;j<i;j++)//由于不改变顺序，故此需要遍历的是i之前的
                   {//// 寻找 nums[0..i-1] 中比 nums[i] 小的元素
-                      if(nums[i]>nums[j])//对于nums[j]<nums[i]的情况，子序列的长度肯定就是dp[j]+1
+                      if(nums[i]>nums[j])//对于nums[j]<nums[i]的情况，子序列的长度肯定就是dp[j]+1（但不要求连续！）
                           dp[i]=max(dp[i],dp[j]+1);//相当于把i之前的每一个都对比了～
                   }
                   if(dp[i]>max_len)
@@ -1030,6 +1093,89 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   </script>
   </code></pre>
 </details> 
+
+<p><br></p>
+<h1>合唱队：最长递增子序列与最长递减子序列的结合</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-134758.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+  #include <vector>
+  using namespace std;
+  
+  int main() {
+      int N;//N位同学
+      cin>>N;
+  
+      vector<int> height_group;
+      int temp;
+      while(cin>>temp)
+      {
+          height_group.push_back(temp);
+      }
+      // 中间从两边递减，因此可以理解为是从左到右：最长递增子序列。从右向左：最长递减子序列
+  
+      //step1:定义dp表。第N-1个同学，最长序列为dp【N-1】
+      //step2:初始化状态为第0个同学，初始化为1,也就是自身的长度
+      vector<int> dp1(N,1);
+      
+      // 从左到右：最长递增子序列
+      // step3:状态转移方程
+      //对于第i个同学，对比j同学（j为0～i）
+      for(int i=0;i<N;i++)
+      {
+          for(int j=0;j<i;j++)
+          {   
+              //只要j小于i就参加对比。j大于i的就删除（不处理）
+              if(height_group[i]>height_group[j])
+                  dp1[i]=max(dp1[i],dp1[j]+1);
+          }
+      }//最终获得第i个同学，最长递增子序列
+  
+      // 从右向左：最长递减子序列
+      //step1:定义dp表。第N-1个同学，最长序列为dp【N-1】
+      //step2:初始化状态为第0个同学，初始化为1,也就是自身的长度
+      vector<int> dp2(N,1);
+      
+      // step3:状态转移方程
+      //对于第i个同学，对比j同学（j为i～N-1），注意不考虑i的本身
+      for(int i=N-1;i>=0;i--)
+      {
+          for(int j=N-1;j>i;j--)
+          {   
+              //只要j小于i就参加对比。j小于于i的就删除（不处理）
+              if(height_group[j]<height_group[i])//j在i的后面，j比i小，那么就是递减
+                  dp2[i]=max(dp2[i],dp2[j]+1);
+          }
+      }//最终获得第i个同学，最长递减子序列
+  
+      //
+      int maxLength = 0;
+      //遍历这些同学
+      for (int  i = 0; i < N; i++){
+          //dp1[i]为第i个同学，从左到右的最长递增子序列
+          //dp2[i] 为第i个同学，从i开始的最长递减子序列
+          if (maxLength < dp1[i] + dp2[i] - 1)//i为分割点，因此需要-1
+          {
+              maxLength = dp1[i] + dp2[i] - 1;
+              //这里的i就是划分中点
+          }
+      }
+      std::cout << N - maxLength << endl;
+      
+  }
+  
+</script>
+</code></pre>
+</details>
 
 <p><br></p>
 <h1>俄罗斯套娃信封问题</h1>
@@ -1116,264 +1262,6 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
         }
     };
   </script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h1>下降路径最小和</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240825-143229.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code。时间与空间复杂度都是O（N<sup>2</sup>）</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int minFallingPathSum(vector<vector<int>>& matrix) {
-    
-            //step1:定义dp表：dp【i】【j】=当前第i行与第j列时最小的路径和
-            vector<vector<int>> dp(matrix.size(),vector<int>(matrix.size(),0));
-    
-            // step2:初始化dp表，实际上应该是位于当前网格的值的大小
-            for(int j=0;j<matrix.size();j++)
-            {
-                dp[0][j]=matrix[0][j];//初始化第一行即可。
-            }
-    
-            //step3:进行状态转移
-            for(int i=1;i<matrix.size();i++)
-            {
-                for(int j=0;j<matrix.size();j++)//注意处理j边界的方式
-                {
-                    // 当前列正上方
-                    int minAbove = dp[i-1][j];
-    
-                    if (j > 0) // 可以对比左上方元素
-                        minAbove = min(minAbove, dp[i-1][j-1]);
-                    
-                    if (j < matrix.size() - 1) // 可以对比右上方元素
-                        minAbove = min(minAbove, dp[i-1][j+1]);
-                    
-                    dp[i][j] = matrix[i][j] + minAbove;
-                }
-            }
-    
-            //最后再统计最后一行的最小值
-            int min_value=INT_MAX;
-            for(int j=0;j<matrix.size();j++)
-            {
-                if(dp[matrix.size()-1][j]<min_value)//最后一行
-                    min_value=dp[matrix.size()-1][j];
-            }
-            return min_value;
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-
-<p><br></p>
-<h1>超级动态规划问题：购物单</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-090109.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>这道题其实就是在01背包问题的基础上，添加了各种约束。是的整体比较复杂。解题的关键点是：
-  <br>1、每次只处理主件。如果是附件的话，状态等于上一次。
-  <br>2、所谓的状态分为：不买、买主件、买主件+1个附件、买主件+2个附件。只有四个状态。而不买跟当前是附件的状态一样，都是继承上一个状态
-  <br>3、在讨论买主件、主件+1附件、主件+2附件的时候，是依次递推满足的情况下再记录状态，不然会超时。</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <utility>  // 包含 pair 和 make_pair 的定义
-    #include <vector>   // 包含 vector 的定义
-    using namespace std;
-    
-    int main() {
-        int N, m;
-    
-        cin >> N; //总的钱的数目
-        cin >> m; //可购买物品的个数
-    
-        // int v, p, q;
-        // v 表示该物品的价格， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件，
-        // vector< pair<int, pair<int, int>> > all_item(m+1);//要m+1个，因为下面的索引也是从1开始的
-        // for (int i = 1; i < m+1; ++i) {
-        //     cin >> v >> p >> q;
-        //     all_item[i] = make_pair(v, make_pair(p, q));//保证了索引从1开始。因为下面也是从1开始的
-        // }
-        //all_item的size为m
-        vector<int> v(m + 1), p(m + 1), q(m + 1);
-        for (int i = 1; i <= m; ++i) {
-            cin >> v[i] >> p[i] >> q[i];
-        }
-    
-    
-        //由于是求解最优子问题，采用动态规划
-        // step1: 定义dp表,购买第m个物体时，此时预算为N的时候的最大满意度
-        vector< vector<int>> dp(m + 1, vector<int> (N + 1, 0));
-        //step2:初始化状态，当当前物品不买的时候，初始化为0
-    
-    
-        //step3:进行自下而上的状态转移方程
-        for (int i = 1; i < m + 1; i++) {
-            //预算从N开始算。没花钱
-            for (int j = N; j >= 0; j--) {
-                // 先继承上一个状态
-                dp[i][j] = dp[i - 1][j];
-    
-                //只考虑主件，非主件时不处理，相当于只继承之前的状态
-                if (q[i] == 0) {
-                    // 当前的状态为买了主件后的贡献量+上一个状态的贡献量
-                    // vs
-                    // 不买当前主件。上一状态的贡献量
-                    if (j >= v[i]) 
-                    { //若可以买
-                        //买与不买之间的最大值。注意，当前如果买了，那么上一个状态可以花的额度就只有j - temp_v
-                        dp[i][j] = max(dp[i - 1][j - v[i]] + v[i] * p[i]
-                                       , dp[i - 1][j]);
-                        //考虑主件+第一个1个附件
-                        for (int k = 1; k < m + 1; k++) { //遍历all_item
-                            if (q[k] == i && j >= v[i] + v[k]) 
-                            { //当前主件的附件
-                                dp[i][j] = max(dp[i - 1][j - v[i] - v[k]]
-                                               + v[i] * p[i]
-                                               + v[k] * p[k]
-                                               , dp[i][j]);//注意对比的为当前的
-    
-                                int k1=k;//下面考虑买两个物品
-                                for (int k2 = k1 + 1; k2 < m + 1; k2++) {
-                                    if (
-                                        q[k2] == i
-                                        && j >= v[i] + v[k1] + v[k2]) 
-                                    { //当前主件的附件
-                                        dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
-                                                    v[i] * p[i]
-                                                    + v[k1] * p[k1]
-                                                    + v[k2] * p[k2]
-                                                    , dp[i][j]);//注意对比的为当前的
-                                    }
-                                }
-                            }
-                        }
-    
-                        // //考虑主件+2个附件
-                        // for (int k1 = 1; k1 < m + 1; k1++) { //遍历all_item
-                        //     for (int k2 = k1 + 1; k2 < m + 1; k2++) {
-                        //         if (q[k1] == i
-                        //                 && q[k2] == i
-                        //                 && j >= v[i] + v[k1] + v[k2]) { //当前主件的附件
-                        //             dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
-                        //                            v[i] * p[i]
-                        //                            + v[k1] * p[k1]
-                        //                            + v[k2] * p[k2]
-                        //                            , dp[i][j]);//注意对比的为当前的
-                        //         }
-                        //     }
-                        // }
-                    }
-    
-                }
-    
-            }
-        }
-        std::cout << dp[m][N];
-    }
-</script>
-</code></pre>
-</details>
-
-
-<p><br></p>
-<h1>合唱队：最长递增子序列与最长递减子序列的结合</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-134758.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  #include <iostream>
-  #include <vector>
-  using namespace std;
-  
-  int main() {
-      int N;//N位同学
-      cin>>N;
-  
-      vector<int> height_group;
-      int temp;
-      while(cin>>temp)
-      {
-          height_group.push_back(temp);
-      }
-      // 中间从两边递减，因此可以理解为是从左到右：最长递增子序列。从右向左：最长递减子序列
-  
-      //step1:定义dp表。第N-1个同学，最长序列为dp【N-1】
-      //step2:初始化状态为第0个同学，初始化为1,也就是自身的长度
-      vector<int> dp1(N,1);
-      
-      // 从左到右：最长递增子序列
-      // step3:状态转移方程
-      //对于第i个同学，对比j同学（j为0～i）
-      for(int i=0;i<N;i++)
-      {
-          for(int j=0;j<i;j++)
-          {   
-              //只要j小于i就参加对比。j大于i的就删除（不处理）
-              if(height_group[i]>height_group[j])
-                  dp1[i]=max(dp1[i],dp1[j]+1);
-          }
-      }//最终获得第i个同学，最长递增子序列
-  
-      // 从右向左：最长递减子序列
-      //step1:定义dp表。第N-1个同学，最长序列为dp【N-1】
-      //step2:初始化状态为第0个同学，初始化为1,也就是自身的长度
-      vector<int> dp2(N,1);
-      
-      // step3:状态转移方程
-      //对于第i个同学，对比j同学（j为0～i）
-      for(int i=N-1;i>=0;i--)
-      {
-          for(int j=N-1;j>i;j--)
-          {   
-              //只要j大于i就参加对比。j小于于i的就删除（不处理）
-              if(height_group[j]<height_group[i])//j在i的后面，j比i小，那么就是递减
-                  dp2[i]=max(dp2[i],dp2[j]+1);
-          }
-      }//最终获得第i个同学，最长递减子序列
-  
-      //
-      int maxLength = 0;
-      //遍历这些同学
-      for (int  i = 0; i < N; i++){
-          //dp1[i]为第i个同学，从左到右的最长递增子序列
-          //dp2[i] 为第i个同学，从i开始的最长递减子序列
-          if (maxLength < dp1[i] + dp2[i] - 1)//i为分割点，因此需要-1
-          {
-              maxLength = dp1[i] + dp2[i] - 1;
-              //这里的i就是划分中点
-          }
-      }
-      std::cout << N - maxLength << endl;
-      
-  }
-  
-</script>
 </code></pre>
 </details>
 
@@ -1694,6 +1582,123 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </script>
 </code></pre>
 </p>
+
+<p><br></p>
+<h2>超级动态规划问题：购物单</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-090109.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>这道题其实就是在01背包问题的基础上，添加了各种约束。是的整体比较复杂。解题的关键点是：
+  <br>1、每次只处理主件。如果是附件的话，状态等于上一次。
+  <br>2、所谓的状态分为：不买、买主件、买主件+1个附件、买主件+2个附件。只有四个状态。而不买跟当前是附件的状态一样，都是继承上一个状态
+  <br>3、在讨论买主件、主件+1附件、主件+2附件的时候，是依次递推满足的情况下再记录状态，不然会超时。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  #include <iostream>
+    #include <utility>  // 包含 pair 和 make_pair 的定义
+    #include <vector>   // 包含 vector 的定义
+    using namespace std;
+    
+    int main() {
+        int N, m;
+    
+        cin >> N; //总的钱的数目
+        cin >> m; //可购买物品的个数
+    
+        // int v, p, q;
+        // v 表示该物品的价格， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件，
+        // vector< pair<int, pair<int, int>> > all_item(m+1);//要m+1个，因为下面的索引也是从1开始的
+        // for (int i = 1; i < m+1; ++i) {
+        //     cin >> v >> p >> q;
+        //     all_item[i] = make_pair(v, make_pair(p, q));//保证了索引从1开始。因为下面也是从1开始的
+        // }
+        //all_item的size为m
+        vector<int> v(m + 1), p(m + 1), q(m + 1);
+        for (int i = 1; i <= m; ++i) {
+            cin >> v[i] >> p[i] >> q[i];
+        }
+    
+    
+        //由于是求解最优子问题，采用动态规划
+        // step1: 定义dp表,购买第m个物体时，此时预算为N的时候的最大满意度
+        //状态：当前第i个物品，当前的预算为j
+        //选择：对于当前的物品，买与不买：如果是附件，不买。如果是主件，则分为买主件、买主件+1个附件、买主件+2个附件
+        vector< vector<int>> dp(m + 1, vector<int> (N + 1, 0));
+        //step2:初始化状态，当当前物品不买的时候，初始化为0
+    
+    
+        //step3:进行自下而上的状态转移方程
+        for (int i = 1; i < m + 1; i++) {//从第一个物品开始一个一个看
+            //预算从N开始算。没花钱
+            for (int j = N; j >= 0; j--) {
+                // 先继承上一个状态
+                dp[i][j] = dp[i - 1][j];
+    
+                //只考虑主件，非主件时不处理，相当于只继承之前的状态
+                if (q[i] == 0) {
+                    // 当前的状态为买了主件后的贡献量+上一个状态的贡献量
+                    // vs
+                    // 不买当前主件。上一状态的贡献量
+                    if (j >= v[i]) 
+                    { //若可以买
+                        //买与不买之间的最大值。注意，当前如果买了，那么上一个状态可以花的额度就只有j - temp_v
+                        dp[i][j] = max(dp[i - 1][j - v[i]] + v[i] * p[i]
+                                       , dp[i - 1][j]);
+                        //考虑主件+第一个1个附件
+                        for (int k = 1; k < m + 1; k++) { //遍历all_item
+                            if (q[k] == i && j >= v[i] + v[k]) 
+                            { //当前主件的第一个附件
+                                dp[i][j] = max(dp[i - 1][j - v[i] - v[k]]
+                                               + v[i] * p[i]
+                                               + v[k] * p[k]
+                                               , dp[i][j]);//注意对比的为当前的
+    
+                                int k1=k;//下面考虑买两个物品（寻找当前主件的第二个附件）
+                                for (int k2 = k1 + 1; k2 < m + 1; k2++) {
+                                    if (
+                                        q[k2] == i
+                                        && j >= v[i] + v[k1] + v[k2]) 
+                                    { //当前主件的第二个附件
+                                        dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
+                                                    v[i] * p[i]
+                                                    + v[k1] * p[k1]
+                                                    + v[k2] * p[k2]
+                                                    , dp[i][j]);//注意对比的为当前的
+                                    }
+                                }
+                            }
+                        }
+    
+                        // //考虑主件+2个附件
+                        // for (int k1 = 1; k1 < m + 1; k1++) { //遍历all_item
+                        //     for (int k2 = k1 + 1; k2 < m + 1; k2++) {
+                        //         if (q[k1] == i
+                        //                 && q[k2] == i
+                        //                 && j >= v[i] + v[k1] + v[k2]) { //当前主件的附件
+                        //             dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
+                        //                            v[i] * p[i]
+                        //                            + v[k1] * p[k1]
+                        //                            + v[k2] * p[k2]
+                        //                            , dp[i][j]);//注意对比的为当前的
+                        //         }
+                        //     }
+                        // }
+                    }
+    
+                }
+    
+            }
+        }
+        std::cout << dp[m][N];
+    }
+</script>
+</code></pre>
+</details>
 
 <p><br></p>
 <h2>背包问题变体之子集分割/子集背包问题</h2>
