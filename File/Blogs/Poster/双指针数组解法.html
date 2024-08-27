@@ -302,7 +302,7 @@
             {
                 if(nums[slow]!=nums[fast])//找到不等的
                 {
-                    slow++;//slow自增
+                    slow++;//slow自增（必须先自增，因为一开始fast=slow，下一刻再判断时必须要先把slow自增）
                     nums[slow]=nums[fast];//进行赋值
                 }
                 fast++;
@@ -417,7 +417,7 @@
             }
     
             while(slow!=nums.size())
-            {//由于没有返回值，把后面的也赋值为0
+            {//由于没有返回值，把后面的也赋值为0（因为可能是原本位置的其他值，上面并不是交换操作）
                 nums[slow]=0;
                 slow++;
             }
