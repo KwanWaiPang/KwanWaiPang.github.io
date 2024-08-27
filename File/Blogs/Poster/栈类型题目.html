@@ -292,6 +292,7 @@
             stack&ltchar&gt stack_char;
             for(int i=0;i&ltnum.size();i++)
             {
+                //每次先检查，如果满足可以先从栈中删除一些：满足条件：从左到右为递增（小的放前面）
                 while(!stack_char.empty() && k&gt0 && stack_char.top()>num[i])
                 {
                     // 当盏不为空，且盏顶的元素大于当前的元素的时候，把栈顶的元素去掉。放入当前的元素
@@ -398,7 +399,7 @@
                 //说明当前字符已经存在了，故此不再插入
                 if(output_str.find(s[i])!=string::npos)
                 {
-                    map[s[i]]--;//记录这个字符的数目减一，因为没有加入
+                    map[s[i]]--;//记录这个字符的数目减一，虽然没有入栈，但是这个字符也被剔除掉了
                     continue;
                 }
     
@@ -406,7 +407,9 @@
                 //且栈内不为空，且即将进栈的元素小于当前栈顶的元素，同时当前栈顶的元素也不是最后一个（map中还有）
                 while(!output_str.empty() && output_str.back()&gts[i] && map[output_str.back()]&gt0)
                 {
+                  //循环对比
                     output_str.pop_back();//就可以删掉（相当于出栈）
+                    //注意由于原本这个字符入栈的时候已经减一了，所以这里不需要再减一
                 }
                 output_str.push_back(s[i]);//入栈操作
                 map[s[i]]--;//入栈后减一。
