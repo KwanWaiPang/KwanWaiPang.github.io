@@ -1343,6 +1343,7 @@ int main() {
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20240810213107.png" alt="Image description">
   </div>
 <figcaption><p>
+  题目：明明生成了N个1到500之间的随机整数。请你删去其中重复的数字，即相同的数字只保留一个，把其余相同的数去掉，然后再把这些数从小到大排序，按照排好的顺序输出。
 </p></figcaption>
 </figure> 
 <details>
@@ -1562,10 +1563,11 @@ int main() {
   
       getline(cin,input_str);
       vector<char> group;//存放着26个字母
-      for(int i=0;i<26;i++)
+      for(int i=0;i<26;i++)//对应26个字母，按先后顺序存放
       {
           for(int j=0;j<input_str.size();j++)
           {
+              //不区分大小写，进而实现了先出现，先存放
               if((input_str[j]-'a'==i) || (input_str[j]-'A'==i))//对应的位置上存字母
                   group.push_back(input_str[j]);
           }
@@ -1573,6 +1575,7 @@ int main() {
   
       for(int i=0, k=0; i<input_str.size(), k<group.size();i++)
       {
+          //对应字母的位置取值，其他位置不变~
           if(
               (input_str[i]>='a' && input_str[i]<='z')
               ||(input_str[i]>='A' && input_str[i]<='Z')
@@ -1678,74 +1681,84 @@ int main() {
 <summary>Click to expand the code</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-  #include <iostream>
-  #include <string>
-  using namespace std;
-  
-  int main() {
-      string input_str;
-      while(cin>>input_str)
-      {
-          //条件1:长度超过8位
-          if(input_str.size()<=8)
-          {
-              std::cout<<"NG"<<std::endl;
-              continue;//长度小于8直接跳出，执行下一次
-          }
-  
-          // 条件2：包括大小写字母.数字.其它符号,以上四种至少三种
-          int big=0, small=0, num=0, other=0;
-          for(int i=0;i<input_str.size();i++)
-          {
-              if(input_str[i]>='a' && input_str[i]<='z')
-                  small=1;
-              else if(input_str[i]>='A' && input_str[i]<='Z')
-                  big=1;
-              else if(input_str[i]>='0' && input_str[i]<='9')
-                  num=1; 
-              else if (input_str[i]!=' ')
-                  other=1;////其他情况且不为空格
-                  
-              if((big+small+num+other)>=3)
-                  break;//满足就退出当前循环
-          }
-          if((big+small+num+other)<3)
-          {
-              std::cout<<"NG"<<std::endl;
-              continue;//不满足条件2，执行下一次
-          }
-  
-          // 条件3:不能有长度大于2的包含公共元素的子串重复 
-          bool repeat_flag=false;
-          for(int i=0;i<input_str.size()-6;i++)
-          {
-              string sub_i=input_str.substr(i,3);
-              for(int j=i+3;j<input_str.size()-3;j++)
-              {
-                  string sub_j=input_str.substr(j,3);
-                  if(sub_i==sub_j)
-                  {
-                      repeat_flag=true;
-                      break;
-                  }
-              }
-              // string sub_str=input_str.substr(i,3);//大于2，就是3啦～
-              // if(input_str.find(sub_str)!=input_str.npos)//找到了。不能用find因为全部找必然找到。。。。
-              // {
-              //     repeat_flag=true;
-              //     break;
-              // }
-          }
-          if(repeat_flag)
-          {
-              std::cout<<"NG"<<std::endl;
-              continue;//不满足条件2，执行下一次
-          }
-          std::cout<<"OK"<<std::endl;
-  
-      }
-  }
+    #include <iostream>
+    #include <string>
+    using namespace std;
     
+    int main() {
+        string input_str;
+        while(cin>>input_str)
+        {
+            //条件1:长度超过8位
+            if(input_str.size()<=8)
+            {
+                std::cout<<"NG"<<std::endl;
+                continue;//长度小于8直接跳出，执行下一次
+            }
+    
+            // 条件2：包括大小写字母.数字.其它符号,以上四种至少三种
+            int big=0, small=0, num=0, other=0;
+            for(int i=0;i<input_str.size();i++)
+            {
+                if(input_str[i]>='a' && input_str[i]<='z')
+                    small=1;
+                else if(input_str[i]>='A' && input_str[i]<='Z')
+                    big=1;
+                else if(input_str[i]>='0' && input_str[i]<='9')
+                    num=1; 
+                else if (input_str[i]!=' ')
+                    other=1;////其他情况且不为空格
+                    
+                if((big+small+num+other)>=3)
+                    break;//满足就退出当前循环
+            }
+            if((big+small+num+other)<3)
+            {
+                std::cout<<"NG"<<std::endl;
+                continue;//不满足条件2，执行下一次
+            }
+    
+            // 条件3:不能有长度大于2的包含公共元素的子串重复 
+            bool repeat_flag=false;
+          //   下面更直接简单
+          //   for(int i=0;i<input_str.size()-3;i++)
+          //   {
+          //       string sub_1=input_str.substr(i,3);
+          //       string sub_2=input_str.substr(i+3,input_str.size()-(i+3));
+          //       if(sub_2.find(sub_1)!=string::npos)
+          //       {
+          //            repeat_flag=true;
+          //            break;
+          //        }
+          //   }
+            for(int i=0;i<input_str.size()-6;i++)
+            {
+                string sub_i=input_str.substr(i,3);
+                for(int j=i+3;j<input_str.size()-3;j++)
+                {
+                    string sub_j=input_str.substr(j,3);
+                    if(sub_i==sub_j)
+                    {
+                        repeat_flag=true;
+                        break;
+                    }
+                }
+                // string sub_str=input_str.substr(i,3);//大于2，就是3啦～
+                // if(input_str.find(sub_str)!=input_str.npos)//找到了。不能用find因为全部找必然找到。。。。
+                // {
+                //     repeat_flag=true;
+                //     break;
+                // }
+            }
+            if(repeat_flag)
+            {
+                std::cout<<"NG"<<std::endl;
+                continue;//不满足条件2，执行下一次
+            }
+            std::cout<<"OK"<<std::endl;
+    
+        }
+    }  
 </script>
 </code></pre>
 </details>
