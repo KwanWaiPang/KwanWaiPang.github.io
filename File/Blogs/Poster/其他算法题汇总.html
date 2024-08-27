@@ -170,7 +170,8 @@
   //平时sort是从小到大排列，如果想从大到小排列，可以这样
   sort(nums.begin(),nums.end(),greater<int>());//从大到小排列，当然也可以自定义函数来实现～
 
-  有时做最大最小值记录的时候，可以选择初始化为INT_MIN和INT_MAX
+  有时做最大最小值记录的时候，可以选择初始化为INT_MIN和INT_MAX！必须，特别是数组或者vector类别的，没有初始化就用地址值会报错。
+  注意每次对比最值都应该check最后一个！
 
   采用"//"来代替'/'，因为'/'是转义字符，会出现问题
 
@@ -182,6 +183,8 @@
   to_string(123);//转换为字符串
   stoi("123");//转换为int
   stol("123");//转换为long int
+
+  n进制转10进制都是pow（n，第几位）逢n进位
 
 </script>
 </code></pre>
@@ -557,7 +560,7 @@
 </p></figcaption>
 </figure> 
 <details>
-  <summary>跟上一题是很像的，注意是要注意设计循环迭代求最值都需要对比一下最后一个</summary>
+  <summary>跟上一题是很像的，主要是要注意设计循环迭代求最值都需要对比一下最后一个</summary>
   <pre><code>
   <script type='text/html' style='display:block'>
       #include <iostream>
@@ -629,7 +632,7 @@
             result+=to_string(yushu);
             value=value/2;//整除，下一次继续算
         }
-        reverse(result.begin(),result.end());//注意存放顺序发生了变化啦
+        reverse(result.begin(),result.end());//注意存放顺序发生了变化也要倒序
         return result;
     }
     
@@ -637,7 +640,7 @@
     {
         long int result=0;
         
-        for(int i=input_str.size()-1;i>=0;i--)//倒序
+        for(int i=input_str.size()-1;i>=0;i--)//注意是倒序
         {
             result+=(input_str[i]=='1'? 1:0)*pow(2,input_str.size()-1-i);//二进制应该是乘2，满2就递增一位
         }
@@ -663,7 +666,7 @@
                 temp+=input_str1[i];
             }
         }
-        //最后一个也要放入
+        //不要漏掉最后一个
         group.push_back(temp);
     
         string output_str;
@@ -701,6 +704,7 @@
             string temp_str = input_str2.substr(i, 8);
             group_out.push_back(temp_str);
         }
+        //四组二进制的值
     
         string result_str;
         for(int i=0;i<group_out.size();i++)
