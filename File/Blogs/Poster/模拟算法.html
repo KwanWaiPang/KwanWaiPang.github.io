@@ -791,7 +791,8 @@
         cin>>x>>y>>z;
     
         int a[x][y], b[y][z], result[x][z];
-    
+
+        //传入数据到矩阵中
         for(int i=0;i<x;i++)
         {
             for(int j=0;j<y;j++)
@@ -799,7 +800,8 @@
                 cin>>a[i][j];
             }
         }
-    
+        
+        //传入数据到矩阵中
         for(int j=0;j<y;j++)
         {
             for(int k=0;k<z;k++)
@@ -807,7 +809,8 @@
                 cin>>b[j][k];
             }
         }
-    
+        
+        //模拟矩阵的计算过程
         for(int i=0;i<x;i++)
         {
             for(int k=0;k<z;k++)
@@ -820,7 +823,8 @@
                 result[i][k]=sum;
             }
         }
-    
+        
+        //从矩阵中输出结果
         for(int i=0;i<x;i++)
         {
             for(int k=0;k<z;k++)
