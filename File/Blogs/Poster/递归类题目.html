@@ -302,25 +302,27 @@
                 return "1";
             
             string input_str=countAndSay(n-1);//每次输入的为上一个的结果
-            int temp_num=1;//初始化为1
-            char temp_char=input_str[0];
+            //由于需要基于上一次的结果做处理，为此，需要放在后序的位置上
+            int temp_num=1;//初始化为1（多少个1）
+            char temp_char=input_str[0];//第一个数
             string result;
             for(int i=1;i&ltinput_str.size();i++)
             {
                 if(input_str[i]==temp_char)//还是等于结果的
                 {
-                    temp_num++;
+                    temp_num++;//记录多少个这个数
                 }
                 else
                 {
+                    //结果记录为=现有结果+多少个当前字符+当前字符
                     result=result+to_string(temp_num)+temp_char;
                     //然后重置一下
                     temp_char=input_str[i];//新的字符
                     temp_num=1;//当前为1个
                 }
             }
-    
-            //出来的结果再加一次
+            //根据for的终止条件，确定最后一个是否需要补上
+            //（把最后漏掉的，补上）
             result=result+to_string(temp_num)+temp_char;
     
             return result;
@@ -351,11 +353,13 @@
     
     int callback(int num_moonth)//求每个月兔子数
     {
+        //递归的终止条件，月数小于等于2时，只有1只兔子
         if(num_moonth<=2)//月数少于2时为1只
             return 1;
         
-        return callback(num_moonth-1)+callback(num_moonth-2);//返回前两个月相加
+        return callback(num_moonth-1)+callback(num_moonth-2);
         //旧兔子每个月生一只；新兔子每两个月就变成一只旧兔子
+        //那么只有上两个月的兔子会生出新的兔子，同时加上上一个月的兔子的基数（为旧的兔子数）
     }
     
     int main() {
@@ -534,7 +538,8 @@
     using namespace std;
     
     int f(int m, int n) {
-        if (m < 0 || n < 0)//苹果或盘子之一小于0，就无法再往下了
+        //确定递归的终止条件~
+        if (m < 0 || n < 0)//苹果或盘子之一小于0，就无法再往下了（等于的时候，还可以继续，直到有一个为1）
             return 0;
         else if (m == 1 || n == 1)
             return 1;
@@ -577,7 +582,7 @@
     using namespace std;
     
     bool calculate(vector<int> value_group, double totally_value) {
-        //递归终止的条件
+        //递归终止的条件（当前组用完了~）
         if (value_group.empty()) {
             if (totally_value == 24)
                 return true;
@@ -597,7 +602,7 @@
             || calculate(rest, totally_value / value_group[i]))
                 return true;
         }
-        return false;
+        return false;//最遍历完都不行的，就返回false
     }
     
     int main() {
