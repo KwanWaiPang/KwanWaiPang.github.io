@@ -808,7 +808,7 @@ class Solution {
                 p_head=p_head->next;//一直递推
             }//注意此时num已经减完了
     
-            ListNode* p_1=head->next;
+            ListNode* p_1=head->next;//去掉了虚拟头节点
             int k;
             cin>>k;//输入获取倒数第k个值
             while(k--)
