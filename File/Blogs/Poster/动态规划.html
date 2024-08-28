@@ -612,8 +612,8 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             // 选择为： 向左 或 向上 移动一步
             vector<vector<int>> dp(dungeon.size()+1, vector<int>(dungeon[0].size()+1, INT_MAX));;
             
-            // step2:初始化dp表为int的最大值，这样索引可以避免考虑最后一列和最后一行复杂的情况
-            dp[dungeon.size()][dungeon[0].size()]=1;//到最后一格的时候刚好是一滴血
+            // step2:初始化dp表为int的最大值（由于下面需要选择最小值），同时索引多一行一列可以避免考虑最后一列和最后一行复杂的情况
+            dp[dungeon.size()][dungeon[0].size()]=1;//到最后一格之后刚好是一滴血
             dp[dungeon.size()-1][dungeon[0].size()]=1;
             dp[dungeon.size()][dungeon[0].size()-1]=1;
             
