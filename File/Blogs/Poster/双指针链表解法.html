@@ -979,7 +979,7 @@ class Solution {
               while(head!=NULL)
               {
                   group[head]++;
-                  if(group[head]>1)//找到了回环
+                  if(group[head]>1)//找到了回环,而此必然为环的起点
                       return head;
                   head=head->next;
               }
@@ -1185,7 +1185,7 @@ class Solution {
   <script type='text/html' style='display:block'>
   class Solution {
     public:
-        // 采用递归的解法
+        // 采用递归的解法。并且通过审题可知，高位在尾节点
         ListNode* addTwoNumbers(ListNode* l1, ListNode* l2, int carry=0) {//carry 为进位
     
             ListNode* result=new ListNode(0);//链表指针初始化为0
