@@ -182,6 +182,8 @@
 
 <p><br></p>
 <h1>爬楼梯</h1>
+<p><br></p>
+<h2>1.自下而上，推到状态方程</h2>
 <p>首先通过经典的爬楼梯问题，导出其对应的动态规划解法</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -218,6 +220,8 @@ int climbingStairsDP(int n) {
     <li>step3:构建状态转移方程。将递推公式 𝑑𝑝[𝑖] = 𝑑𝑝[𝑖 − 1] + 𝑑𝑝[𝑖 − 2] 称为状态转移方程。</li>
     </ul>
 </p>
+<p><br></p>
+<h2>2.最优子结构</h2>
 <p>上图仅仅是展示了动态规划的基本构建，但是一般来说，动态规划都是用来解决最优化问题的，因此进一步的，题目形如下面：
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -273,62 +277,9 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 }
 </code></pre>
 </details> 
-<p>
-  若进一步的，对上面题目添加限制条件，如下：
-  </p>
-  <figure style="text-align: center;">
-    <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214847.png" alt="Image description">
-    </div>
-  <figcaption><p>
-  </p></figcaption>
-  </figure> 
 
-<p>
-  改问题中，下一步选择不能由当前状态（当前所在楼梯阶数）独立决定，还和前一个状态（上一轮所在楼梯阶数）有关。
-  因此不满足<strong>无后效性</strong>，那么上面的状态转移方程就不适用了，
-  <br>
-  为此，扩展状态定义：状态 [𝑖, 𝑗] 表示处在第 𝑖 阶并且上一轮跳了 𝑗 阶，其中 𝑗 ∈ {1, 2} 。此状态定义有效地区分了上一轮跳了 1 阶还是 2 阶，我们可以据此判断当前状态是从何而来的。
-</p>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802215149.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>  
-<p>
-  <ul>
-    <li>当上一轮跳了 1 阶时，上上一轮只能选择跳 2 阶，即 𝑑𝑝[𝑖, 1] 只能从 𝑑𝑝[𝑖 − 1, 2] 转移过来。</li>
-    <li>当上一轮跳了 2 阶时，上上一轮可选择跳 1 阶或跳 2 阶，即 𝑑𝑝[𝑖, 2] 可以从 𝑑𝑝[𝑖−2, 1] 或 𝑑𝑝[𝑖−2, 2]
-  转移过来。</li>
-  </ul>
-</p>
-<details>
-<summary>代码如下：</summary>
-<pre><code>
-  /* 带约束爬楼梯：动态规划 */
-  int climbingStairsConstraintDP(int n) {
-    if (n == 1 || n == 2) {
-    return 1;
-    }
-    // 初始化 dp 表，用于存储子问题的解
-    vector&ltvector&ltint&gt&gt dp(n + 1, vector&ltint&gt(3, 0));
-    // 初始状态：预设最小子问题的解
-    dp[1][1] = 1;
-    dp[1][2] = 0;
-    dp[2][1] = 0;
-    dp[2][2] = 1;
-    // 状态转移：从较小子问题逐步求解较大子问题
-    for (int i = 3; i &lt= n; i++) {
-      dp[i][1] = dp[i - 1][2];
-      dp[i][2] = dp[i - 2][1] + dp[i - 2][2];
-    }
-    return dp[n][1] + dp[n][2];//两者之和代表爬到第 𝑛 阶的方案总数
-  }
-</code></pre>
-</details>
-
+<p><br></p>
+<p>下面看看例题</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805214857.png" alt="Image description">
@@ -402,6 +353,65 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>3.带约束导致无后效性时，需要额外添加状态来保证</h2>
+<p>
+  若进一步的，对上面题目添加限制条件，如下：
+  </p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214847.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+
+<p>
+  在此新问题中，下一步选择不能仅仅由当前状态（当前所在楼梯阶数）独立决定，还和前一个状态（上一轮所在楼梯阶数）有关。
+  因此不满足<strong>无后效性</strong>，那么上面的状态转移方程就不适用了。
+  又或者说：影响当前结果的，不再是一个状态，而是两个状态（当前的阶梯数，以及上次是走1级还是2级）。
+  <br>
+  为此，扩展状态定义：状态 [𝑖, 𝑗] 表示处在第 𝑖 阶并且上一轮跳了 𝑗 阶，其中 𝑗 ∈ {1, 2} 。此状态定义有效地区分了上一轮跳了 1 阶还是 2 阶，我们可以据此判断当前状态是从何而来的。
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802215149.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  
+<p>
+  <ul>
+    <li>当上一轮跳了 1 阶时，上上一轮只能选择跳 2 阶，即 𝑑𝑝[𝑖, 1] 只能从 𝑑𝑝[𝑖 − 1, 2] 转移过来。</li>
+    <li>当上一轮跳了 2 阶时，上上一轮可选择跳 1 阶或跳 2 阶，即 𝑑𝑝[𝑖, 2] 可以从 𝑑𝑝[𝑖−2, 1] 或 𝑑𝑝[𝑖−2, 2]
+  转移过来。</li>
+  </ul>
+</p>
+<details>
+<summary>代码如下：</summary>
+<pre><code>
+  /* 带约束爬楼梯：动态规划 */
+  int climbingStairsConstraintDP(int n) {
+    if (n == 1 || n == 2) {
+    return 1;
+    }
+    // 初始化 dp 表，用于存储子问题的解
+    vector&ltvector&ltint&gt&gt dp(n + 1, vector&ltint&gt(3, 0));
+    // 初始状态：预设最小子问题的解
+    dp[1][1] = 1;
+    dp[1][2] = 0;
+    dp[2][1] = 0;
+    dp[2][2] = 1;
+    // 状态转移：从较小子问题逐步求解较大子问题
+    for (int i = 3; i &lt= n; i++) {
+      dp[i][1] = dp[i - 1][2];
+      dp[i][2] = dp[i - 2][1] + dp[i - 2][2];
+    }
+    return dp[n][1] + dp[n][2];//两者之和代表爬到第 𝑛 阶的方案总数
+  }
+</code></pre>
+</details>
+
 
 <p><br></p>
 <h1>走方格的方案数</h1>
@@ -432,7 +442,8 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     
         //step2:初始化dp表，为0
         dp[0][0]=0;//走法为0,不用走
-    
+
+        //对于第一行和第一列，只有一种走法
         for(int i=1;i<n+1;i++)
         {
             dp[i][0]=1;//从00到i0只有一种走法，就是一直往右
@@ -530,7 +541,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <figcaption><p>
 </p></figcaption>
 </figure> 
-<p>解决两个字符串的动态规划问题，一般都是用两个指针 i, j 分别指向两个字符串的最后，然后一步步往前移动，缩小问题的规模。</p>
+<p>解决两个字符串的动态规划问题，一般都是用两个指针 i, j 分别指向两个字符串的最后，然后一步步往前移动，缩小问题的规模。（注意思路是往前移动，但实际上计算过程是往后移动，因为动态规划是自底向上的~）</p>
 <details>
 <summary>Click to expand the code。（此题中，注释相对比较规范化了动态规划问题的解题~）时间复杂度O（M*N），空间复杂度为O（M*N）</summary>
 <pre><code>
@@ -814,13 +825,12 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <br>
 <strong>1、确定「状态」，也就是原问题和子问题中会变化的变量。</strong> 
 由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case （凑够了目标金额，为0）靠近，所以唯一的「状态」就是目标金额 amount。
-（ps：）
 <br>
 <strong>2、确定「选择」，也就是导致「状态」产生变化的行为。</strong>
 目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是的「选择」。
 <br>
 <strong>3、明确 dp 数组的定义。</strong>
-就本题来说，状态只有一个，即对应凑出目标金额所需的「最少硬币数量」。
+即题目要求的凑出目标金额所需的「最少硬币数量」，所以是最少的金币数量。
 </p>
 <details>
 <summary>Click to expand the code.此题的难点就是用什么作为状态，如何确定dp表。</summary>
@@ -889,6 +899,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             // step3：进行状态转移
             for(int i=1;i<amount+1;i++)//遍历所有状态的所有取值
             {
+                //由于每轮是要选最值的，故此必须先初始化！
                 dp[i]=amount+1;//每一轮对其进行初始化，初始化为每个面值为1元的硬币+1，那么就是最大的。也是全部的最大
                 for(auto each_coin:coins)//选择对应的面值
                 {
