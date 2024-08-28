@@ -7,6 +7,26 @@
         text-align-last: left;
         text-justify: inter-word;
     }
+    #toc {
+      background: #f4f4f4;
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      /* margin-bottom: 20px; */
+      max-width: 100%; /* 限制目录框架的最大宽度 */
+      word-wrap: break-word; /* 强制超长单词换行 */
+      position: relative;
+      margin-left: auto; /* 使目录框架在页面中居右 */
+      margin-right: auto; /* 使目录框架在页面中居右 */
+      box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+  }
+  }
+  #toc ul {
+      list-style-type: none;
+      padding-left: 0; /* 去除默认的列表内边距 */
+  }
+  #toc ul ul {
+      margin-left: 20px; /* 子目录项的缩进 */
+  }
   </style>
 
 <!-- Head -->
@@ -105,15 +125,23 @@
       </nav>
     </header>
 
-    <!-- Content -->
-    <div class="container mt-5">
-      <!-- home.html -->
-      <div class="post">
-        <header class="post-header">
-          <h1 align="center" class="post-title">
-           <span style="font-weight: 600;">二分法</span>
-          </h1>
-        </header>
+<header class="post-header">
+  <h1 align="center" class="post-title">
+    <span style="font-weight: 600;">二分法</span>
+  </h1>
+</header>
+
+<!-- Content -->
+<div class="container mt-5">
+<!-- home.html -->
+<div class="post">
+
+<!-- 插入目录 -->
+<div id="toc">
+  <h8>目录</h8>
+  <ul></ul>
+</div>
+        
 <article>
 <!-- 插入博客内容-->
 <p>
@@ -128,9 +156,9 @@
         if (nums[mid] == target) {
             ...
         } else if (nums[mid] &lt target) {
-            left = mid + 1;
+            left = mid + 1;//注意，middle已经寻找过了，为此要避开
         } else if (nums[mid] &gt target) {
-            right = mid - 1;
+            right = mid - 1;//注意，middle已经寻找过了，为此要避开
         }
     }
     return ...;
@@ -220,11 +248,11 @@ public:
 </code></pre>
 
 <p>
-while(left &lt= right) 的终止条件是 left == right + 1，写成区间的形式就是 [right + 1, right]，或者带个具体的数字进去 [3, 2]，
+while(left &lt= right) 的终止条件是 left == right + 1（也就是left>right），写成区间的形式就是 [right + 1, right]，或者带个具体的数字进去 [3, 2]，
 可见这时候区间为空，因为没有数字既大于等于 3 又小于等于 2 的吧。所以这时候 while 循环终止是正确的，直接返回 -1 即可。
 <br>
 while(left &lt right) 的终止条件是 left == right，写成区间的形式就是 [right, right]，或者带个具体的数字进去 [2, 2]，
-这时候区间非空，还有一个数 2，但此时 while 循环终止了。也就是说区间 [2, 2] 被漏掉了，索引 2 没有被搜索，如果这时候直接返回 -1 就是错误的。
+这时候区间非空，还有一个数 2，但此时 while 循环终止了。也就是说区间 [2, 2] 被漏掉了，索引 2 没有被搜索，如果这时候直接返回 -1 就是错误的。必须再次检查最后一个索引！
 </p>
 </details> 
 
@@ -286,10 +314,10 @@ while(left &lt right) 的终止条件是 left == right，写成区间的形式�
                     right=mid-1;//一直递推收紧右侧的边界以锁定左侧边界，
                     // 下一个中间值必然是大于或等于，因此可以做到锁定一直更新right
             }
-            // 注意要先判断是否有数据越界的情况
+            // 注意要先判断是否有数据越界的情况（由于上面right在找到目标后递推，故此有可能left越界）
             if(left&lt0  || left&gt=nums.size())
                 return -1;
-            // 判断一下 nums[left] 是不是 target
+            // 判断一下 nums[left] 是不是 target（由于上面right在找到目标后递推，故此有可能left不是目标值但是结束了~）
             return nums[left] == target ? left : -1;
     
         }
@@ -322,7 +350,7 @@ while(left &lt right) 的终止条件是 left == right，写成区间的形式�
     
             // 左侧边界与右侧边界的二分法查找
             int left=left_bound(nums,target);
-            if(left==-1)
+            if(left==-1)//左边界若不合法，就不用判断右边了~
                 return vector&ltint&gt{-1,-1};
             int right=right_bound(nums,target);
     
@@ -456,6 +484,25 @@ while(left &lt right) 的终止条件是 left == right，写成区间的形式�
   </script>
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+   <!-- 下面是插入目录的 -->
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toc = document.querySelector("#toc ul");
+        const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+        headers.forEach(header => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+            header.setAttribute("id", id);
+            a.setAttribute("href", `#${id}`);
+            a.textContent = header.textContent;
+            li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+    });
+</script>
 
 </body>
 </html>
