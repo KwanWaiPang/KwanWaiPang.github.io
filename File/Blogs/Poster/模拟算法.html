@@ -209,18 +209,19 @@
                 return s;
             
             //按行索引来存到vector中
-            vector&ltstring&gt result_group (numRows);//一共就numRows个元素
+            vector&ltstring&gt result_group (numRows);//一共就numRows个元素（string也是vector的一种）
             int i=0;//代表索引。
             int flag=1;//控制索引的移动
     
             for(auto c:s)
             {
                 result_group[i]+=c;//在对应行上加字符
+                //到一侧（0或numRows-1）就要反向
                 if(i==numRows-1 && flag==1)
                     flag=-1;
                 if(i==0 && flag==-1)
                     flag=1;
-                i+=flag;
+                i+=flag;//flag的正负决定了是向上还是向下
             }
     
             string result;
