@@ -1449,8 +1449,8 @@ int main() {
         string input_str, result_str;
         getline(cin,input_str);
     
-        int a[10]={0};//用于记录当前值是否出现
-        for(int i=input_str.size()-1;i>=0;i--)
+        int a[10]={0};//用于记录当前值是否出现（用数组代替set或map）
+        for(int i=input_str.size()-1;i>=0;i--)//注意从右到左阅读
         {
             if(a[(input_str[i]-'0')]==0)
             {
