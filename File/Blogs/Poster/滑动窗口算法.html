@@ -175,7 +175,9 @@
           left++;
       }
 
-      //虽然是两个while循环，但是left与right都只增不减，所以字符串/数组中的每个元素都只会进入窗口一次，然后被移出窗口一次，不会说有某些元素多次进入和离开窗口，所以算法的时间复杂度就和字符串/数组的长度成正比。（感觉是O（2N）也就是相当于O（N））
+      //虽然是两个while循环，但是left与right都只增不减，
+      //所以字符串/数组中的每个元素都只会进入窗口一次，然后被移出窗口一次，不会说有某些元素多次进入和离开窗口，
+      //故此算法的时间复杂度就和字符串/数组的长度成正比。（感觉是O（2N）也就是相当于O（N））
   }
   </code></pre>
 </p>
@@ -257,9 +259,10 @@
             int left=0,right=0;
     
             //定义窗口中是目标的字符种类。因为有可能有多个
+            //由于target是去重的，为此只能通过种类来判断
             int num_vail=0;// 记录window中的字符满足need条件的字符个数(注意不能是总的数目)
     
-            //截取的最小字符串，起点索引及长度
+            //截取的最小字符串，起点索引及长度（注意涉及循环中对比的都应该初始化值）
             int start_index=0, min_len=INT_MAX;//将长度定义为最大的整数值，如果被修改了就是更新了
     
             while(right&lts.size())
@@ -397,22 +400,22 @@
     
             while(right&lts.size())
             {
-                char in_window=s[right];
+                char in_window=s[right];//要进入窗口的
                 right++;
-                if(target.count(in_window))
+                if(target.count(in_window))//如果是目标字符
                 {
-                    window[in_window]++;
+                    window[in_window]++;//放入窗口中
                     if(window[in_window]==target[in_window])
                         num_vail++;
                 }
     
-                //缩小左边窗口的条件
+                //缩小左边窗口的条件（固定尺寸了，一旦满足就开始检测！）
                 if(right-left&gt=p.size())
                 {
                     //判断是否成功获得结果
                     if(num_vail==target.size())
                     {
-                        result.push_back(left);
+                        result.push_back(left);//将此时起始位置放入
                     }
     
                     char out_window=s[left];
@@ -529,7 +532,7 @@ class Solution {
                     left++;
                     window[out]--;
                 }
-                
+                //此时获得了一个不重复的窗口
                 // 每次循环都会更新这个，因此在进入上面循环之前，保留了最大的~
                 //而收缩完则可以保证窗口中必然没有重复的元素
                 max_len=max(max_len,(right-left));
