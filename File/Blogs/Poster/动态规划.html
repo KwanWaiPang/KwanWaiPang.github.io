@@ -532,6 +532,116 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details>
 
+
+<p><br></p>
+<h1>最小路径和</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240826160245.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。dp表的初始化容易出错，对于第i行第j列的dp标索引应该从0开始，从1开始其实也可以只是对应处理更加复杂而已~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minPathSum(vector<vector<int>>& grid) {
+    
+            // step1：定义dp表，dp[i][j]表示当前位置的最小路径数值和
+            // 状态：当前位于第i行第j列（注意从0开始）
+            // 选择：（除了第一行和第一列外）向下或向右
+            vector<vector<int>> dp(grid.size(), vector<int>(grid[0].size(),0));
+            
+            // step2:初始化dp表：i或j等于0的情况
+            dp[0][0]=grid[0][0];
+    
+            // 注意！第一行和第一列仅仅有一种选择，而不是两种最小
+            for(int i=1;i<grid.size();i++)
+            {
+                dp[i][0]=grid[i][0]+dp[i-1][0];
+            }
+    
+            for(int j=1;j<grid[0].size();j++)
+            {
+                dp[0][j]=grid[0][j]+dp[0][j-1];
+            }
+    
+    
+            // step3：进行状态转移
+            for(int i=1;i<grid.size();i++)
+            {
+                for(int j=1;j<grid[0].size();j++)
+                {
+                    //当前的值+(上一状态从上下来的或者从左过来的最小值)
+                    dp[i][j]=grid[i][j]+min(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+    
+            return dp[grid.size()-1][grid[0].size()-1];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>逆向思维动态规划：地下城游戏</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240826161711.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>第一次解题的时候，想着把最小路径和改为最大路径和然后简单的对结果值进行修正希望达到最优。但实际上运行发现会选择运行28的结果。所以应该做到是损失最小，也就是负数之和最大，但是这个思路也不对，实际上就是同时考虑补充和扣减，与其如此，还不如换个思路，从右下角到左上角</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int calculateMinimumHP(vector<vector<int>>& dungeon) {
+            // 反过来的思路，初始化血量为1，从右下角走到左上角
+    
+            // step1:定义dp表：dp[i][j]= 这个格子走到右下角所需要的最小生命值
+            // 状态为第i行和第j列（从dungeon.size()-1与dungeon[0].size()-1开始索引）
+            // 选择为： 向左 或 向上 移动一步
+            vector<vector<int>> dp(dungeon.size()+1, vector<int>(dungeon[0].size()+1, INT_MAX));;
+            
+            // step2:初始化dp表为int的最大值，这样索引可以避免考虑最后一列和最后一行复杂的情况
+            dp[dungeon.size()][dungeon[0].size()]=1;//到最后一格的时候刚好是一滴血
+            dp[dungeon.size()-1][dungeon[0].size()]=1;
+            dp[dungeon.size()][dungeon[0].size()-1]=1;
+            
+           for(int i=dungeon.size()-1;i>=0;i--)
+           {
+                for(int j=dungeon[0].size()-1;j>=0;j--)
+                {
+                    // 选择两个去向中较小的一个，也就是下一个时刻最小需要多少
+                    int temp=min(dp[i+1][j],dp[i][j+1]);//可以保持从最小值从取，那么当前temp-dungeon[i][j]也是最小的情况。但是由于不能等于0，故此最小是1或者是temp-dungeon[i][j]
+    
+                    dp[i][j]=max(temp-dungeon[i][j],1);//要么保留1血量，要么就是当前剩余的
+                    // 若dungeon[i][j]为负，那么当前应该是-dungeon[i][j]+temp，这样才可以保证能走到下一个
+                    //  若dungeon[i][j]为正，那么当前只需要1就可以了，因为补充了
+                }
+           }
+    
+           return dp[0][0];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+
+
+
 <p><br></p>
 <h1>编辑距离</h1>
 <figure style="text-align: center;">
@@ -1261,7 +1371,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p></figcaption>
 </figure> 
 <details>
-<summary>此题相当于上面题目的二维版本，但是需要对数组先进行排列。但是leetcode上下面代码运行会超时，只能通过85/87.时间复杂度为O（N<sup>2</sup>）,空间复杂度为O（N）</summary>
+<summary>此题相当于最长递增子序列的二维版本，但是需要对数组先进行排列。但是leetcode上下面代码运行会超时，只能通过85/87.时间复杂度为O（N<sup>2</sup>）,空间复杂度为O（N）</summary>
 <pre><code>
   <script type='text/html' style='display:block'>
   class Solution {
@@ -1610,103 +1720,104 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
   <br>3、在讨论买主件、主件+1附件、主件+2附件的时候，是依次递推满足的情况下再记录状态，不然会超时。</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-  #include <iostream>
-    #include <utility>  // 包含 pair 和 make_pair 的定义
-    #include <vector>   // 包含 vector 的定义
-    using namespace std;
-    
-    int main() {
-        int N, m;
-    
-        cin >> N; //总的钱的数目
-        cin >> m; //可购买物品的个数
-    
-        // int v, p, q;
-        // v 表示该物品的价格， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件，
-        // vector< pair<int, pair<int, int>> > all_item(m+1);//要m+1个，因为下面的索引也是从1开始的
-        // for (int i = 1; i < m+1; ++i) {
-        //     cin >> v >> p >> q;
-        //     all_item[i] = make_pair(v, make_pair(p, q));//保证了索引从1开始。因为下面也是从1开始的
-        // }
-        //all_item的size为m
-        vector<int> v(m + 1), p(m + 1), q(m + 1);
-        for (int i = 1; i <= m; ++i) {
-            cin >> v[i] >> p[i] >> q[i];
-        }
-    
-    
-        //由于是求解最优子问题，采用动态规划
-        // step1: 定义dp表,购买第m个物体时，此时预算为N的时候的最大满意度
-        //状态：当前第i个物品，当前的预算为j
-        //选择：对于当前的物品，买与不买：如果是附件，不买。如果是主件，则分为买主件、买主件+1个附件、买主件+2个附件
-        vector< vector<int>> dp(m + 1, vector<int> (N + 1, 0));
-        //step2:初始化状态，当当前物品不买的时候，初始化为0
-    
-    
-        //step3:进行自下而上的状态转移方程
-        for (int i = 1; i < m + 1; i++) {//从第一个物品开始一个一个看
-            //预算从N开始算。没花钱
-            for (int j = N; j >= 0; j--) {
-                // 先继承上一个状态
-                dp[i][j] = dp[i - 1][j];
-    
-                //只考虑主件，非主件时不处理，相当于只继承之前的状态
-                if (q[i] == 0) {
-                    // 当前的状态为买了主件后的贡献量+上一个状态的贡献量
-                    // vs
-                    // 不买当前主件。上一状态的贡献量
-                    if (j >= v[i]) 
-                    { //若可以买
-                        //买与不买之间的最大值。注意，当前如果买了，那么上一个状态可以花的额度就只有j - temp_v
-                        dp[i][j] = max(dp[i - 1][j - v[i]] + v[i] * p[i]
-                                       , dp[i - 1][j]);
-                        //考虑主件+第一个1个附件
-                        for (int k = 1; k < m + 1; k++) { //遍历all_item
-                            if (q[k] == i && j >= v[i] + v[k]) 
-                            { //当前主件的第一个附件
-                                dp[i][j] = max(dp[i - 1][j - v[i] - v[k]]
-                                               + v[i] * p[i]
-                                               + v[k] * p[k]
-                                               , dp[i][j]);//注意对比的为当前的
-    
-                                int k1=k;//下面考虑买两个物品（寻找当前主件的第二个附件）
-                                for (int k2 = k1 + 1; k2 < m + 1; k2++) {
-                                    if (
-                                        q[k2] == i
-                                        && j >= v[i] + v[k1] + v[k2]) 
-                                    { //当前主件的第二个附件
-                                        dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
-                                                    v[i] * p[i]
-                                                    + v[k1] * p[k1]
-                                                    + v[k2] * p[k2]
-                                                    , dp[i][j]);//注意对比的为当前的
-                                    }
+#include <iostream>
+#include <utility>  // 包含 pair 和 make_pair 的定义
+#include <vector>   // 包含 vector 的定义
+using namespace std;
+
+int main() {
+    int N, m;
+
+    cin >> N; //总的钱的数目
+    cin >> m; //可购买物品的个数
+
+    // int v, p, q;
+    // v 表示该物品的价格， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件，
+    // vector< pair<int, pair<int, int>> > all_item(m+1);//要m+1个，因为下面的索引也是从1开始的
+    // for (int i = 1; i < m+1; ++i) {
+    //     cin >> v >> p >> q;
+    //     all_item[i] = make_pair(v, make_pair(p, q));//保证了索引从1开始。因为下面也是从1开始的
+    // }
+    //all_item的size为m
+    vector<int> v(m + 1), p(m + 1), q(m + 1);
+    for (int i = 1; i <= m; ++i) {
+        cin >> v[i] >> p[i] >> q[i];
+    }
+
+
+    //由于是求解最优子问题，采用动态规划
+    // step1: 定义dp表,购买第m个物体时，此时预算为N的时候的最大满意度
+    //状态：当前第i个物品，当前的预算为j
+    //选择：对于当前的物品，买与不买：如果是附件，不买。如果是主件，则分为买主件、买主件+1个附件、买主件+2个附件
+    vector< vector<int>> dp(m + 1, vector<int> (N + 1, 0));
+    //step2:初始化状态，当当前物品不买的时候，初始化为0
+
+
+    //step3:进行自下而上的状态转移方程
+    for (int i = 1; i < m + 1; i++) {//从第一个物品开始一个一个看
+        //for (int j = N; j >= 0; j--) //预算从N开始算。没花钱（也可以~）
+        for (int j = 0; j <N+1; j++) 
+        {
+            // 先继承上一个状态（由于下面计算中涉及到了各种情况的最值对比）
+            dp[i][j] = dp[i - 1][j];//其实也就是不买的情况
+
+            //只考虑主件，非主件时不处理，相当于只继承之前的状态
+            if (q[i] == 0) {
+                // 当前的状态为买了主件后的贡献量+上一个状态的贡献量
+                // vs
+                // 不买当前主件。上一状态的贡献量
+                if (j >= v[i]) 
+                { //若可以买
+                    //买与不买之间的最大值。注意，当前如果买了，那么上一个状态可以花的额度就只有j - temp_v
+                    dp[i][j] = max(dp[i - 1][j - v[i]] + v[i] * p[i]
+                                    , dp[i - 1][j]);
+                    //考虑主件+第一个1个附件
+                    for (int k = 1; k < m + 1; k++) { //遍历all_item
+                        if (q[k] == i && j >= v[i] + v[k]) 
+                        { //当前主件的第一个附件
+                            dp[i][j] = max(dp[i - 1][j - v[i] - v[k]]
+                                            + v[i] * p[i]
+                                            + v[k] * p[k]
+                                            , dp[i][j]);//注意对比的为当前的
+
+                            int k1=k;//下面考虑买两个物品（寻找当前主件的第二个附件）
+                            for (int k2 = k1 + 1; k2 < m + 1; k2++) {
+                                if (
+                                    q[k2] == i
+                                    && j >= v[i] + v[k1] + v[k2]) 
+                                { //当前主件的第二个附件
+                                    dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
+                                                v[i] * p[i]
+                                                + v[k1] * p[k1]
+                                                + v[k2] * p[k2]
+                                                , dp[i][j]);//注意对比的为当前的
                                 }
                             }
                         }
-    
-                        // //考虑主件+2个附件
-                        // for (int k1 = 1; k1 < m + 1; k1++) { //遍历all_item
-                        //     for (int k2 = k1 + 1; k2 < m + 1; k2++) {
-                        //         if (q[k1] == i
-                        //                 && q[k2] == i
-                        //                 && j >= v[i] + v[k1] + v[k2]) { //当前主件的附件
-                        //             dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
-                        //                            v[i] * p[i]
-                        //                            + v[k1] * p[k1]
-                        //                            + v[k2] * p[k2]
-                        //                            , dp[i][j]);//注意对比的为当前的
-                        //         }
-                        //     }
-                        // }
                     }
-    
+
+                    // //考虑主件+2个附件
+                    // for (int k1 = 1; k1 < m + 1; k1++) { //遍历all_item
+                    //     for (int k2 = k1 + 1; k2 < m + 1; k2++) {
+                    //         if (q[k1] == i
+                    //                 && q[k2] == i
+                    //                 && j >= v[i] + v[k1] + v[k2]) { //当前主件的附件
+                    //             dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
+                    //                            v[i] * p[i]
+                    //                            + v[k1] * p[k1]
+                    //                            + v[k2] * p[k2]
+                    //                            , dp[i][j]);//注意对比的为当前的
+                    //         }
+                    //     }
+                    // }
                 }
-    
+
             }
+
         }
-        std::cout << dp[m][N];
     }
+    std::cout << dp[m][N];
+}
 </script>
 </code></pre>
 </details>
@@ -1859,111 +1970,6 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </code></pre>
 </details>
 
-
-<p><br></p>
-<h1>最小路径和</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240826160245.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code。dp表的初始化容易出错，对于第i行第j列的dp标索引应该从0开始，从1开始其实也可以只是对应处理更加复杂而已~</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int minPathSum(vector<vector<int>>& grid) {
-    
-            // step1：定义dp表，dp[i][j]表示当前位置的最小路径数值和
-            // 状态：当前位于第i行第j列（注意从0开始）
-            // 选择：（除了第一行和第一列外）向下或向右
-            vector<vector<int>> dp(grid.size(), vector<int>(grid[0].size(),0));
-            
-            // step2:初始化dp表：i或j等于0的情况
-            dp[0][0]=grid[0][0];
-    
-            // 注意！第一行和第一列仅仅有一种选择，而不是两种最小
-            for(int i=1;i<grid.size();i++)
-            {
-                dp[i][0]=grid[i][0]+dp[i-1][0];
-            }
-    
-            for(int j=1;j<grid[0].size();j++)
-            {
-                dp[0][j]=grid[0][j]+dp[0][j-1];
-            }
-    
-    
-            // step3：进行状态转移
-            for(int i=1;i<grid.size();i++)
-            {
-                for(int j=1;j<grid[0].size();j++)
-                {
-                    //当前的值+(上一状态从上下来的或者从左过来的最小值)
-                    dp[i][j]=grid[i][j]+min(dp[i-1][j],dp[i][j-1]);
-                }
-            }
-    
-            return dp[grid.size()-1][grid[0].size()-1];
-    
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h1>逆向思维动态规划：地下城游戏</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/dynamic_programming/微信截图_20240826161711.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-
-<details>
-<summary>第一次解题的时候，想着把最小路径和改为最大路径和然后简单的对结果值进行修正希望达到最优。但实际上运行发现会选择运行28的结果。所以应该做到是损失最小，也就是负数之和最大，但是这个思路也不对，实际上就是同时考虑补充和扣减，与其如此，还不如换个思路，从右下角到左上角</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int calculateMinimumHP(vector<vector<int>>& dungeon) {
-            // 反过来的思路，初始化血量为1，从右下角走到左上角
-    
-            // step1:定义dp表：dp[i][j]= 这个格子走到右下角所需要的最小生命值
-            // 状态为第i行和第j列（从dungeon.size()-1与dungeon[0].size()-1开始索引）
-            // 选择为： 向左 或 向上 移动一步
-            vector<vector<int>> dp(dungeon.size()+1, vector<int>(dungeon[0].size()+1, INT_MAX));;
-            
-            // step2:初始化dp表为int的最大值，这样索引可以避免考虑最后一列和最后一行复杂的情况
-            dp[dungeon.size()][dungeon[0].size()]=1;//到最后一格的时候刚好是一滴血
-            dp[dungeon.size()-1][dungeon[0].size()]=1;
-            dp[dungeon.size()][dungeon[0].size()-1]=1;
-            
-           for(int i=dungeon.size()-1;i>=0;i--)
-           {
-                for(int j=dungeon[0].size()-1;j>=0;j--)
-                {
-                    // 选择两个去向中较小的一个，也就是下一个时刻最小需要多少
-                    int temp=min(dp[i+1][j],dp[i][j+1]);//可以保持从最小值从取，那么当前temp-dungeon[i][j]也是最小的情况。但是由于不能等于0，故此最小是1或者是temp-dungeon[i][j]
-    
-                    dp[i][j]=max(temp-dungeon[i][j],1);//要么保留1血量，要么就是当前剩余的
-                    // 若dungeon[i][j]为负，那么当前应该是-dungeon[i][j]+temp，这样才可以保证能走到下一个
-                    //  若dungeon[i][j]为正，那么当前只需要1就可以了，因为补充了
-                }
-           }
-    
-           return dp[0][0];
-    
-        }
-    };
-</script>
-</code></pre>
-</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
