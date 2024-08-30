@@ -314,6 +314,72 @@
 <figcaption><p>
 </p></figcaption>
 </figure>
+<p>
+  此题跟 0-1 背包问题整体上非常相似，状态包含当前物品和容量，目标是求限定背包容量下的最大价值。
+  不同点在于，本题允许只选择物品的一部分。我们可以对物品任意地进行切分，并按照重量比例来计算相应价值。
+  如下图所示。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240830221220.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
+  为此可以采用贪心算法，按照单位重量价值从大到小排序，然后依次选择：
+  <br>
+  1.将物品按照单位价值从高到低进行排序。
+  <br>
+  2.遍历所有物品，每轮贪心地选择单位价值最高的物品。
+  <br>
+  3.若剩余背包容量不足，则使用当前物品的一部分填满背包。  
+</p>
+
+<details>
+<summary>Click to expand the code。时间与空间的复杂度都为O（N）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /* 物品 */
+  class Item {
+    public:
+      int w; // 物品重量
+      int v; // 物品价值
+  
+      Item(int w, int v) : w(w), v(v) {
+      }
+  };
+  
+  /* 分数背包：贪心 */
+  double fractionalKnapsack(vector<int> &wgt, vector<int> &val, int cap) {
+      // 创建物品列表，包含两个属性：重量、价值
+      vector<Item> items;
+      for (int i = 0; i < wgt.size(); i++) {
+          items.push_back(Item(wgt[i], val[i]));
+      }
+      // 按照单位价值 item.v / item.w 从高到低进行排序
+      sort(items.begin(), items.end(), [](Item &a, Item &b) { return (double)a.v / a.w > (double)b.v / b.w; });
+      
+      // 循环贪心选择
+      double res = 0;//最终的价值
+      for (auto &item : items) {
+          if (item.w <= cap) {
+
+              // 若剩余容量充足，则将当前物品整个装进背包
+              res += item.v;//价值递增
+              cap -= item.w;//重量递减
+          } 
+          else {
+              // 若剩余容量不足，则将当前物品的一部分装进背包
+              res += (double)item.v / item.w * cap;
+
+              // 已无剩余容量，因此跳出循环
+              break;
+          }
+      }
+      return res;
+  }
+</script>
+</code></pre>
+</details>
 
 
 <p><br></p>
