@@ -922,213 +922,6 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 <p><br></p>
-<h1>零钱兑换</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805222949.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<p>
-  此处引出动态规划问题中状态以及选择量的确定过程：
-<br>
-<strong>1、确定「状态」，也就是原问题和子问题中会变化的变量。</strong> 
-由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case （凑够了目标金额，为0）靠近，所以唯一的「状态」就是目标金额 amount。
-<br>
-<strong>2、确定「选择」，也就是导致「状态」产生变化的行为。</strong>
-目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是的「选择」。
-<br>
-<strong>3、明确 dp 数组的定义。</strong>
-即题目要求的凑出目标金额所需的「最少硬币数量」，所以是最少的金币数量。
-</p>
-<details>
-<summary>Click to expand the code.此题的难点就是用什么作为状态，如何确定dp表。</summary>
-<pre><code>
-  <script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int coinChange(vector<int>& coins, int amount) {
-    
-            if(coins.size()==0)
-                return -1;
-    
-            // // step!:确定状态，建立dp表。唯一可能的状态就是amount了
-            // int dp[amount+1];//状态amount时,需要的最小的硬币的数量
-            // // 注意初始化为amount + 1 ，因为凑成 amount 金额的硬币数最多只可能等于 amount（全用 1 元面值的硬币）
-            // // 所以初始化为 amount + 1 就相当于初始化为正无穷
-            vector&ltint&gt dp(amount + 1, amount + 1);//这个写法正确且简单
-    
-            // step2：确立初始状态
-            dp[0]=0;
-            // for(int i=1;i&ltamount+1;i++)
-            // {
-            //     dp[i]=amount+1;
-            // }
-    
-            // step3: 确定状态转移方程
-            for(int n=0; n&ltamount+1; n++)
-            {
-                for(int each_coin:coins)
-                {
-                    // 减去当前的面值小于0，那么当前面值不适用,跳过使用下一个试试
-                    if(n-each_coin&lt0)
-                    {
-                        continue;
-                    }
-                    else//若当前面值可以用
-                    {
-                        //当前n的最小值由当前n(不选硬币)
-                        // 以及
-                        // 当前面值选择这个硬币，那么就是n减去each_coin的组成
-                      dp[n]=min(dp[n],1+dp[n-each_coin]);
-                    }
-    
-                }
-            }
-            return (dp[amount]==amount+1)? -1: dp[amount];
-        }
-    };
-  </script>
-</code></pre>
-</details>
-<details>
-<summary>下面可能更好理解</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int coinChange(vector<int>& coins, int amount) {
-            
-            // step1:定义dp表，代表对于需要的金额i，dp【i】状态为[最少的硬币个数]
-            vector<int> dp(amount+1, 0);//当目标金额为 i 时，至少需要 dp[i] 枚硬币凑出
-    
-            // step2:确定初始状态，当总金额为0的时候，最小的硬币数量为0
-            dp[0]=0;
-    
-            // step3：进行状态转移
-            for(int i=1;i<amount+1;i++)//遍历所有状态的所有取值
-            {
-                //由于每轮是要选最值的，故此必须先初始化！
-                dp[i]=amount+1;//每一轮对其进行初始化，初始化为每个面值为1元的硬币+1，那么就是最大的。也是全部的最大
-                for(auto each_coin:coins)//选择对应的面值
-                {
-                    if(i-each_coin<0)//剪枝，当前硬币面值太大了
-                        continue;
-                    else
-                        dp[i]=min(dp[i],dp[i-each_coin]+1);//不选这个面值，或者选这个面值，两种情况的最小
-                }
-            }
-    
-            if(dp[amount]==amount+1)//没有面值合适,故此没有发生变化～
-                return -1;
-            else
-                return dp[amount];
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h1>零钱兑换 II</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-102658.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共有多少数目可以填满，可以转换为背包问题</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int change(int amount, vector<int>& coins) {
-    
-            //step1: 定义dp表：dp[i][j]为第i个硬币,当前的金额数为j,有多少种方法可以放满
-            // 若只使用 coins 中的前 i 个（i 从 1 开始计数）硬币的面值，若想凑出金额 j，有 dp[i][j] 种凑法。
-            // 状态：第i个硬币，现在的金额数
-            // 选择：用或不用当前的硬币
-            int dp[coins.size()+1][amount+1];
-    
-            // step2:初始化状态（base case最重要）
-            for(int i=0;i<coins.size()+1;i++)
-            {
-                dp[i][0]=1;//对于目标金额为0，什么都不做就是一种做法，直接可以凑出
-            }
-    
-            for(int j=1;j<amount+1;j++)
-            {
-                dp[0][j]=0;//没有金币了，但是面值不为0，那么肯定凑不出，就为0
-            }
-    
-            // step3:进行状态转移
-            for(int i=1;i<coins.size()+1;i++)
-            {
-                for(int j=1;j<amount+1;j++)
-                {
-                    if(j<coins[i-1])//那么就是不能选当前的硬币
-                        dp[i][j]=dp[i-1][j];
-                    else
-                    {
-                        //不放以及放，各一种做法，结果应该为两者之和.但是对于放了，你还可以从i个中选，因为金币的数量是无限的！
-                        dp[i][j]=dp[i-1][j]+dp[i][j-coins[i-1]];
-                    }
-                }
-            }
-            
-            return dp[coins.size()][amount];
-    
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-<details>
-<summary>当然也可以不用背包问题的思路去解题！但是思路相对有点绕~</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int change(int amount, vector<int>& coins) {
-    
-            //不用背包问题的思路去解决~
-    
-            // step1:定义dp表：dp[i]=当前金额为i时，总的硬币组合方案
-            // 状态：当前的金额，i，需要为amount+1
-            //选择：用或不用第i个金币（有条件，必须要满足当前金额i大于这个金币的数值）
-            vector<int> dp (amount+1,0);
-    
-            //step2：初始化dp
-            dp[0]=1;//当金额为0的时候，方案数为1
-            // 其余情况均初始化为0，组合方案为0（注意涉及到循环运算的时候需要预先给值）
-    
-            //step3 进行状态转移
-            //每种金币都可以选
-            for(auto each_coin:coins)
-            {
-                //首先对于这个面值的金币，i至少等于each_coin
-                for(int i=each_coin;i<amount+1;i++)
-                {
-                    //故此，当前状态的数目等于上一次使用这个面值的金币在加一次这个面值
-                    dp[i]+=dp[i-each_coin];
-                    // 而由于统计一共的方法数目，因此需要把其他时候的也加入。这就意味着必须初始化dp[i]=0
-                }
-    
-            }
-    
-            return dp[amount];
-    
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
 <h1>最长递增子序列</h1>
 
 <figure style="text-align: center;">
@@ -1914,7 +1707,170 @@ int main() {
 </details>
 
 <p><br></p>
-<h2>完全背包问题：零钱兑换 II</h2>
+<h2>完全背包问题</h2>
+
+<p><br></p>
+<h3>零钱兑换</h3>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805222949.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<p>
+  如果用基本的动态规划问题的思路去解题。此处引出动态规划问题中状态以及选择量的确定过程：
+<br>
+<strong>1、确定「状态」，也就是原问题和子问题中会变化的变量。</strong> 
+由于硬币数量无限，硬币的面额也是题目给定的，只有目标金额会不断地向 base case （凑够了目标金额，为0）靠近，所以唯一的「状态」就是目标金额 amount。
+<br>
+<strong>2、确定「选择」，也就是导致「状态」产生变化的行为。</strong>
+目标金额为什么变化呢，因为你在选择硬币，你每选择一枚硬币，就相当于减少了目标金额。所以说所有硬币的面值，就是的「选择」。
+<br>
+<strong>3、明确 dp 数组的定义。</strong>
+即题目要求的凑出目标金额所需的「最少硬币数量」，所以是最少的金币数量。
+</p>
+<details>
+<summary>Click to expand the code.此题的难点就是用什么作为状态，如何确定dp表。</summary>
+<pre><code>
+  <script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+    
+            if(coins.size()==0)
+                return -1;
+    
+            // // step!:确定状态，建立dp表。唯一可能的状态就是amount了
+            // int dp[amount+1];//状态amount时,需要的最小的硬币的数量
+            // // 注意初始化为amount + 1 ，因为凑成 amount 金额的硬币数最多只可能等于 amount（全用 1 元面值的硬币）
+            // // 所以初始化为 amount + 1 就相当于初始化为正无穷
+            vector&ltint&gt dp(amount + 1, amount + 1);//这个写法正确且简单
+    
+            // step2：确立初始状态
+            dp[0]=0;
+            // for(int i=1;i&ltamount+1;i++)
+            // {
+            //     dp[i]=amount+1;
+            // }
+    
+            // step3: 确定状态转移方程
+            for(int n=0; n&ltamount+1; n++)
+            {
+                for(int each_coin:coins)
+                {
+                    // 减去当前的面值小于0，那么当前面值不适用,跳过使用下一个试试
+                    if(n-each_coin&lt0)
+                    {
+                        continue;
+                    }
+                    else//若当前面值可以用
+                    {
+                        //当前n的最小值由当前n(不选硬币)
+                        // 以及
+                        // 当前面值选择这个硬币，那么就是n减去each_coin的组成
+                      dp[n]=min(dp[n],1+dp[n-each_coin]);
+                    }
+    
+                }
+            }
+            return (dp[amount]==amount+1)? -1: dp[amount];
+        }
+    };
+  </script>
+</code></pre>
+</details>
+<details>
+<summary>下面可能更好理解</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+            
+            // step1:定义dp表，代表对于需要的金额i，dp【i】状态为[最少的硬币个数]
+            vector<int> dp(amount+1, 0);//当目标金额为 i 时，至少需要 dp[i] 枚硬币凑出
+    
+            // step2:确定初始状态，当总金额为0的时候，最小的硬币数量为0
+            dp[0]=0;
+    
+            // step3：进行状态转移
+            for(int i=1;i<amount+1;i++)//遍历所有状态的所有取值
+            {
+                //由于每轮是要选最值的，故此必须先初始化！
+                dp[i]=amount+1;//每一轮对其进行初始化，初始化为每个面值为1元的硬币+1，那么就是最大的。也是全部的最大
+                for(auto each_coin:coins)//选择对应的面值
+                {
+                    if(i-each_coin<0)//剪枝，当前硬币面值太大了
+                        continue;
+                    else
+                        dp[i]=min(dp[i],dp[i-each_coin]+1);//不选这个面值，或者选这个面值，两种情况的最小
+                }
+            }
+    
+            if(dp[amount]==amount+1)//没有面值合适,故此没有发生变化～
+                return -1;
+            else
+                return dp[amount];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p>
+  但实际上也是一个完全背包问题。
+  两道题可以相互转换，“物品”对应“硬币”、“物品重量”对应“硬币面值”、“背包容量”对应“目标金额”。
+  优化目标相反，完全背包问题是要最大化物品价值，零钱兑换问题是要最小化硬币数量。
+  完全背包问题是求“不超过”背包容量下的解，零钱兑换是求“恰好”凑到目标金额的解。
+</p>
+<details>
+<summary>下面看看完全背包问题的解法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+            
+            int n = coins.size();
+            int MAX = amount + 1;//最大的硬币数目
+
+            //step1: 定义 dp 表：dp[i][j]=前种硬币能够凑出金额的最少硬币数量
+            // 状态：i中物品，当前的金额数
+            // 选择：用或者不用当前面值的硬币
+            vector<vector<int>> dp(n + 1, vector<int>(amount + 1, 0));
+
+            // step2:初始化状态：对于硬币数为0，但是需要的金额数不为0的情况，凑不到了为此质为0
+            for (int a = 1; a <amount+1; a++) {
+                dp[0][a] = MAX;//当前没有硬币了，为此是最大的
+            }
+
+            //对于其他情况，比如需要金额为0，那么最小的金币数也是0，已经初始化了~
+
+            //  step3，进行状态转移
+            for (int i = 1; i <n+1; i++) {
+                for (int a = 1; a <amount+1; a++) {
+                    if (coins[i - 1] > a) {
+                        // 若超过目标金额，则不选硬币 i
+                        dp[i][a] = dp[i - 1][a];
+                    } else {
+                        // 不选和选硬币 i 这两种方案的较小值
+                        dp[i][a] = min(
+                            dp[i - 1][a], //不选择
+                            dp[i][a - coins[i - 1]] + 1);//选择的最小值
+                    }
+                }
+            }
+            return dp[n][amount] != MAX ? dp[n][amount] : -1;
+            }
+    };
+</script>
+</code></pre>
+</details> 
+
+<p><br></p>
+<h3>零钱兑换 II</h3>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-102658.png" alt="Image description">
@@ -1923,7 +1879,7 @@ int main() {
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code，同样是背包问题，跟上面是很像的，只是状态转移不一样～</summary>
+<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共有多少数目可以填满，可以转换为背包问题</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -1963,6 +1919,47 @@ int main() {
             }
             
             return dp[coins.size()][amount];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>当然也可以不用背包问题的思路去解题！但是思路相对有点绕~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int change(int amount, vector<int>& coins) {
+    
+            //不用背包问题的思路去解决~
+    
+            // step1:定义dp表：dp[i]=当前金额为i时，总的硬币组合方案
+            // 状态：当前的金额，i，需要为amount+1
+            //选择：用或不用第i个金币（有条件，必须要满足当前金额i大于这个金币的数值）
+            vector<int> dp (amount+1,0);
+    
+            //step2：初始化dp
+            dp[0]=1;//当金额为0的时候，方案数为1
+            // 其余情况均初始化为0，组合方案为0（注意涉及到循环运算的时候需要预先给值）
+    
+            //step3 进行状态转移
+            //每种金币都可以选
+            for(auto each_coin:coins)
+            {
+                //首先对于这个面值的金币，i至少等于each_coin
+                for(int i=each_coin;i<amount+1;i++)
+                {
+                    //故此，当前状态的数目等于上一次使用这个面值的金币在加一次这个面值
+                    dp[i]+=dp[i-each_coin];
+                    // 而由于统计一共的方法数目，因此需要把其他时候的也加入。这就意味着必须初始化dp[i]=0
+                }
+    
+            }
+    
+            return dp[amount];
     
         }
     };
