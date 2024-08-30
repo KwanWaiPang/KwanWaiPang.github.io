@@ -151,7 +151,7 @@
 </p>
 
 <p><br></p>
-<h3>贪心算法与动态规划算法的区别</h3>
+<h1>贪心算法与动态规划区别：零钱兑换</h1>
 <p>
   相同点在于都是解决优化问题的，也依赖最优子结构的性质。但是工作原理不一样~。
   <ul>
@@ -160,7 +160,161 @@
   </ul>
 </p>
 
-在动态规划博客<sup><a href="./动态规划.html#零钱兑换" target="_blank">Link</a></sup>中，介绍过完全背包问题的兑零钱的解法
+在动态规划博客<sup><a href="./动态规划.html#零钱兑换" target="_blank">Link</a></sup>中，介绍过完全背包问题的兑零钱的解法。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805222949.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>贪心算法的解法。在此代码中，假设最小面值为min，那么时间复杂度应该是O（amount/min）比起背包问题的动态规划解法时间复杂度O（n*amount）少不小。但是对于某些硬币面值组合，贪心算法并不能找到最优解（在leeetcode上测试并无法通过所有的样例）。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+            
+            //首先需要保证coins是有序的
+            sort(coins.begin(),coins.end());
+            int i=coins.size()-1;//当前面值最大的硬币的索引
+
+            int count = 0;//初始化需要的最小硬币数为0；
+
+            //循环进行贪心选择，直到没有剩余金额
+            while(amount>0)
+            {
+                // 找到小于且最接近剩余金额的硬币
+                while(i>0 && coins[i]>amount)
+                {
+                    i--;
+                }
+                
+                // 选择这个硬币
+                amount-=coins[i];
+                count++;
+            }
+            // 若未找到可行方案，则返回 -1
+            return amount==0? count:-1;
+           
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>用完全背包问题思路的动态规划解法~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int coinChange(vector<int>& coins, int amount) {
+            
+            int n = coins.size();
+            int MAX = amount + 1;//最大的硬币数目
+
+            //step1: 定义 dp 表：dp[i][j]=前种硬币能够凑出金额的最少硬币数量
+            // 状态：i中物品，当前的金额数
+            // 选择：用或者不用当前面值的硬币
+            vector<vector<int>> dp(n + 1, vector<int>(amount + 1, 0));
+
+            // step2:初始化状态：对于硬币数为0，但是需要的金额数不为0的情况，凑不到了为此质为0
+            for (int a = 1; a <amount+1; a++) {
+                dp[0][a] = MAX;//当前没有硬币了，为此是最大的
+            }
+
+            //对于其他情况，比如需要金额为0，那么最小的金币数也是0，已经初始化了~
+
+            //  step3，进行状态转移
+            for (int i = 1; i <n+1; i++) {
+                for (int a = 1; a <amount+1; a++) {
+                    if (coins[i - 1] > a) {
+                        // 若超过目标金额，则不选硬币 i
+                        dp[i][a] = dp[i - 1][a];
+                    } else {
+                        // 不选和选硬币 i 这两种方案的较小值
+                        dp[i][a] = min(
+                            dp[i - 1][a], //不选择
+                            dp[i][a - coins[i - 1]] + 1);//选择的最小值
+                    }
+                }
+            }
+            return dp[n][amount] != MAX ? dp[n][amount] : -1;
+            }
+    };
+</script>
+</code></pre>
+</details> 
+
+<details>
+  <summary>一维动态规划解法</summary>
+  <pre><code>
+  <script type='text/html' style='display:block'>
+    class Solution {
+      public:
+          int coinChange(vector<int>& coins, int amount) {
+              
+              // step1:定义dp表，代表对于需要的金额i，dp【i】状态为[最少的硬币个数]
+              vector<int> dp(amount+1, 0);//当目标金额为 i 时，至少需要 dp[i] 枚硬币凑出
+      
+              // step2:确定初始状态，当总金额为0的时候，最小的硬币数量为0
+              dp[0]=0;
+      
+              // step3：进行状态转移
+              for(int i=1;i<amount+1;i++)//遍历所有状态的所有取值
+              {
+                  //由于每轮是要选最值的，故此必须先初始化！
+                  dp[i]=amount+1;//每一轮对其进行初始化，初始化为每个面值为1元的硬币+1，那么就是最大的。也是全部的最大
+                  for(auto each_coin:coins)//选择对应的面值
+                  {
+                      if(i-each_coin<0)//剪枝，当前硬币面值太大了
+                          continue;
+                      else
+                          dp[i]=min(dp[i],dp[i-each_coin]+1);//不选这个面值，或者选这个面值，两种情况的最小
+                  }
+              }
+      
+              if(dp[amount]==amount+1)//没有面值合适,故此没有发生变化～
+                  return -1;
+              else
+                  return dp[amount];
+          }
+      };
+  </script>
+  </code></pre>
+</details>
+
+<p>
+  因此，对于零钱兑换问题，贪心算法无法保证找到全局最优解。它更适合用动态规划解决。
+  <br>
+  一般情况下，贪心算法的于以下两种。
+  <ul>
+    <li>可以保证找到最优解：贪心算法在这种情况下往往是最优选择，因为它往往比回溯、动态规划更高效。</li>
+    <li>可以找到近似最优解：贪心算法在这种情况下也是可用的。对于很多复杂问题来说，寻找全局最优解非常困难，能以较高效率找到次优解也是非常不错的。</li>
+  </ul>
+
+  要保证上面两种情况，一般问题需要满足以下两个条件：
+  <ul>
+    <li>贪心选择性质：一个问题的整体最优解可以通过一系列局部最优的选择，即贪心选择来达到。只有当局部最优选择始终可以导致全局最优解时，贪心算法才能保证得到最优解。</li>
+    <li>最优子结构性质：原问题的最优解包含子问题的最优解。</li>
+  </ul>
+</p>
+
+
+<p><br></p>
+<h1>分数背包问题</h1>
+
+
+<p><br></p>
+<h1>最大容量问题</h1>
+
+
+<p><br></p>
+<h1>最大切分乘积问题</h1>
+
 
 <p><br></p>
 <h1>跳跃游戏</h1>
