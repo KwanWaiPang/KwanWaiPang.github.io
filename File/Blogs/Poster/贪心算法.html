@@ -459,6 +459,55 @@
 </code></pre>
 </details>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240831212135.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int jump(vector<int>& nums) {
+    
+            int count=0;//由于按题目说，必然可以达到目标点，为此符合贪心算法
+            //注意是跳跃次数
+    
+            int right_most=0;//记录当前最远的可以到的右侧的距离
+            int cur_end=0;//当前跳跃能够到达的最大下标位置
+    
+    
+            for(int i=0;i<nums.size();i++)
+            {
+                right_most=max(right_most,i+nums[i]);//当前最右侧
+    
+                // 先检查当前i是否已经到达了最后一个位置
+                if(i==nums.size()-1)
+                    break;
+                
+                //i通过自增，进而获取i后面每个位置可以调的最大目的地
+    
+                //当达到当前跳跃的边界时
+                if (i == cur_end) { 
+                    count++;  //达到第一次目的地，就增加跳跃次数
+    
+                    // 更新下次跳跃可以到达的最大边界
+                    cur_end = right_most; //上一个i到它的 cur_end所有的点中，最远可以跳到的地方
+                }
+    
+            }
+    
+            return count;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
