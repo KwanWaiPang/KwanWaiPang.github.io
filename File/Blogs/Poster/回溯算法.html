@@ -1684,7 +1684,7 @@ int main()
                 vector<string> result;//digits的尺寸与result的一样~
                 string path;
                 //回溯算法
-                if(digits.size()!=0)
+                if(digits.size()!=0)//为空的情况下，会输出“”，但结果要求是空的，因此要加上这个判断
                     backtrack(digits,path,result,0);
         
                 return result;
