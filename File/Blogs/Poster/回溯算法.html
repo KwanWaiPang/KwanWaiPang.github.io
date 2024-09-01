@@ -1617,6 +1617,86 @@ int main()
 
 
 <p><br></p>
+<h1>电话号码的数字组合</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901184640.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。hash table与回溯算法的结合。
+<p>
+时间复杂度：O(3<sup>m</sup>×4<sup>n</sup> )，
+其中 m 是输入中对应 3 个字母的数字个数（包括数字 2、3、4、5、6、8），n 是输入中对应 4 个字母的数字个数（包括数字 7、9），m+n 是输入数字的总个数。当输入包含 m 个对应 3 个字母的数字和 n 个对应 4 个字母的数字时，不同的字母组合一共有3<sup>m</sup>×4<sup>n</sup>种，需要遍历每一种字母组合。
+
+<br>
+空间复杂度：O(m+n)，其中 m 是输入中对应 3 个字母的数字个数，n 是输入中对应 4 个字母的数字个数，m+n 是输入数字的总个数。除了返回值以外，空间复杂度主要取决于哈希表以及回溯过程中的递归调用层数，哈希表的大小与输入无关，可以看成常数，递归调用层数最大为 m+n。
+</p>
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            map<char,int> num_group=
+            {
+                {'a',2},        {'b',2},        {'c',2},
+                {'d',3},        {'e',3},        {'f',3},
+                {'g',4},        {'h',4},        {'i',4},
+                {'j',5},        {'k',5},        {'l',5},
+                {'m',6},        {'n',6},        {'o',6},
+                {'p',7},        {'q',7},        {'r',7},        {'s',7},
+                {'t',8},        {'u',8},        {'v',8},
+                {'w',9},        {'x',9},        {'y',9},        {'z',9}
+            };
+        
+            void backtrack(string digits,string path,vector<string> &result,int index)
+            {
+                //回溯终止条件
+                if(path.size()==digits.size())
+                {
+                    result.push_back(path);
+                    return;
+                }
+        
+                for(auto it=num_group.begin();it!=num_group.end();it++)
+                {
+                    if(it->second!=(digits[index]-'0'))//注意是字符串
+                        continue;//进行剪枝
+        
+                    //做选择
+                    path.push_back(it->first);//添加字符
+                    index=index+1;
+        
+                    backtrack(digits,path,result,index);
+        
+                    //撤销选择
+                    path.pop_back();//删掉添加的
+                    index=index-1;
+        
+                }
+        
+            }
+        
+            vector<string> letterCombinations(string digits) {          
+        
+                vector<string> result;//digits的尺寸与result的一样~
+                string path;
+                //回溯算法
+                if(digits.size()!=0)
+                    backtrack(digits,path,result,0);
+        
+                return result;
+        
+            }
+        };
+</script>
+</code></pre>
+</details> 
+
+
+<p><br></p>
 <h1>总结：回溯算法与递归算法的区别</h1>
 <p>
   回溯算法模板的核心是在递归前做选择，递归后撤销选择。两者是很像的。
