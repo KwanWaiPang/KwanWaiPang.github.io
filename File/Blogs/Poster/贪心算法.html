@@ -384,10 +384,45 @@
 
 <p><br></p>
 <h1>最大容量问题</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240901194350.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 
+<details>
+<summary>Click to expand the code.时间复杂度为O(N),空间复杂度为O（1）。贪心算法比穷举更快，是因为每轮的贪心选择都会“跳过”一些状态。从而导致一些状态无法被验证。但是通过代码分析可以发现跳过的这些状态都必然不是最优解，故此跳过他们可以加速同时不影响最终结果</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+/* 最大容量：贪心 */
+int maxCapacity(vector<int> &ht) {
+    // 初始化 i, j，使其分列数组两端
+    int i = 0, j = ht.size() - 1;
+    // 初始最大容量为 0
+    int res = 0;
+    // 循环贪心选择，直至两板相遇
+    while (i < j) {
+        
+        int cap = min(ht[i], ht[j]) * (j - i);//当前的容量
 
-<p><br></p>
-<h1>最大切分乘积问题</h1>
+        res = max(res, cap);// 更新最大容量
+        
+        // 向内移动短板：
+        if (ht[i] < ht[j]) {
+          //若i为短板，j--的话，容量必然减少，因此只能i++，才有可能增加容量
+            i++;
+        } else {
+          //同理，若j为短板，i++的话，容量必然减少，因此只能j--，才有可能增加容量
+            j--;
+        }
+    }
+    return res;
+}
+</script>
+</code></pre>
+</details>
 
 
 <p><br></p>
