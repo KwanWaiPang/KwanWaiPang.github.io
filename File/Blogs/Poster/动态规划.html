@@ -867,6 +867,66 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 
+
+<p><br></p>
+<h1>同时维护两个一维的dp表：摆动序列</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901205402.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int wiggleMaxLength(vector<int>& nums) {
+            
+            //采用动态规划
+            //step1:定义dp表
+            int up[nums.size()];//从0开始，对于位置为i，最长上升摆动序列
+            int down[nums.size()];//从0开始，对于位置为i，最长的下降摆动序列
+    
+            // step2：初始化dp表。对于只有一个元素的情况也是摆动序列
+            up[0]=1;
+            down[0]=1;
+    
+            for(int i=1;i<nums.size();i++)
+            {
+                if(nums[i]>nums[i-1])//当前i大于上一个值
+                {
+                    //删除这个值对应的i-1时最长上升摆动序列。与，i-1时最长的下降摆动序列+1成为上升序列
+                    up[i]=max(up[i-1], down[i-1]+1);
+                    down[i]=down[i-1];//上一个是波谷的话，当前值只能删除，为此只等于上一个状态
+                }
+                else if(nums[i]<nums[i-1])//当前i小于上一个值
+                {
+                    // 跟上面反过来
+                    down[i]=max(down[i-1], up[i-1]+1);
+                    up[i]=up[i-1];
+                }
+                else//相等的情况
+                {
+                    up[i] = up[i - 1];
+                    down[i] = down[i - 1];
+                }
+    
+            }
+    
+            return max(up[nums.size()-1],down[nums.size()-1]);//两者的最大值
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+<p>此题也可以用贪心算法来解决<sup><a href="./贪心算法.html#摆动序列" target="_blank">Link</a></sup></p>
+
+
+
 <p><br></p>
 <h1>二维动态规划问题，走格子</h1>
 
@@ -1962,63 +2022,6 @@ int main() {
             }
     
             return dp[amount];
-    
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-
-<p><br></p>
-<h1>同时维护两个dp表：摆动序列</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901205402.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-<details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int wiggleMaxLength(vector<int>& nums) {
-            
-            //采用动态规划
-            //step1:定义dp表
-            int up[nums.size()];//从0开始，对于位置为i，最长上升摆动序列
-            int down[nums.size()];//从0开始，对于位置为i，最长的下降摆动序列
-    
-            // step2：初始化dp表。对于只有一个元素的情况也是摆动序列
-            up[0]=1;
-            down[0]=1;
-    
-            for(int i=1;i<nums.size();i++)
-            {
-                if(nums[i]>nums[i-1])//当前i大于上一个值
-                {
-                    //删除这个值对应的i-1时最长上升摆动序列。与，i-1时最长的下降摆动序列+1成为上升序列
-                    up[i]=max(up[i-1], down[i-1]+1);
-                    down[i]=down[i-1];//上一个是波谷的话，当前值只能删除，为此只等于上一个状态
-                }
-                else if(nums[i]<nums[i-1])//当前i小于上一个值
-                {
-                    // 跟上面反过来
-                    down[i]=max(down[i-1], up[i-1]+1);
-                    up[i]=up[i-1];
-                }
-                else//相等的情况
-                {
-                    up[i] = up[i - 1];
-                    down[i] = down[i - 1];
-                }
-    
-            }
-    
-            return max(up[nums.size()-1],down[nums.size()-1]);//两者的最大值
     
         }
     };
