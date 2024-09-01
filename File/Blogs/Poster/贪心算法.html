@@ -151,7 +151,11 @@
 
 <br>
 <strong>从局部最优推导出全局最优，但是有时局部最优并不一定能导出全局最优（比如背包问题）</strong>
-
+而贪心算法的关键点是：无套路。因此本博文仅仅是总结一些贪心算法相关的例题。
+实际做题时，需要根据题目的特点，来判断是否适合使用贪心算法。可从下面三个方向思考：
+<li>每步的局部最优是什么？</li>
+<li>能否推导出全局最优？</li>
+<li>是否有反例这样做无法得到最优解？</li>
 </p>
 
 <p><br></p>
@@ -427,6 +431,54 @@ int maxCapacity(vector<int> &ht) {
 </script>
 </code></pre>
 </details>
+
+
+
+<p><br></p>
+<h1>分发饼干</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240901203906.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code,时间复杂度为O(nlogn)，空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int findContentChildren(vector<int>& g, vector<int>& s) {
+    
+            // 局部最优就是大饼干喂给胃口大的，充分利用饼干尺寸喂饱一个，
+            // 全局最优就是喂饱尽可能多的小孩。
+            
+            //进行从大到小的排序，先优先喂饱最大的，然后统计数量
+            int count=0;//喂饱的数量
+    
+            sort(g.begin(),g.end(),greater<int>());//小孩胃口
+            sort(s.begin(),s.end(),greater<int>());//饼干尺寸
+    
+            int index=0;//饼干的索引
+            for(int i=0;i<g.size();i++)//遍历所有的小孩
+            {
+                if(index>=s.size())//注意double check 索引是否越界！
+                    break;
+                if(s[index]>=g[i])
+                {
+                    count++;//喂饼干的数量+1
+                    index++;//喂完当前饼干了，索引自加
+                }
+            }
+    
+            return count;
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
 
 
 <p><br></p>
