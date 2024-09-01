@@ -481,7 +481,10 @@ int maxCapacity(vector<int> &ht) {
 
 
 <p><br></p>
-<h1>摆动序列</h1>
+<h1>既可动态规划，又可贪心算法</h1>
+
+<p><br></p>
+<h2>摆动序列</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/others/微信截图_20240901205402.png" alt="Image description">
@@ -570,6 +573,87 @@ int maxCapacity(vector<int> &ht) {
 </script>
 </code></pre>
 </details>
+
+
+<p><br></p>
+<h2>最大子数组和</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240901215623.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。动态规划解法。时间复杂度为O（N），空间复杂度为O（N）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxSubArray(vector<int>& nums) {
+    
+           //step1：定义dp表：dp[i]=索引为i的数字,能获取的最大和
+            //状态：对于索引为i的数字
+            //选择：从当前索引重新开始或用之前累计的结果
+            int dp[nums.size()];
+    
+            //step2:初始化dp表
+            dp[0]= nums[0];//第一个的最大值就是第一个数
+    
+            // step3:进行状态转移
+            int result=dp[0];//记录全部的最大值(注意，此处不能用INT_MIN,需要初始化为第一个数组)
+            for(int i=1;i<nums.size();i++)
+            {
+                // 从当前索引从新算，或者当前+上一个状态
+                dp[i]=max(nums[i],dp[i-1]+nums[i]);
+                result=max(dp[i],result);
+            }
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。贪心算法的解法，当前“连续和”为负数的时候立刻放弃，从下一个元素重新计算“连续和”，因为负数加上下一个元素 “连续和”只会越来越小。时间复杂度为O（N），空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxSubArray(vector<int>& nums) {
+    
+          
+            int result=INT_MIN;//注意要初始化为最小的负数，因为可能一开始就为负数
+    
+            int temp_sum=0;
+            for(int i=0;i<nums.size();i++)
+            {
+               temp_sum+=nums[i];
+               result=max(temp_sum,result);//每次加完后,记录最大值（最终作为全局最优）
+    
+                // 当前“连续和”为负数的时候立刻放弃，从下一个元素重新计算“连续和”，
+                // 因为负数加上下一个元素 “连续和”只会越来越小。
+               if(temp_sum<0)//为负数了，马上重置
+                    temp_sum=0;
+                
+                //注意遇到负数后，继续加和，下一个可能更大（和为正，对下一个必然是增大的作用）。
+                //但是和为负数后，如果继续加下一个必然更小。
+                // 为此应该选和为负的时候作为零界点
+    
+            }
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
 
 
 <p><br></p>
