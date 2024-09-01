@@ -140,6 +140,7 @@
   <h8>目录</h8>
   <ul></ul>
 </div>
+<p><br></p>
 
 <article>
 <!-- 插入博客内容-->
@@ -148,10 +149,13 @@
 贪心算法（greedy algorithm）基本思想是在问题的每个决策阶段，都选择当前看起来最优的选择，即贪心地做出局部最优的决策，以期获得全局最优解。
 贪心思路的本质，如果找不到重复计算，那就通过问题中一些隐藏较深的规律，来减少冗余计算。
 
+<br>
+<strong>从局部最优推导出全局最优，但是有时局部最优并不一定能导出全局最优（比如背包问题）</strong>
+
 </p>
 
 <p><br></p>
-<h1>贪心算法与动态规划区别：零钱兑换</h1>
+<h1>贪心算法与动态规划区别：零钱兑换（背包问题）</h1>
 <p>
   相同点在于都是解决优化问题的，也依赖最优子结构的性质。但是工作原理不一样~。
   <ul>
@@ -170,7 +174,7 @@
 </figure> 
 
 <details>
-<summary>贪心算法的解法。在此代码中，假设最小面值为min，那么时间复杂度应该是O（amount/min）比起背包问题的动态规划解法时间复杂度O（n*amount）少不小。但是对于某些硬币面值组合，贪心算法并不能找到最优解（在leeetcode上测试并无法通过所有的样例）。</summary>
+<summary>贪心算法的解法。在此代码中，假设最小面值为min，那么时间复杂度应该是O（amount/min）比起背包问题的动态规划解法时间复杂度O（n*amount）少不小。但是对于某些硬币面值组合，贪心算法并不能找到最优解（在leeetcode上测试并无法通过所有的样例）因此，贪心算法并不能用于解决背包问题，背包问题只能用动态规划去解决~。</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -568,6 +572,8 @@ int maxCapacity(vector<int> &ht) {
 <ul>
   <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
   <li><a href="https://www.hello-algo.com/chapter_greedy/" target="_blank">《hello 算法》</a></li>
+  <li><a href="https://www.programmercarl.com/" target="_blank">代码随想录</a></li>
+
 </ul>
 
 </article>
