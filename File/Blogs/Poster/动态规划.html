@@ -2373,6 +2373,7 @@ int main() {
 </details>
 
 <p><br></p>
+<h2>只进行2次交易，k=2</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/others/微信截图_20240901223924.png" alt="Image description">
@@ -2381,10 +2382,60 @@ int main() {
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code.只是188题目中k=2的特例而已。当然此题也有简化版本，其实也就是把k的情况给列出来，不用维护数组而已，但是本人觉得还是应该按K次来计算，不然重新维护，更乱！</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+  class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+    
+            int k=2;
+            //step1:确定dp表：dp[i][j]=当前在第i天，还有j次交易的情况下，最大的利润（加上0或1表示是否持有股票）
+            // 状态：在第i天（i从0开始），当前允许的最大交易次数k，当前的持有状态（1 表示持有，0 表示没有持有）
+            //选择，买入、卖出、无操作。但都是有条件的
+                // 1、卖必须在买之后
+                // 2、买也必须在卖之后
+                // 3、无操作也分为买之后或卖之后
+                // 4、买需要k>0
+            vector<vector<vector<int>>> dp(prices.size(), vector<vector<int>>(k+1, vector<int>(2, 0)));
+    
+            //step2:初始化dp
+            //处理操作数为0的情况（不能买入）
+            for(int i=0;i<prices.size();i++)
+            {
+                dp[i][0][0]=0;//交易次数为0了，没持有，那么利润就是0
+                dp[i][0][1]=INT_MIN;//不允许交易的情况下，是不可能持有股票的。得先买才可持有
+            }
+    
+            //对于第0天的时候，dp[0][...][0]=0;还没开始且不持有，为此利润必然是0
+            for(int j=1;j<k+1;j++)
+            {
+                dp[0][j][0]=0;//利润为0
+                dp[0][j][1]=dp[0][j-1][0]-prices[0];// 第0天，要持有股票，利润只有可能为 -prices[0],当前需要买入，为此操作数-1。
+            }
+            
+    
+            //step3:
+            for(int i=1;i<prices.size();i++)
+            {
+                for(int j=1;j<k+1;j++)
+                {
+                    //当前不持有股票的最大值
+                    dp[i][j][0]=max(dp[i-1][j][0],//当前不操作，就是继续不持股票，那么操作数没变，天数i-1 
+                                    //当前选择卖掉股票，那么结果就是不持有。但是上一天必然是持有且没有买操作数不变
+                                    dp[i-1][j][1]+prices[i]);//卖掉今天价格，钱变多
+                    //当前持有股票的最大值
+                    dp[i][j][1]=max(dp[i-1][j][1],//当前不操作，就是继续持股票，那么操作数没变，天数i-1 
+                                    //当前选择买股票，那么结果就是持有。但是上一天必然是没持有，且买了，操作数-1
+                                    dp[i-1][j-1][0]-prices[i]);//买入今天价格，钱变少                        
+                }
+            }
+    
+            //即最后一天，最多允许 K 次交易，最多获得多少利润。
+            return dp[prices.size()-1][k][0];//注意最后的股票卖出必然比还没卖出去的利润更大
+    
+        }
+    };
 </script>
 </code></pre>
 </details>
