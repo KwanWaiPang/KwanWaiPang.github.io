@@ -2264,16 +2264,60 @@ int main() {
 <h2>无限次交易+冷冻期</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901223924.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901224156.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。关键只是冷冻期就必须考虑当前持有可以是上次不持有然后当前买入。但是上次不持有就只能是上次的上次本来就不持有，而不能是上次卖出导致不持有，因为有冷冻期。因此需要针对i-2的情况额外初始化dp表</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            //step1:确定dp表：dp[i][j]=当前在第i天，还有j次交易的情况下，最大的利润（加上0或1表示是否持有股票）
+            // 状态：在第i天（i从0开始），当前的持有状态（1 表示持有，0 表示没有持有）
+            //选择，买入、卖出、无操作。但都是有条件的
+                // 1、卖必须在买之后
+                // 2、买也必须在卖之后
+                // 3、无操作也分为买之后或卖之后
+            vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
+    
+            //step2:初始化dp
+            //对于第0天的时候，dp[0][0]=0;还没开始且不持有，为此利润必然是0
+            dp[0][0]=0;//利润为0
+            dp[0][1]=-prices[0];// 第0天，要持有股票，利润只有可能为 -prices[0],当前需要买入。
 
+            //对于第一天（由于下面i-2，必须从第2天开始，为此此处需要额外递推一次）
+            if(prices.size()>1)//注意只有一个输入的情况
+           {
+             dp[1][0]=max(dp[0][0],//当前不操作，就是继续不持股票，天数i-1 
+                                //当前选择卖掉股票，那么结果就是不持有。但是上一天必然是持有
+                                dp[0][1]+prices[1]);//卖掉今天价格，钱变多
+             dp[1][1]=max(dp[0][1],//当前不操作，就是继续持股票，天数i-1 
+                                //当前选择买股票，那么结果就是持有。但是上一天必然是没持有
+                                dp[0][0]-prices[1]);//买入今天价格，钱变少，对应要考虑上一次不持有(中不操作)的情况 
+           }
+            
+            //step3:进行状态转移
+            for(int i=2;i<prices.size();i++)//要考虑从第二天开始
+            {
+                //当前不持有股票的最大值
+                dp[i][0]=max(dp[i-1][0],//当前不操作，就是继续不持股票，天数i-1 
+                                //当前选择卖掉股票，那么结果就是不持有。但是上一天必然是持有
+                                dp[i-1][1]+prices[i]);//卖掉今天价格，钱变多
+                //当前持有股票的最大值
+                dp[i][1]=max(dp[i-1][1],//当前不操作，就是继续持股票，天数i-1 
+                                //当前选择买股票，那么结果就是持有。但是上一天必然是没持有
+                                dp[(i-1)-1][0]-prices[i]);//买入今天价格，钱变少，对应要考虑上一次不持有(中不操作)的情况   
+                                //但是上次不持有，必须是上次没有卖掉。所以必然为上次不操作的情况dp[(i-1)-1][0] 
+            }
+    
+            //即最后一天，最多允许 K 次交易，最多获得多少利润。
+            return dp[prices.size()-1][0];//注意最后的股票卖出必然比还没卖出去的利润更大
+        }
+    };
 </script>
 </code></pre>
 </details>
@@ -2282,16 +2326,48 @@ int main() {
 <h2>无限次交易+手续费</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901224156.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901224239.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。只是在上一刻持有并当前需要卖出的时候，考虑手续费即可</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+  class Solution {
+    public:
+        int maxProfit(vector<int>& prices, int fee) {
+            //step1:确定dp表：dp[i][j]=当前在第i天，还有j次交易的情况下，最大的利润（加上0或1表示是否持有股票）
+            // 状态：在第i天（i从0开始），当前的持有状态（1 表示持有，0 表示没有持有）
+            //选择，买入、卖出、无操作。但都是有条件的
+                // 1、卖必须在买之后
+                // 2、买也必须在卖之后
+                // 3、无操作也分为买之后或卖之后
+            vector<vector<int>> dp(prices.size(), vector<int>(2, 0));
+    
+            //step2:初始化dp
+            //对于第0天的时候，dp[0][0]=0;还没开始且不持有，为此利润必然是0
+            dp[0][0]=0;//利润为0
+            dp[0][1]=-prices[0];// 第0天，要持有股票，利润只有可能为 -prices[0],当前需要买入。
+            
+            //step3:
+            for(int i=1;i<prices.size();i++)
+            {
+                //当前不持有股票的最大值
+                dp[i][0]=max(dp[i-1][0],//当前不操作，就是继续不持股票，天数i-1 
+                                //当前选择卖掉股票，那么结果就是不持有。但是上一天必然是持有
+                                dp[i-1][1]+prices[i]-fee);//卖掉今天价格，钱变多，但额外多了手续费
+                //当前持有股票的最大值
+                dp[i][1]=max(dp[i-1][1],//当前不操作，就是继续持股票，天数i-1 
+                                //当前选择买股票，那么结果就是持有。但是上一天必然是没持有
+                                dp[i-1][0]-prices[i]);//买入今天价格，钱变少，对应要考虑上一次不持有     
+            }
+    
+            //即最后一天，最多允许 K 次交易，最多获得多少利润。
+            return dp[prices.size()-1][0];//注意最后的股票卖出必然比还没卖出去的利润更大
+        }
+    };
 </script>
 </code></pre>
 </details>
@@ -2299,7 +2375,7 @@ int main() {
 <p><br></p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901224239.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20240901223924.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
