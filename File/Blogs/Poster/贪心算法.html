@@ -667,7 +667,7 @@ int maxCapacity(vector<int> &ht) {
 </figure>
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code（问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！）贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点。</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -712,6 +712,7 @@ int maxCapacity(vector<int> &ht) {
                 if(i<=mostright)//当前i最大也只能到mostright
                 {
                     mostright=max(mostright,i+nums[i]);
+                    //跳多少步无关系，关键是最远能否到达终点
                     if(mostright>=nums.size()-1)
                         return true;
                 }
@@ -733,7 +734,7 @@ int maxCapacity(vector<int> &ht) {
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。解题的关键在于什么情况下步数+1.局部最优：当前可移动距离尽可能多走，如果还没到终点，步数再加一。整体最优：一步尽可能多走，从而达到最少步数。</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -773,6 +774,78 @@ int maxCapacity(vector<int> &ht) {
 </script>
 </code></pre>
 </details>
+
+
+<p><br></p>
+<h1>K次取反后最大化的数组和</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240903211243.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.时间复杂度为O(Nlogn)，空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int largestSumAfterKNegations(vector<int>& nums, int k) {
+    
+            // 局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。
+            
+            sort(nums.begin(),nums.end());//进行排序（也可以改为按照绝对值大小排序）
+    
+            int index=0;//数组的索引
+            while(k>0)
+            {   
+                //优先将绝对值最大的负数转换为正数
+                if(nums[index]<0)
+                {
+                    nums[index]=-nums[index];
+                    index++;
+                    k--;
+                    if(index>=nums.size())//数组遍历完了（注意凡是非for的数组遍历都需要double check）
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                   break;//剩下的都是正数了
+                }
+            }
+    
+            if(k>0)//还有k可以继续转换
+            {
+                //若全部负数都转换为正数了，还有k则应该多次只转换最小的一个数
+                sort(nums.begin(),nums.end());//再次排序,从小到大
+    
+                while(k>0)
+                {
+                    nums[0]=-nums[0];
+                    k--;
+                }
+            }
+    
+            //获取最终结果
+            int result=0;
+            for(int i=0;i<nums.size();i++)
+            {
+                result+=nums[i];
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
