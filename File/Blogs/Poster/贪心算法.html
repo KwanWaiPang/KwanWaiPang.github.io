@@ -844,7 +844,59 @@ int maxCapacity(vector<int> &ht) {
 </code></pre>
 </details>
 
-
+<p><br></p>
+<h1>加油站</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240903214028.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。局部最优：当前累加rest[i]的和curSum一旦小于0，起始位置至少要是i+1，因为从i之前开始一定不行。全局最优：找到可以跑一圈的起始位置。（注意题目说了如果有解，必然是唯一解）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+    
+            //到达加油站i可以获得gas[i]油，离开加油站i需要消耗cost[i]
+            // 返回从哪个站出发可以绕一圈，若没有则输出-1
+    
+            //首先需要基于如下结论：
+            // 如果选择站点 i 作为起点「恰好」无法走到站点 j，那么 i 和 j 中间的任意站点 k 都不可能作为起点。
+    
+            int sum=0;
+            for(int i=0;i<gas.size();i++)
+            {
+                sum+=gas[i]-cost[i];//总油量小于0，那么必然无法跑一圈
+            }
+    
+            if(sum<0)
+                return -1;//总剩余的油量小于0，那么必然无解
+    
+            // 否则就必然有解，但题目保证了解是唯一的！！！
+            int index=0;//记录起点
+            int temp_sum=0;
+            for(int i=0;i<gas.size();i++)
+            {
+                temp_sum+=gas[i]-cost[i];//当前的油量
+                if(temp_sum<0)//(上次的i到当前都必然不是结果)
+                {//另外一种思维，当前已经是不满足了，那么就尝试从下一刻出发！然后再次计算
+                    temp_sum=0;//清空
+                    index=i+1;//起点至少是i+1，因为从i之前开始一定不行，然后继续验证
+                }
+    
+            }
+    
+            return index==gas.size()? 0:index;//为n时，正好绕一周所以是从0开始
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
