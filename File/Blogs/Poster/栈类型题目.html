@@ -193,6 +193,7 @@
 <details>
 <summary>Click to expand the code</summary>
 <pre><code>
+  <script type='text/html' style='display:block'>
   class Solution {
     public:
         bool isValid(string s) {
@@ -218,12 +219,13 @@
                         return false;
                 }
             }
-            if(group.size()) //结束后如果是空的，
+            if(group.size()) //结束后如果不是空的，
                 return false;
             else
                 return true;
         }
     };
+  </script>
 </code></pre>
 </details>
 
@@ -316,7 +318,7 @@
             }
             //栈是反过来的因此需要反转一下
             reverse(result.begin(), result.end());//stl中的reverse函数，需要反转一下。因为栈是逆过来的
-            return result.empty()? "0":result;
+            return result.empty()? "0":result;//注意最后结果是否为空
     
         }
     };
