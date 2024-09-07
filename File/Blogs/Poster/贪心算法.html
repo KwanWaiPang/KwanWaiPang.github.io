@@ -899,6 +899,58 @@ int maxCapacity(vector<int> &ht) {
 </details>
 
 
+<p><br></p>
+<h1>两次贪心策略：分发糖果</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240907151633.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code,时间与空间复杂度O（N）。
+<br>确定一边之后，再确定另一边，例如比较每一个孩子的左边，然后再比较右边，如果两边一起考虑一定会顾此失彼。
+<br>先确定右边评分大于左边的情况（也就是从左向右遍历）此时局部最优：只要右边评分比左边大，右边的孩子就多一个糖果，全局最优：相邻的孩子中，评分高的右孩子获得比左边孩子更多的糖果。（局部最优可以推出全局最优）
+<br>再确定左孩子大于右孩子的情况（也就是从右向左遍历）
+<br>特殊情况：某个值既大于它的左边，又大于它的右边。也就是candyVec[i]只有取最大的才能既保持对左边candyVec[i - 1]的糖果多，也比右边candyVec[i + 1]的糖果多。
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int candy(vector<int>& ratings) {
+    
+            //贪心算法
+            vector<int> candyVec(ratings.size(), 1);//每个孩子至少分配到 1 个糖果。
+    
+            // 先从左到右对比
+            for(int i=1; i<ratings.size(); i++)
+            {
+                if(ratings[i]>ratings[i-1])//(若有右比左大的情况，ratings[i]要更大)
+                    candyVec[i]=candyVec[i-1]+1;//每两个有一个更大就应该+1
+            }
+    
+            //然后从右到左对比
+            for(int i=ratings.size()-1;i-1>=0;i--)
+            {
+                if(ratings[i]<ratings[i-1])//(若有左比右大的情况，candyVec[i-1]要更大)
+                    candyVec[i-1]=max(candyVec[i-1],candyVec[i]+1);//每两个有一个更大就应该+1(但若原本已经是更大的状态，就无需再加)
+                    //因为若原本此处右大于左时加了糖果，更大了。此时它为与左，比它的右也大，则无需再+1
+            }
+    
+            int result = 0;//最终结果
+            for (int i = 0; i < candyVec.size(); i++) 
+                result += candyVec[i];
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
