@@ -951,6 +951,71 @@ int maxCapacity(vector<int> &ht) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>柠檬水找零</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240907161303.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code，模拟算法计数器。时间复杂度为O（N），空间复杂度为O（1）.但这其实也是算贪心算法！！！
+  <br>
+局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。
+局部最优可以推出全局最优，因为每次找零都是最优的，那么最终的找零也是最优的。
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool lemonadeChange(vector<int>& bills) {//注意题意必须按账单bilis支付顺序
+    
+            // 定义三个计数器
+            int count_5=0;
+            int count_10=0;
+            int count_20=0;
+    
+    
+            for(int i=0;i<bills.size();i++)
+            {
+                if(count_5<0 || count_10<0)
+                    return false;
+    
+                if(bills[i]==5)
+                    count_5++;
+                else if(bills[i]==10)
+                {
+                    count_10++;
+                    count_5--;
+                }
+                else
+                {
+                    if(count_10>0)
+                    {
+                        count_10--;
+                        count_5--;
+                    }
+                    else//若没有10块，找三张5块
+                        count_5=count_5-3;//或者减三也可以
+                    count_20++;
+                }
+            }
+    
+            if(count_5<0 || count_10<0)
+                return false;
+            return true;
+    
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
