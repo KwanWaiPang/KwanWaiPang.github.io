@@ -898,6 +898,70 @@ int maxCapacity(vector<int> &ht) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h1>柠檬水找零</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240907161303.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code，模拟算法计数器。时间复杂度为O（N），空间复杂度为O（1）.但这其实也是算贪心算法！！！
+  <br>
+局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。
+局部最优可以推出全局最优，因为每次找零都是最优的，那么最终的找零也是最优的。
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool lemonadeChange(vector<int>& bills) {//注意题意必须按账单bilis支付顺序
+    
+            // 定义三个计数器
+            int count_5=0;
+            int count_10=0;
+            int count_20=0;
+    
+    
+            for(int i=0;i<bills.size();i++)
+            {
+                if(count_5<0 || count_10<0)
+                    return false;
+    
+                if(bills[i]==5)
+                    count_5++;
+                else if(bills[i]==10)
+                {
+                    count_10++;
+                    count_5--;
+                }
+                else
+                {
+                    if(count_10>0)
+                    {
+                        count_10--;
+                        count_5--;
+                    }
+                    else//若没有10块，找三张5块
+                        count_5=count_5-3;//或者减三也可以
+                    count_20++;
+                }
+            }
+    
+            if(count_5<0 || count_10<0)
+                return false;
+            return true;
+    
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+
 
 <p><br></p>
 <h1>两次贪心策略：分发糖果</h1>
@@ -1008,70 +1072,53 @@ int maxCapacity(vector<int> &ht) {
 </code></pre>
 </details>
 
+
 <p><br></p>
-<h1>柠檬水找零</h1>
+<h1>用最少数量的箭引爆气球</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240907161303.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240908205117.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure>
 
 <details>
-<summary>Click to expand the code，模拟算法计数器。时间复杂度为O（N），空间复杂度为O（1）.但这其实也是算贪心算法！！！
-  <br>
-局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。
-局部最优可以推出全局最优，因为每次找零都是最优的，那么最终的找零也是最优的。
-</summary>
+<summary>Click to expand the code.关键在于需要更新右边界，不能单纯对比，因为必须满足每个最小右边界能被碰到！</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
     public:
-        bool lemonadeChange(vector<int>& bills) {//注意题意必须按账单bilis支付顺序
+        static bool comparefunction(vector<int> &a, vector<int> &b)
+        {
+            if(a[0]!=b[0])
+                return a[0]<b[0];
+            else
+                return a[1]<b[1];
+        }
+        int findMinArrowShots(vector<vector<int>>& points) {
     
-            // 定义三个计数器
-            int count_5=0;
-            int count_10=0;
-            int count_20=0;
+            //先进行排序
+            sort(points.begin(),points.end(),comparefunction);
     
-    
-            for(int i=0;i<bills.size();i++)
+            int result=1;//一开始是一枝箭
+            for(int i=1;i<points.size();i++)
             {
-                if(count_5<0 || count_10<0)
-                    return false;
-    
-                if(bills[i]==5)
-                    count_5++;
-                else if(bills[i]==10)
+                //如果两个气球有交集
+                if(points[i][0]<=points[i-1][1])//当前的左边界<=上一个的右边界
                 {
-                    count_10++;
-                    count_5--;
+                    points[i][1]=min(points[i-1][1],points[i][1]);//更新重叠的气球的最小右边界，下次与最小右边界对比
                 }
                 else
-                {
-                    if(count_10>0)
-                    {
-                        count_10--;
-                        count_5--;
-                    }
-                    else//若没有10块，找三张5块
-                        count_5=count_5-3;//或者减三也可以
-                    count_20++;
-                }
+                    result++;//要多加一支箭
             }
-    
-            if(count_5<0 || count_10<0)
-                return false;
-            return true;
+            return result;
     
         }
     };
 </script>
 </code></pre>
-</details> 
-
-
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
