@@ -952,6 +952,60 @@ int maxCapacity(vector<int> &ht) {
 </details>
 
 <p><br></p>
+<h1>根据身高重建队列</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240908192033.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.遇到两个维度权衡的时候，一定要先确定一个维度，再确定另一个维度。但是题目关键应该还是如何确定排序的方法，要先按什么排序，再按什么排序！</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240908193655.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        static bool comparefunction(vector<int>& a, vector<int>& b)
+        {
+            if(a[0]!=b[0])
+                return a[0]>b[0];
+            else
+                return a[1]<b[1];
+        }
+        vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+    
+            // 局部最优：优先按身高高的people的k来插入。插入操作过后的people满足队列属性
+            // 全局最优：最后都做完插入操作，整个队列满足题目队列属性
+    
+            //第一个是身高，第二个是前面有k个大于等于当前身高的值
+            //先按身高从大到小排序（身高相同的情况下，按照k值从小到大排序）
+            sort(people.begin(),people.end(),comparefunction);
+    
+            vector<vector<int>> result;
+    
+            for(int i=0;i<people.size();i++)
+            {
+                //当前身高，前面有几个大于等于当前身高的值,对应就插入result.begin()+position的位置
+                int position = people[i][1];//前面应该有多少值，因此位于第几个
+                result.insert(result.begin()+position,people[i]);//对应的位置插入
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
 <h1>柠檬水找零</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -1013,8 +1067,6 @@ int maxCapacity(vector<int> &ht) {
 </script>
 </code></pre>
 </details> 
-
-
 
 
 
