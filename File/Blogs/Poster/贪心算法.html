@@ -961,7 +961,10 @@ int maxCapacity(vector<int> &ht) {
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code.遇到两个维度权衡的时候，一定要先确定一个维度，再确定另一个维度。但是题目关键应该还是如何确定排序的方法，要先按什么排序，再按什么排序！</summary>
+<summary>Click to expand the code.遇到两个维度权衡的时候，一定要先确定一个维度，再确定另一个维度。但是题目关键应该还是如何确定排序的方法，要先按什么排序，再按什么排序！
+<br>
+空间复杂度为O（N），时间复杂度为O（N<sup>2</sup>）因为用了vector的insert操作，为此时间复杂度并不是O（N）。sort的时间复杂度为O（NlogN）。
+</summary>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240908193655.png" alt="Image description">
