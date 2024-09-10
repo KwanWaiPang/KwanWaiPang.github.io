@@ -1121,6 +1121,101 @@ int maxCapacity(vector<int> &ht) {
 </details>
 
 
+<p><br></p>
+<h1>无重叠区间</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240910181408.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.按照左边界排序。时间复杂度：O(nlog n) ，有一个快排。空间复杂度：O(n)，有一个快排，最差情况(倒序)时，需要n次递归调用。因此确实需要O(n)的栈空间</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        static bool comparefunction(vector<int>& a, vector<int>& b)
+        {
+            return a[0]<b[0];
+        }
+        int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+    
+            // 此题有点类似于452：用最少数量的箭引爆气球
+    
+            // 先进行排序
+            sort(intervals.begin(),intervals.end(),comparefunction);//按照左边界排序
+    
+            int result=0;
+    
+            for(int i=1;i<intervals.size();i++)
+            {
+                if(intervals[i][0]>=intervals[i-1][1])//若当前的左边界大于等于上一个右边界，那么没有重叠
+                {
+                    continue;
+                }
+                else//必然有重叠
+                {
+                    result++;
+                    // 由于当前是去除掉的，为此更新一下值(下一个会用此来做对比)
+                    //右边界记录最小值（这个可以确定去掉大的边）
+                    intervals[i][1]=min(intervals[i][1], intervals[i-1][1]);
+                }
+            }
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。若按照右边界排序，本质上好像是一样的，只是左边界排序个人感觉更好理解~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        static bool comparefunction(vector<int>& a, vector<int>& b)
+        {
+            return a[1]<b[1];
+        }
+        int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+    
+            // 此题有点类似于452：用最少数量的箭引爆气球
+    
+            // 先进行排序
+            sort(intervals.begin(),intervals.end(),comparefunction);//按照右边界排序
+    
+            int result=0;
+    
+            for(int i=1;i<intervals.size();i++)
+            {
+                if(intervals[i][0]>=intervals[i-1][1])//若当前的左边界大于等于上一个右边界，那么没有重叠
+                {
+                    continue;
+                }
+                else//必然有重叠
+                {
+                    result++;
+                    // 由于当前是去除掉的，为此更新一下值(下一个会用此来做对比)
+                    //右边界记录最小值（这个可以确定去掉大的边）
+                    intervals[i][1]=min(intervals[i][1], intervals[i-1][1]);
+                }
+            }
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
