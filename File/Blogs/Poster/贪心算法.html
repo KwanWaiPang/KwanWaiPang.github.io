@@ -1217,6 +1217,60 @@ int maxCapacity(vector<int> &ht) {
 </details> 
 
 
+
+<p><br></p>
+<h1>划分字母区间</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240910185845.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。时间复杂度O（N），空间复杂度O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        vector<int> partitionLabels(string s) {
+    
+            // 每个字母最多出现在一个片段中。（就是说相同的字母必须在同一个片段中，且不能改变顺序）
+            //循环遍历过的所有字母的最远边界，这个就是分割点，放入result中
+    
+            vector<int> result;
+    
+            //先统计每个字符最后出现的位置
+            unordered_map<char, int> hash_table;
+            for(int i=0;i<s.size();i++)
+            {
+                hash_table[s[i]]=i;//记录index
+            }
+    
+    
+            int right_most=0;
+            int curret_startindex=0;
+            //从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点
+            for(int i=0;i<s.size();i++)
+            {
+                //此时的right_most为当前curret_startindex遍历的最远的
+                right_most=max(right_most,hash_table[s[i]]);//当前字符最远的
+                if(i==right_most)//当前字符串到达了最远
+                {
+                    result.push_back(right_most-curret_startindex+1);//片段的长度
+                    curret_startindex=i+1;//从下一个开始算
+                }
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
