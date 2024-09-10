@@ -1203,7 +1203,8 @@ int maxCapacity(vector<int> &ht) {
                     result++;
                     // 由于当前是去除掉的，为此更新一下值(下一个会用此来做对比)
                     //右边界记录最小值（这个可以确定去掉大的边）
-                    intervals[i][1]=min(intervals[i][1], intervals[i-1][1]);
+                    // intervals[i][1]=min(intervals[i][1], intervals[i-1][1]);
+                    intervals[i][1]= intervals[i-1][1];//上一行写法也可，因为右边界已经排序了！！！
                 }
             }
     
