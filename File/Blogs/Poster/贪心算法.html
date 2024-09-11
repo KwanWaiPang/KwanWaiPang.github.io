@@ -1074,7 +1074,10 @@ int maxCapacity(vector<int> &ht) {
 
 
 <p><br></p>
-<h1>用最少数量的箭引爆气球</h1>
+<h1>判断区间重叠</h1>
+
+<p><br></p>
+<h2>用最少数量的箭引爆气球</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240908205117.png" alt="Image description">
@@ -1122,7 +1125,7 @@ int maxCapacity(vector<int> &ht) {
 
 
 <p><br></p>
-<h1>无重叠区间</h1>
+<h2>无重叠区间</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240910181408.png" alt="Image description">
@@ -1219,7 +1222,7 @@ int maxCapacity(vector<int> &ht) {
 
 
 <p><br></p>
-<h1>划分字母区间</h1>
+<h2>划分字母区间</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240910185845.png" alt="Image description">
@@ -1264,6 +1267,61 @@ int maxCapacity(vector<int> &ht) {
             }
     
             return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h2>合并区间</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240911134922.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。解题思路跟上面几题是很像的。时间复杂度: O(n+nlogn)。空间复杂度: O(logn)，排序需要的空间开销</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        static bool comparefunction(vector<int>& a, vector<int>& b)
+        {
+            return a[0]<b[0];//按左区间从小到大排列
+        }
+    
+        vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    
+            //先进行排序
+            sort(intervals.begin(),intervals.end(),comparefunction);
+    
+            vector<vector<int>> result;
+            int new_left;
+            int new_right;
+    
+            for(int i=1;i<intervals.size();i++)
+            {
+                if(intervals[i-1][1]>=intervals[i][0])//当前的左区间小于等于上一个右区间，有重叠
+                {
+                    intervals[i][0]=min(intervals[i-1][0],intervals[i][0]);//最小值
+                    intervals[i][1]=max(intervals[i-1][1],intervals[i][1]);//最大值
+                    // 下次继续对比
+                }
+                else//没重叠，就push
+                {
+                    result.push_back(intervals[i-1]);//将上一次的放入
+                }
+            }
+            //把最后一个也放入
+            result.push_back(intervals[intervals.size()-1]);
+    
+    
+            return result;
+    
         }
     };
 </script>
