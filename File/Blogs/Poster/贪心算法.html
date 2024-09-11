@@ -1329,6 +1329,49 @@ int maxCapacity(vector<int> &ht) {
 </details>
 
 
+<p><br></p>
+<h1>单调递增的数字</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240911140529.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code。时间与空间复杂度都为O（N）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int monotoneIncreasingDigits(int n) {
+    
+            string input_str=to_string(n);//转换为string
+            int index=input_str.size();//从第几个开始应该全部变为9
+            // （初始化为input_str.size()取不到，不初始化的话会直接导致从0开始之后全部变为9）
+            for(int i=input_str.size()-1;i>=1;i--)
+            {
+                if(input_str[i-1]>input_str[i])//前一个大于后一个了
+                {
+                    index=i;//记录从第几个开始应该全部为9
+                    input_str[i-1]=input_str[i-1]-1;//当前位应该减一，然后当前位置的下一个应该为9（比如对于66，56<59）
+                }
+            }
+    
+            //从第几个开始应该全部变为9(9绝对是当前能到的最大的)
+            for(int i=index;i<input_str.size();i++)
+            {
+                input_str[i]='9';
+            }
+    
+            return stoi(input_str);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
 <summary>Click to expand the code</summary>
