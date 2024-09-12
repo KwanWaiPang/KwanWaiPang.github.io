@@ -170,6 +170,15 @@
 <figcaption>注意最后一个的左侧没有填满，故此不是</figcaption>
 </figure> 
 
+<li>平衡二叉搜索树：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240912162825.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
 </p>
 
 
@@ -188,7 +197,21 @@
   </p>
 
 <p><br></p>
-<h1>1. 经典的二叉树遍历题目</h1>
+<h1>二叉树的遍历方式</h1>
+
+<p><br></p>
+<h1>DFS深度优先遍历</h1>
+<p>
+  DFS深度优先遍历：先往深走，遇到叶子节点再往回走。<br>
+  分为：
+  前序遍历（递归法，迭代法）；
+  中序遍历（递归法，迭代法）；
+  后序遍历（递归法，迭代法）；
+  <br>这里前中后，其实指的就是中间节点的遍历顺序，只要记住:前中后序指的就是中间节点的位置就可以了。
+</p>
+
+<p><br></p>
+<h2>经典的二叉树遍历题目</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802183934.png" alt="Image description">
@@ -344,6 +367,51 @@
 </code></pre>
 </details>
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240912165047.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void calculate(TreeNode* root, vector<int> &result)
+     {
+         if(root==nullptr)
+             return;
+ 
+         calculate(root->left,result);
+         calculate(root->right,result);
+         result.push_back(root->val);//后序遍历
+     }
+ 
+     vector<int> postorderTraversal(TreeNode* root) {
+ 
+         vector<int> result;
+         calculate(root, result);
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details> 
+
 <p><br></p>
 <h3>深入理解前中后序</h3>
 <pre><code>
@@ -369,12 +437,12 @@
   </p></figcaption>
   </figure> 
 
-  前序位置的代码在刚刚进入一个二叉树节点的时候执行；
+  前序位置的代码在刚刚进入一个二叉树节点的时候执行；(前序遍历：中左右)
   <br>
-  后序位置的代码在将要离开一个二叉树节点的时候执行；
+  后序位置的代码在将要离开一个二叉树节点的时候执行；(中序遍历：左中右)
   <br>
-  中序位置的代码在一个二叉树节点左子树都遍历完，即将开始遍历右子树的时候执行。
-  <br>如下图所示：
+  中序位置的代码在一个二叉树节点左子树都遍历完，即将开始遍历右子树的时候执行。(后序遍历：左右中)
+  <br>所谓的前中后，其实指的就是中间节点的遍历顺序。如下图所示：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802202847.png" alt="Image description">
@@ -420,7 +488,7 @@
 </details>
 
 <p><br></p>
-<h1>2. 二叉树的最大深度</h1>
+<h2>二叉树的最大深度</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802203146.png" alt="Image description">
@@ -468,7 +536,7 @@
 </details>
 
 <p><br></p>
-<h1>3. 二叉树的直径</h1>
+<h2>二叉树的直径</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/WX20240824-113023.png" alt="Image description">
@@ -524,6 +592,13 @@
 </details>
 
 
+<p><br></p>
+<h1>BFS广度优先遍历</h1>
+<p>
+  BFS广度优先遍历：一层一层的去遍历.<br>
+  层次遍历（迭代法）
+</p>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
@@ -550,6 +625,7 @@
 <ul>
   <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
   <li><a href="https://labuladong.online/algo/essential-technique/binary-tree-summary/" target="_blank">二叉树</a></li>
+  <li><a href="https://www.programmercarl.com/" target="_blank">代码随想录</a></li>
 </ul>
 
 </article>
