@@ -116,7 +116,7 @@
 
 <header class="post-header">
   <h1 align="center" class="post-title">
-    <span style="font-weight: 600;">Title</span>
+    <span style="font-weight: 600;">Ubuntu命令行下载数据</span>
   </h1>
   <!-- <p><br></p> -->
 </header>
@@ -126,6 +126,7 @@
 <!-- home.html -->
 <div class="post">
 
+
 <!-- 插入目录 -->
 <div id="toc">
   <h8>目录</h8>
@@ -134,34 +135,52 @@
         
 <article>
 <!-- 插入博客内容-->
+<p>
+  在基于服务器的开发过程中，经常需要把数据传到服务器上，本博文记录采用不同的工具来传输数据.
+</p>
+
+<p><br></p> 
+<h1>Onedrive</h1>
+<p>
+首先用google浏览器（Chrome）打开OneDrive的分享链接，然后按F12打开开发者工具，切换到Network选项卡，如下所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20240912210041.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
+  然后点击下载的按钮，可以看到刷新Network选项卡，找到一个以download开头的请求，右键点击，选择Copy -> Copy as cURL（bash格式）：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20240912210054.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
 
 
-Motivations:
+接下来复制到命令行。同时在末端输入<mark>--output filename.bag</mark>。就可以正常下载了~
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20240912205929.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
+
+</p>
+
+
+<p><br></p> 
+<h1>百度网盘</h1>
+
+
+
+<p><br></p>
+<h1>参考资料</h1>
 <ul>
-  <li><p>
-
-  </p></li>  
-</ul>
-
-Contributions:
-<ul>
-  <li><p>
-    
-  </p></li>  
-</ul>
-
-Methodology:
-<ul>
-  <li><p>
-    
-  </p></li>  
-</ul>
-
-Experiments:
-<ul>
-  <li><p>
-    
-  </p></li>  
+  <li><a href="https://www.sooele.com/4328.html" target="_blank">Linux命令行下载OneDrive分享链接中的文件</a></li>
 </ul>
 
 
