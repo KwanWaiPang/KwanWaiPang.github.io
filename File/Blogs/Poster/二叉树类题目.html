@@ -152,6 +152,28 @@
 </p></figcaption>
 </figure> 
 <p>
+  二叉树的种类：
+  <li>满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。(直观理解就是填满了~)</li>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240912162401.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+
+  <li>完全二叉树：在完全二叉树中，除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。</li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240912162519.png" alt="Image description">
+  </div>
+<figcaption>注意最后一个的左侧没有填满，故此不是</figcaption>
+</figure> 
+
+</p>
+
+
+<p>
   二叉树解题的思维模式分两类：
 <br>
 1、是否可以通过遍历一遍二叉树得到答案？如果可以，用一个 traverse 函数配合外部变量来实现，这叫「遍历」的思维模式。
