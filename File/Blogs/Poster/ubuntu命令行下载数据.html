@@ -145,7 +145,7 @@
 首先用google浏览器（Chrome）打开OneDrive的分享链接，然后按F12打开开发者工具，切换到Network选项卡，如下所示：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/others/微信截图_20240912210041.png" alt="Image description">
+      <img style="width: 100%;" src="../assets/img/others/微信截图_20240912210041.png" alt="Image description">
     </div>
   <figcaption><p>
   </p></figcaption>
@@ -153,7 +153,7 @@
   然后点击下载的按钮，可以看到刷新Network选项卡，找到一个以download开头的请求，右键点击，选择Copy -> Copy as cURL（bash格式）：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/others/微信截图_20240912210054.png" alt="Image description">
+      <img style="width: 100%;" src="../assets/img/others/微信截图_20240912210054.png" alt="Image description">
     </div>
   <figcaption><p>
   </p></figcaption>
@@ -163,7 +163,7 @@
 接下来复制到命令行。同时在末端输入<mark>--output filename.bag</mark>。就可以正常下载了~
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/others/微信截图_20240912205929.png" alt="Image description">
+      <img style="width: 100%;" src="../assets/img/others/微信截图_20240912205929.png" alt="Image description">
     </div>
   <figcaption><p>
   </p></figcaption>
@@ -174,13 +174,66 @@
 
 <p><br></p> 
 <h1>百度网盘</h1>
+<p>
+  首先需要安装bypy包:<mark>pip install bypy</mark>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://i-blog.csdnimg.cn/blog_migrate/771050caafff986292a5a9ae16a405e0.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
+  然后配置百度网盘的账号密码：<mark>bypy info</mark>。
+  <br>
+  将命令行提示的链接复制到浏览器，并复制浏览器中的授权码，粘贴到终端并回车（注意是粘贴到终端）
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://i-blog.csdnimg.cn/blog_migrate/1153baafeeade0b179eab5a6747123d8.png" alt="Image description">
+    </div>
+    <div style="margin-bottom: 10px;"></div>
+      <img style="width: 100%;" src="https://i-blog.csdnimg.cn/blog_migrate/91bd51659538bb4ebebf152ef0bcb07f.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
 
+  可以看到百度云盘中出现了我的网盘/我的应用数据/bypy文件夹，该文件夹将是服务器与百度云盘间沟通的桥梁。因此，需要将下载的数据放在bypy文件夹中。
+  <figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://i-blog.csdnimg.cn/blog_migrate/4b5f0fef35d2d027f152b9cb9156cf6a.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+常用的命令如下:
+<pre><code>
+<script type='text/html' style='display:block'>
+  # 查看帮助
+  bypy --help
+   
+  # 查看网盘文件
+  bypy list
+   
+  # 下载文件或目录
+  bypy download [remotepath] [localpath]
+   
+  # 上传文件或目录
+  bypy upload [localpath] [remotepath]
+
+  #开多线程加速下载
+  bypy --downloader aria2 download 远程目录 本地路径
+</script>
+</code></pre>
+
+</p>
 
 
 <p><br></p>
 <h1>参考资料</h1>
 <ul>
   <li><a href="https://www.sooele.com/4328.html" target="_blank">Linux命令行下载OneDrive分享链接中的文件</a></li>
+  <li><a href="https://blog.csdn.net/gwplovekimi/article/details/135383244?spm=1001.2014.3001.5501" target="_blank">实验笔记之——下载数据到服务器</a></li>
 </ul>
 
 
