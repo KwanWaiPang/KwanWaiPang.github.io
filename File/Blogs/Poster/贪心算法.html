@@ -657,126 +657,6 @@ int maxCapacity(vector<int> &ht) {
 
 
 <p><br></p>
-<h1>跳跃游戏</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240830180150.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-
-<details>
-<summary>Click to expand the code（问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！）贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点。</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        bool callback(vector<int>& nums, int index) 
-        {//初始化的时候位于第一步
-    
-            // 递归终止条件
-            if(index==nums.size()-1)
-            {
-                // 当正好跳到终点
-                return true;
-            }
-    
-            int next_step=nums[index];//下次可以跳的最大的步数
-    
-            if(next_step<=0)
-                return false;
-                
-            //若没有超出数组范围就是index+next_step
-            int max_target=(index+next_step)<nums.size()-1? next_step:(nums.size()-1-index);
-    
-            for(int i=1;i<=max_target;i++)
-            {
-                if(callback(nums, index+i))
-                {//有一个结果到了终点就马上返回true
-                    return true;
-                }
-            }
-    
-            return false;//遍历全部后
-        }
-    
-        bool canJump(vector<int>& nums) {
-    
-            // return callback(nums,0);//采用递归(容易超时)
-    
-            //为此采用贪心算法
-            int mostright=0;//记录当前最远的可以到的右侧的距离
-            for(int i=0;i<nums.size();i++)
-            {
-                if(i<=mostright)//当前i最大也只能到mostright
-                {
-                    mostright=max(mostright,i+nums[i]);
-                    //跳多少步无关系，关键是最远能否到达终点
-                    if(mostright>=nums.size()-1)
-                        return true;
-                }
-            }
-    
-            // 否则就是永远不可能到达
-            return false;
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240831212135.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-<details>
-<summary>Click to expand the code。解题的关键在于什么情况下步数+1.局部最优：当前可移动距离尽可能多走，如果还没到终点，步数再加一。整体最优：一步尽可能多走，从而达到最少步数。</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-        int jump(vector<int>& nums) {
-    
-            int count=0;//由于按题目说，必然可以达到目标点，为此符合贪心算法
-            //注意是跳跃次数
-    
-            int right_most=0;//记录当前最远的可以到的右侧的距离
-            int cur_end=0;//当前跳跃能够到达的最大下标位置
-    
-    
-            for(int i=0;i<nums.size();i++)
-            {
-                right_most=max(right_most,i+nums[i]);//当前最右侧
-    
-                // 先检查当前i是否已经到达了最后一个位置
-                if(i==nums.size()-1)
-                    break;
-                
-                //i通过自增，进而获取i后面每个位置可以调的最大目的地
-    
-                //当达到当前跳跃的边界时
-                if (i == cur_end) { 
-                    count++;  //达到第一次目的地，就增加跳跃次数
-    
-                    // 更新下次跳跃可以到达的最大边界
-                    cur_end = right_most; //上一个i到它的 cur_end所有的点中，最远可以跳到的地方
-                }
-    
-            }
-    
-            return count;
-        }
-    };
-</script>
-</code></pre>
-</details>
-
-
-<p><br></p>
 <h1>K次取反后最大化的数组和</h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -1077,6 +957,125 @@ int maxCapacity(vector<int> &ht) {
 <h1>判断区间重叠</h1>
 
 <p><br></p>
+<h2>跳跃游戏</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240830180150.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code（问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！）贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool callback(vector<int>& nums, int index) 
+        {//初始化的时候位于第一步
+    
+            // 递归终止条件
+            if(index==nums.size()-1)
+            {
+                // 当正好跳到终点
+                return true;
+            }
+    
+            int next_step=nums[index];//下次可以跳的最大的步数
+    
+            if(next_step<=0)
+                return false;
+                
+            //若没有超出数组范围就是index+next_step
+            int max_target=(index+next_step)<nums.size()-1? next_step:(nums.size()-1-index);
+    
+            for(int i=1;i<=max_target;i++)
+            {
+                if(callback(nums, index+i))
+                {//有一个结果到了终点就马上返回true
+                    return true;
+                }
+            }
+    
+            return false;//遍历全部后
+        }
+    
+        bool canJump(vector<int>& nums) {
+    
+            // return callback(nums,0);//采用递归(容易超时)
+    
+            //为此采用贪心算法
+            int mostright=0;//记录当前最远的可以到的右侧的距离
+            for(int i=0;i<nums.size();i++)
+            {
+                if(i<=mostright)//当前i最大也只能到mostright
+                {
+                    mostright=max(mostright,i+nums[i]);
+                    //跳多少步无关系，关键是最远能否到达终点
+                    if(mostright>=nums.size()-1)
+                        return true;
+                }
+            }
+    
+            // 否则就是永远不可能到达
+            return false;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240831212135.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。解题的关键在于什么情况下步数+1.局部最优：当前可移动距离尽可能多走，如果还没到终点，步数再加一。整体最优：一步尽可能多走，从而达到最少步数。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int jump(vector<int>& nums) {
+    
+            int count=0;//由于按题目说，必然可以达到目标点，为此符合贪心算法
+            //注意是跳跃次数
+    
+            int right_most=0;//记录当前最远的可以到的右侧的距离
+            int cur_end=0;//当前跳跃能够到达的最大下标位置
+    
+    
+            for(int i=0;i<nums.size();i++)
+            {
+                right_most=max(right_most,i+nums[i]);//当前最右侧
+    
+                // 先检查当前i是否已经到达了最后一个位置
+                if(i==nums.size()-1)
+                    break;
+                
+                //i通过自增，进而获取i后面每个位置可以调的最大目的地
+    
+                //当达到当前跳跃的边界时
+                if (i == cur_end) { 
+                    count++;  //达到第一次目的地，就增加跳跃次数
+    
+                    // 更新下次跳跃可以到达的最大边界
+                    cur_end = right_most; //上一个i到它的 cur_end所有的点中，最远可以跳到的地方
+                }
+    
+            }
+    
+            return count;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
 <h2>用最少数量的箭引爆气球</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -1371,6 +1370,88 @@ int maxCapacity(vector<int> &ht) {
 </script>
 </code></pre>
 </details>
+
+<p><br></p>
+<h1>监控二叉树</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/greedy_algorithm/微信截图_20240912154432.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code。从下往上看，局部最优：让叶子节点的父节点安摄像头，所用摄像头最少，整体最优：全部摄像头数量所用最少！由于采用先从叶节点向上找，为此是后续历遍。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int result=0;//定义全局变量为摄像头数目
+ 
+      //返回的为节点的状态。定义三种状态：0（节点无覆盖），1（节点有摄像头），2（节点有覆盖）
+     int traversal(TreeNode* current) 
+     {
+ 
+         //到达根节点，那么就是当前是空节点，那么必须是有覆盖的（但同时不能是有摄像头）
+         if(current==nullptr)
+             return 2;
+         
+         int left=traversal(current->left);//获取左边节点的状态
+         int right=traversal(current->right);//获取右边节点的状态
+ 
+         // 后续历遍
+ 
+         //若左边跟右边都有覆盖
+         if(left==2 && right==2)
+             return 0;//不能放摄像头
+ 
+         //若左边或右边没有覆盖，那就必须有一个摄像头（当前）
+         else if(left==0 || right==0)
+         {
+             result++;
+             return 1;//当前必须放摄像头
+         }
+ 
+         //若左边或右边有摄像头
+         else if(left==1 || right==1)
+             return 2;//当前是覆盖的
+ 
+         return -1;//此处是不会执行的
+ 
+     }
+ 
+     int minCameraCover(TreeNode* root) {
+ 
+         //示例中的摄像头都没有放在叶子节点上！
+         // （摄像头可以覆盖上中下三层，如果把摄像头放在叶子节点上，就浪费的一层的覆盖。）
+         //因此，从叶节点开始，把摄像头放在叶子节点的父节点位置，才能充分利用摄像头的覆盖面积。
+ 
+         //由于采用先从叶节点向上找，为此是后续历遍
+ 
+         if (traversal(root) == 0) { // 若当前头节点返回的结果是无覆盖，那么头节点处还需放一个摄像头！
+             result++;
+         }
+ 
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
