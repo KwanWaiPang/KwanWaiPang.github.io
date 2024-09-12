@@ -211,7 +211,7 @@
 </p>
 
 <p><br></p>
-<h2>经典的二叉树遍历题目</h2>
+<h2>二叉树前中后序遍历</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802183934.png" alt="Image description">
@@ -454,38 +454,10 @@
 </p>
 
 <p>
-  二叉树的遍历分为递归遍历（DFS）和层序遍历（FBS）。
-  </br>
+  <!-- 二叉树的遍历分为递归遍历（DFS）和层序遍历（FBS）。
+  </br> -->
   对于递归遍历（DFS）本质上就是递归算法。也就说博客<sup><a href="../Poster/递归类题目.html">Link</a></sup>中提到的大部分二叉树的算法都可以用递归来解决的缘由。上面介绍的前中后序遍历都是递归遍历的一种。
-  </br>
-  对于二叉树的层序遍历，顾名思义，就是一层一层地遍历二叉树。这个遍历方式需要借助队列来实现。
-  </p>
-<details>
-<summary>代码框架如下(🙋‍暂时还没用到过，也没有理解很透彻。<a href="https://labuladong.online/algo/data-structure-basic/binary-tree-traverse-basic/" target="_blank">参考链接</a>)：</summary>
-<pre><code>
-  void levelOrderTraverse(TreeNode* root) {
-    if (root == nullptr) {
-        return;
-    }
-    std::queue&ltTreeNode*&gt q;
-    q.push(root);
-    while (!q.empty()) {
-        TreeNode* cur = q.front();
-        q.pop();
-        // 访问 cur 节点
-        std::cout &lt&lt cur->val &lt&lt std::endl;
-
-        // 把 cur 的左右子节点加入队列
-        if (cur->left != nullptr) {
-            q.push(cur->left);
-        }
-        if (cur->right != nullptr) {
-            q.push(cur->right);
-        }
-    }
-}
-</code></pre>
-</details>
+</p>
 
 <p><br></p>
 <h2>二叉树的最大深度</h2>
@@ -597,6 +569,35 @@
 <p>
   BFS广度优先遍历：一层一层的去遍历.<br>
   层次遍历（迭代法）
+</br>
+对于二叉树的层序遍历，顾名思义，就是一层一层地遍历二叉树。这个遍历方式需要借助队列来实现。
+<details>
+<summary>代码框架如下(🙋‍暂时还没用到过，也没有理解很透彻。<a href="https://labuladong.online/algo/data-structure-basic/binary-tree-traverse-basic/" target="_blank">参考链接</a>)：</summary>
+<pre><code>
+void levelOrderTraverse(TreeNode* root) {
+  if (root == nullptr) {
+      return;
+  }
+  std::queue&ltTreeNode*&gt q;
+  q.push(root);
+  while (!q.empty()) {
+      TreeNode* cur = q.front();
+      q.pop();
+      // 访问 cur 节点
+      std::cout &lt&lt cur->val &lt&lt std::endl;
+
+      // 把 cur 的左右子节点加入队列
+      if (cur->left != nullptr) {
+          q.push(cur->left);
+      }
+      if (cur->right != nullptr) {
+          q.push(cur->right);
+      }
+  }
+}
+</code></pre>
+</details>
+
 </p>
 
 
