@@ -457,6 +457,7 @@
   <!-- 二叉树的遍历分为递归遍历（DFS）和层序遍历（FBS）。
   </br> -->
   对于递归遍历（DFS）本质上就是递归算法。也就说博客<sup><a href="../Poster/递归类题目.html">Link</a></sup>中提到的大部分二叉树的算法都可以用递归来解决的缘由。上面介绍的前中后序遍历都是递归遍历的一种。
+  <br>当然,除了使用递归也可以采用栈的方式来解决，这样的话就是迭代法。此处不做深入介绍，请见<sup><a href="https://www.programmercarl.com/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%BB%9F%E4%B8%80%E8%BF%AD%E4%BB%A3%E6%B3%95.html" target="_blank">Link</a></sup>。
 </p>
 
 <p><br></p>
@@ -570,19 +571,28 @@
   BFS广度优先遍历：一层一层的去遍历.<br>
   层次遍历（迭代法）
 </br>
-对于二叉树的层序遍历，顾名思义，就是一层一层地遍历二叉树。这个遍历方式需要借助队列来实现。
-<details>
-<summary>代码框架如下(🙋‍暂时还没用到过，也没有理解很透彻。<a href="https://labuladong.online/algo/data-structure-basic/binary-tree-traverse-basic/" target="_blank">参考链接</a>)：</summary>
+对于二叉树的层序遍历，就是从左到右一层一层的去遍历二叉树。
+这种遍历方式通常需要借助队列来实现。<strong>队列先进先出</strong>，符合一层一层遍历的逻辑，而用栈先进后出适合模拟深度优先遍历也就是递归的逻辑（故此上面DFS也有给出栈解法，只是递归前中后序更直接～）。
+<!-- <details> -->
+<!-- <summary>-->
+  代码框架如下 ：
+  <!-- (🙋‍暂时还没用到过，也没有理解很透彻。<a href="https://labuladong.online/algo/data-structure-basic/binary-tree-traverse-basic/" target="_blank">参考链接</a>)： -->
+<!-- </summary> -->
 <pre><code>
 void levelOrderTraverse(TreeNode* root) {
+
+  //当到终点的时候就返回
   if (root == nullptr) {
       return;
   }
+
+  // 初始化队列，将根节点加入队列
   std::queue&ltTreeNode*&gt q;
   q.push(root);
   while (!q.empty()) {
-      TreeNode* cur = q.front();
-      q.pop();
+      TreeNode* cur = q.front();//获取队列的头
+      q.pop();//删除队列的头
+
       // 访问 cur 节点
       std::cout &lt&lt cur->val &lt&lt std::endl;
 
@@ -596,9 +606,84 @@ void levelOrderTraverse(TreeNode* root) {
   }
 }
 </code></pre>
-</details>
+<!-- </details> -->
 
+使用队列实现二叉树广度优先遍历，动画如下：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/102二叉树的层序遍历.gif" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
 </p>
+
+<p><br></p>
+<h2>二叉树的层序遍历</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/WX20240914-212858.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     vector<vector<int>> levelOrder(TreeNode* root) {
+ 
+         vector<vector<int>> result;
+ 
+         //初始化队列（先入先出）
+         std::queue<TreeNode*> q;
+         if(root!=nullptr)
+             q.push(root);
+         
+         while(!q.empty())
+         {
+             int cur_size=q.size();//当前层的节点数目
+             vector<int> cur_temp;//存放当前层（从左到右，所有的节点）
+ 
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=q.front();//获取队列开头（先入先出）
+                 q.pop();//删掉
+                 cur_temp.push_back(cur->val);//获取当前节点的值
+                 
+                 //当前节点的左子节点与右子节点放入队列中，下次用(注意顺序是先放左后放右)
+                 if(cur->left!=nullptr)//注意不为空再放
+                     q.push(cur->left);
+                 if(cur->right!=nullptr)
+                     q.push(cur->right);
+             }
+             result.push_back(cur_temp);
+ 
+         }
+ 
+         return result;
+ 
+ 
+     }
+ };
+</script>
+</code></pre>
+</details> 
+
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
