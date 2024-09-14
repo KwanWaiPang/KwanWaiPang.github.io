@@ -156,7 +156,7 @@
   <li>满二叉树：如果一棵二叉树只有度为0的结点和度为2的结点，并且度为0的结点在同一层上，则这棵二叉树为满二叉树。(直观理解就是填满了~)</li>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240912162401.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240912162401.png" alt="Image description">
     </div>
   <figcaption><p>
   </p></figcaption>
@@ -173,7 +173,7 @@
 <li>平衡二叉搜索树：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</li>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240912162825.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240912162825.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -445,7 +445,7 @@
   <br>所谓的前中后，其实指的就是中间节点的遍历顺序。如下图所示：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802202847.png" alt="Image description">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802202847.png" alt="Image description">
     </div>
   <figcaption>
     每个节点都有「唯一」属于自己的前中后序位置，所以前中后序遍历是遍历二叉树过程中处理每一个节点的三个特殊时间点。
@@ -464,7 +464,7 @@
 <h2>二叉树的最大深度</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802203146.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802203146.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -512,7 +512,7 @@
 <h2>二叉树的直径</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/WX20240824-113023.png" alt="Image description">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/WX20240824-113023.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
@@ -622,13 +622,13 @@ void levelOrderTraverse(TreeNode* root) {
 <h2>二叉树的层序遍历</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/binary_tree/WX20240914-212858.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240914-212858.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
 </figure>
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。采用队列进行层序遍历，注意检查是否为空再放入队列中</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   /**
@@ -683,7 +683,200 @@ void levelOrderTraverse(TreeNode* root) {
 </code></pre>
 </details> 
 
+<p><br></p>
+<h2>二叉树的层次遍历 II</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240914-215511.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 
+<details>
+<summary>Click to expand the code。跟上题一样，只是结果加个反转</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     vector<vector<int>> levelOrderBottom(TreeNode* root) {
+         
+         //类似102的程序遍历，最后把结果反转一下即可～
+         vector<vector<int>> result;
+  
+          //初始化队列（先入先出）
+          std::queue<TreeNode*> q;
+          if(root!=nullptr)
+              q.push(root);
+          
+          while(!q.empty())
+          {
+              int cur_size=q.size();//当前层的节点数目
+              vector<int> cur_temp;//存放当前层（从左到右，所有的节点）
+  
+              for(int i=0;i<cur_size;i++)
+              {
+                  TreeNode* cur=q.front();//获取队列开头（先入先出）
+                  q.pop();//删掉
+                  cur_temp.push_back(cur->val);//获取当前节点的值
+                  
+                  //当前节点的左子节点与右子节点放入队列中，下次用(注意顺序是先放左后放右)
+                  if(cur->left!=nullptr)//注意不为空再放
+                      q.push(cur->left);
+                  if(cur->right!=nullptr)
+                      q.push(cur->right);
+              }
+              result.push_back(cur_temp);//把每一层的结果记录
+  
+          }
+ 
+          reverse(result.begin(),result.end());//最后结果进行反转～
+          return result;
+  
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>二叉树的右视图</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240914-220107.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code。同样是层序遍历，不过只看最后一个节点（注意是最后一个，不一定是右侧的）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     vector<int> rightSideView(TreeNode* root) {
+ 
+         //同样是层序遍历，不过只看最后一个节点（注意是最后一个，不一定是右侧的）
+ 
+         queue<TreeNode*> que;
+ 
+         if(root!=nullptr)
+             que.push(root);
+ 
+         vector<int> result;
+         while(!que.empty())//不为空
+         {
+             int cur_size=que.size();
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=que.front();//推出第一个
+                 que.pop();//删掉
+ 
+                 if(i==(cur_size-1))//最后一个
+                     result.push_back(cur->val);
+ 
+                 //层序遍历先左后右
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+ 
+                 if(cur->right!=nullptr)//不为空，插入
+                     que.push(cur->right);
+             }
+         }
+ 
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h2>二叉树的层平均值</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240914-222011.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     vector<double> averageOfLevels(TreeNode* root) {
+ 
+         queue<TreeNode*> que;
+ 
+         if(root!=nullptr)
+             que.push(root);
+         
+         vector<double> result;
+         while(!que.empty())
+         {
+             int cur_size=que.size();//当前层节点的数目
+             double sum=0.0;
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 sum+=cur->val;
+ 
+                 //先放入左再放入右
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+ 
+             }
+             result.push_back( double(sum/cur_size));
+         }
+ 
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details>
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
@@ -700,7 +893,7 @@ void levelOrderTraverse(TreeNode* root) {
 <h1></h1>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="../assets/img/binary_tree" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/binary_tree" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
