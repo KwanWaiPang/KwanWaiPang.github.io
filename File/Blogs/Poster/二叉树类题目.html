@@ -957,6 +957,132 @@ void levelOrderTraverse(TreeNode* root) {
 </p></figcaption>
 </figure> 
 
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     vector<int> largestValues(TreeNode* root) {
+         
+         queue<TreeNode*> que;
+  
+         if(root!=nullptr)
+              que.push(root);
+          
+         vector<int> result;
+         while(!que.empty())
+         {
+             int cur_size=que.size();//当前层节点的数目
+             int max_value=INT_MIN;//存在负数，故此不能初始化为0
+ 
+             //遍历当前层，记录最大值
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 max_value=max(max_value,cur->val);
+ 
+                 //先放入左再放入右
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+ 
+             }
+             result.push_back(max_value);
+         }
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>填充每个节点的下一个右侧节点指针</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240915-203743.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code。不要采用指针的思想，单纯把每个节点的next赋值即可</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      Node* left;
+      Node* right;
+      Node* next;
+  
+      Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+  
+      Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+  
+      Node(int _val, Node* _left, Node* _right, Node* _next)
+          : val(_val), left(_left), right(_right), next(_next) {}
+  };
+  */
+  
+  class Solution {
+  public:
+      Node* connect(Node* root) {
+          
+          queue<Node*> que;
+          if(root!=NULL)
+              que.push(root);
+  
+          while(!que.empty())
+          {
+              int cur_size=que.size();
+  
+              //遍历这一层
+              for(int i=0;i<cur_size;i++)
+              {
+                  Node* cur=que.front();
+                  que.pop();
+  
+                  if(i!=cur_size-1)
+                  {//不为最后一个节点
+                      cur->next=que.front();//当前下一个节点指向它的右侧
+                  }
+  
+                  //先左后右
+                  if(cur->left)
+                      que.push(cur->left);
+                  if(cur->right)
+                      que.push(cur->right);
+              }
+              
+          }
+  
+          return root; // 返回节点自身，只是添加了next指针
+      }
+  };
+</script>
+</code></pre>
+</details>
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
