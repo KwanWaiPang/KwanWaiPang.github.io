@@ -878,6 +878,85 @@ void levelOrderTraverse(TreeNode* root) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>N叉树的层序遍历</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240915-200549.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  
+<details>
+<summary>Click to expand the code。N叉树只是二叉树的简单拓展～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      vector<Node*> children;
+  
+      Node() {}
+  
+      Node(int _val) {
+          val = _val;
+      }
+  
+      Node(int _val, vector<Node*> _children) {
+          val = _val;
+          children = _children;
+      }
+  };
+  */
+  
+  class Solution {
+  public:
+      vector<vector<int>> levelOrder(Node* root) {
+  
+          vector<vector<int>> result;
+          
+          queue<Node*> que;
+          if(root!=nullptr)
+              que.push(root);
+          
+          while(!que.empty())
+          {
+              int cur_size=que.size();
+              vector<int> temp;
+  
+              for(int i=0;i<cur_size;i++)
+              {
+                  Node* cur=que.front();
+                  que.pop();
+  
+                  temp.push_back(cur->val);
+  
+                  //依次把节点放入que中
+                  for(auto temp_children:cur->children)
+                      que.push(temp_children);
+              }
+              result.push_back(temp);
+          }
+  
+          return result;
+      }
+  };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>在每个树行中找最大值</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240915-203117.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
