@@ -508,6 +508,55 @@
 </code></pre>
 </details>
 
+<details>
+<summary>Click to expand the code。上面是DFS的解法，至于BFS的解法如下：</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int maxDepth(TreeNode* root) {
+         queue<TreeNode* >que;
+ 
+         if(root!=nullptr)
+             que.push(root);
+         int max_depth=0;
+         while(!que.empty())
+         {
+             int cur_size=que.size();
+ 
+             max_depth++;//每层深度自加
+             for(int i=0;i<cur_size;i++)//遍历当前层
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 //先左后右
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+             }
+         }
+ 
+         return max_depth;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+
 <p><br></p>
 <h2>二叉树的直径</h2>
 <figure style="text-align: center;">
@@ -1083,6 +1132,117 @@ void levelOrderTraverse(TreeNode* root) {
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>二叉树的最小深度</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240916-221040.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。采用DFS，要注意区分空子树和非空子树。如果一个节点只有一个非空的子树，它的最小深度应该是非空子树的深度，而不是 0。
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+ 
+     int traverse(TreeNode* root) 
+     {
+         //递归终止条件
+         if(root==nullptr)
+             return 0;
+         
+         //前序的位置
+         int left=traverse(root->left);//左侧的树的深度
+         //中序的位置
+         int right=traverse(root->right);//右侧的树的深度
+          
+         //后序的位置
+         // 如果一个子树为空，返回另一个子树的深度
+         if (root->left == nullptr)
+             return right + 1;
+         if (root->right == nullptr)
+             return left + 1;
+ 
+         // 如果左右子树都不为空，返回最小深度
+         return min(left, right) + 1;
+         //加上自身+1
+     }
+ 
+     int minDepth(TreeNode* root) {
+         return traverse(root);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。BFS解法。所谓的叶节点指的是左右两个子节点均为空～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int minDepth(TreeNode* root) {
+ 
+         queue<TreeNode* >que;
+ 
+         if(root!=nullptr)
+             que.push(root);
+         int min_depth=0;
+         while(!que.empty())
+         {
+             int cur_size=que.size();
+ 
+             min_depth++;//每层深度自加
+             for(int i=0;i<cur_size;i++)//遍历当前层
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 //先左后右
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+ 
+                 // 当左右子节点都为空的时候，说明是最低点的一层了，退出
+                 if(cur->left==nullptr && cur->right==nullptr)
+                     return min_depth;
+             }
+         }
+ 
+         return min_depth;
+     }
+ };
+</script>
+</code></pre>
+</details>
 
 
 
