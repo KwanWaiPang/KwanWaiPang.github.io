@@ -1247,6 +1247,9 @@ void levelOrderTraverse(TreeNode* root) {
 
 <p><br></p>
 <h1>同时适用DFS与BFS两种解法</h1>
+<p>
+  针对二叉树的问题，解题之前一定要想清楚究竟是前中后序遍历，还是层序遍历。前中后序遍历是DFS，层序遍历是BFS。当然部分的题目两种解法均可，下面给出样例。
+</p>
 <p><br></p>
 <h2>翻转二叉树</h2>
 <figure style="text-align: center;">
@@ -1355,6 +1358,138 @@ void levelOrderTraverse(TreeNode* root) {
 </script>
 </code></pre>
 </details> 
+
+<p><br></p>
+<h2>对称二叉树</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240919-210317.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。类似BFS的解题思路请见动图。注意对称是对比完一半再到另外一半</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/101.对称二叉树.gif" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     bool isSymmetric(TreeNode* root) {
+ 
+         //BFS，查看第一个和最后一个是否一致。但是队列不好取索引，因此存的时候就变索引
+         // （注意写法虽然跟BFS一样，但是并不是真正意义的BFS）
+         queue<TreeNode* > que;
+  
+         if(root!=nullptr)
+         {
+             que.push(root->left);
+             que.push(root->right);
+         }
+ 
+         while(!que.empty())
+         {
+             // int cur_size=que.size();//当前层的节点数
+ 
+             // for(int i=0;i<cur_size;i++)
+             // {
+                 TreeNode* left_of_pre_left=que.front();
+                 que.pop();
+                 TreeNode* right_of_pre_right=que.front();
+                 que.pop();
+ 
+                 //检查是否对称
+                 if(left_of_pre_left==nullptr && right_of_pre_right==nullptr)//左右都为空，那么是对称的
+                     continue;//跳过
+                 
+                 //若左右有一个不为空，或者两个都不为空但值不等，那么就不是对称的
+                 if(
+                     left_of_pre_left==nullptr //此时右必然为空
+                  || right_of_pre_right==nullptr //此时左必然为空
+                  || (left_of_pre_left->val!=right_of_pre_right->val)
+                 )
+                     return false;
+ 
+                 que.push(left_of_pre_left->left);
+                 que.push(right_of_pre_right->right);
+                 que.push(left_of_pre_left->right);
+                 que.push(right_of_pre_right->left);
+ 
+                 // if(cur->left!=nullptr)
+                 //     que.push(cur->left);
+                 // if(cur->right!=nullptr)
+                 //     que.push(cur->right);
+             // }
+         }
+ 
+         return true;
+     }
+ };
+</script>
+</code></pre>
+</details> 
+<details>
+<summary>Click to expand the code。DFS的解法，注意只有在左右不同时为 nullptr 的情况下，才是不对称的。用 != 逻辑符号可能会导致空节点情况判断错误</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     bool traverse(TreeNode* leftnode, TreeNode* rightnode)
+     {
+         //递归终止条件：若一个为空另一个不是，或者两个值不等，那么就return false
+         if(leftnode==nullptr && rightnode==nullptr)//两个都为空
+             return true;
+         else if (leftnode==nullptr || rightnode==nullptr)//只有一个为空（注意不是判断有一个非空，应该是判断有一个为空）
+             return false;
+         else if (leftnode->val!=rightnode->val)
+             return false;
+ 
+         //继续遍历
+         bool temp1=traverse(leftnode->left, rightnode->right);
+         bool temp2=traverse(leftnode->right,rightnode->left);
+         
+         //后序的位置
+         return temp1 && temp2;
+     }
+     bool isSymmetric(TreeNode* root) {
+         if (root!=nullptr)
+             return traverse(root->left, root->right);
+         else
+             return true;//空节点自然是对称的
+     }
+ };
+</script>
+</code></pre>
+</details>
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
