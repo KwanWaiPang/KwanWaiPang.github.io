@@ -172,6 +172,7 @@
 </p>
 
 
+
 <p><br></p> 
 <h1>百度网盘</h1>
 <p>
@@ -190,7 +191,7 @@
     <div style="margin-bottom: 10px;">
       <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/1153baafeeade0b179eab5a6747123d8.png" alt="Image description">
     </div>
-    <div style="margin-bottom: 10px;"></div>
+    <div style="margin-bottom: 10px;">
       <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/91bd51659538bb4ebebf152ef0bcb07f.png" alt="Image description">
     </div>
   <figcaption><p>
@@ -228,12 +229,49 @@
 
 </p>
 
+<p><br></p> 
+<h1>Google Driver</h1>
+<p>
+  首先需要下载Gdown
+  <mark>pip install gdown</mark>
+  若出现下面报错，则执行<mark>pip install --upgrade --no-cache-dir gdown
+  </mark>
+<pre><code>
+<script type='text/html' style='display:block'>
+Access denied with the following error:
+    Cannot retrieve the public link of the file. You may need to change
+    the permission to 'Anyone with the link', or have had many accesses. 
+You may still be able to access the file from the browser:
+</script>
+</code></pre>
+然后通过终端，进入对应的目录下，运行（-c好像是可以实现断点重新下载）。而所谓的标识符就是通过获取分享链接的id得到的，见如下图。
+<pre><code>
+  <!-- <script type='text/html' style='display:block'> -->
+    gdown https://drive.google.com/uc?id=标识符
+
+    或
+
+    gdown -c https://drive.google.com/uc?id=标识符
+  <!-- </script> -->
+  </code></pre>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="../assets/img/others/WX20240919-174911.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>
+
+</p>
+
 
 <p><br></p>
 <h1>参考资料</h1>
 <ul>
   <li><a href="https://www.sooele.com/4328.html" target="_blank">Linux命令行下载OneDrive分享链接中的文件</a></li>
   <li><a href="https://blog.csdn.net/gwplovekimi/article/details/135383244?spm=1001.2014.3001.5501" target="_blank">实验笔记之——下载数据到服务器</a></li>
+  <li><a href="https://blog.csdn.net/qq_42731705/article/details/126870536" target="_blank">ubuntu使用gdown下载谷歌云盘(google drive)文件</a></li>
 </ul>
 
 
