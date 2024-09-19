@@ -1246,6 +1246,115 @@ void levelOrderTraverse(TreeNode* root) {
 </details>
 
 
+<p><br></p>
+<h1>翻转二叉树（两种解法）</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240919-203658.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  
+<details>
+<summary>Click to expand the code，采用DFS来做</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void traverse(TreeNode* root) 
+     {
+         //递归终止的条件
+         if(root==nullptr)
+             return;
+ 
+         // *** 前序位置 ***
+         // 每一个节点需要做的事就是交换它的左右子节点.
+         // 先翻转了，然后再继续遍历，为此应该位于前序的位置
+         TreeNode* temp=root->left;
+         root->left=root->right;
+         root->right=temp;
+ 
+         //然后继续遍历左与右节点
+         traverse(root->left); 
+         traverse(root->right); 
+         
+     }
+     TreeNode* invertTree(TreeNode* root) {
+         
+         //DFS,用递归的思路，每一层将它的左右节点调转
+         if(root!=nullptr)
+             traverse(root);
+         return root;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。采用BFS</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* invertTree(TreeNode* root) {
+         
+         queue<TreeNode* > que;
+ 
+         if(root!=nullptr)
+             que.push(root);
+ 
+         while(!que.empty())
+         {
+             int cur_size=que.size();//当前层的节点数
+ 
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 //进行交换
+                 // auto temp=cur->left;
+                 // cur->left=cur->right;
+                 // cur->right=temp;
+                 swap(cur->left, cur->right); // 函数代替上面3行
+ 
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+             }
+         }
+ 
+         return root;//原地替换而非重新生成树（用的是指针～）
+     }
+ };
+</script>
+</code></pre>
+</details> 
+
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
 <!-- <details>
