@@ -178,7 +178,14 @@
 <figcaption><p>
 </p></figcaption>
 </figure> 
-
+<li>平衡二叉树与普通二叉树的空间复杂度的区别：</li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-111210.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 </p>
 
 
@@ -212,7 +219,7 @@
 </p>
 
 <p><br></p>
-<h2>二叉树前中后序遍历</h2>
+<h2>三道题看二叉树的前中后序遍历</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 50%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802183934.png" alt="Image description">
@@ -460,102 +467,6 @@
   对于递归遍历（DFS）本质上就是递归算法。也就说博客<sup><a href="../Poster/递归类题目.html">Link</a></sup>中提到的大部分二叉树的算法都可以用递归来解决的缘由。上面介绍的前中后序遍历都是递归遍历的一种。
   <br>当然,除了使用递归也可以采用栈的方式来解决，这样的话就是迭代法。此处不做深入介绍，请见<sup><a href="https://www.programmercarl.com/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%BB%9F%E4%B8%80%E8%BF%AD%E4%BB%A3%E6%B3%95.html" target="_blank">Link</a></sup>。
 </p>
-
-<p><br></p>
-<h2>二叉树的最大深度</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802203146.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>时间复杂度：O(n)，其中 n 为二叉树节点的个数。空间复杂度：O(height)，其中 height 表示二叉树的高度。递归函数需要栈空间，而栈空间取决于递归的深度，</summary>
-<pre><code>
-  /**
-  * Definition for a binary tree node.
-  * struct TreeNode {
-  *     int val;
-  *     TreeNode *left;
-  *     TreeNode *right;
-  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-  * };
-  */
- class Solution {
- public:
-     int traverse(TreeNode* root)
-     {
-         if(root==nullptr)//到达跟节点
-             return 0;
-         
-         //前序的位置
-         int left=traverse(root->left);//左侧的树的深度
-         //中序的位置
-         int right=traverse(root->right);//右侧的树的深度
-         //后序的位置
-         return max(left,right)+1;//// 整棵树的最大深度等于左右子树的最大深度取最大值。然后再加上根节点自己
-
-         //为什么在后序呢？
-         //要首先利用递归函数的定义算出左右子树的最大深度，
-         //然后推出原树的最大深度，主要逻辑自然放在后序位置。
-     }
-     int maxDepth(TreeNode* root) {
-         return  traverse(root);
-     }
- };
-</code></pre>
-</details>
-
-<details>
-<summary>Click to expand the code。上面是DFS的解法，至于BFS的解法如下：</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  /**
-  * Definition for a binary tree node.
-  * struct TreeNode {
-  *     int val;
-  *     TreeNode *left;
-  *     TreeNode *right;
-  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-  * };
-  */
- class Solution {
- public:
-     int maxDepth(TreeNode* root) {
-         queue<TreeNode* >que;
- 
-         if(root!=nullptr)
-             que.push(root);
-         int max_depth=0;
-         while(!que.empty())
-         {
-             int cur_size=que.size();
- 
-             max_depth++;//每层深度自加
-             for(int i=0;i<cur_size;i++)//遍历当前层
-             {
-                 TreeNode* cur=que.front();
-                 que.pop();
- 
-                 //先左后右
-                 if(cur->left!=nullptr)
-                     que.push(cur->left);
-                 if(cur->right!=nullptr)
-                     que.push(cur->right);
-             }
-         }
- 
-         return max_depth;
-     }
- };
-</script>
-</code></pre>
-</details>
 
 
 <p><br></p>
@@ -1489,6 +1400,327 @@ void levelOrderTraverse(TreeNode* root) {
 </script>
 </code></pre>
 </details>
+
+<p><br></p>
+<h2>二叉树的最大深度</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/微信截图_20240802203146.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>时间复杂度：O(n)，其中 n 为二叉树节点的个数。空间复杂度：O(height)，其中 height 表示二叉树的高度。递归函数需要栈空间，而栈空间取决于递归的深度，</summary>
+<pre><code>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int traverse(TreeNode* root)
+     {
+         if(root==nullptr)//到达跟节点
+             return 0;
+         
+         //前序的位置
+         int left=traverse(root->left);//左侧的树的深度
+         //中序的位置
+         int right=traverse(root->right);//右侧的树的深度
+         //后序的位置
+         return max(left,right)+1;//// 整棵树的最大深度等于左右子树的最大深度取最大值。然后再加上根节点自己
+
+         //为什么在后序呢？
+         //要首先利用递归函数的定义算出左右子树的最大深度，
+         //然后推出原树的最大深度，主要逻辑自然放在后序位置。
+     }
+     int maxDepth(TreeNode* root) {
+         return  traverse(root);
+     }
+ };
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。上面是DFS的解法，至于BFS的解法如下：</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int maxDepth(TreeNode* root) {
+         queue<TreeNode* >que;
+ 
+         if(root!=nullptr)
+             que.push(root);
+         int max_depth=0;
+         while(!que.empty())
+         {
+             int cur_size=que.size();
+ 
+             max_depth++;//每层深度自加
+             for(int i=0;i<cur_size;i++)//遍历当前层
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 //先左后右
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+             }
+         }
+ 
+         return max_depth;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>N叉树的最大深度</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-103029.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。DFS写法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      vector<Node*> children;
+  
+      Node() {}
+  
+      Node(int _val) {
+          val = _val;
+      }
+  
+      Node(int _val, vector<Node*> _children) {
+          val = _val;
+          children = _children;
+      }
+  };
+  */
+  
+  class Solution {
+  public:
+      int traverse(Node* root)
+      {
+          //递归终止条件
+          if(root==nullptr)
+              return 0;
+          
+          int maxdepth=0;
+          for(auto each_root:root->children)
+          {
+              maxdepth=max(maxdepth,traverse(each_root));//每个进行对比，获取最大值
+          }
+          //后序位置
+          return maxdepth+1;//注意加一是包含当前的节点的
+      }
+  
+      int maxDepth(Node* root) {
+          return traverse(root);
+      }
+  };
+</script>
+</code></pre>
+</details> 
+
+<details>
+<summary>Click to expand the code。BFS写法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      vector<Node*> children;
+  
+      Node() {}
+  
+      Node(int _val) {
+          val = _val;
+      }
+  
+      Node(int _val, vector<Node*> _children) {
+          val = _val;
+          children = _children;
+      }
+  };
+  */
+  
+  class Solution {
+  public:
+      int maxDepth(Node* root) {
+  
+          queue<Node*> que;
+  
+          if(root!=nullptr)
+              que.push(root);
+  
+          int maxdepth=0;
+          while(!que.empty())
+          {
+              int cur_size=que.size();//当前层的数目
+              maxdepth++;//有一层就加
+              for(int i=0;i<cur_size;i++)
+              {
+                  Node* cur=que.front();
+                  que.pop();
+  
+                  for(auto childernnode:cur->children)
+                      que.push(childernnode);
+              }
+          }
+  
+          return maxdepth;
+          
+      }
+  };
+</script>
+</code></pre>
+</details> 
+
+<p><br></p>
+<h2>完全二叉树的节点个数</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-105819.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.BFS解法。时间复杂度：O(n)。空间复杂度：O(n)</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int countNodes(TreeNode* root) {
+         
+         queue<TreeNode*> que;
+   
+         if(root!=nullptr)
+             que.push(root);
+ 
+         int num_node=0;
+         while(!que.empty())
+         {
+             int cur_size=que.size();//当前层的数目
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+                 num_node++;//节点数自加
+ 
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 if(cur->right)
+                     que.push(cur->right);
+             }
+         }
+ 
+         return num_node;
+     }
+ };
+</script>
+</code></pre>
+</details>
+<details>
+<summary>Click to expand the code.DFS解法。时间复杂度：O(n)。空间复杂度：O(log n)，算上了递归系统栈占用的空间（注意平衡二叉树的空间复杂度是O(log n)，普通二叉树的空间复杂度是O(n)）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int traverse(TreeNode* root)
+      {
+         if(root==nullptr)//到达跟节点
+             return 0;
+          
+          //前序的位置
+          int left=traverse(root->left);//左侧的树的深度
+          //中序的位置
+          int right=traverse(root->right);//右侧的树的深度
+          //后序的位置
+          return left+right+1;//左节点数目+右节点数目+自己
+      }
+     int countNodes(TreeNode* root) {
+         return traverse(root);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h1>平衡二叉树</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-111435.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+
+</script>
+</code></pre>
+</details> 
 
 
 
