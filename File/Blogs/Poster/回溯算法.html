@@ -1695,6 +1695,80 @@ int main()
 </code></pre>
 </details> 
 
+<p><br></p>
+<h1>二叉树的所有路径</h1>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-123831.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code，采用DFS其实也就是回溯算法的思路</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void backtrack(TreeNode* root, string each_path, vector<string>& results)//注意string应该是传值而不是地址
+     {
+         //先写入当前结果
+         each_path+=to_string(root->val);
+        //由于使用的是 string path，这里并没有加上引用& ，即本层递归中，path + 该节点数值，但该层递归结束，上一层path的数值并不会受到任何影响
+        //因此，这里不需要撤销选择
+
+         if(root->left==nullptr && root->right==nullptr)//到跟节点了
+         {
+             results.push_back(each_path);//存结果
+             return;
+         }
+ 
+         //选择列表:左节点
+         if(root->left!=nullptr)
+         {
+             //做选择
+             each_path+="->";//值在下一轮存
+             backtrack(root->left, each_path,results);
+             //撤销选择
+             each_path.pop_back(); // 回溯 '>'
+             each_path.pop_back(); // 回溯 '-'
+         }
+ 
+         //选择列表:右节点
+         if(root->right!=nullptr)
+         {
+             //做选择
+             each_path+="->";//值在下一轮存
+             backtrack(root->right, each_path,results);
+             //撤销选择
+             each_path.pop_back(); // 回溯 '>'
+             each_path.pop_back(); // 回溯 '-'
+         }
+ 
+     }
+     vector<string> binaryTreePaths(TreeNode* root) {
+ 
+         //回溯算法
+         string each_path;
+         vector<string> results;
+         backtrack(root, each_path,results);
+         return results;
+     }
+ };
+</script>
+</code></pre>
+</details>
 
 <p><br></p>
 <h1>总结：回溯算法与递归算法的区别</h1>

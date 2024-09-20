@@ -525,6 +525,134 @@
 </code></pre>
 </details>
 
+<p><br></p>
+<h2>平衡二叉树</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-111435.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.DFS跟统计高度/深度基本一样，只是当两边高度差不符合的时候返回-1，而-1就是对应false，其余都是true</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int traverse(TreeNode* root)//同样是统计二叉树的高度，但是为-1的时候就是不是平衡二叉树，不为-1的时候就输出
+     {
+         if(root==nullptr)//到达跟节点
+             return 0;
+         
+         //前序的位置
+         int left=traverse(root->left);//左侧的树的深度
+         if(left==-1)
+             return -1;
+         //中序的位置
+         int right=traverse(root->right);//右侧的树的深度
+         if(right==-1)
+             return -1;
+         //后序的位置(返回树的高度以及是否为-1)
+         if(abs(right-left)>1)
+             return -1;
+         else//否则就返回当前的深度/高度
+             return max(right,left)+1;
+     }
+     bool isBalanced(TreeNode* root) {
+         // 平衡二叉搜索树：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。
+         // 二叉树节点的深度：指从根节点到该节点的最长简单路径边的条数。
+         // 二叉树节点的高度：指从该节点到叶子节点的最长简单路径边的条数。
+         return traverse(root)==-1 ? false:true;//同样是统计高度
+     }
+ };
+</script>
+</code></pre>
+</details> 
+
+
+<p><br></p>
+<h2>二叉树的所有路径</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-123831.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code，采用DFS其实也就是回溯算法的思路</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void backtrack(TreeNode* root, string each_path, vector<string>& results)//注意string应该是传值而不是地址
+     {
+         //先写入当前结果
+         each_path+=to_string(root->val);
+         if(root->left==nullptr && root->right==nullptr)//到跟节点了
+         {
+             results.push_back(each_path);//存结果
+             return;
+         }
+ 
+         //选择列表:左节点
+         if(root->left!=nullptr)
+         {
+             //做选择
+             each_path+="->";//值在下一轮存
+             backtrack(root->left, each_path,results);
+             //撤销选择
+             each_path.pop_back(); // 回溯 '>'
+             each_path.pop_back(); // 回溯 '-'
+         }
+ 
+         //选择列表:右节点
+         if(root->right!=nullptr)
+         {
+             //做选择
+             each_path+="->";//值在下一轮存
+             backtrack(root->right, each_path,results);
+             //撤销选择
+             each_path.pop_back(); // 回溯 '>'
+             each_path.pop_back(); // 回溯 '-'
+         }
+ 
+     }
+     vector<string> binaryTreePaths(TreeNode* root) {
+ 
+         //回溯算法
+         string each_path;
+         vector<string> results;
+         backtrack(root, each_path,results);
+         return results;
+     }
+ };
+</script>
+</code></pre>
+</details>
 
 <p><br></p>
 <h1>BFS广度优先遍历</h1>
@@ -1703,25 +1831,6 @@ void levelOrderTraverse(TreeNode* root) {
 </script>
 </code></pre>
 </details>
-
-<p><br></p>
-<h1>平衡二叉树</h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/binary_tree/WX20240920-111435.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-<details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-
-</script>
-</code></pre>
-</details> 
-
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
