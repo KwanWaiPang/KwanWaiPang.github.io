@@ -1808,7 +1808,7 @@ int main() {
             // int dp[amount+1];//状态amount时,需要的最小的硬币的数量
             // // 注意初始化为amount + 1 ，因为凑成 amount 金额的硬币数最多只可能等于 amount（全用 1 元面值的硬币）
             // // 所以初始化为 amount + 1 就相当于初始化为正无穷
-            vector&ltint&gt dp(amount + 1, amount + 1);//这个写法正确且简单
+            vector<int> dp(amount + 1, amount + 1);//这个写法正确且简单
     
             // step2：确立初始状态
             dp[0]=0;
