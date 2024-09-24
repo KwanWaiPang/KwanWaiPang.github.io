@@ -209,6 +209,7 @@
 
 <p><br></p>
 <h1>DFS深度优先遍历</h1>
+<div>
 <p>
   DFS深度优先遍历：先往深走，遇到叶子节点再往回走。<br>
   分为：
@@ -583,78 +584,6 @@
 
 
 <p><br></p>
-<h2>二叉树的所有路径</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/WX20240920-123831.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-<details>
-<summary>Click to expand the code，采用DFS其实也就是回溯算法的思路</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  /**
-  * Definition for a binary tree node.
-  * struct TreeNode {
-  *     int val;
-  *     TreeNode *left;
-  *     TreeNode *right;
-  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-  * };
-  */
- class Solution {
- public:
-     void backtrack(TreeNode* root, string each_path, vector<string>& results)//注意string应该是传值而不是地址
-     {
-         //先写入当前结果
-         each_path+=to_string(root->val);
-         if(root->left==nullptr && root->right==nullptr)//到跟节点了
-         {
-             results.push_back(each_path);//存结果
-             return;
-         }
- 
-         //选择列表:左节点
-         if(root->left!=nullptr)
-         {
-             //做选择
-             each_path+="->";//值在下一轮存
-             backtrack(root->left, each_path,results);
-             //撤销选择
-             each_path.pop_back(); // 回溯 '>'
-             each_path.pop_back(); // 回溯 '-'
-         }
- 
-         //选择列表:右节点
-         if(root->right!=nullptr)
-         {
-             //做选择
-             each_path+="->";//值在下一轮存
-             backtrack(root->right, each_path,results);
-             //撤销选择
-             each_path.pop_back(); // 回溯 '>'
-             each_path.pop_back(); // 回溯 '-'
-         }
- 
-     }
-     vector<string> binaryTreePaths(TreeNode* root) {
- 
-         //回溯算法
-         string each_path;
-         vector<string> results;
-         backtrack(root, each_path,results);
-         return results;
-     }
- };
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
 <h2>左叶子之和</h2>
 <div>
 <figure style="text-align: center;">
@@ -749,8 +678,11 @@
 
 </div>
 
+</div>
+
 <p><br></p>
 <h1>BFS广度优先遍历</h1>
+<div>
 <p>
   BFS广度优先遍历：一层一层的去遍历.<br>
   层次遍历（迭代法）
@@ -1380,7 +1312,74 @@ void levelOrderTraverse(TreeNode* root) {
 </details>
 
 <p><br></p>
+<h2>找树左下角的值</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240924090605.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。BFS</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int findBottomLeftValue(TreeNode* root) {
+ 
+         // BFS遍历
+         queue<TreeNode*> que;
+         
+         if(root!=nullptr)
+             que.push(root);
+ 
+         int result=0;
+         while(!que.empty())
+         {
+             int cur_size=que.size();//当前层的节点数目
+ 
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur=que.front();
+                 que.pop();
+ 
+                 if(i==0)//最左侧
+                     result=cur->val;//一直更新
+ 
+                 if(cur->left!=nullptr)
+                     que.push(cur->left);
+                 if(cur->right!=nullptr)
+                     que.push(cur->right);
+             }
+         }
+ 
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div> 
+</div> 
+
+<p><br></p>
 <h1>同时适用DFS与BFS两种解法</h1>
+<div>
 <p>
   针对二叉树的问题，解题之前一定要想清楚究竟是前中后序遍历，还是层序遍历。前中后序遍历是DFS，层序遍历是BFS。当然部分的题目两种解法均可，下面给出样例。
 </p>
@@ -1926,6 +1925,247 @@ void levelOrderTraverse(TreeNode* root) {
 </script>
 </code></pre>
 </details>
+</div>
+
+<p><br></p>
+<h1>回溯算法解二叉树</h1>
+<p>更多关于回溯算法的介绍请见博客<sup><a href="../Poster/回溯算法.html">Link</a></sup>
+</p>
+<div>
+<p><br></p>
+<h2>二叉树的所有路径</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/binary_tree/WX20240920-123831.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code，采用DFS其实也就是回溯算法的思路</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void backtrack(TreeNode* root, string each_path, vector<string>& results)//注意string应该是传值而不是地址
+     {
+         //先写入当前结果
+         each_path+=to_string(root->val);
+         if(root->left==nullptr && root->right==nullptr)//到跟节点了
+         {
+             results.push_back(each_path);//存结果
+             return;
+         }
+ 
+         //选择列表:左节点
+         if(root->left!=nullptr)
+         {
+             //做选择
+             each_path+="->";//值在下一轮存
+             backtrack(root->left, each_path,results);
+             //撤销选择
+             each_path.pop_back(); // 回溯 '>'
+             each_path.pop_back(); // 回溯 '-'
+         }
+ 
+         //选择列表:右节点
+         if(root->right!=nullptr)
+         {
+             //做选择
+             each_path+="->";//值在下一轮存
+             backtrack(root->right, each_path,results);
+             //撤销选择
+             each_path.pop_back(); // 回溯 '>'
+             each_path.pop_back(); // 回溯 '-'
+         }
+ 
+     }
+     vector<string> binaryTreePaths(TreeNode* root) {
+ 
+         //回溯算法
+         string each_path;
+         vector<string> results;
+         backtrack(root, each_path,results);
+         return results;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<p><br></p>
+<h2>路径总和</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240924090839.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。DFS+回溯，注意对于回溯终止的条件：并不是判断root是否为空，而是判断root的子节点是否为空</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     bool backtrack(TreeNode* root, int each_patch, int targetSum) 
+     {
+         if(root->left==nullptr && root->right==nullptr)//到达根节点
+         {
+             if(each_patch==targetSum)//凑到了目标值
+                 return true;
+             else
+                 return false;
+         }
+ 
+ 
+         //选择列表
+         if(root->left!=nullptr)
+         {
+             //做选择
+             each_patch+=root->left->val;
+             if(backtrack(root->left, each_patch,targetSum))
+                 return true;
+             //撤销选择
+             each_patch-=root->left->val;
+         }
+ 
+         if(root->right!=nullptr)
+         {
+             //做选择
+             each_patch+=root->right->val;
+             if(backtrack(root->right, each_patch,targetSum))
+                 return true;
+             //撤销选择
+             each_patch-=root->right->val;
+         }
+ 
+         // 两边都试过了，且都无true返回，那么就是false
+         return false;
+     }
+     bool hasPathSum(TreeNode* root, int targetSum) {
+ 
+         // DFS+回溯算法
+         if(root==nullptr)
+             return false;//空的时候为false
+         int each_patch=root->val;//初始化值
+         return backtrack(root, each_patch,targetSum);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240924093004.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>Click to expand the code。跟上面题目几乎是一样的。但是注意初始化的时候不要漏了targetSum也要减</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void backtrack(TreeNode* root, vector<int> each_patch, vector<vector<int>> &results, int targetSum) 
+      {
+          if(root->left==nullptr && root->right==nullptr)//到达根节点
+          {
+             if(targetSum==0)//凑到了目标值(刚好为0)
+                 results.push_back(each_patch);
+             return;
+          }
+  
+  
+          //选择列表
+          if(root->left!=nullptr)
+          {
+             //做选择
+             targetSum-=root->left->val;
+             each_patch.push_back(root->left->val);
+             
+             backtrack(root->left, each_patch,results, targetSum);
+ 
+             //撤销选择
+             targetSum+=root->left->val;
+             each_patch.pop_back();
+          }
+  
+         if(root->right!=nullptr)
+         {
+             //做选择
+             targetSum-=root->right->val;
+             each_patch.push_back(root->right->val);
+             
+             backtrack(root->right, each_patch,results, targetSum);
+ 
+             //撤销选择
+             targetSum+=root->right->val;
+             each_patch.pop_back();
+         }
+  
+      }
+ 
+     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+         // DFS+回溯算法
+ 
+         vector<int> each_patch;
+         vector<vector<int>> results;
+         if(root!=nullptr)
+         {
+             each_patch.push_back(root->val);
+             targetSum-=root->val;//不要漏了！！！
+             backtrack(root, each_patch,results, targetSum);
+         }
+ 
+         return results;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div>
+</div>
+
 
 
 <!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
