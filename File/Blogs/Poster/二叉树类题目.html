@@ -655,6 +655,101 @@
 </details>
 
 <p><br></p>
+<h2>左叶子之和</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240924083014.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。注意题目要求的只是左子叶的和。采用前序遍历</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int reslut;
+     void traverse(TreeNode* root) 
+     {
+         if(root==nullptr)//到叶节点
+             return;
+         //前序位置累加
+         if(root->left!=nullptr && 
+         (root->left->left==nullptr && root->left->right==nullptr))//不为空，并且它的子节点都为空。则累加
+             reslut=reslut+root->left->val;
+ 
+         traverse(root->left);
+         traverse(root->right);
+     }
+     int sumOfLeftLeaves(TreeNode* root) {
+         // 采用DFS。注意只是左子叶
+         reslut=0;
+         traverse(root);
+         return reslut;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code.另外一种写法（采用后序遍历）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     int traverse(TreeNode* root) 
+     {
+         if(root==nullptr)//到叶节点
+             return 0;
+ 
+         int leftvalue=traverse(root->left);//左边的左子叶
+         int rightvalue=traverse(root->right);//右边的左子叶
+ 
+         //后序位置
+         if(root->left!=nullptr && 
+         (root->left->left==nullptr && root->left->right==nullptr))//不为空，并且它的子节点都为空。则累加
+             leftvalue=root->left->val;//更新当前左子叶的结果
+         
+         return leftvalue+rightvalue;
+     }
+     int sumOfLeftLeaves(TreeNode* root) {
+         // 采用DFS。注意只是左子叶
+         return traverse(root);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+<p><br></p>
 <h1>BFS广度优先遍历</h1>
 <p>
   BFS广度优先遍历：一层一层的去遍历.<br>
@@ -1852,6 +1947,29 @@ void levelOrderTraverse(TreeNode* root) {
 <figcaption><p>
 </p></figcaption>
 </figure>  -->
+
+<!-- 一整个模块 -->
+<!-- <p><br></p>
+<h1></h1>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+
+</script>
+</code></pre>
+</details>
+
+</div> -->
 
 <p><br></p>
 <h1>参考资料</h1>
