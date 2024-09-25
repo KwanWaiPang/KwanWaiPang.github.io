@@ -1023,7 +1023,6 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 
 </div>
 
-
 </div>
 
 <p><br></p>
@@ -2271,6 +2270,140 @@ void levelOrderTraverse(TreeNode* root) {
 </script>
 </code></pre>
 </details>
+
+
+<p><br></p>
+<h2>合并二叉树</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925204704.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。DFS前序遍历</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* traverse(TreeNode* root1, TreeNode* root2)
+     {
+         //递归终止条件
+         if(root2==nullptr)
+             return root1;
+         else if(root1==nullptr)
+             return root2;
+         
+         int cur_vale=root1->val+root2->val;
+         TreeNode* root=new TreeNode(cur_vale);
+ 
+         root->left=traverse(root1->left,root2->left);
+         root->right=traverse(root1->right,root2->right);
+ 
+         return root;
+ 
+     }
+     TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+         return traverse(root1,root2);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。采用BFS，层序遍历。注意由于que中push了两个树，故此当前的数目应该要除2</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+ 
+         if(root2==nullptr)
+             return root1;
+         else if(root1==nullptr)
+             return root2;
+ 
+         //初始化队列（先入先出）
+         std::queue<TreeNode*> que;
+         que.push(root1);
+         que.push(root2);
+         
+         while(!que.empty())
+         {
+             int cur_size=que.size();//当前层的节点数目
+             cur_size=cur_size/2;//注意只有一半!
+ 
+             // 遍历当前层
+             for(int i=0;i<cur_size;i++)
+             {
+                 TreeNode* cur1=que.front();//获取队列开头（先入先出）
+                 que.pop();//删掉
+ 
+                 TreeNode* cur2=que.front();
+                 que.pop();//删掉
+ 
+                  // 此时两个节点一定不为空，val相加
+                 cur1->val=cur1->val+cur2->val;//两个值相加
+                 
+                 //当前节点的左子节点与右子节点放入队列中，下次用(注意顺序是先放左后放右)
+                 if(cur1->left!=nullptr && cur2->left!=nullptr)//注意不为空再放
+                 {
+                     que.push(cur1->left);
+                     que.push(cur2->left);
+                 }
+                 if(cur1->right!=nullptr && cur2->right!=nullptr)
+                 {
+                     que.push(cur1->right);
+                     que.push(cur2->right);
+                 }
+ 
+                 //注意:由于返回的是root1，所以对于root2为空的部分不用管
+                 // 下面只处理root1为空,但root2不为空的情况
+                 if(cur1->left==nullptr && cur2->left!=nullptr)
+                 {
+                     cur1->left=cur2->left;//节点地址赋予
+                 }
+                 if(cur1->right==nullptr && cur2->right!=nullptr)
+                 {
+                     cur1->right=cur2->right;
+                 }
+             }
+         }
+         return root1;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div>
+
 </div>
 
 <p><br></p>
