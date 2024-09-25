@@ -681,11 +681,10 @@
 
 <p><br></p>
 <h2>二叉树的构造</h2>
-<p>
-  二叉树的构造问题一般都是使用「分解问题」的思路：构造整棵树 = 根节点 + 构造左子树 + 构造右子树。
-</p>
 <div>
-  
+  <p>
+    二叉树的构造问题一般都是使用「分解问题」的思路：构造整棵树 = 根节点 + 构造左子树 + 构造右子树。
+  </p>
 <p><br></p>
 <h3>从中序与后序遍历序列构造二叉树</h3>
 <div>
@@ -816,7 +815,7 @@
            if(preorder.size()==0)
                return nullptr;
    
-           //前序数组中最后一个元素为当前节点的值
+           //前序数组中第一个元素为当前节点的值
            int cur_rootvalue=preorder[0];
            //创建节点
            TreeNode* root=new TreeNode(cur_rootvalue);
@@ -834,7 +833,7 @@
            vector<int> right_inorder(inorder.begin()+index+1, inorder.end());
    
    
-           //根据inorder size==preorder size的规律，对后序数组进行切割：切割成left_preorder与right_preorder，给递归继续调用
+           //根据inorder size==preorder size的规律，对前序数组进行切割：切割成left_preorder与right_preorder，给递归继续调用
            // [1, leftInorder.size)
            vector<int> left_preorder(preorder.begin()+1, preorder.begin() +1+ left_inorder.size());
            //  [leftInorder.size(), end) 
@@ -863,8 +862,90 @@
 
 <p><br></p>
 <p>
-Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉树；而后序和中序也可以唯一确定一棵二叉树。但是，前序和后序不能唯一确定一棵二叉树！，因为没有中序遍历无法确定左右部分，也就是无法分割。
+Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉树；而后序和中序也可以唯一确定一棵二叉树。但是，前序和后序不能唯一确定一棵二叉树！，因为没有中序遍历无法确定左右部分，也就是无法分割。但是leetcode上还是有这道题，为此是让返回其中任意一个答案
 </p>
+
+<p><br></p>
+<h3>根据前序和后序遍历构造二叉树</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925100753.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。
+  <br>
+  1、首先把前序遍历结果的第一个元素确定为根节点的值(注意，这个值必然等于当前后序遍历结果的最后一个元素)。
+  <br>
+  2、然后把前序遍历结果的第二个元素作为左子树的根节点的值。
+  <br>
+  3、在后序遍历结果中寻找左子树根节点的值，从而确定了左子树的索引边界，进而可以对后序数组进行切割，分为左右子数组，再递归构造左右子树即可。
+</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925102411.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        TreeNode* traversal (vector<int>& preorder, vector<int>& postorder)
+        {
+            //递归终止条件
+            if(preorder.size()==0)
+                return nullptr;
+    
+            //前序数组中第一个元素为当前节点的值
+            int cur_rootvalue=preorder[0];
+            //创建节点
+            TreeNode* root=new TreeNode(cur_rootvalue);
+    
+            // 如果已经是最后一个了，必然是叶子节点，直接返回即可
+            if (preorder.size() == 1) 
+                return root;
+    
+            //注意，当前的前序第一个必然为后序最后一个，故此需要剔除掉再选，进而决定下一个左树的起点 
+            //找到后序数组中左子树的根节点。根据此切割哪里之前是左树！
+            int leftRootValue = preorder[1];
+            int index = find(postorder.begin(), postorder.end(), leftRootValue) - postorder.begin();
+    
+             //为了保证一致性，统一采用左闭右开的形式[0, delimiterIndex+1)
+            vector<int> left_postorder(postorder.begin(), postorder.begin() + index+1);//当前的这个index需要被选上，下次用！
+            // [delimiterIndex + 1, end-1)（最后一个不要了）
+            vector<int> right_postorder(postorder.begin()+index+1, postorder.end()-1);//注意最后一个必然跟当前的前序第一个相同，故此不要
+    
+            //根据postordersize==preorder size的规律，对前序数组进行切割：切割成left_preorder与right_preorder，给递归继续调用
+            // [1, leftInorder.size)
+            vector<int> left_preorder(preorder.begin()+1, preorder.begin() +1+ left_postorder.size());
+            //  [leftInorder.size(), end) 
+            vector<int> right_preorder(preorder.begin()+1+ left_postorder.size(), preorder.end());
+    
+            // 递归分别构建左子树与右子树（因此，前面属于前序，先构建当前的节点值）
+            root->left=traversal(left_preorder, left_postorder);
+            root->right=traversal(right_preorder,right_postorder);
+    
+            return root;
+        }
+    
+        TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
+            if(preorder.size()==0 || postorder.size()==0)
+                return nullptr;//必然为空
+            return traversal(preorder, postorder);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
 
 
 <p><br></p>
