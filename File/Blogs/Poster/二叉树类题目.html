@@ -879,10 +879,61 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </figure>
 
 <details>
-<summary>Click to expand the code。跟上面两题很像，只是上面两题通过前序或后序列表先确定本节点的值及在中序的分割，但此题是通过最大值来确定的</summary>
+<summary>Click to expand the code。跟上面两题很像，只是上面两题通过前序或后序列表先确定本节点的值及在中序的分割，但此题是通过最大值来确定的,然后把输入的数组看成是中序数组即可~</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* traversal (vector<int>& nums)  
+     {
+         //递归终止条件
+         if(nums.size()==0)
+             return nullptr;
+ 
+         //获取当前的最大值作为当前节点的值
+         int cur_rootvalue=*max_element(nums.begin(), nums.end());
+         //创建节点
+         TreeNode* root=new TreeNode(cur_rootvalue);
+ 
+         // 如果已经是最后一个了，必然是叶子节点，直接返回即可
+         if (nums.size() == 1) 
+             return root;
+         
+         //获取当前节点值的索引
+         int index = find(nums.begin(), nums.end(), cur_rootvalue) - nums.begin();
+ 
+         //对数组进行切割。为了保证一致性，统一采用左闭右开的形式[0, delimiterIndex)
+         vector<int> left_nums(nums.begin(), nums.begin() + index);
+         // 注意nums.begin()+index已经被选择了！[delimiterIndex + 1, end)
+         vector<int> right_nums(nums.begin()+index+1, nums.end());
+ 
+ 
+         // 递归分别构建左子树与右子树（因此，前面属于前序，先构建当前的节点值）
+         root->left=traversal(left_nums);
+         root->right=traversal(right_nums);
+ 
+         return root;
+ 
+     }
+ 
+     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+         if(nums.size()==0)
+             return nullptr;//必然为空
+         
+         return traversal(nums);
+     }
+ };
 </script>
 </code></pre>
 </details>
