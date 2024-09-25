@@ -678,6 +678,220 @@
 
 </div>
 
+
+<p><br></p>
+<h2>二叉树的构造</h2>
+<p>
+  二叉树的构造问题一般都是使用「分解问题」的思路：构造整棵树 = 根节点 + 构造左子树 + 构造右子树。
+</p>
+<div>
+  
+<p><br></p>
+<h3>从中序与后序遍历序列构造二叉树</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925085558.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code.图片解析见下图。这题其实不难，关键是理解清楚后序与中序遍历相对的位置。而构建的节点以及分割数组都是在前序位置进行的。</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925091046.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925091554.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<p>
+分为以下几步：<br>
+第一步：如果数组大小为零的话，说明是空节点了。
+<br>
+第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。
+<br>
+第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点
+<br>
+第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）
+<br>
+第五步：切割后序数组，切成后序左数组和后序右数组
+<br>
+第六步：递归处理左区间和右区间
+</p>
+
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* traversal (vector<int>& inorder, vector<int>& postorder)
+     {
+         //递归终止条件
+         if(postorder.size()==0)
+             return nullptr;
+ 
+         //后序数组中最后一个元素为当前节点的值
+         int cur_rootvalue=postorder[postorder.size()-1];
+         //创建节点
+         TreeNode* root=new TreeNode(cur_rootvalue);
+ 
+         // 如果已经是最后一个了，必然是叶子节点，直接返回即可
+         if (postorder.size() == 1) 
+             return root;
+ 
+         //根据当前的节点值，将中序数组进行切割：切割成left_inorder与right_inorder，给递归继续调用
+         int index = find(inorder.begin(), inorder.end(), cur_rootvalue) - inorder.begin();
+ 
+         //为了保证一致性，统一采用左闭右开的形式[0, delimiterIndex)
+         vector<int> left_inorder(inorder.begin(), inorder.begin() + index);
+         // 注意inorder.begin()+index已经被选择了！[delimiterIndex + 1, end)
+         vector<int> right_inorder(inorder.begin()+index+1, inorder.end());
+ 
+ 
+         //根据inorder size==postorder size的规律，对后序数组进行切割：切割成left_postorder与right_postorder，给递归继续调用
+         // [0, leftInorder.size)
+         vector<int> left_postorder(postorder.begin(), postorder.begin() + left_inorder.size());
+         //  [leftInorder.size(), end-1) 最后一个被选了~
+         vector<int> right_postorder(postorder.begin()+ left_inorder.size(), postorder.end()-1);//注意此处不包含最后一个
+ 
+         // 递归分别构建左子树与右子树（因此，前面属于前序，先构建当前的节点值）
+         root->left=traversal(left_inorder, left_postorder);
+         root->right=traversal(right_inorder, right_postorder);
+ 
+         return root;
+ 
+     }
+ 
+     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+         if(inorder.size()==0 || postorder.size()==0)
+             return nullptr;//必然为空
+         
+         return traversal(inorder, postorder);
+     }
+ };
+</script>
+</code></pre>
+</details>
+</div>
+
+<p><br></p>
+<h3>从前序与中序遍历序列构造二叉树</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925094221.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。此题跟上一题基本是一样的，不一样的只是前序遍历是第一个值</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925094950.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+       TreeNode* traversal (vector<int>& preorder, vector<int>& inorder)
+       {
+           //递归终止条件
+           if(preorder.size()==0)
+               return nullptr;
+   
+           //前序数组中最后一个元素为当前节点的值
+           int cur_rootvalue=preorder[0];
+           //创建节点
+           TreeNode* root=new TreeNode(cur_rootvalue);
+   
+           // 如果已经是最后一个了，必然是叶子节点，直接返回即可
+           if (preorder.size() == 1) 
+               return root;
+   
+           //根据当前的节点值，将中序数组进行切割：切割成left_inorder与right_inorder，给递归继续调用
+           int index = find(inorder.begin(), inorder.end(), cur_rootvalue) - inorder.begin();
+   
+           //为了保证一致性，统一采用左闭右开的形式[0, delimiterIndex)
+           vector<int> left_inorder(inorder.begin(), inorder.begin() + index);
+           // 注意inorder.begin()+index已经被选择了！[delimiterIndex + 1, end)
+           vector<int> right_inorder(inorder.begin()+index+1, inorder.end());
+   
+   
+           //根据inorder size==preorder size的规律，对后序数组进行切割：切割成left_preorder与right_preorder，给递归继续调用
+           // [1, leftInorder.size)
+           vector<int> left_preorder(preorder.begin()+1, preorder.begin() +1+ left_inorder.size());
+           //  [leftInorder.size(), end) 
+           vector<int> right_preorder(preorder.begin()+1+ left_inorder.size(), preorder.end());
+   
+           // 递归分别构建左子树与右子树（因此，前面属于前序，先构建当前的节点值）
+           root->left=traversal(left_preorder, left_inorder);
+           root->right=traversal(right_preorder,right_inorder);
+   
+           return root;
+   
+       }
+   
+       TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+           if(preorder.size()==0 || inorder.size()==0)
+                return nullptr;//必然为空
+            
+            return traversal(preorder, inorder);
+       }
+   };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+<p><br></p>
+<p>
+Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉树；而后序和中序也可以唯一确定一棵二叉树。但是，前序和后序不能唯一确定一棵二叉树！，因为没有中序遍历无法确定左右部分，也就是无法分割。
+</p>
+
+
+<p><br></p>
+<h3>构造最大二叉树</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925090141.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。跟上面两题很像，只是上面两题通过前序或后序列表先确定本节点的值及在中序的分割，但此题是通过最大值来确定的</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+
+</script>
+</code></pre>
+</details>
+
+</div>
+
+</div>
+
+
 </div>
 
 <p><br></p>
@@ -2215,7 +2429,7 @@ void levelOrderTraverse(TreeNode* root) {
 <h1>参考资料</h1>
 <ul>
   <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
-  <li><a href="https://labuladong.online/algo/essential-technique/binary-tree-summary/" target="_blank">二叉树</a></li>
+  <li><a href="https://labuladong.online/algo/essential-technique/binary-tree-summary/" target="_blank">labuladong二叉树</a>（PS：感觉写得不是很好，思路不清晰且大部分要付费） </li>
   <li><a href="https://www.programmercarl.com/" target="_blank">代码随想录</a></li>
 </ul>
 
