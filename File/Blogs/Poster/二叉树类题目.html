@@ -2404,6 +2404,101 @@ void levelOrderTraverse(TreeNode* root) {
 
 </div>
 
+<p><br></p>
+<h2>二叉搜索树中的搜索</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240925213023.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。DFS，应该是后序遍历，在后序的位置处理</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* traverse(TreeNode* root, int val)
+     {
+         if(root==nullptr)
+             return root;
+         if(root->val==val)
+             return root;
+         
+         auto left=traverse(root->left,val);
+         auto right=traverse(root->right,val);
+ 
+         //若左右都是空的,证明没有
+         if(left==nullptr && right==nullptr)
+             return nullptr;
+         else//有一个不为空,那么就是返回不为空的那个
+             return (left==nullptr)? right :left;//返回不为空的那个
+ 
+     }
+     TreeNode* searchBST(TreeNode* root, int val) {
+         return traverse(root,val);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。采用BFS</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        TreeNode* searchBST(TreeNode* root, int target) {
+    
+            queue<TreeNode* > que;
+    
+            if(root!=nullptr)
+                que.push(root);
+    
+            while(!que.empty())
+            {
+                int cur_size=que.size();//当前层的节点数
+    
+                for(int i=0;i<cur_size;i++)
+                {
+                    TreeNode* cur=que.front();
+                    que.pop();
+    
+                    if(cur->val==target)
+                        return cur;
+    
+                    if(cur->left!=nullptr)
+                        que.push(cur->left);
+                    if(cur->right!=nullptr)
+                        que.push(cur->right);
+                }
+            }
+    
+            return nullptr;//前面没有return那么必然就是没找到,所以返回空
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
 </div>
 
 <p><br></p>
@@ -2644,6 +2739,7 @@ void levelOrderTraverse(TreeNode* root) {
 
 </div>
 </div>
+
 
 
 
