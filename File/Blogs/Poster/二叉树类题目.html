@@ -1024,8 +1024,12 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </div>
 
 
+
 <p><br></p>
-<h2>验证二叉搜索树</h2>
+<h2>中序遍历解决二叉搜索树</h2>
+
+<p><br></p>
+<h3>验证二叉搜索树</h3>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -1036,7 +1040,7 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </figure>
 
 <details>
-<summary>Click to expand the code.DFS，注意要求是左边子树的全部都要小于当前的节点，而并不仅仅判断当前的左右的大小！而目前的对比过程，实际上就是中序遍历，然后看该数组是否严格递增，如果是那么就是true</summary>
+<summary>Click to expand the code.DFS，注意要求是左边子树的全部都要小于当前的节点，而并不仅仅判断当前的左右的大小！而细看题目的要求，实际上就是中序遍历，然后看该数组是否严格递增，如果是那么就是true</summary>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240926122919.png" alt="Image description">
@@ -1131,6 +1135,55 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
  
      }
  };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+
+<p><br></p>
+<h3>二叉搜索树的最小绝对差</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240926142312.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。此题本质上也是一个中序遍历，求的就是中序遍历的数组两两之间的差值的最小值</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        TreeNode* pre=nullptr;
+        void traverse(TreeNode* root, int& min_value)//注意要传地址
+        {
+            if(root==nullptr)
+                return;
+            
+            traverse(root->left,min_value);
+            //中序的位置
+            if(pre!=nullptr)
+            {
+                if(min_value>abs(pre->val-root->val))
+                    min_value=abs(pre->val-root->val);
+            }
+            pre=root;// 记录当前节点作为下一个节点
+            traverse(root->right,min_value);
+    
+        }
+    
+        int getMinimumDifference(TreeNode* root) {
+            int min_value=INT_MAX;//最小绝对差，为此初始化为最大的int
+            traverse(root,min_value);
+    
+            return min_value;
+        }
+    };
 </script>
 </code></pre>
 </details>
@@ -2853,7 +2906,6 @@ void levelOrderTraverse(TreeNode* root) {
 
 </div>
 </div>
-
 
 
 
