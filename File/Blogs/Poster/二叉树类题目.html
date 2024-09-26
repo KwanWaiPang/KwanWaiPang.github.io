@@ -19,7 +19,7 @@
       margin-right: auto; /* 使目录框架在页面中居右 */
       box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
   }
-  
+
   #scrollToTocButton {
     position: fixed;
     bottom: 20px;
@@ -1045,7 +1045,7 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 
 
 <p><br></p>
-<h2>中序遍历解决二叉搜索树</h2>
+<h2>中序遍历解决二叉搜索树(Binary Search Tree, BST)</h2>
 <p>
   对于二叉搜索树（BST）它的中序遍历必然是有序的！！！
 因此，遇到在二叉搜索树上求什么最值，求差值之类的，都要思考一下二叉搜索树可是有序的，进而转换为前中后序遍历。
@@ -1349,6 +1349,94 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </details>
 
 </div>
+
+
+<p><br></p>
+<h2>后序遍历解最近公共祖先系列(Lowest Common Ancestor，LCA)</h2>
+<p>
+1.求最小公共祖先，需要从底向上遍历，那么二叉树，只能通过后序遍历（即：回溯）实现从底向上的遍历方式。
+<br>
+2.在回溯的过程中，必然要遍历整棵二叉树，即使已经找到结果了，依然要把其他节点遍历完，因为要使用递归函数的返回值（也就是代码中的left和right）做逻辑判断。
+<br>
+3.要理解如果返回值left为空，right不为空为什么要返回right，为什么可以用返回right传给上一层结果。
+</p>
+
+<p><br></p>
+<h3>二叉树的最近公共祖先</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240926214033.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.首先后序遍历实现了自下而上的过程，根据目前左右节点的情况来往前推断。
+  <br>而递归的终止就是直到跟节点或找到p或q开始从下而上。
+  <br>而注意p和q必然会出现且只会出现一次，因此当找到了最近处左右都不为空的情况，返回了当前的节点，那么就是最近的祖先了。而之后是不会再存在左右不为空的情况了。
+  <br>更详细的分析请参考博客：<a href="https://www.programmercarl.com/0236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.html#%E6%80%9D%E8%B7%AF" target="_blank">代码随想录</a>。
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* traverse(TreeNode* root, TreeNode* p, TreeNode* q)
+     {
+         //递归终止的条件
+         if(root==NULL || root == q || root == p)
+             return root;//如果 root == q，或者 root == p，说明找到 q p ，则将其返回
+         
+         TreeNode* left=traverse(root->left,p,q);
+ 
+         TreeNode* right=traverse(root->right,p,q);
+ 
+         //后序的位置
+ 
+         if(left!=NULL && right!=NULL)
+             return root;//找到了就返回当前值
+ 
+         // 如果left为空，right不为空，就返回right，说明目标节点是通过right返回的，反之依然。
+         //注意当找到了最近祖先点后，往上传递的时候，永远只保留有值的子树，而另外子树必然是空的，因为没找到！
+         else if(left==NULL && right!=NULL)
+             return right;
+         else if(left!=NULL && right==NULL)
+             return left;
+         else
+             return NULL;//都为空那么就返回空
+ 
+     }
+     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+ 
+         //首先通过二叉树的后序遍历（左右中），就可以实现从底向上查
+         //进而实现根据左右子树的返回值，来处理中节点的逻辑。
+ 
+         //同时，题目也强调了：二叉树节点数值是不重复的，而且一定存在 q 和 p
+ 
+         //因此，判断逻辑是如果递归遍历遇到q，就将q返回，遇到p 就将p返回
+         // 如果 左右子树的返回值都不为空，说明此时的中节点，一定是q 和p 的最近祖先。
+ 
+         return traverse(root,p,q);
+         
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+235, 1644, 1650, 1676
 
 
 </div>
