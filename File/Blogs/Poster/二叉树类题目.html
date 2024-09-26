@@ -1028,7 +1028,8 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 <p><br></p>
 <h2>中序遍历解决二叉搜索树</h2>
 <p>
-遇到在二叉搜索树上求什么最值，求差值之类的，都要思考一下二叉搜索树可是有序的，进而转换为前中后序遍历。
+  对于二叉搜索树（BST）它的中序遍历必然是有序的！！！
+因此，遇到在二叉搜索树上求什么最值，求差值之类的，都要思考一下二叉搜索树可是有序的，进而转换为前中后序遍历。
 同时在递归遍历的过程中记录前后两个指针，就可以实现对比
 </p>
 
@@ -1193,6 +1194,143 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </details>
 
 </div>
+
+
+<p><br></p>
+<h3>二叉搜索树中的众数</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240926145833.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。最直接的解题思路如下。当然hash table记录的话放前中后序都一样</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void traverse(TreeNode* root, unordered_map<int, int>& map_group)//注意要传地址
+     {
+         if(root==nullptr)
+             return;   
+ 
+         traverse(root->left,map_group);
+ 
+         //中序的位置记录当前的值
+         map_group[root->val]++;//当前值出现的次数记录
+ 
+         traverse(root->right,map_group);
+     }
+ 
+     static bool comparefunction(pair<int,int>a, pair<int,int>b)
+     {
+         return a.second > b.second;//从大到小排列
+     }
+ 
+     vector<int> findMode(TreeNode* root) {
+         unordered_map<int, int> map_group;//值及出现的次数
+         traverse(root,map_group);
+ 
+         // 将 map 的内容复制到 vector 中
+         vector<pair<int, int>> copy_group(map_group.begin(), map_group.end());//初始化一个vector数组
+ 
+         sort(copy_group.begin(),copy_group.end(),comparefunction);//根据出现的次数进行排序
+ 
+         vector<int> result;
+         for(int i=0;i<copy_group.size();i++)
+         {
+             if(copy_group[i].second==copy_group[0].second)//跟第一个出现次数一致
+             {
+                 result.push_back(copy_group[i].first);//对应值记录
+             }
+             else
+                 break;            
+         }
+ 
+         return result;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。上面的解决思路其实是对于普通的二叉树是通用的，但是由于本题是二叉搜索树，为此它的中序遍历必然是有序的，那么就很自然而然通过计数法就可以得到众数！
+  <br>此外，需要注意的是：关于计数次数的更新不能写入pre!=nullptr中，因为会存在只有一个数也就是pre为空的情况</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+
+  class Solution {
+    public:
+        TreeNode* pre=nullptr;
+        int max_count=0;//出现的数目最多
+        int each_count=1;//出现次数的统计
+        void traverse(TreeNode* root, vector<int>& result)//注意要传地址
+        {
+            if(root==nullptr)
+                return;
+            
+            traverse(root->left,result);
+    
+            //中序的位置
+            if(pre!=nullptr)
+            {
+                if(root->val==pre->val)
+                {
+                    each_count++;//再次出现了
+                }
+                else
+                {
+                    each_count=1;//新出现的，数目为1
+                }
+            }
+    
+            //关于计数次数的更新（注意下面部分不能写入pre!=nullptr中，因为会存在只有一个数也就是pre为空的情况）
+            if(each_count==max_count)//同样是出现次数最多
+            {
+                result.push_back(root->val);
+            }
+            else if(each_count>max_count)//当前才是出现的次数最多的
+            {
+                result.clear();//清空之前的误记录
+                max_count=each_count;//记录当前的最大值
+                result.push_back(root->val);//结果放入
+            }
+    
+            pre=root;//当前节点作为上一个跟后面进行对比。
+    
+            pre=root;// 记录当前节点作为下一个节点
+            traverse(root->right,result);
+    
+        }
+        vector<int> findMode(TreeNode* root) {
+    
+            vector<int> result;
+            traverse(root,result);
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
 
 </div>
 
