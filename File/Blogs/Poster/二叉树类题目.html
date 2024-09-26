@@ -27,6 +27,30 @@
   #toc ul ul {
       margin-left: 20px; /* 子目录项的缩进 */
   }
+
+  #scrollToTocButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px; /* 圆角设计 */
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #scrollToTocButton:hover {
+      background-color: #0056b3; /* 鼠标悬停时颜色变化 */
+      transform: translateY(-3px); /* 悬停时按钮略微上移 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+  }
+
   </style>
 
 <!-- Head -->
@@ -134,6 +158,9 @@
 <div class="container mt-5">
 <!-- home.html -->
 <div class="post">
+
+<!-- 添加按钮 -->
+<button id="scrollToTocButton">Go to Catalog</button>
 
 <!-- 插入目录 -->
 <div id="toc">
@@ -3164,6 +3191,15 @@ void levelOrderTraverse(TreeNode* root) {
             toc.appendChild(li);
         });
     });
+</script>
+
+ <!-- JavaScripts添加按钮 -->
+ <script>
+      // 添加按钮点击事件
+      const button = document.getElementById("scrollToTocButton");
+      button.addEventListener("click", function() {
+          document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
+      });
 </script>
 
 </body>
