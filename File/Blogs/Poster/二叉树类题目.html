@@ -1023,6 +1023,120 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 
 </div>
 
+
+<p><br></p>
+<h2>验证二叉搜索树</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240926120431.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.DFS，注意要求是左边子树的全部都要小于当前的节点，而并不仅仅判断当前的左右的大小！而目前的对比过程，实际上就是中序遍历，然后看该数组是否严格递增，如果是那么就是true</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/binary_tree/微信截图_20240926122919.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     void traverse(TreeNode* root, vector<int>& group)
+     {
+         if(root==nullptr)
+             return;
+ 
+         traverse(root->left,group);
+         //中序的位置
+         group.push_back(root->val);//将二叉树转换为有序数组
+ 
+         traverse(root->right,group);
+ 
+     }
+     bool isValidBST(TreeNode* root) {
+         vector<int> group;
+         
+         traverse(root,group);
+ 
+         // 检查是否严格递增
+         for (int i = 1; i < group.size(); i++) {
+             if (group[i] <= group[i - 1]) // 检查相邻元素
+                 return false;//不是递增
+         }
+         return true;
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。直接在dfs的时候判断，但是这种写法相对不好理解~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* pre = nullptr; // 用来记录前一个节点
+ 
+     bool traverse(TreeNode* root)
+     {
+         if(root==nullptr)
+             return true;
+ 
+         bool left=traverse(root->left);
+ 
+         //中序的位置上再与上一个节点进行对比。
+         if(pre!=nullptr && !(pre->val<root->val))
+             return false;
+         pre=root;// 记录前一个节点
+         //对于中序遍历，应该是左中右。所以上一个节点应该永远小于当前的才可以满足左<中<右
+ 
+         bool right=traverse(root->right);
+ 
+         return (left && right);//有一个为false就不对
+ 
+     }
+     bool isValidBST(TreeNode* root) {
+         
+         return traverse(root);
+ 
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div>
+
 </div>
 
 <p><br></p>
@@ -2739,6 +2853,9 @@ void levelOrderTraverse(TreeNode* root) {
 
 </div>
 </div>
+
+
+
 
 
 
