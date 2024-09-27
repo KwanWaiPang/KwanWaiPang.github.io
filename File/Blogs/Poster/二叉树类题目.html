@@ -1484,7 +1484,123 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </div> 
 
 
-235, 1644, 1650, 1676
+<p><br></p>
+<h3>二叉搜索树的最近公共祖先</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240927193855.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.首先对于二叉搜索树（BST）满足中序遍历有序，而对于公共祖先，需要后序遍历从底而上。
+<br>
+因为是有序树，所以 如果 中间节点是 q 和 p 的公共祖先，那么 中节点的数组 一定是在 [p, q]区间的。即 中节点 > p && 中节点 < q 或者 中节点 > q && 中节点 < p。
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+  * };
+  */
+ 
+ class Solution {
+ public:
+     TreeNode* traverse(TreeNode* root, TreeNode* p, TreeNode* q) 
+     {
+         //递归终止条件：空
+         if(root==NULL)
+             return root;
+         
+         if(p->val <= root->val && root->val <= q->val)
+             return root;
+ 
+         if(root->val > q->val)//大了，那么就左遍历，因为左侧更小
+         {
+             TreeNode* left=traverse(root->left, p, q);
+             if(left!=NULL)
+                 return left;
+         }
+ 
+         if(root->val < p->val)//当前值小了，那么就右遍历，因为右侧更大
+         {
+             TreeNode* right=traverse(root->right, p, q);
+             if(right!=NULL)
+                 return right;
+         }
+ 
+         return root;//这个没意义，前面已经包含了，但是不加就报错
+ 
+     }
+ 
+     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+         if(p->val > q->val)//注意对比的的是值
+             swap(p,q);//确保q大于p
+         return traverse(root, p, q);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。当然直接用上一题的思路去解决也可以</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+  * };
+  */
+ 
+ class Solution {
+ public:
+     TreeNode* traverse(TreeNode* root, TreeNode* p, TreeNode* q) 
+     {
+         //递归终止条件：空或者找到了p与q
+         if(root==NULL || root==p || root==q)
+             return root;
+         
+         TreeNode* left=traverse(root->left, p, q);
+         TreeNode* right=traverse(root->right, p, q);
+ 
+         //后序的位置
+         if(left!=NULL && right!=NULL)//若左右都不为空，那就是找到了
+             return root;
+         else if(left==NULL && right!=NULL)
+             return right;
+         else if(left!=NULL && right==NULL)
+             return left;
+         return NULL;
+ 
+     }
+ 
+     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+         
+         return traverse(root, p, q);
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+
+
+1644, 1650, 1676
 
 
 </div>
