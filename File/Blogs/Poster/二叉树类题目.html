@@ -43,6 +43,42 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
   }
 
+  #toggleTocButton {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #00b34b;
+    color: white;
+    border: none;
+    border-radius: 50px; /* 圆角设计 */
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #toggleTocButton:hover {
+      background-color: #00b34b; /* 鼠标悬停时颜色变化 */
+      transform: translateY(-3px); /* 悬停时按钮略微上移 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+  }
+
+  #newToc {
+  display: none; 
+  position: fixed; 
+  bottom: 70px; 
+  right: 200px; 
+  background: #f4f4f4; 
+  padding: 10px; 
+  font-size: 12px; 
+  max-height: 40%; /* 设置最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+
   </style>
 
 <!-- Head -->
@@ -151,8 +187,16 @@
 <!-- home.html -->
 <div class="post">
 
-<!-- 添加按钮 -->
-<button id="scrollToTocButton">Go to Catalog</button>
+<!-- 添加目录按钮 -->
+<button id="toggleTocButton">Table of Contents</button>
+<!-- 新的目录 -->
+<div id="newToc">
+  <h8>Catalog</h8>
+  <ul></ul>
+</div>
+
+<!-- 添加按钮跳转到题目 -->
+<button id="scrollToTocButton">👆Back to Title👆</button>
 
 <!-- 插入目录 -->
 <div id="toc">
@@ -3284,6 +3328,35 @@ void levelOrderTraverse(TreeNode* root) {
       button.addEventListener("click", function() {
           document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
       });
+</script>
+
+<!-- 点击按钮展开目录 -->
+<script>
+  // 添加新的目录
+  const newToc = document.querySelector("#newToc ul");
+  const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+  
+  headers.forEach(header => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+      header.setAttribute("id", id);
+      a.setAttribute("href", `#${id}`);
+      a.textContent = header.textContent;
+      li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+      li.appendChild(a);
+      newToc.appendChild(li);
+  });
+
+  // 控制新的目录的显示与隐藏
+  const toggleButton = document.getElementById("toggleTocButton");
+  toggleButton.addEventListener("click", function() {
+      if (newToc.parentElement.style.display === "none") {
+          newToc.parentElement.style.display = "block"; // 展开新目录
+      } else {
+          newToc.parentElement.style.display = "none"; // 收起新目录
+      }
+  });
 </script>
 
 </body>
