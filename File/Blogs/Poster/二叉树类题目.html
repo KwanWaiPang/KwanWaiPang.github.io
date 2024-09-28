@@ -1669,10 +1669,81 @@ Tips🙋‍通过上面两道题，前序和中序可以唯一确定一棵二叉
 </figure>
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code.
+  <br>
+  对于二叉搜索树中，删除节点，涉及到二叉树的结构调整，故此有以下5种情况：
+<br>1、没找到删除的节点，遍历到空节点直接返回了。
+<br>2、左右孩子都为空（叶子节点），直接删除节点， 返回NULL为根节点。
+<br>3、删除节点的左孩子为空，右孩子不为空，删除节点，右孩子补位，返回右孩子为根节点。
+<br>4、删除节点的右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点。
+<br>5、左右孩子节点都不为空，则将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上（这样就可以保证满足BST的特性），返回删除节点右孩子为新的根节点。
+</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* traverse(TreeNode* root, int key)
+     {
+         //递归终止条件
+         if(root==nullptr)
+             return nullptr;
+ 
+         if(root->val == key)//如果找到了
+         {
+             //情况2：左右孩子都为空（叶子节点），直接删除节点， 返回NULL为根节点。
+             if(root->left==nullptr && root->right==nullptr)
+                 return nullptr;
+ 
+             //情况3：删除节点的左孩子为空，右孩子不为空，删除节点，右孩子补位，返回右孩子为根节点。
+             else if(root->left==nullptr && root->right!=nullptr)
+                 return root->right;
+             
+             //情况4：删除节点的右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点。
+             else if(root->left!=nullptr && root->right==nullptr)
+                 return root->left;
+             
+             //情况5：将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上，
+             // 返回删除节点右孩子为新的根节点。
+             else{
+                 // 找右子树最左面的节点
+                 TreeNode* right_tree = root->right; 
+                 while(right_tree->left != nullptr) {
+                     right_tree = right_tree->left;
+                 }
+ 
+                 right_tree->left = root->left; // 把要删除的节点（root）左子树放在right_tree的左孩子的位置
+                 return root->right;//返回右树
+ 
+             }
+ 
+         }
+ 
+         //若没有找到：利用BST特性，左右方向找
+         if(root->val > key)//大了，那么往左树的方向找，那么左边的结果应该为：
+             root->left = traverse(root->left, key);//注意是结果赋值而非直接返回
+ 
+         if(root->val < key)//小了，那么往右树的方向找
+             root->right = traverse(root->right, key);
+ 
+         return root;//基本不会运行
+ 
+     }
+ 
+     TreeNode* deleteNode(TreeNode* root, int key) {
+         return traverse(root, key);
+     }
+ };
 </script>
 </code></pre>
 </details>
