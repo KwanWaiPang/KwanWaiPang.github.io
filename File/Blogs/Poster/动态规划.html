@@ -219,11 +219,11 @@
   但是穷举所有可行解其实并不是一件容易的事，只有列出正确的「状态转移方程」,才能正确地穷举。同时对于状态与选择的定义也是很重要的。
   为此，在本博文中，解题思路都是以三步走的方式来解决问题的。
   <br>
-  1.定义dp表，确定状态与选择。
+  1.定义dp表(注意下标含义)，确定状态与选择。
   <br>
   2.确定初始状态。（边界值）。
   <br>
-  3.确定状态转移方程，进行状态递推，自下向上。 
+  3.确定状态转移方程，进行状态递推，自下向上(确定遍历顺序)。 
 
 </p>
 
@@ -295,6 +295,7 @@ int climbingStairsDP(int n) {
 </p>
 <p><br></p>
 <h2>2.最优子结构</h2>
+<div>
 <p>上图仅仅是展示了动态规划的基本构建，但是一般来说，动态规划都是用来解决最优化问题的，因此进一步的，题目形如下面：
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -380,7 +381,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             // step2：定义初始状态
             dp[0]=0;
             dp[1]=1;
-            dp[2]=2;//一次性两级，或两次1级
+            dp[2]=2;//一次性两级，或两次1级,故此有两种方法
     
             // step3：状态转移方程
             for(int i=3;i&ltn+1;i++)//注意数组是到n+1
@@ -425,6 +426,8 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </script>
 </code></pre>
 </details>
+
+</div>
 
 <p><br></p>
 <h2>3.带约束导致无后效性时，需要额外添加状态来保证</h2>
@@ -487,6 +490,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 <p><br></p>
 <h1>递归vs动态规划：斐波那契数列</h1>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 70%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805220055.png" alt="Image description">
@@ -505,14 +509,15 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
             if(n&lt2)
                 return n;
             
-            //step1：定义dp表
+            //step1：定义dp表及下标的含义。
+            //状态就是当前在第几个数，选择就是前面两个数的和
             int dp[n+1]; //对应于状态n
     
             // step2：状态的初始化
             dp[0]=0;
             dp[1]=1;
     
-            // step3:自下而上，推到状态方程
+            // step3:自下而上遍历，推到状态方程
             for(int i=2;i&ltn+1;i++)
             {
                 dp[i]=dp[i-1]+dp[i-2];//后面的每一项数字都是前面两项数字的和
@@ -616,7 +621,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     };
 </code></pre>
 </details>
-
+</div>
 
 <p><br></p>
 <h1>最长递增子序列</h1>
