@@ -446,6 +446,39 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     public:
         int minCostClimbingStairs(vector<int>& cost) {
     
+            // step1:定义dp表:dp[i]=为第i阶的时候的最小费用
+            // 状态：第i阶梯（注意最后一个阶梯应该是cost.size()）
+            // 选择，爬一级或两级
+            int dp[cost.size()+1];
+
+    
+            // step2：初始化dp表(注意题目说的：可以选择从下标为 0 或下标为 1 的台阶开始爬楼梯。)
+            dp[0]=0;//第0级的时候的费用
+            dp[1]=0;//从1开始的最小为0（0和cost[0]）
+    
+            // step3：进行状态转移
+            for(int i=2;i<cost.size()+1;i++)
+            {
+                dp[i]=min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2]);//从i-1或者i-2来的最小费用
+            }
+
+            return dp[cost.size()];
+
+        }
+    };
+
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。另外一种解法(可以理解为第一步花费，最后一步不花费，是旧版这个题目的描述)</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minCostClimbingStairs(vector<int>& cost) {
+    
             // step1:定义dp表:dp[i]=为从i开始走的最小费用
             // 状态：第i阶梯
             // 选择，爬一级或两级
