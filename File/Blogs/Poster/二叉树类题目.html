@@ -1873,7 +1873,7 @@ public:
 </div> 
 
 <p><br></p>
-<h3>把二叉搜索树转换为累加树</h3>
+<h3>逆向中序遍历: 把二叉搜索树转换为累加树</h3>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -1884,17 +1884,149 @@ public:
 </figure>
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code.对于BST本质上就是有序数组。那么换个角度来看。一个有序数组[2, 5, 13]，求从后到前的累加数组，也就是[20, 18, 13]。故此对于BST也应该是从后向前一直遍历累加。中序遍历是左中右。那么此处的反过来遍历应该是右中左。
+  <br><strong>逆向中序遍历<strong>,此题跟《1038.从二叉搜索树到更大和树》一模一样
+
+  </summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     TreeNode* pre=nullptr;//记录上一个节点的值
+     void traverse(TreeNode* root)
+     {
+         //递归终止条件
+         if(root==nullptr)
+             return;
+ 
+         traverse(root->right);//先遍历右节点
+ 
+         //中序的位置
+         if(pre!=nullptr)//若为空，那么就是本值
+             root->val+=pre->val;//加上上一个值
+         pre=root;//记录上一个节点
+ 
+         traverse(root->left);//遍历左节点
+ 
+     }
+     TreeNode* convertBST(TreeNode* root) {
+         traverse(root);
+ 
+         return root;
+     }
+ };
 </script>
 </code></pre>
 </details>
 
 </div> 
 
-230、1038
+
+<p><br></p>
+<h3>二叉搜索树中第 K 小的元素</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/binary_tree/微信截图_20240929135117.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+      void traverse(TreeNode* root, vector<int> &nums)
+      {
+         //递归终止条件
+         if(root==nullptr)
+             return;
+ 
+         traverse(root->left,nums);
+ 
+         //中序的位置
+         nums.push_back(root->val);
+ 
+         traverse(root->right, nums);
+  
+      }
+     int kthSmallest(TreeNode* root, int k) {
+         // BST,中序遍历实现从小到大
+         vector<int> nums;
+         traverse(root, nums);
+         return nums[k-1];
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+
+<details>
+<summary>Click to expand the code。另外一种写法</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int result;
+        int index=0;
+         void traverse(TreeNode* root, int k)
+         {
+            //递归终止条件
+            if(root==nullptr)
+                return;
+    
+            traverse(root->left,k);
+    
+            //中序的位置
+           index++;
+           if(index==k)
+           {
+                result=root->val;
+                return;
+           }
+    
+            traverse(root->right, k);
+     
+         }
+        int kthSmallest(TreeNode* root, int k) {
+            // BST,中序遍历实现从小到大
+           
+            traverse(root, k);
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
 
 </div>
 
