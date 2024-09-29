@@ -1092,8 +1092,66 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <h1>二维动态规划问题，走格子</h1>
 
 <p><br></p>
-<h2>走方格的方案数</h2>
+<h2>不同路径</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/WX20240929-214426.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
 
+<details>
+<summary>Click to expand the code。机器人从(0 , 0) 位置出发，到(m - 1, n - 1)终点。这点最重要！</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int uniquePaths(int m, int n) {
+    
+            //step1:定义dp表：dp[i][j]有多少条路径
+            // 状态，当前位于第m行，n列，点（i,j），终点为（m-1，n-1）
+            // 选择：只能向下或者向右移动一步
+            int dp[m][n];
+    
+            //step2:初始化dp表
+            dp[0][0]=1;
+    
+            //对于第一行
+            for(int j=1;j<n;j++)
+            {
+                dp[0][j]=dp[0][j-1];
+            }
+    
+            // 对于第一列
+            for(int i=1;i<m;i++)
+            {
+                dp[i][0]=dp[i-1][0];
+            }
+    
+            //step3:进行状态转移
+            for(int i=1;i<m;i++)
+            {
+                for(int j=1;j<n;j++)
+                {
+                    dp[i][j]=dp[i-1][j]+dp[i][j-1];//由这两者决定
+                }
+            }
+    
+            return dp[m-1][n-1];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+<p><br></p>
+<h2>走方格的方案数</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240819-105641.png" alt="Image description">
@@ -1102,7 +1160,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code。最基本的动态规划问题～</summary>
+<summary>Click to expand the code。如若按照上一题的思路，此题应该是有问题的，n，m的格子。终端是（n-1,m-1）</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
     #include <iostream>
@@ -1148,6 +1206,9 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </script>
 </code></pre>
 </details>
+</div>
+
+
 
 <p><br></p>
 <h2>下降路径最小和</h2>
