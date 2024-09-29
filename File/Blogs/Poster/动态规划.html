@@ -205,20 +205,30 @@
 
 <article>
 <!-- 插入博客内容-->
+<p><br></p>
+<h1>引言</h1>
+<div>
 <p>
   之前做过不少动态规划方面的题目，但是都没有系统的整理，本博文系统整理下动态规划相关的知识。
-  <br>
-  动态规划算法（Dynamic Programming，简称 DP）.它将一个问题分解为一系列更小的子问题，并通过存储子问题的解来避免重复计算，从而大幅提升时间效率。
-  <br>
-  <strong>动态规划问题是从底到顶，而递归算法是从顶到底。</strong>
-  <br>
+  动态规划算法（Dynamic Programming，简称 DP）.它将一个问题分解为一系列更小的子问题(重叠子问题)，并通过存储子问题的解来避免重复计算，从而大幅提升时间效率。
+  故此，动态规划中每一个状态一定是由上一个状态推导出来的，这一点就区分于贪心算法<sup><a href="./贪心算法.html">Link</a></sup>，贪心没有状态推导，而是从局部直接选最优的，
+<br><br>
+<strong>动态规划问题是从底到顶，而递归算法是从顶到底。</strong>
+<br><br>
   动态规划问题的一般形式就是求最值，而求最值的核心其实就是穷举,所谓的穷举就是定义好「状态转移方程」。
-  <!-- 但是穷举所有可行解其实并不是一件容易的事，只有列出正确的「状态转移方程」,才能正确地穷举。  -->
+  但是穷举所有可行解其实并不是一件容易的事，只有列出正确的「状态转移方程」,才能正确地穷举。同时对于状态与选择的定义也是很重要的。
+  为此，在本博文中，解题思路都是以三步走的方式来解决问题的。
+  <br>
+  1.定义dp表，确定状态与选择。
+  <br>
+  2.确定初始状态。（边界值）。
+  <br>
+  3.确定状态转移方程，进行状态递推，自下向上。 
 
 </p>
 
 <details>
-<summary>动态规划算法的一些个人笔记：</summary>
+<summary>PS：动态规划算法的一些手写笔记：</summary>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/算法学习笔记cpp rnL _页面_1.png" alt="Image description">
@@ -241,6 +251,7 @@
 </p></figcaption>
 </figure>  
 </details>
+</div>
 
 <p><br></p>
 <h1>爬楼梯</h1>
