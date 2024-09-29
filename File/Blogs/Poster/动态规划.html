@@ -257,6 +257,7 @@
 <h1>爬楼梯</h1>
 <p><br></p>
 <h2>1.自下而上，推到状态方程</h2>
+<div>
 <p>首先通过经典的爬楼梯问题，导出其对应的动态规划解法</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -293,66 +294,7 @@ int climbingStairsDP(int n) {
     <li>step3:构建状态转移方程。将递推公式 𝑑𝑝[𝑖] = 𝑑𝑝[𝑖 − 1] + 𝑑𝑝[𝑖 − 2] 称为状态转移方程。</li>
     </ul>
 </p>
-<p><br></p>
-<h2>2.最优子结构</h2>
-<div>
-<p>上图仅仅是展示了动态规划的基本构建，但是一般来说，动态规划都是用来解决最优化问题的，因此进一步的，题目形如下面：
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214008.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-前面的动态规划的状态转移方程为：
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214129.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-而对于此处的最优化问题（带有代价函数的），则为：
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214218.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
 
-从两个子问题最优解 𝑑𝑝[𝑖 − 1] 和 𝑑𝑝[𝑖 − 2] 中挑选出较优的那一个，并用它构建出原问题 𝑑𝑝[𝑖] 的最优解。也就是<strong>最优子结构</strong>.
-<br>
-</p>
-<details>
-  <summary>因此，这个带有最优子结构的动态规划问题应该如下代码所示：</summary>
-<pre><code>
-/* 爬楼梯最小代价：动态规划 */
-int minCostClimbingStairsDP(vector&ltint&gt &cost) {
-
-  int n = cost.size() - 1;
-
-  if (n == 1 || n == 2)
-    return cost[n];
-
-  // 初始化 dp 表，用于存储子问题的解
-  vector&ltint&gt dp(n + 1);
-
-  // 初始状态：预设最小子问题的解
-  dp[1] = cost[1];
-  dp[2] = cost[2];
-
-  // 状态转移：从较小子问题逐步求解较大子问题
-  for (int i = 3; i &lt= n; i++) {
-    dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];
-  }
-
-  return dp[n];
-}
-</code></pre>
-</details> 
-
-<p><br></p>
 <p>下面看看例题</p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -426,6 +368,110 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </script>
 </code></pre>
 </details>
+</div>
+
+<p><br></p>
+<h2>2.最优子结构</h2>
+<div>
+<p>上图仅仅是展示了动态规划的基本构建，但是一般来说，动态规划都是用来解决最优化问题的，因此进一步的，题目形如下面：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214008.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+前面的动态规划的状态转移方程为：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214129.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+而对于此处的最优化问题（带有代价函数的），则为：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240802214218.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+从两个子问题最优解 𝑑𝑝[𝑖 − 1] 和 𝑑𝑝[𝑖 − 2] 中挑选出较优的那一个，并用它构建出原问题 𝑑𝑝[𝑖] 的最优解。也就是<strong>最优子结构</strong>.
+<br>
+</p>
+<details>
+  <summary>因此，这个带有最优子结构的动态规划问题应该如下代码所示：</summary>
+<pre><code>
+/* 爬楼梯最小代价：动态规划 */
+int minCostClimbingStairsDP(vector&ltint&gt &cost) {
+
+  int n = cost.size() - 1;
+
+  if (n == 1 || n == 2)
+    return cost[n];
+
+  // 初始化 dp 表，用于存储子问题的解
+  vector&ltint&gt dp(n + 1);
+
+  // 初始状态：预设最小子问题的解
+  dp[1] = cost[1];
+  dp[2] = cost[2];
+
+  // 状态转移：从较小子问题逐步求解较大子问题
+  for (int i = 3; i &lt= n; i++) {
+    dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];
+  }
+
+  return dp[n];
+}
+</code></pre>
+</details> 
+
+<p>下面看看例题</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20240929164833.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minCostClimbingStairs(vector<int>& cost) {
+    
+            // step1:定义dp表:dp[i]=为从i开始走的最小费用
+            // 状态：第i阶梯
+            // 选择，爬一级或两级
+            int dp[cost.size()];
+    
+            // step2：初始化dp表
+            dp[0]=cost[0];//从0开始走的时候的花销
+            dp[1]=cost[1];//从1开始走的时候的花销
+    
+            // step3：进行状态转移
+            for(int i=2;i<cost.size();i++)
+            {
+                dp[i]=min(dp[i-1],dp[i-2])+cost[i];//当前的花销
+            }
+    
+            //注意最后一步没有花销，因此取倒数第一或第二的最小花销
+            return min(dp[cost.size()-1],dp[cost.size()-2]);
+    
+            //cost[i] 是从楼梯第 i 个台阶向上爬需要支付的费用
+            // 第一个台阶的费用=从0开始走到1的费用
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 
 </div>
 
@@ -487,6 +533,10 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   }
 </code></pre>
 </details>
+
+
+
+
 
 <p><br></p>
 <h1>递归vs动态规划：斐波那契数列</h1>
