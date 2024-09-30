@@ -67,9 +67,15 @@
 
     <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
 
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css">
-  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
-  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css"> -->
+  <!-- <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css"> -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/fonts.css">
+  <link rel="stylesheet" href="../assets/new_css_js/cpp-highlight/styles/gradient-dark.css">
+  <script src="../assets/new_css_js/cpp-highlight/highlight.js"></script>    <!--引入代码高亮js库-->
+
+  <script>hljs.initHighlightingOnLoad();
+  </script>
 
   <!-- Dark Mode -->
 
@@ -134,9 +140,7 @@
 <p>
 先验证是否有ssh key。打开终端然后运行
 <pre><code>
-<script type='text/html' style='display:block'>
   ls -al ~/.ssh
-</script>
 </code></pre>
 
 <figure style="text-align: center;">
@@ -160,6 +164,36 @@
 </p></figcaption>
 </figure> 
 
+若没有，则需要生成，过程如下：
+<br>
+1. 生成ssh-keygen
+<pre><code>
+  ssh-keygen -t rsa -b 4096 -C "my_email@example.com"
+</code></pre>
+其中，”my_email@example.com“是 github 关联的邮箱；
+<br>
+2.确定key保存的目录（直接回车，选择默认）
+<br>
+3.输入密码（可回车不需要密码，写密码要写两遍）
+这个时候在默认路径下就生成了两个文件，公钥和私钥。
+<br>
+4.将SSH Key添加到ssh-agent
+<pre><code>
+  eval $(ssh-agent -s)
+</code></pre>
+返回agent的Pid：
+<pre><code>
+  ssh-add ~/.ssh/id_rsa
+</code></pre>
+然后输入密码，没有密码的直接回车，提示添加成功！
+<br>
+5.打开id_rsa.pub文件，复制文件内容到github
+<pre><code>
+# 查看目录
+ls -al ~/.ssh
+# 打开id_rsa.pub文件
+cat ~/.ssh/id_rsa.pub
+</code></pre>
 
 </p>
 </div>
