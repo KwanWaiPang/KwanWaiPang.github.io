@@ -108,7 +108,7 @@
 
 <header class="post-header">
   <h1 align="center" class="post-title">
-    <span style="font-weight: 600;">Title</span>
+    <span style="font-weight: 600;">配置Github ssh</span>
   </h1>
   <!-- <p><br></p> -->
 </header>
@@ -127,6 +127,50 @@
 <article>
 <!-- 插入博客内容-->
 
+
+<p><br></p>
+<h1>Macbook配置</h1>
+<div>
+<p>
+先验证是否有ssh key。打开终端然后运行
+<pre><code>
+<script type='text/html' style='display:block'>
+  ls -al ~/.ssh
+</script>
+</code></pre>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20240930-102921.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+如果有.pub结尾的文件直接打开
+<pre><code>
+  cat ~/.ssh/id_rsa.pub
+</code></pre>
+然后复制到github的ssh key中即可（在进入自己的github，个人设置界面，找到SSH key那栏，new ssh key）
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20240930-103213@2x.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+
+</p>
+</div>
+
+
+
+<p><br></p>
+<h1>Windows与ubuntu配置</h1>
+<p>
+  请参考本人CSDN博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/134191783?spm=1001.2014.3001.5502" target="_blank">Link</a></sup>
+</p>
 
 
 
