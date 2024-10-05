@@ -302,8 +302,9 @@
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
-  <!-- 下面是插入目录的 -->
+  <!-- 下面是自定义的一系列功能 -->
   <script>
+    //下面是插入目录的
     document.addEventListener("DOMContentLoaded", function() {
         const toc = document.querySelector("#toc ul");
         const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
@@ -319,45 +320,77 @@
             toc.appendChild(li);
         });
     });
+
+    // 添加按钮点击事件
+    const button = document.getElementById("scrollToTocButton");
+    button.addEventListener("click", function() {
+        document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 添加新的目录
+    const newToc = document.querySelector("#newToc ul");
+    const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+
+    headers.forEach(header => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+        header.setAttribute("id", id);
+        a.setAttribute("href", `#${id}`);
+        a.textContent = header.textContent;
+        li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+        li.appendChild(a);
+        newToc.appendChild(li);
+    });
+
+    // 控制新的目录的显示与隐藏
+    const toggleButton = document.getElementById("toggleTocButton");
+    toggleButton.addEventListener("click", function() {
+        if (newToc.parentElement.style.display === "none") {
+            newToc.parentElement.style.display = "block"; // 展开新目录
+        } else {
+            newToc.parentElement.style.display = "none"; // 收起新目录
+        }
+    });
 </script>
 
  <!-- JavaScripts添加按钮 -->
- <script>
-      // 添加按钮点击事件
-      const button = document.getElementById("scrollToTocButton");
-      button.addEventListener("click", function() {
-          document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
-      });
-</script>
+ <!-- <script> -->
+      <!-- // 添加按钮点击事件 -->
+      <!-- const button = document.getElementById("scrollToTocButton"); -->
+      <!-- button.addEventListener("click", function() { -->
+          <!-- document.querySelector("#toc").scrollIntoView({ behavior: "smooth" }); -->
+      <!-- }); -->
+<!-- </script> -->
 
 <!-- 点击按钮展开目录 -->
-<script>
-  // 添加新的目录
-  const newToc = document.querySelector("#newToc ul");
-  const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
-  
-  headers.forEach(header => {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
-      header.setAttribute("id", id);
-      a.setAttribute("href", `#${id}`);
-      a.textContent = header.textContent;
-      li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
-      li.appendChild(a);
-      newToc.appendChild(li);
-  });
-
-  // 控制新的目录的显示与隐藏
-  const toggleButton = document.getElementById("toggleTocButton");
-  toggleButton.addEventListener("click", function() {
-      if (newToc.parentElement.style.display === "none") {
-          newToc.parentElement.style.display = "block"; // 展开新目录
-      } else {
-          newToc.parentElement.style.display = "none"; // 收起新目录
-      }
-  });
-</script>
+<!-- <script> -->
+  <!-- // 添加新的目录 -->
+  <!-- const newToc = document.querySelector("#newToc ul"); -->
+  <!-- const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6"); -->
+  <!--  -->
+  <!-- headers.forEach(header => { -->
+      <!-- const li = document.createElement("li"); -->
+      <!-- const a = document.createElement("a"); -->
+      <!-- const id = header.textContent.replace(/\s+/g, "-").toLowerCase(); -->
+      <!-- header.setAttribute("id", id); -->
+      <!-- a.setAttribute("href", `#${id}`); -->
+      <!-- a.textContent = header.textContent; -->
+      <!-- li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`; -->
+      <!-- li.appendChild(a); -->
+      <!-- newToc.appendChild(li); -->
+  <!-- }); -->
+<!--  -->
+  <!-- // 控制新的目录的显示与隐藏 -->
+  <!-- const toggleButton = document.getElementById("toggleTocButton"); -->
+  <!-- toggleButton.addEventListener("click", function() { -->
+      <!-- if (newToc.parentElement.style.display === "none") { -->
+          <!-- newToc.parentElement.style.display = "block"; // 展开新目录 -->
+      <!-- } else { -->
+          <!-- newToc.parentElement.style.display = "none"; // 收起新目录 -->
+      <!-- } -->
+  <!-- }); -->
+<!-- </script> -->
 
 </body>
 </html>
