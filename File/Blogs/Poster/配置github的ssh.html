@@ -206,6 +206,33 @@ cat ~/.ssh/id_rsa.pub
   请参考本人CSDN博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/134191783?spm=1001.2014.3001.5502" target="_blank">Link</a></sup>
 </p>
 
+<p><br></p>
+<h1>与服务器的免密登陆配置</h1>
+<p>
+  请参考本人CSDN博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/135360496?spm=1001.2014.3001.5502" target="_blank">Link</a></sup>
+先按照上面的生成ssh key。打开终端然后运行
+
+<pre><code>
+<script type='text/html' style='display:block'>
+  ssh-copy-id -i "SSH公钥的文件地址" -p <port> <username>@<server_ip>
+ 
+  # 该操作会在服务器~/.ssh中生成authorized_keys文件，并将本地电脑id_rsa.pub中的内容复制到该文件中。
+  # ⭐因此你也可以先ssh登录自己的账户，再手动创建~/.ssh/authorized_keys文件（没有后缀），并复制公钥到该文件中，实现同样的效果。
+</script>
+</code></pre>
+
+如下图所示：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20241005-091755.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>  
+
+</p>
+
+
 
 
 </article>
