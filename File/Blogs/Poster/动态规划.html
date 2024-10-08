@@ -1850,16 +1850,28 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </code></pre>
 </details> 
 
-
+<p><br></p>
+<h1>背包问题</h1>
+<p>
+  背包问题有以下分类：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241008190954.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>  
+  实际主要的应该是0-1背包问题与完全背包问题。他们之间的区别是：0-1背包问题是每个物品只能用一次，而完全背包问题是每个物品可以用无数次。
+</p>
 
 <p><br></p>
-<h1>0-1背包问题</h1>
+<h2>0-1背包问题</h2>
 <p>
   题目：给你一个可装载重量为 W 的背包和 N 个物品，每个物品有重量和价值两个属性。其中第 i 个物品的重量为 wt[i]，价值为 val[i]。现在让你用这个背包装物品，每个物品只能用一次，在不超过被包容量的前提下，最多能装的价值是多少？
   </p>
 <p>
   首先要明确两点，「状态」和「选择」。
-  <li>对于状态，如何才能描述一个问题局面？只要给几个物品和一个背包的容量限制，就形成了一个背包问题呀。所以状态有两个，就是「背包的容量」和「可选择的物品」。</li>
+  <li>对于状态，如何才能描述一个问题局面？只要给几个物品和一个背包的容量限制，就形成了一个背包问题呀。所以状态有两个，就是「背包的容量」和「可选择的物品」。因此需要用二维数组。</li>
   <li>对于选择，选择就是「装进背包」或者「不装进背包」。只有两种。</li>
   确定了状态与选择，那么基本主体的框架就出来了：
 <pre><code>
@@ -2033,7 +2045,7 @@ int main() {
 </details>
 
 <p><br></p>
-<h2>背包问题变体之子集分割/子集背包问题</h2>
+<h2>背包问题变体之子集分割/子集背包问题/分割等和子集</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-092925.png" alt="Image description">
@@ -2066,7 +2078,7 @@ int main() {
 </details> 
 
 <details>
-<summary>采用动态规划</summary>
+<summary>采用动态规划.一个商品如果可以重复多次放入是完全背包，而只能放入一次是01背包.而本题是每个元素只能用一次，因此属于01背包问题</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -2080,10 +2092,10 @@ int main() {
             if(sum%2!=0)//若不能被2整除，那就直接false
                 return false;// 和为奇数时，不可能划分成两个和相等的集合
             
-            int target=sum/2;
+            int target=sum/2;//也就是背包的体积
     
             //step1: 定义dp表：dp【i】【j】=对于第i个物品，当前和值为j，若为true就是刚好分完，若为false就是还没分完
-            // 状态：第i个数，j为当前存放的值和
+            // 状态：第i个数（集合内的元素/商品），j为当前存放的值和（相当于价值）
             // 选择：第i个数选择放与不放
            bool dp[nums.size()+1][target+1];
     
@@ -2105,6 +2117,7 @@ int main() {
             {
                 for(int j=1;j<target+1;j++)
                 {
+                    //当前目标值小于数组上的数字，那么就不能取
                     if(j<nums[i-1])//那么就是当前数字不取，那么就是跟上一个状态一样
                         dp[i][j]=dp[i-1][j];
                     else
@@ -2116,7 +2129,6 @@ int main() {
             }
     
             return dp[nums.size()][target];
-    
         }
     };
 </script>
