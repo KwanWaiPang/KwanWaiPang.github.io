@@ -1028,6 +1028,63 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 
+<p><br></p>
+<h1>整数拆分</h1>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241008174806.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.某种程度上跟最长递增子序列的结构是一样的。解题的关键在于设计的状态是拆分数字i，而不是拆分为i个。只有这样才满足递推关系。其次就是对于每个数有拆与不拆两种选择</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int integerBreak(int n) {
+    
+            //step1:定义dp表：dp[i]为拆分i的时候，最大的乘积
+            // 状态：拆分数字i（注意不是拆分为i个）只有这样才满足递推
+            // 选择：遍历从1~j。
+                // 拆分j：j*（i-j）就是目前的dp[i]
+                // 不拆分j，但是拆分（i-j）那么dp[i]=j*dp[i-j]
+                //因此递推方程应该是：dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));
+    
+            vector<int> dp(n+1,0);
+    
+            // step2:初始化dp表
+            //由于n是大于等于2，因此从2开始
+            dp[2]=1;
+    
+            if(n==2)
+                return dp[2];
+    
+            //step3:进行状态转移
+            for(int i=3;i<n+1;i++)   
+            {
+                // 拆分的数字,对于当前的数字i，最小为1，最大就是到数字i-1
+                for(int j=1; j<i;j++)
+                {
+                    //拆分j：j*（i-j）
+                    //不拆分j，但是拆分（i-j）那么dp[i]=j*dp[i-j]
+                    //全部结果对比求最值
+                    dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));
+                }
+            }     
+    
+            return dp[n];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
 
 <p><br></p>
 <h1>同时维护两个一维的dp表：摆动序列</h1>
