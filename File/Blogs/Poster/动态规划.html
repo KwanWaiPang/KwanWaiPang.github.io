@@ -2200,6 +2200,126 @@ int main() {
 
 </div> 
 
+
+<p><br></p>
+<h2>目标和</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241009155510.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.看到这道题的第一思路就是采用回溯算法，跟组合和有点类似。注意终止条件应该是<strong>index==nums.size()</strong>而不是<strong>index==nums.size()-1</strong></summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        void backtrack(vector<int>& nums, int each_path, int& results, int target, int index)
+        {
+            //递归终止条件
+            if(index==nums.size())//超越了~
+            {
+                if(each_path==target)
+                    results++;
+                
+                return;
+            }
+    
+            //做选择
+            each_path+=nums[index];
+            backtrack(nums,each_path,results,target,index+1);//下一个
+            //撤销选择
+            each_path-=nums[index];
+    
+            //做选择
+            each_path-=nums[index];//减法
+            backtrack(nums,each_path,results,target,index+1);//下一个
+            //撤销选择
+            each_path+=nums[index];//加回来
+    
+        }
+    
+        int findTargetSumWays(vector<int>& nums, int target) {
+    
+            int each_path=0;
+            int results=0;
+            backtrack(nums,each_path,results,target,0);
+    
+            return results;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code.当然，用动态规划去解题也是可以的。但是对于j为什么要从0开始理解得不是很透彻，且比回溯算法的思路复杂多了~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int findTargetSumWays(vector<int>& nums, int target) {
+    
+            //也可以看成是01背包问题。背包的容量为target，对每个物品，nums进行加或减的处理
+            // 假设加法的总和为x，那么减法对应的总和就是sum - x。
+            // 那么就有x - (sum - x) = target。故此x = (target + sum) / 2
+            // 此时问题就转化为，用nums装满容量为x的背包，有几种方法。
+    
+            int sum=0;
+            for(auto num:nums)
+            {
+                sum+=num;
+            }
+    
+            // 不能被2整除，此时没有方案
+            if ((target + sum) % 2 !=0) 
+                return 0; 
+    
+            //如果target 的绝对值已经大于sum，那么也是没有方案的。
+            if (abs(target) > sum)
+                return 0; 
+    
+            target=(target+sum)/2;
+    
+            //step1:定义dp表。dp[i][j]=对于物品i当前能填满背包容量j的方法数
+            // 状态：物品i以及当前的容量j
+            // 选择：加或不加入背包
+            vector< vector<int>> dp(nums.size()+1, vector<int>(target+1, 0));
+    
+            // step2:初始化dp表，对于背包容量为0的情况，不选物品就可以填满，因此方案数为1
+            for(int i=0;i<nums.size()+1;i++)
+            {
+                dp[i][0]=1;
+            }
+    
+            // step3：进行状态转移
+            for(int i=1;i<nums.size()+1;i++)
+            {
+                // for(int j=1;j<target+1;j++)
+                for(int j=0;j<target+1;j++)//注意 j 从 0 开始，这样可以正确处理所有可能的背包容量。
+                {
+                    if(j<nums[i-1])//当前物品不能选
+                        dp[i][j]=dp[i-1][j];
+                    else//方案分别为选当前物品和不选当前物品的方案数总和
+                        dp[i][j]=dp[i-1][j]+dp[i-1][j-nums[i-1]];
+    
+                }
+            }
+            return dp[nums.size()][target];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
 <p><br></p>
 <h2>完全背包问题</h2>
 

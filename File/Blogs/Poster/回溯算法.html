@@ -19,6 +19,64 @@
         margin-right: auto; /* 使目录框架在页面中居右 */
         box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
     }
+    #scrollToTocButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px; /* 圆角设计 */
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #scrollToTocButton:hover {
+      background-color: #0056b3; /* 鼠标悬停时颜色变化 */
+      transform: translateY(-3px); /* 悬停时按钮略微上移 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+  }
+
+  #toggleTocButton {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #00b34b;
+    color: white;
+    border: none;
+    border-radius: 50px; /* 圆角设计 */
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #toggleTocButton:hover {
+      background-color: #00b34b; /* 鼠标悬停时颜色变化 */
+      transform: translateY(-3px); /* 悬停时按钮略微上移 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+  }
+
+  #newToc {
+  display: none; 
+  position: fixed; 
+  bottom: 70px; 
+  right: 100px; 
+  background: #f4f4f4; 
+  padding: 10px; 
+  font-size: 12px; 
+  max-height: 40%; /* 设置最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+}
   </style>
 
 <!-- Head -->
@@ -128,6 +186,19 @@
 <!-- Content -->
 <div class="container mt-5">
 <article>
+
+
+<!-- 添加目录按钮，点击展开目录 -->
+<button id="toggleTocButton">📑</button>
+<!-- 新的目录 -->
+<div id="newToc">
+  <h8>Catalog</h8>
+  <ul></ul>
+</div>
+
+<!-- 添加按钮跳转到题目 -->
+<button id="scrollToTocButton">⬆️</button>
+
 
 <!-- 插入目录 -->
 <div id="toc">
@@ -1688,6 +1759,67 @@ int main()
 </details> 
 
 <p><br></p>
+<h1>目标和</h1>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241009155510.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.看到这道题的第一思路就是采用回溯算法，跟组合和有点类似。注意终止条件应该是<strong>index==nums.size()</strong>而不是<strong>index==nums.size()-1</strong></summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        void backtrack(vector<int>& nums, int each_path, int& results, int target, int index)
+        {
+            //递归终止条件
+            if(index==nums.size())//超越了~
+            {
+                if(each_path==target)
+                    results++;
+                
+                return;
+            }
+    
+            //做选择
+            each_path+=nums[index];
+            backtrack(nums,each_path,results,target,index+1);//下一个
+            //撤销选择
+            each_path-=nums[index];
+    
+            //做选择
+            each_path-=nums[index];//减法
+            backtrack(nums,each_path,results,target,index+1);//下一个
+            //撤销选择
+            each_path+=nums[index];//加回来
+    
+        }
+    
+        int findTargetSumWays(vector<int>& nums, int target) {
+    
+            int each_path=0;
+            int results=0;
+            backtrack(nums,each_path,results,target,0);
+    
+            return results;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<p>
+    此题也可以用动态规划<sup><a href="../Poster/动态规划.html#目标和" target="_blank">Link</a></sup>去求解,但是思路比较绕，还是回溯算法比较直观。
+</p>
+
+</div> 
+
+<p><br></p>
 <h1>回溯算法解二叉树类题目</h1>
 <p>
     毕竟回溯算法也是递归的一种，而递归算法在二叉树类题目中非常常见，因此回溯算法也常用于解决二叉树类题目。
@@ -1966,8 +2098,9 @@ void dfs(...) {
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
-  <!-- 下面是插入目录的 -->
+  <!-- 下面是自定义的一系列功能 -->
   <script>
+    //下面是插入目录的
     document.addEventListener("DOMContentLoaded", function() {
         const toc = document.querySelector("#toc ul");
         const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
@@ -1982,6 +2115,38 @@ void dfs(...) {
             li.appendChild(a);
             toc.appendChild(li);
         });
+    });
+
+    // 添加按钮点击事件
+    const button = document.getElementById("scrollToTocButton");
+    button.addEventListener("click", function() {
+        document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 添加新的目录
+    const newToc = document.querySelector("#newToc ul");
+    const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+
+    headers.forEach(header => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+        header.setAttribute("id", id);
+        a.setAttribute("href", `#${id}`);
+        a.textContent = header.textContent;
+        li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+        li.appendChild(a);
+        newToc.appendChild(li);
+    });
+
+    // 控制新的目录的显示与隐藏
+    const toggleButton = document.getElementById("toggleTocButton");
+    toggleButton.addEventListener("click", function() {
+        if (newToc.parentElement.style.display === "none") {
+            newToc.parentElement.style.display = "block"; // 展开新目录
+        } else {
+            newToc.parentElement.style.display = "none"; // 收起新目录
+        }
     });
 </script>
 
