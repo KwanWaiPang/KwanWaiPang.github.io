@@ -2046,6 +2046,7 @@ int main() {
 
 <p><br></p>
 <h2>背包问题变体之子集分割/子集背包问题/分割等和子集</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-092925.png" alt="Image description">
@@ -2134,6 +2135,70 @@ int main() {
 </script>
 </code></pre>
 </details>
+
+</div>
+
+<p><br></p>
+<h2>最后一块石头的重量II</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241009142950.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。跟分割等和子集非常像，只是前者是判断是否均分，此处是判断最多放了一半多少（那么总的减去一半*2就是剩余的）
+  <br>
+  此外，注意sum需要初始化为0,对于涉及到遍历，特别是循环调用而不是单纯赋值的，一般都需要初始化，此外，可通过debug模式一步一步输出value查看bug</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int lastStoneWeightII(vector<int>& stones) {
+    
+            //尽量让石头分成重量相同的两堆，相撞之后剩下的石头最小
+            //其次每个石头只能选一次，因此是01背包问题，
+            //跟分割等和子集非常像，只是前者是判断是否均分，此处是判断最多放了一半多少（那么总的减去一半*2就是剩余的）
+    
+            int sum=0, target=0;//注意sum要初始化为01
+            for(auto stone:stones)
+                sum+=stone;
+            target=sum/2;
+    
+            //step1:定义dp表：dp[i][j]=当前最大的容量
+            // 状态：当前第i个石头，剩余背包容量为j
+            // 选择：放或不放当前的石头
+            vector< vector<int>> dp(stones.size()+1, vector<int>(target+1, 0));
+    
+            //step2：初始化dp表都为0
+    
+            // step3：进行状态转移
+            for(int i=1;i<stones.size()+1;i++)
+            {
+                for(int j=1;j<target+1;j++)
+                {   
+                    // 不选当前物品i,那么最大容量就退化为dp[i-1][j]
+                    //选当前物品i，那么最大容量就是dp[i-1][j-stones[i-1]]+stones[i-1]（当前物品）
+                    if(j<stones[i-1])//当前是不能选的
+                    {
+                        dp[i][j]=dp[i-1][j];
+                    }
+                    else
+                        dp[i][j]=max(dp[i-1][j],dp[i-1][j-stones[i-1]]+stones[i-1]);//不选或者选的最大值
+                }
+            }
+    
+            return sum-dp[stones.size()][target]*2;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
 
 <p><br></p>
 <h2>完全背包问题</h2>
