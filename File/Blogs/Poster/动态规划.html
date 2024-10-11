@@ -1927,125 +1927,7 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </p>
 
 <p><br></p>
-<h2>超级动态规划问题：购物单</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-090109.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>这道题其实就是在01背包问题的基础上，添加了各种约束。使得整体比较复杂。解题的关键点是：
-  <br>1、每次只处理主件。如果是附件的话，状态等于上一次。
-  <br>2、所谓的状态分为：不买、买主件、买主件+1个附件、买主件+2个附件。只有四个状态。而不买跟当前是附件的状态一样，都是继承上一个状态
-  <br>3、在讨论买主件、主件+1附件、主件+2附件的时候，是依次递推满足的情况下再记录状态，不然会超时。</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-#include <iostream>
-#include <utility>  // 包含 pair 和 make_pair 的定义
-#include <vector>   // 包含 vector 的定义
-using namespace std;
-
-int main() {
-    int N, m;
-
-    cin >> N; //总的钱的数目
-    cin >> m; //可购买物品的个数
-
-    // int v, p, q;
-    // v 表示该物品的价格， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件，
-    // vector< pair<int, pair<int, int>> > all_item(m+1);//要m+1个，因为下面的索引也是从1开始的
-    // for (int i = 1; i < m+1; ++i) {
-    //     cin >> v >> p >> q;
-    //     all_item[i] = make_pair(v, make_pair(p, q));//保证了索引从1开始。因为下面也是从1开始的
-    // }
-    //all_item的size为m
-    vector<int> v(m + 1), p(m + 1), q(m + 1);
-    for (int i = 1; i <= m; ++i) {
-        cin >> v[i] >> p[i] >> q[i];
-    }
-
-
-    //由于是求解最优子问题，采用动态规划
-    // step1: 定义dp表,购买第m个物体时，此时预算为N的时候的最大满意度
-    //状态：当前第i个物品，当前的预算为j
-    //选择：对于当前的物品，买与不买：如果是附件，不买。如果是主件，则分为买主件、买主件+1个附件、买主件+2个附件
-    vector< vector<int>> dp(m + 1, vector<int> (N + 1, 0));
-    //step2:初始化状态，当当前物品不买的时候，初始化为0
-
-
-    //step3:进行自下而上的状态转移方程
-    for (int i = 1; i < m + 1; i++) {//从第一个物品开始一个一个看
-        //for (int j = N; j >= 0; j--) //预算从N开始算。没花钱（也可以~）
-        for (int j = 0; j <N+1; j++) 
-        {
-            // 先继承上一个状态（由于下面计算中涉及到了各种情况的最值对比）
-            dp[i][j] = dp[i - 1][j];//其实也就是不买的情况
-
-            //只考虑主件，非主件时不处理，相当于只继承之前的状态
-            if (q[i] == 0) {
-                // 当前的状态为买了主件后的贡献量+上一个状态的贡献量
-                // vs
-                // 不买当前主件。上一状态的贡献量
-                if (j >= v[i]) 
-                { //若可以买
-                    //买与不买之间的最大值。注意，当前如果买了，那么上一个状态可以花的额度就只有j - temp_v
-                    dp[i][j] = max(dp[i - 1][j - v[i]] + v[i] * p[i]
-                                    , dp[i - 1][j]);
-                    //考虑主件+第一个1个附件
-                    for (int k = 1; k < m + 1; k++) { //遍历all_item
-                        if (q[k] == i && j >= v[i] + v[k]) 
-                        { //当前主件的第一个附件
-                            dp[i][j] = max(dp[i - 1][j - v[i] - v[k]]
-                                            + v[i] * p[i]
-                                            + v[k] * p[k]
-                                            , dp[i][j]);//注意对比的为当前的
-
-                            int k1=k;//下面考虑买两个物品（寻找当前主件的第二个附件）
-                            for (int k2 = k1 + 1; k2 < m + 1; k2++) {
-                                if (
-                                    q[k2] == i
-                                    && j >= v[i] + v[k1] + v[k2]) 
-                                { //当前主件的第二个附件
-                                    dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
-                                                v[i] * p[i]
-                                                + v[k1] * p[k1]
-                                                + v[k2] * p[k2]
-                                                , dp[i][j]);//注意对比的为当前的
-                                }
-                            }
-                        }
-                    }
-
-                    // //考虑主件+2个附件
-                    // for (int k1 = 1; k1 < m + 1; k1++) { //遍历all_item
-                    //     for (int k2 = k1 + 1; k2 < m + 1; k2++) {
-                    //         if (q[k1] == i
-                    //                 && q[k2] == i
-                    //                 && j >= v[i] + v[k1] + v[k2]) { //当前主件的附件
-                    //             dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
-                    //                            v[i] * p[i]
-                    //                            + v[k1] * p[k1]
-                    //                            + v[k2] * p[k2]
-                    //                            , dp[i][j]);//注意对比的为当前的
-                    //         }
-                    //     }
-                    // }
-                }
-
-            }
-
-        }
-    }
-    std::cout << dp[m][N];
-}
-</script>
-</code></pre>
-</details>
-
-<p><br></p>
-<h2>背包问题变体之子集分割/子集背包问题/分割等和子集</h2>
+<h3>背包问题变体之子集分割/子集背包问题/分割等和子集</h3>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -2139,7 +2021,7 @@ int main() {
 </div>
 
 <p><br></p>
-<h2>最后一块石头的重量II</h2>
+<h3>最后一块石头的重量II</h3>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -2202,7 +2084,7 @@ int main() {
 
 
 <p><br></p>
-<h2>目标和</h2>
+<h3>目标和</h3>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -2323,7 +2205,7 @@ int main() {
 
 
 <p><br></p>
-<h2>三维动态规划之一和零</h2>
+<h3>三维动态规划之一和零</h3>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -2392,11 +2274,13 @@ int main() {
 
 </div>
 
+
 <p><br></p>
 <h2>完全背包问题</h2>
 
 <p><br></p>
 <h3>零钱兑换</h3>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805222949.png" alt="Image description">
@@ -2554,9 +2438,11 @@ int main() {
 </script>
 </code></pre>
 </details> 
+</div>
 
 <p><br></p>
 <h3>零钱兑换 II</h3>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240826-102658.png" alt="Image description">
@@ -2652,6 +2538,128 @@ int main() {
 </script>
 </code></pre>
 </details>
+</div>
+
+
+<p><br></p>
+<h2>超级动态规划问题：购物单</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240813-090109.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>这道题其实就是在01背包问题的基础上，添加了各种约束。使得整体比较复杂。解题的关键点是：
+  <br>1、每次只处理主件。如果是附件的话，状态等于上一次。
+  <br>2、所谓的状态分为：不买、买主件、买主件+1个附件、买主件+2个附件。只有四个状态。而不买跟当前是附件的状态一样，都是继承上一个状态
+  <br>3、在讨论买主件、主件+1附件、主件+2附件的时候，是依次递推满足的情况下再记录状态，不然会超时。</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+#include <iostream>
+#include <utility>  // 包含 pair 和 make_pair 的定义
+#include <vector>   // 包含 vector 的定义
+using namespace std;
+
+int main() {
+    int N, m;
+
+    cin >> N; //总的钱的数目
+    cin >> m; //可购买物品的个数
+
+    // int v, p, q;
+    // v 表示该物品的价格， p 表示该物品的重要度（ 1 ~ 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q>0 ，表示该物品为附件，
+    // vector< pair<int, pair<int, int>> > all_item(m+1);//要m+1个，因为下面的索引也是从1开始的
+    // for (int i = 1; i < m+1; ++i) {
+    //     cin >> v >> p >> q;
+    //     all_item[i] = make_pair(v, make_pair(p, q));//保证了索引从1开始。因为下面也是从1开始的
+    // }
+    //all_item的size为m
+    vector<int> v(m + 1), p(m + 1), q(m + 1);
+    for (int i = 1; i <= m; ++i) {
+        cin >> v[i] >> p[i] >> q[i];
+    }
+
+
+    //由于是求解最优子问题，采用动态规划
+    // step1: 定义dp表,购买第m个物体时，此时预算为N的时候的最大满意度
+    //状态：当前第i个物品，当前的预算为j
+    //选择：对于当前的物品，买与不买：如果是附件，不买。如果是主件，则分为买主件、买主件+1个附件、买主件+2个附件
+    vector< vector<int>> dp(m + 1, vector<int> (N + 1, 0));
+    //step2:初始化状态，当当前物品不买的时候，初始化为0
+
+
+    //step3:进行自下而上的状态转移方程
+    for (int i = 1; i < m + 1; i++) {//从第一个物品开始一个一个看
+        //for (int j = N; j >= 0; j--) //预算从N开始算。没花钱（也可以~）
+        for (int j = 0; j <N+1; j++) 
+        {
+            // 先继承上一个状态（由于下面计算中涉及到了各种情况的最值对比）
+            dp[i][j] = dp[i - 1][j];//其实也就是不买的情况
+
+            //只考虑主件，非主件时不处理，相当于只继承之前的状态
+            if (q[i] == 0) {
+                // 当前的状态为买了主件后的贡献量+上一个状态的贡献量
+                // vs
+                // 不买当前主件。上一状态的贡献量
+                if (j >= v[i]) 
+                { //若可以买
+                    //买与不买之间的最大值。注意，当前如果买了，那么上一个状态可以花的额度就只有j - temp_v
+                    dp[i][j] = max(dp[i - 1][j - v[i]] + v[i] * p[i]
+                                    , dp[i - 1][j]);
+                    //考虑主件+第一个1个附件
+                    for (int k = 1; k < m + 1; k++) { //遍历all_item
+                        if (q[k] == i && j >= v[i] + v[k]) 
+                        { //当前主件的第一个附件
+                            dp[i][j] = max(dp[i - 1][j - v[i] - v[k]]
+                                            + v[i] * p[i]
+                                            + v[k] * p[k]
+                                            , dp[i][j]);//注意对比的为当前的
+
+                            int k1=k;//下面考虑买两个物品（寻找当前主件的第二个附件）
+                            for (int k2 = k1 + 1; k2 < m + 1; k2++) {
+                                if (
+                                    q[k2] == i
+                                    && j >= v[i] + v[k1] + v[k2]) 
+                                { //当前主件的第二个附件
+                                    dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
+                                                v[i] * p[i]
+                                                + v[k1] * p[k1]
+                                                + v[k2] * p[k2]
+                                                , dp[i][j]);//注意对比的为当前的
+                                }
+                            }
+                        }
+                    }
+
+                    // //考虑主件+2个附件
+                    // for (int k1 = 1; k1 < m + 1; k1++) { //遍历all_item
+                    //     for (int k2 = k1 + 1; k2 < m + 1; k2++) {
+                    //         if (q[k1] == i
+                    //                 && q[k2] == i
+                    //                 && j >= v[i] + v[k1] + v[k2]) { //当前主件的附件
+                    //             dp[i][j] = max(dp[i - 1][j - v[i] - v[k1] - v[k2]] +
+                    //                            v[i] * p[i]
+                    //                            + v[k1] * p[k1]
+                    //                            + v[k2] * p[k2]
+                    //                            , dp[i][j]);//注意对比的为当前的
+                    //         }
+                    //     }
+                    // }
+                }
+
+            }
+
+        }
+    }
+    std::cout << dp[m][N];
+}
+</script>
+</code></pre>
+</details>
+</div>
 
 
 <p><br></p>
