@@ -2323,6 +2323,76 @@ int main() {
 
 
 <p><br></p>
+<h2>三维动态规划之一和零</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241011194419.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。关键在于分析问题进行数学建模</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int findMaxForm(vector<string>& strs, int m, int n) {
+            
+            //对于strs 数组里的元素就是物品，每个物品都是一个，因此属于0、1背包问题
+            // 而背包为二维的，分别的容量是m和n（每个物品的重量若有0或有1都会占用m和n）
+            //至于价值则是字符数目（每个物品的价值为1）
+    
+            //step1：定义dp表:dp[i][j][k]=对于第i个物品，当前容量为j和k时，最大的字符数目
+            // 状态：当前第i个物品，对应两个背包的容量分别为m和n
+            //选择，当前物体放或不放
+            vector<vector<vector<int>>> dp(strs.size()+1, vector<vector<int>>(m+1, vector<int> (n+1, 0)));
+    
+            //step2:初始化dp表
+            // 当j与k都为0的时候，就是不能再放了，因此最长的字符数为0
+            // 当i为0，就是物体为0，那么最长的字符数也是0
+    
+            //step3：进行状态转移
+            for(int i=1;i<strs.size()+1;i++)
+            {
+                //对于当前物品，先统计它的0和1的数目
+                int oneNum = 0, zeroNum = 0;
+                auto temp_str=strs[i-1];//当前的字符
+                for(char c: temp_str)
+                {
+                    if(c=='0')
+                        zeroNum++;//0的数目自加
+                    else
+                        oneNum++;//1的数目自加
+                }
+    
+                for(int j=0;j<m+1;j++)//剩余装0的容量
+                {
+                    for(int k=0;k<n+1;k++)//剩余装1的容量
+                    {
+                        if(zeroNum>j || oneNum>k)//当前的01的数目大于容量就不能放
+                            dp[i][j][k]=dp[i-1][j][k];
+                        else
+                        {
+                            // 可以选择放或不放
+                            dp[i][j][k]=max(dp[i-1][j][k],dp[i-1][j-zeroNum][k-oneNum]+1);//多了一个，同时要减去容量
+                        }
+                    }
+                }
+            }
+    
+            return dp[strs.size()][m][n];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+<p><br></p>
 <h2>完全背包问题</h2>
 
 <p><br></p>
