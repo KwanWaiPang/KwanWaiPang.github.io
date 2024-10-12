@@ -2457,7 +2457,17 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </p></figcaption>
 </figure> 
 <details>
-<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共有多少数目可以填满，可以转换为背包问题</summary>
+<summary>Click to expand the code，题目跟上面很类似的，但此处不是求最优子问题，求解是总共有多少数目可以填满，可以转换为背包问题
+  <br>此处有一个细节点，是先遍历物体在遍历背包的容量（跟下面的<code>组合总和 Ⅳ</code>相反）
+  <br>对于大部分的完全背包的两个for循环的先后顺序都是可以的。因为纯完全背包求得装满背包的最大价值是多少，和凑成总和的元素有没有顺序没关系，即：有顺序也行，没有顺序也行！
+  <br>
+  而本题要求凑成总和的组合数，元素之间明确要求没有顺序。
+  所以纯完全背包是能凑成总和就行，不用管怎么凑的。
+  假设：coins[0] = 1，coins[1] = 5。
+那么就是先把1加入计算，然后再把5加入计算，得到的方法数量只有{1, 5}这种情况。而不会出现{5, 1}的情况。
+但是如果把遍历背包容量放外面，背包容量的每一个值，都是经过 1 和 5 的计算，包含了{1, 5} 和 {5, 1}两种情况。此时算出来的其实就是排列数了！
+
+</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -2621,25 +2631,25 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
             vector<vector<int>> dp(nums.size() + 1, vector<int>(target + 1, 0));
     
             //step2:初始化dp表
-            //当物体数为0的时候为0
-            // for(int i=0;i<nums.size() + 1;i++)
-            // {
-            //     dp[i][0]=1;//对于目标金额为0，什么都不做就是一种做法，直接可以凑出
-            // }
-            dp[0][0]=1;
+            //当物体数为0的时候为0（上面已经初始化了）
+            for(int i=0;i<nums.size() + 1;i++)
+            {
+                dp[i][0]=1;//对于目标金额为0，什么都不做就是一种做法，直接可以凑出
+            }
     
-            //step3:进行状态转移
+            //step3:进行状态转移（为了得到的是排列数，因此先遍历容量，再到物体）
             for(int j=0;j<target+1;j++)//遍历金额
             {
                 for(int i=1;i<nums.size() + 1;i++)//遍历物体
                 {
                     if(j<nums[i-1] //相当于当前不能选
-                     || dp[i-1][j] > INT32_MAX-dp[nums.size()][j-nums[i-1]]  //测试用例有两个数相加超过int的数据,因此超过就默认不选
+                    || dp[i-1][j] > INT32_MAX-dp[nums.size()][j-nums[i-1]]  //测试用例有两个数相加超过int的数据,因此超过就默认不选
                     )
                         dp[i][j]=dp[i-1][j];
                     else
-                        // dp[i][j]=dp[i-1][j]+dp[i][j-nums[i-1]];//不选和选各一种方案
+                        // dp[i][j]=dp[i-1][j]+dp[i][j-nums[i-1]];//不选和选各一种方案（这是错的，对应出来只是组合数）
                         dp[i][j]=dp[i-1][j]+dp[nums.size()][j-nums[i-1]];//不选和选各一种方案
+                        // 而对于选，应该是从nums.size()中选的，而不是单纯的i
                         
                 }
             }
