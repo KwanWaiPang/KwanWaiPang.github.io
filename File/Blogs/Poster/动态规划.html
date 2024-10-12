@@ -2704,6 +2704,82 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 
 
 <p><br></p>
+<h3>完全平方数</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241012112254.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int numSquares(int n) {
+    
+            //对于和为n，可以理解为从1~n个数，每个数i^2作为可以选的物体，
+            // 且物体（数）可以被选择多次，也就是完全背包问题
+            // 进一步地，可选的i^2必然是小于等同于n的
+    
+            int range=sqrt(n);//向下取整
+    
+            //step1：定义dp表：dp[i][j]=对于物体i，容量为j，最少的数量
+            // 状态，物体i，背包的容量为n
+            // 选择，物体i选或不选。对应的重量为i^2；范围为1~range
+            vector<vector<int>> dp(range+1, vector<int>(n+1,INT_MAX));//由于取最小值，因此统一初始化为最大值
+    
+            // step2:初始化dp表
+            //当1=1的时候，数值应该是正好等于容量值的
+            for(int j=1;j<n+1;j++)
+            {
+                dp[1][j]=j;//j个1
+            }
+    
+            //当j=1时，数值应该就是都是1的
+            for(int i=1;i<range+1;i++)
+            {
+                dp[i][1]=1*1;
+            }
+    
+            //当j=0的时候，可以选的数量为0（注意题目说了从1开始的）
+            for(int i=1;i<range+1;i++)
+            {
+                dp[i][0]=0;
+            }
+    
+            // step3：进行状态转移（先物品，后背包，因此为组合数）
+            for(int i=2;i<range+1;i++)//遍历物品
+            {
+                for(int j=1;j<n+1;j++)//遍历背包
+                {
+                    if(j-i*i<0)//不能选当前值
+                        dp[i][j]=dp[i-1][j];
+                    else
+                        dp[i][j]=min(
+                            dp[i][j], min(
+                                dp[i-1][j],//不选当前值
+                                dp[i][j-i*i]+1//选了当前值，那么当前值还可以再选,注意，选了数目需要+1
+                            )
+                        );
+                }
+            }
+    
+            return dp[range][n];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
+<p><br></p>
 <h2>超级动态规划问题：购物单</h2>
 <div>
 <figure style="text-align: center;">
