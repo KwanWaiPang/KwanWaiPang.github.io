@@ -2281,7 +2281,11 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 所谓的完全背包问题是指：有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。每件物品都有无限个（也就是可以放入背包多次），求解将哪些物品装入背包里物品价值总和最大。
 完全背包和01背包问题唯一不同的地方就是，每种物品有无限件。
 <br>
-01背包和完全背包唯一不同就是体现在遍历顺序上
+01背包和完全背包唯一不同就是体现在遍历顺序上：
+
+<li> 如果求组合数就是外层for循环遍历物品，内层for遍历背包。</li>
+
+<li>如果求排列数就是外层for遍历背包，内层for循环遍历物品。</li>
 </p>
 
 <p><br></p>
@@ -2791,10 +2795,59 @@ int knapsack(int W, int N, vector<int>& wt, vector<int>& val) {
 </figure>
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code.跟顺序有关，故此必然是先遍历背包，再遍历物体
+  <br>
+  同时注意是<code> dp[wordDict.size()][j-wordDict[i-1].size()]</code>而不是<code> dp[i][j-wordDict[i-1].size()]</code>，因为是从所有的单词中找，而不是当前的单词中找
+</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+  class Solution {
+    public:
+        bool wordBreak(string s, vector<string>& wordDict) {
+    
+            //意味着可以选多次，因此属于多重背包问题
+    
+            //step1：定义dp表。dp[i][j]=对于第i个物品，当前字符串所以为j的时候，是否拼接
+            // 状态：选择物品i，j当前到第几个单词(字符串为背包容量)
+            // 选择：当前物品/单词，选或不选
+            vector<vector<bool>> dp(wordDict.size()+1, vector<bool>(s.size()+1,false));
+    
+            // step2:初始化dp表
+            // 对于j=0，也就是目标字符串为0的时候，肯定是可以拼接的（什么都不做）
+            for(int i=0;i<wordDict.size()+1;i++)
+            {
+                dp[i][0]=true;
+            }
+    
+            //step3:进行状态转移（由于本题跟顺序有关，故此必然是先遍历背包，再遍历物体）
+            for(int j=1;j<s.size()+1;j++)//遍历背包容量
+            {
+                for(int i=1;i<wordDict.size()+1;i++)//遍历物体
+                {
+                    if(j<wordDict[i-1].size())//也就是剩余容量的尺寸小于当前单词的尺寸，当前物品不能用
+                        dp[i][j]=dp[i-1][j];
+                    else
+                    {
+                        //查看在0~j这个位置上，是否能找到wordDict[i-1]
+                        // string sub_str=s.substr(0,j);//先截取当前的字符串（当前背包的容量）
+                        // if(sub_str.find(wordDict[i-1])!=string::npos)//找到了，但是不一定是末尾的字符
+                        string sub_str = s.substr(j - wordDict[i-1].size(), wordDict[i-1].size());
+                        if(sub_str==wordDict[i-1])//要严格是最后一个
+                        {//当前字符用或不用中有true即为true
+                             dp[i][j]=dp[i-1][j] //不用当前单词
+                                    || dp[wordDict.size()][j-wordDict[i-1].size()];//用了当前单词，还可以继续从所有单词中找（但是用了剩余容量要减去长度）
+    
+                        }//若找不到，就是当前字符不能用，那么就等于上一状态的
+                        else
+                            dp[i][j]=dp[i-1][j];
+                    }
+                }
+            }
+    
+            return dp[wordDict.size()][s.size()];
+    
+        }
+    };
 </script>
 </code></pre>
 </details>
