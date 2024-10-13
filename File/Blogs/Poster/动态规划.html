@@ -1029,7 +1029,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 
 <p><br></p>
-<h1>整数拆分</h1>
+<h2>整数拆分</h2>
 <div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
@@ -2981,6 +2981,226 @@ int main() {
 </script>
 </code></pre>
 </details>
+</div>
+
+
+<p><br></p>
+<h1>打家劫舍系列问题</h1>
+<div>
+
+
+<p><br></p>
+<h2>打家劫舍</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241013153726.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int rob(vector<int>& nums) {
+    
+            //当前屋偷与不偷由前一个房屋和前两个房屋是否被偷
+    
+            // step1：定义dp组。dp[i]，位于房屋i的时候最高的金额数
+            // 状态：当前第i个房屋
+            // 选择，该房屋偷或不偷
+            vector<int> dp(nums.size()+1, 0);
+    
+            //step2:初始化dp组
+            // 0的时候没有偷，故此初始化了为0
+            dp[1]=nums[0];//1的时候，偷了金额数肯定是最大的
+    
+            //step3：进行状态转移
+            for(int i=2;i<nums.size()+1;i++)
+            {
+                dp[i]=max(
+                    dp[i-1],//前一个偷了，当前不能偷
+                    dp[i-2]+nums[i-1]//前一个没偷，那么就是dp[i-2]+当前偷了获取的价值
+                );            
+            }
+    
+            return dp[nums.size()];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code.另一种解法：两个一维数组的动态规划</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int rob(vector<int>& nums) {
+    
+            //当前屋偷与不偷由前一个房屋和前两个房屋是否被偷
+    
+            // step1：定义dp组。dp[i]，位于房屋i的时候最高的金额数
+            // 状态：当前第i个房屋
+            // 选择，该房屋偷或不偷
+            // dp[i][0];//当前不偷
+            // dp[i][1];//当前偷
+            vector<vector<int>> dp(nums.size()+1, vector<int>(2,0));
+    
+            //step2:初始化dp组
+            dp[1][0]=0;//1的时候，不偷，那么金额数为0
+            dp[1][1]=nums[0];//1的时候偷了，那么金额数为nums[0]
+    
+            //step3：进行状态转移
+            for(int i=2;i<nums.size()+1;i++)
+            {
+                // dp[i][0]=dp[i-1][1];//当前不偷，那么必然是因为上一个时刻偷了
+                dp[i][0] = max(dp[i-1][0], dp[i-1][1]);  // 当前不偷，那么上一个时刻可以偷了，也可以没偷，二者最大值！
+                dp[i][1]=dp[i-1][0]+nums[i-1];//当前偷了，那么必然是上一个时刻没偷,同时加上当前时刻的价值
+            }
+    
+            return max( dp[nums.size()][0] , dp[nums.size()][1] );
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
+<p><br></p>
+<h2>打家劫舍II</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241013160348.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        int robrange(vector<int>& nums, int start, int end) {//原本可以理解为start=0； end为nums.size()
+            
+            //当前屋偷与不偷由前一个房屋和前两个房屋是否被偷
+    
+            // step1：定义dp组。dp[i]，位于房屋i的时候最高的金额数
+            // 状态：当前第i个房屋
+            // 选择，该房屋偷或不偷
+            vector<int> dp(end+1, 0);
+    
+            //step2:初始化dp组
+            // 0的时候没有偷，故此初始化了为0
+            dp[start+1]=nums[start];//1的时候，偷了金额数肯定是最大的
+    
+            //step3：进行状态转移
+            for(int i=start+2;i<end+1;i++)
+            {
+                dp[i]=max(
+                    dp[i-1],//前一个偷了，当前不能偷
+                    dp[i-2]+nums[i-1]//前一个没偷，那么就是dp[i-2]+当前偷了获取的价值
+                );            
+            }
+    
+            return dp[end];
+        }
+    
+    
+        int rob(vector<int>& nums) {
+    
+            if (nums.size() == 1) 
+                return nums[0];//对于size数目为1的话，下面result1会报错
+            
+            //由于是成环的，因此首元素和尾元素不能同时偷
+            int result1=robrange(nums, 0, nums.size()-1);//考虑首元素，不考虑尾元素
+            int result2=robrange(nums, 1, nums.size());//不考虑首元素，考虑尾元素
+    
+            return max(result1, result2);
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+
+<p><br></p>
+<h2>打家劫舍 III</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241013164126.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。本题其实是在上面两题的基础上把数据结构改成了树的形式
+  <br>对于树的话，首先就要想到遍历方式，前中后序（深度优先搜索）还是层序遍历（广度优先搜索）。详细请见博客<sup><a href="../Poster/二叉树类题目.html" target="_blank">Link</a></sup>
+  <br>注意<code>vector<int>{0,0}</code>或<code>vector<int> a(2,0)</code>都是两个0的vector，
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  /**
+  * Definition for a binary tree node.
+  * struct TreeNode {
+  *     int val;
+  *     TreeNode *left;
+  *     TreeNode *right;
+  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+  * };
+  */
+ class Solution {
+ public:
+     //dp表：0为当前节点无被偷，1为当前节点被偷
+     vector<int> traverse(TreeNode* root)
+     {
+         if(root==nullptr)//到达根节点
+             return vector<int>{0,0};//注意为中括号！！！
+ 
+         vector<int> left_result=traverse(root->left);
+         vector<int> right_result=traverse(root->right);
+ 
+         // 后序位置
+         //当前偷了，那么左与右必然都没有被偷,两者的最大值+当前偷的结果
+         int cur_result_1=left_result[0]+right_result[0]+root->val;
+ 
+         //当前没有偷，那么应该是：可以偷也可以不偷左右节点，则取较大的情况
+         int cur_result_0=max(left_result[0],left_result[1])
+                         +max(right_result[0],right_result[1]);
+ 
+         return vector<int>{cur_result_0,cur_result_1};//注意为中括号！！！
+     }
+ 
+     int rob(TreeNode* root) {
+         vector<int> result = traverse(root);
+         return max(result[0],result[1]);//根节点偷与不偷
+         // 由于每个节点只有偷与不偷两种状态，因此从末端到顶端，遍历统计根节点不偷与偷的情况
+     }
+ };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
 </div>
 
 
