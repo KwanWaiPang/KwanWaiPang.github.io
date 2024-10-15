@@ -1932,6 +1932,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
     
             // step1:定义dp表。dp[i][j],对于nums1中第i个数字与nums2中第j个数字，最长的公共子串的数
             // 状态：nums1中第i个数字与nums2中第j个数字(从1开始，对应选取的为nums1[i-1]和nums2[j-1])
+            //而这样定义就不需要考虑初始化的问题了，否则如果以0开始，那么初始化就要检查nums1[0]和nums2[0]是否相等
             vector<vector<int>> dp(nums1.size()+1, vector<int>(nums2.size()+1,0));
     
             // step2:初始化dp表
