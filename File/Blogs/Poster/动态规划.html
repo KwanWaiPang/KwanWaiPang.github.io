@@ -849,6 +849,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 
 
+
 <p><br></p>
 <h2>Redraiment的走法</h2>
 <figure style="text-align: center;">
@@ -1569,7 +1570,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 <p><br></p>
 <h1>两个字符串的动态规划问题</h1>
-
+<div>
 <p><br></p>
 <h2>编辑距离</h2>
 <figure style="text-align: center;">
@@ -1906,6 +1907,64 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </script>
 </code></pre>
 </details> 
+
+
+<p><br></p>
+<h2>最长重复子数组</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241015142118.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。跟最长公共子串是一样的解题思路~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int findLength(vector<int>& nums1, vector<int>& nums2) {
+    
+            // 相当于两个字符串的最长公共子串
+    
+            // step1:定义dp表。dp[i][j],对于nums1中第i个数字与nums2中第j个数字，最长的公共子串的数
+            // 状态：nums1中第i个数字与nums2中第j个数字(从1开始，对应选取的为nums1[i-1]和nums2[j-1])
+            vector<vector<int>> dp(nums1.size()+1, vector<int>(nums2.size()+1,0));
+    
+            // step2:初始化dp表
+            // 上面已经全部初始化为0了~
+    
+            //step3：进行状态转移
+            int max_len=0;//用于记录最长的长度
+            for(int i=1;i<nums1.size()+1;i++)
+            {
+                for(int j=1;j<nums2.size()+1;j++)
+                {
+                    if(nums1[i-1]==nums2[j-1])
+                        dp[i][j]=max(dp[i][j], dp[i-1][j-1]+1);//记录最长的
+                    else//两者不相等
+                        dp[i][j]=0;
+    
+                    if(dp[i][j]>max_len)
+                        max_len=dp[i][j];
+                }
+            }
+    
+            return max_len;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
+</div>
 
 <p><br></p>
 <h1>背包问题</h1>
