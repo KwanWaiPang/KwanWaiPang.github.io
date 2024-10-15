@@ -708,7 +708,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 <p><br></p>
 <h1>最长递增子序列</h1>
-
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240806204942.png" alt="Image description">
@@ -792,6 +792,62 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   </script>
   </code></pre>
 </details> 
+
+
+<p><br></p>
+<h2>最长连续递增序列</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241015132230.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。注意要连续的</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int findLengthOfLCIS(vector<int>& nums) {
+    
+            if(nums.size()==1)//对于只有一个值的情况
+                return 1;
+    
+            //step1:定义dp表.dp[i]对于第i个数字，递增子序列的最大长度为多少
+            // 状态：当前位于第几个数字i,最大为nums.size()
+            // 选择：若当前的比上一个大，那么就是之前的基础上+1
+            vector<int> dp(nums.size()+1,1);
+    
+            // step2:初始化dp表
+            // 初始化为1，自身就是1
+    
+            // step3:状态转移
+            int max_len=0;
+            for(int i=2;i<nums.size()+1;i++)
+            {
+                // 注意要连续的
+                if(nums[i-1]>nums[i-2])//大于前一个
+                    dp[i]=dp[i-1]+1;//上一个状态的值+1
+                
+                // 否则就是1
+    
+                if(dp[i]>max_len)//记录全部的最大值
+                    max_len=dp[i];
+            }
+    
+            return max_len;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
 
 <p><br></p>
 <h2>Redraiment的走法</h2>
@@ -1085,6 +1141,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 </div>
 
+</div>
 
 <p><br></p>
 <h1>同时维护两个一维的dp表：摆动序列</h1>
