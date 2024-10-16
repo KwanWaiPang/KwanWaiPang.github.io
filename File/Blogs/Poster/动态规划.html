@@ -1965,6 +1965,64 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </div> 
 
 
+<p><br></p>
+<h2>最长公共子序列</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241016112446.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。注意要的是子序列，不是子串</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int longestCommonSubsequence(string text1, string text2) {
+    
+            // step1:定义dp表。dp[i][j]=对于text1中的第i个字母，text2中的第j个字母，他们所对应的公共子序列最大长度
+            // 状态：对于text1中的第i个字母，text2中的第j个字母（j从1开始。size()+1）
+            // 选择：两个相等就+1，。不等就清0~
+            vector<vector<int>> dp(text1.size()+1, vector<int>(text2.size()+1,0));
+    
+            // step2:初始化dp表，都初始化为0了，注意i从1开始，所以不用考虑第一个的情况
+    
+            //step3:进行状态转移
+            int max_len=0;//记录最长的字符
+    
+            for(int i=1;i<text1.size()+1;i++)
+            {
+                for(int j=1; j<text2.size()+1;j++)
+                {
+                    if(text1[i-1]==text2[j-1])//若相等
+                        dp[i][j]=dp[i-1][j-1]+1;
+                    else//不等
+                        dp[i][j]=max(dp[i][j-1],dp[i-1][j]);//若不等，但最大应该还是删除这个后的最大值
+    
+                    // 注意dp[i][j]已经一直更新记录全部的最大子序列长度，因此无需额外记录
+    
+                    // // 记录全部的最大值
+                    // if(dp[i][j]>max_len)
+                    //     max_len=dp[i][j];
+                }
+            }
+    
+            // return max_len;
+            return dp[text1.size()][text2.size()];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
+
 </div>
 
 <p><br></p>
