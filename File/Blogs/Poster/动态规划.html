@@ -2022,6 +2022,58 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </div> 
 
 
+<p><br></p>
+<h2>不相交的线</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241016122859.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。直线不能相交，这就是说明在字符串A中 找到一个与字符串B相同的子序列，且这个子序列不能改变相对顺序，只要相对顺序不改变，链接相同数字的直线就不会相交。（本质上跟上一题“最长公共子序列”是一模一样的）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
+    
+            //step1:定义dp表.dp[i][j]=对于nums1的第i个数字与nums2的第j个数字对应的最大连线数
+            // 状态:对于nums1的第i个数字与nums2的第j个数字
+            //选择:连线或不连线
+            vector<vector<int>> dp(nums1.size()+1, vector<int>(nums2.size()+1,0));
+    
+            // step2:初始化dp表,上面都初始化为0了
+    
+            // step3:进行状态转移
+            for(int i=1;i<nums1.size()+1;i++)
+            {
+                for(int j=1;j<nums2.size()+1;j++)
+                {
+                    if(nums1[i-1]==nums2[j-1])//相等,那么就可以选择连或不连
+                        // dp[i][j]=max(
+                        //     dp[i-1][j-1]+1, //连了
+                        //     max(dp[i-1][j],dp[i][j-1])//不连,任意保留一个的最大值
+                        // );
+                        dp[i][j]=dp[i-1][j-1]+1;//上面写法也可以,一模一样的
+                    else//不等,那么只能不连,但是不连是分为放弃哪个的
+                        dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+    
+            return dp[nums1.size()][nums2.size()];
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
 
 </div>
 
