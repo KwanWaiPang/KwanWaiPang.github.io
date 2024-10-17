@@ -1670,7 +1670,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </figure>
 
 <details>
-<summary>Click to expand the code。编辑距离入门级题目</summary>
+<summary>Click to expand the code。编辑距离入门级题目。本质上就是只有删除这一个操作</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
   class Solution {
@@ -1709,6 +1709,67 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 </div> 
+
+
+<p><br></p>
+<h2>不同的子序列</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241017203253.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。也是编辑距离类型的题目，但只有删除的操作</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int numDistinct(string s, string t) {
+            
+            //可以理解为s删掉某些字符就得到t
+            //进一步的可以退化为编辑距离，
+    
+            //step1:定义dp表。dp[i][j]s的第i个字符与t的第j个字符的时候，s到t的方案数
+            // 状态：s的第i个字符与t的第j个字符（从1开始，到size()+1,这样就不用处理初始化问题）
+            // 选择：删或不删
+            vector<vector<unsigned long>> dp(s.size()+1, vector<unsigned long>(t.size()+1, 0));
+            // unsigned long处理极大的数组的情况
+    
+            //step2:初始化dp表
+            dp[0][0]=1;
+            for(int i=1;i<s.size()+1;i++)
+            {
+                dp[i][0]=1;//当t为空时，有且只有一种方案由s到t，就是s全部删掉
+            }
+    
+            // step3：进行状态转移
+            for(int i=1;i<s.size()+1;i++)
+            {
+                for(int j=1;j<t.size()+1;j++)
+                {
+                    if(s[i-1]==t[j-1])//若两个字符相等
+                        dp[i][j]=dp[i-1][j-1]+dp[i-1][j];//退化为上一个状态，或者删掉s再检测（方案数为两者之和）
+                    else//若不等
+                        dp[i][j]=dp[i-1][j];//当前字母s删掉
+                }
+            }
+    
+            return dp[s.size()][t.size()];
+    
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
 
 <p><br></p>
 <h2>编辑距离</h2>
