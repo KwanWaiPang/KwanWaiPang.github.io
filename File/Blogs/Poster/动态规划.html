@@ -706,6 +706,90 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 </div>
 
+
+<p><br></p>
+<h1>最大子数组和</h1>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/greedy_algorithm/微信截图_20240901215623.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<details>
+<summary>Click to expand the code。动态规划解法。时间复杂度为O（N），空间复杂度为O（N）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxSubArray(vector<int>& nums) {
+    
+           //step1：定义dp表：dp[i]=索引为i的数字,能获取的最大和
+            //状态：对于索引为i的数字
+            //选择：从当前索引重新开始或用之前累计的结果
+            int dp[nums.size()];
+    
+            //step2:初始化dp表
+            dp[0]= nums[0];//第一个的最大值就是第一个数
+    
+            // step3:进行状态转移
+            int result=dp[0];//记录全部的最大值(注意，此处不能用INT_MIN,需要初始化为第一个数组)
+            for(int i=1;i<nums.size();i++)
+            {
+                // 从当前索引从新算，或者当前+上一个状态
+                dp[i]=max(nums[i],dp[i-1]+nums[i]);
+                result=max(dp[i],result);
+            }
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。贪心算法的解法，当前“连续和”为负数的时候立刻放弃，从下一个元素重新计算“连续和”，因为负数加上下一个元素 “连续和”只会越来越小。时间复杂度为O（N），空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxSubArray(vector<int>& nums) {
+    
+          
+            int result=INT_MIN;//注意要初始化为最小的负数，因为可能一开始就为负数
+    
+            int temp_sum=0;
+            for(int i=0;i<nums.size();i++)
+            {
+               temp_sum+=nums[i];
+               result=max(temp_sum,result);//每次加完后,记录最大值（最终作为全局最优）
+    
+                // 当前“连续和”为负数的时候立刻放弃，从下一个元素重新计算“连续和”，
+                // 因为负数加上下一个元素 “连续和”只会越来越小。
+               if(temp_sum<0)//为负数了，马上重置
+                    temp_sum=0;
+                
+                //注意遇到负数后，继续加和，下一个可能更大（和为正，对下一个必然是增大的作用）。
+                //但是和为负数后，如果继续加下一个必然更小。
+                // 为此应该选和为负的时候作为零界点
+    
+            }
+    
+            return result;
+    
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+
+
 <p><br></p>
 <h1>最长递增子序列</h1>
 <div>
@@ -1144,6 +1228,8 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 
 </div>
 
+
+
 <p><br></p>
 <h1>同时维护两个一维的dp表：摆动序列</h1>
 <figure style="text-align: center;">
@@ -1571,8 +1657,62 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 <p><br></p>
 <h1>两个字符串的动态规划问题</h1>
 <div>
+
+<p><br></p>
+<h2>判断子序列</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241017201759.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。编辑距离入门级题目</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        bool isSubsequence(string s, string t) {
+    
+            //step1：定义dp表。dp[i][j]s的第i个字符与t的第j个字符是否子序列
+            // 状态：s的第i个字符与t的第j个字符（从1开始，到size()+1,这样就不用处理初始化问题）
+            // 选择：等或不等，
+            vector<vector<bool>> dp(s.size()+1, vector<bool>(t.size()+1, false));
+    
+            // step2:初始化全为false
+            dp[0][0]=true;//全为空必然为子序列
+            for(int j=1;j<t.size()+1;j++)
+            {
+                dp[0][j]=true;//s为空，那么s必然是t的子序列
+            }
+    
+            // step3：进行状态转移
+            for(int i=1;i<s.size()+1;i++)
+            {
+                for(int j=1;j<t.size()+1;j++)
+                {
+                    if(s[i-1]==t[j-1])//若两个字符相等
+                        dp[i][j]=dp[i-1][j-1];//退化为上一个状态
+                    else//若不等
+                        dp[i][j]=dp[i][j-1];//应该删掉，再检查
+                }
+            }
+    
+            return dp[s.size()][t.size()];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
 <p><br></p>
 <h2>编辑距离</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/微信截图_20240805215323.png" alt="Image description">
@@ -1626,9 +1766,11 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   </script>
 </code></pre>
 </details>
+</div>
 
 <p><br></p>
 <h2>字符串通配符</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dynamic_programming/WX20240818-104800.png" alt="Image description">
@@ -1716,7 +1858,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </script>
 </code></pre>
 </details>
-
+</div>
 
 <p><br></p>
 <h2>最长回文子串  </h2>
@@ -2073,6 +2215,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 
 </div> 
+
 
 
 </div>
