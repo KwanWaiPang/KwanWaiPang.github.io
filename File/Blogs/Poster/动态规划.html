@@ -1770,6 +1770,62 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </div> 
 
 
+<p><br></p>
+<h2>两个字符串的删除操作</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241017210134.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。只是上面一题的进阶版，改为两个字符都可以删减了~</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int minDistance(string word1, string word2) {
+    
+            //step1:定义dp表。dp[i][j]word1的第i个字符与word2的第j个字符的时候，s到t的最小步数
+            // 状态：word1的第i个字符与word2的第j个字符（从1开始，到size()+1,这样就不用处理初始化问题）
+            // 选择：删或不删
+            vector<vector<int>> dp(word1.size()+1, vector<int>(word2.size()+1, INT_MAX));
+    
+            //step2:初始化dp表，上面定义的时候都初始化为最大值
+            dp[0][0]=0;
+            // 若只有其中之一为空
+            for(int i=1;i<word1.size()+1;i++)
+                dp[i][0]=i;//操作数为剩余的字符数
+            for(int j=1;j<word2.size()+1;j++)
+                dp[0][j]=j;
+    
+            // step3：进行状态转移
+             for(int i=1;i<word1.size()+1;i++)
+                {
+                    for(int j=1;j<word2.size()+1;j++)
+                    {
+                        if(word1[i-1]==word2[j-1])//若两个字符相等
+                            dp[i][j]=dp[i-1][j-1];//退化为上一个状态，不操作，必然是最小的
+                        else//若不等,两种选择之一的最小
+                            dp[i][j]=min(
+                                dp[i-1][j]+1,//删掉i的操作数
+                                dp[i][j-1]+1//删掉j的操作数
+                            );
+                    }
+                }
+        
+            return dp[word1.size()][word2.size()];
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
 
 <p><br></p>
 <h2>编辑距离</h2>
@@ -1921,8 +1977,12 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </details>
 </div>
 
+
+
+
 <p><br></p>
 <h2>最长回文子串  </h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/array/WX20240814-190830.png" alt="Image description">
@@ -2023,6 +2083,7 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
   </script>
   </code></pre>
 </details>
+</div>
 
 <p><br></p>
 <h2>公共子串计算</h2>
