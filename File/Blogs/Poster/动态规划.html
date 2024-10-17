@@ -1978,6 +1978,116 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
 </div>
 
 
+<p><br></p>
+<h2>回文子串</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241017211420.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。双指针法比较直接，见下题最长回文子串，此处仅用动态规划来解题</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int countSubstrings(string s) {
+            
+            // step1:定义dp表：dp[j][i]=起点为j终点为i的字符它是否为回文子串
+            // 状态：起点为j终点为i的字符(i从0开始，到s.size()-1)
+            vector<vector<bool>> dp(s.size(),vector<bool>(s.size(),false));
+    
+            // step2:初始化dp表，初始化为false
+    
+            //step3:进行状态转移
+            int result=0;//总的回文子串数目
+            for(int i=0;i<s.size();i++)//注意遍历的顺序，i为终点
+            {
+                for(int j=0;j<=i;j++)//j为从0~i
+                {
+                    if(i==j)//自身必然是回文子串
+                    {
+                        dp[j][i]=true;
+                        result++;
+                    }
+                    else if(j+1==i)//偶数的情况
+                    {
+                        dp[j][i]=(s[i]==s[j]);
+                        if(dp[j][i]==true)//若是回文子串
+                            result++;
+                    }
+                    else //i与j相差大于1
+                    {
+                        dp[j][i]= (s[i]==s[j]) && dp[j+1][i-1];//从小范围到大范围
+                        if(dp[j][i]==true)//若是回文子串
+                            result++;
+                    }
+    
+                }
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+<details>
+<summary>Click to expand the code。以i为起点，j为终点（这个思路更好理解~）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int countSubstrings(string s) {
+            
+            // step1:定义dp表：dp[i][j]=起点为i终点为j的字符它是否为回文子串
+            // 状态：起点为i终点为j的字符(i从0开始，到s.size()-1)
+            vector<vector<bool>> dp(s.size(),vector<bool>(s.size(),false));
+    
+            // step2:初始化dp表，初始化为false
+    
+            //step3:进行状态转移
+            int result=0;//总的回文子串数目
+            for(int i=s.size()-1;i>=0;i--)//注意遍历的顺序，i为起点，从后往前遍历
+            {
+                for(int j=i;j<s.size();j++)//j为终点
+                {
+                    if(i==j)//自身必然是回文子串
+                    {
+                        dp[i][j]=true;
+                        result++;
+                    }
+                    else if(i+1==j)//偶数的情况
+                    {
+                        dp[i][j]=(s[i]==s[j]);
+                        if(dp[i][j]==true)//若是回文子串
+                            result++;
+                    }
+                    else //i与j相差大于1
+                    {
+                        dp[i][j]= (s[i]==s[j]) && dp[i+1][j-1];//从小范围到大范围
+                        if(dp[i][j]==true)//若是回文子串
+                            result++;
+                    }
+    
+                }
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+
+</div> 
 
 
 <p><br></p>
@@ -2082,6 +2192,54 @@ int minCostClimbingStairsDP(vector&ltint&gt &cost) {
       }
   </script>
   </code></pre>
+</details>
+
+</div>
+
+
+<p><br></p>
+<h2>最长回文子序列  </h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/dynamic_programming/微信截图_20241017215216.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.以i为起点，j为终点</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int longestPalindromeSubseq(string s) {
+    
+         // step1:定义dp表：dp[i][j]=字符串s在[i, j]范围内，最长的回文子序列长度
+        // 状态：起点为i终点为j的字符(i从0开始，到s.size()-1)
+        vector<vector<int>> dp(s.size(),vector<int>(s.size(),0));
+    
+        // step2:初始化dp表，自身必然是回文子串
+        for(int i=0;i<s.size();i++)
+            dp[i][i]=1;
+    
+        //step3:进行状态转移
+        for(int i=s.size()-1;i>=0;i--)//注意遍历的顺序，i为起点
+        {
+            for(int j=i+1;j<s.size();j++)//j为终点(j=i的情况上面考虑了)
+            {
+                if(s[i]==s[j])
+                    dp[i][j]= dp[i+1][j-1]+2;//数目增大了两个
+                else//可以选择删除一个字符（也就是少对比一个）
+                    dp[i][j]=max(dp[i+1][j],dp[i][j-1]);//两者的最大值
+            }
+        }
+        return dp[0][s.size()-1];//i为起点，j为终点。
+        }
+    };
+</script>
+</code></pre>
 </details>
 </div>
 
