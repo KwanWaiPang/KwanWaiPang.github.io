@@ -442,7 +442,7 @@ def backtrack(路径, 选择列表):
 <p><br></p>
 <h1>排列/组合/子集问题</h1>
 
-<h3>1.子集（元素无重不可复选）</h3>
+<h2>1.子集（元素无重不可复选）</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240808221517.png" alt="Image description">
@@ -491,7 +491,8 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>2.组合（元素无重不可复选）</h3>
+<h2>2.组合（元素无重不可复选）</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809202147.png" alt="Image description">
@@ -540,7 +541,72 @@ def backtrack(路径, 选择列表):
 </details>
 
 <p><br></p>
-<h3>3.排列（元素无重不可复选）</h3>
+<h3>组合总和III</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241018174513.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.注意要从1开始</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            void backtrack(const int num, int target, vector<int>& each_path, vector<vector<int>>& results, int index)
+            {
+                //递归终止条件
+                if(each_path.size()==num)//达到数目了
+                {
+                    if(target==0)//减到0了
+                        results.push_back(each_path);
+                    return;
+                }
+        
+                //选择列表
+                for(int i=index;i<=9;i++)//从index开始，那么就避免了排列的情况（仅仅是组合）
+                {
+                    if(target-i<0)//进行剪枝
+                        continue;
+        
+                    // 做选择
+                    each_path.push_back(i);
+                    target-=i;
+        
+                    backtrack(num,target,each_path,results,i+1);//下次是o的下一个
+        
+                    //撤销选择
+                    each_path.pop_back();
+                    target+=i;
+                    
+                }
+            }
+            vector<vector<int>> combinationSum3(int k, int n) {
+        
+                //首先由于每个数最多使用一次，因此是无重不可复选
+        
+                vector<int> each_path;
+                vector<vector<int>> results;
+                backtrack(k,n,each_path,results,1);//注意从1开始
+        
+                return results;        
+            }
+        };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+</div>
+
+
+<p><br></p>
+<h2>3.排列（元素无重不可复选）</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807230409.png" alt="Image description">
@@ -640,7 +706,7 @@ class Solution {
 
 
 <p><br></p>
-<h3>4.子集（元素可重不可复选）</h3>
+<h2>4.子集（元素可重不可复选）</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809203607.png" alt="Image description">
@@ -700,7 +766,7 @@ class Solution {
 </details>
 
 <p><br></p>
-<h3>5.组合（元素可重不可复选）</h3>
+<h2>5.组合（元素可重不可复选）</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809205515.png" alt="Image description">
@@ -759,7 +825,7 @@ class Solution {
 </details>
 
 <p><br></p>
-<h3>6.排列（元素可重不可复选）</h3>
+<h2>6.排列（元素可重不可复选）</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807231905.png" alt="Image description">
@@ -936,7 +1002,7 @@ int main()
 </details>
 
 <p><br></p>
-<h3>7.组合（元素无重可复选）</h3>
+<h2>7.组合（元素无重可复选）</h2>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809215456.png" alt="Image description">
@@ -1029,15 +1095,15 @@ int main()
 </details>
 
 <p><br></p>
-<h3>8.子集（元素无重可复选）</h3>
+<h2>8.子集（元素无重可复选）</h2>
 <p>此类型目前还没找到例题</p>
 
 <p><br></p>
-<h3>9.排列（元素无重可复选）</h3>
+<h2>9.排列（元素无重可复选）</h2>
 <p>此类型目前还没找到例题</p>
 
 <p><br></p>
-<h3>10.元素可重可复选</h3>
+<h2>10.元素可重可复选</h2>
 <p>
 元素可重可复选。但既然元素可复选，那又何必存在重复元素呢？
 因此可以先对元素进行去重处理，然后就是退化为无重可复选的情况了。
