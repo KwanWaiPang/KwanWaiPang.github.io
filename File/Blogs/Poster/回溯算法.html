@@ -814,7 +814,7 @@ class Solution {
                 for(int i=index;i<s.size();i++)//子集形式
                 {
                     //先判断是否回文子串（相当于剪枝）
-                    if(function(s,index, i))//i为当前右指针的位置
+                    if(function(s,index, i))//注意：i为当前右指针的位置
                     {
                         // 若是回文子串
                         int left=index;
