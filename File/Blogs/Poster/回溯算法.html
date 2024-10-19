@@ -707,6 +707,7 @@ class Solution {
 
 <p><br></p>
 <h2>4.子集（元素可重不可复选）</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809203607.png" alt="Image description">
@@ -764,6 +765,97 @@ class Solution {
   </script>
 </code></pre>
 </details>
+
+
+<p><br></p>
+<h3>分割回文串</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241019165031.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code.本质上为子集问题。可重不可复选，只是额外需要判断是否回文子串（用于剪纸）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            //双指针法判断当前字符串是否为回文子串
+            bool function(string s, int left, int right)
+            {   
+        
+                //确保不越界以及相等
+                while(left<right)
+                {
+                    if(s[left]!=s[right])
+                        return false;//返回不是回文串
+                    left++;
+                    right--;
+                }
+                //注意没有两者相等的情况，这样可以处理aba以及aa所有情况
+                
+                return true;
+            }
+        
+            void backtrack(string s, vector<string> each_path, vector<vector<string>>& results, int index)
+            {
+                //递归终止条件
+                if(index==s.size())
+                {
+                    results.push_back(each_path);
+                    return;
+                }
+        
+                //选择列表
+                for(int i=index;i<s.size();i++)//子集形式
+                {
+                    //先判断是否回文子串（相当于剪枝）
+                    if(function(s,index, i))//i为当前右指针的位置
+                    {
+                        // 若是回文子串
+                        int left=index;
+                        int right=i;
+        
+                        string cur_str=s.substr(left,right-left+1);
+        
+                        //做选择
+                        each_path.push_back(cur_str);
+        
+                        //回溯调用
+                        backtrack(s,each_path,results,i+1);//下次用i+1开始
+        
+                        // 撤销选择
+                        each_path.pop_back();
+        
+                    }
+                    else
+                        continue;//当前跳过
+                }
+            }
+        
+            vector<vector<string>> partition(string s) {
+                
+                //相当于可重不可复选
+                //且为子集
+                vector<vector<string>> results;
+                vector<string> each_path;
+        
+                backtrack(s,each_path,results,0);//从第一个字符开始
+        
+                return results;        
+            }
+        };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+</div>
 
 <p><br></p>
 <h2>5.组合（元素可重不可复选）</h2>
