@@ -855,6 +855,101 @@ class Solution {
 
 </div>
 
+<p><br></p>
+<h3>复原IP地址</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241020203850.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。跟上一题分割回文子串很像，只是额外多了要添加点的操作。
+        <br>
+    关键点在于额外构建函数每次判断字符是否合法的一位。合法就放入，然后继续回溯计算。下一次重新测[index，i]区间</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            //额外定义一个函数判断某个字符是否合法的ip 
+            bool isvail(string s, int start, int end)
+            {
+                if(start>end)
+                    return false;
+                if(end-start+1>4)//长度超过了4
+                    return false;
+                
+                if(s[start]=='0' && start!=end)//也就是不是一个0，存在前导0
+                    return false;
+                
+                string cur_str=s.substr(start,end-start+1);//注意是左右闭区间，因此要+1
+                int str_int=stoi(cur_str);
+                if(str_int>255)//超过255
+                    return false;
+        
+                return true;//通过所有测试，为对
+        
+            }
+            void backtrack(string s, vector<string> each_path,vector<string>& results, int index)
+            {
+                //递归终止的条件
+                if(index==s.size())
+                {
+                    if(each_path.size()==4)//刚刚好为4
+                    {
+                        string cur_str;//插入点
+                        for(int i=0;i<each_path.size();i++)
+                        {
+                            cur_str+=each_path[i]+'.';
+                        }
+                        results.push_back(cur_str.substr(0,cur_str.size()-1));//最后一个点不要
+                    }
+                    return;
+                }
+        
+                //选择列表
+                for(int i=index;i<s.size();i++)
+                {
+                   if(isvail(s, index,i))//先判断这个区间是否有效
+                   { //有效才处理
+                        //做选择
+                        each_path.push_back(s.substr(index,i-index+1));
+        
+                        //回溯
+                        backtrack(s, each_path, results,i+1);
+        
+                        //撤销选择
+                        each_path.pop_back();
+        
+                   }
+                }
+        
+        
+            }
+            vector<string> restoreIpAddresses(string s) {
+        
+                // 首先只包含数字
+                // 不能 重新排序或删除 s 中的任何数字
+                // 因此相当于子集
+                // 可重不可复选
+        
+                vector<string> each_path;
+                vector<string> results;
+                backtrack(s, each_path, results,0);
+        
+                return results;        
+            }
+        };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+
 </div>
 
 <p><br></p>
@@ -1976,6 +2071,8 @@ int main()
 </p>
 
 </div> 
+
+
 
 <p><br></p>
 <h1>回溯算法解二叉树类题目</h1>
