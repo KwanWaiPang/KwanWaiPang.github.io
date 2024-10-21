@@ -602,170 +602,6 @@ def backtrack(路径, 选择列表):
 
 </div>
 
-</div>
-
-
-<p><br></p>
-<h2>3.排列（元素无重不可复选）</h2>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807230409.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-<details>
-<summary>Click to expand the code。注意：此题的全排列问题不包含重复的数字，下一题则是包含重复数字。递归的时间复杂度为O（N！）加上递归中每个有for循环，故此应该是O（N*N！）。空间复杂度应该是O（N）</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-class Solution {
-  public:
-      void calculate(vector<int>& num, int index, vector<vector<int>> &results)
-      {
-          //遍历完了，退出
-          if(index==num.size()-1) //当index等于最后一个字节时，把对调后的num放入结果中(是否减1结果一样～)
-          {
-              results.push_back(num);
-              return;
-          }
-  
-          // index可以理解为一直递增，避免重复使用
-          for(int i=index;i<num.size();i++)
-          {
-              //做选择
-              swap(num[i],num[index]);//变换num中两个索引的顺序，只是采用swap代替了path数组，少了一个中间变量
-
-              calculate(num, index+1, results);//下一次计算，注意是index+1。
-
-              //撤销选择
-              swap(num[index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
-          }
-          
-      }
-  
-      vector<vector<int>> permute(vector<int>& nums) {
-  
-          //采用递归的方法时间复杂度为O（N！）
-          vector<vector<int>> results;
-          calculate(nums,0, results);
-          return results;
-      }
-  };
-</script>
-</code></pre>
-</details>
-
-<details>
-<summary>下面代码跟上面的区别只是上面通过索引index以及swap来保证交互的两个不会重复被用，此处用vector<bool>来记录是否被用过。本质上是一样的。以及递归空间复杂度也是O(N)所以并没有差别～</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-  class Solution {
-    public:
-    
-        void backtrack(vector<int>& nums, vector<bool>& used, vector<int>& path,vector<vector<int>>& results)
-        {
-            //回溯回调的终止条件
-            if(path.size()==nums.size())//全部用完了
-            {
-                results.push_back(path);
-                return;
-            }
-    
-            for(int i=0;i<nums.size();i++)//从列表中选择
-            {
-                //根据是否用过来剪枝
-                if(used[i]==true)
-                    continue;//若当前已经被用过了。就剪枝
-    
-                //前序位置做选择
-                path.push_back(nums[i]);
-                used[i]=true;//标记用过
-    
-                backtrack(nums, used, path,results);
-    
-                //后序位置撤销选择
-                path.pop_back();
-                used[i]=false;//撤销标记
-            }
-        }
-    
-        vector<vector<int>> permute(vector<int>& nums) {
-    
-            vector<bool> used(nums.size(),false);//用于标记当前元素是否被使用过
-            vector<vector<int>> results;//记录所有的结果
-            vector<int> path;//记录每次的结果
-    
-            backtrack(nums, used, path,results);
-            return results;
-    
-        }
-    };
-</script>
-</code></pre>
-</details> 
-
-
-<p><br></p>
-<h2>4.子集（元素可重不可复选）</h2>
-<div>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809203607.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-
-<details>
-<summary>通过新增的if判据，来实现元素虽然存在重复,但是最终结果不能管顺序。空间复杂度：O(n)。临时数组 t 的空间代价是 O(n)，递归时栈空间的代价为 O(n)。
-  而时间复杂度。首先sort排序的时间复杂度为：O（N）回溯的时间复杂度为O(2<sup>N</sup>),然后遍历每个字符，所以应该是O（N*2<sup>N</sup>）至于前面排序sort的时间复杂度也是O（N），因此总的时间复杂度为O（N*2<sup>N</sup>）
-</summary>
-<pre><code>
-  <script type='text/html' style='display:block'>
-  class Solution {
-    public:
-    
-        void backtrack(vector<int>& nums, vector<vector<int>>& results, vector<int>& each_result, int index)
-        {
-            //没有结束条件,每次直接返回
-            results.push_back(each_result);
-    
-            //遍历每个字符
-            for(int i=index;i<nums.size();i++)
-            {   
-                // 注意要对i>index才执行 ( 剪枝逻辑，值相同的相邻树枝，只遍历第一条)
-                if(i>index && nums[i-1]==nums[i])//若当前跟上一个一样,那么就不执行
-                    continue;//不执行
-    
-                //前序位置
-                each_result.push_back(nums[i]);
-    
-                // 回溯前,先if判断当前结果是否出现过
-                // if(find(results.begin(),results.end(),each_result)==results.end())//若找不到(这样做不行)
-                    backtrack(nums, results,each_result,i+1);
-    
-                //后序位置,放入后删掉
-                each_result.pop_back();
-    
-            }
-        }
-    
-    
-        vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-            // 元素虽然存在重复,但是最终结果不能管顺序
-            sort(nums.begin(),nums.end());//排序一下
-            vector<vector<int>> results;
-            vector<int> each_result;
-            backtrack(nums, results,each_result,0);//索引从0开始
-    
-            return results;
-    
-        }
-    };
-  </script>
-</code></pre>
-</details>
-
 
 <p><br></p>
 <h3>分割回文串</h3>
@@ -946,6 +782,310 @@ class Solution {
 </script>
 </code></pre>
 </details>
+
+</div>
+
+</div>
+
+
+<p><br></p>
+<h2>3.排列（元素无重不可复选）</h2>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240807230409.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+<details>
+<summary>Click to expand the code。注意：此题的全排列问题不包含重复的数字，下一题则是包含重复数字。递归的时间复杂度为O（N！）加上递归中每个有for循环，故此应该是O（N*N！）。空间复杂度应该是O（N）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+class Solution {
+  public:
+      void calculate(vector<int>& num, int index, vector<vector<int>> &results)
+      {
+          //遍历完了，退出
+          if(index==num.size()-1) //当index等于最后一个字节时，把对调后的num放入结果中(是否减1结果一样～)
+          {
+              results.push_back(num);
+              return;
+          }
+  
+          // index可以理解为一直递增，避免重复使用
+          for(int i=index;i<num.size();i++)
+          {
+              //做选择
+              swap(num[i],num[index]);//变换num中两个索引的顺序，只是采用swap代替了path数组，少了一个中间变量
+
+              calculate(num, index+1, results);//下一次计算，注意是index+1。
+
+              //撤销选择
+              swap(num[index],num[i]);//变回去（变完后要变回去，才可以确保下次变是正确的）
+          }
+          
+      }
+  
+      vector<vector<int>> permute(vector<int>& nums) {
+  
+          //采用递归的方法时间复杂度为O（N！）
+          vector<vector<int>> results;
+          calculate(nums,0, results);
+          return results;
+      }
+  };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>下面代码跟上面的区别只是上面通过索引index以及swap来保证交互的两个不会重复被用，此处用vector<bool>来记录是否被用过。本质上是一样的。以及递归空间复杂度也是O(N)所以并没有差别～</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        void backtrack(vector<int>& nums, vector<bool>& used, vector<int>& path,vector<vector<int>>& results)
+        {
+            //回溯回调的终止条件
+            if(path.size()==nums.size())//全部用完了
+            {
+                results.push_back(path);
+                return;
+            }
+    
+            for(int i=0;i<nums.size();i++)//从列表中选择
+            {
+                //根据是否用过来剪枝
+                if(used[i]==true)
+                    continue;//若当前已经被用过了。就剪枝
+    
+                //前序位置做选择
+                path.push_back(nums[i]);
+                used[i]=true;//标记用过
+    
+                backtrack(nums, used, path,results);
+    
+                //后序位置撤销选择
+                path.pop_back();
+                used[i]=false;//撤销标记
+            }
+        }
+    
+        vector<vector<int>> permute(vector<int>& nums) {
+    
+            vector<bool> used(nums.size(),false);//用于标记当前元素是否被使用过
+            vector<vector<int>> results;//记录所有的结果
+            vector<int> path;//记录每次的结果
+    
+            backtrack(nums, used, path,results);
+            return results;
+    
+        }
+    };
+</script>
+</code></pre>
+</details> 
+
+
+<p><br></p>
+<h2>4.子集（元素可重不可复选）</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/backtrack/微信截图_20240809203607.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+<details>
+<summary>通过新增的if判据，来实现元素虽然存在重复,但是最终结果不能管顺序。空间复杂度：O(n)。临时数组 t 的空间代价是 O(n)，递归时栈空间的代价为 O(n)。
+  而时间复杂度。首先sort排序的时间复杂度为：O（N）回溯的时间复杂度为O(2<sup>N</sup>),然后遍历每个字符，所以应该是O（N*2<sup>N</sup>）至于前面排序sort的时间复杂度也是O（N），因此总的时间复杂度为O（N*2<sup>N</sup>）
+</summary>
+<pre><code>
+  <script type='text/html' style='display:block'>
+  class Solution {
+    public:
+    
+        void backtrack(vector<int>& nums, vector<vector<int>>& results, vector<int>& each_result, int index)
+        {
+            //没有结束条件,每次直接返回
+            results.push_back(each_result);
+    
+            //遍历每个字符
+            for(int i=index;i<nums.size();i++)
+            {   
+                // 注意要对i>index才执行 ( 剪枝逻辑，值相同的相邻树枝，只遍历第一条)
+                if(i>index && nums[i-1]==nums[i])//若当前跟上一个一样,那么就不执行
+                    continue;//不执行
+    
+                //前序位置
+                each_result.push_back(nums[i]);
+    
+                // 回溯前,先if判断当前结果是否出现过
+                // if(find(results.begin(),results.end(),each_result)==results.end())//若找不到(这样做不行)
+                    backtrack(nums, results,each_result,i+1);
+    
+                //后序位置,放入后删掉
+                each_result.pop_back();
+    
+            }
+        }
+    
+    
+        vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+            // 元素虽然存在重复,但是最终结果不能管顺序
+            sort(nums.begin(),nums.end());//排序一下
+            vector<vector<int>> results;
+            vector<int> each_result;
+            backtrack(nums, results,each_result,0);//索引从0开始
+    
+            return results;
+    
+        }
+    };
+  </script>
+</code></pre>
+</details>
+
+
+<p><br></p>
+<h3>非递减子序列</h3>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241021131318.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。相当于取有序的子集（可重，不可复选）。但是跟上一题不一样的是不能对原数组进行排序的，因此其原本的去重的方式不适用。此处改为用find来看是否存在重复的结果。
+
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            void backtrack(vector<int> nums, vector<int> each_patch, vector<vector<int>>& results, int index)
+            {
+                //递归终止条件
+                if(index==nums.size())
+                {
+                    if(each_patch.size()>1)//必须大于1
+                        if(find(results.begin(),results.end(),each_patch)==results.end())//找到了
+                            results.push_back(each_patch);
+                    return;
+                }
+                if(each_patch.size()>1)//大于1已经可以放置了
+                {
+                    if(find(results.begin(),results.end(),each_patch)==results.end())//找不到才放
+                        results.push_back(each_patch);
+                }
+        
+                //选择列表
+                for(int i=index;i<nums.size();i++)
+                {
+                    if(!each_patch.empty())//若不为空，且最后一个大于当前，就剪枝，不能放
+                    {
+                        if(each_patch[each_patch.size()-1]>nums[i])
+                            continue;
+                    }
+        
+                    //做选择
+                    each_patch.push_back(nums[i]);
+        
+                    backtrack(nums,each_patch,results,i+1);
+        
+                    //撤销选择
+                    each_patch.pop_back();
+        
+                }
+        
+            }
+            vector<vector<int>> findSubsequences(vector<int>& nums) {
+                
+                //相当于取有序的子集（可重，不可复选）
+                //但是跟90.子集III不一样的是不能对原数组进行排序的，因此其原本的去重的方式不适用
+        
+                // 注意从样例中可以看到不能改变原本的数组排列顺序
+                vector<vector<int>> results;
+                vector<int> each_patch;
+        
+                backtrack(nums,each_patch,results,0);
+        
+                return results;
+            }
+        };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。另外一种解法，额外维护一个数组来标记是否重复，但注意是标记每一层（宽度）而非深度！！！</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+    class Solution {
+        public:
+            void backtrack(vector<int> nums, vector<int> each_patch, vector<vector<int>>& results, int index)
+            {
+                //递归终止条件
+                if(index==nums.size())
+                {
+                    if(each_patch.size()>1)//必须大于1
+                        results.push_back(each_patch);
+                    return;
+                }
+                if(each_patch.size()>1)//大于1已经可以放置了
+                {
+                    results.push_back(each_patch);
+                }
+        
+                //选择列表
+                unordered_set<int> used;//用于记录这个元素在本层是否用过
+                for(int i=index;i<nums.size();i++)
+                {
+                    if(used.find(nums[i])!=used.end())//被用过了
+                        continue;
+                        
+                    if(!each_patch.empty())//若不为空，且最后一个大于当前，就剪枝，不能放
+                    {
+                        if(each_patch[each_patch.size()-1]>nums[i])
+                            continue;
+                    }
+        
+                    //做选择
+                    each_patch.push_back(nums[i]);
+                    used.insert(nums[i]); // 记录这个元素在本层用过了，本层后面不能再用了
+        
+                    backtrack(nums,each_patch,results,i+1);
+        
+                    //撤销选择
+                    each_patch.pop_back();
+                    //不需要撤销used，因为是用于记录是否重复！
+                }
+        
+            }
+            vector<vector<int>> findSubsequences(vector<int>& nums) {
+                
+                //相当于取有序的子集（可重，不可复选）
+                //但是跟90.子集III不一样的是不能对原数组进行排序的，因此其原本的去重的方式不适用
+        
+                // 注意从样例中可以看到不能改变原本的数组排列顺序
+                vector<vector<int>> results;
+                vector<int> each_patch;
+        
+                backtrack(nums,each_patch,results,0);
+        
+                return results;
+            }
+        };
+</script>
+</code></pre>
+</details>
+
 
 </div>
 
