@@ -2225,10 +2225,66 @@ int main()
 </figure>
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。注意出发机场和到达机场是会重复的，搜索的过程没及时删除目的机场就会死循环。从而导致计算超时。因此需要剪枝策略检查是否前后两个的机票一模一样。其次，通过预先的排序也可以保证输出的结果字典序最小，而不是全部算完再排序～</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
-
+    class Solution {
+        public:
+            bool backtrack(vector<vector<string>> tickets,vector<string> each_path,vector<string>& results, vector<bool> used)
+            {
+                //递归终止条件
+                if(each_path.size()==tickets.size()+1)//全部都用完了,应该为数目+1
+                {
+                    results=each_path;
+                    return true;
+                }
+        
+                //选择列表(每次都重全部tickerts中选合适的)
+                for(int i=0;i<tickets.size();i++)
+                {
+                    if(i>0 
+                        && tickets[i][0]==tickets[i-1][0] && tickets[i][1] == tickets[i - 1][1]//完全一模一样的情况（那就没必要再测，跳过）
+                        && used[i-1]==false)
+                            continue;// 如果跟上一个一样，且上一个没用过，那就跳过，因为只是重复使用
+                
+                    if(tickets[i][0]==each_path.back() //若当前的第一个跟数组中最后一个相等，那么就可以使用飞
+                    && used[i]==false //且当前机票没有被使用
+                    )
+                    {
+                        //做选择
+                        each_path.push_back(tickets[i][1]);//放入
+                        used[i]=true;//标记当前机票已经被使用了
+        
+                        //回溯
+                        if(backtrack(tickets,each_path,results,used))
+                            return true;//找到了马上返回
+        
+                        //撤销选择
+                        each_path.pop_back();
+                        used[i]=false;
+        
+                    }
+        
+                }
+        
+                return false;
+            }
+            vector<string> findItinerary(vector<vector<string>>& tickets) {
+                
+                //注意题目要求：所有的机票 必须都用一次 且 只能用一次。
+                // 有点类似排列（无重不可复选）
+        
+                sort(tickets.begin(), tickets.end());//进行排序，(保证了,第一个找到的就是字典序最小的，同时也用于剪枝)
+            
+                vector<string> results;
+                vector<string> each_path;
+                each_path.push_back("JFK");//把起点push进去
+                vector<bool> used(tickets.size(), false);//记录是否被用过
+                backtrack(tickets,each_path,results,used);
+        
+                return results;
+            }
+        };
 </script>
 </code></pre>
 </details>
