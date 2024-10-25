@@ -407,25 +407,159 @@ while(left &lt right) 的终止条件是 left == right，写成区间的形式�
 
 
 
-<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
-<!-- <details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-
-</script>
-</code></pre>
-</details> -->
-
-<!-- <p><br></p>
-<h1></h1>
+<p><br></p>
+<h1>寻找两个正序数组的中位数</h1>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
-    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/dichotomy/" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/WX20241025-183527.png" alt="Image description">
   </div>
 <figcaption><p>
 </p></figcaption>
-</figure>  -->
+</figure>
+
+<details>
+<summary>Click to expand the code。最直接的做法其实就是合并一个数组，然后排序，但是时间复杂度为：O((M+N)Log(M+N))其实并不满足题目要求（虽然可以通过所有测试样例）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+            
+            vector<int> new_group;
+    
+            for(int i=0;i<nums1.size();i++)
+            {
+                new_group.push_back(nums1[i]);
+            }
+    
+            for(int i=0;i<nums2.size();i++)
+            {
+                new_group.push_back(nums2[i]);
+            }
+    
+            // 时间复杂度为：O((M+N)Log(M+N))
+    
+            sort(new_group.begin(),new_group.end());
+    
+            if((nums1.size()+nums2.size())%2==0)//能被偶数整除(余数)
+                return (double)(
+                    new_group[(nums1.size()+nums2.size())/2]+
+                    new_group[(nums1.size()+nums2.size())/2-1]
+                    )/2;
+            
+            return new_group[(nums1.size()+nums2.size())/2];//奇数的情况返回原值
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code，下面的双指针法可以让时间复杂度进一步降低为O（m+n）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+            vector<int> merged;
+            int i = 0, j = 0;
+    
+            // 合并两个有序数组
+            while (i < nums1.size() && j < nums2.size()) {
+                if (nums1[i] < nums2[j]) {
+                    merged.push_back(nums1[i]);
+                    i++;
+                } else {
+                    merged.push_back(nums2[j]);
+                    j++;
+                }
+            }
+    
+            // 将剩余元素添加到合并数组
+            while (i < nums1.size()) {
+                merged.push_back(nums1[i]);
+                i++;
+            }
+            while (j < nums2.size()) {
+                merged.push_back(nums2[j]);
+                j++;
+            }
+    
+            // 计算中位数
+            int n = merged.size();
+            if (n % 2 == 1) {//为奇数
+                return merged[n / 2];
+            } else {//为偶数
+                return (merged[n / 2 - 1] + merged[n / 2]) / 2.0;
+            }
+        }
+    };
+        
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。而题目要求O(Log(M+N))实际上就是典型的二分法的时间复杂度。
+  <br>思路就是在两个有序数组中找到第k 小的元素。其中k就是中位数。（理解得不是很透彻～）
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+    
+            // 确保nums1是较短的数组，以减少二分查找的范围
+            if (nums1.size() > nums2.size())
+                swap(nums2, nums1);
+    
+            int m = nums1.size();
+            int n = nums2.size();
+            int k = (m + n + 1) / 2;//第k小的值
+    
+            int left = 0, right = m;
+            while (left < right) {
+                //i和j为nums1 和 nums2 中的分割点
+                // k为中位数左侧元素的总数
+    
+                // num1中的分割点
+                int i = (right +left) / 2;
+    
+                //num2中的分割点
+                int j = k - i;//第k小的值，对应1中的i个，那么2中就是k-2个
+                if (nums1[i] < nums2[j - 1]) {
+                    left = i + 1;  // i太小了，需要右移
+                } else {
+                    right = i;     // i太大了，需要左移
+                }
+            }
+    
+            int i = left;
+            int j = k - i;
+    
+            int nums1LeftMax = (i == 0 ? INT_MIN : nums1[i - 1]);
+            int nums1RightMin = (i == m ? INT_MAX : nums1[i]);
+            int nums2LeftMax = (j == 0 ? INT_MIN : nums2[j - 1]);
+            int nums2RightMin = (j == n ? INT_MAX : nums2[j]);
+    
+            // 如果总长度是奇数
+            if ((m + n) % 2 == 1) {
+                return std::max(nums1LeftMax, nums2LeftMax);
+            } else {
+                // 如果总长度是偶数
+                return (std::max(nums1LeftMax, nums2LeftMax) + std::min(nums1RightMin, nums2RightMin)) / 2.0;
+            }
+        }
+    };
+    
+</script>
+</code></pre>
+</details>
+
+</div> 
+
+
 
 <p><br></p>
 <h1>参考资料</h1>
