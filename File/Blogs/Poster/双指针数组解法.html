@@ -1166,6 +1166,7 @@ overflow-x: hidden; /* 隐藏水平滚动条 */
 <div>
 
 <h2>接雨水</h2>
+<div>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/others/WX20241027-151411.png" alt="Image description">
@@ -1291,6 +1292,62 @@ overflow-x: hidden; /* 隐藏水平滚动条 */
 </script>
 </code></pre>
 </details>
+</div>
+
+
+<p><br></p>
+<h2>盛最多水的容器</h2>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20241027-160632.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。上一题给出的类似一幅直方图，每个横坐标都有宽度，而本题给出的每个横坐标是一条竖线，没有宽度。因此就不存在height[i]存放多少水的问题。
+  因此本题只需要知道了两个指针的位置，就可以计算出最大的面积：<code>min(height[left], height[right]) * (right - left)</code>
+
+</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxArea(vector<int>& height) {
+            
+            int result=0;
+    
+            int left_index=0, right_index=height.size()-1;
+    
+            while(left_index<right_index)
+            {
+                // [left, right] 之间的矩形面积
+                int cur_value = min(height[left_index], height[right_index]) * (right_index - left_index);
+                result=max(result,cur_value);
+    
+                // 因为矩形的高度是由 min(height[left], height[right]) 即较低的一边决定的
+                // 如果移动较低的那一边，那条边可能会变高，使得矩形的高度变大，进而就「有可能」使得矩形的面积变大；
+                // 相反，如果移动较高的那一边，矩形的高度是无论如何都不会变大的，所以不可能使矩形的面积变得更大。
+                if(height[left_index]<height[right_index])
+                {
+                    left_index++;
+                }
+                else
+                {
+                    right_index--;
+                }
+            }
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div> 
+
 
 </div> 
 
