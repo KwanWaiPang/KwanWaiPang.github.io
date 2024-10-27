@@ -1175,10 +1175,119 @@ overflow-x: hidden; /* 隐藏水平滚动条 */
 </figure>
 
 <details>
-<summary>Click to expand the code</summary>
+<summary>Click to expand the code。首先给出暴力的解法。这个思路是最直接的，把问题进行分解然后解题，但是最终只有320 / 323 个通过的测试用例
+  时间复杂度应该是O（N<sup>2</sup>）
+</summary>
 <pre><code>
 <script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int trap(vector<int>& height) {
+            
+            // 实际上就是用一个数组表示一个条形图，问这个条形图最多能接多少水
+            // 简化题目：对于位置i，它的左边和右边最大的柱子高度为：l_max, r_max。而装水的容量为min(l_max, r_max)-height[i] （对应一格）
+            // 而l_max=max(height[0..i])
+            // r_max=max(height[i..end]) 
+    
+            //
+            int result=0;
+            for(int i=0;i<height.size();i++)
+            {
+                int left_max = *max_element(height.begin() , height.begin() + i);
+                int right_max = *max_element(height.begin()+i, height.end());
+                if(min(left_max,right_max)-height[i]>=0)//要大于0才加，小于0为负就是没有水
+                    result+=min(left_max,right_max)-height[i];
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
 
+<details>
+<summary>Click to expand the code.通过备忘录，先预先计算每个i的两个数组，避免每次循环都重复遍历，可以将时间复杂度降低为O(N),空间复杂度为O（1）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int trap(vector<int>& height) {
+            
+            vector<int> left_max(height.size(),0);
+            left_max[0]=height[0];//初始化
+            for(int i=1;i<height.size();i++)
+            {
+                left_max[i]=max(height[i],left_max[i-1]);
+            }
+    
+            vector<int> right_max(height.size(),0);
+            right_max[height.size()-1]=height[height.size()-1];//初始化
+            // 注意：此处需要从右到左遍历
+            for(int i=height.size()-2;i>=0;i--)
+            {
+                right_max[i]=max(height[i],right_max[i+1]);
+            }
+    
+            int result=0;
+            for(int i=0;i<height.size();i++)
+            {
+                if(min(left_max[i],right_max[i])-height[i]>=0)//要大于0才加，小于0为负就是没有水
+                    result+=min(left_max[i],right_max[i])-height[i];
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code.下面通过双指针法解题，将时间复杂度一样为O（N），如下图所示
+</summary>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20241027-155056@2x.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int trap(vector<int>& height) {
+    
+            int result=0;
+            int left_max=0, right_max=0;//相当于数组
+            int left_index=0, right_index=height.size()-1;
+    
+            while(left_index<right_index)
+            {
+                left_max=max(left_max,height[left_index]);
+                right_max=max(right_max,height[right_index]);
+    
+                //result+=min(left_max,right_max)-height[i]
+                // 只在乎 min(l_max, r_max)。
+                // 当已经知道 l_max < r_max 了，这个 r_max 是不是右边最大的，不重要。
+                // 重要的是 height[i] 能够装的水只和较低的 l_max 之差有关：
+                
+                if(left_max<right_max)//result就由此处的left决定
+                {
+                    result+=left_max-height[left_index];
+                    left_index++;
+                }
+                else
+                {
+                    result+=right_max-height[right_index];
+                    right_index--;
+                }
+            }
+    
+            return result;
+        }
+    };
 </script>
 </code></pre>
 </details>
