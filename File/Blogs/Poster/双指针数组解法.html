@@ -1346,6 +1346,40 @@ overflow-x: hidden; /* 隐藏水平滚动条 */
 </code></pre>
 </details>
 
+<details>
+<summary>Click to expand the code下面写法是一样的</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        int maxArea(vector<int>& height) {
+            
+            int result=0;
+    
+            int left_index=0, right_index=height.size()-1;
+    
+            while(left_index<right_index)
+            {
+                if(height[left_index]<height[right_index])
+                {
+                    int cur_value=height[left_index]*(right_index-left_index);
+                    result=max(result,cur_value);
+                    left_index++;
+                }
+                else
+                {
+                    int cur_value=height[right_index]*(right_index-left_index);
+                    result=max(result,cur_value);
+                    right_index--;
+                }
+            }
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
 </div> 
 
 
