@@ -1162,6 +1162,137 @@ overflow-x: hidden; /* 隐藏水平滚动条 */
 
 
 <p><br></p>
+<h1>四数之和</h1>
+<div>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20241029-180631.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+<details>
+<summary>Click to expand the code。最直接的方法就是用回溯算法。但是运行会超时。230 / 294 个通过的测试用例</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        void backtrack(vector<int>& nums, int target,vector<int> each_path,vector<vector<int>>& results, int index)
+        {
+            //递归终止的条件
+            if(each_path.size()==4)
+            {
+                if(target==0)//刚好为0
+                    results.push_back(each_path);
+                return;
+            }
+    
+            //选择列表
+            for(int i=index;i<nums.size();i++)
+            {
+                // 满足条件进行剪枝,以此去重
+                if(i>index && nums[i]==nums[i-1])//若当前值等于上一个值.同时除掉最开始的index以保证每次选重复值的第一个
+                    continue;
+    
+                // if(target-nums[i]<0)//剪枝(由于target存在负数，不能用此剪枝)
+                //     continue;
+                
+                //前序做选择
+                each_path.push_back(nums[i]);
+    
+                backtrack(nums,target-nums[i],each_path,results,i+1);
+    
+                //后序撤销选择
+                each_path.pop_back();
+            }
+        } 
+        vector<vector<int>> fourSum(vector<int>& nums, int target) {
+            
+            //由于要求按顺序返回，故此先排序
+            sort(nums.begin(),nums.end());
+    
+            //其次返回所有的可能，因此用回溯算法解题应该是最直接的
+    
+            vector<vector<int>> results;
+            vector<int> each_path;
+            backtrack(nums,target,each_path,results,0);
+    
+            return results;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+<details>
+<summary>Click to expand the code。要避免超时应该采用的是双指针法，类似三数之和。在三数和的基础上上再套一层for循环.注意测试样例中存在long数据。时间复杂度为O（N<sup>3</sup>）</summary>
+<pre><code>
+<script type='text/html' style='display:block'>
+  class Solution {
+    public:
+        vector<vector<int>> fourSum(vector<int>& nums, int target) {
+    
+            vector<vector<int>> result;
+            sort(nums.begin(),nums.end());// 先对数组进行排序（这样可以避免用到重复的结果，同时题目要求的也是从小到大返回）
+    
+            for(int index_1=0;index_1<nums.size();index_1++)
+            {
+                //由于前面进行了排序，因此这样可以避免重复的结果 
+                if (index_1 > 0 && nums[index_1] == nums[index_1 - 1]) //一样的话，情况一样
+                    continue; // Skip duplicate elements
+    
+                for(int index_2=index_1+1;index_2<nums.size();index_2++)
+                {
+                    //类似上面的剪枝
+                    if (index_2 > index_1+1 && nums[index_2] == nums[index_2 - 1]) //一样的话，情况一样
+                        continue; // Skip duplicate elements
+                    
+                    // int target_value= target-nums[index_1]-nums[index_2];
+                    long target_value= target- (long) (nums[index_1]+nums[index_2]);//测试样例中存在long
+    
+                    //左右指针法
+                    int left=index_2+1;//第三个
+                    int right=nums.size()-1;//第四个
+                    while(left<right)
+                    {
+                        if(nums[left]+nums[right]>target_value)
+                        {
+                            right--;
+                        }
+                        else if(nums[left]+nums[right]<target_value)
+                        {
+                            left++;
+                        }
+                        else //相同
+                        {
+                            // 记录结果
+                            result.push_back({nums[index_1],nums[index_2],nums[left],nums[right]});
+    
+                            //然后继续移动指针避免重复的答案
+                            while (left < right && nums[left] == nums[left + 1]) 
+                                left++;
+                            while (left < right && nums[right] == nums[right - 1]) 
+                                right--;
+        
+                            //必须要继续移动，不然会报错爆内存。要么break掉，但是break掉导致不全
+                            left++;
+                            right--;
+                        }
+                    }
+                }
+            }
+    
+            return result;
+        }
+    };
+</script>
+</code></pre>
+</details>
+
+</div>
+
+<p><br></p>
 <h1>高效解决接雨水问题</h1>
 <div>
 
