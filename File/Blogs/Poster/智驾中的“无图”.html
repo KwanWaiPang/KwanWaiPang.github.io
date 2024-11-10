@@ -216,6 +216,8 @@
   对于自动驾驶系统，一般所谓的有图指的是高精地图。而所谓的高精度地图（HD map）是相对于常用的普通电子导航地图而言的，具有高精度、需要实时更新等特点。
   高精度地图包括大量的驾驶辅助信息，最重要的信息是道路网的精确三维表征。
   不仅有高精度的坐标，同时还有准确的车道形状，并且每个车道的坡度、曲率、航向、高程、侧倾等数据也都含有。
+
+  <p><br></p>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241110212714.png" alt="Image description">
@@ -224,8 +226,12 @@
     如交叉路口布局和路标位置
   </figcaption>
   </figure>
+  <p><br></p>
+
   此外，高精度地图还包括许多语义信息，地图可能会包括交通灯上不同颜色的含义，也可能指示道路的速度限速，以及左转车道的位置，高精度地图做重要的特征之一是，精度，手机上的导航只能达到10米级精度，高精度地图可以达到厘米级精度，这对无人驾驶车至关重要。
   一般的高精度图的制作都包括以下几个步骤
+
+  <p><br></p>
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241110212857.png" alt="Image description">
@@ -234,6 +240,8 @@
     通常的高精地图制作流程
   </figcaption>
   </figure>
+  <p><br></p>
+
   而这么丰富的信息及复杂的流程，就意味着需要采集的时间与更新的成本，且一般更新的频率都比较低。
   此外，高精地图的覆盖也是有限的，毕竟受限于法律或者法规等因素，不是所有的道路都允许采集高精度地图数据。同时也不是谁都可以做的，需要国家相关部门审批。
   <br>
@@ -250,15 +258,13 @@
 
 <p><br></p>
 <h2>特斯拉的FSD Lanes Neural Network方案</h2>
+
 仅使用SD地图中的道路的几何&拓扑关系，车道等级、数量、宽度、属性信息和Occupancy特征就能够构建出实时的车道级拓扑结构，从而结束了车道级拓扑结构只能从高精地图中获取的难点，在技术方案和落地实现上给出了高精地图的替代方案。
-<br>
-并且在2023年特斯拉FSDv12版本已经走向了端到端的方案。原本的自动驾驶系统主要分为三大块：感知-决策（人类预定的规则）-执行。而FSDv12则是直接把像素级的图像输入到神经网络中，输出直接是车辆的控制指令（操作，即刹车、油门、方向盘等），这样的方案就是端到端的方案,也就是只接收像素，不做任何识别和决策，直接通过大模型经验进行执行。
 
-<br>而模型的训练数据则是经过严格筛选的，“驾驶行为规范的”的数据（据说完成这个数据有三个条件：1、几十万颗英伟达H100级芯片训练集；2、几亿英里的真实自动驾驶Bev视频数据（特斯拉在北美的保险业务衍生出驾驶员行为监测系统）；3每年超过20亿美元的训练成本）。
-
+<p><br></p>
 <iframe src="https://www.youtube.com/embed/ODSJsviD_SU?si=u_Vk25e32MibDMn9" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 80%; height: 50vh;"></iframe>
-<br>
 
+<p><br></p>
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/others/tesla-ai-day-fsd-lane-model-architecture.jpg" alt="Image description">
@@ -266,8 +272,13 @@
 <figcaption>
 </figcaption>
 </figure>
+<p><br></p>
 
-<br>
+在2023年特斯拉FSDv12版本已经走向了端到端的方案。原本的自动驾驶系统主要分为三大块：感知-决策（人类预定的规则）-执行。而FSDv12则是直接把像素级的图像输入到神经网络中，输出直接是车辆的控制指令（操作，即刹车、油门、方向盘等），这样的方案就是端到端的方案,也就是只接收像素，不做任何识别和决策，直接通过大模型经验进行执行。
+
+<br>而模型的训练数据则是经过严格筛选的，“驾驶行为规范的”的数据（据说完成这个数据有三个条件：1、几十万颗英伟达H100级芯片训练集；2、几亿英里的真实自动驾驶Bev视频数据（特斯拉在北美的保险业务衍生出驾驶员行为监测系统）；3每年超过20亿美元的训练成本）。
+
+<p><br></p>
 <iframe src="https://www.youtube.com/embed/oWvaDMzgTp0?si=oeN99fkkD2QC2my6" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 80%; height: 50vh;"></iframe>
 
 <p><br></p>
