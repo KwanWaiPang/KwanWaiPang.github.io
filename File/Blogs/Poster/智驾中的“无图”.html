@@ -19,7 +19,66 @@
       margin-right: auto; /* 使目录框架在页面中居右 */
       box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
   }
-    </style>
+
+  #scrollToTocButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px; /* 圆角设计 */
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #scrollToTocButton:hover {
+      background-color: #0056b3; /* 鼠标悬停时颜色变化 */
+      transform: translateY(-3px); /* 悬停时按钮略微上移 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+  }
+
+  #toggleTocButton {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #00b34b;
+    color: white;
+    border: none;
+    border-radius: 50px; /* 圆角设计 */
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+    transition: all 0.3s ease; /* 添加平滑过渡效果 */
+    cursor: pointer;
+    z-index: 1000;
+  }
+
+  #toggleTocButton:hover {
+      background-color: #00b34b; /* 鼠标悬停时颜色变化 */
+      transform: translateY(-3px); /* 悬停时按钮略微上移 */
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+  }
+
+  #newToc {
+  display: none; 
+  position: fixed; 
+  bottom: 70px; 
+  right: 100px; 
+  background: #f4f4f4; 
+  padding: 10px; 
+  font-size: 12px; 
+  max-height: 40%; /* 设置最大高度 */
+  overflow-y: auto; /* 添加垂直滚动条 */
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+  </style>
 
 <!-- Head -->
 <head>    <!-- Metadata, OpenGraph and Schema.org -->
@@ -102,9 +161,13 @@
 
           <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto flex-nowrap">
-                <li class="nav-item ">
-                  <a class="nav-link" href="../My_Blog.html">Homepage</a>
-                </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="../My_Blog.html">Homepage</a>
+              </li>
+
+              <li class="nav-item ">
+                <a class="nav-link" href="../Poster/cpp算法学习笔记.html">Learning Algorithm</a>
+              </li>
 
             </ul>
           </div>
@@ -114,9 +177,8 @@
 
 <header class="post-header">
   <h1 align="center" class="post-title">
-    <span style="font-weight: 600;">配置Github ssh</span>
+    <span style="font-weight: 600;">智驾中的“无图”</span>
   </h1>
-  <!-- <p><br></p> -->
 </header>
 
 <!-- Content -->
@@ -124,123 +186,73 @@
 <!-- home.html -->
 <div class="post">
 
+<!-- 添加目录按钮，点击展开目录 -->
+<button id="toggleTocButton">📑</button>
+<!-- 新的目录 -->
+<div id="newToc">
+  <h8>Catalog</h8>
+  <ul></ul>
+</div>
+
+<!-- 添加按钮跳转到题目 -->
+<button id="scrollToTocButton">⬆️</button>
+
+
+
 <!-- 插入目录 -->
 <div id="toc">
   <h8>目录</h8>
   <ul></ul>
 </div>
-        
+
 <article>
 <!-- 插入博客内容-->
-
-
 <p><br></p>
-<h1>Macbook配置</h1>
-<div>
-<p>
-先验证是否有ssh key。打开终端然后运行
-<pre><code>
-  ls -al ~/.ssh
-</code></pre>
+<h1>高精度地图（HD Map）</h1>
+<div class="content has-text-justified">
+  要了解智驾中“无图”的概念首先我们看看有图是怎么样的？
+  
+  对于自动驾驶系统，一般所谓的有图指的是高精地图。而所谓的高精度地图（HD map）是相对于常用的普通电子导航地图而言的，具有高精度、实时更新等特点。
+  高精度地图包括大量的驾驶辅助信息，最重要的信息是道路网的精确三维表征。
+  不仅有高精度的坐标，同时还有准确的车道形状，并且每个车道的坡度、曲率、航向、高程、侧倾等数据也都含有。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241110212714.png" alt="Image description">
+    </div>
+  <figcaption>
+    如交叉路口布局和路标位置
+  </figcaption>
+  </figure>
+  此外，高精度地图还包括许多语义信息，地图可能会报告交通灯上不同颜色的含义，也可能指示道路的速度限速，以及左转车道的位置，高精度地图做重要的特征之一是，精度，手机上的导航只能达到米级精度，高精度地图可以达到厘米级精度，这对无人驾驶车至关重要。
+  而这么丰富的信息就意味着需要采集的时间与更新的成本。而一般的高精度图的制作都包括以下几个步骤
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241110212857.png" alt="Image description">
+    </div>
+  <figcaption>
+    通常的高精地图制作流程
+  </figcaption>
+  </figure>
 
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/WX20240930-102921.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
+  此外，高精地图的覆盖也是有限的，毕竟受限于法律或者法规等因素，不是所有的道路都允许采集高精度地图数据。因此“轻地图，重感知”的概念应运而生。
 
-如果有.pub结尾的文件直接打开
-<pre><code>
-  cat ~/.ssh/id_rsa.pub
-</code></pre>
-然后复制到github的ssh key中即可（在进入自己的github，个人设置界面，找到SSH key那栏，new ssh key）
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/WX20240930-103213@2x.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure> 
-
-若没有，则需要生成，过程如下：
-<br>
-1. 生成ssh-keygen
-<pre><code>
-  ssh-keygen -t rsa -b 4096 -C "my_email@example.com"
-</code></pre>
-其中，”my_email@example.com“是 github 关联的邮箱；
-<br>
-2.确定key保存的目录（直接回车，选择默认）
-<br>
-3.输入密码（可回车不需要密码，写密码要写两遍）
-这个时候在默认路径下就生成了两个文件，公钥和私钥。
-<br>
-4.将SSH Key添加到ssh-agent
-<pre><code>
-  eval $(ssh-agent -s)
-</code></pre>
-返回agent的Pid：
-<pre><code>
-  ssh-add ~/.ssh/id_rsa
-</code></pre>
-然后输入密码，没有密码的直接回车，提示添加成功！
-<br>
-5.打开id_rsa.pub文件，复制文件内容到github
-<pre><code>
-# 查看目录
-ls -al ~/.ssh
-# 打开id_rsa.pub文件
-cat ~/.ssh/id_rsa.pub
-</code></pre>
-
-</p>
 </div>
 
 
 
-<p><br></p>
-<h1>Windows与ubuntu配置</h1>
-<p>
-  请参考本人CSDN博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/134191783?spm=1001.2014.3001.5502" target="_blank">Link</a></sup>
-</p>
 
 <p><br></p>
-<h1>与服务器的免密登陆配置</h1>
-<p>
-  请参考本人CSDN博客<sup><a href="https://blog.csdn.net/gwplovekimi/article/details/135360496?spm=1001.2014.3001.5502" target="_blank">Link</a></sup>
-先按照上面的生成ssh key。打开终端然后运行
-
-<pre><code>
-<script type='text/html' style='display:block'>
-  ssh-copy-id -i "SSH公钥的文件地址" -p <port> <username>@<server_ip>
- 
-  # 该操作会在服务器~/.ssh中生成authorized_keys文件，并将本地电脑id_rsa.pub中的内容复制到该文件中。
-  # ⭐因此你也可以先ssh登录自己的账户，再手动创建~/.ssh/authorized_keys文件（没有后缀），并复制公钥到该文件中，实现同样的效果。
-</script>
-</code></pre>
-
-如下图所示：
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/WX20241005-091755.png" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>  
-
-</p>
-
-
-
+<h1>参考资料</h1>
+<ul>
+  <li><a href="https://qingsimon.github.io/post/2018-09-26-%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%9C%B0%E5%9B%BEhd-map/" target="_blank">高精度地图HD map</a></li>
+</ul>
 
 </article>
 </div>
 </div>
 
-<!-- Footer -->   
-<p><br></p> 
+<!-- Footer --> 
+<p><br></p>   
 <footer class="nofixed-bottom">
 <div class="container mt-0" style="width:100%;text-align:center;">
   Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a>
@@ -277,8 +289,9 @@ cat ~/.ssh/id_rsa.pub
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
-   <!-- 下面是插入目录的 -->
-   <script>
+  <!-- 下面是自定义的一系列功能 -->
+  <script>
+    //下面是插入目录的
     document.addEventListener("DOMContentLoaded", function() {
         const toc = document.querySelector("#toc ul");
         const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
@@ -294,7 +307,77 @@ cat ~/.ssh/id_rsa.pub
             toc.appendChild(li);
         });
     });
+
+    // 添加按钮点击事件
+    const button = document.getElementById("scrollToTocButton");
+    button.addEventListener("click", function() {
+        document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 添加新的目录
+    const newToc = document.querySelector("#newToc ul");
+    const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+
+    headers.forEach(header => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+        header.setAttribute("id", id);
+        a.setAttribute("href", `#${id}`);
+        a.textContent = header.textContent;
+        li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+        li.appendChild(a);
+        newToc.appendChild(li);
+    });
+
+    // 控制新的目录的显示与隐藏
+    const toggleButton = document.getElementById("toggleTocButton");
+    toggleButton.addEventListener("click", function() {
+        if (newToc.parentElement.style.display === "none") {
+            newToc.parentElement.style.display = "block"; // 展开新目录
+        } else {
+            newToc.parentElement.style.display = "none"; // 收起新目录
+        }
+    });
 </script>
+
+ <!-- JavaScripts添加按钮 -->
+ <!-- <script> -->
+      <!-- // 添加按钮点击事件 -->
+      <!-- const button = document.getElementById("scrollToTocButton"); -->
+      <!-- button.addEventListener("click", function() { -->
+          <!-- document.querySelector("#toc").scrollIntoView({ behavior: "smooth" }); -->
+      <!-- }); -->
+<!-- </script> -->
+
+<!-- 点击按钮展开目录 -->
+<!-- <script> -->
+  <!-- // 添加新的目录 -->
+  <!-- const newToc = document.querySelector("#newToc ul"); -->
+  <!-- const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6"); -->
+  <!--  -->
+  <!-- headers.forEach(header => { -->
+      <!-- const li = document.createElement("li"); -->
+      <!-- const a = document.createElement("a"); -->
+      <!-- const id = header.textContent.replace(/\s+/g, "-").toLowerCase(); -->
+      <!-- header.setAttribute("id", id); -->
+      <!-- a.setAttribute("href", `#${id}`); -->
+      <!-- a.textContent = header.textContent; -->
+      <!-- li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`; -->
+      <!-- li.appendChild(a); -->
+      <!-- newToc.appendChild(li); -->
+  <!-- }); -->
+<!--  -->
+  <!-- // 控制新的目录的显示与隐藏 -->
+  <!-- const toggleButton = document.getElementById("toggleTocButton"); -->
+  <!-- toggleButton.addEventListener("click", function() { -->
+      <!-- if (newToc.parentElement.style.display === "none") { -->
+          <!-- newToc.parentElement.style.display = "block"; // 展开新目录 -->
+      <!-- } else { -->
+          <!-- newToc.parentElement.style.display = "none"; // 收起新目录 -->
+      <!-- } -->
+  <!-- }); -->
+<!-- </script> -->
 
 </body>
 </html>
