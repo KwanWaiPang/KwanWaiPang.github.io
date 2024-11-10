@@ -165,9 +165,9 @@
                 <a class="nav-link" href="../My_Blog.html">Homepage</a>
               </li>
 
-              <li class="nav-item ">
+              <!-- <li class="nav-item ">
                 <a class="nav-link" href="../Poster/cpp算法学习笔记.html">Learning Algorithm</a>
-              </li>
+              </li> -->
 
             </ul>
           </div>
@@ -212,7 +212,7 @@
 <div class="content has-text-justified">
   要了解智驾中“无图”的概念首先我们看看有图是怎么样的？
   
-  对于自动驾驶系统，一般所谓的有图指的是高精地图。而所谓的高精度地图（HD map）是相对于常用的普通电子导航地图而言的，具有高精度、实时更新等特点。
+  对于自动驾驶系统，一般所谓的有图指的是高精地图。而所谓的高精度地图（HD map）是相对于常用的普通电子导航地图而言的，具有高精度、需要实时更新等特点。
   高精度地图包括大量的驾驶辅助信息，最重要的信息是道路网的精确三维表征。
   不仅有高精度的坐标，同时还有准确的车道形状，并且每个车道的坡度、曲率、航向、高程、侧倾等数据也都含有。
   <figure style="text-align: center;">
@@ -223,8 +223,8 @@
     如交叉路口布局和路标位置
   </figcaption>
   </figure>
-  此外，高精度地图还包括许多语义信息，地图可能会报告交通灯上不同颜色的含义，也可能指示道路的速度限速，以及左转车道的位置，高精度地图做重要的特征之一是，精度，手机上的导航只能达到米级精度，高精度地图可以达到厘米级精度，这对无人驾驶车至关重要。
-  而这么丰富的信息就意味着需要采集的时间与更新的成本。而一般的高精度图的制作都包括以下几个步骤
+  此外，高精度地图还包括许多语义信息，地图可能会包括交通灯上不同颜色的含义，也可能指示道路的速度限速，以及左转车道的位置，高精度地图做重要的特征之一是，精度，手机上的导航只能达到10米级精度，高精度地图可以达到厘米级精度，这对无人驾驶车至关重要。
+  一般的高精度图的制作都包括以下几个步骤
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241110212857.png" alt="Image description">
@@ -233,11 +233,40 @@
     通常的高精地图制作流程
   </figcaption>
   </figure>
-
-  此外，高精地图的覆盖也是有限的，毕竟受限于法律或者法规等因素，不是所有的道路都允许采集高精度地图数据。因此“轻地图，重感知”的概念应运而生。
+  而这么丰富的信息及复杂的流程，就意味着需要采集的时间与更新的成本，且一般更新的频率都比较低。
+  此外，高精地图的覆盖也是有限的，毕竟受限于法律或者法规等因素，不是所有的道路都允许采集高精度地图数据。同时也不是谁都可以做的，需要国家相关部门审批。
+  <br>
+  因此“轻地图，重感知”的概念应运而生，开发全场景的自动驾驶系统，不再依赖高精地图是关键。但是没有了高精地图，自然而然的给自动驾驶系统带来了更大的挑战，比如自动驾驶可能不知道车辆在哪条车道上，更不知道众多信号灯中，哪一个信号灯和车道线匹配。因此需要车辆具备识别和理解车道线和道路语义信息的能力。
+  可以理解为有高精地图就可以开启“上帝视角”，但是很耗资源，而没有高精地图就需要车辆具备“自我感知”的能力。
 
 </div>
 
+
+<p><br></p>
+<h1>“无图”</h1>
+<div class="content has-text-justified">
+  不同的车企对于“无图”的定义是不同的，但其共同点就是：不依赖高成本的高精度地图。
+
+<p><br></p>
+<h2>特斯拉的FSD Lanes Neural Network方案</h2>
+仅使用SD地图中的道路的几何&拓扑关系，车道等级、数量、宽度、属性信息和Occupancy特征就能够构建出实时的车道级拓扑结构，从而结束了车道级拓扑结构只能从高精地图中获取的难点，在技术方案和落地实现上给出了高精地图的替代方案。
+并且在2023年特斯拉FSDv12版本已经走向了端到端的方案。原本的自动驾驶系统主要分为三大块：感知-决策-执行。而FSDv12则是直接把像素级的图像输入到神经网络中，输出直接是车辆的控制指令（操作，即刹车、油门、方向盘等），这样的方案就是端到端的方案。
+
+
+<iframe src="https://www.youtube.com/embed/ODSJsviD_SU?si=u_Vk25e32MibDMn9" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 80%; height: 50vh;"></iframe>
+<br>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/tesla-ai-day-fsd-lane-model-architecture.jpg" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+<br>
+<iframe src="https://www.youtube.com/embed/oWvaDMzgTp0?si=oeN99fkkD2QC2my6" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 80%; height: 50vh;"></iframe>
+
+
+
+</div>
 
 
 
@@ -245,6 +274,9 @@
 <h1>参考资料</h1>
 <ul>
   <li><a href="https://qingsimon.github.io/post/2018-09-26-%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%9C%B0%E5%9B%BEhd-map/" target="_blank">高精度地图HD map</a></li>
+  <li><a href="https://mp.weixin.qq.com/s/JX4AzzJYOsfWSXNSYCcLcw" target="_blank">各车企智驾“无图”方案详解</a></li>
+  <li><a href="https://kevinchen.co/blog/tesla-ai-day-2022/" target="_blank">Analyzing Tesla AI Day 2022</a></li>
+  
 </ul>
 
 </article>
