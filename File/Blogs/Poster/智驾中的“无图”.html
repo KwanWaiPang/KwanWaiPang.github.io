@@ -211,7 +211,8 @@
 <h1>高精度地图（HD Map）</h1>
 <div class="content has-text-justified">
   要了解智驾中“无图”的概念首先我们看看有图是怎么样的？
-  
+  导航地图一般可分为标准地图（SD Map）、车道级地图（LD Map）、高精地图（HD Map）。
+  <br>
   对于自动驾驶系统，一般所谓的有图指的是高精地图。而所谓的高精度地图（HD map）是相对于常用的普通电子导航地图而言的，具有高精度、需要实时更新等特点。
   高精度地图包括大量的驾驶辅助信息，最重要的信息是道路网的精确三维表征。
   不仅有高精度的坐标，同时还有准确的车道形状，并且每个车道的坡度、曲率、航向、高程、侧倾等数据也都含有。
@@ -250,21 +251,45 @@
 <p><br></p>
 <h2>特斯拉的FSD Lanes Neural Network方案</h2>
 仅使用SD地图中的道路的几何&拓扑关系，车道等级、数量、宽度、属性信息和Occupancy特征就能够构建出实时的车道级拓扑结构，从而结束了车道级拓扑结构只能从高精地图中获取的难点，在技术方案和落地实现上给出了高精地图的替代方案。
-并且在2023年特斯拉FSDv12版本已经走向了端到端的方案。原本的自动驾驶系统主要分为三大块：感知-决策-执行。而FSDv12则是直接把像素级的图像输入到神经网络中，输出直接是车辆的控制指令（操作，即刹车、油门、方向盘等），这样的方案就是端到端的方案。
+<br>
+并且在2023年特斯拉FSDv12版本已经走向了端到端的方案。原本的自动驾驶系统主要分为三大块：感知-决策（人类预定的规则）-执行。而FSDv12则是直接把像素级的图像输入到神经网络中，输出直接是车辆的控制指令（操作，即刹车、油门、方向盘等），这样的方案就是端到端的方案,也就是只接收像素，不做任何识别和决策，直接通过大模型经验进行执行。
 
+<br>而模型的训练数据则是经过严格筛选的，“驾驶行为规范的”的数据（据说完成这个数据有三个条件：1、几十万颗英伟达H100级芯片训练集；2、几亿英里的真实自动驾驶Bev视频数据（特斯拉在北美的保险业务衍生出驾驶员行为监测系统）；3每年超过20亿美元的训练成本）。
 
 <iframe src="https://www.youtube.com/embed/ODSJsviD_SU?si=u_Vk25e32MibDMn9" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 80%; height: 50vh;"></iframe>
 <br>
+
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="../assets/img/others/tesla-ai-day-fsd-lane-model-architecture.jpg" alt="Image description">
   </div>
 <figcaption>
 </figcaption>
+</figure>
+
 <br>
 <iframe src="https://www.youtube.com/embed/oWvaDMzgTp0?si=oeN99fkkD2QC2my6" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="display: block; margin: 0 auto; width: 80%; height: 50vh;"></iframe>
 
+<p><br></p>
+<h2>小鹏的XNet</h2>
 
+XNet更加倚重纯视觉BEV，能够实现超强的环境感知能力，小鹏实现的“无图化”就是依靠XNet来实时构建“高精地图”达成的。
+小鹏的无图NGP和有图NGP是同一套技术栈，差别仅仅是把原先高精地图的输入，换成了导航地图的输入和实时感知对导航信息的理解。
+为此，XNet需要感知距离的加长，提供决策规划需要的超视距的环境信息；同时通过学习大量的道路及路口特征，增强感知复杂道路结构的能力。
+“无图方案”在路段行驶时基本没有问题，面临的主要还是路口的问题，可以看到在路口区域确实存在感知盲区，所以相应的决策会显得谨慎、迟疑。
+<br>
+除了“无图”方案外，小鹏还具有另外一种模式“AI”代驾，只需要学习一次即可启动城市NOA。“AI”代驾更多的是一种众包图和无图之间的模式，其学习过程中只会记忆导航点和转弯信息，实际运行过程中离不开“无图”能力，学习只是为了的提升体验和安全等。
+主要是学习个性化的行车策略，并不是完全为了建图。从城区遇到的问题可以预见，面对高频变化的城区freespace的通行道路，智驾系统需要具备强大的实时感知和决策能力才行。
+
+
+<li><a href="//player.bilibili.com/player.html?isOutside=true&aid=317393036&bvid=BV16P411s7Gi&cid=1237487111&p=1" target="_blank">真无图，还不听导航的？小鹏XNGP辅助驾驶 勇闯北京二环</a></li>
+
+
+<p><br></p>
+<h2>华为ADS</h2>
+华为是采用激光+视觉的god网络与SD map实现“无图”方案。从实现上来说，华为采用激光去实现“occupancy”网络类似的功能，并且可以实时生成道路的拓扑结构。
+
+<li><a href="//player.bilibili.com/player.html?isOutside=true&aid=660969030&bvid=BV1Uh4y1Y7AJ&cid=1264974826&p=1" target="_blank">华为无图城区智驾，年底全国可用！什么水平？</a></li>
 
 </div>
 
