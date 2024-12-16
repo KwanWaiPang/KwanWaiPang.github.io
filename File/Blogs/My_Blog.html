@@ -10,6 +10,23 @@
         height: 80%;
     }
 
+     /* 外层容器，确保视频居中 */
+     .video-container {
+      display: flex;
+      justify-content: center; /* 水平居中 */
+      align-items: center;    /* 垂直居中 */
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 自适应视频 */
+    .video-container iframe {
+      width: 100%;            /* 宽度自适应屏幕 */
+      max-width: 800px;       /* 可选：设置最大宽度 */
+      aspect-ratio: 16 / 9;   /* 设置宽高比 */
+      border: 0;              /* 去掉边框 */
+    }
+
     </style>
 
   <!-- Head -->
@@ -280,8 +297,21 @@
           </h1>
 
           <p><br></p>
+          <!-- 访客地图 -->
           <div class="map-container">
             <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=fgDHbdr1jwhscwH6bcYS87rhy0jSPyRggFZvP4jIinM"></script>
+          </div>
+
+          <p><br></p>
+          <!-- 研究工作展示 -->
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/uECW4XEEQ5k?si=Hsie2znoN8zVhcL5" 
+              title="YouTube video player" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen>
+            </iframe>
           </div>
 
           <p><br></p>
