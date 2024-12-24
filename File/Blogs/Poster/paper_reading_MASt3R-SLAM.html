@@ -165,10 +165,6 @@
                 <a class="nav-link" href="../My_Blog.html">Homepage</a>
               </li>
 
-              <li class="nav-item ">
-                <a class="nav-link" href="../Poster/cpp算法学习笔记.html">Learning Algorithm</a>
-              </li>
-
             </ul>
           </div>
         </div>
@@ -182,7 +178,7 @@
     <br>
       《MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors》</span>
   </h1>
-  <p><br></p>
+  <!-- <p><br></p> -->
 </header>
 
 <!-- Content -->
@@ -214,6 +210,12 @@
 
 <p><br></p>
 <h1>引言</h1>
+<div><p>
+  最近帝国理工（Imperial College London）新出了实时单目稠密SLAM，从demo中可以看到有如下几个特性：
+  首先是可实时运行，虽然部分mapping的几何一致性有待加强，但是毕竟能实时单目稠密三维重建，可以说是是相当impressed了。
+  其次是鲁棒性比较强，虽然重定位、回环这些都是老生常谈的功能了，但是作者通过遮挡镜头以及zoom in/out的方式来测试，都能够很好的handle这些特殊情况。
+  而本作从某种程度上，更是开启了SLAM的新范式，不再进行2D的匹配而是直接通过3D匹配，也就是所谓的“two-view 3D reconstruction and matching prior”来实现SLAM。
+  最后作者应该是打算开源代码的，后续开源了进行测试一下，而本博文先对论文其及相关的基础工作DUSt3R和MASt3R进行阅读。
 
 <div style="display: flex; justify-content: center;">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wozt71NBFTQ?si=zrxani5Y9hweuMKo" 
@@ -222,6 +224,9 @@
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
   </iframe>
 </div>
+
+
+</p></div>
 
 
 
@@ -237,6 +242,10 @@
 <p><br></p>
 <h1><a href="https://arxiv.org/pdf/2412.12392" target="_blank">MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors</a> </h1>
 
+
+
+<p><br></p>
+<h1>MASt3R-SLAM的实测</h1>
 
 <p><br></p>
 <h1>参考资料</h1>
