@@ -2,24 +2,83 @@
 <html lang="en">
 
 <style>
-    p { /* 文字对齐 */
-        text-align: justify;
-        text-align-last: left;
-        text-justify: inter-word;
-    }
-    #toc {
-      background: #f4f4f4;
-      padding: 10px;
-      /* border: 1px solid #ccc; */
-      /* margin-bottom: 20px; */
-      max-width: 100%; /* 限制目录框架的最大宽度 */
-      word-wrap: break-word; /* 强制超长单词换行 */
-      position: relative;
-      margin-left: auto; /* 使目录框架在页面中居右 */
-      margin-right: auto; /* 使目录框架在页面中居右 */
-      box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+  p { /* 文字对齐 */
+      text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
   }
-    </style>
+  #toc {
+    background: #f4f4f4;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    /* margin-bottom: 20px; */
+    max-width: 100%; /* 限制目录框架的最大宽度 */
+    word-wrap: break-word; /* 强制超长单词换行 */
+    position: relative;
+    margin-left: auto; /* 使目录框架在页面中居右 */
+    margin-right: auto; /* 使目录框架在页面中居右 */
+    box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+}
+
+#scrollToTocButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50px; /* 圆角设计 */
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+  transition: all 0.3s ease; /* 添加平滑过渡效果 */
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#scrollToTocButton:hover {
+    background-color: #0056b3; /* 鼠标悬停时颜色变化 */
+    transform: translateY(-3px); /* 悬停时按钮略微上移 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+}
+
+#toggleTocButton {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  padding: 12px 25px;
+  background-color: #00b34b;
+  color: white;
+  border: none;
+  border-radius: 50px; /* 圆角设计 */
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+  transition: all 0.3s ease; /* 添加平滑过渡效果 */
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#toggleTocButton:hover {
+    background-color: #00b34b; /* 鼠标悬停时颜色变化 */
+    transform: translateY(-3px); /* 悬停时按钮略微上移 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+}
+
+#newToc {
+display: none; 
+position: fixed; 
+bottom: 70px; 
+right: 100px; 
+background: #f4f4f4; 
+padding: 10px; 
+font-size: 12px; 
+max-height: 40%; /* 设置最大高度 */
+overflow-y: auto; /* 添加垂直滚动条 */
+overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+</style>
 
 <!-- Head -->
 <head>    <!-- Metadata, OpenGraph and Schema.org -->
@@ -124,6 +183,18 @@
   <h8>目录</h8>
   <ul></ul>
 </div>
+
+
+<!-- 添加目录按钮，点击展开目录 -->
+<button id="toggleTocButton">📑</button>
+<!-- 新的目录 -->
+<div id="newToc">
+  <h8>Catalog</h8>
+  <ul></ul>
+</div>
+
+<!-- 添加按钮跳转到题目 -->
+<button id="scrollToTocButton">⬆️</button>
         
 <article>
 <!-- 插入博客内容-->
@@ -154,9 +225,35 @@ Supervised Learning可以分为两类：Classification和Regression。Classifica
 </p></figcaption>
 </figure>
 
-
 </p></div>
 
+<p><br></p>
+<h3>Linear Regression Model (线性回归模型)</h3>
+<div><p>
+接下来通过实现一个线性回归模型来预测房价，来更好地理解Supervised Learning的基本原理。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241224162049.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+流程可以总结如下图
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241224163407.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+而对于不同的方法其实关键就是f不一样，比如线性回归，那么可以定义为线性方程
+<code>
+f(x)=wx+b
+</code>
+
+
+
+</p></div>
 
 
 
@@ -194,7 +291,11 @@ Supervised Learning可以分为两类：Classification和Regression。Classifica
   <li><a href="https://www.youtube.com/playlist?list=PLULgBZmS3YWRXpqgJTOq9m_nU4oyEVyj4" target="_blank">2024公认最好的 | 吴恩达机器学习</a></li>
   <li><a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb" target="_blank">Stanford CS230: Deep Learning | Autumn 2018</a></li>
   <li><a href="https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU" target="_blank">Stanford CS229: Machine Learning Full Course taught by Andrew Ng | Autumn 2018</a></li>
+  <li><a href="http://www.ai-start.com/ml2014/" target="_blank">机器学习笔记目录</a></li>
+  <li><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes/tree/master/code" target="_blank">课程代码参考</a></li>
+  
   <li><a href="http://www.ai-start.com/dl2017/" target="_blank">深度学习笔记目录</a></li>
+  <li><a href="https://jupyter.org/try" target="_blank">jupyter notebook online</a></li>
 
 </ul>
 
@@ -243,8 +344,9 @@ Supervised Learning可以分为两类：Classification和Regression。Classifica
   <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
   <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 
-   <!-- 下面是插入目录的 -->
-   <script>
+     <!-- 下面是自定义的一系列功能 -->
+  <script>
+    //下面是插入目录的
     document.addEventListener("DOMContentLoaded", function() {
         const toc = document.querySelector("#toc ul");
         const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
@@ -259,6 +361,38 @@ Supervised Learning可以分为两类：Classification和Regression。Classifica
             li.appendChild(a);
             toc.appendChild(li);
         });
+    });
+
+    // 添加按钮点击事件
+    const button = document.getElementById("scrollToTocButton");
+    button.addEventListener("click", function() {
+        document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 添加新的目录
+    const newToc = document.querySelector("#newToc ul");
+    const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+
+    headers.forEach(header => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+        header.setAttribute("id", id);
+        a.setAttribute("href", `#${id}`);
+        a.textContent = header.textContent;
+        li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+        li.appendChild(a);
+        newToc.appendChild(li);
+    });
+
+    // 控制新的目录的显示与隐藏
+    const toggleButton = document.getElementById("toggleTocButton");
+    toggleButton.addEventListener("click", function() {
+        if (newToc.parentElement.style.display === "none") {
+            newToc.parentElement.style.display = "block"; // 展开新目录
+        } else {
+            newToc.parentElement.style.display = "none"; // 收起新目录
+        }
     });
 </script>
 
