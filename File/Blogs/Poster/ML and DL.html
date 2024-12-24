@@ -250,11 +250,43 @@ Supervised Learning可以分为两类：Classification和Regression。Classifica
 <code>
 f(x)=wx+b
 </code>
-
-
+不同的w与b有不同的表现，如下图
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241224203244.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+监督学习中，通过cost function不停更新迭代，优化w和b，使得f(x)/“y-hat”尽可能接近真实的y，也就是优化的目标（误差最小）。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241224203858.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
 
 </p></div>
 
+<p><br></p>
+<h4>Cost Function的直观理解</h4>
+对于只有一个w参数的时候，cost function的图像如下，可以看到cost function是一个凸函数，只有一个最小值点。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241224204301.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+而对于有两个参数的时候，cost function如下图所示：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241224204400.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
 
 
 <!-- #################################################################################################################################################### -->
@@ -293,7 +325,7 @@ f(x)=wx+b
   <li><a href="https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU" target="_blank">Stanford CS229: Machine Learning Full Course taught by Andrew Ng | Autumn 2018</a></li>
   <li><a href="http://www.ai-start.com/ml2014/" target="_blank">机器学习笔记目录</a></li>
   <li><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes/tree/master/code" target="_blank">课程代码参考</a></li>
-  
+  <li><a href="https://github.com/HuangCongQing/MachineLearning_Ng/tree/master/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BEpython%E4%BB%A3%E7%A0%81" target="_blank">课程代码参考2</a></li>  
   <li><a href="http://www.ai-start.com/dl2017/" target="_blank">深度学习笔记目录</a></li>
   <li><a href="https://jupyter.org/try" target="_blank">jupyter notebook online</a></li>
 
