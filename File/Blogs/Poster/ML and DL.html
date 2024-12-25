@@ -269,6 +269,7 @@ f(x)=wx+b
 
 </p></div>
 
+<!-- #################################################################################################################################################### -->
 <p><br></p>
 <h4>Cost Function的直观理解</h4>
 <div><p>
@@ -291,6 +292,7 @@ f(x)=wx+b
 
 </p></div>
 
+<!-- #################################################################################################################################################### -->
 <p><br></p>
 <h4>gradient descent(梯度下降)</h4>
 <div><p>
@@ -302,6 +304,35 @@ f(x)=wx+b
 <figcaption><p>
 </p></figcaption>
 </figure>
+直观理解梯度下降法，如下图所示。从不同的点开始，可能进入不同的局部最小值点。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241225165743.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+公式表达如下：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241225172045.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+而所谓的局部最小值，可以理解为w和b不再进一步更新了。接下来通过一维的角度来直观理解learning rate和derivative（应该是partial derivative，偏导）。
+首先是偏导数，可以理解为函数在某一点的斜率，也就是函数在这一点的变化率。根据偏导数的符号决定更新的方向，如下图所示。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241225173728.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure>
+
+
+而learning rate可以理解为每次迭代的步长，也就是w和b更新的幅度。
+
 
 
 </p></div>
