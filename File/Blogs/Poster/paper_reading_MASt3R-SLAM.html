@@ -229,24 +229,90 @@
 </p></div>
 
 
-
+<!-- **************************************************************************************************************************** -->
 <p><br></p>
 <h1><a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_DUSt3R_Geometric_3D_Vision_Made_Easy_CVPR_2024_paper.pdf" target="_blank">DUSt3R: Geometric 3D Vision Made Easy</a></h1>
+<!-- **************************************************************************************************************************** -->
+CVPR2024
+<br>
+<a href="https://europe.naverlabs.com/research/publications/dust3r-geometric-3d-vision-made-easy/" target="_blank">DUSt3R project website （有互动插件）</a>
+<h2>理论解读</h2>
+<div><p>
+  DUSt3R其实就是实现从2D图像到3D点云的转换，但是它不需要任何相机校准或视点姿势的先验信息，就可完成任意图像的密集或无约束3D重建。
+  传统的三维重建基本都是基于MVS（Multi-view stereo reconstruction）的原理，它的第一步就是估算相机的内参与外参（pose）。此外，这个过程包含了特征点的tracking与matching、sfm，BA优化等一系列步骤，每一步都可能存在误差并将noise传递到下一步，最终导致重建的不准确。同时也使得SLAM系统额外的庞大。
+  <br>
+  而DUSt3R（Dense and Unconstrained Stereo 3D Reconstruction）则是提供新的范式，它不需要相机的内参与外参，只需要输入双目图像，就可以输出对应的3D点云。
+  作者将成对的重建pairwise reconstruction）问题转换为点图（pointmaps）的回归，进而不再需要相机的投影模型。而当场景中有多于两张照片时，DUSt3R通过相应的global alignment strategy来将所有的点图对齐，进而生成最终的3D model 以及深度信息。
+  <br>
+  所谓的“global alignment strategy”其实是参考BA的思想，通过在3D空间直接优化相机的pose以及场景的几何结构。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/微信截图_20241225143305.png" alt="Image description">
+    </div>
+  <figcaption>
+    图上方的DUSt3R网络结构是基于Transformer encoders and decoders
+    <br>
+    图下方从左到右分别为图像-彩色点云-渲染的3D模型（rendered with shading）
+  </figcaption>
+  </figure> 
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/微信截图_20241225154344.png" alt="Image description">
+    </div>
+  <figcaption>
+    网络结构（更详细的理论学习略）
+  </figcaption>
+  </figure> 
+  
+  同时，DUSt3R还设计了不同的下游任务，比如point matching、相机的内参估计、相机的相对位姿估计等/
+  <br>
+
+  个人更直观一些的理解就是：DUSt3R是一种learning-based的3D reconstruction，但是跟NeRF、3DGS这些不一样，它不需要相机的内参以及pose只需要图像输入即可。
+  <br>
+  PS:当然NeRF或3DGS也有不需要pose先验的工作，也就是Full-SLAM的工作，但是还是额外设计成SLAM的架构，如PTAM等估算位姿，但是DUSt3R完全就没有估算位姿这一个过程，因此更加直观的说就是一个网络（同时封装了场景的几何结构、2D与3D点之间的关系，2个viewpoint之间的关系），仅输入图像就实现三维重建(associate the 2D pixel with 3D shapes)。
+
+  <br>
+  通过实用一个简单的regression loss，采用带label（合成的、sfm生成的、其他传感器提供的）的8个大型公开数据集来训练模型（目前作者开源的github中包含的数据如下图）。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/others/微信截图_20241225154112.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+  并且，DUSt3R并没有针对特定模块进行进行设计，而是基于通用的transformer结构采用完全的data-driven 的策略。
+
+  <br>
+  实验显示，DUSt3R在单目/多视图深度估计以及相对位姿估计三个任务上，均取得SOTA。
+
+</p></div>
+
+<!-- **************************************************************************************************************************** -->
+<p><br></p>
+<h2>实验测试</h2>
+<div><p>
+<a href="https://github.com/naver/dust3r" target="_blank">DUSt3R Github</a>
+<br>
+
+</p></div>
 
 
 
+<!-- **************************************************************************************************************************** -->
 <p><br></p>
 <h1><a href="https://arxiv.org/pdf/2406.09756" target="_blank">Grounding Image Matching in 3D with MASt3R</a></h1>
 
-
+<!-- **************************************************************************************************************************** -->
 <p><br></p>
 <h1><a href="https://arxiv.org/pdf/2412.12392" target="_blank">MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors</a> </h1>
 
 
-
+<!-- **************************************************************************************************************************** -->
 <p><br></p>
 <h1>MASt3R-SLAM的实测</h1>
 
+<!-- **************************************************************************************************************************** -->
 <p><br></p>
 <h1>参考资料</h1>
 <ul>
