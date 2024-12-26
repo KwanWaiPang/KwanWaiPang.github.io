@@ -242,7 +242,7 @@
 CVPR2024
 <br>
 <a href="https://europe.naverlabs.com/research/publications/dust3r-geometric-3d-vision-made-easy/" target="_blank">DUSt3R project website （有互动插件）</a>
-<h2>理论解读</h2>
+<h2>DUSt3R理论解读</h2>
 <div><p>
   DUSt3R其实就是实现从2D图像到3D点云的转换，但是它不需要任何相机校准或视点姿势的先验信息，就可完成任意图像的密集或无约束3D重建。
   传统的三维重建基本都是基于MVS（Multi-view stereo reconstruction）的原理，它的第一步就是估算相机的内参与外参（pose）。此外，这个过程包含了特征点的tracking与matching、sfm，BA优化等一系列步骤，每一步都可能存在误差并将noise传递到下一步，最终导致重建的不准确。同时也使得SLAM系统额外的庞大。
@@ -303,7 +303,7 @@ CVPR2024
 
 <!-- **************************************************************************************************************************** -->
 <p><br></p>
-<h2>实验测试</h2>
+<h2>DUSt3R实验测试</h2>
 <div><p>
 按照github的安装步骤 
 <a href="https://github.com/naver/dust3r" target="_blank">DUSt3R Github</a>也可参考<a href="https://github.com/KwanWaiPang/DUSt3R_comment" target="_blank">My Comment on DUSt3R</a>
@@ -352,7 +352,7 @@ DUSt3R可视化效果如下：
 ECCV2025
 <br>
 <a href="https://europe.naverlabs.com/blog/mast3r-matching-and-stereo-3d-reconstruction/" target="_blank">MASt3R project website</a>
-<h2>理论解读</h2>
+<h2>MASt3R理论解读</h2>
 
 <div><p>
 MASt3R (Matching And Stereo 3D Reconstruction)跟DUSt3R都是来自于NAVER LABS Euro团队的作品。在有了前作DUSt3R之后，作者开始探索从3D的角度来实现图像匹配（dense correspondences）,
@@ -424,7 +424,7 @@ It comprises a training, validation and test sets of 460, 65 and 130 scenes resp
 
 <!-- ! **************************************************************************************************************************** -->
 <p><br></p>
-<h2>实验测试</h2>
+<h2>MASt3R实验测试</h2>
 <div><p>
 按照github的安装步骤 
 <a href="https://github.com/naver/mast3r" target="_blank">MASt3R Github</a>也可参考<a href="https://github.com/KwanWaiPang/MASt3R_comment" target="_blank">My Comment on MASt3R</a>
