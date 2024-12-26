@@ -430,14 +430,82 @@ It comprises a training, validation and test sets of 460, 65 and 130 scenes resp
 <a href="https://github.com/naver/mast3r" target="_blank">MASt3R Github</a>也可参考<a href="https://github.com/KwanWaiPang/MASt3R_comment" target="_blank">My Comment on MASt3R</a>
 <br>
 
-由于作者验证的效果已经非常impressed了，此处仅用我的桌面的两张图片进行匹配，虽然难度不大，但是主要是看泛化性。
+测试匹配效果（跟作者给出的效果差不多，注意要避免有其他进程还在运行会影响匹配的效果 <code>kill -9 PID</code>）
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226185708.png" alt="Image description">
+  </div>
+<figcaption>
+  github给出的结果
+</figcaption>
+</figure> 
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226185806.png" alt="Image description">
+  </div>
+<figcaption>
+  匹配数为20的效果
+</figcaption>
+</figure> 
 
 
-其次，用一张桌面的图片与柯南进行匹配，看误匹配的效果：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226194414.png" alt="Image description">
+  </div>
+<figcaption>
+  匹配数为50的效果
+</figcaption>
+</figure> 
+
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226195022.png" alt="Image description">
+  </div>
+<figcaption>
+  大视差下的效果
+</figcaption>
+</figure> 
+
+
+下面用我的桌面的两张图片进行匹配的效果
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226185857.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226194642.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+
+
+再用一张桌面的图片与柯南进行匹配，看误匹配的效果：
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226190015.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+
 
 
 两张柯南的图片匹配效果：
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226190108.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+这似乎不如作者提到的这么好，<a href="https://github.com/KwanWaiPang/MASt3R_comment/blob/main/matching.ipynb" target="_blank">MASt3R测试代码链接</a>
+<br>
+<a href="https://github.com/KwanWaiPang/DUSt3R_comment/blob/main/matching.ipynb" target="_blank">DUSt3R 测试匹配的效果代码</a>
 
 </p></div>
 
