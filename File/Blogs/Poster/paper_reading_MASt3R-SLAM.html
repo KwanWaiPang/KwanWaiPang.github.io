@@ -355,7 +355,67 @@ CVPR2024
 <h2>理论解读</h2>
 
 <div><p>
-MASt3R跟DUSt3R都是来自于NAVER LABS Euro团队的作品。在有了前作DUSt3R之后，作者开始探索从3D的角度来实现图像匹配。
+MASt3R (Matching And Stereo 3D Reconstruction)跟DUSt3R都是来自于NAVER LABS Euro团队的作品。在有了前作DUSt3R之后，作者开始探索从3D的角度来实现图像匹配（dense correspondences）,
+“aim at producing a list of pairwise correspondences (matches), given two images”（其实在DUSt3R的附加功能中，也已经有这个function的了，属于by-product）
+也可拓展成camera calibration, camera pose estimation, 3D reconstruction 等任务。
+<br>
+图像匹配（Image Matching）是3D视觉中所有性能最佳的算法和pipeline的核心组件。然而，虽然匹配从根本上来说是一个3D问题（与相机姿态和场景几何结构有内在联系），但是通常匹配都被视为一个2D问题。
+本文使用 DUSt3R（一种基于 Transformers 的最新且强大的 3D 重建框架）将匹配作为 3D 任务。
+DUSt3R方法基于点图回归（pointmaps regression），在具有极端视点变换的情况下，仍然可以实现良好的匹配效果，但精度有限。而本文的目标则是是提高匹配的能力，同时保持其鲁棒性。
+作者采用“new head”（应该是在DUSt3R前额外加一个network）来输出稠密的local features，并且添加matching loss来进行训练，进而提升DUSt3R的性能。
+并且，作者引入了一种快速相互匹配方案（a fast reciprocal matching scheme），该方案不仅可以将匹配速度提高几个数量级，而且还具有理论保证以及提升效果。
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="../assets/img/others/微信截图_20241226155152.png" alt="Image description">
+    <img style="width: 100%;" src="../assets/img/others/微信截图_20241226160703.png" alt="Image description">
+    <img style="width: 100%;" src="../assets/img/others/微信截图_20241226160714.png" alt="Image description">
+    <img style="width: 100%;" src="../assets/img/others/微信截图_20241226160724.png" alt="Image description">
+  </div>
+<figcaption>
+在极端视点变换的情况下，仍然可以实现良好的匹配效果
+</figcaption>
+</figure> 
+
+从上面的两两视觉匹配的效果来看，可以说是相当impressed了，尤其是有些测试的场景甚至连人眼也很难分辨出来，但是MASt3R却能够很好的handle这些特殊情况（还包括了不同的光照条件）。
+<br>
+传统的图像匹配方法主要分为三步：
+<li>1. first extracting sparse and repeatable keypoints, </li>
+<li>2.then describing them with locally invariant features, </li>
+<li>3. and finally pairing the discrete set of keypoints by comparing their distance in the feature space.</li>
+这个pipeline有几个优点：关键点检测器在低到中等光照和视点变化下都是精确的，关键点的稀疏性使问题在计算上很容易处理，无论何时在类似条件下查看图像，都能在毫秒内实现非常精确的匹配。这也使得像SIFT以及COLMAP等方法在很多场景下都是非常有效的。
+<br>
+但是，基于关键点的方法通过减少对关键点包问题的匹配，丢弃了对应任务的全局几何上下文。 这使得它们在重复模式或低纹理区域的情况下特别容易出错，这实际上对于局部描述符来说是不适定的。
+解决这个问题的一种方法是在配对步骤中引入全局优化策略，通常利用一些学习到的匹配先验知识(例如SuperGlue等learning-based 方法)。 
+但是还是得依赖于关键点的检测，如果关键点及其描述符没有编码足够的信息，那么仅仅在匹配期间利用全局上下文可能为时已晚。
+<br>
+因此，另一个方向是考虑密集整体匹配(dense holistic matching),也就是完全避免关键点，并一次匹配整个图像。例如基于cross-attention的LoFTR等等，这些方法将图像视为一个整体，生成的稠密的匹配（dense correspondences），并且对于重复模式和低纹理区域也是鲁棒的。
+<br>
+但是这些方法也都是基于2D的匹配。即使像LoFTR这么好的方法，在Map-free localization benchmark上的精度也不高。作者认为这是因为这些方法都将匹配问题视为图像平面上的2D问题。但是实际上，匹配任务的制定本质上是一个 3D 问题：所谓的匹配，要对应的像素是观察的相同的3D点的像素。
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226155105.png" alt="Image description">
+  </div>
+<figcaption>
+  结构跟DUSt3R类似，但是多了一个head来输出local features，并且额外添加了matching loss来进行训练。此外还有针对matching的fast reciprocal matching scheme
+</figcaption>
+</figure> 
+
+Map-free localization benchmark是一个来自于<a href="https://arxiv.org/pdf/2210.05494" target="_blank">ECCV 2022</a>的工作.
+"an extremely challenging dataset aiming at localizing the camera in metric space given a single reference image without any map.
+It comprises a training, validation and test sets of 460, 65 and 130 scenes respectively, each featuring two video sequences."
+<br>
+采用的评价指标为“Virtual Correspondence Reprojection Error (VCRE) and camera pose accuracy”
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241226163020.png" alt="Image description">
+  </div>
+<figcaption>
+  在Map-free localization benchmark上表现最佳
+</figcaption>
+</figure> 
 
 
 
@@ -370,24 +430,46 @@ MASt3R跟DUSt3R都是来自于NAVER LABS Euro团队的作品。在有了前作DU
 <a href="https://github.com/naver/mast3r" target="_blank">MASt3R Github</a>也可参考<a href="https://github.com/KwanWaiPang/MASt3R_comment" target="_blank">My Comment on MASt3R</a>
 <br>
 
+由于作者验证的效果已经非常impressed了，此处仅用我的桌面的两张图片进行匹配，虽然难度不大，但是主要是看泛化性。
+
+
+其次，用一张桌面的图片与柯南进行匹配，看误匹配的效果：
+
+
+两张柯南的图片匹配效果：
+
+
 </p></div>
 
 
-<!-- **************************************************************************************************************************** -->
+<!-- ! MASt3R-SLAM **************************************************************************************************************************** -->
 <p><br></p>
 <h1><a href="https://arxiv.org/pdf/2412.12392" target="_blank">MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors</a> </h1>
 
+<p><br></p>
+<h2>理论解读</h2>
+<div><p>
+
+
+</p></div>
 
 <!-- **************************************************************************************************************************** -->
 <p><br></p>
-<h1>MASt3R-SLAM的实测</h1>
+<h2>实验测试</h2>
+<div><p>
+
+waiting for the code to be released in <a href="https://edexheim.github.io/mast3r-slam/" target="_blank">MASt3R-SLAM Project Website</a> 
+
+
+</p></div>
 
 
 <!-- **************************************************************************************************************************** -->
 <p><br></p>
 <h1>参考资料</h1>
 <ul>
-  <li><a href="https://edexheim.github.io/mast3r-slam/" target="_blank">Project website of MASt3R-SLAM</a></li>
+  <li><a href="https://blog.csdn.net/m0_74310646/article/details/141145147?spm=1001.2014.3001.5501" target="_blank">DUSt3R的解读</a></li>
+  <li><a href="https://blog.csdn.net/m0_74310646/article/details/141830671" target="_blank">MASt3R的解读</a></li>
 </ul>
 
 </article>
