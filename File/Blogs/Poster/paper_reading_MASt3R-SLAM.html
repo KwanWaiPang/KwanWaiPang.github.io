@@ -523,6 +523,64 @@ MASt3R可视化效果如下：
 <p><br></p>
 <h2>理论解读</h2>
 <div><p>
+  在MASt3R提供的a two-view 3D reconstruction and matching prior基础上，作者通过引入有效的pointmap matching, camera tracking and local fusion, graph construction and loop closure, 以及second-order global optimisation，提出了MASt3R-SLAM，一个实时的单目稠密SLAM系统（可以实现15FPS的定位及稠密三维重建）。
+  同时，MASt3R原本就不依赖于camera的model，那么就可以实现reconstructing scenes with generic, time-varying camera models（也就是demo中zoom in zoom out的情况下的稳定三维重建）.当然要达到在多个benchmark上的SOTA performance，还是需要“已知的标定参数”，但是这一点也不难，只是做相机标定而已~
+  <br>
+  PS：其实MASt3R的by-product或者MASt3R-sfm都可以实现定位的功能，加上原本的mapping就已经是一个full-SLAM的，但是都是离线式的。对于SLAM系统来说需要增量式接受数据以及实时，因此这也就是MASt3R-SLAM的意义所在。实时性以及一些列高效的处理（low-latency matching, careful map maintenance, and efficient methods for large-scale optimisation）
+  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/微信截图_20241227130626.png" alt="Image description">
+    </div>
+  <figcaption>
+    先通过MASt3D来预测pointmap以及实现3D pixel matching；
+    tacking 模块负责估算当前的pose以及local pointmap fusion；
+    通过查询由MASt3D的feature产生的检索数据库实现loop closure，如果检测到足够的匹配对数就会构建边（edge）然后通过second-order global optimisation来优化后端实现全局一致性的位姿估计与稠密重建。
+  </figcaption>
+  </figure> 
+
+  <li>
+    Pointmap Matching: 通过MASt3D来获取pointmaps以及对应的features(用来做matching的)。对于DUSt3R采用的是k-d tree来进行匹配，而MASt3R也提出了coarse-to-fine的策略（也就是前面所提到的a fast reciprocal matching scheme），但是这两者的实时性都不够（dense pixel matching都是秒级别的），作者则是提出基于最优化的方法来实现实时的匹配(个人觉得跟重投影误差有点像，通过最小化距离可以转换为下图所示的角度θ)。
+    <br>
+    而通过 Levenberg-Marquard算法来计算大概10代左右就可以收敛。
+  </li>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/others/微信截图_20241227135250.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+
+  <li>
+    Tracking and Pointmap Fusion:从公式上看也就是3D-3D的匹配，不断的优化pose。
+  </li>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/others/微信截图_20241227140601.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure> 
+
+  而至于graph construction以及loop closure基本都是MASt3R-sfm的改进部分，毕竟MASt3R已经实现了匹配了，如何管理图或者回环仅仅是框架设计的问题而已~
+  比较有意思的一点是，作者在论文中提到“inspired by both filtering and optimisation techniques in SLAM, we perform local filtering of pointmaps in the frontend to enable large-scale global optimisation in the backend.”但是感觉也就是前端算是一个coarse estimation后端就是一个second-order optimisation scheme(当然也可能是理解有误，后续具体看看代码的实现)。
+
+  <br>
+  接下来看看benchmark下的效果（our<sup>*</sup>就是未知内参矫正的）
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/微信截图_20241227141539.png" alt="Image description">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/微信截图_20241227145249.png" alt="Image description">
+    </div>
+  <figcaption>
+    可以看到效果比起DROID-SLAM以及DPV-SLAM（DPVO的SLAM版本）都是要好一些的，当然数值上不太明显，可能是测试的序列没有太难
+  </figcaption>
+  </figure> 
 
 
 </p></div>
