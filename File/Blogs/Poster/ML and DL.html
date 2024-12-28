@@ -397,9 +397,18 @@ f(x)=wx+b
 
 
 <p><br></p>
-<h4>Vectorization</h4>
+<h4>Vectorization(向量化) for Coding</h4>
 <div><p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241228222200.png" alt="Image description">
+    </div>
+  <figcaption><p>
+  </p></figcaption>
+  </figure>  
 
+  更进一步的，把x添加一个维度，全为1，这样就可以把b也合并到w中，从而可以进一步简化代码。
+  向量化可以大大提高代码的运行速度，因为不需要循环，而是直接用矩阵运算（在代码的底层可以理解为并行运算）。
 
 </p></div>
 
