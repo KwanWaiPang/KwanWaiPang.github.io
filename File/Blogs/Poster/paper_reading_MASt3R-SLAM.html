@@ -262,16 +262,56 @@ CVPR2024
   </figcaption>
   </figure> 
 
+  SfM恢复的是稀疏的3D map以及相机的pose；而MVS则是稠密重建，但是需要相机的内参以及pose。而DUSt3R则是不需要相机的内参以及pose，只需要图像输入即可。
+  此外，最近比较火的spatial AI应该也是以“direct RGB-to-3D”为目标的。
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241229121014.png" alt="Image description">
+    </div>
+  <figcaption>
+    什么是Pointmap？（个人觉得其实可以理解为彩色点云，只是跟相机的pixel为一一对应关系，在相机坐标系）
+  </figcaption>
+  </figure>  
+
+  相机内参已知的情况下，pointmap可以由深度图投影得到。如下面公式
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241229123606.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>  
+
+  然后通过regression loss来训练网络
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/others/微信截图_20241229123657.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>  
+  同时网络除了输出pointmap以外，还输出了不同区域对应发的confidence map for each pixel。如下图所示
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 90%;" src="../assets/img/others/微信截图_20241229123918.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>  
+
+  整体的framework如下图所示：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 90%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241225154344.png" alt="Image description">
     </div>
   <figcaption>
-    网络结构（更详细的理论学习略）
+    网络结构（更详细的理论学习略，基于CroCo及其v2）
   </figcaption>
   </figure> 
   
-  同时，DUSt3R还设计了不同的下游任务，比如point matching、相机的内参估计、相机的相对位姿估计等/
+  同时，DUSt3R还设计了不同的下游任务，比如point matching、相机的内参估计、相机的相对位姿估计等。注意这里的下游任务相当于by-product是基于所产生的3D pointmaps进一步生成的，而本身pointmaps的生成是不依赖于这些的。
   <br>
 
   个人更直观一些的理解就是：DUSt3R是一种learning-based的3D reconstruction，但是跟NeRF、3DGS这些不一样，它不需要相机的内参以及pose只需要图像输入即可。
