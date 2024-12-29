@@ -336,6 +336,16 @@ f(x)=wx+b
 <br>
 对于固定的学习率，会伴随着Derivative变小，update step也变小，最终到达local minimum。
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241229154505.png" alt="Image description">
+  </div>
+<figcaption>
+  学习率对于收敛效果的影响
+</figcaption>
+</figure>
+一般如果遇到cost 不下降或者下降方式有问题可以先通过设置较小的学习率，看loss是否下降，如果下降，那么就是学习率太大导致的，但如果还是不下降，那么可能是代码有其他bug。
+
 </p></div>
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
@@ -438,6 +448,24 @@ f(x)=wx+b
 
 
 <p><br></p>
+<h4>Polynomial Regression（多项式回归）</h4>
+<div><p>
+  有时候，线性回归并不能很好地拟合数据，这时候可以考虑多项式回归。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241229155828.png" alt="Image description">
+    </div>
+  <figcaption>
+    当然除了用平方根以外，还可以用根号
+  </figcaption>
+  </figure>  
+  注意，多项式回归的特征缩放会更加重要，因为不同的特征的尺度差异会更大。
+  
+
+</p></div>
+
+
+<p><br></p>
 <h4>线性回归代码实现</h4>
 <div><p>
 详细请见:
@@ -445,6 +473,62 @@ f(x)=wx+b
 <li><a href="https://github.com/KwanWaiPang/draw_figure/blob/main/1.%20Linear%20Regreesion/scikit-learn.ipynb" target="_blank">scikit-learn线性回归的代码</a></li>
 
 </p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>Logistic Regression（逻辑回归）</h3>
+<div><p>
+上一节的线性回归是用来预测连续值的（回归问题），而逻辑回归是用来预测离散值的，也就是分类问题（Classification）。
+而分类问题又可以分为二分类（Binary Classification）和多分类（Multiclass Classification）。
+而逻辑回归函数表达如下图所示
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241229163109.png" alt="Image description">
+  </div>
+<figcaption>
+  从数学上来看就是线性回归+一个sigmoid函数
+</figcaption>
+</figure>  
+</p></div>
+
+<p><br></p>
+<h4>Decision Boundary（决策边界）</h4>
+<div><p>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241229170555.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241229170838.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>  
+
+</p></div>
+
+
+<p><br></p>
+<h4>逻辑回归的cost function</h4>
+<div><p>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241229171713.png" alt="Image description">
+    </div>
+  <figcaption>
+    线性回归中的Squared error cost不适用于逻辑回归，因为代入方程会发现它是非凸函数，会有很多局部最小值。
+  </figcaption>
+  </figure>  
+
+  为了让cost function是凸函数，可以用如下的cost function
+
+
+
+
+</p></div> 
+
+
 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
