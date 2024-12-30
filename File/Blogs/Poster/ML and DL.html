@@ -576,6 +576,59 @@ f(x)=wx+b
   </figcaption>
   </figure> 
 
+  解决过拟合的方法：
+  <li>增加训练样本，但是获取更多的训练数据一般是很难的</li>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241230134901.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+
+  <li>进一步筛选特征</li>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241230135131.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+
+  <li>正则化（Regularization）：去掉某些特征可以看作是把对应的特征的权重设置为0，但是这样可能会丢失一些重要的特征，而正则化可以理解为将部分特征的权重设置为很小，但同时又不丢失</li>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241230135426.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+  如下图所示，通过对cost function添加正则项：也就是如果w3和w4太大，那么会导致cost function变大，从而减小w3和w4的值。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241230135954.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>  
+  但实际上，是很难选出具体哪个特征需要正则化的，因此一般会对所有的特征都进行正则化。如下所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241230140524.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+  而对于权重的值越小，可以理解为模型越简单，也就是减小过拟合的可能性。
+
+  <br>而正则化参数则是平衡拟合数据（overfit）以及减少权重（underfit）的作用。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20241230140739.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
   
 </p></div>
 
