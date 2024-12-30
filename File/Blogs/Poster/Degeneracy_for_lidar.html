@@ -178,7 +178,8 @@
 <header class="post-header">
   <p><br></p>
   <h1 align="center" class="post-title">
-    <span style="font-weight: 600;">题目</span>
+    <span style="font-weight: 600;">Degeneracy Detection and Mitigation 
+      <br> for Lidar-SLAM</span>
   </h1>
   <p><br></p>
 </header>
@@ -211,62 +212,25 @@
 <!-- 插入博客内容-->
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
-<!-- <p><br></p>
+<p><br></p>
 <h1>引言</h1>
 <div><p>
+  本文主要介绍了一些用于检测和解决激光雷达SLAM中退化问题的算法。
+  目前LiDAR-SLAM对退化处理的方法基本都是退化检测和退化补偿，检测要么是通过几何结构对点云分析，要么就是优化的方法，对优化问题的矩阵分析，要么就是通过learning判断。
+  而对于退化的补偿一般都要额外信息的引入，因为退化本质上就是约束不够和噪声混了。
+  引入信息最少的方案一般是只要点云配准的先验位姿，然后作约束优化，这样点云配准的时候不会在退化的方向发散。要么就直接加传感器，比如或者相机(比如fast-livo,r3live等等),不过这些是不检测退化，直接加多的约束方程。
+  也有部分工作是仅仅对于退化的时候,对退化的维度进行补偿,这样可以减少work load以及避免引入的视觉等传感器会带来更多的噪声(在lidar不退化的时候加入image可能会让系统变得更差)。
   
-</p></div> -->
-
-<!-- 标签内使用 &lt; 和 &gt; 来代替 < 和 > -->
-<!-- <details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-
-</script>
-</code></pre>
-</details> -->
-
-<!-- <p><br></p>
-<h1></h1>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/others" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>  -->
+</p></div> 
 
 
 
-
-<!-- 一整个模块 -->
-<!-- <p><br></p>
-<h1></h1>
-<div>
-<figure style="text-align: center;">
-  <div style="margin-bottom: 10px;">
-    <img style="width: 80%;" src="../assets/img/" alt="Image description">
-  </div>
-<figcaption><p>
-</p></figcaption>
-</figure>
-
-<details>
-<summary>Click to expand the code</summary>
-<pre><code>
-<script type='text/html' style='display:block'>
-
-</script>
-</code></pre>
-</details>
-
-</div> -->
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 
 <p><br></p>
 <h1>参考资料</h1>
 <ul>
-  <li><a href="https://leetcode.cn/u/kwan-wai-pang/" target="_blank">My Leetcode</a></li>
+  <li><a href="https://github.com/thisparticle/Awesome-Algorithms-Against-Degeneracy" target="_blank">Awesome-Algorithms-Against-Degeneracy</a></li>
 </ul>
 
 </article>
