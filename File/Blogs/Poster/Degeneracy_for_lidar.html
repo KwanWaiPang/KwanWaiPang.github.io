@@ -225,9 +225,100 @@
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h1>退化检测</h1>
-<p><br></p>
-<h3><a href="https://arxiv.org/pdf/2412.17235" target="_blank">Selective Kalman Filter: When and How to Fuse Multi-Sensor Information to Overcome Degeneracy in SLAM</a></h3>
 
+<p><br></p>
+<h2><a href="https://arxiv.org/pdf/2412.17235" target="_blank">Selective Kalman Filter: When and How to Fuse Multi-Sensor Information to Overcome Degeneracy in SLAM</a></h2>
+<div><p>
+这篇论文主要的思路是:多传感器融合确实是可以解决SLAM退化的问题,但是不应该"all in"的融合,而是应该根据传感器的退化情况来选择性的融合,这样可以减少计算量(less processing visual data),提高精度(introduce fewer errors from visual measurement)。也就是"when"与"how"的问题。
+<br>
+为此,作者提出了LiDAR的退化检测(也就是when),只有当lidar退化时才引入视觉观测量.而作者提出的lidar退化检测方法还是直接识别特定的退化方向(考虑了rotational 与translational的约束).
+至于(how),作者则是用视觉测量,仅仅对特定的退化状态来进行更新.
+<br>
+<mark>
+  If LIO subsystem is degenerative, to minimally introduce visual information and prevent deterioration in state estimation, we analyze the LiDAR’s degenerative direction. 
+  We then selectively fuse visual data pertinent to this degenerative direction and discard data from non-degenerative directions, which helps prevent a decline in the accuracy of the LiDAR’s nondegenerative dimensions.
+</mark>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230180040.png" alt="Image description">
+  </div>
+<figcaption><p>
+</p></figcaption>
+</figure> 
+
+作者采用R3LIVE作为baseline,而lidar退化的检测则是基于lidar的测量量实现的.
+基于fast-lio,lidar的point-to-plane constraints可以写为下面的公式:
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230180934.png" alt="Image description">
+  </div>
+<figcaption>
+  x为系统的状态也就是rotation 和 translation
+</figcaption>
+</figure> 
+对上式进行加权线性最小二乘法可以得到下面的公式:
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230181135.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230181222.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+
+<mark>Degeneracy-aware factors with applications to underwater slam(下面介绍)</mark>是通过对比上面公式的H1的最小的eigenvalue与阈值来判断是否退化.
+然而,矩阵H1前3个维度是来自于rotation,后3个维度是来自于translation,而奇异值分解所获得的eigenvalue包含了旋转与平移的信息,,并不能直接用来判断退化的方向.此外,哪怕在同一个H1的奇异值分解中,奇异值都有不同的单位,因此很难设定一个阈值来作为是否退化的判断标准.并且这些奇异值所对应的eigenvector也不代表实际物理意义的方向.
+
+<br>
+而在LION中,作者提出退化及对应的方向可以通过分析H1的对角线元素来判断.并分别对对角线的矩阵进行奇异值分解(这样应该是为了把旋转与平移分开),然后通过设置两个阈值来分别判断平移与旋转两个方向的退化情况.
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230182239.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+但是却又忽略了两外两个矩阵的元素,这样可能会导致退化的方向不准确.如下图所示
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230182635.png" alt="Image description">
+  </div>
+<figcaption>
+  LION neglects the mutual influence between rotational and translational constraints
+</figcaption>
+</figure> 
+那么作者的做法其实就是对矩阵H1进行求逆,进而获取协方差矩阵
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230182830.png" alt="Image description">
+    <img style="width: 60%;" src="../assets/img/others/微信截图_20241230183117.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+而在分别对两个协方差矩阵进行奇异值分解的时候,实际上是考虑到了平移与旋转的相互影响的.并且这个协方差矩阵也是有实际的物理意义的:
+
+<mark>
+  the diagonal blocks of the covariance matrix represent the variances of the state, 
+  while the off-diagonal blocks indicate the correlations between different states. 
+  Variance serves as an intuitive measure of degeneracy level. 
+  For instance, a high variance indicates significant uncertainty in the estimation of that direction, signifying degeneracy.
+  </mark>
+
+  最后分别设置两个阈值来判断是否退化.而退化的时候仅仅更新对应位置的状态(详细过程见原文,推导并不复杂).
+
+</p></div>
+
+
+
+
+<p><br></p>
+<h2><a href="https://www.cs.cmu.edu/~kaess/pub/Hinduja19iros.pdf" target="_blank">Degeneracy-aware factors with applications to underwater slam</a></h2>
+
+
+<p><br></p>
+<h2><a href="https://arxiv.org/pdf/2102.03443" target="_blank">Lion: Lidar-inertial observability-aware navigator for vision-denied environments</a></h2>
 
 
 <p><br></p>
