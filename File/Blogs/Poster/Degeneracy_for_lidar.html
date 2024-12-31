@@ -316,7 +316,7 @@
 <h2><a href="https://www.cs.cmu.edu/~kaess/pub/Hinduja19iros.pdf" target="_blank">Degeneracy-aware factors with applications to underwater slam</a></h2>
 <div><p>
 <strong>IROS2019</strong>
-本文是针对基于ICP（scan matching）方法的退化感知问题（degeneracy-aware ICP algorithm），然后基于感知的退化结果来采用a partially constrained loop closure factor来整合到图优化SLAM中。
+本文是针对基于ICP（scan matching）方法的退化感知问题（degeneracy-aware ICP algorithm），然后基于感知的退化结果（剔除掉退化的部分用来做回环约束），采用a partially constrained loop closure factor来整合到图优化SLAM中。
 在进一步的把该方法用于水下sonar factor来整合到图优化SLAM中。
 <br>本质上可以理解为基于图优化框架的scan matching退化检测，虽然不是针对lidar的，但是传感器测量的退化检测方法是类似的。毕竟检测退化是基于因子图与H矩阵的。
 <br>无论是基于RGB-D还是基于基于Laser 的传感器，在特征点或者几何特征不够的情况下，都容易遇到退化问题（更进一步的应该是能观性分析了~）。而针对SLAM中的退化问题处理的方式一般有两个种：
@@ -331,9 +331,26 @@
     <img style="width: 80%;" src="../assets/img/others/微信截图_20241231104924.png" alt="Image description">
   </div>
 <figcaption>
-  
 </figcaption>
 </figure>  
+
+而基于ICP的scan matching的回环约束可以写为下式
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241231133629.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure> 
+而作者采用的退化检测方法是通过对A矩阵的奇异值分解来判断是否退化，而对于退化的部分则剔除掉，仅仅将没有退化的部分作为回环因子加入。其步骤如下 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241231133922.png" alt="Image description">
+  </div>
+<figcaption>
+  其中第七步是根据特征值与阈值对比来判断是否退化
+</figcaption>
+</figure> 
 
 
 </p></div>
