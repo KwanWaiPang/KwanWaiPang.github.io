@@ -418,6 +418,24 @@
 
 </p></div>
 
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2><a href="https://arxiv.org/pdf/2211.16335" target="_blank">X-icp: Localizability-aware lidar registration for robust localization in extreme environments</a></h2>
+<div><p>  
+<strong>IEEE Transactions on Robotics (2023)</strong>
+X-icp的做法其实跟上面的LION的很类似，也就是对H矩阵进行分解，然后分别考虑rr和tt作为rotation和translation的退化分析（LION应该是只考虑了translation）
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241231154426.png" alt="Image description">
+  </div>
+<figcaption>
+  
+</figcaption>
+</figure> 
+
+
+</p></div>
+
 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
@@ -440,7 +458,7 @@
 <br>
 lidar退化一般是通过额外的信息来进行代替或者添加额外的约束来弥补。
 这篇论文对于lidar退化的补偿方法进行了详细的分析以及对比。与此同时作者也提出了三种方法来保证点云的注册是鲁棒的：
-<li> the incorporation of different types of constraints into the ICP algorithm(添加多种约束到ICP)</li>
+<li> the incorporation of different types of constraints into the ICP algorithm(添加多种约束到ICP，可以理解为通过添加新的约束，进而把退化部分所带来的影响去掉)</li>
 <li> the effect of using active or passive degeneracy mitigation techniques （采用退化补偿）</li>
 <li> the choice of utilizing global point cloud registration methods on the ill-conditioned ICP problem in LiDAR degenerate environments (在退化场景采用全局的点云注册)</li>
 
@@ -449,7 +467,7 @@ lidar退化一般是通过额外的信息来进行代替或者添加额外的约
     <img style="width: 80%;" src="../assets/img/others/微信截图_20241231143708.png" alt="Image description">
   </div>
 <figcaption>
-  
+  各种退化补偿的方法及其效果请见原文（涉及较多的推导与分析~）
 </figcaption>
 </figure> 
 
