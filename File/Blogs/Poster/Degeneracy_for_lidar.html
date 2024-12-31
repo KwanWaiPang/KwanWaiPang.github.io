@@ -222,7 +222,14 @@
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
-<h1>退化检测（Degeneracy Detection</h1>
+<h1>退化检测（Degeneracy Detection）</h1>
+<div><p>
+  一般的退化检测方法有以下几种：
+  <li>Registration Uncertainty：侧重于通过建模优化过程中的不确定性来检测退化。通过估计姿态估计过程的协方差，来捕捉优化问题的退化情况。 </li>
+  <li>Learning-based approaches：通过学习的方法来判断lidar信息是否退化，但是一般认为泛化性都是有限的</li>
+  <li>Optimization stability based approaches：这是对优化变量进行分析的。从优化变量的几何稳定性角度出发，分析ICP（点到平面）算法的几何稳定性。（比如能观性分析等，可能需要对每个lidar点都进行分析，比如LION中的）</li>
+  <li>Degeneracy awareness：通过分析优化的Hessian矩阵的最小特征值，识别退化方向，也就是下面几个工作中主要介绍到的进行奇异值分解，然后判断特征值大小的方法</li>
+</p></div> 
 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
@@ -395,17 +402,37 @@
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h1>退化补偿（Degeneracy Mitigation）</h1>
+<div><p>
+  
+对于退化补偿的方法，基于它们如何应对和补偿退化信息,现有的研究方法可以大致分为被动退化补偿(Passive degeneracy mitigation)和主动退化补偿(Active degeneracy mitigation)两类。
+<li>Passive degeneracy mitigation:通过结合额外的传感器信息或外部里程计数据来缓解LiDAR退化的影响。这些方法不直接修改优化目标函数或LiDAR配准的相对姿态估计，而是通过外部信息来提供补充和辅助，以减少退化带来的负面影响。</li>
+<li>Active degeneracy mitigation:主动退化补偿方法直接修改优化过程，以减少退化对估计结果的影响。这些方法通过引入额外的约束、调整优化目标函数或使用正则化项等方式，主动地改变优化过程中的退化情况。</li>
+
+</p></div> 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h2><a href="https://arxiv.org/pdf/2408.11809" target="_blank">Informed, constrained, aligned: A field analysis on degeneracy-aware point cloud registration in the wild</a></h2>
 <div><p>  
-  <a href="https://github.com/leggedrobotics/perfectlyconstrained" target="_blank">Github Page</a>
-  lidar退化一般是通过额外的信息来进行代替或者添加额外的约束来弥补。
-  这篇论文对于lidar退化的补偿方法进行了详细的分析以及对比。与此同时作者也提出了三种方法来保证点云的注册是鲁棒的：
-  <li> the incorporation of different types of constraints into the ICP algorithm(添加多种约束到ICP)</li>
-  <li> the effect of using active or passive degeneracy mitigation techniques （采用退化补偿）</li>
-  <li> the choice of utilizing global point cloud registration methods on the ill-conditioned ICP problem in LiDAR degenerate environments (在退化场景采用全局的点云注册)</li>
+<a href="https://github.com/leggedrobotics/perfectlyconstrained" target="_blank">Github Page</a>
+
+<br>
+lidar退化一般是通过额外的信息来进行代替或者添加额外的约束来弥补。
+这篇论文对于lidar退化的补偿方法进行了详细的分析以及对比。与此同时作者也提出了三种方法来保证点云的注册是鲁棒的：
+<li> the incorporation of different types of constraints into the ICP algorithm(添加多种约束到ICP)</li>
+<li> the effect of using active or passive degeneracy mitigation techniques （采用退化补偿）</li>
+<li> the choice of utilizing global point cloud registration methods on the ill-conditioned ICP problem in LiDAR degenerate environments (在退化场景采用全局的点云注册)</li>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241231143708.png" alt="Image description">
+  </div>
+<figcaption>
+  
+</figcaption>
+</figure> 
+
+
 
 
 </p></div>
