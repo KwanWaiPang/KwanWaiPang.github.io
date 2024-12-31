@@ -357,12 +357,37 @@
 
 
 
-
-
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h2><a href="https://arxiv.org/pdf/2102.03443" target="_blank">Lion: Lidar-inertial observability-aware navigator for vision-denied environments</a></h2>
+<div><p>  
+<strong>Experimental robotics: The 17th international symposium</strong>
+这篇工作主要其实是提出一个LIO系统（带有在线lidar-imu外参估计），且该算法获得了second and first places in the Tunnel and Urban circuits （DARPA Subterranean Challenge） in August 2019 and February 2020, respectively.
+而本博文关注的则是其退化检测的部分。LION可以通过一个能观性的评价矩阵来衡量自身的性能，从而判断其估算的姿态是否在几何上不受约束。
+<br><mark>LION is able to self-assess its performance using an observability metric that evaluates whether the pose estimate is geometrically ill-constrained</mark>
+<br>而作者采用的则是来自于论文<code>Gelfand, Natasha, et al. "Geometrically stable sampling for the ICP algorithm." Fourth International Conference on 3-D Digital Imaging and Modeling, 2003. 3DIM 2003. Proceedings.. IEEE, 2003.</code>对点云的能观性采样的方法（打分），进而使得LION可退预测可能的退化。
+并且根据打分，转换不同的状态估计算法（比如轮式里程计或者VIO/thermal-imu）来应对退化的情况。（PS：转换不同估算方法来保持系统的稳定性也是参考额外的一篇工作）
 
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241231140147.png" alt="Image description">
+  </div>
+<figcaption>
+  
+</figcaption>
+</figure> 
+而所谓的“Observability Metric”则是通过对point-to-plane的ICP提取hessian矩阵进行分析的
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20241231140735.png" alt="Image description">
+  </div>
+<figcaption>
+  其实跟前面的类似，提取H矩阵后进行重组，然后利用奇异值分解判断奇异值的大小（此处仅仅考虑平移）
+</figcaption>
+</figure> 
+
+
+</p></div>
 
 
 
