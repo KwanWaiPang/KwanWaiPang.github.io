@@ -218,6 +218,27 @@
   引入信息最少的方案一般是只要点云配准的先验位姿(一般需要比较准的里程计)，然后作约束优化，这样点云配准的时候不会在退化的方向发散。要么就直接加传感器，比如或者相机(比如fast-livo,r3live等等),不过这些是不检测退化，直接加多的约束方程。
   也有部分工作是仅仅对于退化的时候,对退化的维度进行补偿,这样可以减少work load以及避免引入的视觉等传感器会带来更多的噪声(在lidar不退化的时候加入image可能会让系统变得更差)。
   
+  <details>
+    <summary>LiDAR-SLAM ICP匹配求pose的推导见</summary>
+    <figure style="text-align: center;">
+      <div style="margin-bottom: 10px;">
+        <img style="width: 80%;" src="../assets/img/others/微信截图_20241231151149.png" alt="Image description">
+      </div>
+    <figcaption>
+      ICP匹配转换成最小二乘问题，而上面的公式3中的A也就是优化问题中的hessian矩阵了
+    </figcaption>
+    </figure> 
+    进一步的要求解状态，其实也就是对上面公式3求导取0，得到下面的公式
+    <figure style="text-align: center;">
+      <div style="margin-bottom: 10px;">
+        <img style="width: 80%;" src="../assets/img/others/微信截图_20241231151437.png" alt="Image description">
+      </div>
+    <figcaption>
+    </figcaption>
+    </figure> 
+    而通过上面推导过程可以看到，hessian矩阵A是求解过程的重中之重，因此退化检测及补偿也基本围绕着对Hessian矩阵的分析展开
+  </details>
+  
 </p></div> 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
