@@ -228,7 +228,7 @@
       ICP匹配转换成最小二乘问题，而上面的公式3中的A也就是优化问题中的hessian矩阵了
     </figcaption>
     </figure> 
-    进一步的要求解状态，其实也就是对上面公式3求导取0，得到下面的公式
+    进一步的要求解状态，其实也就是对上面公式3求导取0。有很多方法可以求解（比如优化库、Gauss-Newton或者LM算法）。下面通过SVD分解的方法来求解
     <figure style="text-align: center;">
       <div style="margin-bottom: 10px;">
         <img style="width: 80%;" src="../assets/img/others/微信截图_20241231151437.png" alt="Image description">
