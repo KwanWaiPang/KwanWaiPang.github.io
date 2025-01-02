@@ -250,7 +250,7 @@
   <li>Registration Uncertainty：侧重于通过建模优化/点云匹配过程中的不确定性来检测退化。通过估计姿态估计过程的协方差，来捕捉优化问题的退化情况。 </li>
   <li>Learning-based approaches：通过学习的方法来判断lidar信息是否退化，但是一般认为泛化性都是有限的</li>
   <li>Optimization stability based approaches：这是对优化变量进行分析的。从优化变量的几何稳定性角度出发，分析ICP（点到平面）算法的几何稳定性。（比如能观性分析等，可能需要对每个lidar点都进行分析，比如LION中的）</li>
-  <li>Degeneracy awareness：通过分析优化的Hessian矩阵的最小特征值，识别退化方向，也就是下面几个工作中主要介绍到的进行奇异值分解，然后判断特征值大小的方法</li>
+  <li>Degeneracy awareness：通过分析优化的Hessian矩阵的最小特征值，识别退化方向，也就是下面几个工作中主要介绍到的进行奇异值分解，然后判断特征值大小的方法(感觉跟上面一种很像，虽然有些文献分为四类，但是其实三类也可)</li>
 </p></div> 
 
 
