@@ -218,6 +218,7 @@
   引入信息最少的方案一般是只要点云配准的先验位姿(一般需要比较准的里程计)，然后作约束优化，这样点云配准的时候不会在退化的方向发散。要么就直接加传感器，比如或者相机(比如fast-livo,r3live等等),不过这些是不检测退化，直接加多的约束方程。
   也有部分工作是仅仅对于退化的时候,对退化的维度进行补偿,这样可以减少work load以及避免引入的视觉等传感器会带来更多的噪声(在lidar不退化的时候加入image可能会让系统变得更差)。
   
+  <br>Lidar-based SLAM一般就是求点云的配准（Point Cloud Registration），其中有分为scan-to-scan registration以及scan-to-map registration。两者的本质其实都是基于ICP。
   <details>
     <summary>LiDAR-SLAM ICP匹配求pose的推导见</summary>
     <figure style="text-align: center;">
@@ -246,7 +247,7 @@
 <h1>退化检测（Degeneracy Detection）</h1>
 <div><p>
   一般的退化检测方法有以下几种：
-  <li>Registration Uncertainty：侧重于通过建模优化过程中的不确定性来检测退化。通过估计姿态估计过程的协方差，来捕捉优化问题的退化情况。 </li>
+  <li>Registration Uncertainty：侧重于通过建模优化/点云匹配过程中的不确定性来检测退化。通过估计姿态估计过程的协方差，来捕捉优化问题的退化情况。 </li>
   <li>Learning-based approaches：通过学习的方法来判断lidar信息是否退化，但是一般认为泛化性都是有限的</li>
   <li>Optimization stability based approaches：这是对优化变量进行分析的。从优化变量的几何稳定性角度出发，分析ICP（点到平面）算法的几何稳定性。（比如能观性分析等，可能需要对每个lidar点都进行分析，比如LION中的）</li>
   <li>Degeneracy awareness：通过分析优化的Hessian矩阵的最小特征值，识别退化方向，也就是下面几个工作中主要介绍到的进行奇异值分解，然后判断特征值大小的方法</li>
@@ -423,13 +424,26 @@
 <h2><a href="https://arxiv.org/pdf/2211.16335" target="_blank">X-icp: Localizability-aware lidar registration for robust localization in extreme environments</a></h2>
 <div><p>  
 <strong>IEEE Transactions on Robotics (2023)</strong>
-X-icp的做法其实跟上面的LION的很类似，也就是对H矩阵进行分解，然后分别考虑rr和tt作为rotation和translation的退化分析（LION应该是只考虑了translation）
+
+<br>
+X-ICP的创新主要是两个：（1）fine-grained localizability detection module（通过利用scan与map的correspondence来分析他们之间在不同维度的对齐强度）和（2）localizability-aware constrained ICP optimization module（其实也就是把退化的方向不纳入优化的考虑，一次实现drift-free的pose update）。
+<br>
+X-icp中的localizability detection module（实际就是退化检测）的做法其实跟上面的LION的很类似，也就是对H矩阵进行分解，然后分别考虑rr和tt作为rotation和translation的退化分析（LION应该是只考虑了translation）
 <figure style="text-align: center;">
   <div style="margin-bottom: 10px;">
     <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231154426.png" alt="Image description">
   </div>
 <figcaption>
-  
+  The localizability detection module 是基于优化的eigenspace实现的
+</figcaption>
+</figure> 
+
+X-ICP整体的系统框架如下：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250102134922.png" alt="Image description">
+  </div>
+<figcaption>
 </figcaption>
 </figure> 
 
