@@ -899,9 +899,36 @@ f(x)=wx+b
   Sigmoid VS ReLU：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
-      <img style="width: 80%;" src="../assets/img/others/微信截图_20250105175920.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250105180215.png" alt="Image description">
     </div>
   <figcaption>    
+  </figcaption>
+  </figure> 
+  
+  对于输出层的激活函数。根据不同的任务选择不同的激活函数：二分类一般采用sigmoid，而回归问题则是线性激活函数，而如果回归问题中只有正数，那么可以用ReLU。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250105181558.png" alt="Image description">
+    </div>
+  <figcaption>    
+  </figcaption>
+  </figure> 
+
+  而对于中间层的激活函数。ReLU是最常用的，因为它的计算速度快，而且不会出现梯度消失的问题（也就是大于0的情况下，走向不会变平，从而使得梯度下降不会变慢，函数的梯度变小了就会导致梯度下降法走得更慢）
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250105182157.png" alt="Image description">
+    </div>
+  <figcaption>    
+  </figcaption>
+  </figure> 
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250105182339.png" alt="Image description">
+    </div>
+  <figcaption>  
+    总结激活函数的选择  
   </figcaption>
   </figure> 
 
