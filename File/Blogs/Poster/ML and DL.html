@@ -1004,13 +1004,65 @@ f(x)=wx+b
     二分类 VS 多分类
   </figcaption>
   </figure> 
+  基于tensorflow的代码实现如下：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250106131907.png" alt="Image description">
+    </div>
+  <figcaption>    
+  </figcaption>
+  </figure> 
 
+  注意通过减少中间值的计算，可以进一步的提升精度：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250106132538.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+
+  对于逻辑回归而言，是否这样做是没有关系的，引入的误差不大，但是对于softmax regression而言，这样做会更好
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250106133211.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
+  因此整体的代码实现如下：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250106133359.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure> 
 
 </p></div>
 
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h4>Multi-label Classification</h4>
+<div><p>
+  此类问题应该指的是一个样本可以有多个标签，而不是多分类问题。如下所示，一张图片的输入对应多个label：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250106134108.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250106134322.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
 
 
-
+</p></div>
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
@@ -1020,6 +1072,7 @@ f(x)=wx+b
 <li><a href="https://github.com/kaieye/2022-Machine-Learning-Specialization/blob/main/Advanced%20Learning%20Algorithms/week2/9.Practice%20Lab%20Neural%20network%20training/C2_W2_Assignment.ipynb" target="_blank">Neural Networks for Handwritten Digit Recognition, Multiclass</a></li>
 
 </p></div>
+
 
 
 
