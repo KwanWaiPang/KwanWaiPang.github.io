@@ -1151,14 +1151,81 @@ f(x)=wx+b
   <figcaption>
   </figcaption>
   </figure>
+
 </p></div>
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h4>评估模型的方法</h4>
 <div><p>
+  当模型存在过拟合的情况，如果是简单的函数，可以通过画图可视化，但是如果有多个输入的feature，很难通过图例来直观感受学习到的函数对数据的拟合情况
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107105702.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
+  那么实际上可以把数据集分为训练集和测试集（例如，7、3分），训练集用来训练模型，而测试集用来评估模型的性能。而如果模型在训练集上表现很好，但是在测试集上表现很差，那么就是过拟合的情况。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107123506.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107123954.png" alt="Image description">
+    </div>
+  <figcaption>
+    注意计算error的时候是不需要正则化的
+  </figcaption>
+  </figure>
+  而对于分类问题中，评估模型的方法则是：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107124858.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107125011.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
 
 </p></div>
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h4>模型的选择以及交叉验证集（cross validation）</h4>
+<div><p>
+  直接的方式就是穷举几个模型，然后选择最好的：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107141250.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
+  那么进一步的，可以将数据集分为三个：训练集、交叉验证集、测试集。训练集用来训练模型，交叉验证集用来选择模型，而测试集用来评估模型的性能。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107141606.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
+  而进一步的，验证模型的性能也是类似上面验证集的方式：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107142111.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107142635.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250107142809.png" alt="Image description">
+    </div>
+  <figcaption>
+  </figcaption>
+  </figure>
+这样就通过交叉验证集来选择模型，而通过测试集来评估模型的性能，这样来评价模型的泛化能力则是公平的。
+
+</p></div>
+
+
+
+
+
 
 
 
@@ -1177,7 +1244,7 @@ f(x)=wx+b
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
-<h1>Reinforcement Learning</h1>
+<h2>Reinforcement Learning</h2>
 <div><p>
 
 
