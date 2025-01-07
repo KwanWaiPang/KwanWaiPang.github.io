@@ -1200,6 +1200,7 @@ f(x)=wx+b
   <figcaption>
   </figcaption>
   </figure>
+  但是上面这种做法会导致所选择的模型在测试集上表现好，再用来验证泛化能力就没有说服力了。
   那么进一步的，可以将数据集分为三个：训练集、交叉验证集、测试集。训练集用来训练模型，交叉验证集用来选择模型，而测试集用来评估模型的性能。如下图所示：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
@@ -1222,7 +1223,31 @@ f(x)=wx+b
 
 </p></div>
 
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h4>Bias and Variance</h4>
+<div><p>
+实际上感觉就是衡量是否过拟合和欠拟合的：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250107144042.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+从另外一个角度来看，bias和variance的关系如下：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250107144327.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250107144547.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
 
+
+
+</p></div>
 
 
 
