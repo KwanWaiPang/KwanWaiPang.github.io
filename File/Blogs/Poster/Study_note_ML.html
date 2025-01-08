@@ -1416,6 +1416,66 @@ f(x)=wx+b
 <p><br></p>
 <h3>Clustering（聚类）</h3>
 <div><p>
+  输入的数据并没有label，也没有办法告诉模型什么才是“正确”的答案。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108155023.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108155438.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+
+</p></div>
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h4>K-means</h4>
+<div><p>
+  首先是随机初始化K（下图是两个）个中心点，然后不断的迭代，直到中心点不再变化为止。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 60%;" src="../assets/img/others/微信截图_20250108155708.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108155917.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108160218.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108160348.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108160455.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108160544.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108160628.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108160659.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+
+  将上述过程总结为如下：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108161722.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+  若出现某个中心点没有数据点与之对应，那么可以将其删掉变为k-1个中心点或者重新初始化
+  <br>而对于数据之间界限没有明显的区分的情况，如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108161959.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
+
+  K-means也有它的优化目标，如下所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108162608.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108162853.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108163400.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
 
 </p></div>
 
