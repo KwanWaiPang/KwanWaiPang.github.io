@@ -1315,21 +1315,80 @@ f(x)=wx+b
 
 </p></div>
 
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h4>基于神经网络的bias与variance分析</h4>
+<div><p>
+  前面都是基于线性回归的，此处看看基于神经网络的debugging，但本质上其实是一样的~
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108125625.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108130248.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+  此外一般通过合适的正则化参数，更大的神经网络模型一般会有更好的性能：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108130430.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108130629.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+
+
+</p></div>
+
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
-<h4>基于神经网络的debugging</h4>
+<h4>数据增广（data augmentation）</h4>
 <div><p>
-  前面都是基于线性回归的，此处看看基于神经网络的debugging，但本质上其实是一样的~
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108151209.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108151304.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108151627.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+  除了数据增广以外也可以通过合成/仿真的数据来训练模型。
+
+</p></div>
 
 
-  
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h4>迁移学习（transfer learning）</h4>
+<div><p>
+  所谓的迁移学习就是将一个模型的参数作为另一个模型的初始参数（或fixed大部分，仅改变某些参数），然后再进行训练。这样可以加速模型的训练，提升模型的性能。
+  换句话说也就是利用别的task中的数据（训练好的模型），如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108152747.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+  而网络的可解析性其实是可以进行迁移学习的一个关键，如下所示，网络所训练的参数实现的功能是可以用于不同的task的（但注意，输入的类型需要一样，比如cv的输入都是image，不可能用NLP的网络来作为预训练模型~）
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108153200.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>  
+
 </p></div>
 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h4>提升模型性能的总结及系列实验</h4>
+<div><p>
 首先总结一下提升模型性能的方法：
 
 <figure style="text-align: center;">
@@ -1340,8 +1399,6 @@ f(x)=wx+b
 </figcaption>
 </figure>  
 
-
-<div><p>
   <li><a href="https://github.com/KwanWaiPang/draw_figure/blob/main/4.Advice%20for%20Applying%20Machine%20Learning/code.ipynb" target="_blank">基于线性回归的正则化及bias与covariance分析</a></li>
   
   <li><a href="https://github.com/KwanWaiPang/draw_figure/blob/main/4.Advice%20for%20Applying%20Machine%20Learning/%E5%9F%BA%E4%BA%8ENN%E7%9A%84%E6%8F%90%E5%8D%87%E6%8A%80%E5%B7%A7%E5%AE%9E%E9%AA%8C.ipynb" target="_blank">基于神经网络的正则化</a></li>
