@@ -1295,6 +1295,25 @@ f(x)=wx+b
 训练集上的error随着训练集的增加而增加，而交叉验证集上的error随着训练集的增加而减小。这是因为训练集越大，模型拟合全部数据是更难的，而又由于数据的样本量增大，模型的泛化能力也会增强，所以交叉验证集上的error会减小。
 但是无论怎么用在交叉验证集上的error都比训练集上的error要大，这是因为模型是在训练集上训练的，所以训练集上的error会小于交叉验证集上的error。
 
+<br>注意更多的训练集只是对过拟合的模型有效的，对于欠拟合的模型是没有用的。因此虽然learning是数据驱动的，但是也是需要模型足够的强，大数据才有用！
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250108123649.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure>  
+而相反对于过拟合的模型，则是如下（图应该是没画好，是有机会比人类的性能要好的）：
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250108124310.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure>  
+
+
 
 </p></div>
 
