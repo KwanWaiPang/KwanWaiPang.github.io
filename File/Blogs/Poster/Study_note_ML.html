@@ -1466,7 +1466,7 @@ f(x)=wx+b
   </figcaption>
   </figure> 
 
-  K-means也有它的优化目标，如下所示：
+  K-means也有它的优化目标，两个step的本质都是将cost最小化。如下所示：
   <figure style="text-align: center;">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="../assets/img/others/微信截图_20250108162608.png" alt="Image description">
@@ -1477,11 +1477,83 @@ f(x)=wx+b
   </figcaption>
   </figure> 
 
+  进一步的，初始化K-means也是非常重要的，不恰当的选择容易导致局部最优解。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108163841.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108164349.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
+  不过可以通过多次计算，然后选择cost最小的结果，来避免局部最优解的问题。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108164733.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
+
+  而选择合适的K值也是非常重要的，可以通过如下的方法来选择：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108164959.png" alt="Image description">
+    </div>
+  <figcaption>      
+    本质上两种的选法都是对的，因为这是非监督学习，没有所谓的“正确”答案，只有合适的答案
+  </figcaption>
+  </figure> 
+  基于Elbow（肘部）method的K选择方法如下：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108165322.png" alt="Image description">
+    </div>
+  <figcaption>      
+    但实际不一定是一个明显的拐点，所以这个方法也不是很好，很容易选择非常大的K值
+  </figcaption>
+  </figure> 
+  进一步的，通过下游任务的效果来看，选择合适的K值也是一个方法：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108165459.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
+
 </p></div>
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h3>Anomaly Detection（异常检测）</h3>
+<div><p>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108170202.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
+  而实现检测最常用的方式就是density estimation（密度估计），也就是找到数据的分布。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250108170534.png" alt="Image description">
+    </div>
+  <figcaption>      
+  </figcaption>
+  </figure> 
+  基于Gaussian（Normal）Distribution的异常检测方法如下：
+
+
+</p></div>
+
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>K-means与异常检测的实验代码</h3>
 <div><p>
 
 </p></div>
