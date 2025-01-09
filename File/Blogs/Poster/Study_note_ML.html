@@ -1752,6 +1752,75 @@ RL的策略（policy）有不同，比如以最近的reward，以最大的或者
 
 </p></div>
 
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>Deep Reinforcement Learning</h3>
+<div><p>
+  训练一个神经网络来学习Q-function，也就是DQN（Deep Q-Network）。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109162132.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>
+  通过仿真各种state下的action的情况来获取训练数据：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109163437.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109163843.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>
+
+  进一步地，DQN可以采用更有效的结构，如下（同时输出四个action）：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109164306.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>
+
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>ϵ-贪婪策略</h3>
+<div><p>
+  ϵ-贪婪策略是指在训练的过程中，以一定的概率ϵ来选择随机的action，而不是根据Q-function来选择action(这样可以避免由于初始化不够好导致陷入局部最优)。如下所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109165003.png" alt="Image description">
+    </div>
+  <figcaption>  
+    ϵ对应的是一个随机的action，而1-ϵ对应的是根据Q-function选择的action
+  </figcaption>
+  </figure>
+  
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>Mini-batch与soft updates</h3>
+<div><p>
+
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>基于强化学习的实验代码</h3>
+<div><p>
+
+
+</p></div>
 
 
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
