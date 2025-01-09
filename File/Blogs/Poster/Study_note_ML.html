@@ -1623,6 +1623,91 @@ f(x)=wx+b
 <h2>Reinforcement Learning</h2>
 <div><p>
 
+强化学习是要告诉模型什么是“正确”的答案，而是通过奖励来告诉模型什么是“好”的行为。也就是告诉模型what to do而不是how to do it，由模型自己来学习如何做。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109143910.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+
+RL的核心：状态（state），动作（action），奖励（reward），下一状态（next state）。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109144856.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+RL的Return（回报）是指从当前状态开始，未来所有奖励的总和，需要综合考虑成本和效益（下面额外加了一个discount factor）。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109145532.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109145848.png" alt="Image description">
+  </div>
+<figcaption>
+  从不同的状态开始会获得不同的return，因此基于不同的状态选择不同的动作是非常重要的。
+</figcaption>
+</figure>
+
+RL的策略（policy）有不同，比如以最近的reward，以最大的或者最小的reward，又或者基于return来选择。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109150410.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+而RL的目标其实就是找到最优的策略，使得对于每个state采取什么样的action使得return最大化。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109150649.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+
+下面总结一下上面的几个概念在不同的应用场景的表现：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109151032.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+而上述的也被称为MDP（Markov Decision Process），the future only depend on the current state。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250109151236.png" alt="Image description">
+  </div>
+<figcaption>
+</figcaption>
+</figure>
+
+</p></div>
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h3>State-action value function/Q-function</h3>
+<div><p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109152148.png" alt="Image description">
+    </div>
+  <figcaption>  
+    此处的数学计算好像有点问题，但是按原始概念来看应该是ok的
+  </figcaption>
+  </figure>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109152512.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>
+
 
 
 </p></div>
