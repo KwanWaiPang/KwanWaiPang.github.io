@@ -13,8 +13,19 @@ body {
   font-size: 16px;
 } */
 
-.bottom-footer {
-  display: grid;
-  place-items: center;
-  min-height: 100vh; /* 设置最小高度为视窗高度 */
+
+html, body {
+  height: 100%;      /* 使 body 和 html 填充整个视口 */
+  margin: 0;         /* 清除默认的外边距 */
+}
+
+body {
+  display: flex;     /* 使用 flexbox 布局 */
+  flex-direction: column; /* 使内容纵向排列 */
+}
+
+footer {
+  margin-top: auto; /* 将页脚推到页面底部 */
+  background-color: #f8f9fa; /* 可选：为页脚设置背景颜色 */
+  padding: 20px 0;  /* 可选：设置页脚的内边距 */
 }
