@@ -1809,6 +1809,27 @@ RL的策略（policy）有不同，比如以最近的reward，以最大的或者
 <p><br></p>
 <h3>Mini-batch与soft updates</h3>
 <div><p>
+  此处提供两个策略来提升模型的性能，一个是mini-batch，一个是soft updates。
+  <br>
+  当样本量很大时，可以通过mini-batch的方式来训练模型（将全部数据分为若干个batch），而不是一次性全部输入。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109170226.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109170329.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>
+  这样做的好处是可以减少计算量，提高训练速度。（虽然每一次获得的结果可能会更noise一些，但是更高效，最终的结果应该是差不多的~）
+  <br>
+  而所谓的soft updates是指每次更新模型的时候，不是直接将新的Q-function替换掉旧的，而是通过一个参数来控制新旧Q-function的比例。如下图所示：
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/微信截图_20250109170624.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure>
 
 
 </p></div>
@@ -1819,6 +1840,7 @@ RL的策略（policy）有不同，比如以最近的reward，以最大的或者
 <h3>基于强化学习的实验代码</h3>
 <div><p>
 
+  <li><a href="" target="_blank">******</a></li>
 
 </p></div>
 
