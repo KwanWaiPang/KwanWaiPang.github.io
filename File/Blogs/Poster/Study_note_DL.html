@@ -222,11 +222,67 @@
 <!-- ! ***********************************************************************************New Section*********************************************************************************** -->
 <p><br></p>
 <h1>Foundation on Neural Network</h1>
+感觉这部分跟之前博客<a href="./Study_note_ML.html">《My study note of ML》</a>重复较多，但是当作重新复习一次了~
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>Binary Classification（二分类）与Logistic Regression（逻辑回归）</h2>
 <div><p>
- 
+ 分类问题分为二分类和多分类，二分类问题是指输出只有两个类别的问题，多分类问题是指输出有多个类别的问题。
+ <figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250118172046.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+逻辑回归（Logistic Regression）可以理解为在线性回归的基础上加上了一个sigmoid函数，将线性回归的输出值映射到0-1之间，从而实现二分类问题的解决。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250118173457.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+进一步地，训练逻辑回归模型的目标是最小化损失函数，进而获取最优的权重w和b，损失函数的定义如下：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250118174634.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+而cost function for training the parameter的定义如下：
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250118175630.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+通过梯度下降法（Gradient Descent）来最小化cost function，从而得到最优的参数w和b。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/微信截图_20250118180013.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+
   
   
 </p></div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
