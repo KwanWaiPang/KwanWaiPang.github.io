@@ -322,10 +322,107 @@
   <figcaption>  
   </figcaption>
   </figure> 
+  而之所以python对于向量化的支持较好，是因为python中的boardcasting机制，可以使得不同维度的矩阵进行运算。
+  但同时会引入一些难以发现的bug，比如矩阵维度不匹配却不报错。因此首先尽可能的把数据都以矩阵的形式写出，然后再进行运算。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/WX20250123-095139@2x.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure> 
+  进一步的，也可以通过assert再次检查矩阵的维度是否匹配，从而避免一些潜在的bug。
   
   
 </p></div>
 
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>基于逻辑回归实现图片分类任务</h2>
+<div><p>
+    <li><a href="https://github.com/KwanWaiPang/draw_figure/blob/main/C1%20-%20Neural%20Networks%20and%20Deep%20Learning/Logistic%20Regression%20as%20a%20Neural%20Network.ipynb" target="_blank">代码链接</a></li>
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>神经网络</h2>
+<div><p>
+直观来说，可以通过多个sigmoid函数的堆叠实现神经网络，之前也曾尝试过用逻辑回归实现神经网络的代码测试。
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20250123-112240@2x.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/WX20250123-114914@2x.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/WX20250123-115430@2x.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>activation function</h2>
+<div><p>
+一般用relu函数或者tanh函数作为激活函数，因为sigmoid函数在深度神经网络中会出现梯度消失的问题。因此一般在二分类的最后一层（输出层）使用sigmoid函数，其他层使用relu或其他激活函数
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 80%;" src="../assets/img/others/WX20250124-114735@2x.png" alt="Image description">
+    <img style="width: 80%;" src="../assets/img/others/WX20250124-115142@2x.png" alt="Image description">
+  </div>
+<figcaption>  
+</figcaption>
+</figure> 
+
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>基于神经网络的梯度下降（backpropagation）</h2>
+<div><p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/WX20250124-122840@2x.png" alt="Image description">
+      <img style="width: 80%;" src="../assets/img/others/WX20250124-124622@2x.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure> 
+
+
+</p></div>
+
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>神经网络的初始化</h2>
+<div><p>
+  一般初始化习惯采用很小的值，这主要是对于sigmoid以及tanh函数来说，小的值的时候斜率（梯度）较大。
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 80%;" src="../assets/img/others/WX20250124-125707@2x.png" alt="Image description">
+    </div>
+  <figcaption>  
+  </figcaption>
+  </figure> 
+
+
+</p></div>
+
+<!-- ! ***********************************************************************************New Section*********************************************************************************** -->
+<p><br></p>
+<h2>手写实现神经网络（非调用库函数）</h2>
+<div><p>
+  <li><a href="https://github.com/KwanWaiPang/draw_figure/blob/main/C1%20-%20Neural%20Networks%20and%20Deep%20Learning/Planar%20data%20classification%20with%20onehidden%20layer.ipynb" target="_blank">神经网络实现平面数据分类</a></li>
+
+</p></div>
 
 
 
@@ -387,7 +484,9 @@
 <ul>
   <li><a href="./Study_note_ML.html">My study note of ML</a></li>
   <li><a href="https://github.com/amanchadha/coursera-deep-learning-specialization" target="_blank">coursera-deep-learning-specialization</a></li>
-  <li><a href="https://github.com/Kulbear/deep-learning-coursera" target="_blank">deep-learning-coursera</a></li>
+  <!-- <li><a href="https://github.com/Kulbear/deep-learning-coursera" target="_blank">deep-learning-coursera</a></li> -->
+  <!-- https://github.com/greyhatguy007/deep-learning-specialization -->
+  <!-- https://github.com/abdur75648/Deep-Learning-Specialization-Coursera -->
   <li><a href="https://www.bilibili.com/video/BV1bs4y1F7Jg/?spm_id_from=333.999.0.0&vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">deep learning 深度学习专项 1/5 吴恩达 DeepLearning.AI</a></li>
   <li><a href="https://www.bilibili.com/video/BV1fF41197vz/?spm_id_from=333.999.0.0&vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">deep learning 深度学习专项 2/5 吴恩达 DeepLearning.AI</a></li>
   <li><a href="https://www.bilibili.com/video/BV1uP411e7iW/?spm_id_from=333.999.0.0&vd_source=a88e426798937812a8ffc1a9be5a3cb7" target="_blank">deep learning 深度学习专项 3/5 吴恩达 DeepLearning.AI</a></li>
