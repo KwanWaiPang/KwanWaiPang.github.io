@@ -42,7 +42,7 @@ permalink: /home/
 {% endif %}
 
 <div class="posts">
-  {% for post in paginator.posts %}
+  {% for post in site.posts %}
   {% unless post.draft %}
     <article class="post">
       <h1>
@@ -76,16 +76,16 @@ permalink: /home/
 </div>
 
 <div class="pagination">
-  {% if paginator.previous_page %}
+  {% if site.previous_page %}
     <span class="prev">
-      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
+      <a href="{{ site.baseurl }}{{ site.previous_page_path }}" class="prev">
         ← 上一页
       </a>
     </span>
   {% endif %}
-  {% if paginator.next_page %}
+  {% if site.next_page %}
     <span class="next">
-      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
+      <a href="{{ site.baseurl}}{{ site.next_page_path }}" class="next">
         下一页 →
       </a>
     </span>
