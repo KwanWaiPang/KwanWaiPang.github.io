@@ -90,8 +90,8 @@ url: https://kwanwaipang.github.io
 # !! You don't need to change any of the configuration flags below !!
 #
 
-permalink: /:title/
-paginate_path: /home:num/ #/page:num/ #指定分页页面的目标路径
+# permalink: /:title/
+paginate_path: "/home/page:num/" #/page:num/ #指定分页页面的目标路径
 
 # The release of Jekyll Now that you're using
 version: v1.2.0
