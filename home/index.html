@@ -21,13 +21,14 @@ layout: default
 <!-- 上面配置的是搜索栏 -->
 
 <!--script src="https://unpkg.com/simple-jekyll-search/dest/simple-jekyll-search.min.js"></script-->
-<script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script>
+<!-- <script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script> -->
+<script src="{{ site.baseurl }}/../js/simple-jekyll-search.min.js"></script>
 
 <script>
 	window.simpleJekyllSearch = new SimpleJekyllSearch({
 	searchInput: document.getElementById('search-input'),
 	resultsContainer: document.getElementById('results-container'),
-	json: '{{ site.baseurl }}/search.json',
+	json: '{{ site.baseurl }}/../search.json',
 	searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
 	noResultsText: 'No results found',
 	limit: 10,
