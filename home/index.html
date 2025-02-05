@@ -76,21 +76,22 @@ permalink: /home/
 </div>
 
 <div class="pagination">
-  {% if site.previous_page %}
+  {% if paginator.previous_page %}
     <span class="prev">
-      <a href="{{ site.baseurl }}{{ site.previous_page_path }}" class="prev">
+      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
         ← 上一页
       </a>
     </span>
   {% endif %}
-  {% if site.next_page %}
+  {% if paginator.next_page %}
     <span class="next">
-      <a href="{{ site.baseurl}}{{ site.next_page_path }}" class="next">
+      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
         下一页 →
       </a>
     </span>
   {% endif %}
 </div>
+
 
 <!--不算子网站访客统计-->
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
