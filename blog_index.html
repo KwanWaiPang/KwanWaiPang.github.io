@@ -21,13 +21,13 @@ layout: default
 <!-- 上面配置的是搜索栏 -->
 
 <!--script src="https://unpkg.com/simple-jekyll-search/dest/simple-jekyll-search.min.js"></script-->
-<script src="{{ site.baseurl }}/../js/simple-jekyll-search.min.js"></script>
+<script src="{{ site.baseurl }}/js/simple-jekyll-search.min.js"></script>
 
 <script>
 	window.simpleJekyllSearch = new SimpleJekyllSearch({
 	searchInput: document.getElementById('search-input'),
 	resultsContainer: document.getElementById('results-container'),
-	json: '{{ site.baseurl }}/../search.json',
+	json: '{{ site.baseurl }}/search.json',
 	searchResultTemplate: '<li><a href="{url}?query={query}" title="{desc}">{title}</a></li>',
 	noResultsText: 'No results found',
 	limit: 10,
@@ -45,7 +45,7 @@ layout: default
   {% unless post.draft %}
     <article class="post">
       <h1>
-        <a href="{{ site.baseurl }}/../{{ post.url }}">{{ post.title }}</a>
+        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
 
       <div clsss="meta">
@@ -56,7 +56,7 @@ layout: default
         <ul class="tag">
           {% for tag in post.tags %}
           <li>
-            <a href="{{ site.url }}{{ site.baseurl }}/../tags#{{ tag }}">
+            <a href="{{ site.url }}{{ site.baseurl }}/tags#{{ tag }}">
               {{ tag }}
             </a>
           </li>
@@ -68,7 +68,7 @@ layout: default
         {{ post.excerpt | truncate: 200 }}
       </div>
 
-      <a href="{{ site.baseurl }}/../{{ post.url }}" class="read-more">Read More</a>
+      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
     </article>
   {% endunless %}
   {% endfor %}
@@ -77,14 +77,14 @@ layout: default
 <div class="pagination">
   {% if paginator.previous_page %}
     <span class="prev">
-      <a href="{{ site.baseurl }}/../{{ paginator.previous_page_path }}" class="prev">
+      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="prev">
         ← 上一页
       </a>
     </span>
   {% endif %}
   {% if paginator.next_page %}
     <span class="next">
-      <a href="{{ site.baseurl}}/../{{ paginator.next_page_path }}" class="next">
+      <a href="{{ site.baseurl}}{{ paginator.next_page_path }}" class="next">
         下一页 →
       </a>
     </span>

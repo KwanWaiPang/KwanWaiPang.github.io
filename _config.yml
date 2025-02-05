@@ -22,7 +22,7 @@ favicon: https://kwanwaipang.github.io/Poster_files/hku_logo.jpg
 # it from the list(Delete '- name: ' and 'url: ', too!)
 navigation:
   - name: Home
-    url: /home
+    url: /blog_index.html
   - name: Archive
     url: /archive
   - name: Tags
