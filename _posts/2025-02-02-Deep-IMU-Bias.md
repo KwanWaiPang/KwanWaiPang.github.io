@@ -133,6 +133,7 @@ Euroc飞行数据集（平移和旋转误差）
 </div>
 
 
+
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # IMU Data Processing For Inertial Aided Navigation:A Recurrent Neural Network Based Approach
 * [ICRA 2021](https://arxiv.org/pdf/2103.14286)
@@ -179,6 +180,20 @@ This is designed since sensor fusion algorithm using IMU measurements might need
 
 虽然作者设计了很多策略，但是论文中提到 ***For each dataset, we randomly chose half of the sequences for training and the others for testing.*** 因此，个人认为泛化能力还是不够的，只是比起学习relative motion，学习预积分会好些，不会依赖于前面的积分值，这样从某种程度下使得在同一个数据集下不同序列有较好的泛化能力，但是本质上还是学了某个数据集的motion pattern，如果要泛化到其他数据集（比如从手持到飞行）基本也是不可能的。
 当然作者也没有开源代码，不然可以进行测试来验证猜想了～
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+# Improved state propagation through AI-based pre-processing and down-sampling of high-speed inertial data
+* [ICRA 2022](https://www.aau.at/wp-content/uploads/2022/03/imu_preprocessing.pdf)
+
+论文也是分别提出基于LSTM和Transformer结构网络来最小化IMU state propagation error。此外是针对UAV的。
+<div align="center">
+  <img src="../Image/WX20250206-133846@2x.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+跟上一个工作其实是很像的，只是上一个工作是基于RNN且为手持的数据集，此处为飞机数据集，并且提出LSTM和Transformer两个结构
+
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
