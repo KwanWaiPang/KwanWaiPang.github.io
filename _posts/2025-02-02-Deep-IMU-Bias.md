@@ -89,6 +89,15 @@ toc: false
   </figcaption>
 </div>
 
+网络的训练则是用lidar辅助，估算出bias的真值，或者用数据集提供的bias真值。用真值bias来作为监督的.
+
+此处用数据集提供的bias作为真值，让我对其性能产生质疑，因为网络最大化也就是模拟接近传感器标定对bias，那跟传统方法基于传感器的bias来做预积分建模区别能有多大呢？
+<div align="center">
+  <img src="../Image/WX20250206-120804@2x.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
 作者测试了多种场景，包括手持、四足、飞机。
 但可惜的是既没有开源代码，似乎也没有说baseline VIO指的是哪个具体算法
 
@@ -128,7 +137,26 @@ Euroc飞行数据集（平移和旋转误差）
 # IMU Data Processing For Inertial Aided Navigation:A Recurrent Neural Network Based Approach
 * [ICRA 2021](https://arxiv.org/pdf/2103.14286)
 
-该工作也是采用DNN计算可观测的IMU预积分，并跟多传感器融合来获取性能的增益。
+该工作采用recurrent neural network (RNN)计算可观测的IMU预积分(而并非related position or orientation，如下图所示)，并跟多传感器融合来获取性能的增益。
+
+论文对于imu的建模推导如下：
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../Image/1738815777404.jpg" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../Image/1738815812482.jpg" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+RNN methods to compute the learnable terms ∆γ, ∆β, and ∆q instead of the relative poses (学习的为预积分而非related pose)
+
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250203154310.png" width="60%" />
@@ -175,6 +203,7 @@ Inertial odometry(IO)中对于IMU的建模可以分为两种：kinematic motion 
 airiMU学习的是IMU预积分，并且loss也是用预积分来监督的（这可能容易导致学习了具体某个imu而影响泛化能力）
 </figcaption>
 </div>
+PS：虽然网络输出的看似是IMU的motion model，但是训练监督的是预积分（或者说是related position和orientation）因此最终网络是否真的学到正确的IMU测量量是不被关注的，网络仅仅学习的是motion model因此会影响泛化能力～
 
 论文的贡献点如下：
 
