@@ -137,7 +137,7 @@ Euroc飞行数据集（平移和旋转误差）
 # IMU Data Processing For Inertial Aided Navigation:A Recurrent Neural Network Based Approach
 * [ICRA 2021](https://arxiv.org/pdf/2103.14286)
 
-该工作采用recurrent neural network (RNN)计算可观测的IMU预积分(而并非related position or orientation，如下图所示)，并跟多传感器融合来获取性能的增益。
+该工作采用recurrent neural network (RNN)计算可观测的IMU测量量(而并非related position or orientation，如下图所示)，并跟多传感器融合来获取性能的增益。
 
 论文对于imu的建模推导如下：
 
@@ -155,25 +155,30 @@ Euroc飞行数据集（平移和旋转误差）
   <figcaption>
   </figcaption>
 </div>
-RNN methods to compute the learnable terms ∆γ, ∆β, and ∆q instead of the relative poses (学习的为预积分而非related pose)
-
-
+RNN methods to compute the learnable terms ∆γ, ∆β, and ∆q instead of the relative poses (学习的为预积分而非related pose)。
+至于训练过程则如下图所示，RNN估算量会传到积分层来计算预积分值，然后用预积分来作为监督学习。但是在interference的时候，IMU的测量会直直接输入图优化中，而并非输入预积分值～
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250203154310.png" width="60%" />
-<figcaption> 
+<figcaption>
+In the training stage, the output of RNN layer will be passed to the integration layer for calculating the training loss. In the reference stage, the RNN layer computes the learned IMU measurements, which will be directly used as the input for the probabilistic sensor fusion 
 </figcaption>
 </div>
+由于imu的观测量真值并不好获取，因此作者设计loss function是基于预积分的，但是网络输出在应用的时候则是IMU测量值，如下：
+<div align="center">
+  <img src="../Image/WX20250206-130535@2x.png" width="60%" />
+<figcaption>
+基于公式6和7，可以通过真值来反推预积分量
+</figcaption>
+</div>
+此外，由于传感器融合的时间分辨率可能不一样，训练中，预积分也会formulated多个loss
 
+~~~
+to enhance the training, integration is conducted by integrating 20%, 40%, 60%, 80%, and 100% data to formulate multiple loss terms. 
+This is designed since sensor fusion algorithm using IMU measurements might need integration for different duration times and this is naturally the ‘data augmentation’ for better training results.
+~~~
 
-
-
-
-
-
-
-
-
-
+虽然作者设计了很多策略，但是论文中提到 ***For each dataset, we randomly chose half of the sequences for training and the others for testing.*** 因此，个人认为泛化能力还是不够的，只是比起学习relative motion，学习预积分会好些，不会依赖于前面的积分值，这样从某种程度下使得在同一个数据集下不同序列有较好的泛化能力，但是本质上还是学了某个数据集的motion pattern，如果要泛化到其他数据集（比如从手持到飞行）基本也是不可能的。
+当然作者也没有开源代码，不然可以进行测试来验证猜想了～
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -203,7 +208,7 @@ Inertial odometry(IO)中对于IMU的建模可以分为两种：kinematic motion 
 airiMU学习的是IMU预积分，并且loss也是用预积分来监督的（这可能容易导致学习了具体某个imu而影响泛化能力）
 </figcaption>
 </div>
-PS：虽然网络输出的看似是IMU的motion model，但是训练监督的是预积分（或者说是related position和orientation）因此最终网络是否真的学到正确的IMU测量量是不被关注的，网络仅仅学习的是motion model因此会影响泛化能力～
+PS：虽然网络输出的看似是IMU的motion model，但是训练监督的是related pose（或者说是related position和orientation）因此最终网络是否真的学到正确的IMU测量量是不被关注的，网络仅仅学习的是motion model因此会影响泛化能力～
 
 论文的贡献点如下：
 
