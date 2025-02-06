@@ -37,7 +37,7 @@ toc: true
 
 2. 然后在相同目录下创建```generate_toc.py```文件：
 
-```python highlight=python
+```python 
 import os
 import re
 import urllib.parse

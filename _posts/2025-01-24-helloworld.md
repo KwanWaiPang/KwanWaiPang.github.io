@@ -100,7 +100,7 @@ int main() {
 }
 ```
 
-```c++ highlight=cpp
+```c++
 int main() {
   int x = 6 + 6;
   cout << "Hello World! " << x << std::endl();
@@ -108,7 +108,7 @@ int main() {
 ```
 
 ## 插入python代码
-```python highlight=python
+```python 
 print("Hello, World")
 ```
 
