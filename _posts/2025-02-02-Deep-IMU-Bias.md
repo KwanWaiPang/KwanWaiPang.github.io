@@ -192,7 +192,18 @@ This is designed since sensor fusion algorithm using IMU measurements might need
 <figcaption>  
 </figcaption>
 </div>
-跟上一个工作其实是很像的，只是上一个工作是基于RNN且为手持的数据集，此处为飞机数据集，并且提出LSTM和Transformer两个结构
+跟上一个工作其实是很像的，只是上一个工作是基于RNN且为手持的数据集，此处为飞机数据集，并且提出LSTM和Transformer两个结构。
+
+至于训练，如文章所述：首先19个序列中的16个序列用于网络训练，而loss function跟上一个工作是差不多的（但此处监督的不是预积分而是relative pose，并通过动捕来提供relative pose以及速度）：
+<div align="center">
+  <img src="../Image/WX20250206-143631@2x.png" width="80%" />
+  <img src="../Image/WX20250206-144146@2x.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+至于实验部分，个人感觉没有上面两个工作soild且也没有开源代码，无法测试效果，此处就略过了～
+
 
 
 
