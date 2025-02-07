@@ -143,6 +143,7 @@ git push -u origin main
 ~~~
 site:https://kwanwaipang.github.io/
 ~~~
+
 <div align="center">
   <img src="../Image/WX20250207-211228@2x.png" width="60%" />
 <figcaption> 
@@ -151,7 +152,7 @@ site:https://kwanwaipang.github.io/
 </div>
 
 * Google网站站长[Google Search Console](https://search.google.com/search-console?hl=zh-CN).然后添加资源，并按要求验证即可。下载对应的html文件，然后放在主目录下
-* 
+
 <div align="center">
   <img src="../Image/WX20250207-211559@2x.png" width="60%" />
   <img src="../Image/WX20250207-211442@2x.png" width="60%" />
