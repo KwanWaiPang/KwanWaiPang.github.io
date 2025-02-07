@@ -138,6 +138,29 @@ git push -u origin main
 ~~~
 
 
+# 在google搜索引擎中登记自己的网站
+* 首先在google的搜索栏中输入下面的语句：
+~~~
+site:https://kwanwaipang.github.io/
+~~~
+<div align="center">
+  <img src="../Image/WX20250207-211228@2x.png" width="60%" />
+<figcaption> 
+可以搜到就证明网站已经被google收录了 
+</figcaption>
+</div>
+
+* Google网站站长[Google Search Console](https://search.google.com/search-console?hl=zh-CN).然后添加资源，并按要求验证即可。下载对应的html文件，然后放在主目录下
+* 
+<div align="center">
+  <img src="../Image/WX20250207-211559@2x.png" width="60%" />
+  <img src="../Image/WX20250207-211442@2x.png" width="60%" />
+<figcaption> 
+</figcaption>
+</div>
+
+* 接下来应该是通过添加站点，把所有博客都加进去后续再运行```site:https://kwanwaipang.github.io/```都时候就可以搜到其他博客同时其他博客也可以被google搜到了（没经实测，个人觉得没必要，因为我写博客只是个人mark而已hhh～）
+
 
 # 参考资料
 * [lemonchann的博客](https://lemonchann.github.io/blog/create_blog_with_github_pages/)
