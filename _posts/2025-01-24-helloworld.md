@@ -138,7 +138,7 @@ git push -u origin main
 ~~~
 
 
-# 在google搜索引擎中登记自己的网站
+# google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
 ~~~
 site:https://kwanwaipang.github.io/
