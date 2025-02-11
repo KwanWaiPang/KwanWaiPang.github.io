@@ -117,6 +117,19 @@ apply plugin: 'com.android.application'
 </div>
 * 依次点击菜单中的“VCS” -> “Import into Version Control” -> “Share Project on GitHub”
 * 若在某些地区，可能会链接不上。那么可以改为用Termainal命令也行~
+
+```bash
+# 初始化github仓库（注意windows和ubuntu中命令稍有不一样）
+rm -r ./git
+
+git init
+git add .
+git commit -m "first commit"
+git remote add origin git@github.com:KwanWaiPang/Your_project_name.git
+git push -u origin main
+
+
+```
 <div align="center">
   <img src="../Image/微信截图_20250211130838.png" width="60%" />
 <figcaption>  
