@@ -17,6 +17,12 @@ toc: true
 # 引言
 好多年前进行过基于java的Android开发,并且搭建了基于可见光通信的室内定位APP，最近看了一下原来的project，发现有不少可以改进的空间。当然~以前学习的基于Android的开发也基本忘光光了hhh，为此，写下本博客记录本人重新搭建的过程。本博客仅供本人学习记录用~
 
+下面为本project的实测效果，从视频可以看到VLP和PDR locating相互切换显示当然使用的定位方法：
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://kwanwaipang.github.io/VLC_Demo/Demo_video/单灯VLP+PDR.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
+
 
 # 打开并配置项目
 android有一个很烦人的点就是版本之间差距较大，且不兼容，导致不同版本之间代码兼容很容易出问题，一个常见的例子就是几年前自己开发的app，几年后再用竟然配置不了。。。因此，先对项目进行适配
@@ -135,6 +141,14 @@ git push -u origin main
 <figcaption>  
 </figcaption>
 </div>
+
+
+# 关于代码的一些基本操作
+## 主要的代码目录
+* ```C:\Users\gwpsc\AndroidStudioProjects\VLP_PDR\app\src\main\java\com\example\pdr_vlp_demo\MainActivity.java```main activity可以理解为代码主函数入口
+* 其中onCreate应该就是正式运行这个activity的入口代码那
+* 整个页面样式的设计在：```C:\Users\gwpsc\AndroidStudioProjects\VLP_PDR\app\src\main\res\layout\activity_main.xml```
+* 曝光度的设置在```C:\Users\gwpsc\AndroidStudioProjects\VLP_PDR\app\src\main\java\com\example\pdr_vlp_demo\Camera2\Camera2.java```
 
 
 # 参考资料
