@@ -20,7 +20,18 @@ toc: true
 下面为本project的实测效果，从视频可以看到VLP和PDR locating相互切换显示当然使用的定位方法：
 
 <div align="center">
-<video playsinline autoplay loop muted src="https://kwanwaipang.github.io/VLC_Demo/Demo_video/单灯VLP+PDR.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://kwanwaipang.github.io/VLC_Demo/Demo_video/单灯VLP+PDR.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://kwanwaipang.github.io/VLC_Demo/Demo_video/double-led-vlp.mp4" poster="./File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
 </div>
 
 
