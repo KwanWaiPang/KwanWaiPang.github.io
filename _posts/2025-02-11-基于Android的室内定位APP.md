@@ -142,6 +142,7 @@ rm -r ./git
 git init
 git add .
 git commit -m "first commit"
+git branch -M main
 git remote add origin git@github.com:KwanWaiPang/Your_project_name.git
 git push -u origin main
 
