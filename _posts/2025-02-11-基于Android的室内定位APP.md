@@ -125,7 +125,7 @@ apply plugin: 'com.android.application'
 
 
 # 参考资料
-* [Code](https://github.com/KwanWaiPang/VLP-PDR)
+* [Code for the project](https://github.com/KwanWaiPang/VLP-PDR)
 * [My CSDN Blogs for Android](https://blog.csdn.net/gwplovekimi/category_9860500.html?spm=1001.2014.3001.5482)
 * [可见光通信调制驱动芯片模组](https://blog.csdn.net/gwplovekimi/article/details/133878460?spm=1001.2014.3001.5501)
 * [Windows下的Android环境开发搭建](https://blog.csdn.net/gwplovekimi/article/details/132040540?spm=1001.2014.3001.5501)
