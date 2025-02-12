@@ -93,7 +93,7 @@ toc: false
 
 此处用数据集提供的bias作为真值，让我对其性能产生质疑，因为网络最大化也就是模拟接近传感器标定对bias，那跟传统方法基于传感器的bias来做预积分建模区别能有多大呢？
 <div align="center">
-  <img src="../Image/WX20250206-120804@2x.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-120804@2x.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -146,10 +146,10 @@ Euroc飞行数据集（平移和旋转误差）
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../Image/1738815777404.jpg" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/1738815777404.jpg" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../Image/1738815812482.jpg" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/1738815812482.jpg" width="100%" />
       </td>
     </tr>
   </table>
@@ -166,7 +166,7 @@ In the training stage, the output of RNN layer will be passed to the integration
 </div>
 由于imu的观测量真值并不好获取，因此作者设计loss function是基于预积分的，但是网络输出在应用的时候则是IMU测量值，如下：
 <div align="center">
-  <img src="../Image/WX20250206-130535@2x.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-130535@2x.png" width="60%" />
 <figcaption>
 基于公式6和7，可以通过真值来反推预积分量
 </figcaption>
@@ -188,7 +188,7 @@ This is designed since sensor fusion algorithm using IMU measurements might need
 
 论文也是分别提出基于LSTM和Transformer结构网络来最小化IMU state propagation error。此外是针对UAV的。
 <div align="center">
-  <img src="../Image/WX20250206-133846@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-133846@2x.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -196,8 +196,8 @@ This is designed since sensor fusion algorithm using IMU measurements might need
 
 至于训练，如文章所述：首先19个序列中的16个序列用于网络训练，而loss function跟上一个工作是差不多的（但此处监督的不是预积分而是relative pose，并通过动捕来提供relative pose以及速度）：
 <div align="center">
-  <img src="../Image/WX20250206-143631@2x.png" width="80%" />
-  <img src="../Image/WX20250206-144146@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-143631@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-144146@2x.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>

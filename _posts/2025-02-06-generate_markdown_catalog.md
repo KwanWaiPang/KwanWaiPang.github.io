@@ -18,7 +18,7 @@ toc: true
 对于习惯用markdown写文档的朋友，整理文档是非常繁琐的。当然类似也可以搭建Jekyll静态博客，这样可以很简单的自动生成博客目录。但是对于仅仅管理markdown文档却要重新搭建Jekyll，未免过于繁琐，为此写下本博客，利用GitHub Actions来自动生成目录。
 效果如下下图所示
 <div align="center">
-  <img src="../Image/WX20250206-181950@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-181950@2x.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
@@ -168,7 +168,7 @@ jobs:
   * 生成并保存这个 token（只会显示一次，之后无法查看）。
 
 <div align="center">
-  <img src="../Image/WX20250206-175838@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-175838@2x.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
@@ -176,21 +176,21 @@ jobs:
 # 将 Personal Access Token 添加到 GitHub Secrets
 变量名可以更改（保持一致性就可以了），至于value部分则是把token粘贴过来
 <div align="center">
-  <img src="../Image/WX20250206-180109@2x.png" width="80%" />
-  <img src="../Image/WX20250206-180450@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-180109@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-180450@2x.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
 接下来需要把action的Workflow permissions设置为可读可写
 <div align="center">
-  <img src="../Image/WX20250206-180711@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-180711@2x.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
 
 然后测试效果如下（有这个提交的标志就证明push修改成功了）：
 <div align="center">
-  <img src="../Image/WX20250206-181843@2x.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250206-181843@2x.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>

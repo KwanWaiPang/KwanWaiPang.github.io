@@ -45,13 +45,13 @@ android有一个很烦人的点就是版本之间差距较大，且不兼容，�
 
 * 首先File——>Setting——>Build Tools——>Gradle，看到我们的Gradle JDK路径。
 <div align="center">
-  <img src="../Image/微信截图_20250211121836.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211121836.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 改成安装好的
 <div align="center">
-  <img src="../Image/微信截图_20250211121917.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211121917.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -92,29 +92,29 @@ org.gradle.jvmargs=-Xmx1536M \
 ## 针对运行按钮不出来的解决方案
 打开一个旧的项目，有时可能出现如下图所示的运行按钮没有显示的情况：
 <div align="center">
-  <img src="../Image/微信截图_20250211113031.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211113031.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 点击图中的Add Configuration,点+号，并选择Android App选项 
 <div align="center">
-  <img src="../Image/微信截图_20250211113326.png" width="60%" />
-  <img src="../Image/微信截图_20250211113402.png" width="60%" />
-  <img src="../Image/微信截图_20250211114453.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211113326.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211113402.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211114453.png" width="60%" />
 <figcaption>  
 在module的下拉菜单中没有发现app
 </figcaption>
 </div>
 更改名字为app然后点击确定和应用，此时还是有个叉号的
 <div align="center">
-  <img src="../Image/微信截图_20250211113710.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211113710.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 然后点击搜索框，并找sync（sync project with gradles files）
 <div align="center">
-  <img src="../Image/微信截图_20250211113749.png" width="60%" />
-  <img src="../Image/微信截图_20250211114756.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211113749.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211114756.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -128,7 +128,7 @@ apply plugin: 'com.android.application'
 # push代码到Github
 * 首先在setting中配置github
 <div align="center">
-  <img src="../Image/微信截图_20250211124552.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211124552.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -149,7 +149,7 @@ git push -u origin main
 
 ```
 <div align="center">
-  <img src="../Image/微信截图_20250211130838.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250211130838.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
