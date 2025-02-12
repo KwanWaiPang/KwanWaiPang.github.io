@@ -70,8 +70,8 @@ disqus: # fromendworld
 
 # Gitalk（评论功能的配置）
 gitalk:
-  clientID: Ov23li1PhzdWJnuiRnHg
-  clientSecret: 432b5860bd7fa8c9f49d9f7cbd747114a9b1ffa7
+  clientID: Ov23liD7RVncxyVJkpxC
+  clientSecret: 8ce63fcbaa301ab0fb7f54e4c7d69d2f17ab1fc3
   repo: KwanWaiPang.github.io
   owner: kwanwaipang
 
