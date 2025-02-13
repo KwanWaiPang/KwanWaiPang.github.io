@@ -137,6 +137,19 @@ git remote add origin YOUR_github_repository_name
 git push -u origin main
 ~~~
 
+# markdown中的数学公式
+* a<sup>B</sup>  或  $a_B$
+* a<sub>B</sub>  或  $a^B$
+* $\vec{a}$  向量
+* $\overline{a}$ 平均值
+* $\widehat{a}$ (线性回归，直线方程) y尖
+* $\widetilde{a}$ 颚化符号  等价无穷小
+* $\dot{a}$   一阶导数
+* $\ddot{a}$  二阶导数
+* $\xi \in so(3)$
+
+更多markdown符号[Link](https://blog.csdn.net/konglongdanfo1/article/details/85204312)
+
 
 # google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
