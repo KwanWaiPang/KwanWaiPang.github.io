@@ -615,3 +615,48 @@ python evaluation/evaluate_state.py --dataconf configs/datasets/BaselineEuroc/Eu
   </figcaption>
 </div>
 
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+# AirIO: Learning Inertial Odometry with Enhanced IMU Feature Observability
+* [code](https://github.com/Air-IO/Air-IO)
+* [paper](https://arxiv.org/pdf/2501.15659)
+* [website](https://air-io.github.io/)
+
+关于这篇工作的解读额外写在了博客[论文复现之——《AirIO: Learning Inertial Odometry with Enhanced IMU Feature Observability》](https://kwanwaipang.github.io/AirIO/)中
+
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+# Learned inertial odometry for autonomous drone racing
+* [code](https://github.com/uzh-rpg/learned_inertial_model_odometry)
+* [paper RAL 2023](https://arxiv.org/pdf/2210.15287)
+* [Youtube](https://www.youtube.com/watch?v=DHQzaDVWXrc)
+
+在复现上一篇工作AirIO的时候，发现作者特意对比了一个称为“IMO”的方法，也就是此工作。
+该工作也是基于learning的inertial odometry，但是网络除了需要IMU输入以外，还需要控制输入（thrust）。
+不过，从视频效果来看，比起AirIO更加的惊艳(宣称可以实现无人机飞70 km/h下的状态估计)。并且也通过实验对比验证了超越VIO（openvins和SVO）和TLIO（一个learning-based IO）
+
+<div align="center">
+<iframe width="80%" height="316" src="https://www.youtube.com/embed/2z2Slyt0WlE?si=l24WEyq43CCM3MHV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+如下图所示。
+网络采用的为一个temporal convolutional network (TCN)，其输入为推力（mass-normalized collective thrust），陀螺仪的测量量，而输出则为无人机飞行的距离（从某种程度上讲，这个方法应该是以related motion作为监督的，因此大几率仅仅学习了飞机的运动模式，也就是前面几个工作提到的，泛化能力有限的因素之一~）；
+而EKF则是以IMU的测量量作为propagation，以网络估算的relative positional displacement作为滤波器的更新。
+
+TCN是一个recurrent network模型来处理temporal sequences，但同时更容易训练。
+输入的陀螺仪测量量都会转换到世界坐标系。在训练过程则用动捕提供的orientation信息（加入高斯噪声，提供鲁棒性），在测试的过程用EKF来提供。
+
+<div align="center">
+  <img src="../images/微信截图_20250214151100.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+该工作的实验是比较solid的，对比包括了：TLIO（一个learning-based IO），openvins，SVO,和Gate-IO（一个VIO，fuses the detection of the gate corners with IMU measurements in an EKF）
+<div align="center">
+  <img src="../images/微信截图_20250214154150.png" width="60%" />
+  <img src="../images/微信截图_20250214154258.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
