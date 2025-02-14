@@ -175,6 +175,9 @@ site:https://kwanwaipang.github.io/
 
 * 接下来应该是通过添加站点，把所有博客都加进去后续再运行```site:https://kwanwaipang.github.io/```都时候就可以搜到其他博客同时其他博客也可以被google搜到了（没经实测，个人觉得没必要，因为我写博客只是个人mark而已hhh～）
 
+* 此外也可以通过注册一个[Google Analytics](https://analytics.google.com/analytics/),可以统计你博客网站的访问人数，访问来源等非常丰富的网站数据。对应修改```_config.yml```文件中的`google_analytics`即可
+* 此博客采用了Google Analytics 4（GA4）而非旧版Universal Analytics（UA），详细请见代码`_includes\analytics.html`
+
 
 # 参考资料
 * [lemonchann的博客](https://lemonchann.github.io/blog/create_blog_with_github_pages/)
