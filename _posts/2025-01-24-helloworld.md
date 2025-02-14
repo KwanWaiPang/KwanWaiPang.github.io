@@ -138,8 +138,8 @@ git push -u origin main
 ~~~
 
 # markdown中的数学公式
-* a<sup>B</sup>  或  $a_B$
-* a<sub>B</sub>  或  $a^B$
+* a<sup>B</sup>  或  $a^B$
+* a<sub>B</sub>  或  $a_B$
 * $\vec{a}$  向量
 * $\overline{a}$ 平均值
 * $\widehat{a}$ (线性回归，直线方程) y尖
