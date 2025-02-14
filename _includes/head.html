@@ -1,6 +1,15 @@
 <head>
   <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
+  <meta name="author" content="Kwan Wai-Pang " />
+  <meta name="description" content="Personal Blog of Kwan Wai-Pang" />
+  <!-- OpenGraph 用于更新页面-->
+  <meta property="og:site_name" content="My Technology Blog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kwan Wai-Pang | Personal Blog" />
+  <meta property="og:description" content="Welcome 😊" {% if page.title %}{{ page.title }} />
+  <meta property="og:image" content="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg" />
+
   {% include meta.html %}
   {% include fonts.html %}
 
@@ -10,6 +19,7 @@
 
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+  <!-- 下面为网页的略缩图 -->
   <link rel="shortcut icon" href="{{ site.favicon }}">
 
   <!-- 使用 MathJax 3 的简化配置，用于配置公式 -->
