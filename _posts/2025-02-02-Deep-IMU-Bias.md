@@ -648,22 +648,22 @@ TCN是一个recurrent network模型来处理temporal sequences，但同时更容
 输入的陀螺仪测量量都会转换到世界坐标系。在训练过程则用动捕提供的orientation信息（加入高斯噪声，提供鲁棒性），在测试的过程用EKF来提供。
 
 <div align="center">
-  <img src="../images/微信截图_20250214151100.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250214151100.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
 该工作的实验是比较solid的，对比包括了：TLIO（一个learning-based IO），openvins，SVO,和Gate-IO（一个VIO，fuses the detection of the gate corners with IMU measurements in an EKF）
 <div align="center">
-  <img src="../images/微信截图_20250214154150.png" width="60%" />
-  <img src="../images/微信截图_20250214154258.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250214154150.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250214154258.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
 不过作者在论文中也提到了他们主要的limitation还是泛化能力，而所提到的```train the network to estimate the positional displacements in the drone body frame```实际上也就是AirIO的主要贡献之一了~
 <div align="center">
-  <img src="../images/微信截图_20250214154533.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250214154533.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
