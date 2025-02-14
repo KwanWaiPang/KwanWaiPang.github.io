@@ -1,16 +1,9 @@
 <head>
   <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
-  <meta name="author" content="Kwan Wai-Pang " />
-  <meta name="description" content="Personal Blog of Kwan Wai-Pang" />
-  <!-- OpenGraph 用于更新页面-->
-  <meta property="og:site_name" content="My Technology Blog" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Kwan Wai-Pang | Personal Blog" />
-  <meta property="og:description" content="Welcome 😊{% if page.title %} {{ page.title }}{% endif %}" />
-  <meta property="og:image" content="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg" />
-
+  <!-- OpenGraph 是一种由 Facebook 推出的协议，用于在社交媒体上更好地展示网页内容。（在meta.html中定义） -->
   {% include meta.html %}
+
   {% include fonts.html %}
 
   <!--[if lt IE 9]>
