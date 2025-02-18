@@ -55,10 +55,10 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
   <li>
     <a href="https://www.webofscience.com/wos/author/record/{{ page.Clarivate }}" class="icon-Clarivate Clarivate" title="Clarivate">
       <svg width="24px" height="24px" viewBox="1.5 0 36.6 36.1" role="img" xmlns="http://www.w3.org/2000/svg"><title>Website of Science</title>
-        <!-- <style type="text/css">
+        <style type="text/css">
           .st0{fill:#1AC604;}
           .st1{fill:#6817FF;}
-        </style> -->
+        </style>
          <path class="st0" d="M28.3,18c1.9,2.2,3.4,4.7,4.5,7.4-5,5.2-11.4,8.9-18.6,10.7-1.8-2.3-3.1-4.9-4.1-7.6C20.3,26.8,26,20.8,28.3,18z"/>
                   <path class="st1" d="M14.4,0c-1.8,2.3-3.2,4.9-4.2,7.6 8.5,1.5 14.2,5.8 18.1,10.5 1.9-2.2 3.4-4.7 4.5-7.4C27.9,5.5,21.5,1.8,14.4,0z"/>
                   <path d="M1.5,28.8c-2-6.9-2-14.1 0-21.4 1.9-0.2 4.9-0.4 8.7,0.2-2.8,7.5-2.3,14.9-0.1,21C7.2,29,4.2,29.1,1.5,28.8z"/>
