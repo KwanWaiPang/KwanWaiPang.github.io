@@ -32,6 +32,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
 * 代码如下：
 
 ```html
+{% raw %}
   {% if site.footer-links.google_scholar %}
   <li>
     <a href="https://scholar.google.com/citations?user={{ site.footer-links.google_scholar }}" class="icon-google-scholar google-scholar" title="Google Scholar">
@@ -39,6 +40,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
     </a>
   </li>
   {% endif %}
+{% endraw %}
 ```
 
 * 效果：
@@ -54,6 +56,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
 * 代码如下：
 
 ```html
+{% raw %}
   {% if site.footer-links.ORCID %}
   <li>
     <a href="https://orcid.org/{{ site.footer-links.ORCID }}" class="icon-ORCID ORCID" title="ORCID">
@@ -61,6 +64,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
     </a>
   </li>
   {% endif %}
+{% endraw %}
 ```
 
 * 效果：
@@ -77,6 +81,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
 * 代码如下：
 
 ```html
+{% raw %}
   {% if site.footer-links.Clarivate %}
   <li>
     <a href="https://www.webofscience.com/wos/author/record/{{ site.footer-links.Clarivate }}" class="icon-Clarivate Clarivate" title="Clarivate">
@@ -92,6 +97,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
     </a>
   </li>
   {% endif %}
+{% endraw %}
 ```
 
 * 效果：
@@ -111,11 +117,12 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
 </a>
 {% endif %}
 
-## Scopus
+## Scopus/Elsevier
 
 * 代码如下：
 
 ```html
+{% raw %}
   {% if site.footer-links.Scopus_id %}
   <li>
     <a href="https://www.scopus.com/authid/detail.uri?authorId={{ site.footer-links.Scopus_id }}" class="icon-Scopus Scopus" title="Scopus">
@@ -123,6 +130,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
     </a>
   </li>
   {% endif %}
+{% endraw %}
 ```
 
 
@@ -140,6 +148,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
 * 代码如下：
 
 ```html
+{% raw %}
   {% if site.footer-links.ResearchGate %}
   <li>
     <a href="https://www.researchgate.net/profile/{{ site.footer-links.ResearchGate }}" class="icon-ResearchGate ResearchGate" title="ResearchGate">
@@ -147,6 +156,7 @@ SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化s
     </a>
   </li>
   {% endif %}
+{% endraw %}
 ```
 
 * 效果：
