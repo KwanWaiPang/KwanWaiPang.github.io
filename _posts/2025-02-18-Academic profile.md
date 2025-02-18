@@ -7,10 +7,10 @@ comments: true
 author: kwanwaipang
 toc: true
 google_scholar: "fUU5Cv0AAAAJ"
-ORCID: # "0000-0003-4518-7852"
-Clarivate: # "AAV-2613-2020"
-Scopus_id: # "56957694200"  # 👈 在这里填写你的Scopus ID
-ResearchGate: # "Guan-Wp"
+ORCID: "0000-0003-4518-7852"
+Clarivate: "AAV-2613-2020"
+Scopus_id: "56957694200"  # 👈 在这里填写你的Scopus ID
+ResearchGate: "Guan-Wp"
 ---
 
 
