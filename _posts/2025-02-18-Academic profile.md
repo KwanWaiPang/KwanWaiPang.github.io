@@ -27,7 +27,7 @@ ResearchGate: "Guan-Wp"
 SVG生成网站推荐[SVGViewer](https://www.svgviewer.dev/),可实时可视化svg编码并且以各种形式下载图片
 （PS：本文采用svg代码可视化，当然也可以采用png等其他图片格式~）
 
-Liquid 提供了 {% raw %}{% raw %}{% endraw %}和 {% raw %}{% endraw %}{% endraw %} 标签，可以将包裹的内容作为纯文本输出，避免被解析（若在markdown中写对应的代码要注意~）。
+Liquid 提供了 ```raw``` 和 ```endraw``` 标签，可以将包裹的内容作为纯文本输出，避免被解析（若在markdown中写对应的代码要注意~）。
 
 ## Google Scholar
 
