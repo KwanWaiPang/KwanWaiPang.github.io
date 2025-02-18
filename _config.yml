@@ -37,7 +37,7 @@ paginate: 8
 
 excerpt_separator: <!-- more -->
 
-# Includes an icon in the footer for each username you enter（配置各种社交链接）
+# Includes an icon in the footer for each username you enter（配置各种社交链接，请见_includes\svg-icons.html）
 footer-links:
   home: https://kwanwaipang.github.io/File/Blogs/My_Blog.html
   email: wpguan@connect.hku.hk
