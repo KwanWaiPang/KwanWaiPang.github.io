@@ -29,6 +29,7 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 
 # SLAM application
 此处的基于SLAM的应用是指full-SLAM或6 DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](#cmax-slam-event-based-rotational-motion-bundle-adjustment-and-slam-system-using-contrast-maximization-tro2024)</sup>
+但是文献<sup>[ref](#event-frame-inertial-odometry-using-point-and-line-features-based-on-coarse-to-fine-motion-compensation-ral2025)</sup>应该是首次实现了将CM framework用到EVIO问题中；而文献<sup>[ref](#event-frame-inertial-odometry-using-point-and-line-features-based-on-coarse-to-fine-motion-compensation-ral2025)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中。
 
 
 # Learning-based application
@@ -87,6 +88,10 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 
 ## Density Invariant Contrast Maximization for Neuromorphic Earth Observations (CVPR2023)
 * [paper](https://openaccess.thecvf.com/content/CVPR2023W/EventVision/papers/Arja_Density_Invariant_Contrast_Maximization_for_Neuromorphic_Earth_Observations_CVPRW_2023_paper.pdf)
+
+## MC-VEO: A visual-event odometry with accurate 6-DoF motion compensation (TIV2023)
+* [paper](https://ieeexplore.ieee.org/abstract/document/10275026)
+* [github](https://cslinzhang.github.io/MC-VEO/MC-VEO.html)
 
 ## CMax-SLAM: Event-based Rotational-Motion Bundle Adjustment and SLAM System using Contrast Maximization (TRO2024)
 * [paper](https://arxiv.org/pdf/2403.08119)
