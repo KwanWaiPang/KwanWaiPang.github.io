@@ -30,6 +30,7 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 # SLAM application
 此处的基于SLAM的应用是指full-SLAM或6 DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](#cmax-slam-event-based-rotational-motion-bundle-adjustment-and-slam-system-using-contrast-maximization-tro2024)</sup>
 
+
 # Learning-based application
 其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](#motion-prior-contrast-maximization-for-dense-continuous-time-motion-estimation-eccv2024), [ref](#self-supervised-learning-of-event-based-optical-flow-with-spiking-neural-networks-nips2021)</sup>)
 
@@ -104,6 +105,10 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 
 ## Secrets of Edge-Informed Contrast Maximization for Event-Based Vision
 * [paper](https://arxiv.org/pdf/2409.14611)
+
+## EROAM: Event-based Camera Rotational Odometry and Mapping in Real-time
+* [paper](https://arxiv.org/pdf/2411.11004)
+* [github](https://wlxing1901.github.io/eroam/)
 
 ## Event-Frame-Inertial Odometry Using Point and Line Features Based on Coarse-to-Fine Motion Compensation (RAL2025)
 * [paper](https://ieeexplore.ieee.org/abstract/document/10855459)
