@@ -12,7 +12,7 @@ toc: false # true
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
 
-在Event Camera领域基于Contrast Maximization(CMax,或CM)框架衍生了大量的工作，包括光流估计、深度估计、运动估计（2D、3D甚至6D）等等。
+在[Event Camera](https://kwanwaipang.github.io/Poster_files/Event_camera/Introduction_of_event_camera.html)领域基于Contrast Maximization(CMax,或CM)框架衍生了大量的工作，包括光流估计、深度估计、运动估计（2D、3D甚至6D）等等。
 其实本质上，CM这个框架是通过对事件进行运动补偿，而在做运动补偿的过程中估算出事件的位移，而这个位移也就是所谓的event point trajectories，而基于像素的位移就可以推广到系列视觉的任务。
 ```CMax aligns point trajectories on the image plane with event data by maximizing the contrast of an image of warped events (IWE)```
 
@@ -26,6 +26,18 @@ toc: false # true
 
 # 基本原理
 CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-event-cameras-with-applications-to-motion-depth-and-optical-flow-estimation-cvpr2018)</sup>中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
+
+下图较好解析了CM的基本原理，其实就是寻找 point的轨迹，使其较好的与event相align
+<div align="center">
+  <img src="https://kwanwaipang.github.io/Poster_files/Event_camera/event_in_voxel.gif" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+
+
 而此工作作为CM算法的基础工作也给出了CM三大基本应用：Rotational Motion estimation, Depth estimation, and Optical Flow estimation
 
 ## CMax for Rotational Motion Estimation
