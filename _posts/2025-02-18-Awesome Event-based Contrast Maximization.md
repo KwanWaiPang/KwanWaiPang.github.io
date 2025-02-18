@@ -14,8 +14,7 @@ toc: false # true
 
 在Event Camera领域基于Contrast Maximization(CMax,或CM)框架衍生了大量的工作，包括光流估计、深度估计、运动估计（2D、3D甚至6D）等等。
 其实本质上，CM这个框架是通过对事件进行运动补偿，而在做运动补偿的过程中估算出事件的位移，而这个位移也就是所谓的event point trajectories，而基于像素的位移就可以推广到系列视觉的任务。
-
-```aligns point trajectories on the image plane with event data by maximizing the contrast of an image of warped events (IWE)```
+```CMax aligns point trajectories on the image plane with event data by maximizing the contrast of an image of warped events (IWE)```
 
 本博文对Event-based Contrast Maximization进行较为全面的survey，并且将对应的经典论文都做简单的介绍
 
@@ -25,7 +24,12 @@ toc: false # true
 {:toc}
 
 
+# 基本原理
+CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-event-cameras-with-applications-to-motion-depth-and-optical-flow-estimation-cvpr2018)</sup>中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
 
+其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](#motion-prior-contrast-maximization-for-dense-continuous-time-motion-estimation-eccv2024), [ref](#motion-prior-contrast-maximization-for-dense-continuous-time-motion-estimation-eccv2024)</sup>)
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # Paper List
 
 ## A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth and Optical Flow Estimation (CVPR2018)
@@ -54,8 +58,8 @@ toc: false # true
 * [paper](https://arxiv.org/pdf/2206.05127)
 * 此篇是上一篇的期刊版本
 
-## Event Collapse in Contrast Maximization Frameworks (Sensor 2022)
-* [paper](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)
+## Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)
+* [paper](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 
 ## Visual Odometry with an Event Camera Using Continuous Ray Warping and Volumetric Contrast Maximization (Sensor2022)
 * [paper](https://arxiv.org/pdf/2107.03011)
@@ -64,8 +68,13 @@ toc: false # true
 
 ## Recursive Contrast Maximization for Event-Based High-Frequency Motion Estimation (IEEE Access2022)
 
+## Event Collapse in Contrast Maximization Frameworks (Sensor 2022)
+* [paper](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)
+
 ## A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)
 * [paper](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)
+* [github](https://github.com/tub-rip/event_collapse)
+* 这篇应该是上一篇的拓展版
 
 ## Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)
 * [paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
