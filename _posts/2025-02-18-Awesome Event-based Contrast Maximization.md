@@ -9,10 +9,6 @@ toc: false # true
 ---
 
 
-* 目录
-{:toc}
-
-
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
 
@@ -22,6 +18,12 @@ toc: false # true
 ```aligns point trajectories on the image plane with event data by maximizing the contrast of an image of warped events (IWE)```
 
 本博文对Event-based Contrast Maximization进行较为全面的survey，并且将对应的经典论文都做简单的介绍
+
+
+
+* 目录
+{:toc}
+
 
 
 # Paper List
