@@ -37,7 +37,7 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 ## CMax for Optical Flow Estimation
 
 
-# SLAM application
+# CMax for SLAM or 6DoF Pose Tracking
 此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](#cmax-slam-event-based-rotational-motion-bundle-adjustment-and-slam-system-using-contrast-maximization-tro2024)</sup>等等
 
 不过，文献<sup>[ref](#event-frame-inertial-odometry-using-point-and-line-features-based-on-coarse-to-fine-motion-compensation-ral2025)</sup>则是是首次实现了将CM framework用到EVIO问题中；而更早的文献<sup>[ref](#mc-veo-a-visual-event-odometry-with-accurate-6-dof-motion-compensation-tiv2023)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中，论文中也宣称首次拓展到6 DoF motion。
@@ -45,7 +45,7 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 本质上这两个能基于CM实现6DoF Pose Tracking的基本原因都是仅仅用CM来作为运动补偿，并不是直接采用CM的原理来计算pose，受限于局部最优以及容易退化，基于CM原理的motion estimation一般都是限制在rotational 或者fronto-parallel motion estimation.
 
 
-# Learning-based application
+# CMax for Learning-based Framework
 其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](#motion-prior-contrast-maximization-for-dense-continuous-time-motion-estimation-eccv2024), [ref](#self-supervised-learning-of-event-based-optical-flow-with-spiking-neural-networks-nips2021)</sup>)
 
 
