@@ -112,7 +112,23 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </figcaption>
 </div>
 
-对于上面公式2中b<sub>k</sub>,作者在附加材料<sup>[link](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)</sup>中做了深入的分析
+对于上面公式2中b<sub>k</sub>,作者在附加材料<sup>[link](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)</sup>中做了深入的分析。
+
+所谓的考不考虑极性是指在计算IWE的时候的公式2，对应下面两个公式：
+<div align="center">
+  <img src="../images/微信截图_20250219151227.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+效果如下图所示.首先从优化函数来说，是否使用极性的优化速度是近似的。但是采用了极性显然中间部分要明显一些，可以理解为更集中（optimal value is slightly narrower and more pronounced）。
+而通过IWE的对比分析则发现，如果带有极性，会使得 contrast function（公式3）下降得更加明显（因为存在正负极性相抵消）
+
+<div align="center">
+  <img src="../images/微信截图_20250219151430.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 ## CMax for Depth Estimation
 
