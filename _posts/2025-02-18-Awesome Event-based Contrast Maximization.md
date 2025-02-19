@@ -39,7 +39,7 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
         <img src="https://kwanwaipang.github.io/Poster_files/Event_camera/event_in_voxel.gif" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250219113408.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219113408.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -52,7 +52,14 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 如上面右图所示，point trajectory近似于直线。
 
 <div align="center">
-  <img src="../images/微信截图_20250219120444.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219120444.png" width="60%" />
+<figcaption>
+数学描述所谓的point trajectory  
+</figcaption>
+</div>
+
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219152239.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -79,7 +86,7 @@ CM算法的框架如上图所示，由以下三步组成：
 所谓的光流实际上就说每个pixel的motion vector（在小的时间段内）。而在理想的情况下（无穷小）在图像平面上的点的轨迹应该是一条直线，那么可以用下面公式来表达：
 
 <div align="center">
-  <img src="../images/微信截图_20250219120444.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219120444.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -89,7 +96,7 @@ CM算法的框架如上图所示，由以下三步组成：
 首先将event累积在一起，通过proposed trajectories将他们warp到参考时间t<sub>ref</sub>下:
 
 <div align="center">
-  <img src="../images/微信截图_20250219121240.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219121240.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -97,7 +104,7 @@ CM算法的框架如上图所示，由以下三步组成：
 公式2其实可以看成event累积的image（an image patch of warped events），求它的方差就可以得到下面公式
 
 <div align="center">
-  <img src="../images/微信截图_20250219121823.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219121823.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -107,7 +114,7 @@ CM算法的框架如上图所示，由以下三步组成：
 PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（contrast）最大，因此这个方法命名为`contrast maximization`
 
 <div align="center">
-  <img src="../images/微信截图_20250219121945.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219121945.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -116,7 +123,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 所谓的考不考虑极性是指在计算IWE的时候的公式2，对应下面两个公式：
 <div align="center">
-  <img src="../images/微信截图_20250219151227.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219151227.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -125,7 +132,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 而通过IWE的对比分析则发现，如果带有极性，会使得 contrast function（公式3）下降得更加明显（因为存在正负极性相抵消）
 
 <div align="center">
-  <img src="../images/微信截图_20250219151430.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219151430.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -140,10 +147,10 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250219142622.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219142622.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250219143658.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219143658.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -157,7 +164,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 对于一个事件点 e<sub>k</sub> 采用 warp (W) function转换到e<sup>'</sup><sub>k</sub>=(x<sup>'</sup><sub>k</sub>,t<sub>ref</sub>,p<sub>k</sub>)下:
 
 <div align="center">
-  <img src="../images/微信截图_20250219143824.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219143824.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -165,7 +172,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 然后，类似于上面公式2（也就是下图公式），通过计算沿着candidate point trajectory事件的数量
 
 <div align="center">
-  <img src="../images/微信截图_20250219144013.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144013.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -173,7 +180,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 2. 通过测量上面获得的图片的对比度（或者说方差）来测试event以及depth value θ的匹配对：
 
 <div align="center">
-  <img src="../images/微信截图_20250219144203.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144203.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -183,7 +190,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 下图通过可视化两个patch的优化过程来看CM算法的深度估计效果：
 
 <div align="center">
-  <img src="../images/微信截图_20250219144537.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144537.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
@@ -193,7 +200,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 首先，此任务是针对在静态环境下相机仅有rotational motion的，同时相机的intrinsic也是已知且去失真~
 
 <div align="center">
-  <img src="../images/微信截图_20250219145133.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219145133.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -201,7 +208,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 1. 其 geometric model如下：
 
 <div align="center">
-  <img src="../images/微信截图_20250219145522.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219145522.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -209,7 +216,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 2. 通过下面构思构建 image of warped events
 
 <div align="center">
-  <img src="../images/微信截图_20250219144013.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144013.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -217,7 +224,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 3. 更前面两个子任务一样，采用下式来构建优化方程
 
 <div align="center">
-  <img src="../images/微信截图_20250219144203.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144203.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -225,7 +232,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 估算的角速度的精度还是比较高的~
 
 <div align="center">
-  <img src="../images/微信截图_20250219150052.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219150052.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -235,8 +242,8 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 在此场景，图像点的变换如下：
 
 <div align="center">
-  <img src="../images/微信截图_20250219150439.png" width="60%" />
-  <img src="../images/微信截图_20250219150728.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219150439.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219150728.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -247,10 +254,10 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250219144013.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144013.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250219144203.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219144203.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -261,7 +268,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 效果如下图所示：
 
 <div align="center">
-  <img src="../images/微信截图_20250219150909.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219150909.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -269,7 +276,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 并且下图也展示了采用或者不采用CM框架下的VIO效果。可以看到采用CM算法恢复的平面点是要平整一些~
 
 <div align="center">
-  <img src="../images/微信截图_20250219151034.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219151034.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
