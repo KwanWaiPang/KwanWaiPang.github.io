@@ -5,7 +5,7 @@ date:   2025-02-18
 tags: [Event-based Vision]
 comments: true
 author: kwanwaipang
-toc: false # true
+toc: true
 ---
 
 
@@ -20,13 +20,13 @@ toc: false # true
 
 
 
-* 目录
-{:toc}
+<!-- * 目录
+{:toc} -->
 
 
 # 基本原理
 Event-based vision的工作分类有很多种，而其中，按照处理事件的形式可以分为`event-by-event`和`groups of events`。而CMax则是属于第二种。
-CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-event-cameras-with-applications-to-motion-depth-and-optical-flow-estimation-cvpr2018)</sup>中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
+CMax 首次在文献<sup>[ref](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)</sup>中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
 而其中的寻找point trajectories可以看成是一种隐式的data association，也是Event-based vision种的关键部分,比如short characteristic time (optical flow)或longer estimation time (monocular depth estimation)；
 此外，CM可以生成motion-corrected event images，既可以看成是对`groups of events`的运动补偿，也可以看成是由事件产生的图像的梯度或edge image。
 
@@ -59,14 +59,14 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 </div>
 
 <div align="center">
-  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219152239.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219152239.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 CM算法的框架如上图所示，由以下三步组成：
-1. Warp the events into an image H, according to the point trajectories defined by the geometric model and candidate parameters θ. 所谓的geometric model就是基于optical flow, depth estimation, motion estimation等问题，来描述how points move on the image plane
-2. Compute a score f based on the image of warped events（也就是score function,比如下面的公式3求方差）
+1. Warp the events into an image H, according to the point trajectories defined by the geometric model and candidate parameters θ. 所谓的geometric model就是基于optical flow, depth estimation, motion estimation等问题，来描述how points move on the image plane（也就是怎么对event point进行投影）
+2. Compute a score f based on the image of warped events（也就是score function,也就是累积IWE，然后计算对比的score function）
 3. Optimize the score or objective function with respect to the parameters θ of the model.这步其实就是优化的过程了，比如采用梯度下降或Newton方法来估算最好的θ值。而这个θ其实就是所求的point trajectory了，因为`x=x+θ*t`
 
 
@@ -285,108 +285,109 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # CMax for SLAM or 6DoF Pose Tracking
-此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](#cmax-slam-event-based-rotational-motion-bundle-adjustment-and-slam-system-using-contrast-maximization-tro2024)</sup>等等
+此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](https://arxiv.org/pdf/2403.08119)</sup>等等
 
-不过，文献<sup>[ref](#event-frame-inertial-odometry-using-point-and-line-features-based-on-coarse-to-fine-motion-compensation-ral2025)</sup>则是是首次实现了将CM framework用到EVIO问题中；而更早的文献<sup>[ref](#mc-veo-a-visual-event-odometry-with-accurate-6-dof-motion-compensation-tiv2023)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中，论文中也宣称首次拓展到6 DoF motion。
+不过，文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10855459)</sup>则是是首次实现了将CM framework用到EVIO问题中；而更早的文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10275026)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中，论文中也宣称首次拓展到6 DoF motion。
 
 本质上这两个能基于CM实现6DoF Pose Tracking的基本原因都是仅仅用CM来作为运动补偿，并不是直接采用CM的原理来计算pose，受限于局部最优以及容易退化，基于CM原理的motion estimation一般都是限制在rotational 或者fronto-parallel motion estimation.
 
 
 # CMax for Learning-based Framework
-其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](#motion-prior-contrast-maximization-for-dense-continuous-time-motion-estimation-eccv2024), [ref](#self-supervised-learning-of-event-based-optical-flow-with-spiking-neural-networks-nips2021)</sup>)
+其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](https://arxiv.org/pdf/2407.10802), [ref](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)</sup>)
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # Paper Resource
 此处列出CMax相关或者用到CMax的文献
 
-### A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth and Optical Flow Estimation (CVPR2018)
-* [paper](https://openaccess.thecvf.com/content_cvpr_2018/papers/Gallego_A_Unifying_Contrast_CVPR_2018_paper.pdf)
-* [supplementary material](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)
+* A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth and Optical Flow Estimation (CVPR2018)
+  * [paper](https://openaccess.thecvf.com/content_cvpr_2018/papers/Gallego_A_Unifying_Contrast_CVPR_2018_paper.pdf)
+  * [supplementary material](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)
 
-### Accurate angular velocity estimation with an event camera (RAL2017)
-* [paper](https://www.zora.uzh.ch/id/eprint/138896/1/RAL16_Gallego.pdf)
+* Accurate angular velocity estimation with an event camera (RAL2017)
+  * [paper](https://www.zora.uzh.ch/id/eprint/138896/1/RAL16_Gallego.pdf)
 
-### Focus is all you need: Loss functions for event-based vision (CVPR2019)
-* [paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Gallego_Focus_Is_All_You_Need_Loss_Functions_for_Event-Based_Vision_CVPR_2019_paper.pdf)
+*Focus is all you need: Loss functions for event-based vision (CVPR2019)
+  * [paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Gallego_Focus_Is_All_You_Need_Loss_Functions_for_Event-Based_Vision_CVPR_2019_paper.pdf)
 
-### Event Cameras, Contrast Maximization and Reward Functions: An Analysis (CVPR2019)
-* [paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Stoffregen_Event_Cameras_Contrast_Maximization_and_Reward_Functions_An_Analysis_CVPR_2019_paper.pdf)
-* [Github](https://github.com/TimoStoff/events_contrast_maximization): A python library for contrast maximization and voxel creation using events.
+* Event Cameras, Contrast Maximization and Reward Functions: An Analysis (CVPR2019)
+  * [paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Stoffregen_Event_Cameras_Contrast_Maximization_and_Reward_Functions_An_Analysis_CVPR_2019_paper.pdf)
+  * [Github](https://github.com/TimoStoff/events_contrast_maximization): A python library for contrast maximization and voxel creation using events.
 
-### Globally optimal contrast maximisation for event-based motion estimation (CVPR2020)
-* [paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Liu_Globally_Optimal_Contrast_Maximisation_for_Event-Based_Motion_Estimation_CVPR_2020_paper.pdf)
+* Globally optimal contrast maximisation for event-based motion estimation (CVPR2020)
+  * [paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Liu_Globally_Optimal_Contrast_Maximisation_for_Event-Based_Motion_Estimation_CVPR_2020_paper.pdf)
 
-### Real-Time Rotational Motion Estimation With Contrast Maximization Over Globally Aligned Events (RAL2021)
-* [paper](https://ieeexplore.ieee.org/abstract/document/9454404)
+* Real-Time Rotational Motion Estimation With Contrast Maximization Over Globally Aligned Events (RAL2021)
+  * [paper](https://ieeexplore.ieee.org/abstract/document/9454404)
 
-### Globally-optimal event camera motion estimation (ECCV2020)
-* [paper](https://arxiv.org/pdf/2203.03914)
+* Globally-optimal event camera motion estimation (ECCV2020)
+  * [paper](https://arxiv.org/pdf/2203.03914)
 
-### Globally-optimal contrast maximisation for event cameras (TPAMI2021)
-* [paper](https://arxiv.org/pdf/2206.05127)
-* 此篇是上一篇的期刊版本
+* Globally-optimal contrast maximisation for event cameras (TPAMI2021)
+  * [paper](https://arxiv.org/pdf/2206.05127)
+  * 此篇是上一篇的期刊版本
 
-### Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)
-* [paper](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
+* Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)
+  * [paper](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 
-### Visual Odometry with an Event Camera Using Continuous Ray Warping and Volumetric Contrast Maximization (Sensor2022)
-* [paper](https://arxiv.org/pdf/2107.03011)
+* Visual Odometry with an Event Camera Using Continuous Ray Warping and Volumetric Contrast Maximization (Sensor2022)
+  * [paper](https://arxiv.org/pdf/2107.03011)
 
-### Contrast maximization-based feature tracking for visual odometry with an event camera (Processes2022)
+* Contrast maximization-based feature tracking for visual odometry with an event camera (Processes2022)
 
-### Recursive Contrast Maximization for Event-Based High-Frequency Motion Estimation (IEEE Access2022)
+* Recursive Contrast Maximization for Event-Based High-Frequency Motion Estimation (IEEE Access2022)
 
-### Event Collapse in Contrast Maximization Frameworks (Sensor 2022)
-* [paper](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)
+* Event Collapse in Contrast Maximization Frameworks (Sensor 2022)
+  * [paper](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)
 
-### A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)
-* [paper](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)
-* [github](https://github.com/tub-rip/event_collapse)
-* 这篇应该是上一篇的拓展版
+* A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)
+  * [paper](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)
+  * [github](https://github.com/tub-rip/event_collapse)
+  * 这篇应该是上一篇的拓展版
 
-### Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)
-* [paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
-* [Supplementary Material](https://openaccess.thecvf.com/content/ICCV2023/supplemental/Paredes-Valles_Taming_Contrast_Maximization_ICCV_2023_supplemental.pdf)
+* Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)
+  * [paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
+  * [Supplementary Material](https://openaccess.thecvf.com/content/ICCV2023/supplemental/Paredes-Valles_Taming_Contrast_Maximization_ICCV_2023_supplemental.pdf)
 
-### Density Invariant Contrast Maximization for Neuromorphic Earth Observations (CVPR2023)
-* [paper](https://openaccess.thecvf.com/content/CVPR2023W/EventVision/papers/Arja_Density_Invariant_Contrast_Maximization_for_Neuromorphic_Earth_Observations_CVPRW_2023_paper.pdf)
+* Density Invariant Contrast Maximization for Neuromorphic Earth Observations (CVPR2023)
+  * [paper](https://openaccess.thecvf.com/content/CVPR2023W/EventVision/papers/Arja_Density_Invariant_Contrast_Maximization_for_Neuromorphic_Earth_Observations_CVPRW_2023_paper.pdf)
 
-### MC-VEO: A visual-event odometry with accurate 6-DoF motion compensation (TIV2023)
-* [paper](https://ieeexplore.ieee.org/abstract/document/10275026)
-* [github](https://cslinzhang.github.io/MC-VEO/MC-VEO.html)
+* MC-VEO: A visual-event odometry with accurate 6-DoF motion compensation (TIV2023)
+  * [paper](https://ieeexplore.ieee.org/abstract/document/10275026)
+  * [github](https://cslinzhang.github.io/MC-VEO/MC-VEO.html)
 
-### CMax-SLAM: Event-based Rotational-Motion Bundle Adjustment and SLAM System using Contrast Maximization (TRO2024)
-* [paper](https://arxiv.org/pdf/2403.08119)
+* CMax-SLAM: Event-based Rotational-Motion Bundle Adjustment and SLAM System using Contrast Maximization (TRO2024)
+  * [paper](https://arxiv.org/pdf/2403.08119)
 
-### Secrets of Event-based Optical Flow (ECCV2022)
-* [paper](https://arxiv.org/pdf/2207.10022)
+* Secrets of Event-based Optical Flow (ECCV2022)
+  * [paper](https://arxiv.org/pdf/2207.10022)
 
-### Secrets of Event-based Optical Flow, Depth and Ego-motion Estimation by Contrast Maximization (TPAMI2024)
-* [paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10517639)
-* [github](https://github.com/tub-rip/event_based_optical_flow)
-* 这篇是上一篇的期刊版本
+* Secrets of Event-based Optical Flow, Depth and Ego-motion Estimation by Contrast Maximization (TPAMI2024)
+  * [paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10517639)
+  * [github](https://github.com/tub-rip/event_based_optical_flow)
+  * 这篇是上一篇的期刊版本
 
-### Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)
-* [paper](https://arxiv.org/pdf/2407.10802)
-* [github](https://github.com/tub-rip/MotionPriorCMax)
+* Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)
+  * [paper](https://arxiv.org/pdf/2407.10802)
+  * [github](https://github.com/tub-rip/MotionPriorCMax)
 
-### Secrets of Edge-Informed Contrast Maximization for Event-Based Vision
-* [paper](https://arxiv.org/pdf/2409.14611)
+* Secrets of Edge-Informed Contrast Maximization for Event-Based Vision
+  * [paper](https://arxiv.org/pdf/2409.14611)
 
-### EROAM: Event-based Camera Rotational Odometry and Mapping in Real-time
-* [paper](https://arxiv.org/pdf/2411.11004)
-* [github](https://wlxing1901.github.io/eroam/)
+* EROAM: Event-based Camera Rotational Odometry and Mapping in Real-time
+  * [paper](https://arxiv.org/pdf/2411.11004)
+  * [github](https://wlxing1901.github.io/eroam/)
 
-### Event-Frame-Inertial Odometry Using Point and Line Features Based on Coarse-to-Fine Motion Compensation (RAL2025)
-* [paper](https://ieeexplore.ieee.org/abstract/document/10855459)
-* [github](https://github.com/choibottle/C2F-EFIO)
+* Event-Frame-Inertial Odometry Using Point and Line Features Based on Coarse-to-Fine Motion Compensation (RAL2025)
+  * [paper](https://ieeexplore.ieee.org/abstract/document/10855459)
+  * [github](https://github.com/choibottle/C2F-EFIO)
 
 
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 复现或测试CM相关工作
+
 * [CMax-SLAM-comment](https://github.com/KwanWaiPang/CMax-SLAM-comment)
 
 
