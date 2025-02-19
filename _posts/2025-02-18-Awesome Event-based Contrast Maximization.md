@@ -173,8 +173,22 @@ CM算法的框架如上图所示，由以下三步组成：
 此外，论文[《Event Cameras, Contrast Maximization and Reward Functions: An Analysis (CVPR2019)》](https://openaccess.thecvf.com/content_CVPR_2019/papers/Stoffregen_Event_Cameras_Contrast_Maximization_and_Reward_Functions_An_Analysis_CVPR_2019_paper.pdf)也是对各种loss function（此处换称呼为reward function）进行了分析，不过当然20多种那么多了。
 
 
+## Event Collapse
+所谓的Event Collapse直译就是“事件崩溃”，表现出来的线性就是事件被warped到少数的pixel区域，也就是退化/失真，场景中的事件被投到一块（陷入所谓的局部最小值了），而Prof. Gallego团队的两篇论文[Event Collapse in Contrast Maximization Frameworks (Sensor 2022)](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)和[A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)的研究也证明，添加正则化项是唯一的有效，消除Event Collapse的方案.
+
+PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也就是换个排序而已😂
+<div align="center">
+  <img src="../images/微信截图_20250219171050.png" width="80%" />
+  <img src="../images/微信截图_20250219171731.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # CMax的主要应用
+理论上CM框架可以用到所有的event-based vision的topic中，特别是以`groups event`的方式来处理event数据的。
+此处主要列出的是基于CMax的原理来实现的framework，而不仅仅是作为数据处理的形式
 
 ## Optical Flow Estimation
 所谓的光流实际上就说每个pixel的motion vector（在小的时间段内）。而在理想的情况下（无穷小）在图像平面上的点的轨迹应该是一条直线，那么可以用下面公式来表达：
@@ -385,7 +399,9 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 ## SLAM or 6DoF Pose Tracking
 此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](https://arxiv.org/pdf/2403.08119)</sup>等等
 
-不过，文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10855459)</sup>则是是首次实现了将CM framework用到EVIO问题中；而更早的文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10275026)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中，论文中也宣称首次拓展到6 DoF motion。
+<!-- [《Visual Odometry with an Event Camera Using Continuous Ray Warping and Volumetric Contrast Maximization (Sensor2022)》](https://arxiv.org/pdf/2107.03011)实现了contrast maximization in 3D -->
+
+文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10855459)</sup>则是是首次实现了将CM framework用到EVIO问题中；而更早的文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10275026)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中，论文中也宣称首次拓展到6 DoF motion。
 
 本质上这两个能基于CM实现6DoF Pose Tracking的基本原因都是仅仅用CM来作为运动补偿，并不是直接采用CM的原理来计算pose，受限于局部最优以及容易退化，基于CM原理的motion estimation一般都是限制在rotational 或者fronto-parallel motion estimation.
 
@@ -399,7 +415,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # Paper Resource
-此处列出CMax相关或者用到CMax的文献
+此处列出CMax相关或者用到CMax的文献。
 
 * A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth and Optical Flow Estimation (CVPR2018)
   * [paper](https://openaccess.thecvf.com/content_cvpr_2018/papers/Gallego_A_Unifying_Contrast_CVPR_2018_paper.pdf)
