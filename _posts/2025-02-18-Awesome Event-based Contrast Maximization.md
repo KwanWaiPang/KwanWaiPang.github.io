@@ -114,12 +114,72 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 对于上面公式2中b<sub>k</sub>,作者在附加材料<sup>[link](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)</sup>中做了深入的分析
 
+## CMax for Depth Estimation
+
+此部分是基于[EMVS](https://www.researchgate.net/profile/Davide-Scaramuzza-3/publication/320914498_EMVS_Event-Based_Multi-View_Stereo-3D_Reconstruction_with_an_Event_Camera_in_Real-Time/links/5a663bff0f7e9b6b8fde4241/EMVS-Event-Based-Multi-View-Stereo-3D-Reconstruction-with-an-Event-Camera-in-Real-Time.pdf)的框架的.
+首先相机的pose、intrinsic都是是已知的。
+
+其次，其 geometric model 为：一个图像点的trajectory可以通过将一个3D点（同时有已知的6 DoF相机pose和相对于参考视角下3D点的深度）进行投影获得的。如下图所示。此时参数θ为深度,假设一个小的区域（patch）内所有的点都具有相同的深度。
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250219142622.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250219143658.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  左图为Event-based space-sweep  
+  </figcaption>
+</div>
+
+基于CM框架下的深度估计步骤如下：
+1. Transfer the events (triggered at the image plane of the moving event camera) onto the reference view using the candidate depth parameter. 
+对于一个事件点 e<sub>k</sub> 采用 warp (W) function转换到e<sup>'</sup><sub>k</sub>=(x<sup>'</sup><sub>k</sub>,t<sub>ref</sub>,p<sub>k</sub>)下:
+
+<div align="center">
+  <img src="../images/微信截图_20250219143824.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+然后，类似于上面公式2（也就是下图公式），通过计算沿着candidate point trajectory事件的数量
+
+<div align="center">
+  <img src="../images/微信截图_20250219144013.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+2. 通过测量上面获得的图片的对比度（或者说方差）来测试event以及depth value θ的匹配对：
+
+<div align="center">
+  <img src="../images/微信截图_20250219144203.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+3. 最大化对比度来获取深度值θ
+
+下图通过可视化两个patch的优化过程来看CM算法的深度估计效果：
+
+<div align="center">
+  <img src="../images/微信截图_20250219144537.png" width="80%" />
+<figcaption>
+</figcaption>
+</div>
+
+
+
 ## CMax for Rotational Motion Estimation
 
 
-## CMax for Depth Estimation
 
 
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # CMax for SLAM or 6DoF Pose Tracking
 此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](#cmax-slam-event-based-rotational-motion-bundle-adjustment-and-slam-system-using-contrast-maximization-tro2024)</sup>等等
 
