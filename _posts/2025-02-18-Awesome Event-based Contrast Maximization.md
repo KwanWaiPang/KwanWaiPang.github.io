@@ -25,28 +25,75 @@ toc: false # true
 
 
 # 基本原理
+Event-based vision的工作分类有很多种，而其中，按照处理事件的形式可以分为`event-by-event`和`groups of events`。而CMax则是属于第二种。
 CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-event-cameras-with-applications-to-motion-depth-and-optical-flow-estimation-cvpr2018)</sup>中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
+而其中的寻找point trajectories可以看成是一种隐式的data association，也是Event-based vision种的关键部分,比如short characteristic time (optical flow)或longer estimation time (monocular depth estimation)；
+此外，CM可以生成motion-corrected event images，既可以看成是对`groups of events`的运动补偿，也可以看成是由事件产生的图像的梯度或edge image。
 
-下图较好解析了CM的基本原理，其实就是寻找 point的轨迹，使其较好的与event相align
+下图较好解析了CM的基本原理，其实就是寻找 point的轨迹，使其较好的与event相align：
+
 <div align="center">
-  <img src="https://kwanwaipang.github.io/Poster_files/Event_camera/event_in_voxel.gif" width="60%" />
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/Poster_files/Event_camera/event_in_voxel.gif" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250219113408.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+事件相机是motion-active的，一般是由亮度变化或相对运动（相机与场景）产生事件的，并且大部分的事件都是由相对运动的edge来产生的，因此事件相机中的数据关联应该是`establishing which events were triggered by the same scene edge`。
+而移动的edge实际上是描述了在平面上的point trajectory，因此将沿着point trajectory生成的event关联起来也就是数据关联的过程。
+如上面右图所示，point trajectory近似于直线。
+
+而此工作作为CM算法的基础工作也给出了CM三大基本应用：Rotational Motion estimation（还有motion estimation in planar scenes）, Depth estimation, and Optical Flow estimation
+
+## CMax for Optical Flow Estimation
+所谓的光流实际上就说每个pixel的motion vector（在小的时间段内）。而在理想的情况下（无穷小）在图像平面上的点的轨迹应该是一条直线，那么可以用下面公式来表达：
+
+<div align="center">
+  <img src="../images/微信截图_20250219120444.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
+而数据关联的过程，就是把在这个轨迹（直线）上的事件给关联起来。
+具体的做法则是：
+首先将event累积在一起，通过proposed trajectories将他们warp到参考时间t<sub>ref</sub>下:
 
+<div align="center">
+  <img src="../images/微信截图_20250219121240.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
+公式2其实可以看成event累积的image（an image patch of warped events），求它的方差就可以得到下面公式
 
+<div align="center">
+  <img src="../images/微信截图_20250219121823.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
-而此工作作为CM算法的基础工作也给出了CM三大基本应用：Rotational Motion estimation, Depth estimation, and Optical Flow estimation
+θ，也就是光流速度，可视化为heat map（如下图所示），可以看到它是smooth以及有明显的峰值的。并且在针对不同的θ，对应的IWE（image of warped event）也可视化到右子图中了。可以看到更高的方差对应IWE更高对比度（更sharp）。因此估算光流的问题可以转换为通过上面公式3（最大化方差函数）来寻找θ参数的过程
+
+<div align="center">
+  <img src="../images/微信截图_20250219121945.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于上面公式2中b<sub>k</sub>,作者在附加材料<sup>[link](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)</sup>中做了深入的分析
 
 ## CMax for Rotational Motion Estimation
 
 
 ## CMax for Depth Estimation
-
-
-## CMax for Optical Flow Estimation
 
 
 # CMax for SLAM or 6DoF Pose Tracking
@@ -67,6 +114,7 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 
 ### A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth and Optical Flow Estimation (CVPR2018)
 * [paper](https://openaccess.thecvf.com/content_cvpr_2018/papers/Gallego_A_Unifying_Contrast_CVPR_2018_paper.pdf)
+* [supplementary material](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)
 
 ### Accurate angular velocity estimation with an event camera (RAL2017)
 * [paper](https://www.zora.uzh.ch/id/eprint/138896/1/RAL16_Gallego.pdf)
