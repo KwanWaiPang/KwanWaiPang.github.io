@@ -75,13 +75,13 @@ CM算法的框架如上图所示，由以下三步组成：
 <table style="border: none; background-color: transparent;">
   <tr>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219161647.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219161647.png" width="100%" />
     </td>
     <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219161822.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219161822.png" width="100%" />
     </td>
     <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219161937.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219161937.png" width="100%" />
     </td>
   </tr>
 </table>
@@ -105,7 +105,7 @@ CM算法的框架如上图所示，由以下三步组成：
 汇总如下：
 
 <div align="center">
-  <img src="../images/微信截图_20250219161028.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219161028.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -114,43 +114,29 @@ CM算法的框架如上图所示，由以下三步组成：
 <table style="border: none; background-color: transparent;">
   <tr>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162425.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162425.png" width="100%" />
     </td>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162445.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162445.png" width="100%" />
     </td>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162543.png" width="100%" />
-    </td>
-  </tr>
-</table>
-
-<img src="../images/微信截图_20250219162659.png" width="60%" />
-
-<table style="border: none; background-color: transparent;">
-  <tr>
-    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162837.png" width="100%" />
-    </td>
-    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162845.png" width="100%" />
-    </td>
-    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162857.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162543.png" width="100%" />
     </td>
   </tr>
 </table>
 
+<img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162659.png" width="60%" />
+
 <table style="border: none; background-color: transparent;">
   <tr>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162939.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162837.png" width="100%" />
     </td>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219162951.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162845.png" width="100%" />
     </td>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219163003.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162857.png" width="100%" />
     </td>
   </tr>
 </table>
@@ -158,10 +144,24 @@ CM算法的框架如上图所示，由以下三步组成：
 <table style="border: none; background-color: transparent;">
   <tr>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219163208.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162939.png" width="100%" />
     </td>
     <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-      <img src="../images/微信截图_20250219163225.png" width="100%" />
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219162951.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219163003.png" width="100%" />
+    </td>
+  </tr>
+</table>
+
+<table style="border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219163208.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219163225.png" width="100%" />
     </td>
   </tr>
 </table>
