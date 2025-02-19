@@ -173,9 +173,90 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </div>
 
 
+## CMax for Rotational Motion Estimation （角速度的估计）
+首先，此任务是针对在静态环境下相机仅有rotational motion的，同时相机的intrinsic也是已知且去失真~
 
-## CMax for Rotational Motion Estimation
+<div align="center">
+  <img src="../images/微信截图_20250219145133.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
 
+1. 其 geometric model如下：
+
+<div align="center">
+  <img src="../images/微信截图_20250219145522.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+2. 通过下面构思构建 image of warped events
+
+<div align="center">
+  <img src="../images/微信截图_20250219144013.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+3. 更前面两个子任务一样，采用下式来构建优化方程
+
+<div align="center">
+  <img src="../images/微信截图_20250219144203.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+估算的角速度的精度还是比较高的~
+
+<div align="center">
+  <img src="../images/微信截图_20250219150052.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+
+## CMax for Motion Estimation in Planar Scenes （平面下的rotation 和translation，3D）
+在此场景，图像点的变换如下：
+
+<div align="center">
+  <img src="../images/微信截图_20250219150439.png" width="60%" />
+  <img src="../images/微信截图_20250219150728.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+同样地，采用上面的公式2和3来构建IWE以及求最优化
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250219144013.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250219144203.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+效果如下图所示：
+
+<div align="center">
+  <img src="../images/微信截图_20250219150909.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+并且下图也展示了采用或者不采用CM框架下的VIO效果。可以看到采用CM算法恢复的平面点是要平整一些~
+
+<div align="center">
+  <img src="../images/微信截图_20250219151034.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
 
 
 
