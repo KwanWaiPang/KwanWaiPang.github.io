@@ -23,10 +23,10 @@ toc: true
 <!-- * 目录
 {:toc} -->
 
-
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 基本原理
 Event-based vision的工作分类有很多种，而其中，按照处理事件的形式可以分为`event-by-event`和`groups of events`。而CMax则是属于第二种。
-CMax 首次在文献<sup>[ref](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)</sup>中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
+CMax 首次在文献[《A Unifying Contrast Maximization Framework for Event Cameras, with Applications to Motion, Depth and Optical Flow Estimation (CVPR2018)》](https://www.ifi.uzh.ch/dam/jcr:a22071c9-b284-43c6-8f71-6433627b2db2/CVPR18_Gallego.pdf)中提出：`The main idea of our framework is to find the point trajectories on the image plane that are best aligned with the event data by maximizing an objective function: the contrast of an image of warped events`
 而其中的寻找point trajectories可以看成是一种隐式的data association，也是Event-based vision种的关键部分,比如short characteristic time (optical flow)或longer estimation time (monocular depth estimation)；
 此外，CM可以生成motion-corrected event images，既可以看成是对`groups of events`的运动补偿，也可以看成是由事件产生的图像的梯度或edge image。
 
@@ -69,18 +69,111 @@ CM算法的框架如上图所示，由以下三步组成：
 2. Compute a score f based on the image of warped events（也就是score function,也就是累积IWE，然后计算对比的score function）
 3. Optimize the score or objective function with respect to the parameters θ of the model.这步其实就是优化的过程了，比如采用梯度下降或Newton方法来估算最好的θ值。而这个θ其实就是所求的point trajectory了，因为`x=x+θ*t`
 
+数学描述如下：
+
+<div align="center">
+<table style="border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219161647.png" width="100%" />
+    </td>
+    <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219161822.png" width="100%" />
+    </td>
+    <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219161937.png" width="100%" />
+    </td>
+  </tr>
+</table>
+<figcaption>
+</figcaption>
+</div>
+
 
 对于CM算法，其有两个副产品：
 1. 估算出point trajectory，隐式建立事件之间的数据关联
 2. 估算出的point trajectory可以用来对运动的edge做校正（correct）
 
+而此工作作为CM算法的基础工作也给出了CM三大基本应用：[Rotational motion estimation](#rotational-velocity-estimation)（还有[motion estimation in planar scenes](#motion-estimation-in-planar-scenes)）, [Depth estimation](#depth-estimation), 和 [Optical Flow estimation](#optical-flow-estimation)
+
 ## 计算复杂度
 而CM算法的时间复杂度应该是`O（n）`,也就是跟事件量成线性关系。其中warp event应该是耗时最大的，想求对比度这些操作几乎可以忽略。此外，优化方法也是影响的重要因素。
 
+## loss function
+[Focus is all you need: Loss functions for event-based vision (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Gallego_Focus_Is_All_You_Need_Loss_Functions_for_Event-Based_Vision_CVPR_2019_paper.pdf)中，介绍了基于CM框架的22个目标函数，不过这篇论文中是针对Motion Compensation这个主题的。
+所谓的loss function其实就是[Rotational motion estimation](#rotational-velocity-estimation)，[motion estimation in planar scenes](#motion-estimation-in-planar-scenes), [Depth estimation](#depth-estimation), 和 [Optical Flow estimation](#optical-flow-estimation)几个section中提到的公式3，就是上面CM算法框架图中描述的`measure event alignment`.
+汇总如下：
 
+<div align="center">
+  <img src="../images/微信截图_20250219161028.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+对应的公式如下（实在太多了，只能是真正开发的时候要用到再细读了hh~）：
+<div align="center">
+<table style="border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162425.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162445.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162543.png" width="100%" />
+    </td>
+  </tr>
+</table>
+
+<img src="../images/微信截图_20250219162659.png" width="60%" />
+
+<table style="border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162837.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162845.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162857.png" width="100%" />
+    </td>
+  </tr>
+</table>
+
+<table style="border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162939.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219162951.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219163003.png" width="100%" />
+    </td>
+  </tr>
+</table>
+
+<table style="border: none; background-color: transparent;">
+  <tr>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219163208.png" width="100%" />
+    </td>
+    <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="../images/微信截图_20250219163225.png" width="100%" />
+    </td>
+  </tr>
+</table>
+
+<figcaption>
+</figcaption>
+</div>
+
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # CMax的主要应用
-
-而此工作作为CM算法的基础工作也给出了CM三大基本应用：Rotational Motion estimation（还有motion estimation in planar scenes）, Depth estimation, and Optical Flow estimation
 
 ## Optical Flow Estimation
 所谓的光流实际上就说每个pixel的motion vector（在小的时间段内）。而在理想的情况下（无穷小）在图像平面上的点的轨迹应该是一条直线，那么可以用下面公式来表达：
@@ -196,7 +289,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </div>
 
 
-## Rotational Motion Estimation 
+## Rotational Velocity Estimation 
 这其实是角速度的估计,最经典的应该是这篇工作[《Accurate angular velocity estimation with an event camera (RAL2017)》](https://www.zora.uzh.ch/id/eprint/138896/1/RAL16_Gallego.pdf)
 
 首先，此任务是针对在静态环境下相机仅有rotational motion的，同时相机的intrinsic也是已知且去失真~
@@ -311,7 +404,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 * Accurate angular velocity estimation with an event camera (RAL2017)
   * [paper](https://www.zora.uzh.ch/id/eprint/138896/1/RAL16_Gallego.pdf)
 
-*Focus is all you need: Loss functions for event-based vision (CVPR2019)
+* Focus is all you need: Loss functions for event-based vision (CVPR2019)
   * [paper](https://openaccess.thecvf.com/content_CVPR_2019/papers/Gallego_Focus_Is_All_You_Need_Loss_Functions_for_Event-Based_Vision_CVPR_2019_paper.pdf)
 
 * Event Cameras, Contrast Maximization and Reward Functions: An Analysis (CVPR2019)
