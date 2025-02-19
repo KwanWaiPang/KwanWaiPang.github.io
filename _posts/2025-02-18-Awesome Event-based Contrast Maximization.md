@@ -174,12 +174,26 @@ CM算法的框架如上图所示，由以下三步组成：
 
 
 ## Event Collapse
-所谓的Event Collapse直译就是“事件崩溃”，表现出来的线性就是事件被warped到少数的pixel区域，也就是退化/失真，场景中的事件被投到一块（陷入所谓的局部最小值了），而Prof. Gallego团队的两篇论文[Event Collapse in Contrast Maximization Frameworks (Sensor 2022)](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)和[A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)的研究也证明，添加正则化项是唯一的有效，消除Event Collapse的方案.
+所谓的Event Collapse直译就是“事件崩溃”，表现出来的线性就是事件被warped到少数的pixel区域(`events accumulate into too few pixels`)，也就是退化/失真，场景中的事件被投到一块（陷入所谓的局部最小值了），而Prof. Gallego团队的两篇论文[Event Collapse in Contrast Maximization Frameworks (Sensor 2022)](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)和[A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)的研究也证明，添加正则化项是唯一的有效，消除Event Collapse的方案.
 
 PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也就是换个排序而已😂
 <div align="center">
   <img src="../images/微信截图_20250219171050.png" width="80%" />
   <img src="../images/微信截图_20250219171731.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+从上图可以看到，甚至在单自由度（直线运动）的时候，也会出现event collapse。
+实际上，如果是测过CMax-SLAM就会发现，除非对事件切分得很好，不然会出现大量的event collapse的情况~
+
+除了正则化以外，解决event collapse的方式有：
+1. 把参数初始化为非常接近真值（`initializing the parameters sufficiently close to the desired solution`）emmmm这点怎么说呢，简单说应该就是：给真值加个高斯noise然后让算法估算获得estimated value再跟真值对比（还真有顶会甚至TPAMI、TRO级别的这样做的😂）
+2. 降低问题的自由度（但个人人为没啥用，毕竟实际中CM是在1D下也可能出现event collapse），也有通过global optimal或者通过设置 reward functions的upper and lower bounds来实现更好的效果的
+3. 采用其他传感器提供更多约束（比如深度图）
+
+<div align="center">
+  <img src="../images/微信截图_20250219174809.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -397,7 +411,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 ## SLAM or 6DoF Pose Tracking
-此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](https://arxiv.org/pdf/2403.08119)</sup>等等
+此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实应用场景非常局限的，比如工作[《CMax-SLAM: Event-based Rotational-Motion Bundle Adjustment and SLAM System using Contrast Maximization (TRO2024)》](https://arxiv.org/pdf/2403.08119)</sup>
 
 <!-- [《Visual Odometry with an Event Camera Using Continuous Ray Warping and Volumetric Contrast Maximization (Sensor2022)》](https://arxiv.org/pdf/2107.03011)实现了contrast maximization in 3D -->
 
@@ -479,6 +493,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 * CMax-SLAM: Event-based Rotational-Motion Bundle Adjustment and SLAM System using Contrast Maximization (TRO2024)
   * [paper](https://arxiv.org/pdf/2403.08119)
+  * [github](https://github.com/tub-rip/cmax_slam)
 
 * Secrets of Event-based Optical Flow (ECCV2022)
   * [paper](https://arxiv.org/pdf/2207.10022)
