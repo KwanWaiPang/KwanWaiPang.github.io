@@ -51,6 +51,28 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 而移动的edge实际上是描述了在平面上的point trajectory，因此将沿着point trajectory生成的event关联起来也就是数据关联的过程。
 如上面右图所示，point trajectory近似于直线。
 
+<div align="center">
+  <img src="../images/微信截图_20250219120444.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+CM算法的框架如上图所示，由以下三步组成：
+1. Warp the events into an image H, according to the point trajectories defined by the geometric model and candidate parameters θ. 所谓的geometric model就是基于optical flow, depth estimation, motion estimation等问题，来描述how points move on the image plane
+2. Compute a score f based on the image of warped events（也就是score function,比如下面的公式3求方差）
+3. Optimize the score or objective function with respect to the parameters θ of the model.这步其实就是优化的过程了，比如采用梯度下降或Newton方法来估算最好的θ值。而这个θ其实就是所求的point trajectory了，因为`x=x+θ*t`
+
+
+对于CM算法，其有两个副产品：
+1. 估算出point trajectory，隐式建立事件之间的数据关联
+2. 估算出的point trajectory可以用来对运动的edge做校正（correct）
+
+## 计算复杂度
+而CM算法的时间复杂度应该是`O（n）`,也就是跟事件量成线性关系。其中warp event应该是耗时最大的，想求对比度这些操作几乎可以忽略。此外，优化方法也是影响的重要因素。
+
+
+# CMax的主要应用
+
 而此工作作为CM算法的基础工作也给出了CM三大基本应用：Rotational Motion estimation（还有motion estimation in planar scenes）, Depth estimation, and Optical Flow estimation
 
 ## CMax for Optical Flow Estimation
@@ -80,7 +102,9 @@ CMax 首次在文献<sup>[ref](#a-unifying-contrast-maximization-framework-for-e
 </figcaption>
 </div>
 
-θ，也就是光流速度，可视化为heat map（如下图所示），可以看到它是smooth以及有明显的峰值的。并且在针对不同的θ，对应的IWE（image of warped event）也可视化到右子图中了。可以看到更高的方差对应IWE更高对比度（更sharp）。因此估算光流的问题可以转换为通过上面公式3（最大化方差函数）来寻找θ参数的过程
+θ，也就是光流速度，可视化为heat map（如下图所示），可以看到它是smooth以及有明显的峰值的。并且在针对不同的θ，对应的IWE（image of warped event）也可视化到右子图中了。可以看到更高的方差对应IWE更高对比度（更sharp）。因此估算光流的问题可以转换为通过上面公式3（最大化方差函数）来寻找θ参数的过程。
+
+PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（contrast）最大，因此这个方法命名为`contrast maximization`
 
 <div align="center">
   <img src="../images/微信截图_20250219121945.png" width="60%" />
