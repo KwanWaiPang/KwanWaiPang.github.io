@@ -170,6 +170,7 @@ CM算法的框架如上图所示，由以下三步组成：
 </figcaption>
 </div>
 
+此外，论文[《Event Cameras, Contrast Maximization and Reward Functions: An Analysis (CVPR2019)》](https://openaccess.thecvf.com/content_CVPR_2019/papers/Stoffregen_Event_Cameras_Contrast_Maximization_and_Reward_Functions_An_Analysis_CVPR_2019_paper.pdf)也是对各种loss function（此处换称呼为reward function）进行了分析，不过当然20多种那么多了。
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -390,7 +391,10 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 
 ## Learning-based Framework
-其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](https://arxiv.org/pdf/2407.10802), [ref](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)</sup>)
+其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss：
+* [Reducing the sim-to-real gap for event cameras（ECCV2020）](https://arxiv.org/pdf/2003.09078)
+* [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
+* [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -416,6 +420,10 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 * Real-Time Rotational Motion Estimation With Contrast Maximization Over Globally Aligned Events (RAL2021)
   * [paper](https://ieeexplore.ieee.org/abstract/document/9454404)
+
+* Reducing the sim-to-real gap for event cameras（ECCV2020）
+  * [paper](https://arxiv.org/pdf/2003.09078)
+  * [github](https://github.com/TimoStoff/event_cnn_minimal)
 
 * Globally-optimal event camera motion estimation (ECCV2020)
   * [paper](https://arxiv.org/pdf/2203.03914)
