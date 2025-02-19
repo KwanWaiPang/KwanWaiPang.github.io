@@ -82,7 +82,7 @@ CM算法的框架如上图所示，由以下三步组成：
 
 而此工作作为CM算法的基础工作也给出了CM三大基本应用：Rotational Motion estimation（还有motion estimation in planar scenes）, Depth estimation, and Optical Flow estimation
 
-## CMax for Optical Flow Estimation
+## Optical Flow Estimation
 所谓的光流实际上就说每个pixel的motion vector（在小的时间段内）。而在理想的情况下（无穷小）在图像平面上的点的轨迹应该是一条直线，那么可以用下面公式来表达：
 
 <div align="center">
@@ -137,7 +137,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </figcaption>
 </div>
 
-## CMax for Depth Estimation
+## Depth Estimation
 
 此部分是基于[EMVS](https://www.researchgate.net/profile/Davide-Scaramuzza-3/publication/320914498_EMVS_Event-Based_Multi-View_Stereo-3D_Reconstruction_with_an_Event_Camera_in_Real-Time/links/5a663bff0f7e9b6b8fde4241/EMVS-Event-Based-Multi-View-Stereo-3D-Reconstruction-with-an-Event-Camera-in-Real-Time.pdf)的框架的.
 首先相机的pose、intrinsic都是是已知的。
@@ -196,7 +196,9 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </div>
 
 
-## CMax for Rotational Motion Estimation （角速度的估计）
+## Rotational Motion Estimation 
+这其实是角速度的估计,最经典的应该是这篇工作[《Accurate angular velocity estimation with an event camera (RAL2017)》](https://www.zora.uzh.ch/id/eprint/138896/1/RAL16_Gallego.pdf)
+
 首先，此任务是针对在静态环境下相机仅有rotational motion的，同时相机的intrinsic也是已知且去失真~
 
 <div align="center">
@@ -238,7 +240,9 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </div>
 
 
-## CMax for Motion Estimation in Planar Scenes （平面下的rotation 和translation，3D）
+## Motion Estimation in Planar Scenes 
+这是在平面下的rotation 和translation运动估计，属于3 DoF吧~
+
 在此场景，图像点的变换如下：
 
 <div align="center">
@@ -284,7 +288,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-# CMax for SLAM or 6DoF Pose Tracking
+## SLAM or 6DoF Pose Tracking
 此处的基于SLAM的应用是指full-SLAM或6DoF Pose Tracking，因为大部分的CMax中所谓的motion estimation都是指 rotational 或者fronto-parallel motion estimation，这其实本质上应用场景非常局限的，比如文献<sup>[ref](https://arxiv.org/pdf/2403.08119)</sup>等等
 
 不过，文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10855459)</sup>则是是首次实现了将CM framework用到EVIO问题中；而更早的文献<sup>[ref](https://ieeexplore.ieee.org/abstract/document/10275026)</sup>则是首次将CM框架拓展到EVO（event+image odometry）问题中，论文中也宣称首次拓展到6 DoF motion。
@@ -292,7 +296,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 本质上这两个能基于CM实现6DoF Pose Tracking的基本原因都是仅仅用CM来作为运动补偿，并不是直接采用CM的原理来计算pose，受限于局部最优以及容易退化，基于CM原理的motion estimation一般都是限制在rotational 或者fronto-parallel motion estimation.
 
 
-# CMax for Learning-based Framework
+## Learning-based Framework
 其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss(如文献<sup>[ref](https://arxiv.org/pdf/2407.10802), [ref](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)</sup>)
 
 
