@@ -229,6 +229,8 @@ event collapse是由motion hypothesis（也就是wrap的模型）来决定，某
 
 而针对不同的运行模型正则化函数R是不一样的。具体的推导分析请见原文了~
 
+类似地，文献[Density Invariant Contrast Maximization for Neuromorphic Earth Observations (CVPR2023)](https://openaccess.thecvf.com/content/CVPR2023W/EventVision/papers/Arja_Density_Invariant_Contrast_Maximization_for_Neuromorphic_Earth_Observations_CVPRW_2023_paper.pdf)也针对1D和2D的运动来对CM框架产生的noise进行了处理，使得在更长的time windows以及高噪声下的CM算法恢复的图像更好，并应用到太空数据观测中。
+
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # CMax的主要应用
@@ -456,6 +458,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss：
 * [Reducing the sim-to-real gap for event cameras（ECCV2020）](https://arxiv.org/pdf/2003.09078)
 * [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
+* [Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
 * [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
 
 
@@ -515,9 +518,11 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 * Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)
   * [paper](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
   * [Supplementary Material](https://openaccess.thecvf.com/content/ICCV2023/supplemental/Paredes-Valles_Taming_Contrast_Maximization_ICCV_2023_supplemental.pdf)
+  * [github](https://github.com/tudelft/taming_event_flow)
 
 * Density Invariant Contrast Maximization for Neuromorphic Earth Observations (CVPR2023)
   * [paper](https://openaccess.thecvf.com/content/CVPR2023W/EventVision/papers/Arja_Density_Invariant_Contrast_Maximization_for_Neuromorphic_Earth_Observations_CVPRW_2023_paper.pdf)
+  * [github](https://github.com/neuromorphicsystems/event_warping)
 
 * MC-VEO: A visual-event odometry with accurate 6-DoF motion compensation (TIV2023)
   * [paper](https://ieeexplore.ieee.org/abstract/document/10275026)
