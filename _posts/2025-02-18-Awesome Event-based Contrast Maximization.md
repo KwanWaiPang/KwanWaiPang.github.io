@@ -178,8 +178,8 @@ CM算法的框架如上图所示，由以下三步组成：
 
 PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也就是换个排序而已😂
 <div align="center">
-  <img src="../images/微信截图_20250219171050.png" width="80%" />
-  <img src="../images/微信截图_20250219171731.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219171050.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219171731.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -193,7 +193,7 @@ PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也�
 3. 采用其他传感器提供更多约束（比如深度图）
 
 <div align="center">
-  <img src="../images/微信截图_20250219174809.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250219174809.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -203,7 +203,7 @@ PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也�
 event collapse是由motion hypothesis（也就是wrap的模型）来决定，某些运行（比如光流或者rotational motion）是不会产生event collapse的
 
 <div align="center">
-  <img src="../images/微信截图_20250220105110.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220105110.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -212,9 +212,9 @@ event collapse是由motion hypothesis（也就是wrap的模型）来决定，某
 而所设计的正则化器也应该由motion hypothesis（也就是wrap的模型）来，因此对于下面构建的CM优化问题：
 
 <div align="center">
-  <img src="../images/微信截图_20250220110211.png" width="25%" />
-  <img src="../images/微信截图_20250220110216.png" width="40%" />
-  <img src="../images/微信截图_20250220110222.png" width="25%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220110211.png" width="25%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220110216.png" width="40%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220110222.png" width="25%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -222,7 +222,7 @@ event collapse是由motion hypothesis（也就是wrap的模型）来决定，某
 所谓的正则化则是把优化函数改为以下的形式：
 
 <div align="center">
-  <img src="../images/微信截图_20250220110405.png" width="50%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220110405.png" width="50%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -231,7 +231,7 @@ event collapse是由motion hypothesis（也就是wrap的模型）来决定，某
 不过在该作者的最新的工作中[Secrets of Event-based Optical Flow, Depth and Ego-motion Estimation by Contrast Maximization (TPAMI2024)](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10517639)，前面两篇工作的正则化器全部不用😂，直接改为采用total variation (TV)
 
 <div align="center">
-  <img src="../images/微信截图_20250220113242.png" width="50%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220113242.png" width="50%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -479,7 +479,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 对于估算出来的光流：u(x, y), v(x, y)可以构建warp function如下：
 
 <div align="center">
-  <img src="../images/微信截图_20250220121922.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220121922.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -489,8 +489,8 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 那么作者通过分离事件的极性，生成an image of the average timestamp at each pixel for each polarity：
 
 <div align="center">
-  <img src="../images/微信截图_20250220122850.png" width="60%" />
-  <img src="../images/微信截图_20250220122941.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220122850.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220122941.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -498,7 +498,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 而采用的最终的loss实际上就是两种图片的平方和:
 
 <div align="center">
-  <img src="../images/微信截图_20250220123059.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220123059.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -506,7 +506,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 再进一步的，使用这个参考时间t'会存在一定的尺度问题(对于离参考事件不一样的事件，梯度相差很大)，那么就进一步的把loss转换为backwards 和 forwards也就是 t′ = t<sub>1</sub> 和 t′ = t<sub>N</sub>（可以理解为用头与为分别作为参考时间来warp）:
 
 <div align="center">
-  <img src="../images/微信截图_20250220123439.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220123439.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -514,8 +514,8 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 同时，在上面的contrast loss的基础上，额外引入了一个Charbonnier smoothness prior (local smoothness regularization):
 
 <div align="center">
-  <img src="../images/微信截图_20250220123734.png" width="60%" />
-  <img src="../images/微信截图_20250220124359.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220123734.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220124359.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -526,10 +526,10 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220132113.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220132113.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220132124.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220132124.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -542,7 +542,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中也提到，每次输入的event需要足够的多才可以保证这个loss是有效的,但是如果是采用高频的处理以期获得高频的光流（fine discretization of the event stream），就不适用了~
 
 <div align="center">
-  <img src="../images/微信截图_20250220135703.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220135703.png" width="60%" />
 <figcaption>
 PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/event_flow
 </figcaption>
@@ -551,7 +551,7 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 如下图（左下）所示。这些用CM来做self-supervised learning的方法都是需要假设`events move linearly within the time window of the loss`.因此在文献《[Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)》中，首先通过使用循环模型来处理小分区（small partitions）的事件流，而不是处理大量输入事件(也就是沿着他们上一篇论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》来做)。这样可以很好利用event camera的high temporal resolution。这也就是论文中提到的`sequential processing`
 
 <div align="center">
-  <img src="../images/微信截图_20250220144810.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220144810.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
@@ -559,7 +559,7 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 对于`sequential processing`作者通过实验验证了其有效性
 
 <div align="center">
-  <img src="../images/微信截图_20250220175806.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220175806.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -570,10 +570,10 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220180553.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220180553.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220180601.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220180601.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -587,11 +587,11 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220181125.png" width="100%" />
-        <img src="../images/微信截图_20250220181444.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220181125.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220181444.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220181139.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220181139.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -602,7 +602,7 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 而传统的其他CM方法则是如下：
 
 <div align="center">
-  <img src="../images/微信截图_20250220181228.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220181228.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -613,10 +613,10 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
   <table style="border: none; background-color: transparent;">
     <tr>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220145754.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220145754.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250220145754.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220145754.png" width="100%" />
       </td>
     </tr>
   </table>
