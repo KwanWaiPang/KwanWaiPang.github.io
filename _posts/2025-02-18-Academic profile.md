@@ -2,7 +2,7 @@
 layout: post
 title: "Academic Profile的管理及其在Jekyll博客中的可视化"
 date:   2025-02-18
-tags: [coding]
+tags: [Coding]
 comments: true
 author: kwanwaipang
 toc: true

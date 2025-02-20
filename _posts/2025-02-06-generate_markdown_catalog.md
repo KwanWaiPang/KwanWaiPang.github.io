@@ -2,7 +2,7 @@
 layout: post
 title: "利用 GitHub Actions 为 Markdown 项目自动添加目录"
 date:   2025-02-06
-tags: [coding]
+tags: [Coding]
 comments: true
 author: kwanwaipang
 toc: true

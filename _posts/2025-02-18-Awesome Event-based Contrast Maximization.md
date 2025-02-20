@@ -464,7 +464,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 ## Learning-based Framework
 其中CMax framework也被广泛应用于deep learning中，特别地，是用来构建Self-Supervised Learning loss：
-* [Reducing the sim-to-real gap for event cameras（ECCV2020）](https://arxiv.org/pdf/2003.09078)
+<!-- * [Reducing the sim-to-real gap for event cameras（ECCV2020）](https://arxiv.org/pdf/2003.09078) 这个不属于 -->
 * [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 * [Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
 * [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
@@ -494,9 +494,9 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 * Real-Time Rotational Motion Estimation With Contrast Maximization Over Globally Aligned Events (RAL2021)
   * [paper](https://ieeexplore.ieee.org/abstract/document/9454404)
 
-* Reducing the sim-to-real gap for event cameras（ECCV2020）
+<!-- * Reducing the sim-to-real gap for event cameras（ECCV2020）
   * [paper](https://arxiv.org/pdf/2003.09078)
-  * [github](https://github.com/TimoStoff/event_cnn_minimal)
+  * [github](https://github.com/TimoStoff/event_cnn_minimal) -->
 
 * Globally-optimal event camera motion estimation (ECCV2020)
   * [paper](https://arxiv.org/pdf/2203.03914)
