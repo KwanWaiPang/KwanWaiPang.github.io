@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Awesome Event-based Contrast Maximization"
+title: "Paper Survey之——Awesome Event-based Contrast Maximization"
 date:   2025-02-18
 tags: [Event-based Vision]
 comments: true
@@ -543,6 +543,35 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/event_flow
 </figcaption>
 </div>
+
+如下图（左下）所示。这些用CM来做self-supervised learning的方法都是需要假设`events move linearly within the time window of the loss`.因此在文献《[Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)》中，首先通过使用循环模型来处理小分区（small partitions）的事件流，而不是处理大量输入事件。其次通过multiple temporal scales，也就是多种时间尺寸来累积事件，来处理CM framework。
+
+<div align="center">
+  <img src="../images/微信截图_20250220144810.png" width="80%" />
+<figcaption>
+</figcaption>
+</div>
+
+论文也通过大量的实验证明了这种multi-timescale CM framework超越所有基于CM的framework，仅仅不如用GT数据训练的纯supervised learning方法
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250220145754.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250220145754.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+supervised learning (SL) methods trained with ground truth, 
+self-supervised learning (SSL) methods trained with grayscale images (SSLF) or events (SSLE), 
+and model-based approaches (MB).
+
+  </figcaption>
+</div>
+
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # Paper Resource
