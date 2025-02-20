@@ -471,8 +471,8 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 * [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 * [Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)
 * [Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
-* [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
 * [Fully neuromorphic vision and control for autonomous drone flight (SRO2024)](https://www.science.org/doi/epdf/10.1126/scirobotics.adi0591)
+* [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
 
 对于光流估算的网络，可以通过CM框架来实现Unsupervised或者Self-supervised learning(首次应该是在论文《 [Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)》中提出的)。原理如下：
 
@@ -539,7 +539,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 论文《[Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)》应该是CM用到self-supervised learning里面最经典的论文，不过可惜的是作者并没有开源代码，但是网上找到了一个非官方实现[Github](https://github.com/mingyip/Motion_Compensated_FlowNet)后续可以测试看看~
 
-而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中也提到，每次输入的event需要足够的多才可以保证这个loss是有效的
+而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中也提到，每次输入的event需要足够的多才可以保证这个loss是有效的,但是如果是采用高频的处理以期获得高频的光流（fine discretization of the event stream），就不适用了~
 
 <div align="center">
   <img src="../images/微信截图_20250220135703.png" width="60%" />
@@ -548,7 +548,7 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 </figcaption>
 </div>
 
-如下图（左下）所示。这些用CM来做self-supervised learning的方法都是需要假设`events move linearly within the time window of the loss`.因此在文献《[Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)》中，首先通过使用循环模型来处理小分区（small partitions）的事件流，而不是处理大量输入事件(也就是沿着他们上一篇论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》来做)。这样可以很好利用event camera的high temporal resolution。
+如下图（左下）所示。这些用CM来做self-supervised learning的方法都是需要假设`events move linearly within the time window of the loss`.因此在文献《[Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)》中，首先通过使用循环模型来处理小分区（small partitions）的事件流，而不是处理大量输入事件(也就是沿着他们上一篇论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》来做)。这样可以很好利用event camera的high temporal resolution。这也就是论文中提到的`sequential processing`
 
 <div align="center">
   <img src="../images/微信截图_20250220144810.png" width="80%" />
@@ -556,7 +556,56 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 </figcaption>
 </div>
 
+对于`sequential processing`作者通过实验验证了其有效性
+
+<div align="center">
+  <img src="../images/微信截图_20250220175806.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+同时再通过`iterative event warping`进而可以实现多段时间的event warp来避免假设事件是线性motion的~
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250220180553.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250220180601.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
 其次通过multiple temporal scales，也就是多种时间尺寸来累积事件，来处理CM framework。
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250220181125.png" width="100%" />
+        <img src="../images/微信截图_20250220181444.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250220181139.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+而传统的其他CM方法则是如下：
+
+<div align="center">
+  <img src="../images/微信截图_20250220181228.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
 
 
 论文也通过大量的实验证明了这种multi-timescale CM framework超越所有基于CM的framework，仅仅不如用GT数据训练的纯supervised learning方法
@@ -574,7 +623,7 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
   <figcaption>
 supervised learning (SL) methods trained with ground truth, 
 self-supervised learning (SSL) methods trained with grayscale images (SSLF) or events (SSLE), 
-and model-based approaches (MB).
+and model-based approaches (MB, non-learning method).
 
   </figcaption>
 </div>
