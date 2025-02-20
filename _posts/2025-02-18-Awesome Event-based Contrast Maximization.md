@@ -174,7 +174,7 @@ CM算法的框架如上图所示，由以下三步组成：
 
 
 ## Event Collapse
-所谓的Event Collapse直译就是“事件崩溃”，表现出来的线性就是事件被warped到少数的pixel区域(`events accumulate into too few pixels`)，也就是退化/失真，场景中的事件被投到一块（陷入所谓的局部最小值了），而Prof. Gallego团队的两篇论文[Event Collapse in Contrast Maximization Frameworks (Sensor 2022)](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)和[A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)的研究也证明，添加正则化项是唯一的有效，消除Event Collapse的方案.
+所谓的Event Collapse直译就是“事件崩溃”（也有称为over fitting），表现出来的线性就是事件被warped到少数的pixel区域(`events accumulate into too few pixels`)，也就是退化/失真，场景中的事件被投到一块（陷入所谓的局部最小值了），而Prof. Gallego团队的两篇论文[Event Collapse in Contrast Maximization Frameworks (Sensor 2022)](https://web.archive.org/web/20220813065935id_/https://depositonce.tu-berlin.de/bitstream/11303/17328/1/sensors-22-05190-v3.pdf)和[A Fast Geometric Regularizer to Mitigate Event Collapse in the Contrast Maximization Framework (AIS2023)](https://advanced.onlinelibrary.wiley.com/doi/pdfdirect/10.1002/aisy.202200251)的研究也证明，添加正则化项是唯一的有效，消除Event Collapse的方案.
 
 PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也就是换个排序而已😂
 <div align="center">
@@ -198,10 +198,42 @@ PS:说是两篇，我个人觉得是一篇，因为两篇论文的结果图也�
 </figcaption>
 </div>
 
+如下图所示，
+`If the warp does not enable event collapse (contraction or accumulation of flow vectors cannot happen due to the geometric properties of the warp), as in the case of feature flow (2 DOF) (Figure 3b) or rotational motion flow (3 DOF) (Figure 3c), then the optimization problem is well posed and multiple objective functions can be designed to achieve event alignment`
+event collapse是由motion hypothesis（也就是wrap的模型）来决定，某些运行（比如光流或者rotational motion）是不会产生event collapse的
+
+<div align="center">
+  <img src="../images/微信截图_20250220105110.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+而所设计的正则化器也应该由motion hypothesis（也就是wrap的模型）来，因此对于下面构建的CM优化问题：
+
+<div align="center">
+  <img src="../images/微信截图_20250220110211.png" width="25%" />
+  <img src="../images/微信截图_20250220110216.png" width="40%" />
+  <img src="../images/微信截图_20250220110222.png" width="25%" />
+<figcaption>  
+</figcaption>
+</div>
+
+所谓的正则化则是把优化函数改为以下的形式：
+
+<div align="center">
+  <img src="../images/微信截图_20250220110405.png" width="50%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而针对不同的运行模型正则化函数R是不一样的。具体的推导分析请见原文了~
+
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # CMax的主要应用
-理论上CM框架可以用到所有的event-based vision的topic中，特别是以`groups event`的方式来处理event数据的。
+理论上CM框架可以用到所有的event-based vision的topic中，特别是以`groups event`的方式来处理event数据的。本质上CM是一个`event processing framework`.
+
 此处主要列出的是基于CMax的原理来实现的framework，而不仅仅是作为数据处理的形式
 
 ## Optical Flow Estimation
