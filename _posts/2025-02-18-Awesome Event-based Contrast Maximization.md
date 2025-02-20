@@ -469,8 +469,10 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 * [Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)
 * [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
+* [Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)
 * [Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
 * [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
+* [Fully neuromorphic vision and control for autonomous drone flight (SRO2024)](https://www.science.org/doi/epdf/10.1126/scirobotics.adi0591)
 
 对于光流估算的网络，可以通过CM框架来实现Unsupervised或者Self-supervised learning(首次应该是在论文《 [Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)》中提出的)。原理如下：
 
@@ -518,7 +520,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 </figcaption>
 </div>
 
-其实论文《[EV-FlowNet: Self-supervised optical flow estimation for event-based cameras (RSS2018)](https://arxiv.org/pdf/1802.06898)》也是用了类似的思路，只不过是基于photometric loss而已
+其实论文《[EV-FlowNet: Self-supervised optical flow estimation for event-based cameras (RSS2018)](https://arxiv.org/pdf/1802.06898)》[Github](https://github.com/daniilidis-group/EV-FlowNet)也是用了类似的思路，只不过是基于photometric loss而已
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
@@ -534,6 +536,8 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
   <figcaption>
   </figcaption>
 </div>
+
+论文《[Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)》应该是CM用到self-supervised learning里面最经典的论文，不过可惜的是作者并没有开源代码，但是网上找到了一个非官方实现[Github](https://github.com/mingyip/Motion_Compensated_FlowNet)后续可以测试看看~
 
 而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中也提到，每次输入的event需要足够的多才可以保证这个loss是有效的
 
@@ -551,6 +555,8 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 <figcaption>
 </figcaption>
 </div>
+
+
 
 论文也通过大量的实验证明了这种multi-timescale CM framework超越所有基于CM的framework，仅仅不如用GT数据训练的纯supervised learning方法
 <div align="center">
@@ -617,6 +623,10 @@ and model-based approaches (MB).
   * [Supplementary Material](https://arxiv.org/pdf/2106.01862)
   * [github](https://github.com/tudelft/event_flow)
 
+* Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)
+  * [paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)
+  * [github](https://github.com/tudelft/ssl_e2vid)
+
 * Visual Odometry with an Event Camera Using Continuous Ray Warping and Volumetric Contrast Maximization (Sensor2022)
   * [paper](https://arxiv.org/pdf/2107.03011)
 
@@ -667,6 +677,10 @@ and model-based approaches (MB).
 * EROAM: Event-based Camera Rotational Odometry and Mapping in Real-time
   * [paper](https://arxiv.org/pdf/2411.11004)
   * [github](https://wlxing1901.github.io/eroam/)
+
+* Fully neuromorphic vision and control for autonomous drone flight (SRO2024)
+  * [paper](https://www.science.org/doi/epdf/10.1126/scirobotics.adi0591)
+  * [github](https://github.com/tudelft/event_planar)
 
 * Event-Frame-Inertial Odometry Using Point and Line Features Based on Coarse-to-Fine Motion Compensation (RAL2025)
   * [paper](https://ieeexplore.ieee.org/abstract/document/10855459)
