@@ -227,7 +227,15 @@ event collapse是由motion hypothesis（也就是wrap的模型）来决定，某
 </figcaption>
 </div>
 
-而针对不同的运行模型正则化函数R是不一样的。具体的推导分析请见原文了~
+而针对不同的运行模型正则化函数R是不一样的。具体的推导分析请见原文了。
+不过在该作者的最新的工作中[Secrets of Event-based Optical Flow, Depth and Ego-motion Estimation by Contrast Maximization (TPAMI2024)](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10517639)，前面两篇工作的正则化器全部不用😂，直接改为采用total variation (TV)
+
+<div align="center">
+  <img src="../images/微信截图_20250220113242.png" width="50%" />
+<figcaption>  
+</figcaption>
+</div>
+
 
 类似地，文献[Density Invariant Contrast Maximization for Neuromorphic Earth Observations (CVPR2023)](https://openaccess.thecvf.com/content/CVPR2023W/EventVision/papers/Arja_Density_Invariant_Contrast_Maximization_for_Neuromorphic_Earth_Observations_CVPRW_2023_paper.pdf)也针对1D和2D的运动来对CM框架产生的noise进行了处理，使得在更长的time windows以及高噪声下的CM算法恢复的图像更好，并应用到太空数据观测中。
 
