@@ -551,6 +551,24 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中作者则是把CNN改为SNN（Spiking neurons network）。
 此外，作者也提到，每次输入的event需要足够的多才可以保证这个loss是有效的,但是如果是采用高频的处理以期获得高频的光流（fine discretization of the event stream），就不适用了~
 
+因此，作者对CM loss提出改进`improves its convexity`也就是额外除以pixel数：
+
+<div align="center">
+  <img src="../images/微信截图_20250221173602.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+如下图所示，确实通过添加了scaling factor，loss function显得更“凸”了~
+
+<div align="center">
+  <img src="../images/微信截图_20250221173749.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+此外作者也提到，CM算法是需要有足够的linear blur才是有效的，而此处采用SNN的结构，每次输入都是`small number of event`,因此作者提出相应的解决方案：
+
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220135703.png" width="60%" />
 <figcaption>
