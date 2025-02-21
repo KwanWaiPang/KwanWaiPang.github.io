@@ -576,6 +576,10 @@ PS: 这点还不是太理解，后续看看代码：https://github.com/tudelft/e
 </figcaption>
 </div>
 
+然而，基于CM的SSL还是存在两点局限性：
+1. the pipeline assumed that events move linearly within the timespan of their loss function. This assumption restricts the ability of the pipeline to accurately capture the true (and potentially nonlinear) trajectory of scene points over time.（也就是需要假设时间段内是线性运动的）
+2.  the success of the self-supervised training heavily depended on the hyperparameters controlling the amount of motion information perceived by the networks before computing the loss.（也就是需要超参控制网络估算的运动信息幅度）
+
 如下图（左下）所示。这些用CM来做self-supervised learning的方法都是需要假设`events move linearly within the time window of the loss`.因此在文献《[Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)》中，首先通过使用循环模型来处理小分区（small partitions）的事件流，而不是处理大量输入事件(也就是沿着他们上一篇论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》来做)。这样可以很好利用event camera的high temporal resolution。这也就是论文中提到的`sequential processing`
 
 <div align="center">
