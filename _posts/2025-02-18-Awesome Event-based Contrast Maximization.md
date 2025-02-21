@@ -468,8 +468,8 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 <!-- * [Reducing the sim-to-real gap for event cameras（ECCV2020）](https://arxiv.org/pdf/2003.09078) 这个不属于 -->
 
 * [Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)
-* [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 * [Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)
+* [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 * [Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
 * [Fully neuromorphic vision and control for autonomous drone flight (SRO2024)](https://www.science.org/doi/epdf/10.1126/scirobotics.adi0591)
 * [Motion-prior Contrast Maximization for Dense Continuous-Time Motion Estimation (ECCV2024)](https://arxiv.org/pdf/2407.10802)
@@ -539,7 +539,16 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 
 论文《[Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)》应该是CM用到self-supervised learning里面最经典的论文，不过可惜的是作者并没有开源代码，但是网上找到了一个非官方实现[Github](https://github.com/mingyip/Motion_Compensated_FlowNet)后续可以测试看看~
 
-而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中也提到，每次输入的event需要足够的多才可以保证这个loss是有效的,但是如果是采用高频的处理以期获得高频的光流（fine discretization of the event stream），就不适用了~
+接下来论文《[Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)》实际上就是沿用了CM for SSL的思路，只是改为SSL估算的光流来监督image reconstruction，并且轻量化了这个光流网络
+
+<div align="center">
+  <img src="../images/微信截图_20250221165806.png" width="60%" />
+<figcaption>
+</figcaption>
+</div>
+
+而在论文《[Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)》中作者则是把CNN改为SNN（Spiking neurons network）。
+此外，作者也提到，每次输入的event需要足够的多才可以保证这个loss是有效的,但是如果是采用高频的处理以期获得高频的光流（fine discretization of the event stream），就不适用了~
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250220135703.png" width="60%" />
