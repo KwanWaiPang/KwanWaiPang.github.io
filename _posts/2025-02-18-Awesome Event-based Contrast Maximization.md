@@ -468,6 +468,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 <!-- * [Reducing the sim-to-real gap for event cameras（ECCV2020）](https://arxiv.org/pdf/2003.09078) 这个不属于 -->
 
 * [Unsupervised event-based learning of optical flow, depth, and egomotion (CVPR2019)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Zhu_Unsupervised_Event-Based_Learning_of_Optical_Flow_Depth_and_Egomotion_CVPR_2019_paper.pdf)
+* [Unsupervised learning of a hierarchical spiking neural network for optical flow estimation: From events to global motion perception (TPAMI2019)](https://arxiv.org/pdf/1807.10936)
 * [Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)
 * [Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
 * [Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)](https://openaccess.thecvf.com/content/ICCV2023/papers/Paredes-Valles_Taming_Contrast_Maximization_for_Learning_Sequential_Low-latency_Event-based_Optical_Flow_ICCV_2023_paper.pdf)
@@ -676,6 +677,10 @@ and model-based approaches (MB, non-learning method).
 * Globally-optimal contrast maximisation for event cameras (TPAMI2021)
   * [paper](https://arxiv.org/pdf/2206.05127)
   * 此篇是上一篇的期刊版本
+
+* Unsupervised learning of a hierarchical spiking neural network for optical flow estimation: From events to global motion perception (TPAMI2019)
+  * [paper](https://arxiv.org/pdf/1807.10936)
+  * [github](https://github.com/tudelft/cuSNN)
 
 * Self-supervised learning of event-based optical flow with spiking neural networks (NIPS2021)
   * [paper](https://proceedings.neurips.cc/paper_files/paper/2021/file/39d4b545fb02556829aab1db805021c3-Paper.pdf)
