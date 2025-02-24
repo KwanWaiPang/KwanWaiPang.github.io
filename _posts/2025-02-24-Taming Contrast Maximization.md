@@ -20,7 +20,7 @@ toc: true
 * [paper link](https://arxiv.org/pdf/2303.05214)
 * [Github Page](https://github.com/tudelft/taming_event_flow)
 * [博客](https://kwanwaipang.github.io/Awesome-Event-based-Contrast-Maximization/)对Event camera领域的Contrast-Maximization作了深入的介绍
-* [复现代码用的代码](https://github.com/KwanWaiPang/taming_event_flow_comment)
+* 此博客复现用的代码及后续注释代码：[taming_event_flow_comment](https://github.com/KwanWaiPang/taming_event_flow_comment)
 
 
 # 配置
@@ -41,17 +41,19 @@ pip install -r requirements.txt
 
 # 数据的下载
 
-* [here](https://1drv.ms/u/s!Ah0kx0CRKrAZjxMxBx4z5HN1CjWv?e=UiayaL) 并且将数据下载到 `/datasets/`文件夹内.
-* 用OneDrive下载数据参考[Link](https://kwanwaipang.github.io/File/Blogs/Poster/ubuntu%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE.html#onedrive)
+* 数据链接：[here](https://1drv.ms/u/s!Ah0kx0CRKrAZjxMxBx4z5HN1CjWv?e=UiayaL) 并且将数据下载到 `/datasets/`文件夹内（在文件夹内下载然后解压~）.
+* 用OneDrive下载数据到服务器可以参考：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/ubuntu%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE.html#onedrive)
 
 # 预训练模型的下载
-* [here](https://1drv.ms/u/s!Ah0kx0CRKrAZjxSwx8-UTUAncgg3?e=yM2g0i), 并放在文件夹 `mlruns/`.
+* 预训练模型：[here](https://1drv.ms/u/s!Ah0kx0CRKrAZjxSwx8-UTUAncgg3?e=yM2g0i), 并放在文件夹 `mlruns/`（下载后直接解压即可）.
 
 # 采用MLflow来可视化
+
 ```bash
 conda activate taming_event_flow
 mlflow ui
 ```
+
 然后本地网页打开`http://127.0.0.1:5000`即可看到界面如下
 
 <div align="center">
@@ -65,12 +67,13 @@ mlflow ui
 <div align="center">
   <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/微信截图_20250224140420.png" width="60%" />
 <figcaption>  
+可以看到加载了mvsec以及dsec两个模型
 </figcaption>
 </div>
 
 
 # Inference
-* 注意需要修改`config/eval_flow.yml`文件中的数据等参数
+* 注意需要修改`config/eval_flow.yml`文件中的数据路径等参数
 
 ## 运行测试MVSEC
 
@@ -127,6 +130,12 @@ Aborted (core dumped)
 </div>
 
 * 测试mvsec indoor
+
+## 运行测试DSEC
+```
+conda activate taming_event_flow
+python eval_flow.py dsec_model --config configs/eval_dsec.yml
+```
 
 * 测试dsec
 
