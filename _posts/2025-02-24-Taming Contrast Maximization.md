@@ -120,16 +120,50 @@ Aborted (core dumped)
 * 测试mvsec outdoor driving；PS: 视频中依次为：输入的事件，GT光流（Lidar），IWE，估算的光流，AEE（暂时还未知是什么）
 
 <div align="center">
-<iframe width="80%" height="400" src="//player.bilibili.com/player.html?isOutside=true&aid=114057554168121&bvid=BV113PsejEpK&cid=28551349330&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
-
-<div align="center">
   <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/微信截图_20250224144908.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
-* 测试mvsec indoor
+<div align="center">
+<iframe width="80%" height="400" src="//player.bilibili.com/player.html?isOutside=true&aid=114057554168121&bvid=BV113PsejEpK&cid=28551349330&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+* 测试mvsec indoor flying 数据集
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/微信截图_20250224165828.png" width="80%" />
+<figcaption>  
+同时运行多个数据集的话可能不保存数值结果。。。。
+</figcaption>
+</div>
+
+indoor\_flying\_1:
+
+<div align="center">
+<iframe width="80%" height="400" src="//player.bilibili.com/player.html?isOutside=true&aid=114058124659217&bvid=BV1tsPWeUEtr&cid=28553514667&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+indoor\_flying\_2:
+
+<div align="center">
+<iframe width="80%" height="400" src="//player.bilibili.com/player.html?isOutside=true&aid=114058124657432&bvid=BV1bsPWeUEu7&cid=28553514272&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+indoor\_flying\_3:
+
+<div align="center">
+<iframe width="80%" height="400" src="//player.bilibili.com/player.html?isOutside=true&aid=114058124591414&bvid=BV1MsPWeUEaL&cid=28553577623&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
+关于在mvsec上的测试，值得一提的是，作者在论文中提到`we decided to transfer one of our models trained on DSEC-Flow to MVSEC.`也就是说网络是在DSEC上训练的，迁移到MVSEC上测试（可见还是有不错的泛化能力的）。
+论文中的结果如下图所示：
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/微信截图_20250224165926.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 ## 运行测试DSEC
 ```
@@ -137,5 +171,5 @@ conda activate taming_event_flow
 python eval_flow.py dsec_model --config configs/eval_dsec.yml
 ```
 
-* 测试dsec
+
 
