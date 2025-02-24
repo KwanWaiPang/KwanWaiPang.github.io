@@ -778,7 +778,7 @@ and model-based approaches (MB, non-learning method).
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 复现或测试CM相关工作
 
-* [CMax-SLAM-comment](https://github.com/KwanWaiPang/CMax-SLAM-comment)
+* CMax-SLAM: Event-based Rotational-Motion Bundle Adjustment and SLAM System using Contrast Maximization (TRO2024)的复现：[CMax-SLAM-comment](https://github.com/KwanWaiPang/CMax-SLAM-comment)
 * Taming contrast maximization for learning sequential, low-latency, event-based optical flow (CVPR2023)的复现：[博客](https://kwanwaipang.github.io/Taming-Contrast-Maximization/) and [taming_event_flow_comment](https://github.com/KwanWaiPang/taming_event_flow_comment)
 
 
