@@ -170,6 +170,73 @@ indoor\_flying\_3:
 conda activate taming_event_flow
 python eval_flow.py dsec_model --config configs/eval_dsec.yml
 ```
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/微信截图_20250225094527.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
+视频可视化数据量太大了，因此把结果保存出来，如下几张图片
+
+<div align="center">
+<table style="border: none; background-color: transparent;">
+  <tr align="center">
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/events/000000000.png" width="100%" />
+      events
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/events_dynamic/000000000.png" width="100%" />
+      events_dynamic
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/events_window/000000009.png" width="100%" />
+      events_window
+    </td>
+  </tr>
+
+  <tr align="center">
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/flow/000000000.png" width="100%" />
+      flow
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/flow_dynamic/000000000.png" width="100%" />
+      flow_dynamic
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/flow_window/000000009.png" width="100%" />
+      flow_window
+    </td>
+  </tr>
+
+  <tr align="center">
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/iwe/000000000.png" width="100%" />
+      iwe
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/iwe_bw_dynamic/000000000.png" width="100%" />
+      iwe_bw_dynamic
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/iwe_bw_window/000000009.png" width="100%" />
+      iwe_bw_window
+    </td>
+  </tr>
+
+  <tr align="center">
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/iwe_fw_dynamic/000000000.png" width="100%" />
+      iwe_fw_dynamic
+    </td>
+    <td style="width: 33%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <img src="https://github.com/KwanWaiPang/taming_event_flow_comment/raw/main/results/Figs/zurich_city_12_a/iwe_fw_window/000000009.png" width="100%" />
+      iwe_fw_window
+    </td>
+  </tr>
+
+</table>
+</div>
 
