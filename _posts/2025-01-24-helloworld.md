@@ -65,6 +65,10 @@ toc: true
   </figcaption>
 </div>
 
+插入github项目及star统计，同时点击实现跳转
+
+[![Github stars](https://img.shields.io/github/stars/KwanWaiPang/KwanWaiPang.github.io.svg)](https://github.com/KwanWaiPang/KwanWaiPang.github.io)
+
 # 插入视频
 ## youtube视频
 
