@@ -709,6 +709,10 @@ and model-based approaches (MB, non-learning method).
   * [Supplementary Material](https://arxiv.org/pdf/2106.01862)
   * [github](https://github.com/tudelft/event_flow)
 
+* Unsupervised learning of a hierarchical spiking neural network for optical flow estimation: From events to global motion perception (TPAMI2019)
+  * [paper](https://arxiv.org/pdf/1807.10936)
+  * [github](https://github.com/tudelft/cuSNN)
+
 * Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)
   * [paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)
   * [github](https://github.com/tudelft/ssl_e2vid)
