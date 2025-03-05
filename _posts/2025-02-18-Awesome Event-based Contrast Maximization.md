@@ -543,7 +543,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 接下来论文《[Back to event basics: Self-supervised learning of image reconstruction for event cameras via photometric constancy (CVPR2021)](https://openaccess.thecvf.com/content/CVPR2021/papers/Paredes-Valles_Back_to_Event_Basics_Self-Supervised_Learning_of_Image_Reconstruction_for_CVPR_2021_paper.pdf)》实际上就是沿用了CM for SSL的思路，只是改为SSL估算的光流来监督image reconstruction，并且轻量化了这个光流网络
 
 <div align="center">
-  <img src="../images/微信截图_20250221165806.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250221165806.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -554,7 +554,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 因此，作者对CM loss提出改进`improves its convexity`也就是额外除以pixel数：
 
 <div align="center">
-  <img src="../images/微信截图_20250221173602.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250221173602.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
@@ -562,7 +562,7 @@ PS：因为这个求最优的过程，其实也就是对于IWE要求对比度（
 如下图所示，确实通过添加了scaling factor，loss function显得更“凸”了~
 
 <div align="center">
-  <img src="../images/微信截图_20250221173749.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250221173749.png" width="60%" />
 <figcaption>
 </figcaption>
 </div>
