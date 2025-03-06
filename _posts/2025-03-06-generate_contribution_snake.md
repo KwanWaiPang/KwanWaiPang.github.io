@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "给 GitHub Profile 做个贪吃蛇游戏"
+title: "给GitHub Profile做个贪吃蛇游戏"
 date:   2025-03-06
 tags: [Coding]
 comments: true
@@ -98,6 +98,15 @@ jobs:
 <figcaption>  
 </figcaption>
 </div> 
+
+此外通过在代码中添加每次push到固定分支（如这里的main）都能生成也可：
+<div align="center">
+  <img src="../images/微信截图_20250306170035.png" width="80%" />
+  <img src="../images/微信截图_20250306165918.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div> 
+
 
 3. 该代码会自动每隔两个小时运行（按需设置时间即可）
 
