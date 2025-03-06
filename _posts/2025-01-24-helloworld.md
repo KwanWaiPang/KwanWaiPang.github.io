@@ -83,7 +83,7 @@ toc: true
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <iframe width="80%" height="400"
+  <iframe width="100%" height="100%"
     src="https://www.youtube.com/embed/Nn40U4e5Si8?si=P_4XDu5l83VeVRQo" 
     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  style="opacity: 0; transition: opacity 0.5s; border-radius: 15px;" onload="this.style.opacity='1'"
   ></iframe>
@@ -107,7 +107,7 @@ toc: true
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <iframe width="80%" height="400"
+  <iframe width="100%" height="100%"
     src="//player.bilibili.com/player.html?isOutside=true&aid=983500021&bvid=BV15t4y1t7yS&cid=777013703&p=1&autoplay=0" 
     title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  style="opacity: 0; transition: opacity 0.5s; border-radius: 15px;" onload="this.style.opacity='1'"
   ></iframe>
