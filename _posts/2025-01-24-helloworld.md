@@ -91,9 +91,13 @@ toc: true
 
 ## B站视频
 
-<!-- <div align="center">
+不带loading-icon.gif:
+
+<div align="center">
 <iframe width="80%" height="400" src="//player.bilibili.com/player.html?isOutside=true&aid=983500021&bvid=BV15t4y1t7yS&cid=777013703&p=1&autoplay=0" title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div> -->
+</div>
+
+带loading-icon.gif:
 
 <div align="center" style="
   position: relative; 
