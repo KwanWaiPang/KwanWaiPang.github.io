@@ -81,28 +81,28 @@ jobs:
 
   * 然后，配置如下。注意需要确保名字对应上`GH_TOKEN`
 <div align="center">
-  <img src="../images/微信截图_20250306164449.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306164449.png" width="80%" />
 <figcaption>
 </figcaption>
 </div>
   
 2. workflow_dispatch就是允许手动触发。首次可以自动触发一下。如下图所示，注意编程成功后会是绿色，红色则是编译不成功
 <div align="center">
-  <img src="../images/微信截图_20250306163955.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306163955.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div> 
 查看output分支就会看到生成的svg图片了~
 <div align="center">
-  <img src="../images/微信截图_20250306165030.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306165030.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div> 
 
 此外通过在代码中添加每次push到固定分支（如这里的main）都能生成也可：
 <div align="center">
-  <img src="../images/微信截图_20250306170035.png" width="80%" />
-  <img src="../images/微信截图_20250306165918.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306170035.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306165918.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div> 
@@ -111,7 +111,7 @@ jobs:
 3. 该代码会自动每隔两个小时运行（按需设置时间即可）
 
 <div align="center">
-  <img src="../images/微信截图_20250306191718.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306191718.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div> 
@@ -132,10 +132,10 @@ jobs:
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250306164801.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306164801.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250306164820.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250306164820.png" width="100%" />
       </td>
     </tr>
   </table>
