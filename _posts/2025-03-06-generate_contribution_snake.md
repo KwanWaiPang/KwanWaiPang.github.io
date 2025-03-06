@@ -110,6 +110,12 @@ jobs:
 
 3. 该代码会自动每隔两个小时运行（按需设置时间即可）
 
+<div align="center">
+  <img src="../images/微信截图_20250306191718.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div> 
+
 最后在read.me文件中添加图片(图片的路径根据实际修改，此处是生成到output分支下的，并且根据主题的颜色选择不同的图片)
 
 ```md
