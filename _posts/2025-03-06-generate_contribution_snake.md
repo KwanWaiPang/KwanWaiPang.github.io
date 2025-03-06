@@ -144,6 +144,30 @@ jobs:
   </figcaption>
 </div>
 
+下面看看生成的两张svg和一张gif的效果：
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/KwanWaiPang/raw/output/github-contribution-grid-snake-dark.svg" width="80%" />
+<figcaption>  
+黑暗模式下的svg效果
+</figcaption>
+</div> 
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/KwanWaiPang/raw/output/github-contribution-grid-snake.svg" width="80%" />
+<figcaption>  
+明亮模式下的svg效果
+</figcaption>
+</div> 
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/KwanWaiPang/raw/output/ocean.gif" width="80%" />
+<figcaption>  
+生成的ocean.gif
+</figcaption>
+</div> 
+
+
 
 * 相关代码请见[My GitHub Profile](https://github.com/KwanWaiPang/KwanWaiPang)
 
