@@ -31,5 +31,6 @@ toc: false #true
 {% endraw %}
 
 
+* 原创不易，如果使用此ppt请给出引用以及给个star <a class="github-button"   href="https://github.com/KwanWaiPang/KwanWaiPang.github.io"   data-icon="octicon-star"   data-size="large"  data-show-count="true"  aria-label="Star 你的用户名/你的仓库名 on GitHub">Star</a>
 * [Previous Survey for Dynamic-SLAM](https://kwanwaipang.github.io/File/Blogs/Poster/survey_dynamic_SLAM.html)
 
