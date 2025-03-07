@@ -26,10 +26,9 @@ toc: false #true
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <iframe src="https://onedrive.live.com/embed?resid=893B607C76D94A76!120&authkey=!AKVVA5SXfM9AYvE&wdHideDownload=1&wdHideOtherOptions=1" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe>
+  <iframe src="https://onedrive.live.com/embed?resid=893B607C76D94A76!120&authkey=!AKVVA5SXfM9AYvE&em=2&wdHideDownload=1&wdHideOtherOptions=1" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe>
 </div>
 {% endraw %}
-
 
 
 * [Previous Survey for Dynamic-SLAM](https://kwanwaipang.github.io/File/Blogs/Poster/survey_dynamic_SLAM.html)
