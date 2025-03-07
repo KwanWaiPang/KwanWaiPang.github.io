@@ -26,12 +26,12 @@ toc: false #true
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <iframe src="https://1drv.ms/p/s!AnZK2XZ8YDuJeI5r_iQJbZJQqhw?embed=1&amp;em=2&amp;wdAr=1.7777777777777777" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe>
+  <iframe src="https://1drv.ms/p/s!AnZK2XZ8YDuJeI5r_iQJbZJQqhw?embed=1&amp;em=2&amp;wdAr=1.7777777777777777&amp;download=0" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe>
 </div>
 {% endraw %}
 
 <br>
 
-* 😁原创不易，如果使用此ppt请给出引用以及给个star <a class="github-button"   href="https://github.com/KwanWaiPang/KwanWaiPang.github.io"   data-icon="octicon-star"   data-size="large"  data-show-count="true"  aria-label="Star 你的用户名/你的仓库名 on GitHub">Star</a>
+* 😁原创不易，如果使用请给出引用以及给个star <a class="github-button"   href="https://github.com/KwanWaiPang/KwanWaiPang.github.io"   data-icon="octicon-star"   data-size="large"  data-show-count="true"  aria-label="Star 你的用户名/你的仓库名 on GitHub">Star</a>谢谢😊
 * [Previous Survey for Dynamic-SLAM](https://kwanwaipang.github.io/File/Blogs/Poster/survey_dynamic_SLAM.html)
 
