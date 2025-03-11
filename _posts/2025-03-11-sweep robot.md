@@ -95,12 +95,12 @@ source /your_path_to_workspace/devel/setup.bash
 测试用的代码及代码解读请见：[Link](https://github.com/KwanWaiPang/ZIMA)
 
 1. 启动仿真环境
+
 ```bash
 roslaunch zima_gazebo gazebo.launch
 
 # 加载可能比较慢，可以尝试离线启动（但似乎也还是很慢）
 roslaunch zima_gazebo gazebo.launch verbose:=true
-
 ```
 
 <div align="center">
@@ -137,7 +137,7 @@ roslaunch zima_ros rviz.launch
 `rqt_graph`如下图所示
 
 <div align="center">
-  <img src="https://github.com/KwanWaiPang/ZIMA/raw/master/Figs/2025-03-11 11-27-48 的屏幕截图.png" width="60%" />
+  <img src="https://github.com/KwanWaiPang/ZIMA/raw/master/Figs/2025-03-11 11-27-48 的屏幕截图.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -170,7 +170,7 @@ roslaunch zima_ros rviz.launch
 时间太长了，因此视频没有全部录制，最终跑了一个多小时才完成整个空间的清洁任务
 
 <div align="center">
-  <img src="https://github.com/KwanWaiPang/ZIMA/raw/master/Figs/2025-03-11 13-28-09 的屏幕截图.png" width="60%" />
+  <img src="https://github.com/KwanWaiPang/ZIMA/raw/master/Figs/2025-03-11 13-28-09 的屏幕截图.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
