@@ -2,7 +2,7 @@
 layout: post
 title: "实验笔记之——Sweep Robot/扫地机器人"
 date:   2025-03-11
-tags: [SLAM]
+tags: [SLAM, LiDAR]
 comments: true
 author: kwanwaipang
 toc: false #true
