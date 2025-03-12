@@ -26,7 +26,7 @@ Transformer最早是由2017年Google的[《Attention is All You Need》](https:/
 
 首先，可以先通过《MIT Introduction to Deep Learning》这个课程，其中第二节对循环神经网络、Transformer 和注意力机制进行了介绍，来了解从RNN到Transformer的一些基本知识。
 
-该课程对应的PPT如下
+课程对应的PPT如下
 
 <div align="center" style="
   position: relative; 
