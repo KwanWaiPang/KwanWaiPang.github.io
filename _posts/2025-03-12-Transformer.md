@@ -228,7 +228,7 @@ Transformer Encoder其实就是重复堆叠Encoder Block L次
 对于上图重新绘制的Encoder Block，主要由以下几部分组成：
 * Layer Normalization，该方法主要是针对NLP领域提出的，这里是对每个token进行Norm处理
 * Multi-Head Attention也就是上面提到的Transformer的结构
-* Dropout/DropPath，在原论文的代码中是直接使用的Dropout层（论文没画，源码有）
+* Dropout/DropPath，在原论文的代码中是直接使用的Dropout层（论文没画，源码有），也就是正则化（通过一定的概率随机将隐藏神经元的某些激活值设置为零，以实现简化网络，避免过拟合）
 * MLP Block，就是全连接+GELU激活函数+Dropout组成的，其中，第一个全连接层会把输入节点个数翻4倍[197, 768] -> [197, 3072]，第二个全连接层会还原回原节点个数[197, 3072] -> [197, 768]
 
 
