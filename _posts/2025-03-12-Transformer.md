@@ -22,7 +22,7 @@ Transformer最早是由2017年Google的[《Attention is All You Need》](https:/
 之前的RNN模型记忆长度有限（后续虽然由LSTM），但无法并行化，只有计算完$t_i$时刻后的数据才能计算$t_{i+1}$时刻的数据，但Transformer都可以做到（理论上其记忆长度是无限长的，并且其可以并行优化）
 
 
-# MIT深度学习课程
+# Deep Sequence Modeling
 
 首先，可以先通过《MIT Introduction to Deep Learning》这个课程，其中第二节对循环神经网络、Transformer 和注意力机制进行了介绍，来了解从RNN到Transformer的一些基本知识。
 
@@ -39,6 +39,72 @@ Transformer最早是由2017年Google的[《Attention is All You Need》](https:/
   <iframe width="100%" height="100%"
     src="https://introtodeeplearning.com/slides/6S191_MIT_DeepLearning_L2.pdf#toolbar=0&navpanes=0&scrollbar=0" ></iframe>
 </div>
+
+Deep Sequence Modeling受到了广泛的关注，特别是最近ChatGPT，Deepseek等大型语言模型的出现。
+而其中的关键，应该就是序列数据以及序列建模，个人理解就是时间与空间维度的数据关联。
+
+而所谓的序列建模，它处理的是一系列的输入（如文本），然后产生输出，如下图所示
+<div align="center">
+  <img src="../images/微信截图_20250312174235.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+## RNN
+而RNN(Recurrent Neural Networks)则是最先用于处理顺序数据的
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250312174547.png" width="100%" />
+        静态单个操作的神经网络（多个时间序列，独立操作）
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250312174737.png" width="100%" />
+        顺序序列的神经网络（h为hidden state，作为先前的记录）
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  左图由于鼓励处理每个输入，并没有将时间上的关联考虑，而右图则是输入考虑了先前时间步长（time step）的内部状态与当前的计算关联起来
+  </figcaption>
+</div>
+
+
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250312180530.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250312180924.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  RNN State Update and Output
+  </figcaption>
+</div>
+
+RNN的计算图如下图所示，这些在每个单独的时间步都是采用相同的权重矩阵。然后在每个片段（即每个单独的时间步长）计算loss，然后将所有的时间下的损失求和获取总的loss
+
+<div align="center">
+  <img src="../images/微信截图_20250312181116.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输入网络中，而不是直接输入单词
+
+<div align="center">
+  <img src="../images/微信截图_20250312183428.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
 
 
 # Attention is All You Need
