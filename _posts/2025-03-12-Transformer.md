@@ -168,9 +168,49 @@ Transformer的基本解析其实可以用下图来描述
 </div>
 
 
-# Vision Transformer (VIT)
+# Vision Transformer (ViT)
 来自于2020的ICLR[《An image is worth 16x16 words: Transformers for image recognition at scale》](https://arxiv.org/pdf/2010.11929/1000)
 
+ViT模型的模型架构如下图所示.对于输入的图片，首先将其分成每个小的patches.
+然后将每个patches输入embedding层，然后得到每个patches对应的token，然后再这一系列的token前面加入新的token（用于分类的class token）。
+至此应该就是相当于NLP中Transformer的$a_i$，然后再加入位置信息（Position embedding）
+
+<div align="center">
+  <img src="../images/微信截图_20250312131237.png" width="80%" />
+  <img src="../images/b3b87535b91b51d80adc759455531f14.gif" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+然后根据Transformer中输入多少个patches就能得到多少个输出，输出再通过MLP来实现分类的层结构。
+
+## Embedding Layer
+对于标准的Transformer模块，要求输入的是token（向量）序列（一个二维的矩阵，[num_token, token_dim]）。
+但是对于图像数据而言，其数据格式为[H, W, C]是三维矩阵明显不是Transformer想要的。所以需要先通过一个Embedding层来对数据做个变换。如下图所示
+
+<div align="center">
+  <img src="../images/微信截图_20250312133423.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+其中token 0-9对应的都是向量序列（二维的矩阵）。以ViT-B/16为例，对于16*16大小的patch，每个token向量长度为16*16*3=768。
+
+而在具体的在代码实现中，通过一个卷积层来实现。 
+以ViT-B/16为例，直接使用一个卷积核大小为16x16，步距为16，卷积核个数（channel数）为768的卷积来实现。
+通过卷积原图[224, 224, 3] -> [14, 14, 768]，然后把H以及W两个维度展平即可[14, 14, 768] -> [196, 768]（14*14=196），此时正好变成了一个二维矩阵，正是Transformer想要的（num_token=196，token_dim=768，一共196个token，每个token的维度为768）。
+
+在输入Transformer Encoder之前注意需要加上`class token`以及`Position Embedding`。 
+* 在上面的tokens[num_token, token_dim]中插入一个专门用于分类的`class token`，这个`class token`是一个可训练的参数，数据格式和其他token一样都是一个向量，
+以ViT-B/16为例，就是一个长度为768的向量，与之前从图片中生成的tokens拼接在一起，`Cat([1, 768], [196, 768]) -> [197, 768]`
+* 至于`Position Embedding`也就是前面Transformer中提到的Positional Encoding，采用的是一个可训练的参数，由于是直接叠加在tokens上的（执行加的操作），所以shape要一样。以ViT-B/16为例，拼接`class token`后shape是[197, 768]，那么对应的Position Embedding的shape也是[197, 768]。
+
+
+## Transformer Encoder
+
+
+
+## MLP Head
 
 
 # 参考资料
@@ -182,5 +222,6 @@ Transformer的基本解析其实可以用下图来描述
 * [Transformers: from NLP to CV](https://ibrahimsobh.github.io/Transformers/)
 * [详解Transformer中Self-Attention以及Multi-Head Attention](https://blog.csdn.net/qq_37541097/article/details/117691873)
 * [Vision Transformer详解](https://blog.csdn.net/qq_37541097/article/details/118242600)
+* [CV攻城狮入门VIT(vision transformer)之旅——VIT原理详解篇](https://blog.csdn.net/qq_47233366/article/details/128122756)
 
 
