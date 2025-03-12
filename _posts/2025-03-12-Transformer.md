@@ -29,7 +29,7 @@ toc: true
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
   <iframe width="100%" height="100%"
-    src="https://github.com/MITDeepLearning/introtodeeplearning.com/blob/main/slides/6S191_MIT_DeepLearning_L2.pdf" ></iframe>
+    src="https://introtodeeplearning.com/slides/6S191_MIT_DeepLearning_L2.pdf" ></iframe>
 </div>
 
 
@@ -37,7 +37,7 @@ toc: true
 # 参考资料
 * [Course lectures for MIT Introduction to Deep Learning](https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI)
 * [Website of MIT Introduction to Deep Learning](https://introtodeeplearning.com/)
-* [MIT深度学习: 循环神经网络、Transformer 和注意力机制 | 2025 第二讲 | 6.S191](https://www.bilibili.com/list/watchlater?oid=114141507425125&bvid=BV1zkREYbE4E&spm_id_from=333.1387.top_right_bar_window_view_later.content.click)
+* [MIT深度学习: 循环神经网络、Transformer 和注意力机制](https://www.bilibili.com/list/watchlater?oid=114141507425125&bvid=BV1zkREYbE4E&spm_id_from=333.1387.top_right_bar_window_view_later.content.click)
 * [Attention is All You Need精读](https://blog.csdn.net/weixin_73654895/article/details/142419678?spm=1001.2014.3001.5501)
 
 
