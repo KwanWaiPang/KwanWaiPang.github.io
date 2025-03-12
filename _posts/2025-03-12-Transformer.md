@@ -23,13 +23,13 @@ toc: true
 <div align="center" style="
   position: relative; 
   width: 80%; 
-  height: 400px;
+  height: 500px;
   margin: 0 auto;
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
   <iframe width="100%" height="100%"
-    src="https://introtodeeplearning.com/slides/6S191_MIT_DeepLearning_L2.pdf" ></iframe>
+    src="https://introtodeeplearning.com/slides/6S191_MIT_DeepLearning_L2.pdf#toolbar=0&navpanes=0&scrollbar=0" ></iframe>
 </div>
 
 
