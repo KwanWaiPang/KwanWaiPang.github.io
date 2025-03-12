@@ -205,12 +205,55 @@ ViT模型的模型架构如下图所示.对于输入的图片，首先将其分�
 以ViT-B/16为例，就是一个长度为768的向量，与之前从图片中生成的tokens拼接在一起，`Cat([1, 768], [196, 768]) -> [197, 768]`
 * 至于`Position Embedding`也就是前面Transformer中提到的Positional Encoding，采用的是一个可训练的参数，由于是直接叠加在tokens上的（执行加的操作），所以shape要一样。以ViT-B/16为例，拼接`class token`后shape是[197, 768]，那么对应的Position Embedding的shape也是[197, 768]。
 
+关于位置编码，论文也通过实验验证了，如果实用了能带来3%的提升，而具体实用什么形式的编码，差异并不大~
+
+下图红色标出的是对于每个patch的最终学习到的位置编码与其他patch的位置编码进行求余弦相似度，可以看到最亮（值为1）是自身所在的位置。而其与对应的一列和一行的相似度都比较高.
+
+<div align="center">
+  <img src="../images/微信截图_20250312141011.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
 ## Transformer Encoder
 
+Transformer Encoder其实就是重复堆叠Encoder Block L次
+
+<div align="center">
+  <img src="../images/微信截图_20250312141410.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于上图重新绘制的Encoder Block，主要由以下几部分组成：
+* Layer Normalization，该方法主要是针对NLP领域提出的，这里是对每个token进行Norm处理
+* Multi-Head Attention也就是上面提到的Transformer的结构
+* Dropout/DropPath，在原论文的代码中是直接使用的Dropout层（论文没画，源码有）
+* MLP Block，就是全连接+GELU激活函数+Dropout组成的，其中，第一个全连接层会把输入节点个数翻4倍[197, 768] -> [197, 3072]，第二个全连接层会还原回原节点个数[197, 3072] -> [197, 768]
 
 
 ## MLP Head
+
+通过Transformer Encoder后输出的shape和输入的shape是保持不变的，以ViT-B/16为例，输入的token是[197, 768]输出的还是[197, 768]。
+由于只是需要分类的信息，所以只需要提取出`class token`生成的对应结果就行，即[197, 768]中抽取出`class token`对应的[1, 768]。
+然后通过MLP Head得到最终的分类结果~
+
+<div align="center">
+  <img src="../images/微信截图_20250312142341.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+MLP Head原论文中说：在训练ImageNet21K时是由Linear(全连接层)+tanh激活函数+Linear组成。但是迁移到ImageNet1K上或者自己的数据上时，只用一个Linear即可。
+故此，MLP head就理解为一共全连接层即可~
+
+最终的ViT-B/16整个pipeline如下图所示：
+<div align="center">
+  <img src="../images/微信截图_20250312142631.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
 
 
 # 参考资料
