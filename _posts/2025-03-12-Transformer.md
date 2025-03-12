@@ -46,7 +46,7 @@ Transformer最早是由2017年Google的[《Attention is All You Need》](https:/
 Transformer的基本解析其实可以用下图来描述
 
 <div align="center">
-  <img src="../images/微信截图_20250312111034.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312111034.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -56,7 +56,7 @@ Transformer的基本解析其实可以用下图来描述
 ## Self-Attention
 先假设输入的序列长度为2，两个输入节点$x_1$和$x_2$通过Input Embedding也就是图中的$f(x)$将输入映射到$a_1$和$a_2$
 <div align="center">
-  <img src="../images/微信截图_20250312115425.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312115425.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -71,23 +71,23 @@ Transformer的基本解析其实可以用下图来描述
 而之所以说transformer是可以并行运算的，其实就是因为它是可以写成矩阵形式的操作，如下面的样例
 
 <div align="center">
-  <img src="../images/微信截图_20250312115931.png" width="60%" />
-  <img src="../images/微信截图_20250312115937.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312115931.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312115937.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
 在分别获取了QKV后，通过下面公式以及softmax的处理得到($\widehat{a}_{1,1}$,$\widehat{a}_{1,2}$)和($\widehat{a}_{2,1}$,$\widehat{a}_{2,2}$)
 <div align="center">
-  <img src="../images/微信截图_20250312112645.png" width="60%" />
-  <img src="../images/微信截图_20250312120342.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312112645.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312120342.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 此处的$\widehat{a}$相当于计算得到针对每个$v$的权重，接着进行加权得到最终结果$b_1$和$b_2$
 <div align="center">
-  <img src="../images/微信截图_20250312120535.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312120535.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -97,8 +97,8 @@ Transformer的基本解析其实可以用下图来描述
 所谓的`Self-Attention`就是论文中的一个公式,也就是通过输入序列$a_1$和$a_2$，得到对应的映射$b_1$和$b_2$
 
 <div align="center">
-  <img src="../images/微信截图_20250312112645.png" width="60%" />
-  <img src="../images/微信截图_20250312112954.png" width="40%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312112645.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312112954.png" width="40%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -109,9 +109,9 @@ Transformer的基本解析其实可以用下图来描述
 所谓的Multi-Head其实也就是上面的self attention中$W_Q,W_K,W_V$得到对应的$q^i,k^i,v^i$分别拆分多个head（均分操作，将$q^i,k^i,v^i$均分为$h$份），然后分别对应部分汇聚到一个head中。如下图所示。$q^1$拆分为$q^{1,1}$和$q^{1,2}$，然后$q^{1,1}$就是属于head1，而$q^{1,2}$则是属于head2
 
 <div align="center">
-  <img src="../images/微信截图_20250312113450.png" width="80%" />
-  <img src="../images/微信截图_20250312113552.png" width="80%" />
-  <img src="../images/微信截图_20250312113732.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312113450.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312113552.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312113732.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -119,8 +119,8 @@ Transformer的基本解析其实可以用下图来描述
 这样就可以把数据可以分为head1和head2对应的数据，然后再对每个head执行上面self attention的一系列过程，就能得到对应的b(比如$head1$对应了$b_{1,1}$和$b_{2,2}$)
 
 <div align="center">
-   <img src="../images/微信截图_20250312112645.png" width="60%" />
-   <img src="../images/微信截图_20250312121247.png" width="80%" />
+   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312112645.png" width="60%" />
+   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312121247.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -128,7 +128,7 @@ Transformer的基本解析其实可以用下图来描述
 接下来，再对每个head得到的结果b进行拼接（concat）
 
 <div align="center">
-  <img src="../images/微信截图_20250312114123.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312114123.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -136,7 +136,7 @@ Transformer的基本解析其实可以用下图来描述
 接着将拼接后的结果通过一个可学习的参数$W^O$进行融合，得到最终的结果$b_1$和$b_2$
 
 <div align="center">
-  <img src="../images/微信截图_20250312114322.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312114322.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -144,8 +144,8 @@ Transformer的基本解析其实可以用下图来描述
 因此，所谓的Multi-Head就是对应论文下面的公式：
 
 <div align="center">
-  <img src="../images/微信截图_20250312114436.png" width="60%" />
-  <img src="../images/微信截图_20250312114655.png" width="40%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312114436.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312114655.png" width="40%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -154,7 +154,7 @@ Transformer的基本解析其实可以用下图来描述
 对于上面的multi-head attention，如果$a_2$和$a_3$位置变了，那么实际上对于$b_1$是没有影响的，因此就引入位置编码
 
 <div align="center">
-  <img src="../images/微信截图_20250312114903.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312114903.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -162,7 +162,7 @@ Transformer的基本解析其实可以用下图来描述
 而所谓的位置编码其实就是对于每个$a_i$都加入一个可训练的位置编码（或者论文计算公式算出的位置编码）
 
 <div align="center">
-  <img src="../images/微信截图_20250312115009.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312115009.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -176,8 +176,8 @@ ViT模型的模型架构如下图所示.对于输入的图片，首先将其分�
 至此应该就是相当于NLP中Transformer的$a_i$，然后再加入位置信息（Position embedding）
 
 <div align="center">
-  <img src="../images/微信截图_20250312131237.png" width="80%" />
-  <img src="../images/b3b87535b91b51d80adc759455531f14.gif" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312131237.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/b3b87535b91b51d80adc759455531f14.gif" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -189,7 +189,7 @@ ViT模型的模型架构如下图所示.对于输入的图片，首先将其分�
 但是对于图像数据而言，其数据格式为[H, W, C]是三维矩阵明显不是Transformer想要的。所以需要先通过一个Embedding层来对数据做个变换。如下图所示
 
 <div align="center">
-  <img src="../images/微信截图_20250312133423.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312133423.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -210,7 +210,7 @@ ViT模型的模型架构如下图所示.对于输入的图片，首先将其分�
 下图红色标出的是对于每个patch的最终学习到的位置编码与其他patch的位置编码进行求余弦相似度，可以看到最亮（值为1）是自身所在的位置。而其与对应的一列和一行的相似度都比较高.
 
 <div align="center">
-  <img src="../images/微信截图_20250312141011.png" width="100%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312141011.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -220,7 +220,7 @@ ViT模型的模型架构如下图所示.对于输入的图片，首先将其分�
 Transformer Encoder其实就是重复堆叠Encoder Block L次
 
 <div align="center">
-  <img src="../images/微信截图_20250312141410.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312141410.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -239,7 +239,7 @@ Transformer Encoder其实就是重复堆叠Encoder Block L次
 然后通过MLP Head得到最终的分类结果~
 
 <div align="center">
-  <img src="../images/微信截图_20250312142341.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312142341.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -249,7 +249,7 @@ MLP Head原论文中说：在训练ImageNet21K时是由Linear(全连接层)+tanh
 
 最终的ViT-B/16整个pipeline如下图所示：
 <div align="center">
-  <img src="../images/微信截图_20250312142631.png" width="100%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312142631.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
