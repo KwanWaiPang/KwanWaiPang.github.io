@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What is Transformer?"
+title: "What is Transformer? Form NLP to CV"
 date:   2025-03-12
 tags: [Deep Learning]
 comments: true
@@ -18,11 +18,12 @@ toc: true
 之前在复现DUSt3R,MASt3R和Fast3R的时候都被其惊艳的效果所吸引，而其中最关键的是Transformer这个结构。
 为此写下本博文对其进行学习，本博文仅供本人学习记录用~
 
-Transformer最早是由2017年Google的《Attention is All You Need》这篇论文提到的，当时主要是针对自然语言处理领域提出的。
+Transformer最早是由2017年Google的[《Attention is All You Need》](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)这篇论文提出的，当时主要是针对自然语言处理领域提出的。
 之前的RNN模型记忆长度有限（后续虽然由LSTM），但无法并行化，只有计算完$t_i$时刻后的数据才能计算$t_{i+1}$时刻的数据，但Transformer都可以做到（理论上其记忆长度是无限长的，并且其可以并行优化）
 
 
 # MIT深度学习课程
+
 首先，可以先通过《MIT Introduction to Deep Learning》这个课程，其中第二节对循环神经网络、Transformer 和注意力机制进行了介绍，来了解从RNN到Transformer的一些基本知识。
 
 该课程对应的PPT如下
@@ -41,7 +42,6 @@ Transformer最早是由2017年Google的《Attention is All You Need》这篇论�
 
 
 # Attention is All You Need
-
 
 Transformer的基本解析其实可以用下图来描述
 
@@ -168,9 +168,9 @@ Transformer的基本解析其实可以用下图来描述
 </div>
 
 
-# Transformers: from NLP to CV
+# Vision Transformer (VIT)
+来自于2020的ICLR[《An image is worth 16x16 words: Transformers for image recognition at scale》](https://arxiv.org/pdf/2010.11929/1000)
 
-## Vision Transformer (VIT)
 
 
 # 参考资料
@@ -181,5 +181,6 @@ Transformer的基本解析其实可以用下图来描述
 * [Attention is All You Need精读](https://blog.csdn.net/weixin_73654895/article/details/142419678?spm=1001.2014.3001.5501)
 * [Transformers: from NLP to CV](https://ibrahimsobh.github.io/Transformers/)
 * [详解Transformer中Self-Attention以及Multi-Head Attention](https://blog.csdn.net/qq_37541097/article/details/117691873)
+* [Vision Transformer详解](https://blog.csdn.net/qq_37541097/article/details/118242600)
 
 
