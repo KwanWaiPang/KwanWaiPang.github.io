@@ -71,7 +71,6 @@ Deep Sequence Modeling受到了广泛的关注，特别是最近ChatGPT，Deepse
 </div>
 
 
-
 <div align="center">
   <table style="border: none; background-color: transparent;">
     <tr align="center">
@@ -127,9 +126,58 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
   </figcaption>
 </div>
 
+所谓的BP Through Time也就是不再通过单个前馈网络反向传播损失，而是跨越所有的time step来反向传播误差，这样可以把来自后面时间的误差反馈到前面的时间去。
 
+而如果有很多大的值，会导致梯度爆炸，而如果有很多小的值又会导致梯度消失，这样就导致无法将时间较晚的梯度传递到最开始.这也就是RNN比较难训练的因素之一.
 
-# Attention is All You Need
+<div align="center">
+  <img src="../images/微信截图_20250313114812.png" width="80%" />
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250313114818.png" width="80%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250313114825.png" width="80%" />
+      </td>
+    </tr>
+  </table>
+   <img src="../images/微信截图_20250313115109.png" width="80%" />
+  <figcaption>
+  </figcaption>
+</div>
+
+那么因此，GRU也就是出来了，通过一个gate来控制传递隐藏状态更新的信息量
+
+<div align="center">
+  <img src="../images/微信截图_20250313115615.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而RNN也有以下的局限：
+1. Encoding bottleneck，RNN的状态是一个固定size的向量，因此只能将有限的信息封装到里面
+2. Slow, no parallelization，由于RNN是逐个time step来处理信息的（有固定的顺序依赖性），因此没法并行运算，
+3. Not long memory，而上面的第一点，有限的状态编码会限制循环架构的长期记忆容量
+
+<div align="center">
+  <img src="../images/微信截图_20250313120659.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+那么针对这些局限，研究人员就开始思考如何去处理全部的数据，而并不是组个time step来处理，也就是消除掉递归的需求，如下所示：
+
+<div align="center">
+  <img src="../images/微信截图_20250313120851.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+也就是把全部都整合到一起，这个也就是Transformer的motivation
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+# Transformer
 
 Transformer最早是由2017年Google的[《Attention is All You Need》](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)这篇论文提出的，当时主要是针对自然语言处理领域提出的。
 之前的RNN模型记忆长度有限（后续虽然由LSTM），但无法并行化，只有计算完$t_i$时刻后的数据才能计算$t_{i+1}$时刻的数据，但Transformer都可以做到（理论上其记忆长度是无限长的，并且其可以并行优化）
@@ -258,6 +306,8 @@ Transformer的基本解析其实可以用下图来描述
 </figcaption>
 </div>
 
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 # Vision Transformer (ViT)
 来自于2020的ICLR[《An image is worth 16x16 words: Transformers for image recognition at scale》](https://arxiv.org/pdf/2010.11929/1000)
