@@ -18,7 +18,7 @@ toc: true
 
 本博文对Event-based Contrast Maximization进行较为全面的survey，并且将对应的经典论文都做简单的介绍，同时也列出了CMax相关或者用到CMax的文献以作mark
 
-* [Awesome-Event-based-Contrast-Maximization](https://github.com/KwanWaiPang/Awesome-Event-based-Contrast-Maximization)
+* Keep update the paper list in: [Awesome-Event-based-Contrast-Maximization](https://github.com/KwanWaiPang/Awesome-Event-based-Contrast-Maximization)
 
 
 <!-- * 目录

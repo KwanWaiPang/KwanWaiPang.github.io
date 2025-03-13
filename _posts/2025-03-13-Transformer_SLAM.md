@@ -20,12 +20,15 @@ toc: false #true
 本博文仅供本人学习记录用~
 
 * [What is Transformer? Form NLP to CV](https://kwanwaipang.github.io/Transformer/)
-* [Awesome-Transformer-based-SLAM](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM)
+* Keep update the paper list in: [Awesome-Transformer-based-SLAM](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM)
 
 
 # Paper List
 
 ## Transformer-based SLAM
+
+<!-- |-|`arXiv`|-|-|-| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
@@ -55,6 +58,9 @@ toc: false #true
 
 ## Transformer-based Optical Flow
 
+<!-- |-|`arXiv`|-|-|-| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2023|`arXiv`|[Win-win: Training high-resolution vision transformers from two windows](https://arxiv.org/pdf/2310.00632)|-|-|
@@ -69,6 +75,9 @@ toc: false #true
 
 
 ## Transformer-based Mapping
+
+<!-- |-|`arXiv`|-|-|-| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
@@ -107,8 +116,6 @@ toc: false #true
 |2021|`BMVC`|[Transformer-based Monocular Depth Estimation with Attention Supervision](https://www.bmvc2021-virtualconference.com/assets/papers/0244.pdf)|[![Github stars](https://img.shields.io/github/stars/WJ-Chang-42/ASTransformer.svg)](https://github.com/WJ-Chang-42/ASTransformer)|-|
 |2021|`ICCV`|[Transformer-Based Attention Networks for Continuous Pixel-Wise Prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Yang_Transformer-Based_Attention_Networks_for_Continuous_Pixel-Wise_Prediction_ICCV_2021_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/ygjwd12345/TransDepth.svg)](https://github.com/ygjwd12345/TransDepth)|-|
 |2021|`ICCV`|[Vision transformers for dense prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Ranftl_Vision_Transformers_for_Dense_Prediction_ICCV_2021_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/isl-org/DPT.svg)](https://github.com/isl-org/DPT)|-|
-
-
 
 <!-- |-|`arXiv`|-|-|-| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
