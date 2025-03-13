@@ -200,12 +200,15 @@ Transformer的基本解析其实可以用下图来描述
 </figcaption>
 </div>
 
-然后将$a_1$和$a_2$通过三个变换矩阵$W_Q,W_K,W_V$(可训练，共享权重的全连接层)得到对应的$q^i,k^i,v^i$，其中这三者分别代表：
-* $q$代表query，后续会去和每一个$k$进行匹配
-* $k$代表key，后续会被每个$q$匹配
-* $v$则是从$a$中提取的信息
+然后将$a_1$和$a_2$通过三个变换矩阵$W_Q,W_K,W_V$(可训练，共享权重的全连接层)得到对应的$q^i,k^i,v^i$。
+
+为什么要QKV这三个信息呢？直观来讲，这三者分别代表：
+* $q$代表query，可以理解为查询的需求。后续会去和每一个$k$进行匹配
+* $k$代表key，可以理解为被查询时用于匹配的键值。后续会被每个$q$匹配
+* $v$则是从$a$中提取的信息，可以理解为$q$查询，$k$应答，那么对应的匹配度是多少
 
 后续$q$和$k$匹配的过程可以理解成计算两者的相关性，相关性越大对应$v$的权重也就越大。
+然后把匹配大的通过softmax提取出来，这样我们就可以得到更重要的信息，那么这个信息也就是需要强调（attention）让网络重点学习的~
 
 而之所以说transformer是可以并行运算的，其实就是因为它是可以写成矩阵形式的操作，如下面的样例
 
@@ -238,6 +241,55 @@ Transformer的基本解析其实可以用下图来描述
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312112645.png" width="60%" />
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312112954.png" width="40%" />
+<figcaption>  
+</figcaption>
+</div>
+
+上面采用的是两个序列为解析样例，下面用一个实际的输入一个句子来解析上面公司的过程。
+
+对于输入的句子$x$,首先先embedding提取向量，然后添加位置编码（位置编码下面介绍）
+<div align="center">
+  <img src="../images/微信截图_20250313122729.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+然后分别提取QKV（query, key, value），也就是用于搜索看哪个才是重要的信息
+
+<div align="center">
+  <img src="../images/微信截图_20250313122902.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+然后通过公式来计算每对特征对应的query与key，获得它们的相似性
+
+<div align="center">
+  <img src="../images/微信截图_20250313122949.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+然后用softmax来计算attention的权重，就是哪个地方是需要被attention的（获取各个组成部分之间的相互关联的相对权重）
+
+<div align="center">
+  <img src="../images/微信截图_20250313123046.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+接下来就是self-attention来提取特征，可以理解为与自身的value相乘，来进一步提取attention的特征
+
+<div align="center">
+  <img src="../images/微信截图_20250313123125.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+整体对于self-attention的公式理解也就是下图
+
+<div align="center">
+  <img src="../images/微信截图_20250313123237.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
