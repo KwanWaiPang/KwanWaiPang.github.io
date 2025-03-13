@@ -20,7 +20,7 @@ toc: false
 为此，写下本博客，作为本人学习相关工作的学习笔记。
 本博客仅供本人学习记录用~
 
-
+* [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
 
 
 * 目录
@@ -209,14 +209,17 @@ This is designed since sensor fusion algorithm using IMU measurements might need
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # AirIMU: Learning uncertainty propagation for inertial odometry
+
 * [code](https://github.com/haleqiu/AirIMU)
 * [paper](https://arxiv.org/pdf/2310.04874)
 * [website](https://airimu.github.io/)
+
 关于这篇工作的解读额外写在了博客[论文复现之——《AirIMU: Learning uncertainty propagation for inertial odometry》](https://kwanwaipang.github.io/AirIMU/)中
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # AirIO: Learning Inertial Odometry with Enhanced IMU Feature Observability
+
 * [code](https://github.com/Air-IO/Air-IO)
 * [paper](https://arxiv.org/pdf/2501.15659)
 * [website](https://air-io.github.io/)
@@ -227,6 +230,7 @@ This is designed since sensor fusion algorithm using IMU measurements might need
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # Learned inertial odometry for autonomous drone racing
+
 * [code](https://github.com/uzh-rpg/learned_inertial_model_odometry)
 * [paper RAL 2023](https://arxiv.org/pdf/2210.15287)
 * [Youtube](https://www.youtube.com/watch?v=DHQzaDVWXrc)
