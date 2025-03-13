@@ -44,7 +44,7 @@ Deep Sequence Modeling受到了广泛的关注，特别是最近ChatGPT，Deepse
 
 而所谓的序列建模，它处理的是一系列的输入（如文本），然后产生输出，如下图所示
 <div align="center">
-  <img src="../images/微信截图_20250312174235.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312174235.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -56,11 +56,11 @@ Deep Sequence Modeling受到了广泛的关注，特别是最近ChatGPT，Deepse
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250312174547.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312174547.png" width="100%" />
         静态单个操作的神经网络（多个时间序列，独立操作）
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250312174737.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312174737.png" width="100%" />
         顺序序列的神经网络（h为hidden state，作为先前的记录）
       </td>
     </tr>
@@ -75,10 +75,10 @@ Deep Sequence Modeling受到了广泛的关注，特别是最近ChatGPT，Deepse
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250312180530.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312180530.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250312180924.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312180924.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -90,7 +90,7 @@ Deep Sequence Modeling受到了广泛的关注，特别是最近ChatGPT，Deepse
 RNN的计算图如下图所示，这些在每个单独的时间步都是采用相同的权重矩阵。然后在每个片段（即每个单独的时间步长）计算loss，然后将所有的时间下的损失求和获取总的loss
 
 <div align="center">
-  <img src="../images/微信截图_20250312181116.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312181116.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -103,7 +103,7 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 当然也可以通过learning的方法来学习把单词映射到低维度、长度固定的空间，这样相似的单词就会位于相似的区域~
 
 <div align="center">
-  <img src="../images/微信截图_20250312183428.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250312183428.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -114,10 +114,10 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250313113439.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313113439.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250313113455.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313113455.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -131,18 +131,18 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 而如果有很多大的值，会导致梯度爆炸，而如果有很多小的值又会导致梯度消失，这样就导致无法将时间较晚的梯度传递到最开始.这也就是RNN比较难训练的因素之一.
 
 <div align="center">
-  <img src="../images/微信截图_20250313114812.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313114812.png" width="80%" />
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250313114818.png" width="80%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313114818.png" width="80%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250313114825.png" width="80%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313114825.png" width="80%" />
       </td>
     </tr>
   </table>
-   <img src="../images/微信截图_20250313115109.png" width="80%" />
+   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313115109.png" width="80%" />
   <figcaption>
   </figcaption>
 </div>
@@ -150,7 +150,7 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 那么因此，GRU也就是出来了，通过一个gate来控制传递隐藏状态更新的信息量
 
 <div align="center">
-  <img src="../images/微信截图_20250313115615.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313115615.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -161,7 +161,7 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 3. Not long memory，而上面的第一点，有限的状态编码会限制循环架构的长期记忆容量
 
 <div align="center">
-  <img src="../images/微信截图_20250313120659.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313120659.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -169,7 +169,7 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 那么针对这些局限，研究人员就开始思考如何去处理全部的数据，而并不是组个time step来处理，也就是消除掉递归的需求，如下所示：
 
 <div align="center">
-  <img src="../images/微信截图_20250313120851.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313120851.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -249,7 +249,7 @@ Transformer的基本解析其实可以用下图来描述
 
 对于输入的句子$x$,首先先embedding提取向量，然后添加位置编码（位置编码下面介绍）
 <div align="center">
-  <img src="../images/微信截图_20250313122729.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313122729.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -257,7 +257,7 @@ Transformer的基本解析其实可以用下图来描述
 然后分别提取QKV（query, key, value），也就是用于搜索看哪个才是重要的信息
 
 <div align="center">
-  <img src="../images/微信截图_20250313122902.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313122902.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -265,7 +265,7 @@ Transformer的基本解析其实可以用下图来描述
 然后通过公式来计算每对特征对应的query与key，获得它们的相似性
 
 <div align="center">
-  <img src="../images/微信截图_20250313122949.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313122949.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -273,7 +273,7 @@ Transformer的基本解析其实可以用下图来描述
 然后用softmax来计算attention的权重，就是哪个地方是需要被attention的（获取各个组成部分之间的相互关联的相对权重）
 
 <div align="center">
-  <img src="../images/微信截图_20250313123046.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313123046.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -281,7 +281,7 @@ Transformer的基本解析其实可以用下图来描述
 接下来就是self-attention来提取特征，可以理解为与自身的value相乘，来进一步提取attention的特征
 
 <div align="center">
-  <img src="../images/微信截图_20250313123125.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313123125.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -289,7 +289,7 @@ Transformer的基本解析其实可以用下图来描述
 整体对于self-attention的公式理解也就是下图
 
 <div align="center">
-  <img src="../images/微信截图_20250313123237.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313123237.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -300,7 +300,7 @@ Transformer的基本解析其实可以用下图来描述
 而之所以要加head，可以直观理解为进一步提升网络的容量，就是不仅仅attention一个区域，而是多个区域，直观理解如下图所示
 
 <div align="center">
-  <img src="../images/微信截图_20250313124131.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313124131.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
