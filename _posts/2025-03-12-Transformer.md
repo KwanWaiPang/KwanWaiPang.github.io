@@ -297,6 +297,15 @@ Transformer的基本解析其实可以用下图来描述
 
 ## Multi-Head Attention
 `Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions`
+而之所以要加head，可以直观理解为进一步提升网络的容量，就是不仅仅attention一个区域，而是多个区域，直观理解如下图所示
+
+<div align="center">
+  <img src="../images/微信截图_20250313124131.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
 所谓的Multi-Head其实也就是上面的self attention中$W_Q,W_K,W_V$得到对应的$q^i,k^i,v^i$分别拆分多个head（均分操作，将$q^i,k^i,v^i$均分为$h$份），然后分别对应部分汇聚到一个head中。如下图所示。$q^1$拆分为$q^{1,1}$和$q^{1,2}$，然后$q^{1,1}$就是属于head1，而$q^{1,2}$则是属于head2
 
 <div align="center">
