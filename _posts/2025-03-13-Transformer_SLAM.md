@@ -31,6 +31,7 @@ toc: true
 
 
 ## Transformer-based Mapping
+
 |Year|Venue|Paper Title|Repository|Note|
 |:-:|:-:|-|:-:|:-:|
 |2025|`CVPR`|[Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass](https://arxiv.org/pdf/2501.13928)|[![Github stars](https://img.shields.io/github/stars/facebookresearch/fast3r.svg)](https://github.com/facebookresearch/fast3r)| [Website](https://fast3r-3d.github.io/) <br> [Self Test](https://kwanwaipang.github.io/Fast3R/)
@@ -40,6 +41,7 @@ toc: true
 
 
 ## Transformer-based Pose Tracking
+
 |Year|Venue|Paper Title|Repository|Note|
 |:-:|:-:|-|:-:|:-:|
 |2024|`arXiv`|[Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry](https://arxiv.org/pdf/2409.08769)|[![Github stars](https://img.shields.io/github/stars/ybkurt/VIFT.svg)](https://github.com/ybkurt/VIFT)|-|
