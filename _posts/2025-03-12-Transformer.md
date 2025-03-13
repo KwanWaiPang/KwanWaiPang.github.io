@@ -18,8 +18,7 @@ toc: true
 之前在复现DUSt3R,MASt3R和Fast3R的时候都被其惊艳的效果所吸引，而其中最关键的是Transformer这个结构。
 为此写下本博文对其进行学习，本博文仅供本人学习记录用~
 
-Transformer最早是由2017年Google的[《Attention is All You Need》](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)这篇论文提出的，当时主要是针对自然语言处理领域提出的。
-之前的RNN模型记忆长度有限（后续虽然由LSTM），但无法并行化，只有计算完$t_i$时刻后的数据才能计算$t_{i+1}$时刻的数据，但Transformer都可以做到（理论上其记忆长度是无限长的，并且其可以并行优化）
+首先本博文先从RNN(Deep Sequence Modeling)的基本概念开始，然后再介绍Transformer以及Vision Transformer (ViT)
 
 
 # Deep Sequence Modeling
@@ -102,7 +101,7 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 
 然后，将这个词汇表中的各个单词映射到一个数字（也就是单词对应的数字索引），那么就可以将语句转换为向量。
 而下图的第三步embedding就是将数字索引映射到一个大小固定的向量（如下图，以二进制编码，就是2，对应的是cat）。
-当然也可以通过learning的方法来学习把单词映射到低维度、长度固定的空间
+当然也可以通过learning的方法来学习把单词映射到低维度、长度固定的空间，这样相似的单词就会位于相似的区域~
 
 <div align="center">
   <img src="../images/微信截图_20250312183428.png" width="80%" />
@@ -110,10 +109,30 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
 </figcaption>
 </div>
 
+而RNN的训练也是采用BP，只不过是叫`Backpropagation Through Time (BPTT)`
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250313113439.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250313113455.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  BP vs BPTT
+  </figcaption>
+</div>
 
 
 
 # Attention is All You Need
+
+Transformer最早是由2017年Google的[《Attention is All You Need》](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)这篇论文提出的，当时主要是针对自然语言处理领域提出的。
+之前的RNN模型记忆长度有限（后续虽然由LSTM），但无法并行化，只有计算完$t_i$时刻后的数据才能计算$t_{i+1}$时刻的数据，但Transformer都可以做到（理论上其记忆长度是无限长的，并且其可以并行优化）
 
 Transformer的基本解析其实可以用下图来描述
 
