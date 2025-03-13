@@ -48,6 +48,7 @@ toc: false #true
 |2021|`Neural Computing and Applications`|[Transformer guided geometry model for flow-based unsupervised visual odometry](https://arxiv.org/pdf/2101.02143)|-|-|
 
 ## Transformer-based Optical Flow
+
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2023|`arXiv`|[Win-win: Training high-resolution vision transformers from two windows](https://arxiv.org/pdf/2310.00632)|-|-|
@@ -71,15 +72,40 @@ toc: false #true
 |2024|`CVPR`|[Learning to adapt clip for few-shot monocular depth estimation](https://openaccess.thecvf.com/content/WACV2024/papers/Hu_Learning_To_Adapt_CLIP_for_Few-Shot_Monocular_Depth_Estimation_WACV_2024_paper.pdf)|-|-| 
 |2024|`ECCV`|[Grounding Image Matching in 3D with MASt3R](https://arxiv.org/pdf/2406.09756)|[![Github stars](https://img.shields.io/github/stars/naver/mast3r.svg)](https://github.com/naver/mast3r)| [Website](https://europe.naverlabs.com/blog/mast3r-matching-and-stereo-3d-reconstruction/) <br> [Test](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
 |2024|`CVPR`|[DUSt3R: Geometric 3D Vision Made Easy](https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_DUSt3R_Geometric_3D_Vision_Made_Easy_CVPR_2024_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/naver/dust3r.svg)](https://github.com/naver/dust3r)| [Website](https://europe.naverlabs.com/research/publications/dust3r-geometric-3d-vision-made-easy/) <br> [Test](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
+|2024|`TIP`|[BinsFormer: Revisiting Adaptive Bins for Monocular Depth Estimation](https://arxiv.org/pdf/2204.00987)|[![Github stars](https://img.shields.io/github/stars/zhyever/Monocular-Depth-Estimation-Toolbox.svg)](https://github.com/zhyever/Monocular-Depth-Estimation-Toolbox)|-|
+|2024|`TIP`|[GLPanoDepth: Global-to-Local Panoramic Depth Estimation](https://arxiv.org/pdf/2202.02796)|-|-|
 |2023|`ICCV`|[Towards zero-shot scale-aware monocular depth estimation](https://openaccess.thecvf.com/content/ICCV2023/papers/Guizilini_Towards_Zero-Shot_Scale-Aware_Monocular_Depth_Estimation_ICCV_2023_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/tri-ml/vidar.svg)](https://github.com/tri-ml/vidar)|[website](https://sites.google.com/view/tri-zerodepth)|
+|2023|`ICCV`|[Egformer: Equirectangular geometry-biased transformer for 360 depth estimation](https://openaccess.thecvf.com/content/ICCV2023/papers/Yun_EGformer_Equirectangular_Geometry-biased_Transformer_for_360_Depth_Estimation_ICCV_2023_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/noahzn/Lite-Mono.svg)](https://github.com/noahzn/Lite-Mono)|-|
+|2023|`Machine Intelligence Research`|[Depthformer: Exploiting long-range correlation and local information for accurate monocular depth estimation](https://link.springer.com/content/pdf/10.1007/s11633-023-1458-0.pdf)|-|-|
+|2023|`CVPR`|[Lite-mono: A lightweight cnn and transformer architecture for self-supervised monocular depth estimation](https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_Lite-Mono_A_Lightweight_CNN_and_Transformer_Architecture_for_Self-Supervised_Monocular_CVPR_2023_paper.pdf)|-|-|
+|2023|`CVPR`|[CompletionFormer: Depth Completion with Convolutions and Vision Transformers](https://openaccess.thecvf.com/content/CVPR2023/papers/Zhang_CompletionFormer_Depth_Completion_With_Convolutions_and_Vision_Transformers_CVPR_2023_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/youmi-zym/CompletionFormer.svg)](https://github.com/youmi-zym/CompletionFormer)|[website](https://youmi-zym.github.io/projects/CompletionFormer/)|
+|2023|`ICRA`|[Lightweight monocular depth estimation via token-sharing transformer](https://arxiv.org/pdf/2306.05682)|-|-|
+|2023|`AAAI`|[ROIFormer: Semantic-Aware Region of Interest Transformer for Efficient Self-Supervised Monocular Depth Estimation](https://d1wqtxts1xzle7.cloudfront.net/104480606/25173-libre.pdf?1690190871=&response-content-disposition=inline%3B+filename%3DROIFormer_Semantic_Aware_Region_of_Inter.pdf&Expires=1741856732&Signature=KUxZHd6ZmNPg8XrNv3m~pPy~vdm9zxVdSFmbVrrYb~ZO0XTVpbbkHMgYNa05AQHpHA6NE7YckuF85Oa~rNBfT3LoMWiPm~UIxIk5zzFj6jevZsEe7WY33hUOfYeW~4JbRdYhpBN1U1zAyM4APilqFNRQMrinJ6CYmdrgoHaW6Afb5Xr2jNknzZ6zbVkB4ot26OreDLphqzyyHnmdH2YsOzbd2hTimakiibYNsY97axBqpY-u54BWhJW7-b8vtSC250M19hInvXTD79oHySYw7IUuCXwVJ4~UkJK~8ZTKVDtt3gSwMlqrKkZVv7pdzyLgbCpOHS~1VtA26sWmzyf4Hg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)|-|-|
+|2023|`ICRA`|[TODE-Trans: Transparent Object Depth Estimation with Transformer](https://arxiv.org/pdf/2209.08455)|[![Github stars](https://img.shields.io/github/stars/yuchendoudou/TODE.svg)](https://github.com/yuchendoudou/TODE)|-|
+|2023|`AAAI`|[Deep digging into the generalization of self-supervised monocular depth estimation](https://arxiv.org/pdf/2205.11083)|[![Github stars](https://img.shields.io/github/stars/sjg02122/MonoFormer.svg)](https://github.com/sjg02122/MonoFormer)|-|
 |2022|`ECCV`|[PanoFormer: Panorama Transformer for Indoor 360 Depth Estimation](https://arxiv.org/pdf/2203.09283)|[![Github stars](https://img.shields.io/github/stars/zhijieshen-bjtu/PanoFormer.svg)](https://github.com/zhijieshen-bjtu/PanoFormerr)|-|
 |2022|`AAAI`|[Improving 360 monocular depth estimation via non-local dense prediction transformer and joint supervised and self-supervised learning](https://arxiv.org/pdf/2109.10563)|-|-| 
 |2022|`arXiv`|[MVSFormer: Multi-view stereo by learning robust image features and temperature-based depth](https://arxiv.org/pdf/2208.02541)|-|-|
+|2022|`arXiv`|[Objcavit: improving monocular depth estimation using natural language models and image-object cross-attention](https://arxiv.org/pdf/2211.17232)|[![Github stars](https://img.shields.io/github/stars/DylanAuty/ObjCAViT.svg)](https://github.com/DylanAuty/ObjCAViT)|-|
+|2022|`arXiv`|[Depthformer: Multiscale Vision Transformer For Monocular Depth Estimation With Local Global Information Fusion](https://arxiv.org/pdf/2207.04535)|[![Github stars](https://img.shields.io/github/stars/ashutosh1807/Depthformer.svg)](https://github.com/ashutosh1807/Depthformer)|-|
+|2022|`arXiv`|[Sidert: A real-time pure transformer architecture for single image depth estimation](https://arxiv.org/pdf/2204.13892)|-|-|
+|2022|`ECCV`|[Hybrid transformer based feature fusion for self-supervised monocular depth estimation](https://arxiv.org/pdf/2211.11066)|-|-|
+|2022|`ECCV`|[Spike transformer: Monocular depth estimation for spiking camera](https://fq.pkwyx.com/default/https/www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136670034.pdf)|[![Github stars](https://img.shields.io/github/stars/Leozhangjiyuan/MDE-SpikingCamera.svg)](https://github.com/Leozhangjiyuan/MDE-SpikingCamera)|-|
+|2022|`3DV`|[MonoViT: Self-Supervised Monocular Depth Estimation with a Vision Transformer](https://arxiv.org/pdf/2208.03543)|[![Github stars](https://img.shields.io/github/stars/zxcqlf/MonoViT.svg)](https://github.com/zxcqlf/MonoViT)|-|
+|2022|`arXiv`|[DEST: "Depth Estimation with Simplified Transformer](https://arxiv.org/pdf/2204.13791)|-|-|
+|2022|`arXiv`|[SparseFormer: Attention-based Depth Completion Network](https://arxiv.org/pdf/2206.04557)|-|-|
+|2022|`CVPR`|[GuideFormer: Transformers for Image Guided Depth Completion](https://openaccess.thecvf.com/content/CVPR2022/papers/Rho_GuideFormer_Transformers_for_Image_Guided_Depth_Completion_CVPR_2022_paper.pdf)|-|-|
+|2022|`CVPR`|[Multi-frame self-supervised depth with transformers](https://openaccess.thecvf.com/content/CVPR2022/papers/Guizilini_Multi-Frame_Self-Supervised_Depth_With_Transformers_CVPR_2022_paper.pdf)|-|-|
+|2022|`arXiv`|[Transformers in Self-Supervised Monocular Depth Estimation with Unknown Camera Intrinsics](https://arxiv.org/pdf/2202.03131)|-|-|
 |2021|`ICCV`|[Revisiting stereo depth estimation from a sequence-to-sequence perspective with transformers](https://openaccess.thecvf.com/content/ICCV2021/papers/Li_Revisiting_Stereo_Depth_Estimation_From_a_Sequence-to-Sequence_Perspective_With_Transformers_ICCV_2021_paper.pdf)|-|-|
+|2021|`BMVC`|[Transformer-based Monocular Depth Estimation with Attention Supervision](https://www.bmvc2021-virtualconference.com/assets/papers/0244.pdf)|[![Github stars](https://img.shields.io/github/stars/WJ-Chang-42/ASTransformer.svg)](https://github.com/WJ-Chang-42/ASTransformer)|-|
+|2021|`ICCV`|[Transformer-Based Attention Networks for Continuous Pixel-Wise Prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Yang_Transformer-Based_Attention_Networks_for_Continuous_Pixel-Wise_Prediction_ICCV_2021_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/ygjwd12345/TransDepth.svg)](https://github.com/ygjwd12345/TransDepth)|-|
+|2021|`ICCV`|[Vision transformers for dense prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Ranftl_Vision_Transformers_for_Dense_Prediction_ICCV_2021_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/isl-org/DPT.svg)](https://github.com/isl-org/DPT)|-|
+
 
 
 <!-- |-|`arXiv`|-|-|-| -->
-<!-- [![Github stars](https://img.shields.io/github/stars/***/***.svg)]() -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 ## Other Resources
 * [Awesome-Transformer-Attention](https://github.com/cmhungsteve/Awesome-Transformer-Attention)
