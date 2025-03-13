@@ -15,7 +15,9 @@ toc: false #true
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
-之前博客对Transformer进行了基本的学习（从NLP到CV），鉴于Transformer强大的数据（时间与空间维度）关联能力，个人感觉其在SLAM问题上应该是有不少的应用空间的，为此写下本博文，记录本人调研收集Transformer-based SLAM，Transformer-based visual odometry以及Transformer-based mapping的过程
+之前博客对Transformer进行了基本的学习（从NLP到CV），鉴于Transformer强大的数据（时间与空间维度）关联能力，个人感觉其在SLAM问题上应该是有不少的应用空间的，为此写下本博文，记录本人调研收集的ransformer-based SLAM，visual odometry, mapping（depth estimation）以及optical estimation
+
+本博文仅供本人学习记录用~
 
 * [What is Transformer? Form NLP to CV](https://kwanwaipang.github.io/Transformer/)
 * [Awesome-Transformer-based-SLAM](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM)
