@@ -36,9 +36,13 @@ toc: false #true
 
 ## Transformer-based Pose Tracking
 
+<!-- |-|`arXiv`|-|-|-| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`IEEE Acess`|[Transformer-based model for monocular visual odometry: a video understanding approach](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10845764)|[![Github stars](https://img.shields.io/github/stars/aofrancani/TSformer-VO.svg)](https://github.com/aofrancani/TSformer-VO)|-|
+|2024|`arXiv`|[MASt3R-SfM: a Fully-Integrated Solution for Unconstrained Structure-from-Motion](https://arxiv.org/pdf/2409.19152)|[![Github stars](https://img.shields.io/github/stars/naver/mast3r.svg)](https://github.com/naver/mast3r/tree/mast3r_sfm)|MASt3R sfm version|
 |2024|Msc Thesis|[End-to-End Learned Visual Odometry Based on Vision Transformer](https://www.utupub.fi/bitstream/handle/10024/178848/Aman_Manishbhai_Vyas_Thesis.pdf?sequence=1)|-|-|
 |2024|`arXiv`|[Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry](https://arxiv.org/pdf/2409.08769)|[![Github stars](https://img.shields.io/github/stars/ybkurt/VIFT.svg)](https://github.com/ybkurt/VIFT)|-|
 |2024|`IJRA`|[DDETR-SLAM: A Transformer-Based Approach to Pose Optimization in Dynamic Environments](https://assets-eu.researchsquare.com/files/rs-2965479/v1_covered_409a1161-fe39-4b94-9411-68639c8215b1.pdf)|-|-|
