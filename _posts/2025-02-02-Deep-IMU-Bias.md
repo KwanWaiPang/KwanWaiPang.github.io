@@ -15,13 +15,12 @@ toc: false
 特别是VIO，标定及sensor modeling是影响系统性能最关键的部分。一般传统的方法都是把IMU的bias建模为additive Gaussian noise + random walk.
 得益于深度学习强大的性能，基于learning的IMU bias建模也将具备很大的发展潜力。
 
+* Keep update the paper list in: [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
+
 之前[博客](https://kwanwaipang.github.io/File/Blogs/Poster/Learning_based_VO.html)已经较为系统的介绍了基于learning的VO以及VIO工作。
 但是对于使用learning的方法来handle IMU bias仍然没有调研。
 为此，写下本博客，作为本人学习相关工作的学习笔记。
 本博客仅供本人学习记录用~
-
-
-* [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
 
 
 * 目录
