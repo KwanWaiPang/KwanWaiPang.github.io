@@ -147,7 +147,8 @@ RNN预测`Next word`要做的第一步，则是把语言转换成某种表达输
   </figcaption>
 </div>
 
-那么因此，GRU也就是出来了，通过一个gate来控制传递隐藏状态更新的信息量
+那么因此，GRU也就是出来了，通过一个gate来控制传递隐藏状态更新的信息量，此外LSTM也被提出来了。
+它们的结构内部有极其巧妙的长期状态输入和输出，能够让模型从文本中提取丰富的上下文语义。
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250313115615.png" width="80%" />
