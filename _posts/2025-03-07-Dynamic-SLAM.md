@@ -26,9 +26,11 @@ toc: false #true
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <iframe src="https://1drv.ms/p/s!AnZK2XZ8YDuJeI5r_iQJbZJQqhw?embed=1&amp;em=2&amp;wdAr=1.7777777777777777#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe>
+  <!-- <iframe src="https://1drv.ms/p/s!AnZK2XZ8YDuJeI5r_iQJbZJQqhw?embed=1&amp;em=2&amp;wdAr=1.7777777777777777#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe> -->
+  <iframe src="https://onedrive.live.com/embed?resid=893B607C76D94A76!120&authkey=!AI5r_iQJbZJQqhw&em=2&wdAr=1.777&wdHideHeaders=true&wdEmbedCode=0" width="100%" height="100%" frameborder="0"></iframe>
 </div>
 {% endraw %}
+
 
 <br>
 
