@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+  p { /* 文字对齐 */
+      text-align: justify;
+      text-align-last: left;
+      text-justify: inter-word;
+  }
+  #toc {
+    background: #f4f4f4;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    /* margin-bottom: 20px; */
+    max-width: 100%; /* 限制目录框架的最大宽度 */
+    word-wrap: break-word; /* 强制超长单词换行 */
+    position: relative;
+    margin-left: auto; /* 使目录框架在页面中居右 */
+    margin-right: auto; /* 使目录框架在页面中居右 */
+    box-sizing: border-box; /* 包含内边距和边框在内的宽度计算 */
+}
+
+#scrollToTocButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50px; /* 圆角设计 */
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+  transition: all 0.3s ease; /* 添加平滑过渡效果 */
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#scrollToTocButton:hover {
+    background-color: #0056b3; /* 鼠标悬停时颜色变化 */
+    transform: translateY(-3px); /* 悬停时按钮略微上移 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+}
+
+#toggleTocButton {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  padding: 12px 25px;
+  background-color: #00b34b;
+  color: white;
+  border: none;
+  border-radius: 50px; /* 圆角设计 */
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影效果 */
+  transition: all 0.3s ease; /* 添加平滑过渡效果 */
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#toggleTocButton:hover {
+    background-color: #00b34b; /* 鼠标悬停时颜色变化 */
+    transform: translateY(-3px); /* 悬停时按钮略微上移 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时增加阴影 */
+}
+
+#newToc {
+display: none; 
+position: fixed; 
+bottom: 70px; 
+right: 100px; 
+background: #f4f4f4; 
+padding: 10px; 
+font-size: 10px; 
+max-height: 40%; /* 设置最大高度 */
+overflow-y: auto; /* 添加垂直滚动条 */
+overflow-x: hidden; /* 隐藏水平滚动条 */
+}
+</style>
+
+<!-- Head -->
+<head>    <!-- Metadata, OpenGraph and Schema.org -->
+
+
+  <!-- Standard metadata -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Kwan Wai-Pang's Blog</title>
+  <meta name="author" content="Kwan Wai-Pang " />
+  <meta name="description" content="Personal Blog of Kwan Wai-Pang" />
+  <meta name="keywords" content="Event-based Vision, SLAM, Robotics" />
+
+  <!-- OpenGraph -->
+  <meta property="og:site_name" content="My Technology Blog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kwan Wai-Pang | Personal Blog" />
+  <meta property="og:description" content="Welcome 😊
+" />
+
+  <meta property="og:locale" content="en" />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Home" />
+  <meta name="twitter:description" content="Personal Blog of Kwan Wai-Pang" />
+
+  <!-- Bootstrap & MDB -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Barriecito&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700">
+
+  <!-- Code Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/PASTIE.css" media="none" id="highlight_theme_light" />
+
+  <!-- Styles -->
+
+    <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/>
+
+  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/main.css">
+  <link rel="stylesheet" href="https://kwanwaipang.github.io/File/Blogs/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+
+  <!-- Dark Mode -->
+
+
+</head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+                <li class="nav-item ">
+                  <a class="nav-link" href="../My_Blog.html">Homepage</a>
+                </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+<header class="post-header">
+  <h1 align="center" class="post-title">
+    <span style="font-weight: 600;">Paper Survey: Learning-based VO and VIO</span>
+  </h1>
+</header>
+
+<!-- Content -->
+<div class="container mt-5">
+<!-- home.html -->
+<div class="post">
+        
+<!-- 添加目录按钮，点击展开目录 -->
+<button id="toggleTocButton">📑</button>
+<!-- 新的目录 -->
+<div id="newToc">
+  <h8>Catalog</h8>
+  <ul></ul>
+</div>
+
+<!-- 添加按钮跳转到题目 -->
+<button id="scrollToTocButton">⬆️</button>
+
+
+
+<!-- 插入目录 -->
+<div id="toc">
+  <h8>目录</h8>
+  <ul></ul>
+</div>
+
+<article>
+<!-- 插入博客内容-->
+<p><br></p>
+<h2>Abstract</h2>
+<p>
+This blog is about the paper survey and analysis for learning-based VO, VIO and SLAM.
+This blog is based on the paper reading and my personal understanding, which is only for self-record rather than any commercial purposes.
+</p>
+
+
+Keep update the paper list in: <a href="https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO" target="_blank">Awesome-Learning-based-VO-VIO</a>
+
+
+<h2>Learning-based VO</h2>
+<p>
+As shown in following figure, a classic VO pipeline, which typically consists of camera calibration, feature detection, feature matching (or tracking), outlier rejection (e.g., RANSAC), motion estimation, scale estimation and local optimization (Bundle Adjustment), has been developed and broadly considered as a golden rule to follow. 
+However, the traditional VO pipeline is not robust enough to handle the challenging scenarios, such as dynamic environments, illumination changes, textureless scenes, etc.
+<figure style="text-align: center;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/典型的VO框架.png" alt="Image description">
+    <figcaption>
+    The framework of the traditional VO system.
+    </figcaption>
+</figure>
+</p>
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/1709.08429" target="_blank">Deepvo: Towards end-to-end visual odometry with deep recurrent convolutional neural networks</a></h3>
+<p>
+  ICRA2017
+<br>
+Motivations:
+<ul>
+  <li> Most of existing VO algorithms need to be carefully designed and specifically fine-tuned to work well in different environments. </li>
+  <li> Some prior knowledge is also required to recover an <font color="#FF0000">absolute scale</font>  for monocular VO. </li>
+  <li> <p>
+    Most of the deep learning architectures are designed to tackle recognition and classification problems (extract high-level appearance information).
+    While learning the appearance representation limited the VO to function only in trained environments and seriously hinders the generalization ability.
+  </p></li>
+  <li><p>
+    <font color="#FF0000">VO heavily rely on geometric features rather than the appearance ones.</font>
+    Because a trained CNN model serves as an appearance “map” of the scene, it needs to be re-trained or at least fine-tuned for a new environment.
+    This seriously hampers the technique for widespread usage, which is also one of the biggest difficulties when applying deep learning for VO.
+    Therefore, some works need to estimate the optical flow or depth map to get the geometric features.
+    This leads to a two-stage pipeline and also requires the pre-processed optical flow or depth map as input, which is not end-to-end.
+  </p></li>
+  <li> <p>
+  VO algorithm ideally should model motion dynamics by examining the changes and connections on a <strong>sequence of images</strong> rather than processing a single image. This means we need sequential learning, which the CNNs are inadequate to.
+  But Recurrent Convolution Neural Networks (RCNNs) can be used to model the <font color="#FF0000">sequential dynamics and relations</font>.
+</p></li>
+</ul>
+
+Contributions:
+<ul>
+  <li> <font color="#FF0000">The first</font> end-to-end framework using deep Neural Networks. </li>
+  <li> infers poses directly from a sequence of raw RGB images (or videos) </li>
+  <li> Key-point: be generalized to new environments by using the geometric feature representation learnt by CNN </li>
+  <li>  <p>
+    Based on the RCNNs, it not only automatically learns <font color="#FF0000">effective feature representation</font> for the VO problem through CNN, but also implicitly <font color="#FF0000">models sequential dynamics and relations </font> using deep Recurrent Neural Networks.
+    </p> </li>  
+</ul>
+
+<figure style="text-align: center;">
+<div style="margin-bottom: 10px;">
+  <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704191626.png" alt="Image description">
+</div>
+  <figcaption> <p>
+    The framework of the proposed method. 
+    RCNN takes a sequence of RGB images (video) as input and learns features by CNN for RNN based sequential modelling to estimate poses.
+  </p>
+  <a href="https://epiception.github.io/assets/Projects/deep_event_vo.pdf" target="_blank">DeepEvent-VO</a> use the same framework.
+</figcaption>
+</figure>
+
+Methodology:
+<ul>
+  <li><p> It is composed of CNN for geometric feature extraction and RNN for sequential learning (modelling the dynamics and relations among a sequence of CNN features). </p></li>
+</ul>
+<details>
+🤔 <a href="https://blog.csdn.net/gwplovekimi/article/details/83474593" target="_blank">what is RNN?</a>
+</details>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704191824.png" alt="Image description">
+  </div>
+    <figcaption> 
+      Architecture of the RCNN based monocular VO system
+  </figcaption>
+  </figure>
+
+  <ul>
+    <li> <p>It seems that the <mark>geometric feature extraction</mark> is just a manual explanation, since the network doesn't have any supervise label for this <mark>geometric feature</mark>, how to ensure the CNN network learn the <mark>geometric feature</mark>.</p></li>
+    <li> <p>Cost Function</p></li>
+  </ul>
+  <p>
+    The input is the RGB image while the target is the pose of the camera.
+    The pose is represented by the 6-DOF transformation matrix. 
+    The cost function is the Mean Square Error (MSE) between the predicted pose (positions and orientations) and the ground truth pose.
+  </p>
+
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704213130.png" alt="Image description">
+    </div>
+      <figcaption> 
+        Note: using quaternion degrades the orientation estimate, therefore Euler angles should be better.
+    </figcaption>
+  </figure>
+
+Experiments:
+<ul>
+  <li> only done on the KITTI dataset. </li>
+  <li> worse than the traditional methods. </li>
+</ul>
+
+<!-- Marks:
+<ul>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/83474593" target="_blank">what is RNN</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84647354" target="_blank">what is Normalization</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84539021" target="_blank">different kinds of Normalization</a></li>
+</ul> -->
+
+</p>
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/1709.06841" target="_blank">UnDeepVO: Monocular Visual Odometry through Unsupervised Deep Learning</a></h3>
+ICRA2018
+<br>
+<!-- Motivations:
+<ul>
+  <li><p>
+
+  </p></li>  
+</ul> -->
+
+Contributions:
+<ul>
+  <li>
+    estimate the 6-DoF pose of a monocular camera and the depth of its view (both tracking and mapping).
+  </li>  
+  <li>
+    unsupervised scheme: train with unlabeled datasets and can be applied to localization scenarios (through the spatial and temporal geometric constraint). 
+  </li> 
+  <li>
+    absolute scale recovery for both pose and dense depth: train UnDeepVO by using stereo image pairs to recover the scale but test it by using consecutive monocular images.
+  </li> 
+</ul>
+
+Some key-points:
+<ul>
+  <li>
+    <font color="#FF0000">stereo image training without the need of labeled datasets</font>.
+  </li>  
+  <li><p>
+    Since rotation (represented by Euler angles) has high nonlinearity, it is usually difficult to train compared with translation.
+    For supervised training, a popular solution is to give a bigger weight to the rotational loss as a way of normalization.
+  </p></li>
+</ul>
+
+Methodology:
+<ul>
+  <li><p>
+    The pose estimator is a CNN architecture.
+    <br>
+    In order to better train the rotation with unsupervised learning, the authors decouple the translation and the rotation with two separate groups of fully-connected layers after the last convolution layer. 
+    This enables the network to introduce a weight normalizing the rotation and the translation predictions for better performance.
+  </p></li>  
+  <li><p>
+    The depth estimator is an encoder-decoder architecture.
+    <br>
+    Instead of produce the disparity images, it directly predicts the depth maps.
+  </p></li>  
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704215256.png" alt="Image description">
+  </div>
+    <figcaption> <p>
+      After training with unlabeled stereo images, UnDeepVO can simultaneously perform visual odometry and depth estimation with monocular images. The estimated 6-DoF poses and depth maps are both scaled without the need for scale postprocessing.
+    </p></figcaption>
+</figure>
+
+Loss are built on geometric constraints.
+  <p>
+  Its total loss includes spatial image losses and temporal image losses.
+  <font color="#FF0000">The spatial image losses drive the network to recover scaled depth maps by using stereo image pairs, 
+  while the temporal image losses are designed to minimize the errors on camera motion by using two consecutive monocular images.
+  </font>
+  <br>
+  As shown in following Figure, utilizing both spatial and temporal geometric consistencies of a stereo image sequence to formulate the loss function. 
+  The red points in one image all have the corresponding ones in another. 
+  <br>
+  <mark>Spatial geometric consistency</mark> represents the geometric projective constraint between the corresponding points in left-right image pairs, while <mark>temporal geometric consistency</mark> represents the geometric projective constraint between the corresponding points in two consecutive monocular images (🤔similar to the re-projection or BA?)
+  <br>
+</p>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704222218.png" alt="Image description">
+  </div>
+    <figcaption> <p>
+      Training scheme of UnDeepVO. The pose and depth
+estimators take stereo images as inputs to estimate 6-DoF
+poses and depth maps, respectively. The total loss including
+spatial losses and temporal losses can then be calculated
+based on raw RGB images, estimated depth maps and poses.
+    </p></figcaption>
+</figure>
+
+<p>
+<mark>Spatial Image Losses</mark>, including the left-right photometric consistency loss, disparity consistency loss and pose consistency loss.
+</p>
+(i) Photometric Consistency Loss:
+<ul>
+<li>Assume p<SUB>L</SUB>(u<SUB>L</SUB>, v<SUB>L</SUB>) is a pixel in the left image and p<SUB>R</SUB>(u<SUB>R</SUB>, v<SUB>R</SUB>) is its corresponding pixel in the right image. 
+Then, we have the spatial constraint u<SUB>L</SUB> = u<SUB>R</SUB> and v<SUB>l</SUB> = v<SUB>R</SUB> +D<SUB>P</SUB>.</li>
+<li>using the following figure, we can calculate the horizontal distance between the stereo images using the depth value of the network</li>
+<details>
+😀 <a href="https://blog.csdn.net/qq_40918859/article/details/123984329" target="_blank">principle of stereo depth calculation</a>
+</details>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704224924.png" alt="Image description">
+  </div>
+    <figcaption>
+     calculating the horizontal distance D<SUB>P</SUB> (or disparity) between the corresponding points in the left and right images.
+    </figcaption>
+</figure>
+<li>using the previous horizontal distance map D<SUB>P</SUB>, we can synthesize one image from the other through “spatial transformer”. And then the combination of an L1 norm and an SSIM term is used to construct the left-right photometric consistency loss: </li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240704225536.png" alt="Image description">
+  </div>
+    <figcaption>
+    </figcaption>
+</figure>
+</ul>
+
+(ii) Disparity Consistency Loss:
+<ul>
+  <li><p>
+    Through the horizontal distance map D<SUB>P</SUB>, we can calculate the disparity map.
+  </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705095420.png" alt="Image description">
+    </div>
+      <figcaption><p>
+        The depth map is generated from the network.
+        The horizontal distance map D<SUB>P</SUB> is calculated from the depth map.
+        Through the horizontal distance map D<SUB>P</SUB>, we can calculate the disparity map.
+        AKA. the disparity map can be obtained from the depth map of the network.
+        While the disparity map of left and right images should be consistent.
+        (I think the description in the original paper is not clear enough, this is my understanding)
+      </p></figcaption>
+  </figure>
+</ul>
+
+(iii) Pose Consistency Loss:
+<ul>
+  <li><p>
+    both left and right images are taken from the same camera, the transformations between the left and right images should be basically identical.
+  </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705100606.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+</ul>
+
+<p>
+  <mark>Temporal Image Losses</mark>, including  photometric consistency loss and 3D geometric registration loss.
+</p>
+(i) Photometric Consistency Loss:
+<ul>
+  <li><p>
+    Align the k and k+1 frames based on the predicted relative pose, camera internal parameters, and predicted depth map.
+    For two consecutive frames, the photometric should be very similar.
+  </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705101612.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+</ul>
+
+(ii) 3D Geometric Registration Loss:
+<ul>
+  <li><p>
+    similar to the ICP, the point cloud of the k frame can be transformed to the k+1 frame through the estimated transform.
+    Then minimize the loss between the transformed point cloud and the estimated point cloud of the k+1 frame in the network.
+  </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705102108.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+</ul>
+<p>
+🙋In my opinion, all the above-mentioned loss is very similar to the concept of the re-projection error in the traditional VO pipeline.
+Or, in other words, it is very similar to the Bundle Adjustment.
+The created loss should be minimized (ideally case is zero) to obtain the optimal pose and depth map.
+</p>
+Experiments:
+<ul>
+  <li><p>
+    better than ORB-SLAM2 in KITTI dataset.
+  </p></li>  
+</ul>
+
+<p><br></p>
+<h3><a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_Recurrent_Neural_Network_for_Un-Supervised_Learning_of_Monocular_Video_Visual_CVPR_2019_paper.pdf" target="_blank">Recurrent neural network for (un-) supervised learning of monocular video visual odometry and depth</a></h3>
+CVPR2019
+<br>
+Contributions:
+<ul>
+  <li><p>
+    convolutional Long Short-Term Memory (ConvLSTM) units: to carry temporal information from previous views into the current frame’s depth and visual odometry estimation.
+    Since it utilizes multiple views, the image reprojection constraint between <strong>multiple views</strong> can be incorporated into the loss (rather than only two consecutive frames), therefore it has performance improvement.
+    <br>
+    More details about the multi-view re-projectioin constraint can be found in the paper.
+  </p></li>  
+  <li><p>
+    forward-backward flow-consistency constraint (idea is from the GeoNet): provides additional supervision to image areas and improves the robustness and generalization ability of the model.
+    <br>
+    It works as self-supervision and regularization.
+    Through some strategies, we can get the dense flow field from k to k+1, while the dense flow field in k+1 can be estimated from the network. Therefore, minimize these two flow fields can provide additional supervision.
+  </p></li>  
+</ul>
+
+🤔The GeoNet：
+<details>
+<a href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Yin_GeoNet_Unsupervised_Learning_CVPR_2018_paper.pdf" target="_blank">Geonet: Unsupervised learning of dense depth, optical flow and camera pose</a>
+<br>
+CVPR2018
+<br>
+Contributions:
+<ul>
+  <li><p>
+    Jointly learning three components: depth, optical flow, and camera pose (VO), using divide-and-conquer strategy.
+    <br>
+    Most of the natural scenes are comprised of rigid static surfaces. 
+    Their projected 2D image motion between video frames can be fully determined by the depth structure and camera motion. 
+    Meanwhile, dynamic objects commonly exist in such scenes and usually possess the characteristics of large displacement and disarrangement
+  </p></li>  
+  <li><p>geometric consistency loss through forward-backward (or left-right) consistency check. 
+    <br>
+    This is based on the assumptions of photo consistency as well as the geometric consistency between the two consecutive frames.
+  </p> </li>
+  <li><p>Concept of dynamic VO: 
+    The 2D projection image of a static background between image frames is entirely determined by depth structure and camera motion, and can be simulated using optical flow to capture camera motion. 
+    While the motion of a dynamic target is determined by both camera motion and its own motion</p></li>
+</ul>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705111854.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+</details>
+<br>
+Methodology:
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705104043.png" alt="Image description">
+  </div>
+    <figcaption><p>
+      Training scheme of the proposed method.
+      <br>
+      Note that: with depth as input target, the network can estimate the depth at absolute scale, otherwise, the depth is only at relative scale.
+    </p></figcaption>
+</figure>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240705104842.png" alt="Image description">
+  </div>
+    <figcaption><p>
+      Network architecture of the proposed method.
+      Very similar to the UnDeepVO, but with the ConvLSTM.
+    </p></figcaption>
+</figure>
+
+<p><br></p>
+<h3><a href="https://proceedings.neurips.cc/paper/2021/file/89fcd07f20b6785b92134bd6c1d0fa42-Paper.pdf" target="_blank">DROID-SLAM: Deep Visual SLAM for Monocular,Stereo, and RGB-D Cameras</a></h3>
+NIPS2021
+<br>
+<ul>
+  <li><p>
+  In the perspective of mapping, DROID-SLAM employs a "stitched predictive optical flow + DBA + Upsample" approach, it significantly enhances the generalization of a pre-trained model across various scenarios compared to the existing depth estimation networks.
+  </p></li>
+  <li><p>
+  In the perspective of pose tracking, different from feature-based SLAM methods, DROID-SLAM fully utilizes 1/8 down-sampled RGB information and predicts optical flow using a pre-trained model, this eliminates the need for feature matching. 
+  On the other hand, compared to direct SLAM, the optical flow prediction module of the DROID-SLAM supports global BA, whereas direct-based methods cannot perform global BA between two frames that are far away from each other.
+  </p></li>
+  <li><p>Truly realize high accuracy pose estimation and based on their previous work RAFT(for optical flow tracking).</p></li>
+
+  <details>
+    <a href="https://arxiv.org/pdf/2003.12039" target="_blank">Raft: Recurrent all-pairs field transforms for optical flow</a>
+  
+    <figure style="text-align: center;">
+      <div style="margin-bottom: 10px;">
+        <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708102007.png" alt="Image description">
+      </div>
+        <figcaption><p>
+        </p></figcaption>
+    </figure>
+  </details>
+
+<li><p>
+  The feature extraction: is borrowed from the RAFT, which is composed of two separate networks: a feature network and a context network. T
+  The feature network is used to build the set of correlation volumes, while the context features are feed into the network during each application of the update operator.
+</p></li>
+
+<li><p>
+  The update operator: recurrent iterative updates, building on the RAFT, iteratively update the camera poses and depth. While each update is produced by differentiable dense bundle adjustment (DBA) layer.
+</p></li>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708105119.png" alt="Image description">
+  </div>
+    <figcaption>
+      update operator. It acts on edges in the frame graph, predicting flow revisions which are mapped to depth and pose update through the DBA layer.
+    </figcaption>
+</figure>
+
+<li>Dense Bundle Adjustment Layer (DBA): create the loss between the projected points and the predicted point of the update operator </li>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708112414.png" alt="Image description">
+  </div>
+    <figcaption>
+    </figcaption>
+</figure>
+
+</ul>
+
+Experiments:
+<ul>
+  <li>high robustness and good generalization ability: EuRoC, TUM-RGND, TartanAir, ETH-3D</li>  
+  <li>outperform the ORB-SLAM3 in EuRoC using monocular or stereo input</li>.
+</ul>
+
+
+<p><br></p>
+<h3><a href="https://proceedings.mlr.press/v155/wang21h/wang21h.pdf" target="_blank">Tartanvo: A generalizable learning-based vo</a></h3>
+CoRL2021
+<br>
+
+Contributions:
+<ul>
+  <li> <p>Pose the question: <mark>why haven’t we seen the deep learning models outperform geometry-based methods yet?</mark>
+    <br>
+    The first reason is the diversity of the training data. The motivation to solve this problem is based on the "common sense": a large number of studies show that training purely in simulation but with broad diversity, the model learned can be easily transferred to the real world.
+    <br>
+    The second reason is that most of the learning-based method ignore some fundamental nature of the problem which is well formulated in geometry-based VO theories. For example, the scale ambiguity, take the intrinsic parameters into consideration, etc.
+  </p></li>  
+  <li><p>
+    <strong>Only</strong>. using <a href="https://theairlab.org/tartanair-dataset/" target="_blank">TartanAir</a> data for training, so that: generalizes to multiple datasets and real-world scenarios (e.g. EuRoC, KITTI), outperforms the geometry-based methods in challenging scenarios.
+  </p></li>  
+  <li<p>
+    An up-to-scale loss function and the intrinsics layer (IL). Require the ground truth optical flow for training.
+  </p></li>  
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708115846.png" alt="Image description">
+    </div>
+      <figcaption>
+      </figcaption>
+  </figure>
+</ul>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708114901.png" alt="Image description">
+  </div>
+    <figcaption>
+    </figcaption>
+</figure>
+
+
+<p><br></p>
+<h3><a href="https://openaccess.thecvf.com/content/CVPR2022/papers/Parameshwara_DiffPoseNet_Direct_Differentiable_Camera_Pose_Estimation_CVPR_2022_paper.pdf" target="_blank">Diffposenet: Direct differentiable camera pose estimation</a></h3>
+CVPR2022
+<br>
+
+Motivations:
+<ul>
+  <li><p>
+    For the classical approaches, they use structure from motion estimate 3D motion utilizing optical flow and then compute depth.
+    Therefore, the pose estimation is dependent on the scene structure.
+    <br>
+    While the direct-based methods separate 3D motion from depth estimation, but compute 3D motion using only image gradients in the form of normal flow. 
+  </p></li>
+  <li><p>all the optical flow algorithms have large errors in regions of non-uniform gradient distributions. This should be common sense since the assumptions of the optical flow is the brightness constancy and the motion smoothness (should be equal to the gradient constancy).
+  </p></li>
+</ul>
+<p>
+  Therefore, this paper design a network for normal flow estimation (create the direct constraints).
+  Through the differentiable optimization layer to estimate the camera pose from the normal flow.
+  What's more, it also highlights the robustness and cross-dataset generalizability without any fine-tuning or re-training. 
+</p>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708123253.png" alt="Image description">
+  </div>
+    <figcaption>
+      <p>
+        The NFlowNet and the PoseNet are trained firstly.
+        Then the whole network is trained in self-supervision fashion via the refinement loss.
+        </p>
+    </figcaption>
+</figure>
+
+
+
+<p><br></p>
+<h3><a href="https://proceedings.neurips.cc/paper_files/paper/2023/file/7ac484b0f1a1719ad5be9aa8c8455fbb-Paper-Conference.pdf" target="_blank">Deep patch visual odometry</a></h3>
+NIPS2024
+<br>
+An extension of DROID-SLAM through using sparse VO, which achieves similar accuracy but much lower cost.
+<ul>
+  <li><p>
+    <a href="https://blog.csdn.net/gwplovekimi/article/details/139436796?spm=1001.2014.3001.5501" target="_blank">The evaluation and setup of the DPVO</a>
+  </p></li>  
+  <li><p>
+    <a href="https://github.com/KwanWaiPang/DPVO_comment" target="_blank">Self Comment of DPVO</a>
+  </p></li>
+</ul>
+
+
+
+😊There are some event-based works developed based on the DPVO:
+<details>
+  <li><a href="https://arxiv.org/pdf/2312.09800" target="_blank">Deep event visual odometry</a></li>
+  <br>
+  3DV2024
+  <br>
+  <a href="https://github.com/KwanWaiPang/DEVO_comment" target="_blank">Comment and evaluation of the DEVO</a>
+  <p>
+    Package the event data into voxel-based representation, and design a patch selector for the event data.
+    While the other part is same as the DPVO.
+  </p>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/DEVO.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+
+  <li><a href="https://rpg.ifi.uzh.ch/docs/Arxiv23_Pellerito.pdf" target="_blank">End-to-end Learned Visual Odometry with Events and Frames</a></li>
+</details>
+
+<p><br></p>
+<h2>Learning-based VIO</h2>
+<p>
+  The above mentioned methods are learning-based VO that use only the visual information.
+  It is wellknown that including an additional inertial measurement unit (IMU) can enhance the robustness of visual SLAM methods.
+  What's more, the IMU can estimate the absolute scale of the motion, it is easier to estimate the up-to-scale pose.
+</p>
+
+<p><br></p>
+<h3><a href="https://ojs.aaai.org/index.php/AAAI/article/view/11215" target="_blank">Vinet: Visual-inertial odometry as a sequence-to-sequence learning problem</a></h3>
+<br>
+AAAI2017
+<br>
+<a href="https://github.com/HTLife/VINet" target="_blank">Github Link</a>
+
+Contributions:
+<ul>
+  <li><p>
+    The first end-to-end trainable VIO.
+  </p></li>
+  <li><p>  
+  It eliminates the need for manual synchronization as well as calibration between the IMU and camera. 
+</p></li>
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709144117.png" alt="Image description">
+  </div>
+    <figcaption><p>
+      LSTM processing the pose output at camera-rate and an IMU LSTM processing data at the IMU rate.
+    </p></figcaption>
+</figure>
+
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/1906.11435" target="_blank">Deepvio: Self-supervised deep learning of monocular visual inertial odometry using 3d geometric constraints</a></h3>
+<br>
+IROS2019
+<br>
+<p>
+  Motivations:
+  <br>
+  The direct-based representative DSO and the feature-based representative ORB-SLAM both achieve very high localization accuracy in the large-scale environment, and real-time performance with commercial CPUs. 
+  However, they still face some challenging issues when they are deployed in non-textured environments, serious image blur or under extreme lighting conditions.
+  <br>
+  VIO are proposed to eliminate these limitations.
+  However, the current VIO systems heavily rely on manual interference to analyze failure cases and refine localization results. Furthermore, all these VIO systems require careful parameter tuning procedures for the specific environment they have to work in.
+  <br>
+  Compared to the traditional methods, DeepVIO reduces the impacts of inaccurate CameraIMU calibrations, unsynchronized and missing data.
+</p>
+Contributions:
+<ul>
+  <li><p>
+    Merging 2D optical flow feature and the IMU data. 
+    <br>
+    2D optical flow network is constrained by the projection of its corresponding 3D optical flow.
+    While the 3D optical flow is obtained through estimating the depth and dense 3D point cloud of each scene by using stereo sequences.
+    <br>
+    The IMU data is feed to the LSTM-style IMU pre-integration network.
+  </p></li>
+</ul>
+
+Methodology:
+<ul>
+  <li><p> 
+    The network is composed of CNN-Flow, LSTM-IMU, and FC-fusion network.
+    <br>
+    CNN-Flow: estimated the 2D optical flow.
+    <br>
+    LSTM-IMU: works as IMU pre-integration network to calculate the relative 6-DoF pose between adjacent two frames.
+    (The LSTM network is usually difficult to coverage because of the noises and changes of IMU data).
+    <br>
+    FC-Fusion network: calculate the final pose.
+  </p></li>
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709150331.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+😊The point of se3 and so3 can be seen as following：
+<details>
+  <a href="https://blog.csdn.net/gwplovekimi/article/details/116943603" target="_blank">My CSDN blog for the understanding of SO3, SE3 and the so3, se3</a>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信图片_20240709160404.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+</details>
+
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/2306.01173" target="_blank">Bamf-slam: bundle adjusted multi-fisheye visual-inertial slam using recurrent field transforms</a></h3>
+ICRA2023
+<br>
+Contributions:
+<ul>
+  <li><p>
+    DROID-SLAM+IMU: utilizes Bundle Adjustment (BA) and recurrent field transforms (RFT) to achieve accurate and robust state estimation.
+    <br>
+    minimize the re-projection errors of dense depth maps using the prediction of RFT as targets (DROID-SLAM and RAFT).
+  </p></li>
+  <li><p>
+    using the fisheye images, integration of multi-camera inputs.
+  </p></li>
+  <li><p>
+    loop closure: the wide FoV of the fisheye camera allows the system to find more potential loop closures, and powered by the broad convergence basin of RFT, it can perform very wide loop closing with little overlap.
+  </p></li>
+  <li><p>
+    Proposed semi-pose-graph BA method to avoid the expensive full global BA.
+  </p></li>
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709172150.png" alt="Image description">
+  </div>
+    <figcaption>
+      builds based on DROID-SLAM and extends it to a multi-camera VI-SLAM system.
+    </figcaption>
+</figure>
+
+<ul>
+  <li><p>
+    Despite only being trained on the TartanAir dataset of pinhole images, the pre-trained model by DROID-SLAM has excellent generalization ability on fisheye images. Therefore, the author use the pre-trained model without further fine-tuning.
+   </p> </li>
+  <li>
+    The IMU initialization is adopted from ORB-SLAM3.
+  </li>
+  <li>
+    marginalization is not considered.
+  </li>
+</ul>
+
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/2309.13814" target="_blank">DVI-SLAM: A dual visual inertial SLAM network</a></h3>
+<br>
+Contributions:
+<ul>
+  <li><p>
+    integrate both photometric factor and re-projection factor into the end-to-end differentiable structure through multi-factor data association module. (feature-based + direct-based)
+  </p></li>  
+  <li>The output is camera pose (rotation and translation), depth map, and IMU motion (velocity, ba, bg).
+  </li>
+  <li><p>
+    feature-metric factor (served as the direct-based method?). 
+    <br>
+    Using the feature extraction model of DROID-SLAM to extract the correlation features (for estimate the dense flow map), this acts as feature-based method.
+    <br>
+    add a U-Net structure to extract the appearance feature, this acts as direct-based method.
+  </p></li>  
+</ul>
+
+Methodology:
+<ul>
+  <li><p>
+    build upon DROID-SLAM, it consists of two modules and one layer: (a) a feature extraction module, (b) a multi-factor data association module, and (c) a multi-factor DBA layer.
+  </p></li>  
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240708170446.png" alt="Image description">
+  </div>
+    <figcaption><p>
+      the re-projection factor dominates at the early stage of BA optimization to get a good initialization and avoid getting stuck in local minima. 
+      In the later stage, both the feature-metric factor and re-projection factor smoothly steer the joint optimization towards a true minimum. 
+      The network also dynamically adjusts the confidence map of IMU factor. 
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Confidence-based Re-projection Residual (adopted from the DROID-SLAM)</li>
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709104332.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Confidence-based Feature-metric Residual (the "direct-based methods"). Very similar to the previous one</li>
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709104528.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Confidence-based Inertial Residual (basic knowledge of the IMU pre-integration)</li>
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709104706.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Final residual to get the pose</li>
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709104744.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Final loss</li>
+  Including the pose loss, flow loss, re-projection loss, and feature-metric loss.
+  <br>
+  (i) The pose loss is the distance between ground truth pose and the predicted pose, 
+  <br>
+  (ii) The low flow loss is the distance between the predicted flow and GT flow which is converted from GT pose and depth. 
+  <br>
+  (iii) Re-projection loss and feature-metric loss are the distances of the re-projection error and feature-metric error.
+  <br>
+  The network is required to be trained in three state with supervision of the pose, GT flow.
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240709105753.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p>
+  <li>Initialization</li>
+  DVI-SLAM initialization follows the VINS-Mono method.
+  <br>
+  Firstly, multiple keyframes are collected to build a frame graph, and camera pose and inverse depth states are optimized by DBA layer.
+  <br>
+  Then initialize the gravity direction and IMU motion according to the estimated camera pose and IMU pre-integration result.
+  For the monocular visual and inertial streams, the absolute scale is also initialized. 
+  <br>
+  Finally, minimize re-projection residual, feature-metric residual, and inertial residual with DBA layer to refine camera pose, motion, and inverse depth.
+</p>
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/2403.13714" target="_blank">DBA-Fusion: Tightly Integrating Deep Dense Visual Bundle Adjustment with Multiple Sensors for Large-Scale Localization and Mapping</a></h3>
+<br>
+RAL2024
+<br>
+<a href="https://github.com/GREAT-WHU/DBA-Fusion" target="_blank">Github Link</a>
+<br>
+Motivations:
+<ul>
+  <li><p>
+    Fusing learning-based methods with multi-sensor information.
+  </p></li>  
+</ul>
+
+Contributions:
+<ul>
+  <li><p>
+    This work proposed the <strong>generic factor graph framework</strong> to tightly integrate the trainable deep dense bundle adjustment (DBA) with multi-sensor information through a factor graph.
+    <br>
+    The Hessian information derived from DBA is fed into a generic factor graph for multi-sensor fusion, which employs a sliding window and supports probabilistic marginalization.
+    <br>
+    for enhancing the learning-based visual SLAM through multi-sensor fusion.
+  </p></li>  
+
+  <li><p>  
+    Flexibly fuses a trainable visual SLAM with multi-sensor information (e.g. IMU, wheel odometry, GPS, etc.).
+  </p></li>  
+</ul>
+
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/DBA-Fusion.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+key-points:
+<ul>
+  <li><p>
+    More details of the code-comment and the testing can be seen in <a href="https://github.com/KwanWaiPang/DBA-Fusion_comment" target="_blank">Link</a>.
+  </p></li>
+  <li><p>
+    The visual-inertial initialization is same as DVI-SLAM (also adopted from VINS-Mono).
+  </p></li>
+  <li><p>
+    For the learning-based visual process, aka. the recurrent optical flow is from the network which is pre-trained in the DROID-SLAM.
+  </p></li> 
+</ul>
+
+Experiments, no bad~:
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/DBA-Fusion_result.png" alt="Image description">
+  </div>
+    <figcaption><p>
+    </p></figcaption>
+</figure>
+
+<p><br></p>
+<h3><a href="https://arxiv.org/pdf/2405.16754" target="_blank">Adaptive VIO: Deep Visual-Inertial Odometry with Online Continual Learning</a></h3>
+
+<p>
+  Motivations: 
+  <br>
+  1. Traditional VIO is less robustness, which can be attributed to the reliance on low-level and hand-crafted visual features.
+  <br>
+  2. trajectory drift caused by IMU bias is also one of the critical reasons affecting the system’s performance, while traditionally modeling IMU bias as a random walk is insufficient to reflect its evolutionary patterns.
+</p>
+
+<p>
+Key-points: using two networks to predict visual correspondences and <strong> IMU bias </strong>, respectively.
+Combining deep learning with the visual-inertial bundle adjustment.
+<br> Frameworks of different VIO methods:
+<ul>
+  <li>(a) Classic optimization-based method. </li>
+  <li>(b)End-to-end learning-based method. </li>
+  <li>(c) Learning-optimization-combined method with online continual learning.</li>
+</ul>
+</p>
+<figure style="text-align: center;">
+  <div style="margin-bottom: 10px;">
+    <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240711101925.png" alt="Image description">
+  </div>
+    <figcaption>
+      Learning-based modules are colored in orange.
+      Traditional computational modules are colored in green. 
+    </figcaption>
+</figure>
+
+Methodology:
+<ul>
+  <li> The pipeline of the method</li>
+  <figure style="text-align: center;">
+    <div style="margin-bottom: 10px;">
+      <img style="width: 100%;" src="https://kwanwaipang.github.io/Poster_files/learning_based_VO/微信截图_20240711102705.png" alt="Image description">
+    </div>
+      <figcaption><p>
+      </p></figcaption>
+  </figure>
+  <li> The feature encoder and visual correspondence predictor adopt similar network structures to DPVO, but without the hidden state.</li>
+
+  <li>The online continual learning is proposed to handle the performance degradation in unseen environment. </li>
+  <li>The visual network requires pre-training, while the IMU bias network does not. (since it has the online continual learning).</li>
+</ul>
+
+
+<p><br></p>
+<h1>Reference or Marks</h1>
+<ul>
+  <!-- <li></li> -->
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84647354" target="_blank">what is Normalization</a></li>
+  <li> <a href="https://blog.csdn.net/gwplovekimi/article/details/84539021" target="_blank">different kinds of Normalization</a></li>
+  <li> <a href="https://blog.csdn.net/qin_liang/article/details/132868855" target="_blank">Learned-Based VO 梳理（USTC Paper Reading）</a> </li>
+  <li> <a href="https://blog.csdn.net/qin_liang/article/details/132708994" target="_blank">深度学习相关VO梳理</a> </li>
+  <li> <a href="https://github.com/lichunshang/deep_ekf_vio" target="_blank">Deep EKF VIO</a> </li>
+  <li> <a href="https://github.com/uoip/stereo_msckf" target="_blank">Python reimplemention of S-MSCKF</a> </li>
+  <li> <a href="https://github.com/rohiitb/msckf_vio_python" target="_blank">MSCKF (Multi-State Constraint Kalman Filter) implementation in Python</a> </li>
+</ul>
+
+
+</article>
+</div>
+</div>
+
+<!-- Footer -->    
+<footer class="nofixed-bottom">
+<div class="container mt-0" style="width:100%;text-align:center;">
+  <!-- Please feel free to contact me through <a href="https://kwanwaipang.github.io/" target="_blank">my personal website</a> -->
+  A simple star should be the best affirmation 
+  <!-- 载入GitHub按钮库 -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Star按钮 -->
+  <a class="github-button" 
+    href="https://github.com/KwanWaiPang/KwanWaiPang.github.io" 
+    data-icon="octicon-star" 
+    data-size="small"
+    data-show-count="true" 
+    aria-label="Star 你的用户名/你的仓库名 on GitHub">Star</a>
+</div>
+</footer>
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha256-l/1pMF/+J4TThfgARS6KwWrk/egwuVvhRzfLAMQ6Ds4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/ecmd/assets/js/masonry.js" type="text/javascript"></script>
+
+  <!-- Medium Zoom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="/ecmd/assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script src="/ecmd/assets/js/common.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <!-- 下面是插入目录的 -->
+  <!-- <script> -->
+    <!-- document.addEventListener("DOMContentLoaded", function() { -->
+        <!-- const toc = document.querySelector("#toc ul"); -->
+        <!-- const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6"); -->
+        <!-- headers.forEach(header => { -->
+            <!-- const li = document.createElement("li"); -->
+            <!-- const a = document.createElement("a"); -->
+            <!-- const id = header.textContent.replace(/\s+/g, "-").toLowerCase(); -->
+            <!-- header.setAttribute("id", id); -->
+            <!-- a.setAttribute("href", `#${id}`); -->
+            <!-- a.textContent = header.textContent; -->
+            <!-- li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`; -->
+            <!-- li.appendChild(a); -->
+            <!-- toc.appendChild(li); -->
+        <!-- }); -->
+    <!-- }); -->
+<!-- </script> -->
+
+  <!-- 下面是自定义的一系列功能 -->
+  <script>
+    //下面是插入目录的
+    document.addEventListener("DOMContentLoaded", function() {
+        const toc = document.querySelector("#toc ul");
+        const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+        headers.forEach(header => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+            header.setAttribute("id", id);
+            a.setAttribute("href", `#${id}`);
+            a.textContent = header.textContent;
+            li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+            li.appendChild(a);
+            toc.appendChild(li);
+        });
+    });
+
+    // 添加按钮点击事件
+    const button = document.getElementById("scrollToTocButton");
+    button.addEventListener("click", function() {
+        document.querySelector("#toc").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // 添加新的目录
+    const newToc = document.querySelector("#newToc ul");
+    const headers = document.querySelectorAll(".post h1, .post h2, .post h3, .post h4, .post h5, .post h6");
+
+    headers.forEach(header => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        const id = header.textContent.replace(/\s+/g, "-").toLowerCase();
+        header.setAttribute("id", id);
+        a.setAttribute("href", `#${id}`);
+        a.textContent = header.textContent;
+        li.style.marginLeft = `${(parseInt(header.tagName.substring(1)) - 2) * 20}px`;
+        li.appendChild(a);
+        newToc.appendChild(li);
+    });
+
+    // 控制新的目录的显示与隐藏
+    const toggleButton = document.getElementById("toggleTocButton");
+    toggleButton.addEventListener("click", function() {
+        if (newToc.parentElement.style.display === "none") {
+            newToc.parentElement.style.display = "block"; // 展开新目录
+        } else {
+            newToc.parentElement.style.display = "none"; // 收起新目录
+        }
+    });
+</script>
+
+</body>
+</html>
+
