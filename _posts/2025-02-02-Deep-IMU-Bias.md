@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Paper Survey之——Deep IMU-Bias Inference"
+title: "Paper Survey之——Awesome Deep IMU-Bias Inference"
 date:   2025-02-02
 tags: [SLAM, Deep Learning]
 comments: true
