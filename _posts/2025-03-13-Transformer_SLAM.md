@@ -29,7 +29,7 @@ toc: false #true
 
 ## Transformer-based SLAM
 
-<!-- |-|`arXiv`|-|-|-| -->
+<!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 | Year | Venue | Paper Title | Repository | Note |
@@ -41,11 +41,12 @@ toc: false #true
 
 ## Transformer-based Pose Tracking
 
-<!-- |-|`arXiv`|-|-|-| -->
+<!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[XIRVIO: Critic-guided Iterative Refinement for Visual-Inertial Odometry with Explainable Adaptive Weighting](https://arxiv.org/pdf/2503.00315)|---|---|
 |2025|`IEEE Acess`|[Transformer-based model for monocular visual odometry: a video understanding approach](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10845764)|[![Github stars](https://img.shields.io/github/stars/aofrancani/TSformer-VO.svg)](https://github.com/aofrancani/TSformer-VO)|-|
 |2024|`arXiv`|[MASt3R-SfM: a Fully-Integrated Solution for Unconstrained Structure-from-Motion](https://arxiv.org/pdf/2409.19152)|[![Github stars](https://img.shields.io/github/stars/naver/mast3r.svg)](https://github.com/naver/mast3r/tree/mast3r_sfm)|MASt3R sfm version|
 |2024|Msc Thesis|[End-to-End Learned Visual Odometry Based on Vision Transformer](https://www.utupub.fi/bitstream/handle/10024/178848/Aman_Manishbhai_Vyas_Thesis.pdf?sequence=1)|-|-|
@@ -54,13 +55,14 @@ toc: false #true
 |2023|`CVPR`|[Modality-invariant Visual Odometry for Embodied Vision](https://openaccess.thecvf.com/content/CVPR2023/papers/Memmel_Modality-Invariant_Visual_Odometry_for_Embodied_Vision_CVPR_2023_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/memmelma/VO-Transformer.svg)](https://github.com/memmelma/VO-Transformer)|[Website](https://memmelma.github.io/vot/)
 |2023|`MAV`|[ViTVO: Vision Transformer based Visual Odometry with Attention Supervision](https://elsalab.ai/publications/2023/ViTVO_Vision_Transformer_based_Visual_Odometry_with_Attention_Supervision.pdf)|-|-|
 |2023|`International Conference on Haptics and Virtual Reality`|[VIOFormer: Advancing Monocular Visual-Inertial Odometry Through Transformer-Based Fusion](https://link.springer.com/chapter/10.1007/978-3-031-56521-2_2)|-|-|
+|2022|`IEEE-SJ`|[Ema-vio: Deep visual–inertial odometry with external memory attention](https://arxiv.org/pdf/2209.08490)|---|---|
 |2022|`IROS`|[AFT-VO: Asynchronous fusion transformers for multi-view visual odometry estimation](https://arxiv.org/pdf/2206.12946)|-|-|
 |2022|`arXiv`|[Dense prediction transformer for scale estimation in monocular visual odometry](https://arxiv.org/pdf/2210.01723)|-|-|
 |2021|`Neural Computing and Applications`|[Transformer guided geometry model for flow-based unsupervised visual odometry](https://arxiv.org/pdf/2101.02143)|-|-|
 
 ## Transformer-based Optical Flow
 
-<!-- |-|`arXiv`|-|-|-| -->
+<!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 | Year | Venue | Paper Title | Repository | Note |
@@ -78,7 +80,7 @@ toc: false #true
 
 ## Transformer-based Mapping
 
-<!-- |-|`arXiv`|-|-|-| -->
+<!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 | Year | Venue | Paper Title | Repository | Note |
@@ -126,8 +128,12 @@ toc: false #true
 * [Awesome-Transformer-Attention](https://github.com/cmhungsteve/Awesome-Transformer-Attention)
 * [Dense-Prediction-Transformer-Based-Visual-Odometry](https://github.com/sumedhreddy90/Dense-Prediction-Transformer-Based-Visual-Odometry)
 * [Visual SLAM with Vision Transformers(ViT)](https://github.com/MisterEkole/slam_with_vit)
+* [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
 
+# Paper Reading
+接下来重点阅读几篇有意思的论文
 
-<!-- # Paper Reading
-接下来重点阅读几篇有意思的论文 -->
+## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
+* [paper](https://arxiv.org/pdf/2409.08769)
+* [github](https://github.com/ybkurt/VIFT)
 
