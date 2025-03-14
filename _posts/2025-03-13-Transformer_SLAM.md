@@ -19,13 +19,17 @@ toc: false #true
 
 本博文仅供本人学习记录用~
 
+相关链接：
+
 * [What is Transformer? Form NLP to CV](https://kwanwaipang.github.io/Transformer/)
 * [Survey for Learning-based VO/VIO](https://kwanwaipang.github.io/File/Blogs/Poster/Learning_based_VO.html)
 * [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
-* Keep update the paper list in: [Awesome-Transformer-based-SLAM](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM)
 
 
 # Paper List
+
+* 注意，此处非最新版，仅仅是写此博客的时候的记录
+* Keep update the paper list in: [Awesome-Transformer-based-SLAM](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM)
 
 ## Transformer-based SLAM
 
