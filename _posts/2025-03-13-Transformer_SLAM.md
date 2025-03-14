@@ -132,7 +132,7 @@ toc: false #true
 * [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
 
 # Paper Reading
-接下来重点阅读几篇有意思的论文
+接下来重点阅读几篇论文
 
 ## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
 
@@ -150,9 +150,38 @@ toc: false #true
 </figcaption>
 </div>
 
-这篇工作采用的结构与思路其实跟ECCV2022的[Efficient deep visual and inertial odometry with adaptive visual modality selection](https://arxiv.org/pdf/2205.06187)很类似，如下图所示。该工作采用的是LSTM进行融合，此处改为Transformer，当然Visual-Selective-VIO的监督loss是考虑了translation和rotation的
+* 更正，后续loss function可以看到，监督是同时监督rotation和translation的，只是对于rotation用的是旋转矩阵，而不是欧拉角或者四元数
+
+<div align="center">
+  <img src="../images/微信截图_20250314135327.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+这篇工作采用的结构与思路其实跟ECCV2022的[Efficient deep visual and inertial odometry with adaptive visual modality selection](https://arxiv.org/pdf/2205.06187)很类似，如下图所示。该工作采用的是LSTM进行融合，此处改为Transformer，当然Visual-Selective-VIO的监督loss是考虑了translation和rotation的.
 <div align="center">
   <img src="../images/微信截图_20250314130039.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
+
+而本文的imu的encoder也是采用该工作网络结构与训练权重的，image则是采用Flownet及其预训练权重。这两者在训练过程都是fix住的，没有重新训练（不过github写的是`We use pretrained image and IMU encoders of Visual-Selective-VIO model`）
+
+本文所谓的`Causal Transformer`如下图所示。跟ViT的结构差不多，最后通过两层的MLP来输出pose（6个自由度，N+1张图片对应N组姿态结果）
+
+<div align="center">
+  <img src="../images/微信截图_20250314134510.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+训练采用的是KITTI odometry数据集（验证也是KITTI，无泛化其他数据集的验证）。
+实验对比效果如下图所示
+
+<div align="center">
+  <img src="../images/微信截图_20250314135722.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
