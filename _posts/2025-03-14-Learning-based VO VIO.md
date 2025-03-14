@@ -23,12 +23,12 @@ toc: true
 <div align="center" style="
   position: relative; 
   width: 100%; 
-  height: auto;
+  height: 100%;
   margin: 0 auto;
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <iframe src="../File/Blogs/Poster/Learning_based_VO.html" width="100%" height="auto" frameborder="0"></iframe>
+  <iframe src="../File/Blogs/Poster/Learning_based_VO.html" width="100%" height="100%" frameborder="0"></iframe>
 </div>
 {% endraw %}
 
