@@ -89,7 +89,7 @@ kramdown:
 # _config.yml
 includes_dir: 
   - _includes       # 保留默认目录
-  - File/Blogs      # 添加你的自定义目录（或完整路径,以此include其他html代码）
+  - File\Blogs      # 添加你的自定义目录（或完整路径,以此include其他html代码）
 
 #
 # !! You don't need to change any of the configuration flags below !!
