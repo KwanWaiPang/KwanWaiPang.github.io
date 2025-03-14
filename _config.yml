@@ -85,10 +85,6 @@ kramdown:
   math_engine: mathjax  # 启用 MathJax 渲染
   syntax_highlighter: rouge
 
-
-# 添加会include的html代码
-includes_dir: [_includes, File/Blogs/Poster]
-
 #
 # !! You don't need to change any of the configuration flags below !!
 #
