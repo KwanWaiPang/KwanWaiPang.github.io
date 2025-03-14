@@ -18,6 +18,6 @@ toc: true
 
 
 
-{% include /File/Blogs/Poster/Learning_based_VO.html %}
+{% include Learning_based_VO.html %}
 
 
