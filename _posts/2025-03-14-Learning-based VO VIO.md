@@ -17,5 +17,5 @@ toc: true
 # 引言
 
 
-{% include ../File/Blogs/Poster/Learning_based_VO.html %}
+{% include /Poster/Learning_based_VO.html %}
 
