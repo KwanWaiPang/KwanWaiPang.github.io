@@ -17,5 +17,7 @@ toc: true
 # 引言
 
 
-{% include /Poster/Learning_based_VO.html %}
+{% raw %}
+{% include /File/Blogs/Poster/Learning_based_VO.html %}
+{% endraw %}
 
