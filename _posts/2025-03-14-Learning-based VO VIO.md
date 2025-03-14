@@ -17,15 +17,20 @@ toc: true
 # 引言
 
 
-<!-- 通过 JavaScript 动态加载 -->
-<script>
-fetch("../File/Blogs/Poster/Learning_based_VO.html")
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById("target-container").innerHTML = html;
-  });
-</script>
-<div id="target-container"></div>
+
+<!-- 使用 iframe 嵌入html -->
+{% raw %}
+<div align="center" style="
+  position: relative; 
+  width: 100%; 
+  height: auto;
+  margin: 0 auto;
+  border-radius: 15px;
+  background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
+  ">
+  <iframe src="../File/Blogs/Poster/Learning_based_VO.html" width="100%" height="auto" frameborder="0"></iframe>
+</div>
+{% endraw %}
 
 
 
