@@ -51,7 +51,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
-|2025|`arXiv`|[XIRVIO: Critic-guided Iterative Refinement for Visual-Inertial Odometry with Explainable Adaptive Weighting](https://arxiv.org/pdf/2503.00315)|---|---|
+|2025|`arXiv`|[XIRVIO: Critic-guided Iterative Refinement for Visual-Inertial Odometry with Explainable Adaptive Weighting](https://arxiv.org/pdf/2503.00315)|---|Transformer + GAN|
 |2025|`IEEE Acess`|[Transformer-based model for monocular visual odometry: a video understanding approach](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10845764)|[![Github stars](https://img.shields.io/github/stars/aofrancani/TSformer-VO.svg)](https://github.com/aofrancani/TSformer-VO)|ViT for VO|
 |2024|`arXiv`|[MASt3R-SfM: a Fully-Integrated Solution for Unconstrained Structure-from-Motion](https://arxiv.org/pdf/2409.19152)|[![Github stars](https://img.shields.io/github/stars/naver/mast3r.svg)](https://github.com/naver/mast3r/tree/mast3r_sfm)|MASt3R sfm version|
 |2024|Msc Thesis|[End-to-End Learned Visual Odometry Based on Vision Transformer](https://www.utupub.fi/bitstream/handle/10024/178848/Aman_Manishbhai_Vyas_Thesis.pdf?sequence=1)|---|ViT for VO|
@@ -139,7 +139,18 @@ toc: false #true
 # Paper Reading
 接下来重点阅读几篇论文
 
+## MASt3R系列
+请见博客：
+* [实验笔记之——MASt3R-SLAM](https://kwanwaipang.github.io/MASt3R-SLAM/)
+* [论文阅读及复现笔记之——《Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass》](https://kwanwaipang.github.io/Fast3R/)
+* [DUSt3R与MASt3R学习博客](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
+
 ## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
+
+~~~
+见上面表格`Transformer-based Pose Tracking`
+很多的相关工作其实都是用transformer来进行多传感器融合（比如多个camera，camera与imu，camera与depth/lidar）
+~~~
 
 <!-- * [paper](https://arxiv.org/pdf/2409.08769)
 * [github](https://github.com/ybkurt/VIFT) -->
@@ -189,4 +200,10 @@ toc: false #true
 <figcaption>  
 </figcaption>
 </div>
+
+## Transformer-based model for monocular visual odometry: a video understanding approach
+
+这篇论文以及论文《[End-to-End Learned Visual Odometry Based on Vision Transformer](https://www.utupub.fi/bitstream/handle/10024/178848/Aman_Manishbhai_Vyas_Thesis.pdf?sequence=1)》本质上都是直接用ViT 来做 VO任务，也是真正意义上的image input到transformer然后输出pose的工作。而此前的，Transformer VO除了只是做sensor fusion就是要其他光流、深度估计网络结合用的~
+
+ 
 
