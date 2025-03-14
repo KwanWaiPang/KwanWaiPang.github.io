@@ -135,6 +135,19 @@ toc: false #true
 * [Dense-Prediction-Transformer-Based-Visual-Odometry](https://github.com/sumedhreddy90/Dense-Prediction-Transformer-Based-Visual-Odometry)
 * [Visual SLAM with Vision Transformers(ViT)](https://github.com/MisterEkole/slam_with_vit)
 * [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
+* Some basic paper in ViT:
+
+| Year | Venue | Paper Title | Repository | Note |
+|:----:|:-----:| ----------- |:----------:|:----:|
+|2021|`ICML`|[Is space-time attention all you need for video understanding?](https://arxiv.org/pdf/2102.05095)|[![Github stars](https://img.shields.io/github/stars/facebookresearch/TimeSformer.svg)](https://github.com/facebookresearch/TimeSformer)|ViT+CNN，TimeSformer|
+|2021|`ICCV`|[Vivit: A video vision transformer](https://openaccess.thecvf.com/content/ICCV2021/papers/Arnab_ViViT_A_Video_Vision_Transformer_ICCV_2021_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/lucidrains/vit-pytorch.svg)](https://github.com/lucidrains/vit-pytorch)|---|
+|2020|`CoLR`|[An image is worth 16x16 words: Transformers for image recognition at scale](https://arxiv.org/pdf/2010.11929/1000)|[![Github stars](https://img.shields.io/github/stars/google-research/vision_transformer.svg)](https://github.com/google-research/vision_transformer)|ViT|
+
+
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+
+
 
 # Paper Reading
 接下来重点阅读几篇论文
@@ -205,5 +218,31 @@ toc: false #true
 
 这篇论文以及论文《[End-to-End Learned Visual Odometry Based on Vision Transformer](https://www.utupub.fi/bitstream/handle/10024/178848/Aman_Manishbhai_Vyas_Thesis.pdf?sequence=1)》本质上都是直接用ViT 来做 VO任务，也是真正意义上的image input到transformer然后输出pose的工作。而此前的，Transformer VO除了只是做sensor fusion就是要其他光流、深度估计网络结合用的~
 
- 
+因此虽然这篇论文是Access，但是还是值得看看的
 
+这篇论文的思路就是`visual odometry as a video understanding problem`因此直接从输入的序列图片中获取6D pose.
+
+而采用的framework则是TimeSformer，来自于《[Is space-time attention all you need for video understanding?](https://arxiv.org/pdf/2102.05095)》然后重新设计MSE loss来实现对姿态估计的回归而不是分类任务。
+而所谓的MSE loss就是跟GT求误差啦~
+<div align="center">
+  <img src="../images/微信截图_20250314160538.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+其framework如下图所示，跟基本的ViT是差不多的，把输入的图片分割为$N=H*W/p^2$个patch，然后通过CNN(2D卷积)来转换为token输入，而transformer的结构则是用TimeSformer
+
+<div align="center">
+  <img src="../images/微信截图_20250314160039.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+最终结果如下图所示（所谓的TSformer-VO1、2、3就是multi head self attention的head数目分别为2、3、4）
+
+<div align="center">
+  <img src="../images/微信截图_20250314160854.png" width="60%" />
+  <img src="../images/微信截图_20250314160923.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
