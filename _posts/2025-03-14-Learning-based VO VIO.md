@@ -6,6 +6,7 @@ tags: [SLAM,Deep Learning]
 comments: true
 author: kwanwaipang
 toc: true
+html_variable: ../File/Blogs/Poster/Learning_based_VO.html
 ---
 
 
@@ -18,7 +19,9 @@ toc: true
 
 
 
-{% include_absolute '../File/Blogs/Poster/Learning_based_VO.html' %}
+{% if page.html_variable %}
+  {% include {{ page.html_variable }} %}
+{% endif %}
 
 
 
