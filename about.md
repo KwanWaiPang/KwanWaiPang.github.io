@@ -22,7 +22,7 @@ permalink: /about/
 <div id="iframe-wrapper">
   <iframe 
     id="iframe-content"
-    src="./index.html" 
+    src="https://kwanwaipang.github.io/index.html" 
     onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
   ></iframe>
 </div>
