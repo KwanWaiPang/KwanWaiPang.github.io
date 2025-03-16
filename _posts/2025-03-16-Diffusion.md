@@ -119,12 +119,71 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 
 ## Forward diffusion process
 
+在正向过程中，来自训练集的图片$X_{0}$会加入$T$次噪声，使得最终得到图像$X_{T}$为符合标准正态分布。
+准确来说，`加噪声`并不是给上一时刻的图像加上噪声值，而是从一个均值与上一时刻图像相关的正态分布里采样出一幅新图像。直观解析通过下面公式来表述：
 
+<div align="center">
+  <img src="../images/微信截图_20250316113956.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+其中$X_{t-1}$为上一时刻的图像，$X_{t}$为当前加了噪声后生成的图像。可以理解为它是从一个均值为$X_{t-1}$的正态分布中采样出来的。
+
+PS：这个过程也符合马尔可夫过程，因为当前状态仅仅由上一状态决定，不会由更早的状态决定。
+
+而为了让每一步加噪声的过程能够从慢到快改变原图像，让最终的图像$X_{T}$为均值0，方差$I$(标准正态分布)，那么加噪声的扩散模型会设置为：
+
+<div align="center">
+  <img src="../images/微信截图_20250316114847.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+具体的推导为什么是$1-\beta$的形式请见[Link](https://zhouyifan.net/2023/07/07/20230330-diffusion-model/)
 
 
 ## Reverse diffusion process
 
+在正向过程中，人为设置了$T$步加噪声过程。而在反向过程中，则是希望能够倒过来取消每一步加噪声操作，让一幅纯噪声图像变回数据集里的图像。
+这样，利用这个去噪声过程，就可以把任意一个从标准正态分布里采样出来的噪声图像变成一幅和训练数据长得差不多的图像，从而起到图像生成的目的。
 
+而对于上述正向过程的$\beta_{t}$只要足够的小，那么每一步加噪声的逆操作也会满足正态分布
+
+<div align="center">
+  <img src="../images/微信截图_20250316115354.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而当前时刻加噪声的逆操作的均值$\tilde{\mu}_{t}$和方差$\tilde{\beta}_{t}$则是由当前的时刻$t$和当前的图像$X_{t}$来决定。
+网络应该就是输入$t$和$X_{t}$拟合获得当前的均值$\tilde{\mu}_{t}$和方差$\tilde{\beta}_{t}$。而它的均值的求解过程请见[Link](https://zhouyifan.net/2023/07/07/20230330-diffusion-model/)，下面直接给出结果
+
+<div align="center">
+  <img src="../images/微信截图_20250316120326.png" width="60%" />
+  <img src="../images/微信截图_20250316120333.png" width="60%" />
+<figcaption>  
+给定某个输入时，去噪的正态分布的均值和方差是可以用解析式表达出来的
+</figcaption>
+</div>
+
+$\beta_{t}$为加噪声的方差，是一个常量。<img src="../images/微信截图_20250316120441.png" width="30%" />
+而$\varepsilon_{t}$则是前面正向过程的时候从对应的$\varepsilon$(注意下面时间表达差一个时刻):
+
+<div align="center">
+  <img src="../images/微信截图_20250316121015.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于神经网络拟合均值的时候，$x_{t}$为已知，，那么上面公式中就只有$\varepsilon_{t}$是不确定的，那么网络实际上只需要预测方差$\varepsilon_{t}$即可获得对应的去噪的均值$\tilde{\mu}_{t}$和方差$\tilde{\beta}_{t}$。
+
+对于网络预测的$\varepsilon_{\theta}(x_{t},t)$($\theta$为网络可学习参数)，让其和生成$x_{t}$的时候用的噪声方差$\tilde{\beta}_{t}$的均方误差最小即可：
+
+<div align="center">
+  <img src="../images/微信截图_20250316124144.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
