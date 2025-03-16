@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "基于CPP的算法学习笔记"
+title: "Paper Survey之——LiDAR-SLAM中的退化检测"
 date:   2025-03-16
-tags: [Coding]
+tags: [SLAM]
 comments: true
 author: kwanwaipang
-toc: fasle #true
+toc: true
 ---
 
 
@@ -16,14 +16,15 @@ toc: fasle #true
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <!-- # 引言 -->
 
-本博文汇总了本人学习算法以及刷Leetcode、牛客网等题目的过程中的一些笔记，主要是基于C++的实现。 具体代码运行及测试请见[My Leetcode](https://leetcode.cn/u/kwan-wai-pang/)
-* 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/cpp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html)
+本博文主要介绍了一些用于检测和解决激光雷达SLAM中退化问题的算法。
+
+* 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/Degeneracy_for_lidar.html)
 
 <style>
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
-  --cut-top: 800px;    /* 当前页面专用变量 */
-  --cut-bottom: 800px;   /* 默认值 */
+  --cut-top: 150px;    /* 当前页面专用变量 */
+  --cut-bottom: 60px;   /* 默认值 */
 
   width: 100%;
   overflow: hidden;
@@ -47,7 +48,7 @@ toc: fasle #true
 <div id="iframe-wrapper-{{ page.url | slugify }}">
   <iframe 
     id="iframe-content-{{ page.url | slugify }}"
-    src="https://kwanwaipang.github.io/File/Blogs/Poster/cpp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html"
+    src="https://kwanwaipang.github.io/File/Blogs/Poster/Degeneracy_for_lidar.html"
     onload='
       const frame = this;
       const wrapper = frame.parentElement;
