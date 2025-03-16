@@ -22,8 +22,8 @@ toc: fasle #true
 <style>
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
-  --cut-top: 400px;    /* 当前页面专用变量 */
-  --cut-bottom: 400px;   /* 默认值 */
+  --cut-top: 800px;    /* 当前页面专用变量 */
+  --cut-bottom: 800px;   /* 默认值 */
 
   width: 100%;
   overflow: hidden;
