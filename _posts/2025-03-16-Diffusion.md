@@ -196,8 +196,11 @@ $\beta_{t}$为加噪声的方差，是一个常量。<img src="https://kwanwaipa
 但对于实际的基于扩散模型的图像生成应用基本都只需要20次左右的去噪操作即可生成图像，而这些方法用得则是DDIM。
 
 ## DDIM
+基于DDPM，DDIM（Denoising Diffusion Implicit Model, 去噪扩散隐式模型）论文主要提出了两项改进：
 
-去噪扩散隐式模型（Denoising Diffusion Implicit Model, DDIM）
+1. 对于一个已经训练好的DDPM，只需要对采样公式做简单的修改，模型就能在去噪时「跳步骤」，在一步去噪迭代中直接预测若干次去噪后的结果。
+2. 推广了DDPM的数学模型，从更高的视角定义了DDPM的前向过程（加噪过程）和反向过程（去噪过程）。在这个新数学模型下，可以自定义模型的噪声强度，让同一个训练好的DDPM有不同的采样效果。
+
 
 
 ## Stable Diffusion
