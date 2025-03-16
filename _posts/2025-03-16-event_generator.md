@@ -22,21 +22,21 @@ toc: true
 
 
 <style>
-/* 内联样式隔离 */
+/* 修改后样式 */
 #iframe-wrapper {
   width: 100%;
   overflow: hidden;
-  border: none;
-  display: block;
-  margin: 0;
-  padding: 0;
+  position: relative;  /* 新增定位上下文 */
+  height: calc(100vh - 100px);  /* 初始可见区域高度 */
 }
 
 #iframe-content {
   width: 100%;
   border: none;
-  display: block; /* 消除 iframe 默认的 inline 空隙 */
-  top: -100px; /* 上移100px */
+  position: absolute;  /* 改为绝对定位 */
+  top: -100px;         /* 上移100px */
+  left: 0;
+  height: calc(100% + 100px);  /* 补偿高度 */
 }
 </style>
 
@@ -44,22 +44,31 @@ toc: true
   <iframe 
     id="iframe-content"
     src="https://kwanwaipang.github.io/File/Blogs/Poster/esim.html" 
-    onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
+    onload='
+      const frame = this;
+      const updateSize = () => {
+        try {
+          // 获取实际内容高度
+          const contentHeight = Math.max(
+            frame.contentWindow.document.body.scrollHeight,
+            frame.contentWindow.document.documentElement.scrollHeight
+          );
+          
+          // 动态设置父容器高度（可视区域）
+          frame.parentElement.style.height = contentHeight > 100 
+            ? `${contentHeight - 100}px`  // 正常情况
+            : "0px";  // 内容过短保护
+          
+          // 设置iframe总高度（包含被隐藏部分）
+          frame.style.height = `${contentHeight}px`;
+        } catch(e) {
+          console.log("跨域限制:", e);
+        }
+      };
+      
+      updateSize();
+      window.addEventListener("resize", updateSize);
+      new ResizeObserver(updateSize).observe(frame);
+    '
   ></iframe>
 </div>
-
-<script>
-// 纯当前页面运行的脚本
-document.getElementById('iframe-content').addEventListener('load', function() {
-  try {
-    const contentHeight = this.contentWindow.document.documentElement.scrollHeight;
-    this.style.height = contentHeight + 'px';//增加了高度
-    // 添加窗口变化监听
-    window.addEventListener('resize', () => {
-      this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
-    });
-  } catch (error) {
-    console.log('跨域保护机制触发，请确保被嵌入页面与本站同源');
-  }
-});
-</script>
