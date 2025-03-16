@@ -5,7 +5,7 @@ date:   2025-03-16
 tags: [Deep Learning,Event-based Vision]
 comments: true
 author: kwanwaipang
-toc: true
+toc: false #true
 ---
 
 
@@ -20,55 +20,59 @@ toc: true
 * 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/esim.html)
 * 代码：[ESIM_comment](https://github.com/KwanWaiPang/ESIM_comment)
 
-
 <style>
-/* 修改后样式 */
-#iframe-wrapper {
+/* 通过ID限定作用域 */
+#iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
+  --cut-top: 200px;    /* 当前页面专用变量 */
+  --cut-bottom: 100px;   /* 默认值 */
+
   width: 100%;
   overflow: hidden;
-  position: relative;  /* 新增定位上下文 */
-  height: calc(100vh - 100px);  /* 初始可见区域高度 */
+  position: relative;
+  height: calc(100vh - var(--cut-top));
 }
 
-#iframe-content {
+#iframe-content-{{ page.url | slugify }} {
   width: 100%;
   border: none;
-  position: absolute;  /* 改为绝对定位 */
-  top: -100px;         /* 上移100px */
+  position: absolute;
+  top: calc(-1 * var(--cut-top));
   left: 0;
-  height: calc(100% + 100px);  /* 补偿高度 */
+  height: calc(100% + var(--cut-top) + var(--cut-bottom));
 }
 </style>
 
-<div id="iframe-wrapper">
+<div id="iframe-wrapper-{{ page.url | slugify }}">
   <iframe 
-    id="iframe-content"
-    src="https://kwanwaipang.github.io/File/Blogs/Poster/esim.html" 
+    id="iframe-content-{{ page.url | slugify }}"
+    src="https://kwanwaipang.github.io/File/Blogs/Poster/esim.html"
     onload='
       const frame = this;
-      const updateSize = () => {
+      const wrapper = frame.parentElement;
+      
+      const getCutValue = (name) => 
+        parseInt(getComputedStyle(wrapper)
+          .getPropertyValue(name).replace("px",""));
+
+      const update = () => {
         try {
-          // 获取实际内容高度
-          const contentHeight = Math.max(
-            frame.contentWindow.document.body.scrollHeight,
-            frame.contentWindow.document.documentElement.scrollHeight
+          const doc = frame.contentWindow.document;
+          const fullHeight = Math.max(
+            doc.body.scrollHeight,
+            doc.documentElement.scrollHeight
           );
           
-          // 动态设置父容器高度（可视区域）
-          frame.parentElement.style.height = contentHeight > 100 
-            ? `${contentHeight - 100}px`  // 正常情况
-            : "0px";  // 内容过短保护
-          
-          // 设置iframe总高度（包含被隐藏部分）
-          frame.style.height = `${contentHeight}px`;
-        } catch(e) {
-          console.log("跨域限制:", e);
-        }
+          // 动态设置高度
+          wrapper.style.height = 
+            `${Math.max(fullHeight - getCutValue("--cut-top") - getCutValue("--cut-bottom"), 0)}px`;
+            
+          frame.style.height = `${fullHeight}px`;
+        } catch(e) {}
       };
       
-      updateSize();
-      window.addEventListener("resize", updateSize);
-      new ResizeObserver(updateSize).observe(frame);
+      update();
+      new ResizeObserver(update).observe(frame);
+      window.addEventListener("resize", update);
     '
   ></iframe>
 </div>
