@@ -175,7 +175,7 @@ $\beta_{t}$为加噪声的方差，是一个常量。<img src="https://kwanwaipa
 </figcaption>
 </div>
 
-对于神经网络拟合均值的时候，$x_{t}$为已知，，那么上面公式中就只有$\varepsilon_{t}$是不确定的，那么网络实际上只需要预测方差$\varepsilon_{t}$即可获得对应的去噪的均值$\tilde{\mu}_{t}$和方差$\tilde{\beta}_{t}$。
+对于神经网络拟合均值的时候，$x_{t}$为已知，，那么上面公式中就只有 $\varepsilon_{t}$ 是不确定的，那么网络实际上只需要预测方差 $\varepsilon_{t}$ 即可获得对应的去噪的均值 $\tilde{\mu}_{t}$ 和方差 $\tilde{\beta}_{t}$。
 
 对于网络预测的$\varepsilon_{\theta}(x_{t},t)$($\theta$为网络可学习参数)，让其和生成$x_{t}$的时候用的噪声方差$\tilde{\beta}_{t}$的均方误差最小即可：
 
