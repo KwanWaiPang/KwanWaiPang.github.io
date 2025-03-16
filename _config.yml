@@ -30,7 +30,7 @@ navigation:
   - name: Tags
     url: /tags
   - name: About
-    url: / #https://kwanwaipang.github.io/ #/about
+    url: /about #/ #https://kwanwaipang.github.io/ 
 
 # Pagination（分页）
 paginate: 8 
