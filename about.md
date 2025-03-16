@@ -6,53 +6,40 @@ permalink: /about/
 
 
 <style>
-/* 强制消除所有滚动条 */
-#iframe-host {
-  overflow: hidden !important;
+/* 内联样式隔离 */
+#iframe-wrapper {
   width: 100%;
-  display: block;
-  border: none;
+  overflow: hidden;
 }
 
-/* 穿透式样式重置 */
-#iframe-host iframe {
-  overflow: hidden !important;
-  border: none;
-  display: block;
+#iframe-content {
   width: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
+  border: none;
+  display: block; /* 消除 iframe 默认的 inline 空隙 */
 }
 </style>
 
-<div id="iframe-host">
+<div id="iframe-wrapper">
   <iframe 
-    src="https://kwanwaipang.github.io/index.html"
-    onload='
-      const calcHeight = () => {
-        try {
-          const body = this.contentWindow.document.body,
-                html = this.contentWindow.document.documentElement;
-          // 取最大可能高度
-          const height = Math.max(
-            body.scrollHeight, body.offsetHeight,
-            html.clientHeight, html.scrollHeight, html.offsetHeight
-          );
-          this.style.height = (height + 20) + "px"; // 增加容错余量
-        } catch(e) {}
-      };
-      calcHeight();
-      // 动态监听内容变化
-      new ResizeObserver(calcHeight).observe(this);
-      this.contentWindow.addEventListener("resize", calcHeight);
-    '
+    id="iframe-content"
+    src="./index.html" 
+    onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
   ></iframe>
 </div>
 
 <script>
-// 保险机制：强制隐藏滚动条
-document.querySelectorAll('html, body').forEach(el => {
-  el.style.overflow = 'hidden';
+// 纯当前页面运行的脚本
+document.getElementById('iframe-content').addEventListener('load', function() {
+  try {
+    const contentHeight = this.contentWindow.document.documentElement.scrollHeight;
+    this.style.height = contentHeight +60+ 'px';//增加了高度
+    // 添加窗口变化监听
+    window.addEventListener('resize', () => {
+      this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
+    });
+  } catch (error) {
+    console.log('跨域保护机制触发，请确保被嵌入页面与本站同源');
+  }
 });
 </script>
 
