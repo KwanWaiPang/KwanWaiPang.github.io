@@ -6,42 +6,56 @@ permalink: /about/
 
 
 <style>
-/* 内联样式隔离 */
-#iframe-wrapper {
+/* 强制消除所有滚动条 */
+#iframe-host {
+  overflow: hidden !important;
   width: 100%;
-  overflow: hidden;
+  display: block;
+  border: none;
 }
 
-#iframe-content {
-  width: 100%;
+/* 穿透式样式重置 */
+#iframe-host iframe {
+  overflow: hidden !important;
   border: none;
-  display: block; /* 消除 iframe 默认的 inline 空隙 */
+  display: block;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 </style>
 
-<div id="iframe-wrapper">
+<div id="iframe-host">
   <iframe 
-    id="iframe-content"
-    src="./index.html" 
-    onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
+    src="./index.html"
+    onload='
+      const calcHeight = () => {
+        try {
+          const body = this.contentWindow.document.body,
+                html = this.contentWindow.document.documentElement;
+          // 取最大可能高度
+          const height = Math.max(
+            body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight
+          );
+          this.style.height = (height + 20) + "px"; // 增加容错余量
+        } catch(e) {}
+      };
+      calcHeight();
+      // 动态监听内容变化
+      new ResizeObserver(calcHeight).observe(this);
+      this.contentWindow.addEventListener("resize", calcHeight);
+    '
   ></iframe>
 </div>
 
 <script>
-// 纯当前页面运行的脚本
-document.getElementById('iframe-content').addEventListener('load', function() {
-  try {
-    const contentHeight = this.contentWindow.document.documentElement.scrollHeight;
-    this.style.height = contentHeight + 'px';
-    // 添加窗口变化监听
-    window.addEventListener('resize', () => {
-      this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
-    });
-  } catch (error) {
-    console.log('跨域保护机制触发，请确保被嵌入页面与本站同源');
-  }
+// 保险机制：强制隐藏滚动条
+document.querySelectorAll('html, body').forEach(el => {
+  el.style.overflow = 'hidden';
 });
 </script>
+
 
 <!-- # Hi~ 👋
 only for template
