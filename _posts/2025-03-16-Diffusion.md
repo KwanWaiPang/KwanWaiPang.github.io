@@ -135,6 +135,7 @@ PS：这个过程也符合马尔可夫过程，因为当前状态仅仅由上一
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316114847.png" width="60%" />
+  <img src="../images/微信截图_20250316130826.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -187,17 +188,26 @@ $\beta_{t}$为加噪声的方差，是一个常量。<img src="https://kwanwaipa
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+# 各类型的Diffusion Models
 
-# 噪扩散概率模型（Denoising Diffusion Probabilistic Models, DDPM）
+## DDPM
+噪扩散概率模型（Denoising Diffusion Probabilistic Models, DDPM），也就是上文介绍的diffusion Model了.
+它的采样速度非常慢，因为DDPM在采样时通常要做1000次去噪操作。
+但对于实际的基于扩散模型的图像生成应用基本都只需要20次左右的去噪操作即可生成图像，而这些方法用得则是DDIM。
+
+## DDIM
+
+去噪扩散隐式模型（Denoising Diffusion Implicit Model, DDIM）
 
 
-
+## Stable Diffusion
 
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 参考资料
 * [扩散模型(Diffusion Model)详解：直观理解、数学原理、PyTorch 实现](https://zhouyifan.net/2023/07/07/20230330-diffusion-model/)
+* [DDIM 简明讲解与 PyTorch 实现：加速扩散模型采样的通用方法](https://zhouyifan.net/2023/07/07/20230702-DDIM/)
 * [What are Diffusion Models?](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/)
 * [生成扩散模型漫谈（一）：DDPM = 拆楼 + 建楼](https://kexue.fm/archives/9119)
 * [Understanding Diffusion Models: A Unified Perspective](https://arxiv.org/pdf/2208.11970)
