@@ -10,6 +10,10 @@ permalink: /about/
 #iframe-wrapper {
   width: 100%;
   overflow: hidden;
+  border: none;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 #iframe-content {
