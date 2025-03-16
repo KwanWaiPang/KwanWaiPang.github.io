@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "生成事件数据"
+title: "从图像数据集中生成事件数据"
 date:   2025-03-16
 tags: [Deep Learning,Event-based Vision]
 comments: true
