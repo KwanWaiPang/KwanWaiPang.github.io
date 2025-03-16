@@ -35,11 +35,13 @@ toc: false #true
 
 #iframe-content-{{ page.url | slugify }} {
   width: 100%;
+  overflow: hidden;
   border: none;
   position: absolute;
   top: calc(-1 * var(--cut-top));
   left: 0;
   height: calc(100% + var(--cut-top) + var(--cut-bottom));
+  display: block; /* 消除 iframe 默认的 inline 空隙 */
 }
 </style>
 
