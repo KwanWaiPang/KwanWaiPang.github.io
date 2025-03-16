@@ -4,6 +4,10 @@ title: About
 permalink: /about/
 ---
 
+# Hi~ 👋
+This blog is my original work, archived in the _posts folder, and all rights are reserved. 
+Please contact me for authorization before reusing or reposting.
+* [My Homepage](https://kwanwaipang.github.io/) 
 
 <style>
 /* 内联样式隔离 */
