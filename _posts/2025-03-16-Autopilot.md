@@ -24,7 +24,7 @@ toc: false #true
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
   --cut-top: 150px;    /* 当前页面专用变量 */
-  --cut-bottom: 200px;   /* 默认值 */
+  --cut-bottom: 280px;   /* 默认值 */
 
   width: 100%;
   overflow: hidden;
