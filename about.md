@@ -27,7 +27,7 @@ permalink: /about/
 
 <div id="iframe-host">
   <iframe 
-    src="./index.html"
+    src="https://kwanwaipang.github.io/index.html"
     onload='
       const calcHeight = () => {
         try {
