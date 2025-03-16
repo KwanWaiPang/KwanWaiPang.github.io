@@ -2,7 +2,7 @@
 layout: post
 title: "生成事件数据"
 date:   2025-03-16
-tags: [Deep Learning]
+tags: [Deep Learning,Event-based Vision]
 comments: true
 author: kwanwaipang
 toc: true
@@ -36,6 +36,7 @@ toc: true
   width: 100%;
   border: none;
   display: block; /* 消除 iframe 默认的 inline 空隙 */
+  top: -100px; /* 上移100px */
 }
 </style>
 
