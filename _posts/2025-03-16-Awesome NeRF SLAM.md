@@ -646,12 +646,3 @@ NeRF SLAM（Neural Radiance Fields Simultaneous Localization and Mapping）是�
 <p>同时也对不同的loss的效果进行杜比：</p> 
 <p align="center"><img alt="" height="427" src="https://kwanwaipang.github.io/awesome_NeRF_SLAM/学习笔记之——NeRF SLAM（基于神经辐射场的SLAM）-CSDN博客_files/4032e57ffbaeca23cd63728e07e663e0.png" width="883"></p> 
 <p></p> 
-
-
-<!-- <h2 id="%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><a name="t35"></a>参考文献</h2>  -->
-<p></p> 
-<p></p> 
-<p></p>
-                </div><div><div></div></div>
-        </div>
-    </article>
