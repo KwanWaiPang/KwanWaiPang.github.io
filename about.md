@@ -36,7 +36,7 @@ permalink: /about/
 document.getElementById('iframe-content').addEventListener('load', function() {
   try {
     const contentHeight = this.contentWindow.document.documentElement.scrollHeight;
-    this.style.height = contentHeight +60+ 'px';//增加了高度
+    this.style.height = contentHeight +100+ 'px';//增加了高度
     // 添加窗口变化监听
     window.addEventListener('resize', () => {
       this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
