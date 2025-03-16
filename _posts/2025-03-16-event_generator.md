@@ -24,11 +24,12 @@ toc: false #true
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
   --cut-top: 200px;    /* 当前页面专用变量 */
-  --cut-bottom: 50px;   /* 默认值 */
+  --cut-bottom: 60px;   /* 默认值 */
 
   width: 100%;
   overflow: hidden;
   position: relative;
+  border: none;
   height: calc(100vh - var(--cut-top));
 }
 
