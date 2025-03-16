@@ -178,7 +178,7 @@ toc: false #true
 至于监督，从图上来看似乎是监督rotation，然后用RPMG来进行梯度的反向传播。
 所谓的`RPMG`应该就是论文中提到的`Riemannian manifold optimization`，不采用欧拉角或者四元数来监督，而是采用`Riemannian manifold optimization`来让网络更好的学习rotation
 <div align="center">
-  <img src="../images/微信截图_20250314125229.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314125229.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -186,7 +186,7 @@ toc: false #true
 * 更正，后续loss function可以看到，监督是同时监督rotation和translation的，只是对于rotation用的是旋转矩阵，而不是欧拉角或者四元数
 
 <div align="center">
-  <img src="../images/微信截图_20250314135327.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314135327.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -194,7 +194,7 @@ toc: false #true
 
 这篇工作采用的结构与思路其实跟ECCV2022的[Efficient deep visual and inertial odometry with adaptive visual modality selection](https://arxiv.org/pdf/2205.06187)很类似，如下图所示。该工作采用的是LSTM进行融合，此处改为Transformer，当然Visual-Selective-VIO的监督loss是考虑了translation和rotation的.
 <div align="center">
-  <img src="../images/微信截图_20250314130039.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314130039.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -204,7 +204,7 @@ toc: false #true
 本文所谓的`Causal Transformer`如下图所示。跟ViT的结构差不多，最后通过两层的MLP来输出pose（6个自由度，N+1张图片对应N组姿态结果）
 
 <div align="center">
-  <img src="../images/微信截图_20250314134510.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314134510.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -213,7 +213,7 @@ toc: false #true
 实验对比效果如下图所示
 
 <div align="center">
-  <img src="../images/微信截图_20250314135722.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314135722.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -229,7 +229,7 @@ toc: false #true
 而采用的framework则是TimeSformer，来自于《[Is space-time attention all you need for video understanding?](https://arxiv.org/pdf/2102.05095)》然后重新设计MSE loss来实现对姿态估计的回归而不是分类任务。
 而所谓的MSE loss就是跟GT求误差啦~
 <div align="center">
-  <img src="../images/微信截图_20250314160538.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314160538.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -237,7 +237,7 @@ toc: false #true
 其framework如下图所示，跟基本的ViT是差不多的，把输入的图片分割为$N=H*W/p^2$个patch，然后通过CNN(2D卷积)来转换为token输入，而transformer的结构则是用TimeSformer
 
 <div align="center">
-  <img src="../images/微信截图_20250314160039.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314160039.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -245,8 +245,8 @@ toc: false #true
 最终结果如下图所示（所谓的TSformer-VO1、2、3就是multi head self attention的head数目分别为2、3、4）
 
 <div align="center">
-  <img src="../images/微信截图_20250314160854.png" width="60%" />
-  <img src="../images/微信截图_20250314160923.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314160854.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250314160923.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>

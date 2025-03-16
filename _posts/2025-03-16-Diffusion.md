@@ -46,7 +46,7 @@ toc: true
 GAN基本思路是，既然生成网络（生成器）无法知道一幅图片好不好，那么就再训练一个网络（对抗网络/判别器），用于辨别生成网络生成的图片是不是和训练集里的图片长得一样（或者分布一样）。两个网络互相对抗，共同进步。
 
 <div align="center">
-  <img src="../images/微信截图_20250315113444.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250315113444.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -59,7 +59,7 @@ VAE中，把图像变成向量的网络叫做编码器，把向量转换回图�
 
 
 <div align="center">
-  <img src="../images/微信截图_20250315113751.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250315113751.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -80,7 +80,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 网络的学习目标是让$T$个去噪声操作正好能抵消掉对应的加噪声操作。
 
 <div align="center">
-  <img src="../images/微信截图_20250315201910.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250315201910.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -88,7 +88,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 训练完毕后，只需要从标准正态分布里随机采样出一个噪声，再利用反向过程里的神经网络把该噪声恢复成一幅图像，就能够生成一幅图片了。如下图所示。
 
 <div align="center">
-  <img src="../images/微信截图_20250315202233.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250315202233.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -97,7 +97,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 下图为不同种类的生成模型的总结对比
 
 <div align="center">
-  <img src="../images/generative-overview.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/generative-overview.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -110,7 +110,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 Diffusion模型的思路则是：一个分布可以通过不断地添加噪声变成另一个分布。如下图所示
 
 <div align="center">
-  <img src="../images/微信截图_20250315114047.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250315114047.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -123,7 +123,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 准确来说，`加噪声`并不是给上一时刻的图像加上噪声值，而是从一个均值与上一时刻图像相关的正态分布里采样出一幅新图像。直观解析通过下面公式来表述：
 
 <div align="center">
-  <img src="../images/微信截图_20250316113956.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316113956.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -134,7 +134,7 @@ PS：这个过程也符合马尔可夫过程，因为当前状态仅仅由上一
 而为了让每一步加噪声的过程能够从慢到快改变原图像，让最终的图像$X_{T}$为均值0，方差$I$(标准正态分布)，那么加噪声的扩散模型会设置为：
 
 <div align="center">
-  <img src="../images/微信截图_20250316114847.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316114847.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -150,7 +150,7 @@ PS：这个过程也符合马尔可夫过程，因为当前状态仅仅由上一
 而对于上述正向过程的$\beta_{t}$只要足够的小，那么每一步加噪声的逆操作也会满足正态分布
 
 <div align="center">
-  <img src="../images/微信截图_20250316115354.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316115354.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -159,18 +159,18 @@ PS：这个过程也符合马尔可夫过程，因为当前状态仅仅由上一
 网络应该就是输入$t$和$X_{t}$拟合获得当前的均值$\tilde{\mu}_{t}$和方差$\tilde{\beta}_{t}$。而它的均值的求解过程请见[Link](https://zhouyifan.net/2023/07/07/20230330-diffusion-model/)，下面直接给出结果
 
 <div align="center">
-  <img src="../images/微信截图_20250316120326.png" width="60%" />
-  <img src="../images/微信截图_20250316120333.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316120326.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316120333.png" width="60%" />
 <figcaption>  
 给定某个输入时，去噪的正态分布的均值和方差是可以用解析式表达出来的
 </figcaption>
 </div>
 
-$\beta_{t}$为加噪声的方差，是一个常量。<img src="../images/微信截图_20250316120441.png" width="30%" />
+$\beta_{t}$为加噪声的方差，是一个常量。<img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316120441.png" width="30%" />
 而$\varepsilon_{t}$则是前面正向过程的时候从对应的$\varepsilon$(注意下面时间表达差一个时刻):
 
 <div align="center">
-  <img src="../images/微信截图_20250316121015.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316121015.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -180,7 +180,7 @@ $\beta_{t}$为加噪声的方差，是一个常量。<img src="../images/微信�
 对于网络预测的$\varepsilon_{\theta}(x_{t},t)$($\theta$为网络可学习参数)，让其和生成$x_{t}$的时候用的噪声方差$\tilde{\beta}_{t}$的均方误差最小即可：
 
 <div align="center">
-  <img src="../images/微信截图_20250316124144.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316124144.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
