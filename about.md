@@ -41,7 +41,7 @@ Please contact me for authorization before reusing or reposting.
   <iframe 
     id="iframe-content"
     src="https://kwanwaipang.github.io/index.html" 
-    scrolling="no"  <!-- 禁用滚动条 -->
+    scrolling="no" 
   ></iframe>
 </div>
 
