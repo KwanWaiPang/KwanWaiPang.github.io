@@ -162,6 +162,31 @@ toc: false #true
 * [论文阅读及复现笔记之——《Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass》](https://kwanwaipang.github.io/Fast3R/)
 * [DUSt3R与MASt3R学习博客](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
 
+### Croco
+
+MASt3R系列的一个核心观点就是3D数据的关联。其起源于DUSt3R，而DUSt3R则是起源于《[Croco: Self-supervised pre-training for 3d vision tasks by cross-view completion](https://proceedings.neurips.cc/paper_files/paper/2022/file/16e71d1a24b98a02c17b1be1f634f979-Paper-Conference.pdf)》和《[Croco v2: Improved cross-view completion pre-training for stereo matching and optical flow](https://openaccess.thecvf.com/content/ICCV2023/papers/Weinzaepfel_CroCo_v2_Improved_Cross-view_Completion_Pre-training_for_Stereo_Matching_and_ICCV_2023_paper.pdf)》
+
+Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个人理解是有点类似于图像补全，通过输入同一个场景下的两个视角的对应的两张图，对于第一张图片打mask，然后输入两个ViT的encoder中，而decoder重构出第一张图片打mask前的样式，并且采用self-supervise的形式来监督学习（也就是输入打mask前的图片与预测的图片之间的MSE）
+
+而Croco在针对这一任务发现，网络实际上学习了空间的数据关联。因此在光流和深度估计等下游任务都有不错的提升。因此在Croco V2中针对光流和双目匹配（其实也就是深度估计了）这两个任务，采用了更大的encoder和decoder网络、大型真实+仿真数据（Croco用仿真数据）、位置编码从绝对位置改为相对位置，最终发现这一预训练模型比起RAFT、Gmflow这种task-specific网络还要强，`paving the way towards universal vision models`
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250317162137.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250317162157.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  Croco VS Croco-V2
+  </figcaption>
+</div>
+
+
 ## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
 
 ~~~
