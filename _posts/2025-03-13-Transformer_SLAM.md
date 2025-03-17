@@ -168,7 +168,10 @@ MASt3R系列的一个核心观点就是3D数据的关联。其起源于DUSt3R，
 
 Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个人理解是有点类似于图像补全，通过输入同一个场景下的两个视角的对应的两张图，对于第一张图片打mask，然后输入两个ViT的encoder中，而decoder重构出第一张图片打mask前的样式，并且采用self-supervise的形式来监督学习（也就是输入打mask前的图片与预测的图片之间的MSE）
 
-而Croco在针对这一任务发现，网络实际上学习了空间的数据关联。因此在光流和深度估计等下游任务都有不错的提升。因此在Croco V2中针对光流和双目匹配（其实也就是深度估计了）这两个任务，采用了更大的encoder和decoder网络、大型真实+仿真数据（Croco用仿真数据）、位置编码从绝对位置改为相对位置，最终发现这一预训练模型比起RAFT、Gmflow这种task-specific网络还要强，`paving the way towards universal vision models`
+而Croco在针对这一任务发现，网络实际上学习了空间的数据关联。因此在光流和深度估计等下游任务都有不错的提升。因此在Croco V2中针对光流和双目匹配（其实也就是深度估计了）这两个任务，采用了更大的encoder和decoder网络、大型真实+仿真数据（Croco用仿真数据）、位置编码从绝对位置改为相对位置，最终发现这一预训练模型比起RAFT、Gmflow这种task-specific网络还要强.
+换句话说，对于深度估计和光流两个任务，Croco V2采用一样的结构，并且用self-supervised的方式来训练，最终可以直接finetuned到目标任务（而采用的transformer框架并不包含correlation或cost volume）`paving the way towards universal vision models`
+
+对于位置编码，learned以及cosine embeddings都是包含绝对的位置信息的，而论文提出采用的相对位置则是用RoPE《[Roformer: Enhanced transformer with rotary position embedding](https://arxiv.org/pdf/2104.09864)》
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
@@ -185,6 +188,25 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
   Croco VS Croco-V2
   </figcaption>
 </div>
+
+如上图所示，通过利用来自图2的信息可以恢复图1中被masked的区域，这能让模型隐式学习到场景的几何结构以及两个视角的空间关系，而这也使得该模型非常适用于基于几何（geometric）的task。
+
+如下图所示，对于stereo matching 以及optical flow两个task，则是用预训练好的模型，输入为两张图片（此时图1不再mask），然后decoder中间层输出的结果通过DPT《[Vision transformers for dense prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Ranftl_Vision_Transformers_for_Dense_Prediction_ICCV_2021_paper.pdf)》来输出最终的结果
+
+<div align="center">
+  <img src="../images/微信截图_20250317205814.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而finetune则是用真值的target disparity通过Laplacian distribution来求
+
+<div align="center">
+  <img src="../images/微信截图_20250317210427.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
 
 
 ## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
