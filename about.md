@@ -10,24 +10,20 @@ Please contact me for authorization before reusing or reposting.
 * [My Homepage](https://kwanwaipang.github.io/) 
 
 <style>
-.iframe-container {
+.iframe-wrapper {
   width: 100%;
   overflow: hidden;
   position: relative;
-  height: 0; /* 初始高度设为0，由脚本动态设置 */
 }
 
 #iframe-content {
-  width: 100% !important; /* 强制宽度充满容器 */
-  height: 1000px; /* 初始高度 */
-  border: none;
-  position: absolute;
-  left: 0;
-  top: 0;
+  width: 100%;
+  height: 500px; /* 初始高度 */
+  border: 1px solid red; /* 调试边框 */
 }
 </style>
 
-<div class="iframe-container">
+<div class="iframe-wrapper">
   <iframe 
     id="iframe-content"
     src="https://kwanwaipang.github.io/index.html" 
@@ -36,58 +32,71 @@ Please contact me for authorization before reusing or reposting.
 </div>
 
 <script>
-// 改进版自适应脚本
-function resizeIframe() {
-  const container = document.querySelector('.iframe-container');
+// 第一阶段：基础功能验证
+function debugLayout() {
+  const wrapper = document.querySelector('.iframe-wrapper');
+  const iframe = document.getElementById('iframe-content');
+  
+  // 输出基础尺寸信息
+  console.log('Wrapper尺寸:', {
+    width: wrapper.offsetWidth,
+    height: wrapper.offsetHeight
+  });
+  
+  console.log('Iframe尺寸:', {
+    width: iframe.offsetWidth,
+    height: iframe.offsetHeight
+  });
+
+  // 强制设置初始尺寸
+  iframe.style.width = wrapper.offsetWidth + 'px';
+  iframe.style.height = '800px'; // 临时固定高度
+}
+
+// 第二阶段：渐进增强
+function safeResize() {
   const iframe = document.getElementById('iframe-content');
   
   try {
-    // 获取实际可用宽度
-    const containerWidth = container.offsetWidth;
+    // 尝试获取文档尺寸
+    const doc = iframe.contentWindow.document;
+    const contentWidth = doc.documentElement.scrollWidth;
+    const contentHeight = doc.documentElement.scrollHeight;
     
-    // 获取被嵌入页面的实际尺寸
-    const contentWidth = iframe.contentWindow.document.documentElement.scrollWidth;
-    const contentHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-
-    // 计算比例因子
-    const scale = containerWidth / contentWidth;
+    console.log('内容实际尺寸:', { contentWidth, contentHeight });
     
-    // 应用缩放变换
-    iframe.style.transform = `scale(${scale})`;
-    iframe.style.transformOrigin = '0 0';
-    
-    // 计算缩放后的实际占用空间
-    const scaledHeight = contentHeight * scale;
-    const scaledWidth = contentWidth * scale;
-    
-    // 设置容器尺寸
-    container.style.height = `${scaledHeight}px`;
-    container.style.width = `${scaledWidth}px`;
-    
-    // 设置iframe原始尺寸
-    iframe.style.width = `${contentWidth}px`;
-    iframe.style.height = `${contentHeight}px`;
-
-  } catch (error) {
-    console.error('尺寸获取失败:', error);
-    // 降级方案：每列显示100%宽度
+    // 设置自适应尺寸
     iframe.style.width = '100%';
-    iframe.style.height = '100vh';
-    container.style.height = '100vh';
+    iframe.style.height = contentHeight + 'px';
+    
+    // 更新容器高度
+    document.querySelector('.iframe-wrapper').style.height = contentHeight + 'px';
+    
+  } catch (error) {
+    console.warn('安全模式启用（跨域限制）');
+    // 降级方案：响应式比例容器
+    const aspectRatio = 16 / 9;
+    const containerWidth = iframe.offsetWidth;
+    iframe.style.height = (containerWidth / aspectRatio) + 'px';
   }
 }
 
-// 添加智能监听
-let resizeTimer;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(resizeIframe, 100);
-});
-
-iframe.addEventListener('load', () => {
-  resizeIframe();
-  // 首次加载后额外检查
-  setTimeout(resizeIframe, 500);
+// 执行调试流程
+window.addEventListener('DOMContentLoaded', () => {
+  const iframe = document.getElementById('iframe-content');
+  
+  // 第一步：验证基础布局
+  debugLayout();
+  
+  // 第二步：渐进加载
+  iframe.addEventListener('load', () => {
+    setTimeout(() => {
+      safeResize();
+      window.addEventListener('resize', () => {
+        setTimeout(safeResize, 100);
+      });
+    }, 500);
+  });
 });
 </script>
 
