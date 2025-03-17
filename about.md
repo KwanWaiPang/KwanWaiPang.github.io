@@ -10,44 +10,72 @@ Please contact me for authorization before reusing or reposting.
 * [My Homepage](https://kwanwaipang.github.io/) 
 
 <style>
-/* 内联样式隔离 */
-#iframe-wrapper {
+/* 新增外层容器样式 */
+.iframe-container {
   width: 100%;
-  overflow: hidden;
-  border: none;
-  display: block;
-  margin: 0;
-  padding: 0;
+  max-width: 100vw;   /* 最大宽度限制为视口宽度 */
+  overflow: hidden;     /* 隐藏溢出内容 */
+  position: relative;   /* 相对定位 */
+  left: 50%;            /* 左偏移 */
+  right: 50%;           /* 右偏移 */
+  margin-left: -50vw;   /* 向左补偿偏移 */
+  margin-right: -50vw;  /* 向右补偿偏移 */
 }
 
 #iframe-content {
-  width: 100%;
+  width: 100vw;         /* 宽度等于视口宽度 */
+  height: 100vh;        /* 初始高度设为视口高度 */
   border: none;
-  display: block; /* 消除 iframe 默认的 inline 空隙 */
+  transform-origin: 0 0; /* 缩放基点 */
+  transform: scale(1);   /* 默认不缩放 */
+}
+
+@media screen and (max-width: 768px) {
+  #iframe-content {
+    transform: scale(0.8); /* 小屏幕时适当缩放 */
+  }
 }
 </style>
 
-<div id="iframe-wrapper">
+<div class="iframe-container">
   <iframe 
     id="iframe-content"
     src="https://kwanwaipang.github.io/index.html" 
-    onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
+    scrolling="no"  <!-- 禁用滚动条 -->
   ></iframe>
 </div>
 
 <script>
-// 纯当前页面运行的脚本
-document.getElementById('iframe-content').addEventListener('load', function() {
+// 改进后的自适应脚本
+function resizeIframe() {
+  const iframe = document.getElementById('iframe-content');
   try {
-    const contentHeight = this.contentWindow.document.documentElement.scrollHeight;
-    this.style.height = contentHeight +100+ 'px';//增加了高度
-    // 添加窗口变化监听
-    window.addEventListener('resize', () => {
-      this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
-    });
+    const containerWidth = iframe.offsetWidth;
+    const contentWidth = iframe.contentWindow.document.documentElement.scrollWidth;
+    const contentHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+
+    // 自动缩放逻辑
+    const scale = Math.min(1, containerWidth / contentWidth);
+    iframe.style.transform = `scale(${scale})`;
+    iframe.style.width = `${contentWidth}px`;
+    iframe.style.height = `${contentHeight}px`;
+    
+    // 补偿缩放后的高度
+    const scaledHeight = contentHeight * scale;
+    iframe.parentElement.style.height = `${scaledHeight}px`;
+    
   } catch (error) {
     console.log('跨域保护机制触发，请确保被嵌入页面与本站同源');
   }
+}
+
+// 初始化监听
+window.addEventListener('DOMContentLoaded', () => {
+  const iframe = document.getElementById('iframe-content');
+  iframe.addEventListener('load', () => {
+    resizeIframe();
+    window.addEventListener('resize', () => resizeIframe());
+  });
 });
 </script>
 
