@@ -1,0 +1,64 @@
+<button id="backToTop" class="back-to-top" aria-label="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+  
+  <style>
+  /* 回到顶部按钮样式 */
+  #backToTop {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    background: var(--theme-color, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; /* 确保在其它元素之上 */
+  }
+  
+  #backToTop.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @media (hover: hover) {
+    #backToTop:hover {
+      background: var(--theme-hover-color, #1d4ed8);
+      transform: translateY(0) scale(1.1);
+    }
+  }
+  </style>
+  
+  <script>
+  // 回到顶部功能
+  document.addEventListener('DOMContentLoaded', function() {
+    const backToTop = document.getElementById('backToTop');
+    
+    // 滚动显示逻辑
+    window.addEventListener('scroll', () => {
+      window.scrollY > 300 
+        ? backToTop.classList.add('show')
+        : backToTop.classList.remove('show');
+    });
+  
+    // 平滑滚动
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+  </script>
