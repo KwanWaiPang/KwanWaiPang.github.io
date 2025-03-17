@@ -19,7 +19,7 @@ Please contact me for authorization before reusing or reposting.
 #iframe-content {
   width: 100%;
   height: 500px; /* 初始高度 */
-  border: 1px solid red; /* 调试边框 */
+  border: none; /* 调试边框 */
 }
 </style>
 
