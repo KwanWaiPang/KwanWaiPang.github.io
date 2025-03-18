@@ -204,6 +204,16 @@ git push -u origin main
 ></model-viewer>
 ```
 
+效果如下所示
+<model-viewer
+  src="https://github.com/KwanWaiPang/vggt/raw/main/generate_glb/mydesk.glb" 
+  alt="3D Model"
+  ar
+  auto-rotate
+  camera-controls
+  style="width: 100%; height: 400px;"
+></model-viewer>
+
 
 # google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
