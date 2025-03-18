@@ -15,7 +15,7 @@
     <br>Lidar-based SLAM一般就是求点云的配准（Point Cloud Registration），其中有分为scan-to-scan registration以及scan-to-map registration。两者的本质其实都是基于ICP。
     <details>
       <summary>LiDAR-SLAM ICP匹配求pose的推导见</summary>
-      <figure style="text-align: center;">
+      <figure align="center">
         <div style="margin-bottom: 10px;">
           <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231151149.png" alt="Image description">
         </div>
@@ -24,7 +24,7 @@
       </figcaption>
       </figure> 
       进一步的要求解状态，其实也就是对上面公式3求导取0。有很多方法可以求解（比如优化库、Gauss-Newton或者LM算法）。下面通过SVD分解的方法来求解
-      <figure style="text-align: center;">
+      <figure align="center">
         <div style="margin-bottom: 10px;">
           <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231151437.png" alt="Image description">
         </div>
@@ -62,7 +62,7 @@
     We then selectively fuse visual data pertinent to this degenerative direction and discard data from non-degenerative directions, which helps prevent a decline in the accuracy of the LiDAR’s nondegenerative dimensions.
   </mark>
   
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230180040.png" alt="Image description">
     </div>
@@ -72,7 +72,7 @@
   
   作者采用R3LIVE作为baseline,而lidar退化的检测则是基于lidar的测量量实现的.
   基于fast-lio,lidar的point-to-plane constraints可以写为下面的公式:
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230180934.png" alt="Image description">
     </div>
@@ -81,7 +81,7 @@
   </figcaption>
   </figure> 
   对上式进行加权线性最小二乘法可以得到下面的公式:
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230181135.png" alt="Image description">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230181222.png" alt="Image description">
@@ -95,7 +95,7 @@
   
   <br>
   而在LION中,作者提出退化及对应的方向可以通过分析H1的对角线元素来判断.并分别对对角线的矩阵进行奇异值分解(这样应该是为了把旋转与平移分开),然后通过设置两个阈值来分别判断平移与旋转两个方向的退化情况.
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230182239.png" alt="Image description">
     </div>
@@ -103,7 +103,7 @@
   </figcaption>
   </figure> 
   但是却又忽略了两外两个矩阵的元素,这样可能会导致退化的方向不准确.如下图所示
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230182635.png" alt="Image description">
     </div>
@@ -112,7 +112,7 @@
   </figcaption>
   </figure> 
   那么作者的做法其实就是对矩阵H1进行求逆,进而获取协方差矩阵
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230182830.png" alt="Image description">
       <img style="width: 60%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241230183117.png" alt="Image description">
@@ -150,7 +150,7 @@
   <br>
   而对于SLAM中的优化问题，状态空间任何一个维度的退化（或者没有很好的约束）都会导致退化，但是，即使有些方向是退化的，约束好的方向却仍然可以较好的更新状态。因此，将退化及没有退化的方向分开来处理是很重要的。对于退化的方向进行补偿，对于没有退化的方向则进行继续的更新。
   <br>对于图优化SLAM中，最基本的非线性最小二乘表达式如下：
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231104924.png" alt="Image description">
     </div>
@@ -159,7 +159,7 @@
   </figure>  
   
   而基于ICP的scan matching的回环约束可以写为下式
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231133629.png" alt="Image description">
     </div>
@@ -167,7 +167,7 @@
   </figcaption>
   </figure> 
   而作者采用的退化检测方法是通过对A矩阵的奇异值分解来判断是否退化，而对于退化的部分则剔除掉，仅仅将没有退化的部分作为回环因子加入。其步骤如下 
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231133922.png" alt="Image description">
     </div>
@@ -192,7 +192,7 @@
   <br>而作者采用的则是来自于论文<code>Gelfand, Natasha, et al. "Geometrically stable sampling for the ICP algorithm." Fourth International Conference on 3-D Digital Imaging and Modeling, 2003. 3DIM 2003. Proceedings.. IEEE, 2003.</code>对点云的能观性采样的方法（打分），进而使得LION可退预测可能的退化。
   并且根据打分，转换不同的状态估计算法（比如轮式里程计或者VIO/thermal-imu）来应对退化的情况。（PS：转换不同估算方法来保持系统的稳定性也是参考额外的一篇工作）
   
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231140147.png" alt="Image description">
     </div>
@@ -201,7 +201,7 @@
   </figcaption>
   </figure> 
   而所谓的“Observability Metric”则是通过对point-to-plane的ICP提取hessian矩阵进行分析的
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231140735.png" alt="Image description">
     </div>
@@ -223,7 +223,7 @@
   X-ICP的创新主要是两个：（1）fine-grained localizability detection module（通过利用scan与map的correspondence来分析他们之间在不同维度的对齐强度）和（2）localizability-aware constrained ICP optimization module（其实也就是把退化的方向不纳入优化的考虑，一次实现drift-free的pose update）。
   <br>
   X-icp中的localizability detection module（实际就是退化检测）的做法其实跟上面的LION的很类似，也就是对H矩阵进行分解，然后分别考虑rr和tt作为rotation和translation的退化分析（LION应该是只考虑了translation）
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231154426.png" alt="Image description">
     </div>
@@ -233,7 +233,7 @@
   </figure> 
   
   X-ICP整体的系统框架如下：
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20250102134922.png" alt="Image description">
     </div>
@@ -270,7 +270,7 @@
   <li> the effect of using active or passive degeneracy mitigation techniques （采用退化补偿）</li>
   <li> the choice of utilizing global point cloud registration methods on the ill-conditioned ICP problem in LiDAR degenerate environments (在退化场景采用全局的点云注册)</li>
   
-  <figure style="text-align: center;">
+  <figure align="center">
     <div style="margin-bottom: 10px;">
       <img style="width: 80%;" src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/微信截图_20241231143708.png" alt="Image description">
     </div>
