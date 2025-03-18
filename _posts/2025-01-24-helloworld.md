@@ -187,6 +187,23 @@ git push -u origin main
 
 更多markdown符号[Link](https://blog.csdn.net/konglongdanfo1/article/details/85204312)
 
+# 可视化三维模型.glb
+
+* 对于下面的path_to_your.glb需要确保是可以在线下载的路径，输入浏览器检查一下即可
+
+```html
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<model-viewer
+  src="path_to_your.glb" 
+  alt="3D Model"
+  ar
+  auto-rotate
+  camera-controls
+  style="width: 100%; height: 400px;"
+></model-viewer>
+```
+
 
 # google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
