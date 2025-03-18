@@ -204,7 +204,9 @@ git push -u origin main
 ></model-viewer>
 ```
 
-效果如下所示
+效果如下所示：
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
 <model-viewer
   src="https://github.com/KwanWaiPang/vggt/raw/main/generate_glb/mydesk.glb" 
   alt="3D Model"
