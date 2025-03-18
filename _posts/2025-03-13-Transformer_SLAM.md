@@ -227,9 +227,11 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
     </tr>
   </table>
   <figcaption>
-  注意，该framework是no task-specific learnable parameters的，也就是不需要针对具体任务进一步学习
   </figcaption>
 </div>
+
+注意，该framework是no task-specific learnable parameters的，也就是不需要针对具体任务进一步学习。
+但是，上图中的matching layers设计的时候还是需要考虑不同任务的约束（个人理解就是对应三个任务的三个loss），因此还是算task-specific，不过matching layer只是比较feature的相似度，因此三种任务都可以用同一个学习的参数，因此可以cross-task transfer.
 
 
 
