@@ -208,6 +208,31 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 </div>
 
 
+而关于单个transformer模型来解决多个问题，其实早在《[Unifying flow, stereo and depth estimation](https://arxiv.org/pdf/2211.05783)》中就已经有`single unified model to solve three dense perception tasks: optical flow, rectified stereo matching and unrectified stereo depth estimation`
+值得一提的是，该工作应该是首次（作者的上一篇论文《[Gmflow: Learning optical flow via global matching](https://openaccess.thecvf.com/content/CVPR2022/papers/Xu_GMFlow_Learning_Optical_Flow_via_Global_Matching_CVPR_2022_paper.pdf)》）实现用transformer并且摒弃掉correlation等CNN网络（注意在feature embedding还是要CNN的）以及针对光流等具体任务的cost单元
+
+而做到这一切靠的就是Transformer的cross-attention mechanism来实现通过特征之间的对比进而显示的构建稠密的数据关联（这一数据关联还是时间与空间维度的）
+`Our key insight is that these tasks can be unified in an explicit dense correspondence matching formulation, where they can be solved by directly comparing feature similarities. Thus the task is reduced to learning strong task agnostic feature representations for matching, for which we use a Transformer, in particular the cross-attention mechanism to achieve this. `
+简而言之就是Transformer可以建立很好的dense correspondence，而dense correspondence则可以很好的应对光流、双目匹配以及深度估计这三个任务~
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250318130106.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250318130058.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  注意，该framework是no task-specific learnable parameters的，也就是不需要针对具体任务进一步学习
+  </figcaption>
+</div>
+
+
+
 
 ## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
 
