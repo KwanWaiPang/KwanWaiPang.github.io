@@ -208,7 +208,7 @@ git push -u origin main
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <model-viewer
-  src="https://github.com/KwanWaiPang/vggt/raw/main/generate_glb/mydesk.glb" 
+  src="https://kwanwaipang.github.io/ubuntu_md_blog/VGGT/mydesk.glb" 
   alt="3D Model"
   ar
   auto-rotate
