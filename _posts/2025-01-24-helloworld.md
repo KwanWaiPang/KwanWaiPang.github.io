@@ -192,6 +192,18 @@ git push -u origin main
 * 对于下面的path_to_your.glb需要确保是可以在线下载的路径，输入浏览器检查一下即可
 
 ```html
+<!-- 定义全局样式 -->
+<style>
+  model-viewer {
+    display: block;
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+</style>
+
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <model-viewer
@@ -200,7 +212,6 @@ git push -u origin main
   ar
   auto-rotate
   camera-controls
-  style="width: 100%; height: 400px;"
 ></model-viewer>
 ```
 
@@ -213,7 +224,7 @@ git push -u origin main
   ar
   auto-rotate
   camera-controls
-  style="width: 100%; height: 400px;"
+  style="display: block; width: 100%; height: 500px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); overflow: hidden;"
 ></model-viewer>
 
 
