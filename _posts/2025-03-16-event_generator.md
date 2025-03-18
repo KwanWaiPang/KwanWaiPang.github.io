@@ -20,10 +20,7 @@ toc: false #true
 * 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/esim.html)
 * 代码：[ESIM_comment](https://github.com/KwanWaiPang/ESIM_comment)
 
-
-{% include_relative html_file/esim.html %}
-
-<!-- <style>
+<style>
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
   --cut-top: 200px;    /* 当前页面专用变量 */
@@ -81,4 +78,4 @@ toc: false #true
       window.addEventListener("resize", update);
     '
   ></iframe>
-</div> -->
+</div>
