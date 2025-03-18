@@ -177,10 +177,10 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250317162137.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317162137.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250317162157.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317162157.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -194,7 +194,7 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 如下图所示，对于stereo matching 以及optical flow两个task，则是用预训练好的模型，输入为两张图片（此时图1不再mask），然后decoder中间层输出的结果通过DPT《[Vision transformers for dense prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Ranftl_Vision_Transformers_for_Dense_Prediction_ICCV_2021_paper.pdf)》来输出最终的结果
 
 <div align="center">
-  <img src="../images/微信截图_20250317205814.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317205814.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -202,7 +202,7 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 而finetune则是用真值的target disparity通过Laplacian distribution来求
 
 <div align="center">
-  <img src="../images/微信截图_20250317210427.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317210427.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -219,10 +219,10 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250318130106.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250318130106.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250318130058.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250318130058.png" width="100%" />
       </td>
     </tr>
   </table>

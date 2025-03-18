@@ -135,7 +135,7 @@ PS：这个过程也符合马尔可夫过程，因为当前状态仅仅由上一
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316114847.png" width="60%" />
-  <img src="../images/微信截图_20250316130826.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250316130826.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
