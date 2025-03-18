@@ -202,7 +202,9 @@ git push -u origin main
   ar
   auto-rotate
   camera-controls
+  style="display: block; width: 100%; height: 500px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); overflow: hidden;"
 ></model-viewer>
+
 ```
 
 效果如下所示：
