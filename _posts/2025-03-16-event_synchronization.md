@@ -19,7 +19,9 @@ toc: false #true
 本博文记录了本人实现多个事件相机时间同步的实验过程。
 * 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/Sensor_Synchronization.html)
 
-<style>
+{% include_relative html_file/Sensor_Synchronization.html %}
+
+<!-- <style>
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
   --cut-top: 200px;    /* 当前页面专用变量 */
@@ -77,4 +79,4 @@ toc: false #true
       window.addEventListener("resize", update);
     '
   ></iframe>
-</div>
+</div> -->

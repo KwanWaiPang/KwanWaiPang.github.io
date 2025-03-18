@@ -20,7 +20,9 @@ toc: false #true
 
 * 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/Degeneracy_for_lidar.html)
 
-<style>
+{% include_relative html_file/Degeneracy_for_lidar.html %}
+
+<!-- <style>
 /* 通过ID限定作用域 */
 #iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
   --cut-top: 200px;    /* 当前页面专用变量 */
@@ -78,4 +80,4 @@ toc: false #true
       window.addEventListener("resize", update);
     '
   ></iframe>
-</div>
+</div> -->
