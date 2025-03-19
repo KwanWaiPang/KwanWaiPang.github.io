@@ -99,6 +99,22 @@ toc: true
 
 带loading-icon.gif:
 
+```html
+<div align="center" style="
+  position: relative; 
+  width: 80%; 
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 15px;
+  background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
+  ">
+  <iframe width="100%" height="100%"
+    src="填入B站链接&autoplay=0" 
+    title="Bilibili video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  style="opacity: 0; transition: opacity 0.5s; border-radius: 15px;" onload="this.style.opacity='1'"
+  ></iframe>
+</div>
+```
+
 <div align="center" style="
   position: relative; 
   width: 80%; 
