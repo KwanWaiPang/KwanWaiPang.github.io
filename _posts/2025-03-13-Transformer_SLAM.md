@@ -156,85 +156,6 @@ toc: false #true
 # Paper Reading
 接下来重点阅读几篇论文
 
-## MASt3R系列
-请见博客：
-* [实验笔记之——MASt3R-SLAM](https://kwanwaipang.github.io/MASt3R-SLAM/)
-* [论文阅读及复现笔记之——《Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass》](https://kwanwaipang.github.io/Fast3R/)
-* [DUSt3R与MASt3R学习博客](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
-
-### Croco
-
-MASt3R系列的一个核心观点就是3D数据的关联。其起源于DUSt3R，而DUSt3R则是起源于《[Croco: Self-supervised pre-training for 3d vision tasks by cross-view completion](https://proceedings.neurips.cc/paper_files/paper/2022/file/16e71d1a24b98a02c17b1be1f634f979-Paper-Conference.pdf)》和《[Croco v2: Improved cross-view completion pre-training for stereo matching and optical flow](https://openaccess.thecvf.com/content/ICCV2023/papers/Weinzaepfel_CroCo_v2_Improved_Cross-view_Completion_Pre-training_for_Stereo_Matching_and_ICCV_2023_paper.pdf)》
-
-Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个人理解是有点类似于图像补全，通过输入同一个场景下的两个视角的对应的两张图，对于第一张图片打mask，然后输入两个ViT的encoder中，而decoder重构出第一张图片打mask前的样式，并且采用self-supervise的形式来监督学习（也就是输入打mask前的图片与预测的图片之间的MSE）
-
-而Croco在针对这一任务发现，网络实际上学习了空间的数据关联。因此在光流和深度估计等下游任务都有不错的提升。因此在Croco V2中针对光流和双目匹配（其实也就是深度估计了）这两个任务，采用了更大的encoder和decoder网络、大型真实+仿真数据（Croco用仿真数据）、位置编码从绝对位置改为相对位置，最终发现这一预训练模型比起RAFT、Gmflow这种task-specific网络还要强.
-换句话说，对于深度估计和光流两个任务，Croco V2采用一样的结构，并且用self-supervised的方式来训练，最终可以直接finetuned到目标任务（而采用的transformer框架并不包含correlation或cost volume）`paving the way towards universal vision models`
-
-对于位置编码，learned以及cosine embeddings都是包含绝对的位置信息的，而论文提出采用的相对位置则是用RoPE《[Roformer: Enhanced transformer with rotary position embedding](https://arxiv.org/pdf/2104.09864)》
-
-<div align="center">
-  <table style="border: none; background-color: transparent;">
-    <tr align="center">
-      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317162137.png" width="100%" />
-      </td>
-      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317162157.png" width="100%" />
-      </td>
-    </tr>
-  </table>
-  <figcaption>
-  Croco VS Croco-V2
-  </figcaption>
-</div>
-
-如上图所示，通过利用来自图2的信息可以恢复图1中被masked的区域，这能让模型隐式学习到场景的几何结构以及两个视角的空间关系，而这也使得该模型非常适用于基于几何（geometric）的task。
-
-如下图所示，对于stereo matching 以及optical flow两个task，则是用预训练好的模型，输入为两张图片（此时图1不再mask），然后decoder中间层输出的结果通过DPT《[Vision transformers for dense prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Ranftl_Vision_Transformers_for_Dense_Prediction_ICCV_2021_paper.pdf)》来输出最终的结果
-
-<div align="center">
-  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317205814.png" width="60%" />
-<figcaption>  
-</figcaption>
-</div>
-
-而finetune则是用真值的target disparity通过Laplacian distribution来求
-
-<div align="center">
-  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317210427.png" width="60%" />
-<figcaption>  
-</figcaption>
-</div>
-
-
-而关于单个transformer模型来解决多个问题，其实早在《[Unifying flow, stereo and depth estimation](https://arxiv.org/pdf/2211.05783)》中就已经有`single unified model to solve three dense perception tasks: optical flow, rectified stereo matching and unrectified stereo depth estimation`
-值得一提的是，该工作应该是首次（作者的上一篇论文《[Gmflow: Learning optical flow via global matching](https://openaccess.thecvf.com/content/CVPR2022/papers/Xu_GMFlow_Learning_Optical_Flow_via_Global_Matching_CVPR_2022_paper.pdf)》）实现用transformer并且摒弃掉correlation等CNN网络（注意在feature embedding还是要CNN的）以及针对光流等具体任务的cost单元
-
-而做到这一切靠的就是Transformer的cross-attention mechanism来实现通过特征之间的对比进而显示的构建稠密的数据关联（这一数据关联还是时间与空间维度的）
-`Our key insight is that these tasks can be unified in an explicit dense correspondence matching formulation, where they can be solved by directly comparing feature similarities. Thus the task is reduced to learning strong task agnostic feature representations for matching, for which we use a Transformer, in particular the cross-attention mechanism to achieve this. `
-简而言之就是Transformer可以建立很好的dense correspondence，而dense correspondence则可以很好的应对光流、双目匹配以及深度估计这三个任务~
-
-<div align="center">
-  <table style="border: none; background-color: transparent;">
-    <tr align="center">
-      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250318130106.png" width="100%" />
-      </td>
-      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250318130058.png" width="100%" />
-      </td>
-    </tr>
-  </table>
-  <figcaption>
-  </figcaption>
-</div>
-
-注意，该framework是no task-specific learnable parameters的，也就是不需要针对具体任务进一步学习。
-但是，上图中的matching layers设计的时候还是需要考虑不同任务的约束（个人理解就是对应三个任务的三个loss），因此还是算task-specific，不过matching layer只是比较feature的相似度，因此三种任务都可以用同一个学习的参数，因此可以cross-task transfer.
-
-
-
 
 ## Causal Transformer for Fusion and Pose Estimation in Deep Visual Inertial Odometry
 
@@ -325,6 +246,90 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 </figcaption>
 </div>
 
+
+## DUSt3R与MASt3R系列
+请见博客：
+* [DUSt3R与MASt3R学习博客](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
+
+### Croco
+
+MASt3R系列的一个核心观点就是3D数据的关联。其起源于DUSt3R，而DUSt3R则是起源于《[Croco: Self-supervised pre-training for 3d vision tasks by cross-view completion](https://proceedings.neurips.cc/paper_files/paper/2022/file/16e71d1a24b98a02c17b1be1f634f979-Paper-Conference.pdf)》和《[Croco v2: Improved cross-view completion pre-training for stereo matching and optical flow](https://openaccess.thecvf.com/content/ICCV2023/papers/Weinzaepfel_CroCo_v2_Improved_Cross-view_Completion_Pre-training_for_Stereo_Matching_and_ICCV_2023_paper.pdf)》
+
+Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个人理解是有点类似于图像补全，通过输入同一个场景下的两个视角的对应的两张图，对于第一张图片打mask，然后输入两个ViT的encoder中，而decoder重构出第一张图片打mask前的样式，并且采用self-supervise的形式来监督学习（也就是输入打mask前的图片与预测的图片之间的MSE）
+
+而Croco在针对这一任务发现，网络实际上学习了空间的数据关联。因此在光流和深度估计等下游任务都有不错的提升。因此在Croco V2中针对光流和双目匹配（其实也就是深度估计了）这两个任务，采用了更大的encoder和decoder网络、大型真实+仿真数据（Croco用仿真数据）、位置编码从绝对位置改为相对位置，最终发现这一预训练模型比起RAFT、Gmflow这种task-specific网络还要强.
+换句话说，对于深度估计和光流两个任务，Croco V2采用一样的结构，并且用self-supervised的方式来训练，最终可以直接finetuned到目标任务（而采用的transformer框架并不包含correlation或cost volume）`paving the way towards universal vision models`
+
+对于位置编码，learned以及cosine embeddings都是包含绝对的位置信息的，而论文提出采用的相对位置则是用RoPE《[Roformer: Enhanced transformer with rotary position embedding](https://arxiv.org/pdf/2104.09864)》
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317162137.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317162157.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  Croco VS Croco-V2
+  </figcaption>
+</div>
+
+如上图所示，通过利用来自图2的信息可以恢复图1中被masked的区域，这能让模型隐式学习到场景的几何结构以及两个视角的空间关系，而这也使得该模型非常适用于基于几何（geometric）的task。
+
+如下图所示，对于stereo matching 以及optical flow两个task，则是用预训练好的模型，输入为两张图片（此时图1不再mask），然后decoder中间层输出的结果通过DPT《[Vision transformers for dense prediction](https://openaccess.thecvf.com/content/ICCV2021/papers/Ranftl_Vision_Transformers_for_Dense_Prediction_ICCV_2021_paper.pdf)》来输出最终的结果
+
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317205814.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而finetune则是用真值的target disparity通过Laplacian distribution来求
+
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250317210427.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+而关于单个transformer模型来解决多个问题，其实早在《[Unifying flow, stereo and depth estimation](https://arxiv.org/pdf/2211.05783)》中就已经有`single unified model to solve three dense perception tasks: optical flow, rectified stereo matching and unrectified stereo depth estimation`
+值得一提的是，该工作应该是首次（作者的上一篇论文《[Gmflow: Learning optical flow via global matching](https://openaccess.thecvf.com/content/CVPR2022/papers/Xu_GMFlow_Learning_Optical_Flow_via_Global_Matching_CVPR_2022_paper.pdf)》）实现用transformer并且摒弃掉correlation等CNN网络（注意在feature embedding还是要CNN的）以及针对光流等具体任务的cost单元
+
+而做到这一切靠的就是Transformer的cross-attention mechanism来实现通过特征之间的对比进而显示的构建稠密的数据关联（这一数据关联还是时间与空间维度的）
+`Our key insight is that these tasks can be unified in an explicit dense correspondence matching formulation, where they can be solved by directly comparing feature similarities. Thus the task is reduced to learning strong task agnostic feature representations for matching, for which we use a Transformer, in particular the cross-attention mechanism to achieve this. `
+简而言之就是Transformer可以建立很好的dense correspondence，而dense correspondence则可以很好的应对光流、双目匹配以及深度估计这三个任务~
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250318130106.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250318130058.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+注意，该framework是no task-specific learnable parameters的，也就是不需要针对具体任务进一步学习。
+但是，上图中的matching layers设计的时候还是需要考虑不同任务的约束（个人理解就是对应三个任务的三个loss），因此还是算task-specific，不过matching layer只是比较feature的相似度，因此三种任务都可以用同一个学习的参数，因此可以cross-task transfer.
+
+## MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors
+
+* 解读及测试请见博客：[Link](https://kwanwaipang.github.io/MASt3R-SLAM/)
+
+## Fast3R: Towards 3D Reconstruction of 1000+ Images in One Forward Pass
+
+* 解读及测试请见博客：[Link](https://kwanwaipang.github.io/Fast3R/)
+
 ## VGGT: Visual Geometry Grounded Transformer
 
-解读及测试请见博客：[Link](https://kwanwaipang.github.io/VGGT/)
+* 解读及测试请见博客：[Link](https://kwanwaipang.github.io/VGGT/)
