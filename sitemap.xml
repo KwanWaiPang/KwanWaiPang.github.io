@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://kwanwaipang.github.io/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/My_Blog.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Representative_works/Granted_patents.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/DEIO/</loc>
+  <lastmod>2025-02-14T11:11:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/LVI-GS/</loc>
+  <lastmod>2025-03-16T02:38:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/EVI-SAM%EF%BC%9ARobust,%20Real-time,%20Tightly-coupled%20Event-Visual-Inertial%20State%20Estimation%20and%203D%20Dense%20Mapping.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/EVI-SAM/</loc>
+  <lastmod>2025-02-14T11:12:25+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/PL-EVIO%EF%BC%9ARobust%20Monocular%20Event-based%20Visual%20Inertial%20Odometry%20with%20Point%20and%20Line%20Features.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/ICRA2024_presentation.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/PL-EVIO/</loc>
+  <lastmod>2025-02-14T11:15:48+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/ECMD%EF%BC%9AAn%20Event-Centric%20Multisensory%20Driving%20Dataset%20for%20SLAM.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/ESVIO%EF%BC%9AEvent-based%20Stereo%20Visual%20Inertial%20Odometry.pdf</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/IROS2023_presentation.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/ESVIO/</loc>
+  <lastmod>2025-02-14T11:11:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/Monocular%20Event%20Visual%20Inertial%20Odometry%20Based%20on%20Event-Corner%20Using%20Sliding%20Windows%20Graph-Based%20Optimization.pdf</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Mono-EIO/</loc>
+  <lastmod>2025-02-14T11:14:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/IROS2022_presentation.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/Robot%20Localization%20and%20Navigation%20Using%20Visible%20Light%20Positioning%20and%20SLAM%20Fusion.pdf</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/Robust%20Robotic%20Localization%20Using%20Visible%20Light%20Positioning%20and%20Inertial%20Fusion.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/High%20accuracy,%206-DoF%20simultaneous%20localization%20and%20calibration%20using%20visible%20light%20positioning.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/CGA-VLP%EF%BC%9AHigh%20Accuracy%20Visible%20Light%20Positioning%20Algorithm%20Using%20Single%20Square%20LED%20with%20Geomagnetic%20Angle%20Correction.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/VWR-SLAM%20Tightly-coupled%20SLAM%20System%20Based%20on%20Visible%20Light%20Positioning%20Landmark,%20Wheel%20Odometer%20and%20RGB-D%20Camera.pdf</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/Multirobot%20Cooperative%20Localization%20Based%20on%20Visible%20Light%20Positioning%20and%20Odometer.pdf</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/High-Accuracy%20Robot%20Indoor%20Localization%20Scheme%20Based%20on%20Robot%20Operating%20System%20Using%20Visible%20Light%20Positioning.pdf</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/Performance%20enhancement%20scheme%20for%20RSE-based%20underwater%20optical%20camera%20communication%20using%20de-bubble%20algorithm%20and%20binary%20fringe%20correction.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/papers/The%20LED-ID%20Detection%20and%20Recognition%20Method%20Based%20on%20Visible%20Light%20Positioning%20Using%20Proximity%20Method.pdf</loc>
+  <lastmod>2025-03-07T07:52:27+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/esim.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/Sensor_Synchronization.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Poster_files/Event_camera/Introduction_of_event_camera.html</loc>
+  <lastmod>2025-03-07T07:52:28+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/Degeneracy_for_lidar.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E8%A7%86%E8%A7%89SLAM.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/Learning_based_VO.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/survey_3DGS_SLAM.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/survey_dynamic_SLAM.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/Study_note_DL.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/Study_note_ML.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E6%99%BA%E9%A9%BE%E4%B8%AD%E7%9A%84%E2%80%9C%E6%97%A0%E5%9B%BE%E2%80%9D.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E9%85%8D%E7%BD%AEgithub%E7%9A%84ssh.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/ubuntu%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/cpp%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/Self_develop_APP.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Representative_works/Representative_works.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/home/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Representative_works/research_work_demo.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010135091.5.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010987949.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201710699977.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201710687803.2.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202011412896.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201710687950.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010135681.8.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201711130032.3.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202111149229.8.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202111148825.4.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201711084904.7.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201710709928.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201711105236.1.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810523801.4.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201510515037.2.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201510552213.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201611019097.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201610698106.2.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201610326757.9.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201610326741.8.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201710803114.3.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010700172.5.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010675439.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810177868.7.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202111261775.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201510514172.5.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202111386074.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810184128.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810184130.3.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201611080890.7.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202111492102.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201610698304.9.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201510963153.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201510966604.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201910480104.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201910095972.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810861653.7.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810578890.2.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810578887.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201711142400.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201610698466.2.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810186113.3.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810184129.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201710400906.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010323629.5.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201910572729.9.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201510966533.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201810177867.2.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201811029390.X.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201910485565.6.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/201910268529.4.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202111389612.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VLC_Demo/PDF_of_patent/202010987956.0.pdf</loc>
+  <lastmod>2024-11-26T03:15:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/MASt3R-SLAM/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/3DGS-SLAM/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E6%A0%88%E7%B1%BB%E5%9E%8B%E9%A2%98%E7%9B%AE.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E5%8F%8C%E6%8C%87%E9%92%88%E9%93%BE%E8%A1%A8%E8%A7%A3%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E5%8F%8C%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E8%A7%A3%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E4%BA%8C%E5%88%86%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%B1%BB%E9%A2%98%E7%9B%AE.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E9%80%92%E5%BD%92%E7%B1%BB%E9%A2%98%E7%9B%AE.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E6%A8%A1%E6%8B%9F%E7%AE%97%E6%B3%95.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E5%9B%BE%E8%AE%BA.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E5%85%B6%E4%BB%96%E7%AE%97%E6%B3%95%E9%A2%98%E6%B1%87%E6%80%BB.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E4%BD%8D%E8%BF%90%E7%AE%97.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Blogs/Poster/%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/File/Representative_works/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/archive/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/tags/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/about/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/SLAM3R/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/VGGT/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/event_synchronization/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/event_generator/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Lidar_Degeneracy/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Diffusion/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Awesome-NeRF-SLAM/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Autopilot/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/home/page2/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Taming-Contrast-Maximization/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/RL-for-VO/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/generate_contribution_snake/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Dynamic-SLAM/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/PlayGame/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Learning-based-VO-VIO/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Transformer_SLAM/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Transformer/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/sweep-robot/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Fast3R/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Awesome-Event-based-Contrast-Maximization/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Academic-profile/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/AirIO/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/%E5%9F%BA%E4%BA%8E%E5%8F%AF%E8%A7%81%E5%85%89%E9%80%9A%E4%BF%A1%E7%9A%84%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8D%E5%8F%8A%E7%89%A9%E8%81%94%E7%BD%91%E5%BA%94%E7%94%A8/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/%E5%9F%BA%E4%BA%8EAndroid%E7%9A%84%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8DAPP/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/generate_markdown_catalog/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/AirIMU/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Deep-IMU-Bias/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/SF-Loc/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/SEA-RAFT/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Occupancy-SLAM/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/fast_livo2_testing/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/helloworld/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/index.html</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/home/page3/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Chess/Western_chess/index.html</loc>
+  <lastmod>2025-03-17T13:51:48+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Chess/Western_chess/index3D.html</loc>
+  <lastmod>2025-03-17T13:51:48+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Chess/wuziqi.html</loc>
+  <lastmod>2025-03-17T13:51:48+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Chess/Chinese_Chess/index.html</loc>
+  <lastmod>2025-03-17T13:51:48+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/Chess/Go/index.html</loc>
+  <lastmod>2025-03-17T13:51:48+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/home/page4/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kwanwaipang.github.io/home/page5/</loc>
+  <lastmod>2025-03-19T12:09:51+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+
+
+</urlset>
