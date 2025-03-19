@@ -258,7 +258,18 @@ site:https://kwanwaipang.github.io/
 </figcaption>
 </div>
 
-* 接下来应该是通过添加站点，把所有博客都加进去后续再运行```site:https://kwanwaipang.github.io/```都时候就可以搜到其他博客同时其他博客也可以被google搜到了（没经实测，个人觉得没必要，因为我写博客只是个人mark而已hhh～）
+* 接下来应该是通过添加站点，那么应该就让博客也可以被google搜到了
+
+<div align="center">
+  <img src="../images/微信截图_20250319174824.png" width="60%" />
+  <img src="../images/微信截图_20250319175610.png" width="60%" />
+<figcaption> 
+</figcaption>
+</div>
+
+所谓的站点地图是一个 XML 文件，列出了你网站上的所有页面，帮助 Google 爬虫更快地发现和索引你的内容。应该为`https://kwanwaipang.github.io/sitemap.xml`
+
+
 
 * 此外也可以通过注册一个[Google Analytics](https://analytics.google.com/analytics/),可以统计你博客网站的访问人数，访问来源等非常丰富的网站数据。对应修改```_config.yml```文件中的`google_analytics`即可
 * 此博客采用了Google Analytics 4（GA4）而非旧版Universal Analytics（UA），详细请见代码`_includes\analytics.html`
