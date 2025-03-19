@@ -333,3 +333,7 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 ## VGGT: Visual Geometry Grounded Transformer
 
 * 解读及测试请见博客：[Link](https://kwanwaipang.github.io/VGGT/)
+
+## SLAM3R: Real-Time Dense Scene Reconstruction from Monocular RGB Videos
+
+* 解读及测试请见博客：[Link](https://kwanwaipang.github.io/SLAM3R/)
