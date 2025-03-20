@@ -249,7 +249,7 @@ site:https://kwanwaipang.github.io/
 </figcaption>
 </div>
 
-* Google网站站长[Google Search Console](https://search.google.com/search-console?hl=zh-CN).然后添加资源，并按要求验证即可。下载对应的html文件，然后放在主目录下
+* Google网站站长[Google Search Console](https://search.google.com/search-console?hl=zh-CN)然后添加资源，并按要求验证即可。下载对应的html文件，然后放在主目录下
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/WX20250207-211559@2x.png" width="60%" />
@@ -272,7 +272,7 @@ site:https://kwanwaipang.github.io/
 
 
 
-* 此外也可以通过注册一个[Google Analytics](https://analytics.google.com/analytics/),可以统计你博客网站的访问人数，访问来源等非常丰富的网站数据。对应修改```_config.yml```文件中的`google_analytics`即可
+* 此外也可以通过注册一个[Google Analytics](https://analytics.google.com/analytics/web/?hl=zh-cn#),可以统计你博客网站的访问人数，访问来源等非常丰富的网站数据。对应修改```_config.yml```文件中的`google_analytics`即可
 * 此博客采用了Google Analytics 4（GA4）而非旧版Universal Analytics（UA），详细请见代码`_includes\analytics.html`
 
 
