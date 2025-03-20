@@ -270,6 +270,8 @@ site:https://kwanwaipang.github.io/
 所谓的站点地图是一个 XML 文件，列出了你网站上的所有页面，帮助 Google 爬虫更快地发现和索引你的内容。应该为`https://kwanwaipang.github.io/sitemap.xml`
 但似乎还是无法抓取~~~
 
+对应的`https://kwanwaipang.github.io/robots.txt`应该也是正常的
+
 
 
 * 此外也可以通过注册一个[Google Analytics](https://analytics.google.com/analytics/web/?hl=zh-cn#),可以统计你博客网站的访问人数，访问来源等非常丰富的网站数据。对应修改```_config.yml```文件中的`google_analytics`即可
