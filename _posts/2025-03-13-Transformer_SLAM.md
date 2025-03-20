@@ -11,7 +11,7 @@ toc: false #true
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
-之前博客对Transformer进行了基本的学习（从NLP到CV），鉴于Transformer强大的数据（时间与空间维度）关联能力，个人感觉其在SLAM问题上应该是有不少的应用空间的，为此写下本博文，记录本人调研收集的ransformer-based SLAM，visual odometry, mapping（depth estimation）以及optical estimation
+之前博客对Transformer进行了基本的学习（从NLP到CV），鉴于Transformer强大的数据（时间与空间维度）关联能力，个人感觉其在SLAM问题上应该是有不少的应用空间的，为此写下本博文，记录本人调研收集的Transformer-based SLAM，visual odometry, mapping（depth estimation）以及optical estimation
 
 本博文仅供本人学习记录用~
 
@@ -333,6 +333,23 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 ## VGGT: Visual Geometry Grounded Transformer
 
 * 解读及测试请见博客：[Link](https://kwanwaipang.github.io/VGGT/)
+
+其中《[VGGSfM: Visual Geometry Grounded Deep Structure From Motion](https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_VGGSfM_Visual_Geometry_Grounded_Deep_Structure_From_Motion_CVPR_2024_paper.pdf)》应该算是其前作了，就是用transfomer-based的网络拟合end-to-end的sfm。感觉跟	MASt3R-SfM有些像，只不过	MASt3R-SfM是基于3D匹配的概念的，VGGSfM则还是2D匹配的概念。其架构如下图所示
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 70%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250320143408.png" width="100%" />
+      </td>
+      <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250320143431.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 ## SLAM3R: Real-Time Dense Scene Reconstruction from Monocular RGB Videos
 
