@@ -89,7 +89,7 @@ or 3D reconstruction
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2022|`CVPR`|[High-resolution image synthesis with latent diffusion models](https://openaccess.thecvf.com/content/CVPR2022/papers/Rombach_High-Resolution_Image_Synthesis_With_Latent_Diffusion_Models_CVPR_2022_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/CompVis/latent-diffusion.svg)](https://github.com/CompVis/latent-diffusion)|stable diffusion|
-|2021|`NIPS`|[Diffusion models beat gans on image synthesis](https://proceedings.neurips.cc/paper_files/paper/2021/file/49ad23d1ec9fa4bd8d77d02681df5cfa-Paper.pdf)|---|---|
+|2021|`NIPS`|[Diffusion models beat gans on image synthesis](https://proceedings.neurips.cc/paper_files/paper/2021/file/49ad23d1ec9fa4bd8d77d02681df5cfa-Paper.pdf)|---|Ablated Diffusion Model(ADM)|
 |2020|`ICLR`|[Denoising diffusion implicit models](https://arxiv.org/pdf/2010.02502)|---|DDIM|
 |2020|`NIPS`|[Denoising diffusion probabilistic models](https://proceedings.neurips.cc/paper/2020/file/4c5bcfec8584af0d967f1ab10179ca4b-Paper.pdf)|[![Github stars](https://img.shields.io/github/stars/hojonathanho/diffusion.svg)](https://github.com/hojonathanho/diffusion)|DDPM|
 
@@ -176,4 +176,57 @@ DINO V2提供的应该是 semantic knowledge, DIFT提供的semantic和geometric�
 
 ## Emergent correspondence from image diffusion
 
-这篇论文就是DIFT，也就是利用diffusion来获取图像之间的correspondence，同样地，也是针对semantic, geometric, 和 temporal数据关联
+这篇论文就是DIFT(DIffusion FeaTures)，也就是利用diffusion model来获取图像之间的correspondence，同样地，也是针对semantic, geometric, 和 temporal数据关联,并且不需要用task-specif数据来进行监督或者fine tuning。
+
+diffusion model一般是用于做图像生成的，那么最关键的observation就是它在 image-to-image translation以及image editing上有好的表现（如下图所示）。而这个过程实际上就是隐式的将两张图片的数据关联对应起来，因此diffusion model应该也可以用于做图像之间的数据关联
+
+<div align="center">
+  <img src="https://github.com/Tsingularity/dift/raw/main/assets/edit_cat.gif" width="80%" />
+<figcaption>  
+模型很好的知道要修改的位置在哪里，而其余区域不变，这需要有很强的关联能力 (must implicitly reason about correspondence between the two categories)
+</figcaption>
+</div>
+
+如下图所示，所谓的semantic correspondence也就是指定了位置(比如鸭子的熊的耳朵)，那么在各种不同但相似的图像上也可以把耳朵的特征点关联出来
+
+<div align="center">
+  <img src="../images/微信截图_20250321162635.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+Diffusion models是一种生成模型，将正态分布转换为任意的数据分布的形式。而在训练的过程中，带有不同幅度的高斯噪声会被加到数据点上（clean data point）以获取带噪声的data point，如下公式所示
+
+<div align="center">
+  <img src="../images/微信截图_20250321163431.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而一个神经网络$f_{\theta}$则会用于学习以图像$x_{t}$和时间$t$为输入，预测噪声$\varepsilon$.
+在图像生成领域，网络$f_{\theta}$一般是U-Net，而经过训练后，$f_{\theta}$可以用来逆转diffusion的过程（"diffusion backward process"）：
+从一个来自于正态分布采样的纯噪声$x_{T}$，$f_{\theta}$可以迭代估算来自于噪声图片$x_{t}$的噪声$\varepsilon$，然后去掉这个噪声来获取更清晰的数据$x_{t-1}$，最终获取一个原数据分布下的$x_{0}$
+
+那么针对上面图像生成的过程，通过提取backward process中，特征时间$t$的中间层的feature map，然后用其来建立两张不同生成图片之间的correspondence，如下公式所示
+
+<div align="center">
+  <img src="../images/微信截图_20250321164543.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而对于到底应该拿哪一个$t$对应的网络，作者发现越大的$t$以及越前的网络层就有更多可识别的语义特征，而越小的$t$以及越后的层则会更多的low-level细节。作者通过消融实验来验证了这部分（具体请见原文）
+
+PS：个人感觉就是作者假设Diffusion models是可以获取两张图像之间的关联的，然后就确实从Diffusion models中的一层获得的feature map作为描述子，而这又确实可以用。然后再从理论反推的~~~
+
+语义以及temporal tracking可能不是SLAM中关注的，这里看看它几何匹配的效果
+<div align="center">
+  <img src="../images/微信截图_20250321165458.png" width="80%" />
+  <img src="../images/微信截图_20250321165531.png" width="80%" />
+<figcaption>
+ after removing outliers with RANSAC  
+</figcaption>
+</div>
+
+PS：对于diffusion-based feature matching的看法：
+感觉这一系列的diffusion-based matching的论文首先都是以语义匹配为主的，毕竟diffusion本身就是图像生成或者translation等相关的，因此可以做到语义转换后仍然可以实现较好的匹配。而对于geometric 和 temporal的特征匹配其实就是在语义的基础上的降维打击了hhh，毕竟语义都能匹配上，更何况只是几何的角度不一样呢。
