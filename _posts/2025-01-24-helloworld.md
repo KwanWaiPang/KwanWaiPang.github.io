@@ -274,8 +274,7 @@ git push -u origin main
       width: 80%;
       height: 400px;
       border: none;
-      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
-    "
+      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);"
       ></iframe>
 </div>
 
