@@ -203,8 +203,8 @@ git push -u origin main
 
 更多markdown符号[Link](https://blog.csdn.net/konglongdanfo1/article/details/85204312)
 
-# 可视化三维模型.glb
-
+# 3D可视化插件
+* 可视化三维模型.glb
 * 对于下面的path_to_your.glb需要确保是可以在线下载的路径，输入浏览器检查一下即可
 
 ```html
