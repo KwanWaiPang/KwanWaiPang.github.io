@@ -19,20 +19,12 @@ toc: false #true
 {:toc}
 
 
-其他相关链接：
-
-* [What is Diffusion?](https://kwanwaipang.github.io/Diffusion/)
-* Learning-based VO,VIO,IO：[Paper List](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO) 以及[博客](https://kwanwaipang.github.io/Learning-based-VO-VIO/)
-* Transformer-based SLAM：[Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) 以及[博客](https://kwanwaipang.github.io/Transformer_SLAM/)
-* NeRF-based SLAM：[博客](https://kwanwaipang.github.io/Awesome-NeRF-SLAM/)
-* 3DGS-based SLAM: [博客](https://kwanwaipang.github.io/File/Blogs/Poster/survey_3DGS_SLAM.html)
-
-
 # Paper List
 
 * 注意，此处非最新版，仅仅是写此博客的时候的记录
 * Keep update the paper list in: [Awesome-Diffusion-based-SLAM](https://github.com/KwanWaiPang/Awesome-Diffusion-based-SLAM)
 
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 ## Matching
 
@@ -64,10 +56,11 @@ or 3D reconstruction
 |2025|`CVPR`|[Difix3D+: Improving 3D Reconstructions with Single-Step Diffusion Models](https://arxiv.org/pdf/2503.01774?)|---|[website](https://research.nvidia.com/labs/toronto-ai/difix3d/)|
 |2025|`CVPR`|[Multi-view Reconstruction via SfM-guided Monocular Depth Estimation](https://arxiv.org/pdf/2503.14483)|[![Github stars](https://img.shields.io/github/stars/zju3dv/Murre.svg)](https://github.com/zju3dv/Murre)|[website](https://zju3dv.github.io/murre/)|
 |2025|`CVPR`|[Align3r: Aligned monocular depth estimation for dynamic videos](https://arxiv.org/pdf/2412.03079)|[![Github stars](https://img.shields.io/github/stars/jiah-cloud/Align3R.svg)](https://github.com/jiah-cloud/Align3R)|---|
+|2024|`NIPS`|[Cat3d: Create anything in 3d with multi-view diffusion models](https://arxiv.org/pdf/2405.10314)|---|[website](https://cat3d.github.io/)|
 |2024|`ECCV`|[Diffusiondepth: Diffusion denoising approach for monocular depth estimation](https://arxiv.org/pdf/2303.05021)|[![Github stars](https://img.shields.io/github/stars/duanyiqun/DiffusionDepth.svg)](https://github.com/duanyiqun/DiffusionDepth)|[website](https://igl-hkust.github.io/Align3R.github.io/)|
 |2023|`NIPS`|[The surprising effectiveness of diffusion models for optical flow and monocular depth estimation](https://proceedings.neurips.cc/paper_files/paper/2023/file/7c119415672ae2186e17d492e1d5da2f-Paper-Conference.pdf)|---|[website](https://diffusion-vision.github.io/)|
 |2023|`arXiv`|[Monocular depth estimation using diffusion models](https://arxiv.org/pdf/2302.14816)|---|[website](https://depth-gen.github.io/)| 
-
+|2023|`arXiv`|[Mvdream: Multi-view diffusion for 3d generation](https://arxiv.org/pdf/2308.16512)|[![Github stars](https://img.shields.io/github/stars/bytedance/MVDream.svg)](https://github.com/bytedance/MVDream)|[website](https://mv-dream.github.io/)|
 
 ## Pose Estimation
 
@@ -79,9 +72,15 @@ or 3D reconstruction
 |2023|`ICCV`|[Posediffusion: Solving pose estimation via diffusion-aided bundle adjustment](https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_PoseDiffusion_Solving_Pose_Estimation_via_Diffusion-aided_Bundle_Adjustment_ICCV_2023_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/facebookresearch/PoseDiffusion.svg)](https://github.com/facebookresearch/PoseDiffusion)|[website](https://posediffusion.github.io/)|
 
 
+## Other Resource
 
-
-* Some basic paper for Diffusion Model
+* [What is Diffusion?](https://kwanwaipang.github.io/Diffusion/)
+* Survey for Learning-based VO,VIO,IO：[Paper List](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO) and [Blog](https://kwanwaipang.github.io/Learning-based-VO-VIO/)
+* Survey for Transformer-based SLAM：[Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) and [Blog](https://kwanwaipang.github.io/Transformer_SLAM/)
+* Survey for NeRF-based SLAM：[Blog](https://kwanwaipang.github.io/Awesome-NeRF-SLAM/)
+* Survey for 3DGS-based SLAM: [Blog](https://kwanwaipang.github.io/File/Blogs/Poster/survey_3DGS_SLAM.html)
+* [Awesome-Diffusion-Models](https://github.com/diff-usion/Awesome-Diffusion-Models)
+* Some basic paper for Diffusion Model:
 
 <!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
@@ -95,6 +94,9 @@ or 3D reconstruction
 
 
 
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 # Paper Reading
 接下来重点阅读几篇论文
@@ -230,3 +232,56 @@ PS：个人感觉就是作者假设Diffusion models是可以获取两张图像�
 
 PS：对于diffusion-based feature matching的看法：
 感觉这一系列的diffusion-based matching的论文首先都是以语义匹配为主的，毕竟diffusion本身就是图像生成或者translation等相关的，因此可以做到语义转换后仍然可以实现较好的匹配。而对于geometric 和 temporal的特征匹配其实就是在语义的基础上的降维打击了hhh，毕竟语义都能匹配上，更何况只是几何的角度不一样呢。
+
+## STABLE VIRTUAL CAMERA: Generative View Synthesis with Diffusion Models
+STABLE VIRTUAL CAMERA (SEVA)，就是输入视角以及相机pose等信息，可以获得场景的新视觉。但是跟其他新视觉合成的工作不一样，不依赖于固定的输入，比如像NeRF之类的，需要360度全方位覆盖，视角间的位移不能太大。具体见nerf系列的工作就知道😂，相邻两个视角基本上是肉眼分不出区别的小位移，不然效果就非常差。而这篇工作应该就是利用了Diffusion Models可以弥补这些缺陷为motivation的：
+1. 可以handle大视点变化建模与时间平滑
+2. 应对任意长度的相机轨迹（也就是任意输入视角）
+3. 在新视觉合成任务上，具有泛化能力
+
+<div align="center">
+  <img src="../images/微信截图_20250322131401.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+SEVA解决的是新视觉合成（Novel view synthesis，NVS）的问题。其结构如下，采用的是Stable Diffusion的结构，并且结合了self-attention
+
+<div align="center">
+  <img src="../images/微信截图_20250322132519.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+## Bolt3D: Generating 3D Scenes in Seconds
+这篇论文则是属于三维重建领域的， 用单个GPU，在7秒内获取3维场景。
+采用的是2D diffusion network来预测出一致性强的3D场景
+而为了训练这个模型，作者构建了一个大尺度的3D数据集。
+
+当前的diffusion model在图像以及视频的生成都有不少的工作，但是都是基于2D图像的，并不是3D图像的（比如上一篇，只是新视觉合成，那么也只是2D图像层面的）。
+而之所以用diffusion model生成3D这么具有挑战性，主要是由于以下两个原因：
+1. 表示和构造3D数据以能够训练以高分辨率生成完整场景的扩散模型是一个未解决的问题。（也就是数据集的问题）
+2. 真值3D场景也是稀缺的（比起生成模型的2D数据集），那么也就是数据集的问题。
+
+而这也导致大多数的3D生成模型只能局限于合成物体、新视觉、部分“forward-facing”的场景。而要真正合成3D场景，需要进一步的通过NeRF或者3DGS，虽然这可以产生高质量的3D数据，但是不现实。
+
+那么其实读到这里，就很显然的，本文就是通过构建了一个好的、大的3D数据集可以喂给existing 2D diffusion network，以及可以`leveraging powerful and scalable existing 2D diffusion network`。而在这篇论文之前的diffusion-based 的3D重建的工作基本都是有局限的“伪3D”
+不过即使作者前面这样说，但是本文实际上又还是将3D场景表达为一系列的存在多个2D网格下的3D Gaussians，其结构如下图所示
+
+<div align="center">
+  <img src="../images/微信截图_20250322140355.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+生成的过程主要分为两部分：
+1. "denoising" 每个高斯的color 以及position
+2. 回归每个高斯的透明度（opacity）以及形状（应该就是旋转和尺度等高斯球的属性了~）
+
+输入一系列的image以及对应的pose，模型可以预测场景的外观（pixel color）以及场景点的3D坐标，然后通过训练一个 Geometry Variational Auto-Encoder（VAE）来获取高精度的每个pixel的3D几何信息。
+而所构建的数据集实际上是通过MAST3R生成的，然后用这个数据集来训练diffusion以及VAE
+
+PS：那么也就是用了Diffusion+VAE+3DGS最终拟合出类似MAST3R的效果？如果是这样的话，那么至少感觉diffusion在3D reconstruction这个任务上是远不如Transformer的，至少本文和上一篇论文读下来连解析为什么用diffusion都没有。而Transformer则是从概念层面上很好的进行了时空之间的关联，而diffusion似乎更加适用于生成方面的任务。而从论文网页的一些demo效果来看，感觉生成的3D模型比较一般~~~
+
+
+## Posediffusion: Solving pose estimation via diffusion-aided bundle adjustment
