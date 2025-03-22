@@ -261,8 +261,8 @@ site:https://kwanwaipang.github.io/
 * 接下来应该是通过添加站点，那么应该就让博客也可以被google搜到了
 
 <div align="center">
-  <img src="../images/微信截图_20250319174824.png" width="60%" />
-  <img src="../images/微信截图_20250319175610.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250319174824.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250319175610.png" width="60%" />
 <figcaption> 
 </figcaption>
 </div>

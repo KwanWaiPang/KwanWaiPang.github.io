@@ -340,10 +340,10 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 70%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250320143408.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250320143408.png" width="100%" />
       </td>
       <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250320143431.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250320143431.png" width="100%" />
       </td>
     </tr>
   </table>
