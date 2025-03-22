@@ -238,6 +238,8 @@ git push -u origin main
 
 # 4D可视化插件
 
+* 已经写好了4D插件了，只需要把链接指定即可,至于`&initDistanceScale=1&initHeightOffset=0.0`则是对应视角的初始化参数
+
 ```html
 <div id="wrapper" style="
         display: flex;
@@ -247,10 +249,35 @@ git push -u origin main
         gap: 2em;
       ">
 <iframe
-      src="https://kwanwaipang.github.io/ubuntu_md_blog/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_lady-running.viser&initDistanceScale=1&initHeightOffset=0.0" border-radius= "0.5em" width="80%"  height="400px" border="none" box-shadow="0 0 1em 0em rgba(0, 0, 0, 0.15)"
+      src="https://kwanwaipang.github.io/ubuntu_md_blog/4D_plugin/build/?playbackPath=YOUR_FILE_PATH.viser&initDistanceScale=1&initHeightOffset=0.0" style="
+      border-radius: 0.5em;
+      width: 80%;
+      height: 400px;
+      border: none;
+      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
+    "
       ></iframe>
 </div>
 ```
+* 效果如下：
+
+<div id="wrapper" style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+      ">
+<iframe
+      src="https://kwanwaipang.github.io/ubuntu_md_blog/4D_plugin/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_lady-running.viser&initDistanceScale=1&initHeightOffset=0.0" style="
+      border-radius: 0.5em;
+      width: 80%;
+      height: 400px;
+      border: none;
+      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);
+    "
+      ></iframe>
+</div>
 
 
 # google搜索引擎中登记网站
