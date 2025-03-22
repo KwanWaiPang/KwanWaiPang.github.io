@@ -238,7 +238,7 @@ git push -u origin main
 
 # 4D可视化插件
 
-* 已经写好了4D插件了，只需要把链接指定即可,至于`&initDistanceScale=1&initHeightOffset=0.0`则是对应视角的初始化参数
+* 已经写好了4D插件了（基于Viser的），只需要把链接指定即可`YOUR_FILE_PATH.viser`,至于`&initDistanceScale=1&initHeightOffset=0.0`则是对应视角的初始化参数,可以不改~
 
 ```html
 <div id="wrapper" style="
