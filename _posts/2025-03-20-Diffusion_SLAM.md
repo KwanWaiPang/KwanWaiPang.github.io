@@ -285,3 +285,48 @@ PS：那么也就是用了Diffusion+VAE+3DGS最终拟合出类似MAST3R的效果
 
 
 ## Posediffusion: Solving pose estimation via diffusion-aided bundle adjustment
+这篇论文提出的就是将sfm问题用probabilistic diffusion framework来构建。其实基于以下的motivation的：
+1. diffusion framework相当于bundle adjustment的迭代处理的过程（diffusion framework迭代加噪或者去噪可以等同于迭代的BA）
+2. 将diffusion framework formulate成BA的过程可以很好的从对极几何中引入几何约束
+3. 在稀疏视角下有好的表现（应该就是利用了diffusion生成、推理的能力）
+4. 对于任意数目的图像可以预测其内参和外参。
+
+其框架如下图所示。感觉跟DDPM模型很像，只是把估算噪声改为了估算相机的内外参。
+
+<div align="center">
+  <img src="../images/微信截图_20250322160058.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+其中建模的$P(x|I)$可以理解为对于图片$I$其相机的参数$x$的概率分布。而从图片估算相机参数的模型则是用Transformer来训练的
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250322160751.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250322160943.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+PS：本质上就是Transformer直接可以解决的问题，要改到diffusion迭代处理，用类似逐步加高斯去噪的过程来求pose
+
+至于实验关于定位精度方面的验证基本是跟sfm对比，没有跟传统的SLAM方法对比，而且验证的序列也是非常少的
+
+<div align="center">
+  <img src="../images/微信截图_20250322161331.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+## 总结这几篇工作
+目前这几篇diffusion的工作，除了做feature matching是比较make sense以外，其他基本是硬要把别的可以独立完成task的框架改成diffusion来做。比如最经典的就是上面的Posediffusion。不过也是提供了解决问题的额外的新思路。期待后续有更加make sense的diffusion-based SLAM工作吧~
