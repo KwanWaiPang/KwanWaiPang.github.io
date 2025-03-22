@@ -236,6 +236,23 @@ git push -u origin main
 ></model-viewer>
 
 
+# 4D可视化插件
+
+```html
+<div id="wrapper" style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+      ">
+<iframe
+      src="https://kwanwaipang.github.io/ubuntu_md_blog/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_lady-running.viser&initDistanceScale=1&initHeightOffset=0.0" border-radius= "0.5em" width="80%"  height="400px" border="none" box-shadow="0 0 1em 0em rgba(0, 0, 0, 0.15)"
+      ></iframe>
+</div>
+```
+
+
 # google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
 ~~~
