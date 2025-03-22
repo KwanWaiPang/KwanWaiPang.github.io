@@ -354,3 +354,12 @@ Croco这两个工作最开始针对的任务是Mask image modeling（MIM）个�
 ## SLAM3R: Real-Time Dense Scene Reconstruction from Monocular RGB Videos
 
 * 解读及测试请见博客：[Link](https://kwanwaipang.github.io/SLAM3R/)
+
+## Dynamic Point Maps: A Versatile Representation for Dynamic 3D Reconstruction
+
+将pointmap添加时间维度为DPM来喂给DUSt3R，因此可以实现dynamic DUSt3R，进而应对video depth prediction, dynamic point cloud reconstruction, 3D scene flow 和 object pose tracking等任务。
+不过代码还没开源，后续测试的时候在深入介绍一下~
+
+## MonST3R: A Simple Approach for Estimating Geometry in the Presence of Motion
+
+* 解读及测试请见博客：[Link](https://kwanwaipang.github.io/MonST3R/)
