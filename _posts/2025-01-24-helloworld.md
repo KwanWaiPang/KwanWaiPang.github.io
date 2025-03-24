@@ -269,7 +269,7 @@ git push -u origin main
         gap: 2em;
       ">
 <iframe
-      src="https://kwanwaipang.github.io/ubuntu_md_blog/4D_plugin/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_lady-running.viser&initDistanceScale=1&initHeightOffset=0.0" style="
+      src="https://kwanwaipang.github.io/ubuntu_md_blog/4D_plugin/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_breakdance.viser&initDistanceScale=0.3&initHeightOffset=0.15" style="
       border-radius: 0.5em;
       width: 80%;
       height: 400px;
