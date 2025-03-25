@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What is Diffusion"
+title: "What is Diffusion and Deep Generative Modeling"
 date:   2025-03-16
 tags: [Deep Learning]
 comments: true
@@ -101,6 +101,59 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 <figcaption>  
 </figcaption>
 </div>
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+# Deep Generative Modeling
+
+`补充`《MIT Introduction to Deep Learning》课程，其中第四节对生成模型进行了介绍。课程对应的PPT如下
+
+<div align="center" style="
+  position: relative; 
+  width: 80%; 
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 15px;
+  background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
+  ">
+  <iframe width="100%" height="100%"
+    src="https://introtodeeplearning.com/slides/6S191_MIT_DeepLearning_L4.pdf#toolbar=0&navpanes=0&scrollbar=0" ></iframe>
+</div>
+
+
+生成模型的发展非常强大，比如下面三张图片，竟然都是生成的
+
+<div align="center">
+  <img src="../images/微信截图_20250325160723.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+生成模型最基本的原理是：从训练样本中学到某种分布，让模型可以输出该分布的数据。`Take as input training samples from some distribution and learn a model that represents that distribution`
+
+<div align="center">
+  <img src="../images/微信截图_20250325161447.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习低维度的latent space $z$,通过将$z$ mapping back回原来的数据，即可实现自监督/un-supervise learning
+
+<div align="center">
+  <img src="../images/微信截图_20250325162743.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
