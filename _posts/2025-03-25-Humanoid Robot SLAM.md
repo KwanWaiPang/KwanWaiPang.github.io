@@ -13,7 +13,7 @@ toc: false
 # 引言
 本博文为本人针对基于人形机械狗等足式机器人的SLAM进行技术洞察的记录
 
-本技术洞察从3DSLAM到基于足式机器人的SLAM，以求给与相关领域开发者启发,由于本人水平有限，不足之处，敬请谅解。
+本技术洞察从3DSLAM到基于足式机器人的SLAM，以求给与相关领域开发者启发,由于笔者水平有限，不足之处，敬请谅解。
 
 <!-- 本博文仅供本人学习记录用~ -->
 
@@ -37,6 +37,10 @@ toc: false
 |2023|`International Conference on Robotics and Mechatronics`|[Comparative evaluation of rgb-d slam methods for humanoid robot localization and mapping](https://arxiv.org/pdf/2401.02816)|---|---|
 |2023|`TASE`|[Humanoid loco-manipulations using combined fast dense 3D tracking and SLAM with wide-angle depth-images](https://hal.science/hal-04125159v1/file/2023_TASE_Chappellet.pdf)|---|---|
 |2018|`Mechatronics`|[Novel lightweight odometric learning method for humanoid robot localization](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/1-s2.0-S0957415818301338-main.pdf)|---|---|
+|2016|`IEEE/SICE International Symposium on System Integration`|[Closed-loop RGB-D SLAM multi-contact control for humanoid robots](https://hal.science/hal-01568048v1/file/iis2016.pdf)|---|---|
+
+
+
 
 
 # Related Resource
@@ -65,6 +69,7 @@ toc: false
 |2023|`Advanced Intelligent Systems`|[Point‐LIO: Robust high‐bandwidth light detection and ranging inertial odometry](https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/aisy.202200459)|[![Github stars](https://img.shields.io/github/stars/hku-mars/Point-LIO.svg)](https://github.com/hku-mars/Point-LIO)|---|
 |2022|`TRO`|[FAST-LIO2: Fast Direct LiDAR-inertial Odometry](https://arxiv.org/pdf/2107.06829)|[![Github stars](https://img.shields.io/github/stars/hku-mars/FAST_LIO.svg)](https://github.com/hku-mars/FAST_LIO)|---| 
 |2021|`RAL`|[Fast-lio: A fast, robust lidar-inertial odometry package by tightly-coupled iterated kalman filter](https://arxiv.org/pdf/2010.08196)|[![Github stars](https://img.shields.io/github/stars/hku-mars/FAST_LIO.svg)](https://github.com/hku-mars/FAST_LIO)|---|
+|2019|`JFR`|[RTAB‐Map as an open‐source lidar and visual simultaneous localization and mapping library for large‐scale and long‐term online operation](https://arxiv.org/pdf/2403.06341)|[![Github stars](https://img.shields.io/github/stars/introlab/rtabmap.svg)](https://github.com/introlab/rtabmap)|---| 
 |2019|`ICRA`|[Tightly coupled 3d lidar inertial odometry and mapping](https://arxiv.org/pdf/1904.06993)|[![Github stars](https://img.shields.io/github/stars/hyye/lio-mapping.svg)](https://github.com/hyye/lio-mapping)|LIO-Mapping|
 |2018|`IROS`|[Scan context: Egocentric spatial descriptor for place recognition within 3d point cloud map](https://gisbi-kim.github.io/publications/gkim-2018-iros.pdf)|[![Github stars](https://img.shields.io/github/stars/gisbi-kim/SC-LIO-SAM.svg)](https://github.com/gisbi-kim/SC-LIO-SAM)|SC-LIO-SAM| 
 |2021|`ICRA`|[Lvi-sam: Tightly-coupled lidar-visual-inertial odometry via smoothing and mapping](https://arxiv.org/pdf/2104.10831)|[![Github stars](https://img.shields.io/github/stars/TixiaoShan/LVI-SAM.svg)](https://github.com/TixiaoShan/LVI-SAM)|---|
@@ -129,7 +134,47 @@ toc: false
 </div>
 
 ## Humanoid loco-manipulations using combined fast dense 3D tracking and SLAM with wide-angle depth-images
+本文提出了一个结合基于视觉的跟踪定位作为人形机器人的whole-body 优化控制，看着似乎跟视觉伺服有点类似。
+而为了将操作与定位更好的结合，作者提出了一个基于广角深度相机的稠密3D跟踪算法，并且跟SLAM结合起来。进而使得人形机器人可以实现在行走的同时来操作和组装大型的物体。
 
+本文一个基本的insight就是，机器人手持着一个物体行走，那么这个物体对于机器人的视觉系统而言就是outlier，因此要去掉这个outlier，用其他的环境信息来进行定位。此外对于嵌入在人形机器人上的视觉系统而言，将四周的背景环境跟要操控的物体分割开来是非常重要的。
+
+<div align="center">
+  <img src="../images/微信截图_20250326173101.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+系统的框架如下图所示。所采用的SLAM算法是RTAB-Map，在其基础上添加对于机器人操作物体的跟踪
+<div align="center">
+  <img src="../images/微信截图_20250326175125.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 ## Novel lightweight odometric learning method for humanoid robot localization
+本文提出的就是基于人形机器人的惯性里程计(inertial odometry),不依赖于其他外部的感知，仅仅用IMU，并且采用ANN来进行运动学计算。
+采用的网络是最基本的MLP，输入为来自人形机器人上的IMU、里程计、腿式压力等数据，输出直接为全局坐标系下的位置信息。如下图所示：
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250326180209.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250326180217.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+从实验的结果来看，所提提出的算法确实要比纯航位推算的精度要高（更加接近真值），但是运动的剧烈并不长，图上的单位是cm
+<div align="center">
+  <img src="../images/微信截图_20250326180632.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
