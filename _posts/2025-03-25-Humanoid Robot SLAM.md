@@ -65,14 +65,18 @@ toc: false
 |2017|`IEEE-RAS 17th International Conference on Humanoid Robotics`|[Efficient coverage of 3D environments with humanoid robots using inverse reachability maps](https://www.cs.columbia.edu/~allen/S19/Student_Papers/coverage_nao_environment.pdf)|---|---|
 |2017|`Intelligent Service Robotics`|[A closed-loop approach for tracking a humanoid robot using particle filtering and depth data](https://upcommons.upc.edu/bitstream/handle/2117/107765/ISR2016v2-CR-submitted.pdf?sequence=1)|---|---| 
 |2017|`RAL`|[Probabilistic contact estimation and impact detection for state estimation of quadruped robots](https://robots.ox.ac.uk/~mfallon/publications/2017RAL_camurri.pdf)|---|---|
+|2016|`Autonomous robots`|[Optimization-based locomotion planning, estimation, and control design for the atlas humanoid robot](https://www.researchgate.net/profile/Hongkai-Dai/publication/282477851_Optimization-based_locomotion_planning_estimation_and_control_design_for_the_atlas_humanoid_robot/links/5614501f08ae983c1b4073ac/Optimization-based-locomotion-planning-estimation-and-control-design-for-the-atlas-humanoid-robot.pdf)|---|---|
 |2016|`IJRR`|[Real-time pose estimation of a dynamic quadruped in GPS-denied environments for 24-hour operation](https://journals.sagepub.com/doi/pdf/10.1177/0278364915587333?casa_token=yLMhh0p_DsoAAAAA:28GnrhizmgotGH4q0DjWKNXJnA4lb-21GdjpeXJDKsDSdDjJg_FPlt9vHaH_XOC4rYfCKER32UXaoAY)|---|---| 
 |2016|`IROS`|[Probabilistic foot contact estimation by fusing information from dynamics and differential/forward kinematics](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/119957/1/eth-49681-01.pdf)|---|---|
 |2016|`IROS`|[Achievement of localization system for humanoid robots with virtual horizontal scan relative to improved odometry fusing internal sensors and visual information](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Achievement_of_localization_system_for_humanoid_robots_with_virtual_horizontal_scan_relative_to_improved_odometry_fusing_internal_sensors_and_visual_information.pdf)|---|---|
 |2016|`Autonomous Robots`|[Humanoid odometric localization integrating kinematic, inertial and visual information](https://iris.uniroma1.it/bitstream/11573/796335/6/796335.pdf)|---|---|
 |2016|`IEEE/SICE International Symposium on System Integration`|[Closed-loop RGB-D SLAM multi-contact control for humanoid robots](https://hal.science/hal-01568048v1/file/iis2016.pdf)|---|---|
 |2016|`ICRA`|[Learning the odometry on a small humanoid robot](https://www.researchgate.net/profile/Steve-Nguyen-2/publication/303885984_Learning_the_odometry_on_a_small_humanoid_robot/links/59e0f7af0f7e9b97fbe1382f/Learning-the-odometry-on-a-small-humanoid-robot.pdf)|[![Github stars](https://img.shields.io/github/stars/Rhoban/IKWalk.svg)](https://github.com/Rhoban/IKWalk)|---|
+|2015|`IROS`|[Multimodal sensor fusion for foot state estimation in bipedal robots using the extended kalman filter](https://ieeexplore.ieee.org/abstract/document/7353746/)|---|---|
+|2015|`International Journal of Humanoid Robotics`|[Estimation and stabilization of humanoid flexibility deformation using only inertial measurement units and contact information](https://hal.science/hal-01169149/document)|---|---| 
 |2015|`Advanced Robotics`|[Dead reckoning for biped robots that suffers less from foot contact condition based on anchoring pivot estimation](https://www.tandfonline.com/doi/pdf/10.1080/01691864.2015.1011694)|---|---|
 |2014|`IROS`|[Dynamic state estimation using quadratic programming](http://www.cs.cmu.edu/~sfeng/xx_iros14.pdf)|---|---|
+|2014|`IROS`|[State estimation for a humanoid robot](https://arxiv.org/pdf/1402.5450)|---|---| 
 |2014|`IEEE-RAS International Conference on Humanoid Robots`|[Drift-free humanoid state estimation fusing kinematic, inertial and lidar sensing](https://www.pure.ed.ac.uk/ws/portalfiles/portal/18903340/14_fallon_humanoids.pdf)|---|---|
 |2013|`IROS`|[State estimation for legged robots on unstable and slippery terrain](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/75852/eth-7743-01.pdf)|---|---|
 |2013|`Robotics`|[State estimation for legged robots-consistent fusion of leg kinematics and IMU](https://infoscience.epfl.ch/server/api/core/bitstreams/bb6c046d-6633-4c8c-8a5f-f8729667c6b6/content)|---|---|
@@ -455,12 +459,17 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 
 
 
-
-
 ## Hybrid contact preintegration for visual-inertial-contact state estimation using factor graphs
 
+该工作提出了基于图优化框架的视觉、imu、关键编码器和腿式接触传感器融合定位系统。
+IMU部分采用预计分构建的因子，视觉里程计采用的是SVO2。
 
-
+实验效果如下图所示（从youtube视频来看感觉是做了个比较简单的实验验证，当然在18年的时候有这样的硬件搭建这样的测试平台已经很不容易了hh）
+<div align="center">
+  <img src="../images/微信截图_20250327150817.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 
