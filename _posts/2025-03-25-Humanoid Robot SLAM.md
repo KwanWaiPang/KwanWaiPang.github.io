@@ -152,7 +152,7 @@ toc: false
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
   <iframe width="100%" height="100%"
-    src="***.pdf#toolbar=0&navpanes=0&scrollbar=0" ></iframe>
+    src="https://kwanwaipang.github.io/ubuntu_md_blog/images/Awesome%20SLAM%20for%20Legged%20Robot.pdf#toolbar=0&navpanes=0&scrollbar=0" ></iframe>
 </div>
 
 
