@@ -42,6 +42,7 @@ toc: false
 |2022|`TRO`|[Vilens: Visual, inertial, lidar, and leg odometry for all-terrain legged robots](https://arxiv.org/pdf/2107.07243)|---|---|
 |2022|`RAL`|[Step: State estimator for legged robots using a preintegrated foot velocity factor](https://arxiv.org/pdf/2202.05572)|---|---|
 |2022|`Conference on robot learning`|[Learning inertial odometry for dynamic legged robot state estimation](https://proceedings.mlr.press/v164/buchanan22a/buchanan22a.pdf)|---|---| 
+|2021|`RAL`|[Legged robot state estimation with dynamic contact event information](https://ieeexplore.ieee.org/abstract/document/9468900)|---|---|
 |2021|`RAL`|[Online Object Searching by a Humanoid Robot in an Unknown Environment](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/2021_RAL_Tsuru.pdf)|---|---|
 |2020|`ICRA`|[Preintegrated velocity bias estimation to overcome contact nonlinearities in legged robot odometry](https://arxiv.org/pdf/1910.09875)|---|---|
 |2020|`Frontiers in Robotics and AI`|[Pronto: A multi-sensor state estimator for legged robots in real-world scenarios](https://www.robots.ox.ac.uk/~mobile/drs/Papers/2020FRONTIERS_camurri.pdf)|---|---|
@@ -51,10 +52,13 @@ toc: false
 |2019|`IROS`|[Humanoid robot next best view planning under occlusions using body movement primitives](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Humanoid_Robot_Next_Best_View_Planning_Under_Occlusions_Using_Body_Movement_Primitives.pdf)|---|---|
 |2018|`Mechatronics`|[Novel lightweight odometric learning method for humanoid robot localization](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/1-s2.0-S0957415818301338-main.pdf)|---|---|
 |2018|`IROS`|[Mit cheetah 3: Design and control of a robust, dynamic quadruped robot](https://dspace.mit.edu/bitstream/handle/1721.1/126619/iros.pdf?sequence=2)|---|---|
+|2018|`ICRA`|[Legged robot state-estimation through combined forward kinematic and preintegrated contact factors](https://arxiv.org/pdf/1712.05873)|---|---|
 |2017|`Ph.D. dissertation`|[State estimation for legged robots-kinematics, inertial sensing, and computer vision](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/129873/ETH24130.pdf)|---|---|
 |2017|`IEEE-RAS 17th International Conference on Humanoid Robotics`|[Efficient coverage of 3D environments with humanoid robots using inverse reachability maps](https://www.cs.columbia.edu/~allen/S19/Student_Papers/coverage_nao_environment.pdf)|---|---|
 |2017|`Intelligent Service Robotics`|[A closed-loop approach for tracking a humanoid robot using particle filtering and depth data](https://upcommons.upc.edu/bitstream/handle/2117/107765/ISR2016v2-CR-submitted.pdf?sequence=1)|---|---| 
+|2017|`RAL`|[Probabilistic contact estimation and impact detection for state estimation of quadruped robots](https://robots.ox.ac.uk/~mfallon/publications/2017RAL_camurri.pdf)|---|---|
 |2016|`IJRR`|[Real-time pose estimation of a dynamic quadruped in GPS-denied environments for 24-hour operation](https://journals.sagepub.com/doi/pdf/10.1177/0278364915587333?casa_token=yLMhh0p_DsoAAAAA:28GnrhizmgotGH4q0DjWKNXJnA4lb-21GdjpeXJDKsDSdDjJg_FPlt9vHaH_XOC4rYfCKER32UXaoAY)|---|---| 
+|2016|`IROS`|[Probabilistic foot contact estimation by fusing information from dynamics and differential/forward kinematics](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/119957/1/eth-49681-01.pdf)|---|---|
 |2016|`IROS`|[Achievement of localization system for humanoid robots with virtual horizontal scan relative to improved odometry fusing internal sensors and visual information](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Achievement_of_localization_system_for_humanoid_robots_with_virtual_horizontal_scan_relative_to_improved_odometry_fusing_internal_sensors_and_visual_information.pdf)|---|---|
 |2016|`Autonomous Robots`|[Humanoid odometric localization integrating kinematic, inertial and visual information](https://iris.uniroma1.it/bitstream/11573/796335/6/796335.pdf)|---|---|
 |2016|`IEEE/SICE International Symposium on System Integration`|[Closed-loop RGB-D SLAM multi-contact control for humanoid robots](https://hal.science/hal-01568048v1/file/iis2016.pdf)|---|---|
@@ -71,6 +75,7 @@ toc: false
 |2006|`IEEE-RAS International Conference on Humanoid Robots`|[Localisation for autonomous humanoid navigation](https://ieeexplore.ieee.org/abstract/document/4115574)|---|---|
 |2006|`IEEE/RSJ International Conference on Intelligent Robots and Systems`|[Real-time 3d slam for humanoid robot considering pattern generator information](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=8f13256fa676153aafccad3e32dabbfec1fce32a)|---|---|
 |2005|`IEEE-RAS International Conference on Humanoid Robots`|[Humanoid robot localisation using stereo vision](https://ieeexplore.ieee.org/abstract/document/1573539/)|---|---|
+|2005|`TRO`|[A leg configuration measurement system for full-body pose estimates in a hexapod robot](https://core.ac.uk/download/pdf/76389503.pdf)|---|---|
 
 
 
@@ -336,7 +341,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 ## Cerberus: Low-Drift Visual-Inertial-Leg Odometry For Agile Locomotion
 该工作提出了一个视觉-惯性-腿式里程计(Visual-Inertial-Leg Odometry, VILO), 包含的传感器有：双目图像、IMU、关节编码器、腿部接触传感器。
 实现了在线的运动学参数的校正以及接触传感器的异常值剔除，进而减少了定位的漂移。
-通过室内与室外的实验（450米远、平均运动速度0.5m/s室内，1m/s室外）也证明了所采用的运动学参数估算可以将累积误差减少的1%以内
+通过室内与室外的实验（450米远、平均运动速度0.5m/s室内，1m/s室外）也证明了所采用的运动学参数估算可以将累积误差减少的1%以内。
 
 
 <div align="center">
