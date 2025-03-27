@@ -31,6 +31,7 @@ toc: false
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`IEEE Signal Processing Letters`|[A 3D reconstruction and relocalization method for humanoid welding robots](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/A_3D_Reconstruction_and_Relocalization_Method_for_Humanoid_Welding_Robots.pdf)|---|---|
+|2024|`arXiv`|[Navila: Legged robot vision-language-action model for navigation](https://arxiv.org/pdf/2412.04453)|[![Github stars](https://img.shields.io/github/stars/yang-zj1026/legged-loco.svg)](https://github.com/yang-zj1026/legged-loco)|[website](https://navila-bot.github.io/)|
 |2024|`RAL`|[Leg-KILO: Robust Kinematic-Inertial-Lidar Odometry for Dynamic Legged Robots](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Leg-KILO%20Robust%20Kinematic-Inertial-Lidar%20Odometry%20for%20Dynamic%20Legged%20Robots.pdf)|[![Github stars](https://img.shields.io/github/stars/ouguangjun/Leg-KILO.svg)](https://github.com/ouguangjun/Leg-KILO)|[dataset](https://github.com/ouguangjun/legkilo-dataset)|
 |2024|`ICRA`|[Optistate: State estimation of legged robots using gated networks with transformer-based vision and kalman filtering](https://arxiv.org/pdf/2401.16719)|[![Github stars](https://img.shields.io/github/stars/AlexS28/OptiState.svg)](https://github.com/AlexS28/OptiState)|---|
 |2023|`ICRA`|[Visual-inertial and leg odometry fusion for dynamic locomotion](https://arxiv.org/pdf/2210.02127)|---|---| 
@@ -50,11 +51,12 @@ toc: false
 |2021|`RAL`|[Online Object Searching by a Humanoid Robot in an Unknown Environment](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/2021_RAL_Tsuru.pdf)|---|---|
 |2020|`ICRA`|[Preintegrated velocity bias estimation to overcome contact nonlinearities in legged robot odometry](https://arxiv.org/pdf/1910.09875)|---|---|
 |2020|`Frontiers in Robotics and AI`|[Pronto: A multi-sensor state estimator for legged robots in real-world scenarios](https://www.robots.ox.ac.uk/~mobile/drs/Papers/2020FRONTIERS_camurri.pdf)|---|---|
-|2020|`IJRR`|[Contact-aided invariant extended Kalman filtering for robot state estimation](https://journals.sagepub.com/doi/pdf/10.1177/0278364919894385?casa_token=uQLkhLPMngkAAAAA:8BFM9dE1oo8qr_iiOXpZyhTf0-plTFQs2tbRezy_Njqb6aiuCykDYh4Odds7pEGOa1_2RuuefeHduKY)|---|---| 
+|2020|`IJRR`|[Contact-aided invariant extended Kalman filtering for robot state estimation](https://journals.sagepub.com/doi/pdf/10.1177/0278364919894385?casa_token=dzctF2F3Nb0AAAAA:c21qyyoA6KtBcnsRO6CBHSlcO0lBt6rtxFU16tLmTK3jVOjdlr4x5cMtWF1fLuaf6YSFROwK7vA_N4A)|[![Github stars](https://img.shields.io/github/stars/RossHartley/invariant-ekf.svg)](https://github.com/RossHartley/invariant-ekf)|---| 
 |2019|`RAL`|[Dynamic locomotion on slippery ground](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/355281/1/IROS19___Dynamic_Locomotion_on_Slippery_Ground.pdf)|---|---|
 |2019|`IEEE-RAS 19th international conference on humanoid robots`|[Footstep planning for autonomous walking over rough terrain](https://arxiv.org/pdf/1907.08673)|---|---|
 |2019|`RAL`|[Robust legged robot state estimation using factor graph optimization](https://arxiv.org/pdf/1904.03048)|---|---|
 |2019|`IROS`|[Humanoid robot next best view planning under occlusions using body movement primitives](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Humanoid_Robot_Next_Best_View_Planning_Under_Occlusions_Using_Body_Movement_Primitives.pdf)|---|---|
+|2018|`RSS`|[Contact-Aided Invariant Extended Kalman Filtering for Legged Robot State Estimation](https://arxiv.org/pdf/1805.10410)|[![Github stars](https://img.shields.io/github/stars/RossHartley/invariant-ekf.svg)](https://github.com/RossHartley/invariant-ekf)|---|
 |2018|`IROS`|[Hybrid contact preintegration for visual-inertial-contact state estimation using factor graphs](https://arxiv.org/pdf/1803.07531)|---|---|
 |2018|`Mechatronics`|[Novel lightweight odometric learning method for humanoid robot localization](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/1-s2.0-S0957415818301338-main.pdf)|---|---|
 |2018|`IROS`|[Mit cheetah 3: Design and control of a robust, dynamic quadruped robot](https://dspace.mit.edu/bitstream/handle/1721.1/126619/iros.pdf?sequence=2)|---|---|
@@ -107,6 +109,8 @@ toc: false
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`arXiv`|[Humanoid locomotion and manipulation: Current progress and challenges in control, planning, and learning](https://arxiv.org/pdf/2501.02116)|---|---|
 |2024|`IEEE/CAA Journal of Automatica Sinica`|[Advancements in humanoid robots: A comprehensive review and future prospects](https://www.ieee-jas.net/article/doi/10.1109/JAS.2023.124140)|---|---|
+|2024|`arXiv`|[Exbody2: Advanced expressive humanoid whole-body control](https://arxiv.org/pdf/2412.13196?)|---|[website](https://exbody2.github.io/)| 
+|2024|`CoRL`|[Visual whole-body control for legged loco-manipulation](https://arxiv.org/pdf/2403.16967)|[![Github stars](https://img.shields.io/github/stars/Ericonaldo/visual_wholebody.svg)](https://github.com/Ericonaldo/visual_wholebody)|[website](https://wholebody-b1.github.io/)|
 |2022|`Field Robotics`|[Cerberus: Autonomous legged and aerial robotic exploration in the tunnel and urban circuits of the darpa subterranean challenge](https://d1wqtxts1xzle7.cloudfront.net/84655738/2201.07067-libre.pdf?1650599141=&response-content-disposition=inline%3B+filename%3DCERBERUS_Autonomous_Legged_and_Aerial_Ro.pdf&Expires=1743056230&Signature=Kau5sbITIQY8t44-b22CcAmkb0ODESA4oYnMPghfJLqMrtO-ZVxKvacw0zHU-zJ59NcQ2l8mHEbBQXp55sXoSJWg6CTO52KY2Hwd3Bo3hs1UfW8WhStxS-mQmDPF-AFqlgBjuH8iwrOtVETkUuUuOlf8iPGSlvQpNurkGUftuF70esjD~Yex-fyQlmIOX0xazfrE8IAnAlrHV7E94lpD7cvNOnDtQvL6kBq7Je8owcH2ikqcJBIDe1yUbO42S~dC5J50aR57mO0cy61PdUl2hxcNnSnF8yFcEgDrRrIDcaI5ULF4NFQR0jODcS0evpmag~dmfOmgU4dQkbDj04AQIA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)|---|---| 
 |2024|`TPAMI`|[R3LIVE++: A Robust, Real-time, Radiance Reconstruction Package with a Tightly-coupled LiDAR-Inertial-Visual State Estimator](https://arxiv.org/pdf/2209.03666)|[![Github stars](https://img.shields.io/github/stars/hku-mars/r3live.svg)](https://github.com/hku-mars/r3live)|dataset [![Github stars](https://img.shields.io/github/stars/ziv-lin/r3live_dataset.svg)](https://github.com/ziv-lin/r3live_dataset)|
 |2023|`IROS`|[Event camera-based visual odometry for dynamic motion tracking of a legged robot using adaptive time surface](https://arxiv.org/pdf/2305.08962)|---|[demo](https://www.youtube.com/watch?v=-5ieQSh0g3M&feature=youtu.be)|
@@ -416,6 +420,48 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 <figcaption>  
 </figcaption>
 </div>
+
+## NaVILA: Legged Robot Vision-Language-Action Model for Navigation
+
+该工作实现了腿式机器人的视觉语音导航，即输入人类的指令，通过vision-language model(VLA)来处理RGB图像帧以及结合对应的locomotion skills，机器人即可直接执行任务指令。
+将人类语言指令直接转换为底层的腿关节运动。就是让机器人跟随着人的语音指令执行任务，当然还包含了实时运行的locomotion policy，这样两个结合让机器人可以共同完成任务。
+
+作者在人形及四足机器狗上做了大量的实验来验证
+<div align="center">
+  <img src="../images/微信截图_20250327142612.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+其架构如下所示：
+
+<div align="center">
+  <img src="../images/微信截图_20250327142451.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+## Contact-aided invariant extended Kalman filtering for robot state estimation
+
+该工作是针对腿式接触器辅助的基于不变扩展卡尔曼滤波的状态估计器，利用接触器与IMU来对前向的运动学进行校正，进而估算姿态与速度信息。
+这篇工作的数学推导比较多，后面对leg odomerty相关深入研究的时候在深入学习与推导吧~
+
+<div align="center">
+  <img src="../images/微信截图_20250327145230.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+
+
+## Hybrid contact preintegration for visual-inertial-contact state estimation using factor graphs
+
+
+
+
 
 
 
