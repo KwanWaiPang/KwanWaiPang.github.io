@@ -32,6 +32,7 @@ toc: false
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`IEEE Signal Processing Letters`|[A 3D reconstruction and relocalization method for humanoid welding robots](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/A_3D_Reconstruction_and_Relocalization_Method_for_Humanoid_Welding_Robots.pdf)|---|---|
 |2024|`RAL`|[Leg-KILO: Robust Kinematic-Inertial-Lidar Odometry for Dynamic Legged Robots](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Leg-KILO%20Robust%20Kinematic-Inertial-Lidar%20Odometry%20for%20Dynamic%20Legged%20Robots.pdf)|[![Github stars](https://img.shields.io/github/stars/ouguangjun/Leg-KILO.svg)](https://github.com/ouguangjun/Leg-KILO)|[dataset](https://github.com/ouguangjun/legkilo-dataset)|
+|2024|`ICRA`|[Optistate: State estimation of legged robots using gated networks with transformer-based vision and kalman filtering](https://arxiv.org/pdf/2401.16719)|[![Github stars](https://img.shields.io/github/stars/AlexS28/OptiState.svg)](https://github.com/AlexS28/OptiState)|---|
 |2023|`ICRA`|[Visual-inertial and leg odometry fusion for dynamic locomotion](https://arxiv.org/pdf/2210.02127)|---|---| 
 |2023|`ICRA`|[Cerberus: Low-drift visual-inertial-leg odometry for agile locomotion](https://arxiv.org/pdf/2209.07654)|[![Github stars](https://img.shields.io/github/stars/ShuoYangRobotics/Cerberus.svg)](https://github.com/ShuoYangRobotics/Cerberus)|---|
 |2023|`RAL`|[Tunable impact and vibration absorbing neck for robust visual-inertial state estimation for dynamic legged robots](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10027207)|---|---|
@@ -39,12 +40,16 @@ toc: false
 |2023|`TASE`|[Humanoid loco-manipulations using combined fast dense 3D tracking and SLAM with wide-angle depth-images](https://hal.science/hal-04125159v1/file/2023_TASE_Chappellet.pdf)|---|---|
 |2022|`TRO`|[Vilens: Visual, inertial, lidar, and leg odometry for all-terrain legged robots](https://arxiv.org/pdf/2107.07243)|---|---|
 |2022|`RAL`|[Step: State estimator for legged robots using a preintegrated foot velocity factor](https://arxiv.org/pdf/2202.05572)|---|---|
+|2022|`Conference on robot learning`|[Learning inertial odometry for dynamic legged robot state estimation](https://proceedings.mlr.press/v164/buchanan22a/buchanan22a.pdf)|---|---| 
 |2021|`RAL`|[Online Object Searching by a Humanoid Robot in an Unknown Environment](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/2021_RAL_Tsuru.pdf)|---|---|
 |2020|`ICRA`|[Preintegrated velocity bias estimation to overcome contact nonlinearities in legged robot odometry](https://arxiv.org/pdf/1910.09875)|---|---|
 |2020|`IJRR`|[Contact-aided invariant extended Kalman filtering for robot state estimation](https://journals.sagepub.com/doi/pdf/10.1177/0278364919894385?casa_token=uQLkhLPMngkAAAAA:8BFM9dE1oo8qr_iiOXpZyhTf0-plTFQs2tbRezy_Njqb6aiuCykDYh4Odds7pEGOa1_2RuuefeHduKY)|---|---| 
+|2019|`IEEE-RAS 19th international conference on humanoid robots`|[Footstep planning for autonomous walking over rough terrain](https://arxiv.org/pdf/1907.08673)|---|---|
 |2019|`RAL`|[Robust legged robot state estimation using factor graph optimization](https://arxiv.org/pdf/1904.03048)|---|---|
+|2019|`IROS`|[Humanoid robot next best view planning under occlusions using body movement primitives](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Humanoid_Robot_Next_Best_View_Planning_Under_Occlusions_Using_Body_Movement_Primitives.pdf)|---|---|
 |2018|`Mechatronics`|[Novel lightweight odometric learning method for humanoid robot localization](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/1-s2.0-S0957415818301338-main.pdf)|---|---|
 |2018|`IROS`|[Mit cheetah 3: Design and control of a robust, dynamic quadruped robot](https://dspace.mit.edu/bitstream/handle/1721.1/126619/iros.pdf?sequence=2)|---|---|
+|2017|`IEEE-RAS 17th International Conference on Humanoid Robotics`|[Efficient coverage of 3D environments with humanoid robots using inverse reachability maps](https://www.cs.columbia.edu/~allen/S19/Student_Papers/coverage_nao_environment.pdf)|---|---|
 |2017|`Intelligent Service Robotics`|[A closed-loop approach for tracking a humanoid robot using particle filtering and depth data](https://upcommons.upc.edu/bitstream/handle/2117/107765/ISR2016v2-CR-submitted.pdf?sequence=1)|---|---| 
 |2016|`IJRR`|[Real-time pose estimation of a dynamic quadruped in GPS-denied environments for 24-hour operation](https://journals.sagepub.com/doi/pdf/10.1177/0278364915587333?casa_token=yLMhh0p_DsoAAAAA:28GnrhizmgotGH4q0DjWKNXJnA4lb-21GdjpeXJDKsDSdDjJg_FPlt9vHaH_XOC4rYfCKER32UXaoAY)|---|---| 
 |2016|`IROS`|[Achievement of localization system for humanoid robots with virtual horizontal scan relative to improved odometry fusing internal sensors and visual information](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Achievement_of_localization_system_for_humanoid_robots_with_virtual_horizontal_scan_relative_to_improved_odometry_fusing_internal_sensors_and_visual_information.pdf)|---|---|
@@ -52,16 +57,17 @@ toc: false
 |2016|`IEEE/SICE International Symposium on System Integration`|[Closed-loop RGB-D SLAM multi-contact control for humanoid robots](https://hal.science/hal-01568048v1/file/iis2016.pdf)|---|---|
 |2016|`ICRA`|[Learning the odometry on a small humanoid robot](https://www.researchgate.net/profile/Steve-Nguyen-2/publication/303885984_Learning_the_odometry_on_a_small_humanoid_robot/links/59e0f7af0f7e9b97fbe1382f/Learning-the-odometry-on-a-small-humanoid-robot.pdf)|[![Github stars](https://img.shields.io/github/stars/Rhoban/IKWalk.svg)](https://github.com/Rhoban/IKWalk)|---|
 |2015|`Advanced Robotics`|[Dead reckoning for biped robots that suffers less from foot contact condition based on anchoring pivot estimation](https://www.tandfonline.com/doi/pdf/10.1080/01691864.2015.1011694)|---|---|
+|2014|`IROS`|[Dynamic state estimation using quadratic programming](http://www.cs.cmu.edu/~sfeng/xx_iros14.pdf)|---|---|
 |2014|`IEEE-RAS International Conference on Humanoid Robots`|[Drift-free humanoid state estimation fusing kinematic, inertial and lidar sensing](https://www.pure.ed.ac.uk/ws/portalfiles/portal/18903340/14_fallon_humanoids.pdf)|---|---|
 |2013|`IROS`|[State estimation for legged robots on unstable and slippery terrain](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/75852/eth-7743-01.pdf)|---|---|
 |2013|`Robotics`|[State estimation for legged robots-consistent fusion of leg kinematics and IMU](https://infoscience.epfl.ch/server/api/core/bitstreams/bb6c046d-6633-4c8c-8a5f-f8729667c6b6/content)|---|---|
 |2012|`IEEE-RAS International Conference on Humanoid Robots`|[Vision-based odometric localization for humanoids using a kinematic EKF](http://www.diag.uniroma1.it/~labrob/pub/papers/Humanoids2012.pdf)|---|---| 
 |2010|`IEEE/RSJ International Conference on Intelligent Robots and Systems`|[Humanoid robot localization in complex indoor environments](http://www2.informatik.uni-freiburg.de/~wurm/papers/hornung10iros.pdf)|---|---|
-|2009|`IEEE-RAS International Conference on Humanoid Robots`|[3D grid and particle based SLAM for a humanoid robot]()|---|---|
+|2009|`IEEE-RAS International Conference on Humanoid Robots`|[3D grid and particle based SLAM for a humanoid robot](https://ieeexplore.ieee.org/abstract/document/5379602)|---|---|
 |2008|`IEEE-RAS International Conference on Humanoid Robots`|[Autonomous humanoid navigation using laser and odometry data](https://d1wqtxts1xzle7.cloudfront.net/84814066/navigation2008-libre.pdf?1650840576=&response-content-disposition=inline%3B+filename%3DAutonomous_humanoid_navigation_using_las.pdf&Expires=1742998314&Signature=PhG-Jac79p3DdteQuhFeKYbJZhHd01wTVhFGRVwaI3-4XHejDUzPm1bwtv6fHNIMK~ePhalBmacKGeJgh7nMPlNQ44VsY2JojP0dEdnwtdbgpL3JDl6I5gzMRpNDPmwxUQTo8gzIMYpZx5WVccgNizHM7bu0gk1oHP8Zz~Nq5JOwgKim1dI77wvu2pQeVWxv9TyFr0BjXus4p23lx3gA6PLtRqddiwJJ0Sd1plMa-EVRpc3KtvbFdIRgUBtRnm8y37TeAw6PtwWpQ~-4ODqrpEC5M-4Ys1Y9ACnaRU6YVolOkZRYdG~MguXeB8Bg1ElCJhhqxXH49ZoHwH6XOUMtvA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)|---|---|
-|2006|`IEEE-RAS International Conference on Humanoid Robots`|[Localisation for autonomous humanoid navigation]()|---|---|
+|2006|`IEEE-RAS International Conference on Humanoid Robots`|[Localisation for autonomous humanoid navigation](https://ieeexplore.ieee.org/abstract/document/4115574)|---|---|
 |2006|`IEEE/RSJ International Conference on Intelligent Robots and Systems`|[Real-time 3d slam for humanoid robot considering pattern generator information](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=8f13256fa676153aafccad3e32dabbfec1fce32a)|---|---|
-|2005|`IEEE-RAS International Conference on Humanoid Robots`|[Humanoid robot localisation using stereo vision]()|---|---|
+|2005|`IEEE-RAS International Conference on Humanoid Robots`|[Humanoid robot localisation using stereo vision](https://ieeexplore.ieee.org/abstract/document/1573539/)|---|---|
 
 
 
@@ -133,7 +139,7 @@ toc: false
 首先建议看一下这篇人形机器人相关的综述。对人形机器人领域进行了系统性回顾。
 
 <div align="center">
-  <img src="../images/微信截图_20250326163015.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326163015.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -149,7 +155,7 @@ toc: false
 这篇论文只是普通的会议论文，只是把三种开源的方法(ORB-SLAM3, RTAB-MAP, OpenVSLAM)在人形平台上测试了一下，也没用结合人形机器人的特点来进行分析，单纯就是三个算法的分析，个人感觉参考价值不大~
 
 <div align="center">
-  <img src="../images/微信截图_20250326162252.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326162252.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -164,10 +170,10 @@ toc: false
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-          <img src="../images/微信截图_20250326171255.png" width="100%" />
+          <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326171255.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250326172033.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326172033.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -182,14 +188,14 @@ toc: false
 本文一个基本的insight就是，机器人手持着一个物体行走，那么这个物体对于机器人的视觉系统而言就是outlier，因此要去掉这个outlier，用其他的环境信息来进行定位。此外对于嵌入在人形机器人上的视觉系统而言，将四周的背景环境跟要操控的物体分割开来是非常重要的。
 
 <div align="center">
-  <img src="../images/微信截图_20250326173101.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326173101.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
 系统的框架如下图所示。所采用的SLAM算法是RTAB-Map，在其基础上添加对于机器人操作物体的跟踪
 <div align="center">
-  <img src="../images/微信截图_20250326175125.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326175125.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -203,10 +209,10 @@ toc: false
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250326180209.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326180209.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250326180217.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326180217.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -216,7 +222,7 @@ toc: false
 
 从实验的结果来看，所提提出的算法确实要比纯航位推算的精度要高（更加接近真值），但是运动的剧烈并不长，图上的单位是cm
 <div align="center">
-  <img src="../images/微信截图_20250326180632.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326180632.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -230,7 +236,7 @@ toc: false
 其架构如下图所示：
 
 <div align="center">
-  <img src="../images/微信截图_20250326184508.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326184508.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -239,10 +245,10 @@ toc: false
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250326211802.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326211802.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250326211755.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326211755.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -262,7 +268,7 @@ toc: false
 系统的框架如下图所示
 
 <div align="center">
-  <img src="../images/微信截图_20250326213516.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326213516.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -270,16 +276,112 @@ toc: false
 作者跟A-LOAM、Fast-LIO2以及Point-LIO进行了对比，值得一提的是，本文是基于LIO-SAM开发的，而LIO-SAM之前的测试经验是远不如Fast-LIO2以及Point-LIO的，但是在作者改动的框架下却可以超越这两者，可以看出所提出算法应该是有效的~
 
 <div align="center">
-  <img src="../images/微信截图_20250326215054.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326215054.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
 而在下右图的实验中也发现，在平地运动时，baseline方法均有较大的高度变化，而Leg-KILO则是在10cm以内。
 <div align="center">
-  <img src="../images/微信截图_20250326215324.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250326215324.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 ## Online object searching by a humanoid robot in an unknown environment
+
+本文是通过结合3D SLAM来实现人形机器人在未知环境中寻找目标物体。
+传统的方法都是需要一个静态的地图，同时需要有关于对象位置、区域大小限制或每次观察的离线视点规划时间等提示信息。而本文则是单纯基于目标物体的3D模型，在未知环境中寻找这个物体。
+其框架如下图所示。
+SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动规划（包括目标物体的3D点云，路径规划、避障以及自主探索）来实现整个系统。
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327094216.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+要完成一项任务需要四个主要部分：目标识别（object recognition）, 环境感知（environment recognition）, 运动规划 （action planning）, 以及双足行走bipedal walking。
+
+
+## OptiState: State Estimation of Legged Robots using Gated Networks with Transformer-based Vision and Kalman Filtering
+
+对于足式机器人而言，踏步容易引起相机的运动模糊，使得视觉数据不可靠。而由于机械腿与地面的不断接触和断开（还存在滑动），基于IMU等运动学信息也容易出错，特别是在有大干扰（比如障碍物）或柔性表面的情况。
+
+此外，由于腿式机器人产生的动态运动需要高频控制，因此低计算消耗、高精度的状态估计系统的也是必须的。
+因此，该工作通过融合卡尔曼滤波、优化以及深度学习方法，提出了一个融合内部与外部传感器信息的机器人躯干状态估计算法。
+首先采用卡尔曼滤波来对关节编码器以及IMU测量量进行状态预测，通过复用来自凸模型预测优化方法输出的地面反作用力来进行状态的更新。
+而卡尔曼滤波的输出会输入GRU网络。
+
+此外，GRU网络还会有来自Vision Transformer处理的深度图的latent feature（隐特征），而GRU输出的姿态信息将会与动捕提供的真值数据求loss来实现网络的训练。
+
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327103619.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327111230.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+从结果来看确实OptiState的误差要比滤波以及VIO SLAM（来自RealSense T265 camera传感器的输出）要小
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327111431.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+## Cerberus: Low-Drift Visual-Inertial-Leg Odometry For Agile Locomotion
+该工作提出了一个视觉-惯性-腿式里程计（包含的传感器有：双目图像、IMU、关节编码器、腿部接触传感器）。
+实现了在线的运动学参数的校正以及接触传感器的异常值剔除，进而减少了定位的漂移。
+通过室内与室外的实验（450米远、平均运动速度0.5m/s室内，1m/s室外）也证明了所采用的运动学参数估算可以将累积误差减少的1%以内
+
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327113336.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327113315.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

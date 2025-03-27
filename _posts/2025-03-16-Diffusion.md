@@ -124,7 +124,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 生成模型的发展非常强大，比如下面三张图片，竟然都是生成的
 
 <div align="center">
-  <img src="../images/微信截图_20250325160723.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250325160723.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -132,7 +132,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 生成模型最基本的原理是：从训练样本中学到某种分布，让模型可以输出该分布的数据。`Take as input training samples from some distribution and learn a model that represents that distribution`
 
 <div align="center">
-  <img src="../images/微信截图_20250325161447.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250325161447.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -140,7 +140,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习低维度的latent space $z$,通过将$z$ mapping back回原来的数据，即可实现自监督/un-supervise learning
 
 <div align="center">
-  <img src="../images/微信截图_20250325162743.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250325162743.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>

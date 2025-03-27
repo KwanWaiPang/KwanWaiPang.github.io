@@ -294,7 +294,7 @@ PS：那么也就是用了Diffusion+VAE+3DGS最终拟合出类似MAST3R的效果
 其框架如下图所示。感觉跟DDPM模型很像，只是把估算噪声改为了估算相机的内外参。
 
 <div align="center">
-  <img src="../images/微信截图_20250322160058.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250322160058.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -305,10 +305,10 @@ PS：那么也就是用了Diffusion+VAE+3DGS最终拟合出类似MAST3R的效果
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250322160751.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250322160751.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250322160943.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250322160943.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -321,7 +321,7 @@ PS：本质上就是Transformer直接可以解决的问题，要改到diffusion�
 至于实验关于定位精度方面的验证基本是跟sfm对比，没有跟传统的SLAM方法对比，而且验证的序列也是非常少的
 
 <div align="center">
-  <img src="../images/微信截图_20250322161331.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250322161331.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
