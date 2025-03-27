@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Survey——Humanoid/Legged  Robot Localization and Mapping"
+title: "Paper Survey之——Awesome SLAM for Legged Robot"
 date:   2025-03-25
 tags: [SLAM]
 comments: true
