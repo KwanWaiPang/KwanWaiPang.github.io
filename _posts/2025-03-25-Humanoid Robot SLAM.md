@@ -11,11 +11,11 @@ toc: false
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
-本博文为本人针对基于人形机械狗等足式机器人的SLAM进行技术洞察的记录
+本博文为本人针对基于人形机械狗等足式机器人的SLAM进行调研的记录
 
-本技术洞察从3DSLAM到基于足式机器人的SLAM，以求给与相关领域开发者启发,由于笔者水平有限，不足之处，敬请谅解。
+<!-- 本技术洞察从3DSLAM到基于足式机器人的SLAM，以求给与相关领域开发者启发,由于笔者水平有限，不足之处，敬请谅解。 -->
 
-<!-- 本博文仅供本人学习记录用~ -->
+本博文仅供本人学习记录用~
 
 * 目录
 {:toc}
@@ -39,6 +39,7 @@ toc: false
 |2023|`RAL`|[Tunable impact and vibration absorbing neck for robust visual-inertial state estimation for dynamic legged robots](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10027207)|---|---|
 |2023|`International Conference on Robotics and Mechatronics`|[Comparative evaluation of rgb-d slam methods for humanoid robot localization and mapping](https://arxiv.org/pdf/2401.02816)|---|---|
 |2023|`TASE`|[Humanoid loco-manipulations using combined fast dense 3D tracking and SLAM with wide-angle depth-images](https://hal.science/hal-04125159v1/file/2023_TASE_Chappellet.pdf)|---|---|
+|2022|`ICRA`|[Periodic SLAM: Using cyclic constraints to improve the performance of visual-inertial SLAM on legged robots](https://par.nsf.gov/servlets/purl/10335323)|---|[video](https://www.youtube.com/watch?v=QygyDjVy5nY)|
 |2022|`RAL`|[Online kinematic calibration for legged robots](https://rexlab.ri.cmu.edu/papers/onlinecalib.pdf)|---|---|
 |2022|`TRO`|[Vilens: Visual, inertial, lidar, and leg odometry for all-terrain legged robots](https://arxiv.org/pdf/2107.07243)|---|---|
 |2022|`TRO`|[Rloc: Terrain-aware legged locomotion using reinforcement learning and optimal control](https://arxiv.org/pdf/2012.03094)|---|---|
@@ -50,7 +51,7 @@ toc: false
 |2021|`RAL`|[Legged robot state estimation with dynamic contact event information](https://ieeexplore.ieee.org/abstract/document/9468900)|---|---|
 |2021|`RAL`|[Online Object Searching by a Humanoid Robot in an Unknown Environment](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/2021_RAL_Tsuru.pdf)|---|---|
 |2020|`ICRA`|[Preintegrated velocity bias estimation to overcome contact nonlinearities in legged robot odometry](https://arxiv.org/pdf/1910.09875)|---|---|
-|2020|`Frontiers in Robotics and AI`|[Pronto: A multi-sensor state estimator for legged robots in real-world scenarios](https://www.robots.ox.ac.uk/~mobile/drs/Papers/2020FRONTIERS_camurri.pdf)|---|---|
+|2020|`Frontiers in Robotics and AI`|[Pronto: A multi-sensor state estimator for legged robots in real-world scenarios](https://www.robots.ox.ac.uk/~mobile/drs/Papers/2020FRONTIERS_camurri.pdf)|[![Github stars](https://img.shields.io/github/stars/ori-drs/pronto.svg)](https://github.com/ori-drs/pronto)|---|
 |2020|`IJRR`|[Contact-aided invariant extended Kalman filtering for robot state estimation](https://journals.sagepub.com/doi/pdf/10.1177/0278364919894385?casa_token=dzctF2F3Nb0AAAAA:c21qyyoA6KtBcnsRO6CBHSlcO0lBt6rtxFU16tLmTK3jVOjdlr4x5cMtWF1fLuaf6YSFROwK7vA_N4A)|[![Github stars](https://img.shields.io/github/stars/RossHartley/invariant-ekf.svg)](https://github.com/RossHartley/invariant-ekf)|---| 
 |2019|`RAL`|[Dynamic locomotion on slippery ground](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/355281/1/IROS19___Dynamic_Locomotion_on_Slippery_Ground.pdf)|---|---|
 |2019|`IEEE-RAS 19th international conference on humanoid robots`|[Footstep planning for autonomous walking over rough terrain](https://arxiv.org/pdf/1907.08673)|---|---|
@@ -61,6 +62,7 @@ toc: false
 |2018|`Mechatronics`|[Novel lightweight odometric learning method for humanoid robot localization](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/1-s2.0-S0957415818301338-main.pdf)|---|---|
 |2018|`IROS`|[Mit cheetah 3: Design and control of a robust, dynamic quadruped robot](https://dspace.mit.edu/bitstream/handle/1721.1/126619/iros.pdf?sequence=2)|---|---|
 |2018|`ICRA`|[Legged robot state-estimation through combined forward kinematic and preintegrated contact factors](https://arxiv.org/pdf/1712.05873)|---|---|
+|2017|`RSS`|[Heterogeneous sensor fusion for accurate state estimation of dynamic legged robots](https://www.pure.ed.ac.uk/ws/portalfiles/portal/36374655/NobiliCamurriRSS17_3.pdf)|[![Github stars](https://img.shields.io/github/stars/ori-drs/pronto.svg)](https://github.com/ori-drs/pronto) |---|
 |2017|`Ph.D. dissertation`|[State estimation for legged robots-kinematics, inertial sensing, and computer vision](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/129873/ETH24130.pdf)|---|---|
 |2017|`IEEE-RAS 17th International Conference on Humanoid Robotics`|[Efficient coverage of 3D environments with humanoid robots using inverse reachability maps](https://www.cs.columbia.edu/~allen/S19/Student_Papers/coverage_nao_environment.pdf)|---|---|
 |2017|`Intelligent Service Robotics`|[A closed-loop approach for tracking a humanoid robot using particle filtering and depth data](https://upcommons.upc.edu/bitstream/handle/2117/107765/ISR2016v2-CR-submitted.pdf?sequence=1)|---|---| 
@@ -463,17 +465,26 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 
 该工作提出了基于图优化框架的视觉、imu、关键编码器和腿式接触传感器融合定位系统。
 IMU部分采用预计分构建的因子，视觉里程计采用的是SVO2。
+至于腿式接触传感器则是开发了一种通过任意数量的接触来实现预积分接触信息的方法。这样以预积分的形式加入因子图中可以减少优化的变量。
 
 实验效果如下图所示（从youtube视频来看感觉是做了个比较简单的实验验证，当然在18年的时候有这样的硬件搭建这样的测试平台已经很不容易了hh）
 <div align="center">
-  <img src="../images/微信截图_20250327150817.png" width="60%" />
+  <img src="../images/微信截图_20250327150817.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 
+## Online Kinematic Calibration for Legged Robots
+该工作是在线校正腿式机器人的运动学参数。一般这些运动学参数都是来源于joint encoders, foot contact sensors,以及IMU，通过这些传感器来估算机器人的速度。而估算的速度进一步的跟外部传感器相结合，进而实现运动参数的更新，而更新的过程可以采用滤波或者图优化的方式（分别采用了VINS-mono和ekf-VIO）。
 
+此外，本文还着重于步长的估计。一般步长都是预定义或者手动测量的，但是这会导致很大的误差。每个关键点的一点误差都会导致累积误差（时间与空间维度）。
 
+<div align="center">
+  <img src="../images/微信截图_20250327153448.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 
