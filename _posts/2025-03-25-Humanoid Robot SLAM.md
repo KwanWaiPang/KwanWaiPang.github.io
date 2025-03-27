@@ -40,16 +40,22 @@ toc: false
 |2023|`TASE`|[Humanoid loco-manipulations using combined fast dense 3D tracking and SLAM with wide-angle depth-images](https://hal.science/hal-04125159v1/file/2023_TASE_Chappellet.pdf)|---|---|
 |2022|`RAL`|[Online kinematic calibration for legged robots](https://rexlab.ri.cmu.edu/papers/onlinecalib.pdf)|---|---|
 |2022|`TRO`|[Vilens: Visual, inertial, lidar, and leg odometry for all-terrain legged robots](https://arxiv.org/pdf/2107.07243)|---|---|
+|2022|`TRO`|[Rloc: Terrain-aware legged locomotion using reinforcement learning and optimal control](https://arxiv.org/pdf/2012.03094)|---|---|
 |2022|`RAL`|[Step: State estimator for legged robots using a preintegrated foot velocity factor](https://arxiv.org/pdf/2202.05572)|---|---|
 |2022|`Conference on robot learning`|[Learning inertial odometry for dynamic legged robot state estimation](https://proceedings.mlr.press/v164/buchanan22a/buchanan22a.pdf)|---|---| 
+|2022|`arXiv`|[A1 SLAM: Quadruped SLAM using the A1's Onboard Sensors](https://arxiv.org/pdf/2211.14432)|[![Github stars](https://img.shields.io/github/stars/jerredchen/A1_SLAM.svg)](https://github.com/jerredchen/A1_SLAM)|---|
+|2021|`IEEE Sensors Letters`|[On state estimation for legged locomotion over soft terrain](https://arxiv.org/pdf/2101.02279)|---|---|
+|2021|`ICRA`|[Contact forces preintegration for estimation in legged robotics using factor graphs](https://hal.science/hal-02991717v1/file/ICRA_2021_MFourmy.pdf)|---|---| 
 |2021|`RAL`|[Legged robot state estimation with dynamic contact event information](https://ieeexplore.ieee.org/abstract/document/9468900)|---|---|
 |2021|`RAL`|[Online Object Searching by a Humanoid Robot in an Unknown Environment](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/2021_RAL_Tsuru.pdf)|---|---|
 |2020|`ICRA`|[Preintegrated velocity bias estimation to overcome contact nonlinearities in legged robot odometry](https://arxiv.org/pdf/1910.09875)|---|---|
 |2020|`Frontiers in Robotics and AI`|[Pronto: A multi-sensor state estimator for legged robots in real-world scenarios](https://www.robots.ox.ac.uk/~mobile/drs/Papers/2020FRONTIERS_camurri.pdf)|---|---|
 |2020|`IJRR`|[Contact-aided invariant extended Kalman filtering for robot state estimation](https://journals.sagepub.com/doi/pdf/10.1177/0278364919894385?casa_token=uQLkhLPMngkAAAAA:8BFM9dE1oo8qr_iiOXpZyhTf0-plTFQs2tbRezy_Njqb6aiuCykDYh4Odds7pEGOa1_2RuuefeHduKY)|---|---| 
+|2019|`RAL`|[Dynamic locomotion on slippery ground](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/355281/1/IROS19___Dynamic_Locomotion_on_Slippery_Ground.pdf)|---|---|
 |2019|`IEEE-RAS 19th international conference on humanoid robots`|[Footstep planning for autonomous walking over rough terrain](https://arxiv.org/pdf/1907.08673)|---|---|
 |2019|`RAL`|[Robust legged robot state estimation using factor graph optimization](https://arxiv.org/pdf/1904.03048)|---|---|
 |2019|`IROS`|[Humanoid robot next best view planning under occlusions using body movement primitives](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/Humanoid_Robot_Next_Best_View_Planning_Under_Occlusions_Using_Body_Movement_Primitives.pdf)|---|---|
+|2018|`IROS`|[Hybrid contact preintegration for visual-inertial-contact state estimation using factor graphs](https://arxiv.org/pdf/1803.07531)|---|---|
 |2018|`Mechatronics`|[Novel lightweight odometric learning method for humanoid robot localization](https://github.com/KwanWaiPang/Awesome-Humanoid-Robot-Localization-and-Mapping/blob/pdf/1-s2.0-S0957415818301338-main.pdf)|---|---|
 |2018|`IROS`|[Mit cheetah 3: Design and control of a robust, dynamic quadruped robot](https://dspace.mit.edu/bitstream/handle/1721.1/126619/iros.pdf?sequence=2)|---|---|
 |2018|`ICRA`|[Legged robot state-estimation through combined forward kinematic and preintegrated contact factors](https://arxiv.org/pdf/1712.05873)|---|---|
@@ -101,6 +107,7 @@ toc: false
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`arXiv`|[Humanoid locomotion and manipulation: Current progress and challenges in control, planning, and learning](https://arxiv.org/pdf/2501.02116)|---|---|
 |2024|`IEEE/CAA Journal of Automatica Sinica`|[Advancements in humanoid robots: A comprehensive review and future prospects](https://www.ieee-jas.net/article/doi/10.1109/JAS.2023.124140)|---|---|
+|2022|`Field Robotics`|[Cerberus: Autonomous legged and aerial robotic exploration in the tunnel and urban circuits of the darpa subterranean challenge](https://d1wqtxts1xzle7.cloudfront.net/84655738/2201.07067-libre.pdf?1650599141=&response-content-disposition=inline%3B+filename%3DCERBERUS_Autonomous_Legged_and_Aerial_Ro.pdf&Expires=1743056230&Signature=Kau5sbITIQY8t44-b22CcAmkb0ODESA4oYnMPghfJLqMrtO-ZVxKvacw0zHU-zJ59NcQ2l8mHEbBQXp55sXoSJWg6CTO52KY2Hwd3Bo3hs1UfW8WhStxS-mQmDPF-AFqlgBjuH8iwrOtVETkUuUuOlf8iPGSlvQpNurkGUftuF70esjD~Yex-fyQlmIOX0xazfrE8IAnAlrHV7E94lpD7cvNOnDtQvL6kBq7Je8owcH2ikqcJBIDe1yUbO42S~dC5J50aR57mO0cy61PdUl2hxcNnSnF8yFcEgDrRrIDcaI5ULF4NFQR0jODcS0evpmag~dmfOmgU4dQkbDj04AQIA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)|---|---| 
 |2024|`TPAMI`|[R3LIVE++: A Robust, Real-time, Radiance Reconstruction Package with a Tightly-coupled LiDAR-Inertial-Visual State Estimator](https://arxiv.org/pdf/2209.03666)|[![Github stars](https://img.shields.io/github/stars/hku-mars/r3live.svg)](https://github.com/hku-mars/r3live)|dataset [![Github stars](https://img.shields.io/github/stars/ziv-lin/r3live_dataset.svg)](https://github.com/ziv-lin/r3live_dataset)|
 |2023|`IROS`|[Event camera-based visual odometry for dynamic motion tracking of a legged robot using adaptive time surface](https://arxiv.org/pdf/2305.08962)|---|[demo](https://www.youtube.com/watch?v=-5ieQSh0g3M&feature=youtu.be)|
 |2022|`ICRA`|[R3LIVE: A Robust, Real-time, RGB-colored, LiDAR-Inertial-Visual tightly-coupled state Estimation and mapping package](https://arxiv.org/pdf/2109.07982)|[![Github stars](https://img.shields.io/github/stars/hku-mars/r3live.svg)](https://github.com/hku-mars/r3live)|---|
@@ -360,15 +367,55 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 </div>
 
 
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250327121747.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250327121755.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 
+## VILENS: Visual, Inertial, Lidar, and Leg Odometry for All-Terrain Legged Robots
+
+足式机器人中，对于穿越崎岖地形时，会遇到可变形地形、腿部灵活性和脚部打滑等都会降低状态估计的性能，甚至在短距离内，会存在多步态轨迹无法执行，局部地形重建无法使用等情况。
+
+基于因子图的紧耦合的视觉-IMU-lidar-腿式里程计，并通过对线速度的bias进行在线估计来减少腿式里程计的漂移；
+一共2小时，1.8km的实验来验证系统的性能，并且在实验的场景中还包含了松散岩石、斜坡、泥土、滑动、地形形变等挑战；
+
+下图比较直观的看到足式机器人在砾石上小跑时脚接触序列的例子。
+第一张图是当脚接触地面后，然后就是随着控制器增加施加的力，地形和机器人的橡胶脚都会变形(图2)。
+而在站立阶段，第三张图为机械脚在其半球形轮廓上滚动，导致接触点会发生变化，最后一张图则是机械脚准备立刻接触面。
+<div align="center">
+  <img src="../images/微信截图_20250327130011.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+系统的框架如下图所示.
+主要包括IMU及运动学的预积分、camera特征跟踪（用的时FAST corner以及KLT），lidar的特征跟踪及ICP匹配，最后就是融合前面因子的图优化框架；
+
+<div align="center">
+  <img src="../images/微信截图_20250327130609.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
+所采用的因子图结构如下图所示
 
-
-
-
-
+<div align="center">
+  <img src="../images/微信截图_20250327130448.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 
