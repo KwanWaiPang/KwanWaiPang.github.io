@@ -146,7 +146,7 @@ toc: false
 <div align="center" style="
   position: relative; 
   width: 80%; 
-  height: 400px;
+  height: 450px;
   margin: 0 auto;
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
