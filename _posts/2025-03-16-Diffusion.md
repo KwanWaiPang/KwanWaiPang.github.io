@@ -153,7 +153,7 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
 因此需要引入一些随机性（randomness）到Autoencoders中
 
 <div align="center">
-  <img src="../images/微信截图_20250328132247.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328132247.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -161,7 +161,7 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
 对于每个latent variables都添加一个概率分布。那么进一步可以理解为编码器和解码器都是学习概率分布。而两个network分别学习权重$\phi$和$\theta$
 
 <div align="center">
-  <img src="../images/微信截图_20250328132339.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328132339.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -170,11 +170,11 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250328144647.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328144647.png" width="100%" />
         重构loss
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250328144757.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328144757.png" width="100%" />
         正则化loss
       </td>
     </tr>
@@ -185,8 +185,8 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
 而所谓的正则化loss实际上就是让学习的分布要更加接近于某种预定义的分布。如下图所示，假设需要latent的先验分布为正态分布
 而下方图片则是计算两个分布有多靠近的公式
 <div align="center">
-  <img src="../images/微信截图_20250328145222.png" width="60%" />
-  <img src="../images/微信截图_20250328145332.png" width="40%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328145222.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328145332.png" width="40%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -199,10 +199,10 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250328150156.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328150156.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250328150203.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328150203.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -214,7 +214,7 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
 
 
 <div align="center">
-  <img src="../images/微信截图_20250328151109.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250328151109.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>

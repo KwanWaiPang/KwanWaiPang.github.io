@@ -381,10 +381,10 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250327121747.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327121747.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250327121755.png" width="100%" />
+        <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327121755.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -404,7 +404,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 第一张图是当脚接触地面后，然后就是随着控制器增加施加的力，地形和机器人的橡胶脚都会变形(图2)。
 而在站立阶段，第三张图为机械脚在其半球形轮廓上滚动，导致接触点会发生变化，最后一张图则是机械脚准备立刻接触面。
 <div align="center">
-  <img src="../images/微信截图_20250327130011.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327130011.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -413,7 +413,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 主要包括IMU及运动学的预积分、camera特征跟踪（用的时FAST corner以及KLT），lidar的特征跟踪及ICP匹配，最后就是融合前面因子的图优化框架；
 
 <div align="center">
-  <img src="../images/微信截图_20250327130609.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327130609.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -422,7 +422,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 所采用的因子图结构如下图所示
 
 <div align="center">
-  <img src="../images/微信截图_20250327130448.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327130448.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -434,7 +434,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 
 作者在人形及四足机器狗上做了大量的实验来验证
 <div align="center">
-  <img src="../images/微信截图_20250327142612.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327142612.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -443,7 +443,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 其架构如下所示：
 
 <div align="center">
-  <img src="../images/微信截图_20250327142451.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327142451.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -454,7 +454,7 @@ SLAM用的是RTAB-Map(但是生成的是2D map)，同时结合机器人的运动
 这篇工作的数学推导比较多，后面对leg odomerty相关深入研究的时候在深入学习与推导吧~
 
 <div align="center">
-  <img src="../images/微信截图_20250327145230.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327145230.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -469,7 +469,7 @@ IMU部分采用预计分构建的因子，视觉里程计采用的是SVO2。
 
 实验效果如下图所示（从youtube视频来看感觉是做了个比较简单的实验验证，当然在18年的时候有这样的硬件搭建这样的测试平台已经很不容易了hh）
 <div align="center">
-  <img src="../images/微信截图_20250327150817.png" width="80%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327150817.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -481,7 +481,7 @@ IMU部分采用预计分构建的因子，视觉里程计采用的是SVO2。
 此外，本文还着重于步长的估计。一般步长都是预定义或者手动测量的，但是这会导致很大的误差。每个关键点的一点误差都会导致累积误差（时间与空间维度）。
 
 <div align="center">
-  <img src="../images/微信截图_20250327153448.png" width="60%" />
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250327153448.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
