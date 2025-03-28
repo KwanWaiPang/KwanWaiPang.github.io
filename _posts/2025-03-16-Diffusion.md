@@ -137,7 +137,7 @@ Diffusion模型的思路则是：一个分布可以通过不断地添加噪声�
 </figcaption>
 </div>
 
-Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习低维度的latent space $z$,通过将$z$ mapping back回原来的数据，即可实现自监督/un-supervise learning
+Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习低维度的latent space $z$,通过将$z$ mapping back回原来的数据，即可实现自监督/un-supervise learning，不需要任何的label
 
 <div align="center">
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/微信截图_20250325162743.png" width="60%" />
@@ -145,14 +145,72 @@ Autoencoders，其实就是类似U-Net的结构，从输入的数据$x$中学习
 </figcaption>
 </div>
 
+这个过程实际上就是让网络去学习压缩的latent representation，而重建的loss则是强迫所学习的latent representation可以编码更多信息，因此这个Autoencoders的框架可以理解为`Autoencoding = Automatically encoding data; "Auto" = self-encoding`
 
+而更常用的则是Variational Autoencoders (VAES)，也就是引入多样性来提升它的泛化能力。如下图所示.
 
+对于传统的Autoencoders，是确定性模型，也就是对于输入，理论上会获得相同的输出（也就是它是一个deterministic encoding）。
+因此需要引入一些随机性（randomness）到Autoencoders中
 
+<div align="center">
+  <img src="../images/微信截图_20250328132247.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
+对于每个latent variables都添加一个概率分布。那么进一步可以理解为编码器和解码器都是学习概率分布。而两个network分别学习权重$\phi$和$\theta$
 
+<div align="center">
+  <img src="../images/微信截图_20250328132339.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250328144647.png" width="100%" />
+        重构loss
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250328144757.png" width="100%" />
+        正则化loss
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+而所谓的正则化loss实际上就是让学习的分布要更加接近于某种预定义的分布。如下图所示，假设需要latent的先验分布为正态分布
+而下方图片则是计算两个分布有多靠近的公式
+<div align="center">
+  <img src="../images/微信截图_20250328145222.png" width="60%" />
+  <img src="../images/微信截图_20250328145332.png" width="40%" />
+<figcaption>  
+</figcaption>
+</div>
 
+而之所以要这样的正则化处理，是因为需要让网络学习的分布要跟预定义的一样，要"meaningful".
 
+然而对于BP算法而言，需要网络是确定性的，随机的是没有办法反向传播梯度来更新权重的，因此需要对其sampling layer进行参数化如下：
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250328150156.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250328150203.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+此处深入学习VAE是因为其跟diffusion模型的思路是非常像的，而对于GAN网络，此处就不介绍了~
 
 
 
