@@ -72,9 +72,6 @@ toc: true
 # 插入视频
 ## youtube视频
 
-<!-- <div align="center">
-<iframe width="80%" height="400" src="https://www.youtube.com/embed/Nn40U4e5Si8?si=P_4XDu5l83VeVRQo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div> -->
 <div align="center" style="
   position: relative; 
   width: 80%; 
