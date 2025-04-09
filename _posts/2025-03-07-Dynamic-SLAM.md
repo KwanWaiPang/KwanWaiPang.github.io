@@ -17,7 +17,7 @@ toc: false #true
 # 引言
 之前博客以图片的形式将Dynamic-SLAM相关的调研工作共享出来，但实际阅读是非常困难的，加上容易混乱，因此本博文将完整版ppt给出，并且后续新增的调研也可实时更新，这样避免了每次截图的繁琐操作。
 
-{% raw %}
+<!-- {% raw %}
 <div align="center" style="
   position: relative; 
   width: 100%; 
@@ -26,11 +26,21 @@ toc: false #true
   border-radius: 15px;
   background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
   ">
-  <!-- <iframe src="https://1drv.ms/p/s!AnZK2XZ8YDuJeI5r_iQJbZJQqhw?embed=1&amp;em=2&amp;wdAr=1.7777777777777777#toolbar=0&navpanes=0&scrollbar=0" width="100%" height="100%" frameborder="0">这是嵌入 <a target="_blank" href="https://office.com">Microsoft Office</a> 演示文稿，由 <a target="_blank" href="https://office.com/webapps">Office</a> 提供支持。</iframe> -->
   <iframe src="https://onedrive.live.com/embed?resid=893B607C76D94A76!120&authkey=!AI5r_iQJbZJQqhw&em=2&wdAr=1.777&wdHideHeaders=true&wdEmbedCode=0" width="100%" height="100%" frameborder="0"></iframe>
 </div>
-{% endraw %}
+{% endraw %} -->
 
+<div align="center" style="
+  position: relative; 
+  width: 100%; 
+  height: 500px;
+  margin: 0 auto;
+  border-radius: 15px;
+  background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
+  ">
+  <iframe width="100%" height="100%"
+    src="https://kwanwaipang.github.io/awesome_NeRF_SLAM/学习笔记之——NeRF SLAM（基于神经辐射场的SLAM）-CSDN博客_files/Survey for Dynamic SLAM.pdf#toolbar=0&navpanes=0&scrollbar=0" ></iframe>
+</div>
 
 <br>
 
