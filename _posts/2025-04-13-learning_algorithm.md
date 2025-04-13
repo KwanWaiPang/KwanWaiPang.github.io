@@ -19,7 +19,7 @@ toc: false #true
 本博文汇总了本人学习算法以及刷Leetcode、牛客网等题目的过程中的一些笔记，主要是基于C++的实现。 具体代码运行及测试请见[My Leetcode](https://leetcode.cn/u/kwan-wai-pang/)
 
 
-| Year | Title | Note |
+| Title | Link | Note |
 |:----:|:-----:|:----:|
 | 堆栈  | [link](../File/Blogs/Poster/栈类型题目.html) | C++ |
 | 双指针| [链表](../File/Blogs/Poster/双指针链表解法.html) <br> [数组/Vector](../File/Blogs/Poster/双指针数组解法.html) | C++ |
