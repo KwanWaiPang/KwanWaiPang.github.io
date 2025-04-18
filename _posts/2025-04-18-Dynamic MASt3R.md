@@ -165,6 +165,21 @@ frame28 与 frame30 的匹配效果
 </div>
 从图中的效果分析，虽然移动的物体在跨度大的时候会导致误匹配，但是对于增量式SLAM而言，相邻两帧的误匹配是较少的~
 
+至于测试有宠物奔跑的场景发现，MASt3R倾向于将静态部分的信息保留下来~
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/Easi3R/raw/main/assert/dog-gooses_depth_maps.gif" width="60%" />
+<figcaption> 
+dog-gooses
+</figcaption>
+</div>
+        
+<div align="center">
+  <img src="../images/微信截图_20250418151257.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
 
 # MASt3R-SLAM in Dynamic Scene
 
@@ -198,4 +213,39 @@ CUDA_VISIBLE_DEVICES=0 python main.py --dataset /home/gwp/monst3r/demo_data/lady
 
 ```bash
 bash ./scripts/download_tum_dynamic.sh
+
+
+cd MASt3R-SLAM
+conda activate mast3r-slam
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg2_desk_with_person/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_sitting_static/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_sitting_xyz/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_sitting_halfsphere/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_sitting_rpy/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_walking_static/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_walking_xyz/ --config config/calib.yaml
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_walking_halfsphere/ --config config/calib.yaml
+
+
+CUDA_VISIBLE_DEVICES=1 python main.py --dataset datasets/tum_Dynamic_Objects/rgbd_dataset_freiburg3_walking_rpy/ --config config/calib.yaml
+
+
+#下面是验证精度的
+bash ./scripts/eval_tum.sh --no-calib
 ```
+
+
+<div align="center">
+  <img src="../images/微信截图_20250418150551.png" width="80%" />
+<figcaption> 
+rgbd_dataset_freiburg2_desk_with_person 
+</figcaption>
+</div>
+
