@@ -31,5 +31,15 @@ toc: true
 * Survey for Dynamic SLAM: [blog](https://kwanwaipang.github.io/Dynamic-SLAM/)
 
 
-# 
+# MASt3R in Dynamic Scene
+
+* 使用的代码见[MASt3R_comment](https://github.com/KwanWaiPang/MASt3R_comment)
+
+```bash
+#下载代码链接，并切换分支
+git clone --recursive https://github.com/naver/mast3r
+# rm -rf .git
+
+```
+
 
