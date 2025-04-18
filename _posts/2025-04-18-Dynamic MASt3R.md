@@ -158,7 +158,7 @@ pip install ipykernel
 </div>
 
 <div align="center">
-  <img src="https://github.com/KwanWaiPang/MASt3R_comment/raw/a100/assets/output28_30.png" width="60%" />
+  <img src="https://github.com/KwanWaiPang/MASt3R_comment/raw/a100/assets/output28_30.png" width="80%" />
 <figcaption>  
 frame28 与 frame30 的匹配效果
 </figcaption>
@@ -166,3 +166,31 @@ frame28 与 frame30 的匹配效果
 从图中的效果分析，虽然移动的物体在跨度大的时候会导致误匹配，但是对于增量式SLAM而言，相邻两帧的误匹配是较少的~
 
 
+# MASt3R-SLAM in Dynamic Scene
+
+* 使用的代码请见[MASt3R-SLAM_comment](https://github.com/KwanWaiPang/MASt3R-SLAM_comment),采用[comment](https://github.com/KwanWaiPang/MASt3R-SLAM_comment/tree/main)分支
+* 在MobaXterm中运行以下代码：
+
+```bash
+cd MASt3R-SLAM
+conda activate mast3r-slam
+
+pip install plyfile
+
+# 直接采用py脚本运行不带标定参数的
+CUDA_VISIBLE_DEVICES=0 python main.py --dataset /home/gwp/monst3r/demo_data/lady-running/ --config config/base.yaml
+
+CUDA_VISIBLE_DEVICES=0 python main.py --dataset /home/gwp/monst3r/demo_data/lady-running.mp4 --config config/base.yaml
+```
+
+从下面看似乎效果没有受到明显的影响
+<div align="center">
+  <img src="../images/微信截图_20250418141239.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://r-c-group.github.io/blog_media/MASt3R-SLAM/123456.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
