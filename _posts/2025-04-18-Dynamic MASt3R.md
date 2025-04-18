@@ -249,3 +249,15 @@ rgbd_dataset_freiburg2_desk_with_person
 </figcaption>
 </div>
 
+下面的demo效果会更加明显，当同时伴随着物体运动及相机运动时：
+
+<div align="center">
+  <img src="../images/微信截图_20250418151735.png" width="80%" />
+<figcaption> 
+rgbd_dataset_freiburg3_walking_halfsphere
+</figcaption>
+</div>
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://r-c-group.github.io/blog_media/MASt3R-SLAM/rgbd_dataset_freiburg3_walking_halfsphere.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
