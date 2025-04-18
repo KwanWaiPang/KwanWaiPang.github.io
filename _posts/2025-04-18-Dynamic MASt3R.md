@@ -190,7 +190,12 @@ CUDA_VISIBLE_DEVICES=0 python main.py --dataset /home/gwp/monst3r/demo_data/lady
 </figcaption>
 </div>
 
-
 <div align="center">
 <video playsinline autoplay loop muted src="https://r-c-group.github.io/blog_media/MASt3R-SLAM/123456.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
 </div>
+
+* 接下来下载TUM-RGBD带有Dynamic Objects的数据集[bash](https://github.com/KwanWaiPang/MASt3R-SLAM_comment/blob/comment/scripts/download_tum_dynamic.sh)
+
+```bash
+bash ./scripts/download_tum_dynamic.sh
+```
