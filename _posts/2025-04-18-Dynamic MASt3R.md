@@ -130,3 +130,39 @@ see https://github.com/naver/dust3r?tab=readme-ov-file#interactive-demo for deta
   camera-controls
   style="display: block; width: 100%; height: 500px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); overflow: hidden;"
 ></model-viewer>
+
+通过可视化的点云来看，个人觉得其实效果没有很差，只是没有把动态点云检测出来
+
+* 下面通过代码[link](https://github.com/KwanWaiPang/MASt3R_comment/blob/a100/matching.ipynb)来测试匹配的效果
+
+```bash
+conda activate mast3r 
+pip install ipykernel 
+```
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://github.com/KwanWaiPang/MASt3R_comment/raw/a100/assets/output0_1.png" width="100%" />
+        frame0 与 frame1 的匹配效果
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://github.com/KwanWaiPang/MASt3R_comment/raw/a100/assets/output0_30.png" width="100%" />
+        frame0 与 frame30 的匹配效果
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+<div align="center">
+  <img src="https://github.com/KwanWaiPang/MASt3R_comment/raw/a100/assets/output28_30.png" width="60%" />
+<figcaption>  
+frame28 与 frame30 的匹配效果
+</figcaption>
+</div>
+从图中的效果分析，虽然移动的物体在跨度大的时候会导致误匹配，但是对于增量式SLAM而言，相邻两帧的误匹配是较少的~
+
+
