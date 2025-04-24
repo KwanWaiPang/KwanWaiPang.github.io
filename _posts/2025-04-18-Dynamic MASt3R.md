@@ -175,7 +175,7 @@ dog-gooses
 </div>
         
 <div align="center">
-  <img src="../images/微信截图_20250418151257.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250418151257.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -200,7 +200,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py --dataset /home/gwp/monst3r/demo_data/lady
 
 从下面看似乎效果没有受到明显的影响
 <div align="center">
-  <img src="../images/微信截图_20250418141239.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250418141239.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -243,7 +243,7 @@ bash ./scripts/eval_tum.sh --no-calib
 
 
 <div align="center">
-  <img src="../images/微信截图_20250418150551.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250418150551.png" width="80%" />
 <figcaption> 
 rgbd_dataset_freiburg2_desk_with_person 
 </figcaption>
@@ -252,7 +252,7 @@ rgbd_dataset_freiburg2_desk_with_person
 下面的demo效果会更加明显，当同时伴随着物体运动及相机运动时：
 
 <div align="center">
-  <img src="../images/微信截图_20250418151735.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250418151735.png" width="80%" />
 <figcaption> 
 rgbd_dataset_freiburg3_walking_halfsphere
 </figcaption>
