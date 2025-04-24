@@ -50,3 +50,16 @@ toc: false #true
   * Awesome-Transformer-based-SLAM: [Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) 
   * Awesome-3DGS-SLAM: [Paper List](https://github.com/KwanWaiPang/Awesome-3DGS-SLAM)
 
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+* Keep update the paper list:
+
+| Year | Venue | Paper Title | Repository | Note |
+|:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[Back on Track: Bundle Adjustment for Dynamic Scene Reconstruction](https://arxiv.org/pdf/2504.14516)|---|[website](https://wrchen530.github.io/projects/batrack/)|
+<!-- |2018|`RAL`|[DynaSLAM: Tracking, mapping, and inpainting in dynamic scenes](https://arxiv.org/pdf/1806.05620)|---|---| -->
+
+
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+
