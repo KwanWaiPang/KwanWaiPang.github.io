@@ -20,6 +20,17 @@ toc: false #true
 
 * 原博客：[Link](https://blog.csdn.net/gwplovekimi/article/details/135083274)
 
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+* Keep update the paper list:
+
+| Year | Venue | Paper Title | Repository | Note |
+|:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[Joint Optimization of Neural Radiance Fields and Continuous Camera Motion from a Monocular Video](https://arxiv.org/pdf/2504.19819)|[![Github stars](https://img.shields.io/github/stars/HoangChuongNguyen/cope-nerf.svg)](https://github.com/HoangChuongNguyen/cope-nerf)|---|
+
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+
 NeRF SLAM（Neural Radiance Fields Simultaneous Localization and Mapping）是一种结合神经辐射场（NeRF）和SLAM（Simultaneous Localization and Mapping）的先进技术，用于实时地构建三维环境地图并同时估计相机的姿态。目前NeRF-SLAM主要有以下两个方向：
 <ol><li>SLAM为NeRF训练提供位姿，然后建立稠密细腻的三维场景。简而言之就是NeRF只做mapping</li><li>在NeRF里建立各种损失函数反过来优化pose和depth。 简而言之就是full slam</li></ol> 
 <p>那么基于这两个方向，目前的NeRF SLAM的工作主要分为以下三类：仅优化NeRF、仅优化位姿、位姿和NeRF联合优化。与此同时，本文也把最新的3D Gaussian Splatting也加入调研序列中。每个工作介绍的时候都会给出论文的下载链接、<span class="edu-hl hl hl-1" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;word\&quot;:\&quot;源代码\&quot;}&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;word\&quot;:\&quot;源代码\&quot;}&quot;}" data-tit="源代码" data-pretit="源代码">源代码</span>（如有）、demo video（如有）</p> 
