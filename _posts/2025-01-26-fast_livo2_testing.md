@@ -163,8 +163,8 @@ Fast-LIVO2是基于Fast-LIVO的升级版本，一个基于ESIKF的lidar-image-im
 
 
 
-# 代码解读
-代码解读部分直接将注释添加到代码中，具体请见：[Fast-LIVO2代码解读](https://github.com/KwanWaiPang/Fast-LIVO2_comment)
+<!-- # 代码解读
+代码解读部分直接将注释添加到代码中，具体请见：[Fast-LIVO2代码解读](https://github.com/KwanWaiPang/Fast-LIVO2_comment) -->
 
 
 # 参考资料
