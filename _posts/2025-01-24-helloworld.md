@@ -276,6 +276,18 @@ git push -u origin main
 </div>
 
 
+<div align="center">
+  <iframe
+  data-src="https://kwanwaipang.github.io/ubuntu_md_blog/4D_plugin/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_breakdance.viser&initDistanceScale=0.3&initHeightOffset=0.15" style="
+      border-radius: 0.5em;
+      width: 80%;
+      height: 400px;
+      border: none;
+      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.15);"
+      ></iframe>
+</div>
+
+
 # google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
 ~~~
