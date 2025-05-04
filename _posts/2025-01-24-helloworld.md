@@ -276,20 +276,6 @@ git push -u origin main
 </div>
 
 
-<div align="center" style="
-  position: relative; 
-  width: 80%; 
-  height: 400px;
-  margin: 0 auto;
-  border-radius: 15px;
-  background: url('https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif') center/contain no-repeat;
-  ">
-  <iframe width="100%" height="100%"
-    src="https://kwanwaipang.github.io/ubuntu_md_blog/4D_plugin/build/?playbackPath=https://kwanwaipang.github.io/ubuntu_md_blog/MonST3R/recording_breakdance.viser&initDistanceScale=0.3&initHeightOffset=0.15"
-  ></iframe>
-</div>
-
-
 # google搜索引擎中登记网站
 * 首先在google的搜索栏中输入下面的语句：
 ~~~
