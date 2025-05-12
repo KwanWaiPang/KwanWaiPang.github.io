@@ -234,7 +234,7 @@ CUDA_VISIBLE_DEVICES=3 python main.py --config configs/TUM_VIE/mocap-1d-trans.ya
 </figcaption>
 </div>
 
-跑了大概6个小时还没跑完😂
+跑了大概6个小时还没跑完😂就不跑了，把中间结果show一下吧~
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
@@ -252,3 +252,4 @@ CUDA_VISIBLE_DEVICES=3 python main.py --config configs/TUM_VIE/mocap-1d-trans.ya
   <figcaption>
   </figcaption>
 </div>
+
