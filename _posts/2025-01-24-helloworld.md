@@ -314,6 +314,8 @@ site:https://kwanwaipang.github.io/
 
 
 
+
+
 * 此外也可以通过注册一个[Google Analytics](https://analytics.google.com/analytics/web/?hl=zh-cn#),可以统计你博客网站的访问人数，访问来源等非常丰富的网站数据。对应修改```_config.yml```文件中的`google_analytics`即可
 * 此博客采用了Google Analytics 4（GA4）而非旧版Universal Analytics（UA），详细请见代码`_includes\analytics.html`
 
