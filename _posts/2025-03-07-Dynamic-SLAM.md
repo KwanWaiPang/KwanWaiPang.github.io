@@ -56,6 +56,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[DynaGSLAM: Real-Time Gaussian-Splatting SLAM for Online Rendering, Tracking, Motion Predictions of Moving Objects in Dynamic Scenes](https://arxiv.org/pdf/2503.11979)|[![Github stars](https://img.shields.io/github/stars/BlarkLee/DynaGSLAM_official.svg)](https://github.com/BlarkLee/DynaGSLAM_official)|[website](https://blarklee.github.io/dynagslam/)| 
 |2025|`CVPR`|[Dynamic Camera Poses and Where to Find Them](https://arxiv.org/pdf/2504.17788)|---|[website](https://research.nvidia.com/labs/dir/dynpose-100k/)<br>[dataset](https://huggingface.co/datasets/nvidia/dynpose-100k)|
 |2025|`arXiv`|[Back on Track: Bundle Adjustment for Dynamic Scene Reconstruction](https://arxiv.org/pdf/2504.14516)|---|[website](https://wrchen530.github.io/projects/batrack/)|
 |2018|`RAL`|[DynaSLAM: Tracking, mapping, and inpainting in dynamic scenes](https://arxiv.org/pdf/1806.05620)|---|---|
