@@ -56,7 +56,6 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
-|2025|`CVPR`|[Time of the Flight of the Gaussians: Optimizing Depth Indirectly in Dynamic Radiance Fields](https://arxiv.org/pdf/2505.05356)|[![Github stars](https://img.shields.io/github/stars/brownvc/gftorf.svg)](https://github.com/brownvc/gftorf)|[website](https://visual.cs.brown.edu/projects/gftorf-webpage/)| 
 |2025|`arXiv`|[DynaGSLAM: Real-Time Gaussian-Splatting SLAM for Online Rendering, Tracking, Motion Predictions of Moving Objects in Dynamic Scenes](https://arxiv.org/pdf/2503.11979)|[![Github stars](https://img.shields.io/github/stars/BlarkLee/DynaGSLAM_official.svg)](https://github.com/BlarkLee/DynaGSLAM_official)|[website](https://blarklee.github.io/dynagslam/)| 
 |2025|`arXiv`|[DynoSAM: Open-Source Smoothing and Mapping Framework for Dynamic SLAM](https://arxiv.org/pdf/2501.11893)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|---|
 |2025|`CVPR`|[Dynamic Camera Poses and Where to Find Them](https://arxiv.org/pdf/2504.17788)|---|[website](https://research.nvidia.com/labs/dir/dynpose-100k/)<br>[dataset](https://huggingface.co/datasets/nvidia/dynpose-100k)|
@@ -66,6 +65,18 @@ toc: false #true
 |2020|`ICRA`|[Flowfusion: Dynamic dense rgb-d slam based on optical flow](https://arxiv.org/pdf/2003.05102)|---|---|
 |2020|`TPAMI`|[Rgb-d slam in dynamic environments using point correlations](https://arxiv.org/pdf/1811.03217)|---|[video](https://www.youtube.com/watch?v=WCOoaaVaHTw)|
 |2018|`RAL`|[DynaSLAM: Tracking, mapping, and inpainting in dynamic scenes](https://arxiv.org/pdf/1806.05620)|---|---|
+
+* dynamic 3D reconstruction but not the SLAM：
+| Year | Venue | Paper Title | Repository | Note |
+|:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[MGStream: Motion-aware 3D Gaussian for Streamable Dynamic Scene Reconstruction](https://arxiv.org/pdf/2505.13839)| [![Github stars](https://img.shields.io/github/stars/pcl3dv/MGStream.svg)](https://github.com/pcl3dv/MGStream)|[website](https://zhenybao.github.io/MGStream/)| 
+|2025|`CVPR`|[Time of the Flight of the Gaussians: Optimizing Depth Indirectly in Dynamic Radiance Fields](https://arxiv.org/pdf/2505.05356)|[![Github stars](https://img.shields.io/github/stars/brownvc/gftorf.svg)](https://github.com/brownvc/gftorf)|[website](https://visual.cs.brown.edu/projects/gftorf-webpage/)| 
+|2025|`arXiv`|[Hybrid 3D-4D Gaussian Splatting for Fast Dynamic Scene Representation](https://arxiv.org/pdf/2505.13215)|[![Github stars](https://img.shields.io/github/stars/ohsngjun/3D-4DGS.svg)](https://github.com/ohsngjun/3D-4DGS)|[website](https://ohsngjun.github.io/3D-4DGS/)| 
+|2025|`SIGGRAPH`|[Compensating Spatiotemporally Inconsistent Observations for Online Dynamic 3D Gaussian Splatting](https://arxiv.org/pdf/2505.01235)|---|[website](https://bbangsik13.github.io/OR2/)|
+|2025|`ICLR`|[MoDGS: Dynamic Gaussian Splatting from Casually-captured Monocular Videos with Depth Priors](https://openreview.net/pdf?id=2prShxdLkX)|[![Github stars](https://img.shields.io/github/stars/MobiusLqm/MoDGS.svg)](https://github.com/MobiusLqm/MoDGS)|[website](https://modgs.github.io/)| 
+|2024|`ICLR`|[Real-time photorealistic dynamic scene representation and rendering with 4d gaussian splatting](https://arxiv.org/pdf/2310.10642)|[![Github stars](https://img.shields.io/github/stars/fudan-zvg/4d-gaussian-splatting.svg)](https://github.com/fudan-zvg/4d-gaussian-splatting)|4DGS|
+|2024|`CVPR`|[4d gaussian splatting for real-time dynamic scene rendering](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_4D_Gaussian_Splatting_for_Real-Time_Dynamic_Scene_Rendering_CVPR_2024_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/hustvl/4DGaussians.svg)](https://github.com/hustvl/4DGaussians)|[website](https://guanjunwu.github.io/4dgs/)<br>4DGS|
+|2024|`CVPR`|[Compact 3d gaussian representation for radiance field](https://openaccess.thecvf.com/content/CVPR2024/papers/Lee_Compact_3D_Gaussian_Representation_for_Radiance_Field_CVPR_2024_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/maincold2/Compact-3DGS.svg)](https://github.com/maincold2/Compact-3DGS)<br>[![Github stars](https://img.shields.io/github/stars/maincold2/Dynamic_C3DGS.svg)](https://github.com/maincold2/Dynamic_C3DGS/)|[website](https://maincold2.github.io/c3dgs/)|
 
 
 <!-- |---|`arXiv`|---|---|---| -->
