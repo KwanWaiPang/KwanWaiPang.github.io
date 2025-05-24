@@ -66,7 +66,7 @@ toc: false #true
 |2020|`TPAMI`|[Rgb-d slam in dynamic environments using point correlations](https://arxiv.org/pdf/1811.03217)|---|[video](https://www.youtube.com/watch?v=WCOoaaVaHTw)|
 |2018|`RAL`|[DynaSLAM: Tracking, mapping, and inpainting in dynamic scenes](https://arxiv.org/pdf/1806.05620)|---|---|
 
-* dynamic 3D reconstruction but not the SLAM：
+* Dynamic 3D reconstruction but not the SLAM：
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`arXiv`|[MGStream: Motion-aware 3D Gaussian for Streamable Dynamic Scene Reconstruction](https://arxiv.org/pdf/2505.13839)| [![Github stars](https://img.shields.io/github/stars/pcl3dv/MGStream.svg)](https://github.com/pcl3dv/MGStream)|[website](https://zhenybao.github.io/MGStream/)| 
