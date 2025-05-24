@@ -7,6 +7,9 @@ permalink: /about/
 # Hi~ 👋
 This blog is my original work, archived in the `_posts` folder, and all rights are reserved. 
 Please contact me for authorization before reusing or reposting.
+
+If you find this blog is useful, a simple star ([![Github stars](https://img.shields.io/github/stars/KwanWaiPang/KwanWaiPang.github.io.svg)](https://github.com/KwanWaiPang/KwanWaiPang.github.io)) should be the best affirmation. 😊
+
 * [My Homepage](https://kwanwaipang.github.io/) 
 
 <style>
