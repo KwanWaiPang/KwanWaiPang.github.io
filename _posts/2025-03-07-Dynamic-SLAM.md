@@ -63,6 +63,7 @@ toc: false #true
 |2025|`arXiv`|[Back on Track: Bundle Adjustment for Dynamic Scene Reconstruction](https://arxiv.org/pdf/2504.14516)|---|[website](https://wrchen530.github.io/projects/batrack/)|
 |2022|`RAL`|[DynaVINS: A Visual-Inertial SLAM for Dynamic Environments](https://arxiv.org/pdf/2208.11500)|[![Github stars](https://img.shields.io/github/stars/url-kaist/dynaVINS.svg)](https://github.com/url-kaist/dynaVINS)|---|
 |2021|`RAL`|[DynaSLAM II: Tightly-coupled multi-object tracking and SLAM](https://arxiv.org/pdf/2010.07820)|---|---|
+|2021|`Sensor`|[DOE-SLAM: dynamic object enhanced visual SLAM](https://www.mdpi.com/1424-8220/21/9/3091)|---|---|
 |2020|`ICRA`|[Flowfusion: Dynamic dense rgb-d slam based on optical flow](https://arxiv.org/pdf/2003.05102)|---|---|
 |2020|`TPAMI`|[Rgb-d slam in dynamic environments using point correlations](https://arxiv.org/pdf/1811.03217)|---|[video](https://www.youtube.com/watch?v=WCOoaaVaHTw)|
 |2018|`RAL`|[DynaSLAM: Tracking, mapping, and inpainting in dynamic scenes](https://arxiv.org/pdf/1806.05620)|---|---|
