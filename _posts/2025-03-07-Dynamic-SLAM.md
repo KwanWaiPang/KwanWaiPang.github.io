@@ -67,6 +67,10 @@ toc: false #true
 |2020|`ICRA`|[Flowfusion: Dynamic dense rgb-d slam based on optical flow](https://arxiv.org/pdf/2003.05102)|---|---|
 |2020|`TPAMI`|[Rgb-d slam in dynamic environments using point correlations](https://arxiv.org/pdf/1811.03217)|---|[video](https://www.youtube.com/watch?v=WCOoaaVaHTw)|
 |2018|`RAL`|[DynaSLAM: Tracking, mapping, and inpainting in dynamic scenes](https://arxiv.org/pdf/1806.05620)|---|---|
+|2018|`ICRA`|[Staticfusion: Background reconstruction for dense rgb-d slam in dynamic environments](https://scholar.archive.org/work/ouzjgiwo5jekffbx6kqiwnhpeq/access/wayback/https://ora.ox.ac.uk/objects/uuid:b06224b2-62dd-459f-bbf7-1352dbbb5dc8/download_file?safe_filename=2018ICRA_scona2.pdf&file_format=application%2Fpdf&type_of_work=Conference+item)|---|---|
+
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 * Dynamic 3D reconstruction but not the SLAM：
 
@@ -77,9 +81,11 @@ toc: false #true
 |2025|`arXiv`|[Hybrid 3D-4D Gaussian Splatting for Fast Dynamic Scene Representation](https://arxiv.org/pdf/2505.13215)|[![Github stars](https://img.shields.io/github/stars/ohsngjun/3D-4DGS.svg)](https://github.com/ohsngjun/3D-4DGS)|[website](https://ohsngjun.github.io/3D-4DGS/)| 
 |2025|`SIGGRAPH`|[Compensating Spatiotemporally Inconsistent Observations for Online Dynamic 3D Gaussian Splatting](https://arxiv.org/pdf/2505.01235)|---|[website](https://bbangsik13.github.io/OR2/)|
 |2025|`ICLR`|[MoDGS: Dynamic Gaussian Splatting from Casually-captured Monocular Videos with Depth Priors](https://openreview.net/pdf?id=2prShxdLkX)|[![Github stars](https://img.shields.io/github/stars/MobiusLqm/MoDGS.svg)](https://github.com/MobiusLqm/MoDGS)|[website](https://modgs.github.io/)| 
+|2024|`arXiv`|[Dynomo: Online point tracking by dynamic online monocular gaussian reconstruction](https://arxiv.org/pdf/2409.02104)|[![Github stars](https://img.shields.io/github/stars/dvl-tum/DynOMo.svg)](https://github.com/dvl-tum/DynOMo)|[website](https://jennyseidenschwarz.github.io/DynOMo.github.io/)|
 |2024|`ICLR`|[Real-time photorealistic dynamic scene representation and rendering with 4d gaussian splatting](https://arxiv.org/pdf/2310.10642)|[![Github stars](https://img.shields.io/github/stars/fudan-zvg/4d-gaussian-splatting.svg)](https://github.com/fudan-zvg/4d-gaussian-splatting)|4DGS|
 |2024|`CVPR`|[4d gaussian splatting for real-time dynamic scene rendering](https://openaccess.thecvf.com/content/CVPR2024/papers/Wu_4D_Gaussian_Splatting_for_Real-Time_Dynamic_Scene_Rendering_CVPR_2024_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/hustvl/4DGaussians.svg)](https://github.com/hustvl/4DGaussians)|[website](https://guanjunwu.github.io/4dgs/)<br>4DGS|
 |2024|`CVPR`|[Compact 3d gaussian representation for radiance field](https://openaccess.thecvf.com/content/CVPR2024/papers/Lee_Compact_3D_Gaussian_Representation_for_Radiance_Field_CVPR_2024_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/maincold2/Compact-3DGS.svg)](https://github.com/maincold2/Compact-3DGS)<br>[![Github stars](https://img.shields.io/github/stars/maincold2/Dynamic_C3DGS.svg)](https://github.com/maincold2/Dynamic_C3DGS/)|[website](https://maincold2.github.io/c3dgs/)|
+|2015|`arXiv`|[Dynamicfusion: Reconstruction and tracking of non-rigid scenes in real-time](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Newcombe_DynamicFusion_Reconstruction_and_2015_CVPR_paper.pdf)|---|---|
 
 
 <!-- |---|`arXiv`|---|---|---| -->
