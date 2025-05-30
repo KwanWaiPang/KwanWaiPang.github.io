@@ -3,19 +3,32 @@ layout: default
 ---
 
 <!-- 仅在此页面加载的自定义样式 -->
-<link rel="stylesheet" href="{{ './File/cn-cv/styles/main.css' | relative_url }}">
-<link rel="stylesheet" href="{{ './File/cn-cv/styles/lapis-cv-serif.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/File/cn-cv/styles/main.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/File/cn-cv/styles/lapis-cv-serif.css' | relative_url }}">
 
-<article class="page about-cn-page">
-  <h1>{{ page.title }}</h1>
-  <div class="entry">
-    {{ content }}
-  </div>
-</article>
+<div class="about-cn-container">
+  <article class="page">
+    <h1>{{ page.title }}</h1>
+    <div class="entry">
+      {{ content }}
+    </div>
+  </article>
+</div>
 
 <style>
-  /* 将自定义样式限制在.about-cn-page容器内 */
-  .about-cn-page * {
-    all: revert; /* 重置内部元素样式 */
+  /* 严格隔离样式 */
+  .about-cn-container {
+    all: initial; /* 重置容器本身 */
+    display: block;
+  }
+  
+  .about-cn-container * {
+    all: revert; /* 重置容器内所有元素 */
+  }
+  
+  /* 防止全局样式污染 */
+  body > *:not(.about-cn-container),
+  body > *:not(.about-cn-container) * {
+    all: revert !important;
   }
 </style>

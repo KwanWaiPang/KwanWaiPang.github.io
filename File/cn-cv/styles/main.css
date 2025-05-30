@@ -5,6 +5,33 @@
 
 /* Text */
 
+
+/* ===== 强制样式隔离 ===== */
+.about-cn-container {
+  isolation: isolate;
+  contain: content style;
+  all: initial !important;
+}
+
+.about-cn-container * {
+  all: revert !important;
+  box-sizing: border-box;
+  float: none !important;
+  position: static !important;
+}
+
+/* 重置可能影响布局的属性 */
+.about-cn-container div, 
+.about-cn-container p, 
+.about-cn-container h1, 
+.about-cn-container h2, 
+.about-cn-container h3 {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+}
+
 a,
 a span {
     font-family: var(--link-font);
