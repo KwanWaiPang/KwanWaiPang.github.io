@@ -16,7 +16,7 @@ permalink: /about-cn/
 > <span class="icon">&#xe7ca;</span> `octocat@github.com` &emsp;
 > <span class="icon">&#xe600;</span> [octocat](https://github.com/octocat)
 
-<img class="avatar" src="https://avatars.githubusercontent.com/u/583231?v=4">
+<img class=".cv-page-container .avatar" src="https://avatars.githubusercontent.com/u/583231?v=4">
 
 ## <span class="icon">&#xe80c;</span> 教育经历
 
