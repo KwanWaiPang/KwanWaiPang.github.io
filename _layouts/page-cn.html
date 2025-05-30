@@ -8,46 +8,50 @@ layout: default
 
 <div class="cv-page-container">
   <article class="page">
-    <h1>{{ page.title }}</h1>
     <div class="entry">
       {{ content }}
     </div>
   </article>
 </div>
 
-<!-- <style>
-  /* 严格隔离样式 - 不影响其他页面 */
+<style>
+  /* 基础隔离 - 防止全局样式渗透 */
   .cv-page-container {
-    all: initial; /* 重置容器本身 */
+    isolation: isolate;
+    contain: content;
     display: block;
-    isolation: isolate; /* 创建新的层叠上下文 */
-    contain: content; /* 限制样式影响范围 */
+    width: 100%;
   }
   
+  /* 确保自定义CSS优先级最高 */
   .cv-page-container * {
-    all: revert; /* 重置容器内所有元素 */
-    box-sizing: border-box;
-  }
-  
-  /* 确保全局样式不渗透进来 */
-  .cv-page-container *:not(.icon) {
-    font-family: inherit !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    color: inherit !important;
-  }
-  
-  /* 防止全局样式覆盖 */
-  body .cv-page-container h1,
-  body .cv-page-container h2,
-  body .cv-page-container h3,
-  body .cv-page-container p,
-  body .cv-page-container li {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: none !important;
-    border: none !important;
+    box-sizing: border-box !important;
     float: none !important;
     position: static !important;
+    background: none !important;
   }
-</style> -->
+  
+  /* 重置基础元素样式 */
+  .cv-page-container h1,
+  .cv-page-container h2,
+  .cv-page-container h3,
+  .cv-page-container p,
+  .cv-page-container ul,
+  .cv-page-container ol,
+  .cv-page-container li {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* 确保Jekyll页面类不影响内容 */
+  .cv-page-container .page,
+  .cv-page-container .entry {
+    all: revert;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+</style>
