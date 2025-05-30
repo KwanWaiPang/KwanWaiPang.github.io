@@ -8,13 +8,10 @@ permalink: /about-cn/
 <style>
   @import url("./File/cn-cv/styles/main.css");
   @import url("./File/cn-cv/styles/lapis-cv-serif.css");
-  
-  /* body {
-    margin: 1.2cm 1.1cm !important;
-    padding: 0;
-    font-family: "Lapis CV Serif", serif;
-  } */
 </style>
+
+<link rel="stylesheet" href="{{ '/File/cn-cv/styles/main.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/File/cn-cv/styles/lapis-cv-serif.css' | relative_url }}">
 
 # 八爪猫
 
