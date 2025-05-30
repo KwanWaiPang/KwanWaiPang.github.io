@@ -1,0 +1,53 @@
+---
+layout: default
+---
+
+<!-- 仅在此页面加载的自定义样式 -->
+<link rel="stylesheet" href="{{ '/File/cn-cv/styles/main.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/File/cn-cv/styles/lapis-cv-serif.css' | relative_url }}">
+
+<div class="cv-page-container">
+  <article class="page">
+    <h1>{{ page.title }}</h1>
+    <div class="entry">
+      {{ content }}
+    </div>
+  </article>
+</div>
+
+<style>
+  /* 严格隔离样式 - 不影响其他页面 */
+  .cv-page-container {
+    all: initial; /* 重置容器本身 */
+    display: block;
+    isolation: isolate; /* 创建新的层叠上下文 */
+    contain: content; /* 限制样式影响范围 */
+  }
+  
+  .cv-page-container * {
+    all: revert; /* 重置容器内所有元素 */
+    box-sizing: border-box;
+  }
+  
+  /* 确保全局样式不渗透进来 */
+  .cv-page-container *:not(.icon) {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    color: inherit !important;
+  }
+  
+  /* 防止全局样式覆盖 */
+  body .cv-page-container h1,
+  body .cv-page-container h2,
+  body .cv-page-container h3,
+  body .cv-page-container p,
+  body .cv-page-container li {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    float: none !important;
+    position: static !important;
+  }
+</style>
