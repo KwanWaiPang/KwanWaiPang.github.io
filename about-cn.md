@@ -1,20 +1,26 @@
 ---
-layout: page
+layout: page-cn
 title: 关于
 permalink: /about-cn/
 ---
 
+<!-- CSS 样式引入 -->
+<style>
+  @import url("./File/cn-cv/styles/main.css");
+  @import url("./File/cn-cv/styles/lapis-cv-serif.css");
+</style>
+
 # 八爪猫
 
-> <span class="cncv-icon">&#xe60f;</span> `(123)456-7890`&emsp;&emsp;
-> <span class="cncv-icon">&#xe7ca;</span> `octocat@github.com`&emsp;&emsp;
-> <span class="cncv-icon">&#xe600;</span> [octocat](https://github.com/octocat)
+> <span class="icon">&#xe60f;</span> `(123)456-7890`&emsp;&emsp;
+> <span class="icon">&#xe7ca;</span> `octocat@github.com`&emsp;&emsp;
+> <span class="icon">&#xe600;</span> [octocat](https://github.com/octocat)
 
-<img class="cncv-avatar" src="https://avatars.githubusercontent.com/u/583231?v=4">
+<img class="avatar" src="https://avatars.githubusercontent.com/u/583231?v=4">
 
 ## &#xe80c; 教育经历
 
-<div class="cncv-entry-title">
+<div class="entry-title">
     <h3>八爪科技大学 - 本科 - 软件工程专业</h3> 
     <p>2008.02 - 2024.06</p>
 </div>
@@ -24,7 +30,7 @@ permalink: /about-cn/
 
 ## &#xe618; 工作经验
 
-<div alt="cncv-entry-title">
+<div alt="entry-title">
     <h3>软件工程师 - 章小鱼有限公司</h3> 
     <p>2008.03 - 2009.07</p>
 </div>
@@ -34,7 +40,7 @@ permalink: /about-cn/
 - 设计并实现独特的"八爪风格"用户交互体系，包括：动态触手消息传递系统、墨水喷溅情感反应功能、自适应伪装个人主页，以促进全球八爪生物和猫之间的社区参与，使用户互动频率提升210%。
 - 集成 OAuth 认证，与 GitHub 账户进行同步，为 Octocat 和其他在 GitHub 上活跃的八爪生物提供无缝登录和个人资料同步，将认证流程耗时从12.8s缩短至2.3s，获选GitHub年度最佳身份集成案例。
 
-<div class="cncv-entry-title">
+<div class="entry-title">
     <h3>软件开发实习生 - 八爪科技</h3> 
     <p>2008.06 - 2008.08</p>
 </div>
@@ -45,7 +51,7 @@ permalink: /about-cn/
 
 ## &#xe635; 项目经历
 
-<div class="cncv-entry-title">
+<div class="entry-title">
     <h3>GitFlix</h3>
     <a href="https://github.com/YiNNx/cmd-wrapped">github.com/octocat/gitflix</a>
 </div>
@@ -54,7 +60,7 @@ permalink: /about-cn/
 - 实现了一个复杂的推荐算法，分析八爪生物的偏好和观影历史，为八爪生物跨多个流派提供八爪主题的电影推荐，确保了个性化和吸引人的内容发现。
 - 使用 JSON Web Tokens 和 bcrypt 实现用户身份验证和授权，用于安全密码哈希。利用 GitHub Actions 进行持续集成和部署，确保流畅高效的开发工作流程。
 
-<div class="cncv-entry-title">
+<div class="entry-title">
     <h3>OctoGithubber</h3> 
     <a href="https://github.com/YiNNx/cmd-wrapped">github.com/octocat/gitflix</a>
 </div>
@@ -70,3 +76,4 @@ permalink: /about-cn/
 - 出色的沟通和语言能力，无论八爪生物抑或来自不同地区的猫，都能进行有效的团队合作和清晰技术概念沟通。
 - 扎实的软件开发原理，数据结构和算法理解，熟悉计算机底层原理。
 - 在版本控制方面有丰富的经验，熟练管理代码库、解决合并冲突，并促进代码审议。
+
