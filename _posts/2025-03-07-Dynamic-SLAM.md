@@ -56,6 +56,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`TASE`|[SDS-SLAM: VSLAM Fusing Static and Dynamic Semantic Information for Driving Scenarios](https://ieeexplore.ieee.org/abstract/document/11015815)|---|---|
 |2025|`TIM`|[DOG-SLAM: Enhancing Dynamic Visual SLAM Precision Through GMM-Based Dynamic Object Removal and ORB-Boost](https://ieeexplore.ieee.org/abstract/document/10908975/)|---|---|
 |2025|`arXiv`|[DynaGSLAM: Real-Time Gaussian-Splatting SLAM for Online Rendering, Tracking, Motion Predictions of Moving Objects in Dynamic Scenes](https://arxiv.org/pdf/2503.11979)|[![Github stars](https://img.shields.io/github/stars/BlarkLee/DynaGSLAM_official.svg)](https://github.com/BlarkLee/DynaGSLAM_official)|[website](https://blarklee.github.io/dynagslam/)| 
 |2025|`arXiv`|[DynoSAM: Open-Source Smoothing and Mapping Framework for Dynamic SLAM](https://arxiv.org/pdf/2501.11893)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|---|
