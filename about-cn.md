@@ -5,15 +5,15 @@ permalink: /about-cn/
 ---
 
 <!-- CSS 样式引入 -->
-<style>
+<!-- <style>
   @import url("./File/cn-cv/styles/main.css");
   @import url("./File/cn-cv/styles/lapis-cv-serif.css");
-</style>
+</style> -->
 
 # 八爪猫
 
-> <span class="icon">&#xe60f;</span> `(123)456-7890`&emsp;&emsp;
-> <span class="icon">&#xe7ca;</span> `octocat@github.com`&emsp;&emsp;
+> <span class="icon">&#xe60f;</span> `(123)456-7890` &emsp;
+> <span class="icon">&#xe7ca;</span> `octocat@github.com` &emsp;
 > <span class="icon">&#xe600;</span> [octocat](https://github.com/octocat)
 
 <img class="avatar" src="https://avatars.githubusercontent.com/u/583231?v=4">
