@@ -661,7 +661,18 @@ nav {
   }
 }
 
+//cn-cv
+.cncv-entry-title,
+div[alt="cncv-entry-title"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.cncv-icon,
+span[alt="cncv-icon"] {
+    color: var(--color-accent);
+}
 
 // Footer
 .wrapper-footer-desktop {
