@@ -62,9 +62,17 @@ toc: false #true
 |2025|`arXiv`|[DynoSAM: Open-Source Smoothing and Mapping Framework for Dynamic SLAM](https://arxiv.org/pdf/2501.11893)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|---|
 |2025|`CVPR`|[Dynamic Camera Poses and Where to Find Them](https://arxiv.org/pdf/2504.17788)|---|[website](https://research.nvidia.com/labs/dir/dynpose-100k/)<br>[dataset](https://huggingface.co/datasets/nvidia/dynpose-100k)|
 |2025|`arXiv`|[Back on Track: Bundle Adjustment for Dynamic Scene Reconstruction](https://arxiv.org/pdf/2504.14516)|---|[website](https://wrchen530.github.io/projects/batrack/)|
+|2024|`IJRR`|[Multimotion visual odometry](https://journals.sagepub.com/doi/pdf/10.1177/02783649241229095)|---|---|
+|2024|`IROS`|[Visual Perception System for Autonomous Driving](https://arxiv.org/pdf/2303.02257)|---|---|
+|2024|`IROS`|[SDPL-SLAM: Introducing Lines in Dynamic Visual SLAM and Multi-Object Tracking](https://robotics.ntua.gr/wp-content/uploads/sites/2/2024_Manetas_IntroduceLinesInVisualSLAM-MultiObjectTrack_IROS.pdf)|---|---|
+|2024|`RAL`|[DynaMeshSLAM: A Mesh-based Dynamic Visual SLAMMOT Method](https://ieeexplore.ieee.org/abstract/document/10517385/)|---|---|
 |2024|`TIV`|[STS-SLAM: Joint Visual SLAM and Multi-Object Tracking Based on Spatio-Temporal Similarity](https://ieeexplore.ieee.org/abstract/document/10559403/)|---|---|
+|2023|`TITS`|[Fast, Robust, Accurate, Multi-Body Motion Aware SLAM](https://pure.ulster.ac.uk/files/147101806/Fast_Robust_Accurate_Multi_Body_Motion_Aware_SLAM.pdf)|---|---|
 |2023|`TRO`|[Dynam-SLAM: An accurate, robust stereo visual-inertial SLAM method in dynamic environments](https://ieeexplore.ieee.org/abstract/document/9866888/)|---|---|
+|2023|`TIM`|[VIMOT: A tightly coupled estimator for stereo visual-inertial navigation and multiobject tracking](https://www.researchgate.net/profile/Feng-Shaoquan/publication/372044394_VIMOT_A_Tightly-Coupled_Estimator_for_Stereo_Visual-Inertial_Navigation_and_Multi-Object_Tracking/links/6684fb720a25e27fbc1fde01/VIMOT-A-Tightly-Coupled-Estimator-for-Stereo-Visual-Inertial-Navigation-and-Multiobject-Tracking.pdf)|---|---|
+|2022|`TIM`|[SG-SLAM: A real-time RGB-D visual SLAM toward dynamic scenes with semantic and geometric information](https://ieeexplore.ieee.org/abstract/document/9978699/)|---|---|
 |2022|`RAL`|[DynaVINS: A Visual-Inertial SLAM for Dynamic Environments](https://arxiv.org/pdf/2208.11500)|[![Github stars](https://img.shields.io/github/stars/url-kaist/dynaVINS.svg)](https://github.com/url-kaist/dynaVINS)|---|
+|2022|`RAL`|[Twistslam: Constrained slam in dynamic environment](https://arxiv.org/pdf/2202.12384)|---|---|
 |2021|`RAL`|[DynaSLAM II: Tightly-coupled multi-object tracking and SLAM](https://arxiv.org/pdf/2010.07820)|---|---|
 |2021|`Sensor`|[DOE-SLAM: dynamic object enhanced visual SLAM](https://www.mdpi.com/1424-8220/21/9/3091)|---|---|
 |2021|`ICRA`|[DOT: Dynamic object tracking for visual SLAM](https://elib.dlr.de/146127/1/ICRA21_DOT.pdf)|---|---|
@@ -80,6 +88,7 @@ toc: false #true
 |2018|`IROS`|[Estimating metric poses of dynamic objects using monocular visual-inertial fusion](https://arxiv.org/pdf/1808.06753)|---|---|
 |2018|`ECCV`|[Stereo vision-based semantic 3d object and ego-motion tracking for autonomous driving](http://openaccess.thecvf.com/content_ECCV_2018/papers/Peiliang_LI_Stereo_Vision-based_Semantic_ECCV_2018_paper.pdf)|---|---|
 |2018|`ICRA`|[Staticfusion: Background reconstruction for dense rgb-d slam in dynamic environments](https://scholar.archive.org/work/ouzjgiwo5jekffbx6kqiwnhpeq/access/wayback/https://ora.ox.ac.uk/objects/uuid:b06224b2-62dd-459f-bbf7-1352dbbb5dc8/download_file?safe_filename=2018ICRA_scona2.pdf&file_format=application%2Fpdf&type_of_work=Conference+item)|---|---|
+|2018|`IROS`|[DS-SLAM: A semantic visual SLAM towards dynamic environments](https://arxiv.org/pdf/1809.08379)|---|---|
 
 <!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
