@@ -5,6 +5,16 @@
 
 /* Text */
 
+/* 强制隔离所有样式 */
+.about-cn-page {
+  all: initial; 
+  display: block;
+}
+
+.about-cn-page * {
+  all: revert;
+}
+
 a,
 a span {
     font-family: var(--link-font);
