@@ -123,15 +123,20 @@
 .cv-page-container .avatar,
 .cv-page-container img[alt="avatar"] {
     display: block;
+    position: relative;
+    top: 1mm;
+    right: 0;
+    z-index: 9999;
+    float: right;
     object-fit: cover;
     overflow: hidden;
+
     width: var(--avatar-width);
     height: var(--avatar-width);
     border-radius: 50%;
     border: 2px solid var(--border-color);
-    box-shadow: 0 0 0 3px var(--background-primary);
-    margin: 20px auto;
-    float: none !important;
+    box-shadow: 0 0 0 3mm var(--background-primary);
+    margin: 0 0 0 3mm;
 }
 
 .cv-page-container p:has(.avatar, img[alt="avatar"]) {
