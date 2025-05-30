@@ -141,7 +141,7 @@
 
 .cv-page-container p:has(.avatar, img[alt="avatar"]) {
     height: 0;
-    text-align: center;
+    text-align: right;
     padding: 0;
     margin: 0;
 }
