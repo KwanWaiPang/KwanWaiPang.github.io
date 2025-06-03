@@ -15,7 +15,13 @@ If you find this blog is useful, a simple star (<a class="github-button"
   data-show-count="true" 
   aria-label="Star it on GitHub">Star on Github</a>) should be the best affirmation. 😊
 
-* [My Homepage](https://kwanwaipang.github.io/) 
+<!-- * [My Homepage](https://kwanwaipang.github.io/)  -->
+
+[comment]: <> (  <h2 align="center">PAPER</h2>)
+  <h3 align="center">
+  <a href="./about.md">English Version</a> 
+  | <a href="./about-cn.md">中文版</a> 
+  </h3>
 
 <style>
 /* 内联样式隔离 */
