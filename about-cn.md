@@ -15,7 +15,7 @@ permalink: /about-cn/
 <div align="center">
   <table style="border: none; background-color: transparent;">
     <tr align="center">
-      <td style="width: 80%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+      <td style="width: 70%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
 
       <svg class="icon" viewBox="0 0 24 24">
         <path d="M8.2,13.6C7.4,14.1,7,15,7,15.9c0,1.1,0.9,2,2,2c1.1,0,2-0.9,2-2c0-0.9-0.4-1.8-1.2-2.3c-0.3-0.2-0.7-0.3-1.1-0.3
@@ -40,7 +40,7 @@ permalink: /about-cn/
       &emsp;<a href="https://github.com/KwanWaiPang">KwanWaiPang</a>
 
 </td>
-      <td style="width: 10%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
+      <td style="width: 30%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
         <img src="https://kwanwaipang.github.io/Poster_files/Image/Guan_Weipeng.jpg" width="100%" />
       </td>
     </tr>
