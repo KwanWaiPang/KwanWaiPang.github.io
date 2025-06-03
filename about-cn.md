@@ -56,8 +56,8 @@ permalink: /about-cn/
 - 2022.06 ~ 2022.09&emsp;&emsp;&emsp; **TCL科技集团有限公司**   <span style="float:right;">技术顾问（兼职）</span>
   <!-- * 香港大学-TCL人工智能联合研究中心项目——《基于激光雷达及二维码的智能物流机器人定位与导航》； -->
 - 2020.04 - 2020.08&emsp;&emsp;&emsp; **华为技术有限公司** - 网络产品与解决方案 - 创新实验室   <span style="float:right;">解决方案工程师 (特聘实习生)</span>
-- 2019.10 - 2020.01&emsp;&emsp;&emsp; **香港中文大学** - 信息工程系   <span style="float:right;">Research Assistant</span>
-- 2018.10 - 2019.10&emsp;&emsp;&emsp; **中国科学院深圳先进技术研究院** - 先进计算与数字工程研究所 - 多媒体研究中心   <span style="float:right;">Research Assistant</span>
+- 2019.10 - 2020.01&emsp;&emsp;&emsp; **香港中文大学** - 信息工程系   <span style="float:right;">助理研究员</span>
+- 2018.10 - 2019.10&emsp;&emsp;&emsp; **中国科学院深圳先进技术研究院** - 先进计算与数字工程研究所 - 多媒体研究中心   <span style="float:right;">助理研究员</span>
 - 2018.06 - 2018.09&emsp;&emsp;&emsp; **华为技术有限公司** - 中央研究院 - 玻普实验室   <span style="float:right;">技术研究工程师（实习生）</span>
 - 2015.07 - 2015.08&emsp;&emsp;&emsp; **三星电子** - 广州三星通信研究院   <span style="float:right;">“HW”工程师（实习）</span>
 
