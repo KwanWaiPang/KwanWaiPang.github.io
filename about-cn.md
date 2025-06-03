@@ -4,14 +4,19 @@ layout: page
 permalink: /about-cn/
 ---
 
+
+[comment]: <> (  <h2 align="center">PAPER</h2>)
+  <h3 align="center">
+  <a href="./about-cn.md">中文版</a> 
+  | <a href="./about.md">English Version</a> 
+  </h3>
+
+
 <div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 80%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
 
-[中文版](./about-cn.md)|[English Version](./about.md)
-
-</div>
-
-<div class="profile-header">
-  <div class="contact-info">
     <div class="contact-item">
       <svg class="icon" viewBox="0 0 512 512"><path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"/></svg>
       <span>(123)456-7890</span>
@@ -30,9 +35,13 @@ permalink: /about-cn/
     </div>
   </div>
   
-  <div class="profile-image">
-    <img src="https://kwanwaipang.github.io/Poster_files/Image/Guan_Weipeng.jpg" alt="Profile Photo"/>
-  </div>
+</td>
+      <td style="width: 10%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
+        <img src="https://kwanwaipang.github.io/Poster_files/Image/Guan_Weipeng.jpg" width="100%" />
+      </td>
+    </tr>
+  </table>
+
 </div>
 
 ## <svg class="section-icon" viewBox="0 0 512 512"><path d="M496 128v16a8 8 0 0 1-8 8h-24v12c0 6.627-5.373 12-12 12H60c-6.627 0-12-5.373-12-12v-12H24a8 8 0 0 1-8-8v-16a8 8 0 0 1 4.941-7.392l232-88a7.996 7.996 0 0 1 6.118 0l232 88A8 8 0 0 1 496 128zm-24 304H40c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zM96 192v192H60c-6.627 0-12 5.373-12 12v20h416v-20c0-6.627-5.373-12-12-12h-36V192h-64v192h-64V192h-64v192h-64V192H96z"/></svg> 教育经历
@@ -76,7 +85,7 @@ permalink: /about-cn/
 }
 
 .profile-image img {
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: 150px;
   height: 150px;
   object-fit: cover;
