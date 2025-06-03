@@ -7,8 +7,8 @@ permalink: /about-cn/
 
 [comment]: <> (  <h2 align="center">PAPER</h2>)
   <h3 align="center">
-  <a href="/about-cn/">中文版</a> 
-  | <a href="/about/">English Version</a> 
+  <a href="../about-cn/">中文版</a> 
+  | <a href="../about/">English Version</a> 
   </h3>
 
 
