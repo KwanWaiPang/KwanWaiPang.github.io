@@ -52,9 +52,9 @@ permalink: /about-cn/
 
 - **香港大学** - 博士 - 机器人学    <span style="float:right;">2021.09 - 至今</span>
 
-- **华南理工大学** - 学术型硕士（保研） - 控制理论与控制工程   <span style="float:right;">2016.09 - 2019.06</span>
+- **华南理工大学** - 学术型硕士 - 控制理论与控制工程   <span style="float:right;">2016.09 - 2019.06</span>
 
-- **华南理工大学** - 工学学士（自主招生） - 电子科学与技术（电子材料与元器件）  <span style="float:right;">2012.09 - 2016.06</span>
+- **华南理工大学** - 工学学士 - 电子科学与技术（电子材料与元器件）  <span style="float:right;">2012.09 - 2016.06</span>
 
 
 
