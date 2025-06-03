@@ -48,6 +48,38 @@ permalink: /about-cn/
 
 ## <svg class="section-icon" viewBox="0 0 512 512"><path d="M496 128v16a8 8 0 0 1-8 8h-24v12c0 6.627-5.373 12-12 12H60c-6.627 0-12-5.373-12-12v-12H24a8 8 0 0 1-8-8v-16a8 8 0 0 1 4.941-7.392l232-88a7.996 7.996 0 0 1 6.118 0l232 88A8 8 0 0 1 496 128zm-24 304H40c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zM96 192v192H60c-6.627 0-12 5.373-12 12v20h416v-20c0-6.627-5.373-12-12-12h-36V192h-64v192h-64V192h-64v192h-64V192H96z"/></svg> 教育经历
 
+- 
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+  <tr align="center">
+      <td style="width: 60%; border: none; padding: 0.01; background-color: transparent; vertical-align: left;">
+        香港大学-博士-机器人学
+      </td>
+      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
+        2021.09-至今
+      </td>
+    </tr>
+  <tr align="center">
+      <td style="width: 60%; border: none; padding: 0.01; background-color: transparent; vertical-align: left;">
+        华南理工大学-学术型硕士（保研）-控制理论与控制工程
+      </td>
+      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
+        2016.09-2019.06
+      </td>
+    </tr>
+    <tr align="center">
+      <td style="width: 60%; border: none; padding: 0.01; background-color: transparent; vertical-align: left;">
+        华南理工大学-工学学士（自主招生）-电子科学与技术（电子材料与元器件）
+      </td>
+      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
+        2012.09-2016.06
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
 
 ## <svg class="section-icon" viewBox="0 0 512 512"><path d="M320 336c0 8.84-7.16 16-16 16h-96c-8.84 0-16-7.16-16-16v-48H0v144c0 25.6 22.4 48 48 48h416c25.6 0 48-22.4 48-48V288H320v48zm144-208h-80V80c0-25.6-22.4-48-48-48H176c-25.6 0-48 22.4-48 48v48H48c-25.6 0-48 22.4-48 48v80h512v-80c0-25.6-22.4-48-48-48zm-144 0H192V96h128v32z"/></svg> 工作经验
 
