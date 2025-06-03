@@ -52,37 +52,6 @@ permalink: /about-cn/
 - **华南理工大学** - 工学学士（自主招生） - 电子科学与技术（电子材料与元器件）  
   <span style="float:right;">2012.09 - 2016.06</span>
 
-<div align="center">
-  <table style="border: none; background-color: transparent;">
-  <tr>
-      <td style="width: 60%; border: none; padding: 0.01; background-color: transparent; vertical-align: left;">
-        -香港大学-博士-机器人学
-      </td>
-      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
-        2021.09-至今
-      </td>
-    </tr>
-  <tr>
-      <td style="width: 60%; border: none; padding: 0.01; background-color: transparent; vertical-align: left;">
-        -华南理工大学-学术型硕士（保研）-控制理论与控制工程
-      </td>
-      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
-        2016.09-2019.06
-      </td>
-    </tr>
-    <tr>
-      <td style="width: 60%; border: none; padding: 0.01; background-color: transparent; vertical-align: left;">
-        -华南理工大学-工学学士（自主招生）-电子科学与技术（电子材料与元器件）
-      </td>
-      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: right;">
-        2012.09-2016.06
-      </td>
-    </tr>
-  </table>
-  <figcaption>
-  </figcaption>
-</div>
-
 
 
 ## <svg class="section-icon" viewBox="0 0 512 512"><path d="M320 336c0 8.84-7.16 16-16 16h-96c-8.84 0-16-7.16-16-16v-48H0v144c0 25.6 22.4 48 48 48h416c25.6 0 48-22.4 48-48V288H320v48zm144-208h-80V80c0-25.6-22.4-48-48-48H176c-25.6 0-48 22.4-48 48v48H48c-25.6 0-48 22.4-48 48v80h512v-80c0-25.6-22.4-48-48-48zm-144 0H192V96h128v32z"/></svg> 工作经验
