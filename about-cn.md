@@ -4,11 +4,15 @@ layout: page
 permalink: /about-cn/
 ---
 
+## 版权声明
+
+博客文章是本人原创文章，存档于_posts 文件夹下，版权归本人所有，转载请与本人联系获得授权许可。
+
 
 [comment]: <> (  <h2 align="center">PAPER</h2>)
   <h3 align="center">
-  <a href="../about-cn/">中文版</a> 
-  | <a href="../about/">English Version</a> 
+  <a href="/about-cn/">中文版</a> 
+  | <a href="/about/">English Version</a> 
   </h3>
 
 

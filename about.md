@@ -19,8 +19,8 @@ If you find this blog is useful, a simple star (<a class="github-button"
 
 [comment]: <> (  <h2 align="center">PAPER</h2>)
   <h3 align="center">
-  <a href="../about/">English Version</a> 
-  | <a href="../about-cn/">中文版</a> 
+  <a href="/about/">English Version</a> 
+  | <a href="/about-cn/">中文版</a> 
   </h3>
 
 <style>
