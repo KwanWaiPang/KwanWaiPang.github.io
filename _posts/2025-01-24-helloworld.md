@@ -40,7 +40,7 @@ toc: true
 # 插入图片与动图
 
 <div align="center">
-  <img src="https://kwanwaipang.github.io/Poster_files/md_blog/yijiansanlian.gif" width="60%" />
+  <img src="https://kwanwaipang.github.io/Poster_files/md_blog/yijiansanlian.gif" width="80%" />
 <figcaption>  
 图片标题
 </figcaption>
