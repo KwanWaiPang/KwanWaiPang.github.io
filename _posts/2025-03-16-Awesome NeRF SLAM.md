@@ -26,6 +26,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[LRSLAM: Low-rank Representation of Signed Distance Fields in Dense Visual SLAM System](https://arxiv.org/pdf/2506.10567)|---|---|
 |2025|`arXiv`|[Joint Optimization of Neural Radiance Fields and Continuous Camera Motion from a Monocular Video](https://arxiv.org/pdf/2504.19819)|[![Github stars](https://img.shields.io/github/stars/HoangChuongNguyen/cope-nerf.svg)](https://github.com/HoangChuongNguyen/cope-nerf)|---|
 
 <!-- |---|`arXiv`|---|---|---| -->
