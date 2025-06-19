@@ -2,7 +2,7 @@
 layout: post
 title: "论文阅读笔记之——《Splat-LOAM: Gaussian Splatting LiDAR Odometry and Mapping》"
 date:   2025-06-19
-tags: [SLAM]
+tags: [SLAM, LiDAR]
 comments: true
 author: kwanwaipang
 toc: true
