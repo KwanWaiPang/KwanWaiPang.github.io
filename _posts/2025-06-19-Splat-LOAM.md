@@ -28,6 +28,16 @@ toc: true
 
 # 理论解读
 
+本文提出的就是一个基于lidar以及2DGS场景表征的SLAM系统。并且是纯lidar没有跟image或者IMU相结合。
+系统的框架如下图所示
+<div align="center">
+  <img src="../images/微信截图_20250619190821.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+直观来看应该就是把lidar点云投影成image，然后走2DGS一套。个人觉得跟最开始的lidar-based 3DGS《Drivinggaussian: Composite gaussian splatting for surrounding dynamic autonomous driving scenes》应该是很像的~
+对比的方法则是用基于nerf的或者voxelbox的，没有跟最经典的算法进行对比。
+
 # 实验测试
 
 ## 安装配置
