@@ -77,6 +77,7 @@ toc: true
 |2019|`ICCV`|[Deepvcp: An end-to-end deep neural network for point cloud registration](https://openaccess.thecvf.com/content_ICCV_2019/papers/Lu_DeepVCP_An_End-to-End_Deep_Neural_Network_for_Point_Cloud_Registration_ICCV_2019_paper.pdf)|---|---|
 |2019|`CVPR`|[Flownet3d: Learning scene flow in 3d point clouds](http://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_FlowNet3D_Learning_Scene_Flow_in_3D_Point_Clouds_CVPR_2019_paper.pdf)|---|---|
 |2019|`IROS`|[Rangenet++: Fast and accurate lidar semantic segmentation](https://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/milioto2019iros.pdf)|---|---|
+|2019|`ACM Transactions on Graphics`|[Dynamic graph cnn for learning on point clouds](https://dl.acm.org/doi/pdf/10.1145/3326362)|---|---|
 |2018|`ECCV`|[3dfeat-net: Weakly supervised local 3d features for point cloud registration](http://openaccess.thecvf.com/content_ECCV_2018/papers/Zi_Jian_Yew_3DFeat-Net_Weakly_Supervised_ECCV_2018_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/yewzijian/3DFeatNet.svg)](https://github.com/yewzijian/3DFeatNet)|---|
 |2017|`NIPS`|[Pointnet++: Deep hierarchical feature learning on point sets in a metric space](https://proceedings.neurips.cc/paper_files/paper/2017/file/d8bf84be3800d12f74d8b05e9b89836f-Paper.pdf)|---|---|
 |2017|`CVPR`|[Pointnet: Deep learning on point sets for 3d classification and segmentation](https://openaccess.thecvf.com/content_cvpr_2017/papers/Qi_PointNet_Deep_Learning_CVPR_2017_paper.pdf)|---|---|
@@ -225,6 +226,23 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
   </figcaption>
 </div>
 
+# DELO: Deep Evidential LiDAR Odometry using Partial Optimal Transpor
+则是采用将点云降采样为固定的数量的点，然后用graph cnn来编码获取特征。然后也用transformer进行数据关联，然后再通过一个网络来估算变换以及用GTSAM来优化姿态：
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702175159.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702175338.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 ## Pointconv: Deep convolutional networks on 3d point clouds
 
