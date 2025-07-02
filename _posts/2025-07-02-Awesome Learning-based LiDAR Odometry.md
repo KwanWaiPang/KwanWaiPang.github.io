@@ -69,6 +69,7 @@ toc: true
 |2024|`arXiv`|[A Consistency-Aware Spot-Guided Transformer for Versatile and Hierarchical Point Cloud Registration](https://arxiv.org/pdf/2410.10295)|[![Github stars](https://img.shields.io/github/stars/RenlangHuang/CAST.svg)](https://github.com/RenlangHuang/CAST)|---|
 |2020|`CVPR`|[3dregnet: A deep neural network for 3d point registration](https://openaccess.thecvf.com/content_CVPR_2020/papers/Pais_3DRegNet_A_Deep_Neural_Network_for_3D_Point_Registration_CVPR_2020_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/3DVisionISR/3DRegNet.svg)](https://github.com/3DVisionISR/3DRegNet)|---|
 |2020|`CVPR`|[P2b: Point-to-box network for 3d object tracking in point clouds](http://openaccess.thecvf.com/content_CVPR_2020/papers/Qi_P2B_Point-to-Box_Network_for_3D_Object_Tracking_in_Point_Clouds_CVPR_2020_paper.pdf)|---|---|
+|2019|`CVPR`|[Pointconv: Deep convolutional networks on 3d point clouds](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wu_PointConv_Deep_Convolutional_Networks_on_3D_Point_Clouds_CVPR_2019_paper.pdf)|---|---|
 |2019|`ICCV`|[Meteornet: Deep learning on dynamic 3d point cloud sequences](https://openaccess.thecvf.com/content_ICCV_2019/papers/Liu_MeteorNet_Deep_Learning_on_Dynamic_3D_Point_Cloud_Sequences_ICCV_2019_paper.pdf)|---|---|
 |2019|`ICCV`|[Deep closest point: Learning representations for point cloud registration](https://openaccess.thecvf.com/content_ICCV_2019/papers/Wang_Deep_Closest_Point_Learning_Representations_for_Point_Cloud_Registration_ICCV_2019_paper.pdf)|---|---|
 |2019|`CVPR`|[Pointnetlk: Robust & efficient point cloud registration using pointnet](https://openaccess.thecvf.com/content_CVPR_2019/papers/Aoki_PointNetLK_Robust__Efficient_Point_Cloud_Registration_Using_PointNet_CVPR_2019_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/hmgoforth/PointNetLK.svg)](https://github.com/hmgoforth/PointNetLK)|---|
@@ -185,6 +186,8 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 </div>
 
 ## DiffLO: Semantic-Aware LiDAR Odometry with Diffusion-Based Refinement
+直观理解为将MLP或者ICP对coarse initial pose refine的过程用Diffusion来做
+（the first diffusion-based LiDAR odometry network）
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
@@ -201,4 +204,27 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
   </figcaption>
 </div>
 
+点云的特征提取则是采用PointConv。而对于图中的语义感知模块，在推理的时候都需要retraining
+
 ## Translo: A window-based masked point transformer framework for large-scale lidar odometry
+这个工作则是基于transformer的lidar odometry（the first transformer-based LiDAR odometry network）
+而点云则是也是投影到2D 图像平面来处理的`project point clouds onto a cylindrical surface to get pseudo images`
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702173745.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702173730.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+
+## Pointconv: Deep convolutional networks on 3d point clouds
+
