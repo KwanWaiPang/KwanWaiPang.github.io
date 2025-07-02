@@ -31,11 +31,17 @@ toc: true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
-|2025|`arXiv`|[LIR-LIVO: A Lightweight, Robust LiDAR/Vision/Inertial Odometry with Illumination-Resilient Deep Features](https://arxiv.org/pdf/2502.08676)|[![Github stars](https://img.shields.io/github/stars/IF-A-CAT/LIR-LIVO.svg)](https://github.com/IF-A-CAT/LIR-LIVO)|Fast-LIVO+AirSLAM| 
+|2025|`IEEE Sensor Journal`|[A Generative Hierarchical Optimization Framework for LiDAR Odometry Using Conditional Diffusion Models](https://ieeexplore.ieee.org/abstract/document/11026785/)|---|---|
+|2025|`CVPR`|[DiffLO: Semantic-Aware LiDAR Odometry with Diffusion-Based Refinement](https://openaccess.thecvf.com/content/CVPR2025/papers/Huang_DiffLO_Semantic-Aware_LiDAR_Odometry_with_Diffusion-Based_Refinement_CVPR_2025_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/HyTree7/DiffLO.svg)](https://github.com/HyTree7/DiffLO)|---| 
+|2025|`arXiv`|[LIR-LIVO: A Lightweight, Robust LiDAR/Vision/Inertial Odometry with Illumination-Resilient Deep Features](https://arxiv.org/pdf/2502.08676)|[![Github stars](https://img.shields.io/github/stars/IF-A-CAT/LIR-LIVO.svg)](https://github.com/IF-A-CAT/LIR-LIVO)|Fast-LIVO+AirSLAM|
+|2024|`arXiv`|[LiDAR Inertial Odometry And Mapping Using Learned Registration-Relevant Features](https://arxiv.org/pdf/2410.02961)|[![Github stars](https://img.shields.io/github/stars/neu-autonomy/FeatureLIOM.svg)](https://github.com/neu-autonomy/FeatureLIOM)|---|
+|2024|`IEEE 100th Vehicular Technology Conference`|[LiDAR-OdomNet: LiDAR Odometry Network Using Feature Fusion Based on Attention](https://www.researchgate.net/profile/Parvez-Alam-20/publication/387812406_LiDAR-OdomNet_LiDAR_Odometry_Network_Using_Feature_Fusion_Based_on_Attention/links/677e43b8fb021f2a47e1e77e/LiDAR-OdomNet-LiDAR-Odometry-Network-Using-Feature-Fusion-Based-on-Attention.pdf)|---|---| 
 |2024|`IROS`|[LiDAR-Visual-Inertial Tightly-coupled Odometry with Adaptive Learnable Fusion Weights](https://comrob.fel.cvut.cz/papers/iros24loc.pdf)|---|F-LOAM+VINS-Mono|
 |2024|`TRO`|[PIN-SLAM: LiDAR SLAM Using a Point-Based Implicit Neural Representation for Achieving Global Map Consistency](https://arxiv.org/pdf/2401.09101v1)|[![Github stars](https://img.shields.io/github/stars/PRBonn/PIN_SLAM.svg)](https://github.com/PRBonn/PIN_SLAM)|---| 
 |2024|`AAAI`|[DeepPointMap: Advancing LiDAR SLAM with Unified Neural Descriptors](https://arxiv.org/abs/2312.02684)|[![Github stars](https://img.shields.io/github/stars/ZhangXiaze/DeepPointMap.svg)](https://github.com/ZhangXiaze/DeepPointMap)|---| 
 |2023|`ICCV`|[NeRF-LOAM: Neural Implicit Representation for Large-Scale Incremental LiDAR Odometry and Mapping](https://arxiv.org/pdf/2303.10709)|[![Github stars](https://img.shields.io/github/stars/JunyuanDeng/NeRF-LOAM.svg)](https://github.com/JunyuanDeng/NeRF-LOAM)|---| 
+*|2023|`ICCV`|[DELO: Deep Evidential LiDAR Odometry using Partial Optimal Transport](https://openaccess.thecvf.com/content/ICCV2023W/UnCV/papers/Ali_DELO_Deep_Evidential_LiDAR_Odometry_Using_Partial_Optimal_Transport_ICCVW_2023_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/saali14/DELO.svg)](https://github.com/saali14/DELO)|[website](https://skazizali.com/delo.github.io/)|
+|2023|`AAAI`|[Translo: A window-based masked point transformer framework for large-scale lidar odometry](https://ojs.aaai.org/index.php/AAAI/article/download/25256/25028)|[![Github stars](https://img.shields.io/github/stars/IRMVLab/TransLO.svg)](https://github.com/IRMVLab/TransLO)|---| 
 |2023|`RAL`|[LONER: LiDAR Only Neural Representations for Real-Time SLAM](https://arxiv.org/abs/2309.04937)|[![Github stars](https://img.shields.io/github/stars/umautobots/LONER.svg)](https://github.com/umautobots/LONER)|---| 
 |2023|`TIV`|[HPPLO-Net: Unsupervised LiDAR Odometry Using a Hierarchical Point-to-Plane Solver](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10160144&tag=1)|[![Github stars](https://img.shields.io/github/stars/IMRL/HPPLO-Net.svg)](https://github.com/IMRL/HPPLO-Net)|---| 
 |2022|`TPAMI`|[Efficient 3D Deep LiDAR Odometry](https://arxiv.org/abs/2111.02135)|[![Github stars](https://img.shields.io/github/stars/IRMVLab/EfficientLO-Net.svg)](https://github.com/IRMVLab/EfficientLO-Net)|---| 
@@ -60,6 +66,7 @@ toc: true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2024|`arXiv`|[A Consistency-Aware Spot-Guided Transformer for Versatile and Hierarchical Point Cloud Registration](https://arxiv.org/pdf/2410.10295)|[![Github stars](https://img.shields.io/github/stars/RenlangHuang/CAST.svg)](https://github.com/RenlangHuang/CAST)|---|
 |2020|`CVPR`|[3dregnet: A deep neural network for 3d point registration](https://openaccess.thecvf.com/content_CVPR_2020/papers/Pais_3DRegNet_A_Deep_Neural_Network_for_3D_Point_Registration_CVPR_2020_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/3DVisionISR/3DRegNet.svg)](https://github.com/3DVisionISR/3DRegNet)|---|
 |2020|`CVPR`|[P2b: Point-to-box network for 3d object tracking in point clouds](http://openaccess.thecvf.com/content_CVPR_2020/papers/Qi_P2B_Point-to-Box_Network_for_3D_Object_Tracking_in_Point_Clouds_CVPR_2020_paper.pdf)|---|---|
 |2019|`ICCV`|[Meteornet: Deep learning on dynamic 3d point cloud sequences](https://openaccess.thecvf.com/content_ICCV_2019/papers/Liu_MeteorNet_Deep_Learning_on_Dynamic_3D_Point_Cloud_Sequences_ICCV_2019_paper.pdf)|---|---|
@@ -176,3 +183,22 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 <figcaption>  
 </figcaption>
 </div>
+
+## DiffLO: Semantic-Aware LiDAR Odometry with Diffusion-Based Refinement
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702171957.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702172010.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+## Translo: A window-based masked point transformer framework for large-scale lidar odometry
