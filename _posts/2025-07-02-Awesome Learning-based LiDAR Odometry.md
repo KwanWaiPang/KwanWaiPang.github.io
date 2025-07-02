@@ -186,6 +186,25 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 </figcaption>
 </div>
 
+## Translo: A window-based masked point transformer framework for large-scale lidar odometry
+这个工作则是基于transformer的lidar odometry（the first transformer-based LiDAR odometry network）
+而点云则是也是投影到2D 图像平面来处理的`project point clouds onto a cylindrical surface to get pseudo images`
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702173745.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250702173730.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
 ## DiffLO: Semantic-Aware LiDAR Odometry with Diffusion-Based Refinement
 直观理解为将MLP或者ICP对coarse initial pose refine的过程用Diffusion来做
 （the first diffusion-based LiDAR odometry network）
@@ -207,24 +226,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 
 点云的特征提取则是采用PointConv。而对于图中的语义感知模块，在推理的时候都需要retraining
 
-## Translo: A window-based masked point transformer framework for large-scale lidar odometry
-这个工作则是基于transformer的lidar odometry（the first transformer-based LiDAR odometry network）
-而点云则是也是投影到2D 图像平面来处理的`project point clouds onto a cylindrical surface to get pseudo images`
-
-<div align="center">
-  <table style="border: none; background-color: transparent;">
-    <tr align="center">
-      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702173745.png" width="100%" />
-      </td>
-      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702173730.png" width="100%" />
-      </td>
-    </tr>
-  </table>
-  <figcaption>
-  </figcaption>
-</div>
+## Pointconv: Deep convolutional networks on 3d point clouds
 
 # DELO: Deep Evidential LiDAR Odometry using Partial Optimal Transpor
 则是采用将点云降采样为固定的数量的点，然后用graph cnn来编码获取特征。然后也用transformer进行数据关联，然后再通过一个网络来估算变换以及用GTSAM来优化姿态：
@@ -244,5 +246,14 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
   </figcaption>
 </div>
 
-## Pointconv: Deep convolutional networks on 3d point clouds
+## PWCLO-Net: Deep LiDAR Odometry in 3D Point Clouds Using Hierarchical Embedding Mask Optimization
+直接作用在点云上的
 
+<div align="center">
+  <img src="../images/微信截图_20250702180135.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+## LO-Net: Deep Real-time Lidar Odometry
+这个工作也是直接作用在点云上的（point normal vectors）
