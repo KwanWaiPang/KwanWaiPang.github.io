@@ -31,7 +31,7 @@ toc: true
 本文提出的就是一个基于lidar以及2DGS场景表征的SLAM系统。并且是纯lidar没有跟image或者IMU相结合。
 系统的框架如下图所示
 <div align="center">
-  <img src="../images/微信截图_20250619190821.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250619190821.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -121,7 +121,7 @@ python3 run.py mesh <path/to/result/folder>
 * `.ply`文件拉到在线网站进行可视化:
 
 <div align="center">
-  <img src="../images/微信截图_20250619164649.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250619164649.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>

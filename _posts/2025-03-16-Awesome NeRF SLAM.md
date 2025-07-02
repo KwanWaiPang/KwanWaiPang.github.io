@@ -28,6 +28,14 @@ toc: false #true
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`arXiv`|[LRSLAM: Low-rank Representation of Signed Distance Fields in Dense Visual SLAM System](https://arxiv.org/pdf/2506.10567)|---|---|
 |2025|`arXiv`|[Joint Optimization of Neural Radiance Fields and Continuous Camera Motion from a Monocular Video](https://arxiv.org/pdf/2504.19819)|[![Github stars](https://img.shields.io/github/stars/HoangChuongNguyen/cope-nerf.svg)](https://github.com/HoangChuongNguyen/cope-nerf)|---|
+|2024|`RAL`|[N3-Mapping: Normal Guided Neural Non-Projective Signed Distance Fields for Large-scale 3D Mapping](https://arxiv.org/abs/2401.03412)|[![Github stars](https://img.shields.io/github/stars/tiev-tongji/N3-Mapping.svg)](https://github.com/tiev-tongji/N3-Mapping)|---| 
+|2024|`TRO`|[PIN-SLAM: LiDAR SLAM Using a Point-Based Implicit Neural Representation for Achieving Global Map Consistency](https://arxiv.org/pdf/2401.09101v1)|[![Github stars](https://img.shields.io/github/stars/PRBonn/PIN_SLAM.svg)](https://github.com/PRBonn/PIN_SLAM)|---| 
+|2024|`AAAI`|[DeepPointMap: Advancing LiDAR SLAM with Unified Neural Descriptors](https://arxiv.org/abs/2312.02684)|[![Github stars](https://img.shields.io/github/stars/ZhangXiaze/DeepPointMap.svg)](https://github.com/ZhangXiaze/DeepPointMap)|---| 
+|2024|`ICRA`|[Towards Large-Scale Incremental Dense Mapping using Robot-centric Implicit Neural Representation](https://arxiv.org/pdf/2306.10472)|[![Github stars](https://img.shields.io/github/stars/HITSZ-NRSL/RIM.svg)](https://github.com/HITSZ-NRSL/RIM)|---| 
+|2024|`CVPR`|[3D LiDAR Mapping in Dynamic Environments using a 4D Implicit Neural Representation](https://www.ipb.uni-bonn.de/pdfs/zhong2024cvpr.pdf)|[![Github stars](https://img.shields.io/github/stars/PRBonn/4dNDF.svg)](https://github.com/PRBonn/4dNDF)|---| 
+|2023|`ICRA`|[SHINE-Mapping: Large-Scale 3D Mapping Using Sparse Hierarchical Implicit NEural Representations](https://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/zhong2023icra.pdf)|[![Github stars](https://img.shields.io/github/stars/PRBonn/SHINE_mapping.svg)](https://github.com/PRBonn/SHINE_mapping)|---| 
+|2023|`RAL`|[LONER: LiDAR Only Neural Representations for Real-Time SLAM](https://arxiv.org/abs/2309.04937)|[![Github stars](https://img.shields.io/github/stars/umautobots/LONER.svg)](https://github.com/umautobots/LONER)|---| 
+|2023|`ICCV`|[NeRF-LOAM: Neural Implicit Representation for Large-Scale Incremental LiDAR Odometry and Mapping](https://arxiv.org/pdf/2303.10709)|[![Github stars](https://img.shields.io/github/stars/JunyuanDeng/NeRF-LOAM.svg)](https://github.com/JunyuanDeng/NeRF-LOAM)|---| 
 
 <!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
