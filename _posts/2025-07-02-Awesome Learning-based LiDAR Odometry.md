@@ -46,6 +46,7 @@ toc: true
 |2020|`IROS`|[DMLO: Deep Matching LiDAR Odometry](https://arxiv.org/pdf/2004.03796)|---|---|
 |2019|`IROS`|[Deeppco: End-to-end point cloud odometry through deep parallel neural network](https://arxiv.org/pdf/1910.11088)|---|---|
 |2019|`CVPR`|[Lo-net: Deep real-time lidar odometry](https://openaccess.thecvf.com/content_CVPR_2019/papers/Li_LO-Net_Deep_Real-Time_Lidar_Odometry_CVPR_2019_paper.pdf)|---|---|
+|2019|`CVPR`|[L3-net: Towards learning based lidar localization for autonomous driving](http://openaccess.thecvf.com/content_CVPR_2019/papers/Lu_L3-Net_Towards_Learning_Based_LiDAR_Localization_for_Autonomous_Driving_CVPR_2019_paper.pdf)|---|---|
 |2018|`IEEE International Conference on Autonomous Robot Systems and Competitions`|[CNN for IMU assisted odometry estimation using velodyne LiDAR](https://arxiv.org/pdf/1712.06352)|---|---|
 |2016|`RSS workshop`|[Deep learning for laser based odometry estimation](https://nicolaia.github.io/papers/rss_16_workshop.pdf)|---|---|
 
@@ -122,4 +123,14 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 </div>
 
 
+## Self-supervised Learning of LiDAR Odometry for Robotic Applications
+关键点：
+* no labeled or ground-truth data is required
+* applicable to a wide range of environments and sensor modalities without requiring any network or loss function adjustments
+* 6-DOF pose, being able to operate in real-time on a mobile-CPU.
 
+<div align="center">
+  <img src="../images/微信截图_20250702155443.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
