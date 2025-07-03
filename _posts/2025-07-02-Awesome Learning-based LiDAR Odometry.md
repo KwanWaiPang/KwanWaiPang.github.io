@@ -13,8 +13,9 @@ author: kwanwaipang
 # 引言
 
 本博文对基于learning的lidar odometry（包括lidar，lidar+IMU等）进行调研，并对一些经典的工作进行阅读。
-本博文仅供本人学习记录用~
 
+
+本博文仅供本人学习记录用~
 
 
 * 目录
@@ -249,7 +250,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 </div>
 
 ## PWCLO-Net: Deep LiDAR Odometry in 3D Point Clouds Using Hierarchical Embedding Mask Optimization
-直接作用在点云上的
+这个工作是直接作用在点云上的
 
 <div align="center">
   <img src="../images/微信截图_20250702180135.png" width="100%" />
