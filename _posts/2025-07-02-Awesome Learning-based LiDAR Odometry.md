@@ -231,6 +231,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 
 ## Pointconv: Deep convolutional networks on 3d point clouds
 
+
 ## DELO: Deep Evidential LiDAR Odometry using Partial Optimal Transpor
 则是采用将点云降采样为固定的数量的点，然后用graph cnn来编码获取特征。然后也用transformer进行数据关联，然后再通过一个网络来估算变换以及用GTSAM来优化姿态：
 
@@ -250,7 +251,15 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 </div>
 
 ## PWCLO-Net: Deep LiDAR Odometry in 3D Point Clouds Using Hierarchical Embedding Mask Optimization
-这个工作是直接作用在点云上的
+这个工作是直接作用在点云上的(处理原始点云的思路参考Pointnet++).通过计算两帧点云的a weighted soft correspondence
+
+通过一个 internal trainable embedding mask来滤除遮挡点云或者动态点云。
+
+<div align="center">
+  <img src="../images/微信截图_20250703133144.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 <div align="center">
   <img src="../images/微信截图_20250702180135.png" width="100%" />
@@ -258,14 +267,18 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 </figcaption>
 </div>
 
-## LO-Net: Deep Real-time Lidar Odometry
-这个工作也是直接作用在点云上的（point normal vectors）
+## Pointnet++: Deep hierarchical feature learning on point sets in a metric space
 
-## LiDAR-OdomNet: LiDAR Odometry Network Using Feature Fusion Based on Attention
-
-
-## LiDAR Inertial Odometry And Mapping Using Learned Registration-Relevant Features
 
 
 
 ## A Consistency-Aware Spot-Guided Transformer for Versatile and Hierarchical Point Cloud Registration
+
+此处点云的预处理就是用的Kpconv，然后通过transformer以及coarse-to-fine matching network来计算两帧点云的相关性（如变换矩阵）
+<div align="center">
+  <img src="../images/微信截图_20250703161255.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+## Kpconv: Flexible and deformable convolution for point clouds
