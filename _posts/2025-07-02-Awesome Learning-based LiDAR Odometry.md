@@ -231,6 +231,42 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 
 ## Pointconv: Deep convolutional networks on 3d point clouds
 
+PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并对学习到的权重采用inverse density scale来补偿非均匀采样。
+可以看成是2D图像的卷积扩展到3D点云，采用MLP来实现`density re-weighted convolution`同时通过`memory efficient`的实现让其可以易于拓展。
+
+* `treat convolution kernels as nonlinear functions of the local coordinates of 3D points comprised of weight and density functions. `
+* `perform convolution on 3D point clouds with non-uniform sampling`
+* `PointConv involves taking the positions of point clouds as input and learning an MLP to approximate a weight function, as well as applying a inverse density scale on the learned weights to compensate the non-uniform sampling.`
+
+对于一张2D图像，其可以展开为2D的离散网格阵列，对应的卷积可以看成如下表达：
+
+<div align="center">
+  <img src="../images/微信截图_20250704111951.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于每个CNN的filter都是一个固定的小区域（比如3x3或者5x5等）
+
+而对于点云数据，其是一系列3D点，每个点包含了xyz的位置向量以及对应的特征（比如颜色、表面法线等）。
+相比起2D图像而言，点云的形状更加的灵活，其不在是在固定的网格中的点，而是可以是任意的连续值。因此传统的离散卷积将不可以直接用于点云上。而本文所提出的PointConv则是回归到3D卷积的连续版本上：
+
+<div align="center">
+  <img src="../images/微信截图_20250704113008.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而点云可以看成是连续3D空间的非均匀采样：
+
+<div align="center">
+  <img src="../images/微信截图_20250704113106.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
 
 ## DELO: Deep Evidential LiDAR Odometry using Partial Optimal Transpor
 则是采用将点云降采样为固定的数量的点，然后用graph cnn来编码获取特征。然后也用transformer进行数据关联，然后再通过一个网络来估算变换以及用GTSAM来优化姿态：
