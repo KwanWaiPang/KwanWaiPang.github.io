@@ -108,10 +108,10 @@ LONet是首个基于learning的lidar odometry，依赖于CNN的拟合能力。�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702152547.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702152547.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702152557.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702152557.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -127,7 +127,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 将所有的lidar信息编码成2D的图像（如下图所示），进而可以通过CNN来提取feature以及局部的相似性，进而计算出scans之间的数据关联。
 
 <div align="center">
-  <img src="../images/微信截图_20250702151849.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702151849.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -135,7 +135,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 而对于所获得的correspondence，也会额外估算其对应的权重，而对于获得的这些点云对（ matched pairs）再通过SVD来计算姿态变换。直观来看，有点像基于learning的`point cloud registration`+SVD进而实现lidar-based odometry.
 
 <div align="center">
-  <img src="../images/微信截图_20250702144758.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702144758.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -155,7 +155,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 而本文采用的是第一种。
 
 <div align="center">
-  <img src="../images/微信截图_20250702155443.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702155443.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -167,10 +167,10 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702162022.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702162022.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702162030.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702162030.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -184,7 +184,7 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
 针对点云表达、数据关联、（动态点云）、如何提取有效的信息这四个问题，分别提出对应的模块针对处理。
 
 <div align="center">
-  <img src="../images/微信截图_20250702163256.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702163256.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -197,10 +197,10 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702173745.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702173745.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702173730.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702173730.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -216,10 +216,10 @@ DMLO在框架中明确强制执行几何约束,将6DoF姿态估计分为两个�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702171957.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702171957.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702172010.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702172010.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -241,7 +241,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 对于一张2D图像，其可以展开为2D的离散网格阵列，对应的卷积可以看成如下表达：
 
 <div align="center">
-  <img src="../images/微信截图_20250704111951.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704111951.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -252,7 +252,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 相比起2D图像而言，点云的形状更加的灵活，其不在是在固定的网格中的点，而是可以是任意的连续值。因此传统的离散卷积将不可以直接用于点云上。而本文所提出的PointConv则是回归到3D卷积的连续版本上：
 
 <div align="center">
-  <img src="../images/微信截图_20250704113008.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704113008.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -260,7 +260,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 而点云可以看成是连续3D空间的非均匀采样：
 
 <div align="center">
-  <img src="../images/微信截图_20250704113106.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704113106.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -269,7 +269,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 进一步原理如下图3所示：
 
 <div align="center">
-  <img src="../images/微信截图_20250704134518.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704134518.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -283,10 +283,10 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702175159.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702175159.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250702175338.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702175338.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -300,13 +300,13 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 通过一个 internal trainable embedding mask来滤除遮挡点云或者动态点云。
 
 <div align="center">
-  <img src="../images/微信截图_20250703133144.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250703133144.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
 
 <div align="center">
-  <img src="../images/微信截图_20250702180135.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250702180135.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -316,7 +316,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 在PointNet的基础上加了一个hierarchical structure
 
 <div align="center">
-  <img src="../images/微信截图_20250704140443.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704140443.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -324,7 +324,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 而PointNet的架构则是如下：
 
 <div align="center">
-  <img src="../images/微信截图_20250704140600.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704140600.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -334,7 +334,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 
 此处点云的预处理就是用的Kpconv，然后通过transformer以及coarse-to-fine matching network来计算两帧点云的相关性（如变换矩阵）
 <div align="center">
-  <img src="../images/微信截图_20250703161255.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250703161255.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -346,10 +346,10 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250704142749.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704142749.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250704142800.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704142800.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -360,7 +360,7 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 
 下图是CNN与Kpconv的对比：
 <div align="center">
-  <img src="../images/微信截图_20250704142308.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250704142308.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
