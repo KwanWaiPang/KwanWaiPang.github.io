@@ -313,7 +313,21 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 
 ## Pointnet++: Deep hierarchical feature learning on point sets in a metric space
 
+在PointNet的基础上加了一个hierarchical structure
 
+<div align="center">
+  <img src="../images/微信截图_20250704140443.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而PointNet的架构则是如下：
+
+<div align="center">
+  <img src="../images/微信截图_20250704140600.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 ## A Consistency-Aware Spot-Guided Transformer for Versatile and Hierarchical Point Cloud Registration
