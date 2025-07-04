@@ -2,7 +2,7 @@
 layout: post
 title: "Paper Survey之——Awesome Learning-based LiDAR Odometry"
 date:   2025-07-02
-tags: [SLAM，LiDAR]
+tags: [SLAM,LiDAR]
 comments: true
 author: kwanwaipang
 # toc: true
@@ -340,3 +340,5 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 </div>
 
 ## Kpconv: Flexible and deformable convolution for point clouds
+
+
