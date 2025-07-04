@@ -340,5 +340,28 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 </div>
 
 ## Kpconv: Flexible and deformable convolution for point clouds
+收到image-based CNN的启发，对于一系列的kernel point定义一个kernel weight区域。如下图所示
 
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250704142749.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20250704142800.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+相当于kernel weight是由点来携带的，类似于input features，而其影响的区域则是由一个相关的函数来定义。
+
+下图是CNN与Kpconv的对比：
+<div align="center">
+  <img src="../images/微信截图_20250704142308.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
