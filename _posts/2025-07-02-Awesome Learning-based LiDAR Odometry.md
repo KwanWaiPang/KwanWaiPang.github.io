@@ -265,8 +265,16 @@ PointConv将点云的位置(xyz)作为输入，用MLP来学习权重函数，并
 </figcaption>
 </div>
 
+而本文的关键点其实就是用MLP来实现上式中的权重函数W与3D坐标的关联。而对上式中的逆密度函数S则是通过a kernelized density estimation+MLP来近似。
+进一步原理如下图3所示：
 
+<div align="center">
+  <img src="../images/微信截图_20250704134518.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
+而PointConv中MLP的权重则是在多有的点云间share weight的。
 
 ## DELO: Deep Evidential LiDAR Odometry using Partial Optimal Transpor
 则是采用将点云降采样为固定的数量的点，然后用graph cnn来编码获取特征。然后也用transformer进行数据关联，然后再通过一个网络来估算变换以及用GTSAM来优化姿态：
