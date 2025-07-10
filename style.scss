@@ -556,9 +556,6 @@ nav {
     overflow-y: auto; /* 关键属性 - 启用垂直滚动 */
     position: static; /* 确保不改变原有布局 */
     top: auto; /* 重置top值 */
-
-    /* 添加最大高度防止目录过长 */
-    max-height: calc(100vh - 60px); /* 动态高度，视口高度减去导航和边距 */
     
     /* 滚动条美化 */
     scrollbar-width: thin; /* Firefox */
