@@ -554,7 +554,7 @@ nav {
   .toc {
     /* 只添加滚动条相关属性 */
     overflow-y: auto; /* 关键属性 - 启用垂直滚动 */
-    position: static; /* 确保不改变原有布局 */
+    position: fixed; /* 使用固定定位 */
     top: auto; /* 重置top值 */
     
     /* 滚动条美化 */
