@@ -102,31 +102,3 @@
 {{ my_toc | lstrip }}{% endcapture %}
     {% endif %}
 {% endcapture %}{% assign tocWorkspace = '' %}{{ my_toc | markdownify | strip }}
-
-<!-- 添加滚动容器 -->
-<div class="toc-scroll-container">
-    {{ my_toc | markdownify | strip }}
-  </div>
-
-<!-- 添加滚动条样式 -->
-<style>
-.toc-scroll-container {
-    max-height: 70vh;
-    overflow-y: auto;
-    position: sticky;
-    top: 20px;
-}
-
-.toc-scroll-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.toc-scroll-container::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-}
-
-.toc-scroll-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-</style>
