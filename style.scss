@@ -550,19 +550,22 @@ nav {
     padding-left: 260px;
   }
 
-  /* 添加滑动条样式 */
+  /* 仅添加滚动条功能，不改变布局 */
   .toc {
-    // max-height: 70vh; /* 限制最大高度 */
-    overflow-y: auto; /* 添加垂直滚动条 */
-    position: sticky; /* 保持可见 */
-    // top: 80px; /* 距离顶部距离，根据导航高度调整 */
+    /* 只添加滚动条相关属性 */
+    overflow-y: auto; /* 关键属性 - 启用垂直滚动 */
+    //max-height: 80vh; /* 可选：防止目录过高 */
+    
+    /* 保持原有定位 */
+    position: static !important; /* 覆盖任何可能的位置属性 */
+    top: auto !important;
     
     /* 滚动条美化 */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #888 #f1f1f1; /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
   }
   
-  /* Webkit浏览器滚动条样式 */
+  /* Webkit滚动条样式 */
   .toc::-webkit-scrollbar {
     width: 6px;
   }
@@ -572,6 +575,14 @@ nav {
   }
   .toc::-webkit-scrollbar-track {
     background: #f1f1f1;
+  }
+  
+  /* 防止滚动条影响布局 */
+  .toc > *:first-child {
+    margin-top: 0 !important;
+  }
+  .toc > *:last-child {
+    margin-bottom: 0 !important;
   }
 }
 
