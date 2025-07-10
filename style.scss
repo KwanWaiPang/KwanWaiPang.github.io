@@ -576,14 +576,6 @@ nav {
   .toc::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
-  
-  /* 防止滚动条影响布局 */
-  .toc > *:first-child {
-    margin-top: 0 !important;
-  }
-  .toc > *:last-child {
-    margin-bottom: 0 !important;
-  }
 }
 
 .pagination {
