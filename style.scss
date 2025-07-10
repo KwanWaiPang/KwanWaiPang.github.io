@@ -549,10 +549,10 @@ nav {
   .withtoc{
     padding-left: 260px;
   }
-  
+
   /* 添加滑动条样式 */
   .toc {
-    max-height: 70vh; /* 限制最大高度 */
+    // max-height: 70vh; /* 限制最大高度 */
     overflow-y: auto; /* 添加垂直滚动条 */
     position: sticky; /* 保持可见 */
     top: 80px; /* 距离顶部距离，根据导航高度调整 */
