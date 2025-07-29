@@ -17,6 +17,8 @@ author: kwanwaipang
 
 本博文仅供本人学习记录用~
 
+* Keep update the paper list in: [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO#Learning-based-LiDAR-Odometry)
+
 
 * 目录
 {:toc}
@@ -25,9 +27,6 @@ author: kwanwaipang
 
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 # Paper List
-
-* Keep update the paper list in: [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO#Learning-based-LiDAR-Odometry)
-
 
 <!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
