@@ -563,6 +563,11 @@ nav {
 
     /* 防止滚动条影响布局 */
     padding-right: 5px; /* 给滚动条留出空间 */
+
+    /* 添加隐藏标题的样式，第一个目录会被隐藏 */
+    > ul > li:first-child {
+      display: none;
+    }
   }
   
   /* Webkit滚动条样式 */
