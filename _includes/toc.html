@@ -71,6 +71,8 @@
         {% assign _classWorkspace = _classWorkspace[1] | split: '"' %}
         {% assign html_class = _classWorkspace[0] %}
 
+        {% assign html_class = node | split: 'class="' | last | split: '"' | first %}
+        
         {% if html_class contains "no_toc" %}
             {% continue %}
         {% endif %}
