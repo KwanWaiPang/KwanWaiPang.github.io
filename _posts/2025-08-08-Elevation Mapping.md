@@ -30,6 +30,12 @@ toc: true
 
 对于足式机器人来说，相比自动驾驶等所需的全局导航，由于其需要主动选择落足点，因此对于局部高程图来说更加关心.这也就是本博文的重点Elevation Map。
 
+<div align="center">
+  <img src="../images/anymal_sdf_demo.gif" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
 目前常用的解决方案是：雷达提供长期可靠的里程计信息，采用深度视觉获取局部深度来建立高程图。
 
 高程地图分为实时和全局高程图：
@@ -39,12 +45,20 @@ toc: true
 后者需要全局定位信息并需要而外的计算来构建全局地图，但可以通过机器人多个视角下的采集对全局高程地图不断优化修正，最终提取的局部高程图质量更高。
 
 ## 高程地图的一些开源工作
+* [Grid Map](https://github.com/ANYbotics/grid_map)
 * [Robot-Centric Elevation Mapping](https://github.com/ANYbotics/elevation_mapping): RTAB定位输出Odom，elevation mapping采用深度点云和里程计输出全局高程图
 * [Elevation Mapping cupy](https://github.com/leggedrobotics/elevation_mapping_cupy)
 
 
 
-##
+## 代表性论文阅读
+
+### Probabilistic Terrain Mapping for Mobile Robots with Uncertain Localization
+
+* [PDF](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/272110/fankhauser2018.pdf?sequence=1)
+* [Github](https://github.com/anybotics/elevation_mapping)
+
+
 
 
 
