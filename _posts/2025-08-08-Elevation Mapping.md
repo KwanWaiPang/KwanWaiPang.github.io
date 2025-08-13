@@ -117,6 +117,7 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 ### Elevation Mapping for Locomotion and Navigation using GPU
 
 * [PDF](https://arxiv.org/pdf/2204.12876)
+* [github](https://github.com/leggedrobotics/elevation_mapping_cupy)
 
 
 
