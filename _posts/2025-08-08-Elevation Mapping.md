@@ -121,6 +121,16 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 
 
 
+### GEM: Online Globally Consistent Dense Elevation Mapping for Unstructured Terrain
+
+* [PDF](https://www.researchgate.net/profile/Xuecheng-Xu-2/publication/347631694_GEM_Online_Globally_Consistent_Dense_Elevation_Mapping_for_Unstructured_Terrain/links/61064d6a169a1a0103cca834/GEM-Online-Globally-Consistent-Dense-Elevation-Mapping-for-Unstructured-Terrain.pdf)
+* [github](https://github.com/ZJU-Robotics-Lab/GEM)
+
+### Robust Rough-Terrain Locomotion with a Quadrupedal Robot
+
+* [PDF](https://be.research-collection.ethz.ch/server/api/core/bitstreams/3e37a431-d6b9-458f-aad4-9348891eb498/content)
+
+
 # 参考资料
 * [四足机器人雷达-视觉导航2：Elevation mapping局部高程图测试](https://zhuanlan.zhihu.com/p/469921393)
 * [两万字梳理 四足机器人的结构、控制及运动控制](https://zhuanlan.zhihu.com/p/15527181044)
