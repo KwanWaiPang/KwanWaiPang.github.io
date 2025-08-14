@@ -134,3 +134,18 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 # 参考资料
 * [四足机器人雷达-视觉导航2：Elevation mapping局部高程图测试](https://zhuanlan.zhihu.com/p/469921393)
 * [两万字梳理 四足机器人的结构、控制及运动控制](https://zhuanlan.zhihu.com/p/15527181044)
+
+
+足式机器人大多还是locomotion和感知。因为navigation大多情况下可以解耦，然后先是分割可通行区域，再把机器人当质点用model based方法规划路径。
+
+一般情况下的足式机器人navigation都是local navigation，可能会涉及复杂的地形，让机器人选择合适的可通行路线，这种情况下规则不太好写，所以就会有用learning based方法。
+
+* 可通行区域提取：
+  *  https://github.com/leggedrobotics/traversability_estimation
+  *  https://github.com/Ikhyeon-Cho/awesome-traversability-analysis
+* 通过learning去学cost，然后planning的：
+  * https://github.com/leggedrobotics/art_planner
+  * https://leggedrobotics.github.io/fdm.github.io/
+用rl直接学一个local navigation的比较有名就是anymal parkour了，然后是轮足的sr：
+* https://arxiv.org/html/2405.01792v1
+* https://research.google/blog/barkour-benchmarking-animal-level-agility-with-quadruped-robots/ 
