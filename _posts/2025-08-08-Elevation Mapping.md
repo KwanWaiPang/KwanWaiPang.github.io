@@ -131,6 +131,12 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 * [PDF](https://be.research-collection.ethz.ch/server/api/core/bitstreams/3e37a431-d6b9-458f-aad4-9348891eb498/content)
 
 
+### ArtPlanner: Robust Legged Robot Navigation in the Field
+
+* [PDF](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10876046)
+* [github](https://github.com/leggedrobotics/art_planner)
+
+
 # 参考资料
 * [四足机器人雷达-视觉导航2：Elevation mapping局部高程图测试](https://zhuanlan.zhihu.com/p/469921393)
 * [两万字梳理 四足机器人的结构、控制及运动控制](https://zhuanlan.zhihu.com/p/15527181044)
@@ -144,7 +150,6 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
   *  https://github.com/leggedrobotics/traversability_estimation
   *  https://github.com/Ikhyeon-Cho/awesome-traversability-analysis
 * 通过learning去学cost，然后planning的：
-  * https://github.com/leggedrobotics/art_planner
   * https://leggedrobotics.github.io/fdm.github.io/
 用rl直接学一个local navigation的比较有名就是anymal parkour了，然后是轮足的sr：
 * https://arxiv.org/html/2405.01792v1
