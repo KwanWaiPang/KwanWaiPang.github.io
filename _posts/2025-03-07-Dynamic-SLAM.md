@@ -56,6 +56,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[StreamVGGT: Streaming 4D Visual Geometry Transformer](https://arxiv.org/pdf/2507.11539)|[![Github stars](https://img.shields.io/github/stars/wzzheng/StreamVGGT.svg)](https://github.com/wzzheng/StreamVGGT)|[website](https://wzzheng.net/StreamVGGT/)|
 |2025|`TIM`|[R4-SLAM: Toward Real-time, Robust, and Resource-Restricted Visual SLAM in Dynamic Environments](https://ieeexplore.ieee.org/abstract/document/11087758)|---|---|
 |2025|`arXiv`|[Dy3DGS-SLAM: Monocular 3D Gaussian Splatting SLAM for Dynamic Environments](https://arxiv.org/pdf/2506.05965)|---|---|
 |2025|`arXiv`|[GeneA-SLAM2: Dynamic SLAM with AutoEncoder-Preprocessed Genetic Keypoints Resampling and Depth Variance-Guided Dynamic Region Removal](https://arxiv.org/pdf/2506.02736)|[![Github stars](https://img.shields.io/github/stars/qingshufan/GeneA-SLAM2.svg)](https://github.com/qingshufan/GeneA-SLAM2)|---|
