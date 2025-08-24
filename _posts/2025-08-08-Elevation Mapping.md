@@ -40,7 +40,7 @@ toc: true
 对于足式机器人来说，相比自动驾驶等所需的全局导航，由于其需要主动选择落足点，因此对于局部高程图来说更加关心.这也就是本博文的重点Elevation Map。
 
 <div align="center">
-  <img src="../images/anymal_sdf_demo.gif" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/anymal_sdf_demo.gif" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -82,7 +82,7 @@ toc: true
 
 从range sensor（如laser range, time-of-flight, 或 stereo camera sensors）上获取数据，同时需要结合本体的姿态估计（把姿态估计的uncertainty也考虑进来）。如下图所示：
 <div align="center">
-  <img src="../images/微信截图_20250812103356.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250812103356.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -94,7 +94,7 @@ toc: true
 首先每个range测量点会更新一个单元的高度地图。而高度的测量服从高斯分布。将高度的测量结果从sensor frame转换到map frame下（可以理解为sensor相对于map的高度，那么就获得当前map相对于起初点的高度）。
 
 <div align="center">
-  <img src="../images/微信截图_20250812104822.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250812104822.png" width="80%" />
 <figcaption>  
 此计算过程还考虑了一系列的measurement noise,要实际部署再细看~
 </figcaption>
@@ -103,7 +103,7 @@ toc: true
 而新测量的高度将会通过一维的卡尔曼滤波跟已有的 elevation map进行融合
 
 <div align="center">
-  <img src="../images/微信截图_20250812105019.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250812105019.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
