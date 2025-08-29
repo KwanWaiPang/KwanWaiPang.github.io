@@ -137,6 +137,10 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 * [github](https://github.com/leggedrobotics/art_planner)
 
 
+# 代码复现
+* 复现代码见[Github](https://github.com/KwanWaiPang/Elevation_Map)
+
+
 # 参考资料
 * [四足机器人雷达-视觉导航2：Elevation mapping局部高程图测试](https://zhuanlan.zhihu.com/p/469921393)
 * [两万字梳理 四足机器人的结构、控制及运动控制](https://zhuanlan.zhihu.com/p/15527181044)
