@@ -75,7 +75,7 @@ toc: true
 
 ## 代表性论文阅读
 
-### Probabilistic Terrain Mapping for Mobile Robots with Uncertain Localization
+### 1. Probabilistic Terrain Mapping for Mobile Robots with Uncertain Localization
 
 * [PDF](https://www.research-collection.ethz.ch/bitstream/handle/20.500.11850/272110/fankhauser2018.pdf?sequence=1)
 * [Github](https://github.com/anybotics/elevation_mapping)
@@ -114,24 +114,24 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 这个更新是要考虑到运动的不确定性的（详细的推导此处略过，见原文）
 
 
-### Elevation Mapping for Locomotion and Navigation using GPU
+### 2. Elevation Mapping for Locomotion and Navigation using GPU
 
 * [PDF](https://arxiv.org/pdf/2204.12876)
 * [github](https://github.com/leggedrobotics/elevation_mapping_cupy)
 
 
 
-### GEM: Online Globally Consistent Dense Elevation Mapping for Unstructured Terrain
+### 3. GEM: Online Globally Consistent Dense Elevation Mapping for Unstructured Terrain
 
 * [PDF](https://www.researchgate.net/profile/Xuecheng-Xu-2/publication/347631694_GEM_Online_Globally_Consistent_Dense_Elevation_Mapping_for_Unstructured_Terrain/links/61064d6a169a1a0103cca834/GEM-Online-Globally-Consistent-Dense-Elevation-Mapping-for-Unstructured-Terrain.pdf)
 * [github](https://github.com/ZJU-Robotics-Lab/GEM)
 
-### Robust Rough-Terrain Locomotion with a Quadrupedal Robot
+### 4. Robust Rough-Terrain Locomotion with a Quadrupedal Robot
 
 * [PDF](https://be.research-collection.ethz.ch/server/api/core/bitstreams/3e37a431-d6b9-458f-aad4-9348891eb498/content)
 
 
-### ArtPlanner: Robust Legged Robot Navigation in the Field
+### 5. ArtPlanner: Robust Legged Robot Navigation in the Field
 
 * [PDF](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10876046)
 * [github](https://github.com/leggedrobotics/art_planner)
