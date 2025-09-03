@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "什么是Teacher Forcing和Student Forcing呢？"
+title: "什么是Teacher Forcing和Student Forcing"
 date:   2025-09-03
 tags: [Deep Learning]
 comments: true
@@ -13,7 +13,9 @@ toc: true
 {:toc} -->
 
 
-本博文简单分析下“Teacher Forcing”和“Student Forcing”。本博文由deep seek生成并结合个人理解补充。
+本博文简单分析下“Teacher Forcing”和“Student Forcing”。
+
+本博文由deep seek生成并结合个人理解补充。
 
 本博文仅供本人学习记录用~
 
@@ -82,7 +84,7 @@ toc: true
 缺点：
 * 训练极其困难，难以收敛：在训练初期，模型的预测能力很差，早期的一个错误会导致后续所有输入都偏离正轨，整个序列的预测会变得一团糟。这使得损失函数难以提供有效的梯度信号，模型不知道问题到底出在哪一步，导致训练非常不稳定，甚至无法收敛。
 
-# 结论
+# 总结
 * Teacher Forcing是实际训练中广泛使用的高效方法，但存在Exposure偏差。
 * Student Forcing更符合推理逻辑，但直接用于训练不现实。
 
@@ -97,3 +99,12 @@ toc: true
 4. 波束搜索（Beam Search）
     * 虽然在训练中不直接解决Exposure Bias，但在推理时，波束搜索等策略会同时保留多个候选序列，可以在一定程度上缓解因单次错误预测导致的序列崩溃问题。
 
+
+
+# 模仿学习（Imitation Learning）
+
+模仿学习（Imitation Learning, IL） 是机器学习和强化学习（Reinforcement Learning, RL）中的一个重要分支。它的核心思想非常直观：智能体（Agent）通过观察并模仿专家（Expert）的行为来学习完成任务，而不是通过自己漫无目的地试错。
+
+你可以把它想象成一个学徒跟着师傅学手艺。学徒不需要自己去发明所有的技巧，而是通过观察师傅怎么做（专家示范），然后自己尝试模仿着做。
+
+## 为什么要用模仿学习？
