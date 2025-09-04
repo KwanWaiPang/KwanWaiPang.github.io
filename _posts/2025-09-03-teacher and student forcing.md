@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What is Teacher and Student Forcing"
+title: "What is Teacher and Student Forcing?"
 date:   2025-09-03
 tags: [Deep Learning]
 comments: true
@@ -20,7 +20,7 @@ toc: true
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- # 引言 -->
+# 引言
 
 “Teacher Forcing”和“Student Forcing”这两个在序列生成模型（如RNN、LSTM、Transformer）训练中非常重要的概念。
 
