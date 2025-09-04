@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "什么是Teacher和Student Forcing"
+title: "What is Teacher and Student Forcing"
 date:   2025-09-03
 tags: [Deep Learning]
 comments: true
