@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What is Teacher and Student Forcing?"
+title: "What is Teacher and Student Learning?"
 date:   2025-09-03
 tags: [Deep Learning]
 comments: true
