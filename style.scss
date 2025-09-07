@@ -556,6 +556,7 @@ nav {
     overflow-y: auto; /* 关键属性 - 启用垂直滚动 */
     position: fixed; /* 使用固定定位 */
     top: auto; /* 重置top值 */
+    height: 100vh; /* 添加高度值 */
     
     /* 滚动条美化 */
     scrollbar-width: thin; /* Firefox */
@@ -572,16 +573,16 @@ nav {
   }
   
   /* Webkit滚动条样式 */
-  // .toc::-webkit-scrollbar {
-  //   width: 6px;
-  // }
-  // .toc::-webkit-scrollbar-thumb {
-  //   background: #888;
-  //   border-radius: 3px;
-  // }
-  // .toc::-webkit-scrollbar-track {
-  //   background: #f1f1f1;
-  // }
+  .toc::-webkit-scrollbar {
+    width: 6px;
+  }
+  .toc::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+  .toc::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
 }
 
 .pagination {
