@@ -572,16 +572,16 @@ nav {
   }
   
   /* Webkit滚动条样式 */
-  .toc::-webkit-scrollbar {
-    width: 6px;
-  }
-  .toc::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-  }
-  .toc::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+  // .toc::-webkit-scrollbar {
+  //   width: 6px;
+  // }
+  // .toc::-webkit-scrollbar-thumb {
+  //   background: #888;
+  //   border-radius: 3px;
+  // }
+  // .toc::-webkit-scrollbar-track {
+  //   background: #f1f1f1;
+  // }
 }
 
 .pagination {
