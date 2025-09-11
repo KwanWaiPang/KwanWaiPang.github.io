@@ -47,8 +47,18 @@ toc: true
 </figcaption>
 </div>
 
+本文主要是for object localization的，但是由于有语言的输入，且属于寻找物体，因此跟目标导向的VLN几乎是一样的。对于探索的方法有基于前沿的探索（Frontier based exploration，FBE，可以理解为用地图的探索 ）也有基于learning的（可以理解为用trainable GRU的hidden state来记录）
 
+而对于采用的开发词汇分类器（open-vocabulary classifiers），通过三种策略来fine-turn CLIP模型为object localizers：
+1. 采用CLIP的文本编码器来编码k个引用表达，特别指定目标物体在图像的哪个区域。比如`a plant in the top left of the image`。然后匹配当前观测的语言的embedding与CLIP的视觉embedding。计算图像和文本特征的相似性来决定区域的相关分数。
+2. 将图像离散化为k个小的patches，然后或者CLIP的patch embedding。然后将每个patch embedding与CLIP文本embeding进行卷积。如果object在patch中，对这个patch的相关分数就会很高。
+3. 修改一个可解析（interpretability）的方法，从ViT中提取物体的相关性。使用一个目标CLIP文本embedding以及CLIP视觉编码器的累积梯度信息，进而可以构建输入pixel的相关性的图，当object在视野中可以定性的分割目标。
 
+对于开放词汇检测器与分割器（open-vocabulary detectors and segmentors）采用了两个额外的开发词汇模型来做object localization
+* MDETR segmentation model，输入文本和图像，输出box检测。
+* OWL-ViT detector用了一系列预测微调配方来将类似CLIP的方法转为物体检测。
+
+实验测试测试了一系列基于CLIP的baseline的SR和SPL（Success weighted by inverse path length）
 
 # CLIP-NAV: USING CLIP FOR ZERO-SHOT VISIONAND-LANGUAGE NAVIGATION
 
