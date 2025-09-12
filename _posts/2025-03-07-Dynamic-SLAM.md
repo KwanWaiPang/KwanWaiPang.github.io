@@ -56,6 +56,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[DyPho-SLAM: Real-time Photorealistic SLAM in Dynamic Environments](https://arxiv.org/pdf/2509.00741)|---|---| 
 |2025|`Complex & Intelligent Systems`|[MAGSLAM: multi-modal adaptive generator-based semantic SLAM for enhanced robustness in dynamic environments](https://link.springer.com/content/pdf/10.1007/s40747-025-02058-6.pdf)|---|---|
 |2025|`ICCV`|[POMATO: Marrying Pointmap Matching with Temporal Motions for Dynamic 3D Reconstruction](https://arxiv.org/pdf/2504.05692)|[![Github stars](https://img.shields.io/github/stars/wyddmw/POMATO.svg)](https://github.com/wyddmw/POMATO)|---| 
 |2025|`arXiv`|[StreamVGGT: Streaming 4D Visual Geometry Transformer](https://arxiv.org/pdf/2507.11539)|[![Github stars](https://img.shields.io/github/stars/wzzheng/StreamVGGT.svg)](https://github.com/wzzheng/StreamVGGT)|[website](https://wzzheng.net/StreamVGGT/)|
