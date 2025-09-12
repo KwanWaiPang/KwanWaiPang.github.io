@@ -73,6 +73,7 @@ toc: false #true
 |2024|`IROS`|[SDPL-SLAM: Introducing Lines in Dynamic Visual SLAM and Multi-Object Tracking](https://robotics.ntua.gr/wp-content/uploads/sites/2/2024_Manetas_IntroduceLinesInVisualSLAM-MultiObjectTrack_IROS.pdf)|---|---|
 |2024|`RAL`|[DynaMeshSLAM: A Mesh-based Dynamic Visual SLAMMOT Method](https://ieeexplore.ieee.org/abstract/document/10517385/)|---|---|
 |2024|`TIV`|[STS-SLAM: Joint Visual SLAM and Multi-Object Tracking Based on Spatio-Temporal Similarity](https://ieeexplore.ieee.org/abstract/document/10559403/)|---|---|
+|2024|`Expert Systems with Applications`|[A method of dense point cloud SLAM based on improved YOLOV8 and fused with ORB-SLAM3 to cope with dynamic environments](https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=4848367)|---|---|
 |2023|`TITS`|[Fast, Robust, Accurate, Multi-Body Motion Aware SLAM](https://pure.ulster.ac.uk/files/147101806/Fast_Robust_Accurate_Multi_Body_Motion_Aware_SLAM.pdf)|---|---|
 |2023|`TRO`|[Dynam-SLAM: An accurate, robust stereo visual-inertial SLAM method in dynamic environments](https://ieeexplore.ieee.org/abstract/document/9866888/)|---|---|
 |2023|`TIM`|[VIMOT: A tightly coupled estimator for stereo visual-inertial navigation and multiobject tracking](https://www.researchgate.net/profile/Feng-Shaoquan/publication/372044394_VIMOT_A_Tightly-Coupled_Estimator_for_Stereo_Visual-Inertial_Navigation_and_Multi-Object_Tracking/links/6684fb720a25e27fbc1fde01/VIMOT-A-Tightly-Coupled-Estimator-for-Stereo-Visual-Inertial-Navigation-and-Multiobject-Tracking.pdf)|---|---|
