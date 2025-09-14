@@ -129,11 +129,38 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 </div>
 
 
-# ESC: Exploration with Soft Commonsense Constraints for Zero-shot Object Navigation
+# 3. ESC: Exploration with Soft Commonsense Constraints for Zero-shot Object Navigation
 
+* [PDF](https://proceedings.mlr.press/v202/zhou23r/zhou23r.pdf)
 
+本文提出了一种新的zero-shot的目标导航方法。软常识约束下的探索（Exploration with Soft Commonsense constraints，ESC)。通过预训练模型引入常识推理机制，而不需要导航经验或者其他的视觉环境的训练。
+1. ESC利用预训练视觉语言模型（GLIP）来做open-world prompt-based grounding（开放世界提示定位）以及采用预训练的commonsense 语言模型来做房间和物体的推理（这部分属于场景理解/scene understanding）。
+2. ESC通过把导航动作建模为用于高效探索的软逻辑词（soft logic predicates），实现将commonsense知识转换为导航action，这部分（Frontier-based Exploration 和Probabilistic Soft Logic，PSL）就是将大语言模型（LLM）推理的commonsense知识转换为执行action。
 
+而本文验证也是以object goal navigation的benchmark来评估的。
 
+ESC框架如下图所示。首先将输入的图像转换为场景的语言理解，然后将其投影为语义地图（semantic map），然后利用LLM来进行常识推理，进而获取目标物体与其他物体、房间的空间关系。最后通过结合Frontier-based Exploration与场景语义理解，还有通过Probabilistic Soft Logic实现commonsense的推理。
+
+<div align="center">
+  <img src="../images/微信截图_20250914143449.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+* 开放世界语义理解：为了利用LLM来做导航推理，需要将输入的RGB图像转换为语言形式的语言内容。这部分的实现是采用GLIP
+* 语言地图的构建（Semantic Map Construction）：基于输入的depth，agent的位置，相机的参数，可以实现2D图像pixel转换到3D空间，并且存储为3D voxel的形式，然后再将其沿着高度维度进行投影即可获得2D导航地图（其实也就是栅格地图）
+
+对于探索采用的是一种启发式探索方法，基于边界的探索（Frontier-based Exploration，FBE）
+
+至于性能效果则是比前面的CoW要好不少。
+
+<div align="center">
+  <img src="../images/微信截图_20250914144949.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+最后值得一提的是，写这篇博文的初衷其实是参考了这篇文献推文的[10年VLN之路：详解具身智能「视觉-语言-导航」三大技术拐点！](https://mp.weixin.qq.com/s/FvPMMnaHNovsU28xC-agRg)当时觉得这篇推文写得很差，每个字都懂连起来既没有逻辑性，又没有连贯性，所以打算针对性的把里面提到VLN的四个CLIP工作阅读一下，结果读了3个发现两个都不是直接跟VLN有关系的😂并且也没有一个明显的技术发展的脉络。。。。。。
 
 # VLFM: Vision-Language Frontier Maps for Zero-Shot Semantic Navigation
 
