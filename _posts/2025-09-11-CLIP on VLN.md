@@ -44,7 +44,7 @@ toc: true
 2. 基于CLIP的object定义及经典的探索（不需要额外training）
 
 <div align="center">
-  <img src="../images/微信截图_20250911150618.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250911150618.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -73,7 +73,7 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 此前的VLN方法都是采用监督学习,模型首先在"seen"环境及指令下训练的,然后在"seen"以及"unseen"环境下验证.这类型的方法没见过的环境中通常有明显的性能drop.如下图所示:
 
 <div align="center">
-  <img src="../images/微信截图_20250914100033.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914100033.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -87,8 +87,8 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 
 下面也对用作者提出的指令分解方法与GPT-3做指令分解的区别
 <div align="center">
-  <img src="../images/微信截图_20250914102140.png" width="80%" />
-  <img src="../images/微信截图_20250914102200.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914102140.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914102200.png" width="80%" />
 <figcaption>  
 作者将指令分解的时候会分为：Navigational components (NC) and Activity components (AC)
 </figcaption>
@@ -97,7 +97,7 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 将指令分解为keyphrases后，作者就用于在Matterport3D的导航中，而Matterport3D的每个节点但都是agent的360度的全景图像，而为了选择全景图中的导航方向，作者将其分为4个分开的image，每张图包含了agent大概90度的空间。然后图片分别与语言指令通过CLIP进行匹配，选择匹配最大的为方向。其中AC指令如果超过一定的阈值或满足停止的条件时就会执行`stop`
 
 <div align="center">
-  <img src="../images/微信截图_20250914103003.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914103003.png" width="80%" />
 <figcaption> 
 上图的红色就是选定的图像 
 </figcaption>
@@ -107,7 +107,7 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 此外，NC grouding score也会决定什么时候选择下一个keyphrase。比如，`Go to the kitchen`如果 grounding score一直高于一定的阈值，我们就假设agent可以成功导航到kitchen，并且可以执行next keyphrase。因此CLIP不仅仅是选择导航的方向，还是决定agent什么时候到达中间的目标位置。
 
 <div align="center">
-  <img src="../images/微信截图_20250914103509.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914103509.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -115,7 +115,7 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 同时由于选择节点的时候采用的是最近的节点，因此作者额外提出了一个 backtracking mechanism，如下图所示。用来决定agent是否需要回溯一些节点。
 
 <div align="center">
-  <img src="../images/微信截图_20250914104435.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914104435.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -123,7 +123,7 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 不过从实验的表格上来看，似乎并没有作者所宣称的效果，只是额外定义了Relative Change in Success (RCS)指标来证明效果更好，但是成功率这些是远不如supervised learning的
 
 <div align="center">
-  <img src="../images/微信截图_20250914104854.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914104854.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -142,7 +142,7 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 ESC框架如下图所示。首先将输入的图像转换为场景的语言理解，然后将其投影为语义地图（semantic map），然后利用LLM来进行常识推理，进而获取目标物体与其他物体、房间的空间关系。最后通过结合Frontier-based Exploration与场景语义理解，还有通过Probabilistic Soft Logic实现commonsense的推理。
 
 <div align="center">
-  <img src="../images/微信截图_20250914143449.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914143449.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -155,7 +155,7 @@ ESC框架如下图所示。首先将输入的图像转换为场景的语言理�
 至于性能效果则是比前面的CoW要好不少。
 
 <div align="center">
-  <img src="../images/微信截图_20250914144949.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914144949.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -183,7 +183,7 @@ VLFM通过预训练的VLM来选择哪个frontiers是最可能到达语义目标�
 3. 目标导航/goal navigation：机器人简答的导航到最靠近所检测的目标物体的地方，然后触发`STOP`.
 
 <div align="center">
-  <img src="../images/微信截图_20250914152240.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914152240.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -193,7 +193,7 @@ VLFM通过预训练的VLM来选择哪个frontiers是最可能到达语义目标�
 * 对于Value map generation：作者采用预训练好的视觉语言模型，BLIP-2（CLIP的图像到文本检索），来直接从机器人当前的RGB观测以及包含目标物体的txet prompt来计算cosine similarity score。而这个score会进一步的投影成value map。这个值是用作confidence value来辅助frontiers的选择以及目标的定位的。
 
 <div align="center">
-  <img src="../images/微信截图_20250914154533.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914154533.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -203,7 +203,7 @@ VLFM通过预训练的VLM来选择哪个frontiers是最可能到达语义目标�
 从实验结果来看，虽然比起其他方法都有一定的提升，但是在不同数据集下的差异还是比较大的~
 
 <div align="center">
-  <img src="../images/微信截图_20250914154750.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250914154750.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
