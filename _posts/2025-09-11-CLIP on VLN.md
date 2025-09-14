@@ -64,7 +64,7 @@ toc: true
 
 # CLIP-NAV: USING CLIP FOR ZERO-SHOT VISIONAND-LANGUAGE NAVIGATION
 
-VLN要面对的场景都是比较复杂的：如任意的语言指令、多样性的环境
+VLN要面对的场景都是比较复杂的：如任意的语言指令、多样性的环境。而CLIP等视觉语言模型在zero-shot目标识别等都展示了强大的性能，因此作者在本文中尝试探究这些方法能否实现zero-shot的language grounding。本质上跟上文是有点像的，都是把CLIP用到VLN中，作为尝试性论文，只是上一篇以object navigation为主题，本篇更细化到VLN上。
 
 
 
