@@ -33,7 +33,7 @@ navigation:
     url: /about #/ #https://kwanwaipang.github.io/ 
 
 # Pagination（分页）
-paginate: 8 
+paginate: 10 #8 
 
 excerpt_separator: <!-- more -->
 

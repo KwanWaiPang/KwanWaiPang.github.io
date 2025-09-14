@@ -70,7 +70,7 @@ toc: true
 
 VLN要面对的场景都是比较复杂的：如任意的语言指令、多样性的环境。而CLIP等视觉语言模型在zero-shot目标识别等都展示了强大的性能，因此作者在本文中尝试探究这些方法能否实现zero-shot的language grounding。本质上跟上文是有点像的，都是把CLIP用到VLN中（without any dataset-specific finetuning），作为尝试性论文，只是上一篇以object navigation为主题，本篇更细化到VLN上。
 
-
+此前的VLN方法都是采用监督学习,模型首先在"seen"环境及指令下训练的,然后在"seen"以及"unseen"环境下验证.这类型的方法没见过的环境中通常有明显的性能drop.
 
 
 
