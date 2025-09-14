@@ -162,7 +162,53 @@ ESC框架如下图所示。首先将输入的图像转换为场景的语言理�
 
 最后值得一提的是，写这篇博文的初衷其实是参考了这篇文献推文的[10年VLN之路：详解具身智能「视觉-语言-导航」三大技术拐点！](https://mp.weixin.qq.com/s/FvPMMnaHNovsU28xC-agRg)当时觉得这篇推文写得很差，每个字都懂连起来既没有逻辑性，又没有连贯性，所以打算针对性的把里面提到VLN的四个CLIP工作阅读一下，结果读了3个发现两个都不是直接跟VLN有关系的😂并且也没有一个明显的技术发展的脉络。。。。。。
 
-# VLFM: Vision-Language Frontier Maps for Zero-Shot Semantic Navigation
+~~~
+补充，下面的也不是😂
+不过勉强也是可以跟VLN扯上关系的，只是这是以探索或者说物体/目标导航为主的，或者可以理解为目标导向的VLN
+~~~
+
+# 4. VLFM: Vision-Language Frontier Maps for Zero-Shot Semantic Navigation
+
+* [PDF](https://arxiv.org/pdf/2312.03275)
+
+所谓的Vision-Language Frontier Maps（VLFM）是受到了人类推理的启发，旨在在新环境中导航到unseen的语义object。
+VLFM通过输入的深度观测构建栅格地图（occupancy map）。利用RGB观测以及预训练的视觉-语言模型来生成language-grounded value map。
+VLFM利用这张map来识别最promising frontier（最有前途的前沿）来探索给定的物体类型。
+VLFM通过预训练的VLM来选择哪个frontiers是最可能到达语义目标区域。与此前的工作不一样，不再依赖于目标检测或者语义模型进行文本推理，而是采用视觉-语言模型，直接从RGB中提取语义值，然后通过与文本构建cosine similarity score来定位目标。
+并且其zero-shot的特性也使得它可以移植到波士顿动力移动操作平台上。
+
+如下图所示，框架可以分为三部分：
+1. 初始化/initialization：机器人原地旋转一整圈，以建立其边界（frontier）和language-grounded value map。
+2. 探索/exploration：机器人持续更新边界（frontier）和value map，以创建frontier waypoints，并选择最有价值的航路点来定位指定的目标对象类别并导航到它。一旦找到目标object类别，就会导航过去。
+3. 目标导航/goal navigation：机器人简答的导航到最靠近所检测的目标物体的地方，然后触发`STOP`.
+
+<div align="center">
+  <img src="../images/微信截图_20250914152240.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+
+* 对于Frontier waypoint generation：采用depth以及里程计观测来构建障碍物的top-down 2D地图。基于机器人的位置会更新可探索的区域。对于障碍物的位置，通过把depth image转换为point cloud，然后投影到2D栅格上。进一步的，识别区分探索与未探索区域的边界，用其midpoint作为潜在的frontier waypoint。随着机器人探索区域，frontier的数量和位置都会变化，直到整个环境都被探索了且没有frontier。
+* 对于Value map generation：作者采用预训练好的视觉语言模型，BLIP-2（CLIP的图像到文本检索），来直接从机器人当前的RGB观测以及包含目标物体的txet prompt来计算cosine similarity score。而这个score会进一步的投影成value map。这个值是用作confidence value来辅助frontiers的选择以及目标的定位的。
+
+<div align="center">
+  <img src="../images/微信截图_20250914154533.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+至于最终的物体检测采用的是Grounding-DINO。
+
+从实验结果来看，虽然比起其他方法都有一定的提升，但是在不同数据集下的差异还是比较大的~
+
+<div align="center">
+  <img src="../images/微信截图_20250914154750.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+论文[网站](http://naoki.io/vlfm)上有对应的实验demo。
 
 
 
