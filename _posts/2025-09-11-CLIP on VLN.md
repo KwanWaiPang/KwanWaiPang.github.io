@@ -78,6 +78,8 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 </figcaption>
 </div>
 
+此外,现有的VLN模型也都是dataset specific的,也就是在一个数据集下训练的模型难以泛化到另一个数据集上.比如在REVERIE上训练的,在SOON上可能得不到类似的结果(虽然这两个数据集都是很像的,都是coarse-grained instruction following task).
+
 
 
 
