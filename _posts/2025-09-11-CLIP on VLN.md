@@ -78,10 +78,55 @@ VLN要面对的场景都是比较复杂的：如任意的语言指令、多样�
 </figcaption>
 </div>
 
-此外,现有的VLN模型也都是dataset specific的,也就是在一个数据集下训练的模型难以泛化到另一个数据集上.比如在REVERIE上训练的,在SOON上可能得不到类似的结果(虽然这两个数据集都是很像的,都是coarse-grained instruction following task).
+此外,现有的VLN模型也都是dataset specific的,也就是在一个数据集下训练的模型难以泛化到另一个数据集上.比如在REVERIE上训练的,在SOON上可能得不到类似的结果(虽然这两个数据集都是很像的,都是coarse-grained instruction following task).不过这主要是由于训练数据不够导致的。虽然可以通过一些数据增强来改善，但是提升还是有限的。
 
+作者所提出的方法包含三步：
+1. 指令分解-将粗粒度（coarse-grained）指令分解为关键短语。
+2. 视觉语言定位（Vision-Language Grounding）-使用CLIP在环境中找到keyphrase
+3. 采用CLIP的分数来做导航决策
 
+下面也对用作者提出的指令分解方法与GPT-3做指令分解的区别
+<div align="center">
+  <img src="../images/微信截图_20250914102140.png" width="80%" />
+  <img src="../images/微信截图_20250914102200.png" width="80%" />
+<figcaption>  
+作者将指令分解的时候会分为：Navigational components (NC) and Activity components (AC)
+</figcaption>
+</div>
 
+将指令分解为keyphrases后，作者就用于在Matterport3D的导航中，而Matterport3D的每个节点但都是agent的360度的全景图像，而为了选择全景图中的导航方向，作者将其分为4个分开的image，每张图包含了agent大概90度的空间。然后图片分别与语言指令通过CLIP进行匹配，选择匹配最大的为方向。其中AC指令如果超过一定的阈值或满足停止的条件时就会执行`stop`
+
+<div align="center">
+  <img src="../images/微信截图_20250914103003.png" width="80%" />
+<figcaption> 
+上图的红色就是选定的图像 
+</figcaption>
+</div>
+
+下图则是为整个CLIP-Nav的框架。每一步将全景图分为4张图像。通过CLIP选择一张图像。进而可以获得该图片对应的可以导航邻近节点，然后选择最近的节点。
+此外，NC grouding score也会决定什么时候选择下一个keyphrase。比如，`Go to the kitchen`如果 grounding score一直高于一定的阈值，我们就假设agent可以成功导航到kitchen，并且可以执行next keyphrase。因此CLIP不仅仅是选择导航的方向，还是决定agent什么时候到达中间的目标位置。
+
+<div align="center">
+  <img src="../images/微信截图_20250914103509.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+同时由于选择节点的时候采用的是最近的节点，因此作者额外提出了一个 backtracking mechanism，如下图所示。用来决定agent是否需要回溯一些节点。
+
+<div align="center">
+  <img src="../images/微信截图_20250914104435.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
+
+不过从实验的表格上来看，似乎并没有作者所宣称的效果，只是额外定义了Relative Change in Success (RCS)指标来证明效果更好，但是成功率这些是远不如supervised learning的
+
+<div align="center">
+  <img src="../images/微信截图_20250914104854.png" width="80%" />
+<figcaption> 
+</figcaption>
+</div>
 
 
 # ESC: Exploration with Soft Commonsense Constraints for Zero-shot Object Navigation
