@@ -12,6 +12,8 @@ toc: true
 <!-- * 目录
 {:toc} -->
 
+# 引言
+
 2022年OpenAI发布的CLIP模型，大大提升了模型的跨模态理解能力，实习了视觉与语言的统一，也给VLN带来新的突破————零样本学习的能力使得机器人无需依赖人工标注，即可理解自然语言指令并执行高效导航。
 
 本博文针对基于CLIP的VLN几篇论文对其进展进行调研。
@@ -62,7 +64,7 @@ toc: true
 
 # CLIP-NAV: USING CLIP FOR ZERO-SHOT VISIONAND-LANGUAGE NAVIGATION
 
-VLN要面对的场景都是比较
+VLN要面对的场景都是比较复杂的：如任意的语言指令、多样性的环境
 
 
 
