@@ -138,6 +138,15 @@ Elevation map的定义是相对于机器人或者传感器的pos的，因此随�
 
 
 # 代码复现
+
+基于ETH开源的Elevation_Map，先复现了其仿真代码，在此基础上，用VINS-mono来提供定位，用RGBD相机实现人形机器人高程图的构建.
+
+<div align="center">
+  <img src="../images/微信截图_20250916142328.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
 * 复现代码见[Github](https://github.com/KwanWaiPang/Elevation_Map)
 
 
