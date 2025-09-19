@@ -49,7 +49,7 @@ toc: true
 
 * 注意，此处大部分都是“宣称”
 
-| 机器人型号/公司 | 控制模式 | 核心算法/架构 | 基本描述 |
+| 机器人型号/公司 | 控制模式 | 核心算法/架构 | 补充说明 |
 |:-----:|:-----:|:-----:|:-----:|
 |智元机器人(远征)|下肢：结合Model-based与Learning-based方式优化行走稳定性和自然度 <br> 上肢：不明|强化学习|“预研”基于自然语言指令集驱动的AgentOS,适配不同的机器人本体，并通过强化学习实现机器人技能的精准编排与高效执行|
 |智元机器人(灵犀)|下肢：强化学习 <br> 上肢：不明|强化学习|[训练代码](https://github.com/AgibotTech/agibot_x1_train/blob/main/README.zh_CN.md) <br> [推理代码](https://github.com/AgibotTech/agibot_x1_infer/blob/main/README.zh_CN.md) |
@@ -57,7 +57,8 @@ toc: true
 |银河通用（Galbot）|下肢：可折叠腿部+轮式底盘 <br> 上肢：端到端VLA|VLA+VLN|端到端视觉输入输出末端执行器抓取；端到端导航大模型|
 |星动纪元（星动L7）|运动控制：端到端强化学习实现运动平衡|全身控制|端到端 VLA 大模型 ERA-42实现观看操作视频直接学技能|
 |宇树科技（H1）|---|强化学习|---|
-|优必选（Walker X）|下肢：实时步态规划，基于ZMP（零力矩点） 等传统控制算法保障稳定性 <br> 上肢：视觉伺服，手眼协调，能完成一些交互任务|传统控制|[Walker X产品说明](https://hippo-robot.com/product/163/)|
+|优必选（Walker X）|下肢：实时步态规划，基于ZMP（零力矩点） 等传统控制算法保障稳定性 <br> 上肢：视觉伺服，手眼协调，能完成一些交互任务|传统控制|21年左右的产品，下肢是传统控制，上肢为遥操作，人手动作映射到机器人动作[Walker X产品说明](https://hippo-robot.com/product/163/)|
+|特斯拉 Optimus|下肢：基于学习的方法（模仿学习、强化学习），强调整体运动柔顺性与效率 <br> 上肢：基于学习的方法，致力于实现精细操作（如精准抓取）|导航部分与FSD融合|特斯拉虽然提及了Optimus 在运动控制上采用了仿生人体低频率运动的设计理念，但并未披露更细节的设计方案,但鉴于特斯拉在端到端自动驾驶的成就，大几率也是端到端的|
 
 
 
@@ -125,6 +126,40 @@ toc: true
 <video playsinline autoplay loop muted src="https://videos.ctfassets.net/qx5k8y1u9drj/5uOKAGkEqDISJXys5zl28i/f354a6ca801cd28966de775be3dfd919/APPLE_VIDEO.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
 </div>
 
+## 特斯拉Optimus
+
+* 环境感知与记忆：第二代的Optimus 集成的感知与定位传感器（包括摄像头、IMU 等）与特斯拉FSD 视觉神经网络深度融合，实现了实时环境建图与路径记忆。视频中机器人在室外行走时，能自主识别障碍物并规划避障路径，同时通过视觉特征点匹配技术完成环境记忆，二次行走时可直接调用历史路径数据。
+
+<div align="center">
+  <img src="../images/v2-2f7db7b29b80bb4007b3081929c7487f_b.webp" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 动作捕捉与技能迁移：第二代的Optimus 通过多模态动作捕捉与端到端神经网络的无缝协同，实现了人类技能的快速迁移：工程人员佩戴 VR 头显与动作捕捉服进行操作，其动作序列被多传感器系统实时采集，经基于 Transformer 的端到端模型解析后，直接生成机器人关节控制参数。
+
+<div align="center">
+  <img src="../images/v2-2497d064d67717f3d76183d52e52a256_b.webp" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 端到端操作：在端到端操作中，系统仅需视觉输入即可完成复杂任务 —— 例如通过摄像头识别物体后，直接输出关节角度指令驱动灵巧手完成抓取，全程无需预设代码
+
+<div align="center">
+  <img src="../images/v2-0e260cca168543d9a13714bf14536ad5_b.webp" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 身体平衡控制：视频中Optimus 不仅能稳定完成单脚平衡动作，还能做出瑜伽级的肢体拉伸姿态，展现出远超以往的身体控制精度与动作协调性。这一进展标志着特斯拉在机器人多关节协同控制、重心动态调整等核心领域实现了重大突破。这个应该是实现了全身控制的。
+
+<div align="center">
+  <img src="../images/v2-5b892592c03c21d84e5cdd1c0cd1c274_b.webp" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
 
 # 其他
 
@@ -141,4 +176,5 @@ toc: true
 * [(智元机器人)稚晖君人形机器人全家桶发布](https://zhidx.com/p/438230.html)
 * [数据：99%+1%，能实现“从0到10000”——银河通用王鹤：让机器人甩掉遥控器，“睁开眼”干活](http://www.bj.xinhuanet.com/20250916/e5d34b87ef39480ab8d2b4219dac4c59/c.html)
 * [性能比肩特斯拉 Optimus，清华系具身智能企业星动纪元发布星动 L7](https://www.geekpark.net/news/351767)
+* [2021~2025：特斯拉人形机器人Optimus发展进程详解](https://zhuanlan.zhihu.com/p/1908561554837868813)
 
