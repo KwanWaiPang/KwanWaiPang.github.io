@@ -184,7 +184,7 @@ Liquid 提供了 ```raw``` 和 ```endraw``` 标签，可以将包裹的内容作
 
 ## Stanford/Elsevier Top 2% Scientists
 
-* [Profile](https://topresearcherslist.com/Home/Profile/755856)
+* 世界前2%顶尖科学家: [Profile](https://topresearcherslist.com/Home/Profile/755856)
 
 <div align="center" style="
   position: relative; 
