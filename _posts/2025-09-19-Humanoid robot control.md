@@ -184,4 +184,5 @@ toc: true
 * [数据：99%+1%，能实现“从0到10000”——银河通用王鹤：让机器人甩掉遥控器，“睁开眼”干活](http://www.bj.xinhuanet.com/20250916/e5d34b87ef39480ab8d2b4219dac4c59/c.html)
 * [性能比肩特斯拉 Optimus，清华系具身智能企业星动纪元发布星动 L7](https://www.geekpark.net/news/351767)
 * [2021~2025：特斯拉人形机器人Optimus发展进程详解](https://zhuanlan.zhihu.com/p/1908561554837868813)
+* [具身智能创业项目信息汇总](https://github.com/FreesiaGPT/Embodied-AI)
 
