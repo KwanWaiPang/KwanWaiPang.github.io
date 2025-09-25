@@ -82,7 +82,7 @@ toc: true
 波士顿动力应该都是最早的了，当时用的还是传统控制等。
 
 <div align="center">
-  <img src="../images/微信截图_20250919143127.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250919143127.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -107,7 +107,7 @@ toc: true
 55 个自由度与端到端强化学习算法构建「超灵活 +自适应」控制体系：全身 55 个自由度形成协同网络，通过算法实现毫秒级关节联动——旋转跳时，腰部调整躯干角度、手臂摆动抵消离心力、腿部精准控制落地位置，多维度姿态修正确保重心稳定；端到端强化学习基于运动数据训练，建立「传感器数据 -关节动作」直接映射：无需人工设计平衡规则，动态调整 55 个关节的输出力度与角度，在 360°旋转跳、街舞 Breaking 等高动态动作中，通过持续与环境交互优化动作策略，实现「失衡即修正」的实时平衡姿态控制。
 
 <div align="center">
-  <img src="../images/微信截图_20250919170110.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250919170110.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -117,7 +117,7 @@ toc: true
 2025年2月，Figure AI发布Helix通用具身智能模型(VLA模型)。Helix可以在人形机器人上协同运行，使得两台机器人可以协作解决一个共享的、长期的操作任务。在发布会演示的视频中，Figure AI的机器人在摆放水果的操作中展现出流畅的协作模式：左边的机器人把果盆拉过来，右边的机器人顺手把水果放进去，然后左边的机器人再把果盆放回原位。
 
 <div align="center">
-  <img src="../images/微信截图_20250919140752.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250919140752.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -132,7 +132,7 @@ toc: true
 * 环境感知与记忆：第二代的Optimus 集成的感知与定位传感器（包括摄像头、IMU 等）与特斯拉FSD 视觉神经网络深度融合，实现了实时环境建图与路径记忆。视频中机器人在室外行走时，能自主识别障碍物并规划避障路径，同时通过视觉特征点匹配技术完成环境记忆，二次行走时可直接调用历史路径数据。
 
 <div align="center">
-  <img src="../images/v2-2f7db7b29b80bb4007b3081929c7487f_b.webp" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/v2-2f7db7b29b80bb4007b3081929c7487f_b.webp" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -140,7 +140,7 @@ toc: true
 * 动作捕捉与技能迁移：第二代的Optimus 通过多模态动作捕捉与端到端神经网络的无缝协同，实现了人类技能的快速迁移：工程人员佩戴 VR 头显与动作捕捉服进行操作，其动作序列被多传感器系统实时采集，经基于 Transformer 的端到端模型解析后，直接生成机器人关节控制参数。
 
 <div align="center">
-  <img src="../images/v2-2497d064d67717f3d76183d52e52a256_b.webp" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/v2-2497d064d67717f3d76183d52e52a256_b.webp" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -148,7 +148,7 @@ toc: true
 * 端到端操作：在端到端操作中，系统仅需视觉输入即可完成复杂任务 —— 例如通过摄像头识别物体后，直接输出关节角度指令驱动灵巧手完成抓取，全程无需预设代码
 
 <div align="center">
-  <img src="../images/v2-0e260cca168543d9a13714bf14536ad5_b.webp" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/v2-0e260cca168543d9a13714bf14536ad5_b.webp" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -156,7 +156,7 @@ toc: true
 * 身体平衡控制：视频中Optimus 不仅能稳定完成单脚平衡动作，还能做出瑜伽级的肢体拉伸姿态，展现出远超以往的身体控制精度与动作协调性。这一进展标志着特斯拉在机器人多关节协同控制、重心动态调整等核心领域实现了重大突破。这个应该是实现了全身控制的。
 
 <div align="center">
-  <img src="../images/v2-5b892592c03c21d84e5cdd1c0cd1c274_b.webp" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/v2-5b892592c03c21d84e5cdd1c0cd1c274_b.webp" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -184,7 +184,7 @@ toc: true
 全身关节力控基于机器人完整的刚体动力学模型，将各个关节力矩的分配表达成一个优化问题：如下图，优化目标是减小质心和末端执行器轨迹的跟踪误差等用户需求，优化变量是关节的加速度和足底的接触力，约束包括符合动力学模型，满足关节力矩限制，符合支撑腿足底不动等物理假设，足底力满足摩擦锥要求以及ZMP(基于简化模型的零力矩点)在支撑域内保证脚掌不翻转等要求。优化得到的关节加速度和足底接触力再通过逆动力学就可以得到各个关节期望的前馈力矩。
 
 <div align="center">
-  <img src="..//images/微信截图_20250925093708.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250925093708.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
