@@ -2,7 +2,7 @@
 layout: post
 title: "Paper Survey之——Awesome VLA"
 date:   2025-09-19
-tags: []
+tags: [VLN/VLA]
 comments: true
 author: kwanwaipang
 toc: true

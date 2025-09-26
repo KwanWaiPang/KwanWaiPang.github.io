@@ -2,7 +2,7 @@
 layout: post
 title: "Paper Survey——CLIP on VLN"
 date:   2025-09-11
-tags: [Deep Learning]
+tags: [VLN/VLA]
 comments: true
 author: kwanwaipang
 toc: true
