@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "论文阅读笔记之——《Sensing, Social, and Motion Intelligence in Embodied Navigation: A Comprehensive Survey》"
-date:   yyyy-mm-dd
+date:   2025-09-25
 tags: [Robotics]
 comments: true
 author: kwanwaipang
