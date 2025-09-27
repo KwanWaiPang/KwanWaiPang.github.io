@@ -19,6 +19,7 @@ toc: true
 
 * [PDF](https://arxiv.org/pdf/2508.15354)
 * [Github](https://github.com/Franky-X/Awesome-Embodied-Navigation)
+* [上海交大具身导航中的感知智能、社会智能和运动智能全面综述](https://mp.weixin.qq.com/s/_2Gm9fHhJ43T_2q0hespyg)
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
