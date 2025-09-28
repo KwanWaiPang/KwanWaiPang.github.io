@@ -162,6 +162,28 @@ toc: true
 </div>
 
 
+## 开普勒
+开普勒发布了全球首款商业可售的混动架构人形机器人K2“大黄蜂”，正式启动量产进程。
+以24.8万元的售价打破了人形机器人“百万级原型机”的价格壁垒，更凭借“滚柱丝杠直线执行器混动架构”等核心技术，在步态自然度、环境适应性、工业实用性等维度比肩国际顶尖水平。
+* 下肢：采用“强化学习+模仿学习”组合策略，结合GPU加速仿真训练与真机数据打磨，搭配“奖励函数引导”机制，不断优化步态控制，缩小仿真与现实的适配误差，这一思路与特斯拉Optimus的技术方向相通。
+* 上肢：分层模型VLA+语义识别。该系统依托“仿真训练+真机数据”双轮驱动，还融入了混动架构研发中积累的仿真与真机数据经验，让机器人具备“听懂指令、自主决策”的能力。目前，K2“大黄蜂”已能精准识别自然语言指令，完成深度推理与规划，并借助基于扩散变换器（DiT）的动作模块，快速生成动作指令，实现毫秒级响应。
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/2025-09-28开普勒1.gif" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/2025-09-28开普勒2.gif" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+
 ## 逐际动力 (TRON 1)
 
 * 下肢：模块化足端（双点足、双足、双轮足），支持多形态算法研发，开箱即用，内置高性能运控算法。
@@ -198,4 +220,5 @@ toc: true
 * [2021~2025：特斯拉人形机器人Optimus发展进程详解](https://zhuanlan.zhihu.com/p/1908561554837868813)
 * [具身智能创业项目信息汇总](https://github.com/FreesiaGPT/Embodied-AI)
 * [干货丨浅谈足式机器人的运动控制](https://mp.weixin.qq.com/s/9pprjWlu_ka5mXWZk9qgJQ?poc_token=HEiW1Gij26g5HoPZRv-jEH0tk4LLfFEc7JxP9TIC)
+* [领先特斯拉Optimus，全球首款商业可售的混动架构人形机器人正式启动量产！](https://mp.weixin.qq.com/s/hb_jZQCK2TSJ96UC4S01Tw)
 
