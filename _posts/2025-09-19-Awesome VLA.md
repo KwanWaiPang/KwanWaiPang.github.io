@@ -73,13 +73,22 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 而其关键的contribution应该是数据集部分：17个月，13个机器人，13万此示范，700多个任务。
 
+<div align="center">
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250930153623.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250916135343.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
 
 ## AnywhereVLA
 
 本文通过将微调的VLA操纵，与探索、SLAM等传统任务结合，实现了移动机械臂（Mobile manipulation）的VLA任务。
 系统架构如下图所示。
 <div align="center">
-  <img src="../images/微信截图_20250930142254.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250930142254.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>

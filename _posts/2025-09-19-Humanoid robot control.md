@@ -172,10 +172,10 @@ toc: true
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/2025-09-28开普勒1.gif" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/2025-09-28开普勒1.gif" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/2025-09-28开普勒2.gif" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/2025-09-28开普勒2.gif" width="100%" />
       </td>
     </tr>
   </table>

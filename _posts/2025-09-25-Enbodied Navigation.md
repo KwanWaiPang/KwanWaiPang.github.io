@@ -41,7 +41,7 @@ toc: true
    * 主要是神经形态/生物启发(bio-inspired mechanisms)做的。尝试模仿生物导航机制，但同样存在社会智能和运动智能的覆盖不足。
 
 <div align="center">
-  <img src="../images/微信截图_20250925101302.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250925101302.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -60,7 +60,7 @@ toc: true
 * 最优策略：通过优化累计期望奖励，得到策略函数，生成动作序列 $[a_{0},a_{1},a_{2},...]$。
   
 <div align="center">
-  <img src="../images/微信截图_20250925162539.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250925162539.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -125,7 +125,7 @@ Transition 是具身导航中本体感知智能（Proprioceptive Intelligence）
 Transition 是具身导航系统中从“动作”到“状态”的映射环节。论文将状态转移方法分为三类：`动力学建模方法（dynamics-based models）`、`运动认知增强方法（motion cognition-enhanced approaches）`、`端到端学习方法（end-to-end learning）`。
 
 <div align="center">
-  <img src="../images/微信截图_20250926142022.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250926142022.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -147,7 +147,7 @@ Transition 是具身导航系统中从“动作”到“状态”的映射环节
 * 认知化转移模型（如下公式所示）
 
 <div align="center">
-  <img src="../images/微信截图_20250929101746.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250929101746.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -163,7 +163,7 @@ Transition 是具身导航系统中从“动作”到“状态”的映射环节
 机器人通过外部传感器（exteroceptive sensors）来感知环境，从而形成对外部世界的认知。本section介绍了从低层次特征提取到高层次认知理解，再到多智能体协作感知的观察方法。
 
 <div align="center">
-  <img src="../images/微信截图_20250929102003.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250929102003.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -202,7 +202,7 @@ Transition 是具身导航系统中从“动作”到“状态”的映射环节
 将来自本体感知（proprioception）和外部感知（exteroception）的信息进行融合，以形成最优的状态估计。主要是两种融合范式：经典贝叶斯方法（classic Bayesian methods）和隐式神经技术（implicit neural techniques）。
 
 <div align="center">
-  <img src="../images/微信截图_20250929161154.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250929161154.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -241,7 +241,7 @@ Transition 是具身导航系统中从“动作”到“状态”的映射环节
 通过将高层任务（high-level tasks）转换为奖励函数来指导策略学习。
 
 <div align="center">
-  <img src="../images/微信截图_20250929162508.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250929162508.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>

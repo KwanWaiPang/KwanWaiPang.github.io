@@ -24,7 +24,7 @@ toc: true
 本文是波士顿动力24年arvix的工作，关注Instruction Following，通过LLM大模型与传统的SLAM导航相结合的方式让具身导航智能体学会指令跟随。
 
 <div align="center">
-  <img src="../images/微信截图_20250927080811.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250927080811.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -53,7 +53,7 @@ toc: true
 
 
 <div align="center">
-  <img src="../images/微信截图_20250930104411.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250930104411.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -76,10 +76,10 @@ toc: true
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250930110900.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250930110900.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20250930110900 - 副本.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250930110900 - 副本.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -89,7 +89,7 @@ toc: true
 从下表可以看到，在20此实验中，成功率基本都是50%以下。
 
 <div align="center">
-  <img src="../images/微信截图_20250930112340.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250930112340.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
