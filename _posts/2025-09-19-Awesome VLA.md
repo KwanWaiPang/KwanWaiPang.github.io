@@ -62,13 +62,89 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 
 
-~~~
-未完待续
-~~~
+## AnywhereVLA
+* [PDF](https://arxiv.org/pdf/2509.21006)
+* 目前项目还没开源：[Website](https://selfai-research.github.io/AnywhereVLA/), [Github](https://github.com/SelfAI-research/AnywhereVLA)
+
+本文通过将微调的VLA操纵，与探索、SLAM等传统任务结合，实现了移动机械臂（Mobile manipulation）的VLA任务。
+系统架构如下图所示。
+<div align="center">
+  <img src="../images/微信截图_20250930142254.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 对于交互：
+* 感知及VLA部分运行在Jetson Orin NX上，而SLAM，探索以及控制则是运行在Intel NUC上；
+* 任务成功率：46%
 
 
+<br><br><br>
 
+```bash
+未完待续。下面是待更新的论文：
 
+#Act
+Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware
+
+# DexVLA
+DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control
+
+# DiVLA
+Diffusion-VLA: Scaling Robot Foundation Models via Unified Diffusion and Autoregression
+
+# Go-1
+AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems
+
+# GR-1
+UNLEASHING LARGE-SCALE VIDEO GENERATIVE PRE-TRAINING FOR VISUAL ROBOT MANIPULATION
+
+# GR-2
+GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation
+
+# HiRT
+HiRT: Enhancing Robotic Control with Hierarchical Robot Transformers
+
+# LAPA
+LATENT ACTION PRETRAINING FROM VIDEOS
+
+# Moto
+Moto: Latent Motion Token as the Bridging Language for Learning Robot Manipulation from Videos
+
+# Octo
+Octo: An Open-Source Generalist Robot Policy
+
+# OpenVLA
+OpenVLA: An Open-Source Vision-Language-Action Model
+
+# OpenVLA-OFT
+Fine-Tuning Vision-Language-Action Models: Optimizing Speed and Success
+
+# ReKep
+ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation
+
+# RoboDual
+TOWARDS SYNERGISTIC, GENERALIZED AND EFFICIENT DUAL-SYSTEM FOR ROBOTIC MANIPULATION
+
+# RoboFlamingo
+VISION-LANGUAGE FOUNDATION MODELS AS EFFECTIVE ROBOT IMITATORS
+
+# RT-2
+RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control
+
+# saycan
+Do As I Can, Not As I Say: Grounding Language in Robotic Affordances
+
+# TinyVLA
+TinyVLA: Towards Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation
+
+# VoxPoser
+VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
+
+# π0
+π0: A Vision-Language-Action Flow Model for General Robot Control
+
+```
 
 
 
