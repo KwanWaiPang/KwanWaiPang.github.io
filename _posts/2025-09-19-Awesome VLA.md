@@ -52,13 +52,26 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航+frontier-based探索|消费级硬件上实时运行VLA<br>移动机械臂|
-|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|---|---|
+|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|---|
 
 
 
 ## RT-1
 * 详细请见博客：[VLA论文阅读笔记之——《Rt-1: Robotics transformer for real-world control at scale》](https://kwanwaipang.github.io/VLA-RT1/)
 
+其架构如下图所示：
+1. 输入处理：图像和文本首先通过一个基于ImageNet预训练的EfficientNet进行处理。在FiLM层通过预训练的指令嵌入，进而提取与任务相关的视觉特征。
+2. Token Learner：将提取的视觉特征转换为Token的形式；
+3. Transformer对获取的Token做一系列的attention操作生成action token；
+4. 最终输出的action包括：手臂的七个自由度的运动：xyz，rpy，双指夹持器开合。此外，action还需要包括移动地盘的xy和航向角（yaw）。并且还需控制手臂、控制底盘、终止，三个模块的切换。
+
+<div align="center">
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250916134816.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而其关键的contribution应该是数据集部分：17个月，13个机器人，13万此示范，700多个任务。
 
 
 ## AnywhereVLA
@@ -71,7 +84,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 </figcaption>
 </div>
 
-分为三个部分：
+workflow通过语言指令作为输入，然后同时执行VLA模块实现基于task的操纵以及自主探索。主要分为三个部分：
 1. 3D语义建图。通过雷达-惯性-视觉SLAM（Fast-LIVO2）构建3D点云地图，而语义部分来自于目标检测模块。
 2. 主导环境探索(Active Environment Exploration,AEE)，基于语言指令推导出的目标物体类来执行frontier-based exploration。一旦检测到目标对象并在语义图中定位，探索就会停止。而探索部分则是将LiDAR点云投影成2D栅格地图。
 3. VLA操作，采用的为fine-tune（在SO-101机械臂上训练）的SmolVLA模型。
