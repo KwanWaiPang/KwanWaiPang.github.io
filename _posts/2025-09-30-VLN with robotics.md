@@ -20,7 +20,7 @@ toc: true
 * [论文阅读笔记之——《Vision-and-language navigation today and tomorrow: A survey in the era of foundation models》](https://kwanwaipang.github.io/VLNsurvery2024/)
 * [Paper Survey——CLIP on VLN](https://kwanwaipang.github.io/CLIP-on-VLN/)
 
-# Zero-shot Object-Centric Instruction Following: Integrating Foundation Models with Traditional Navigation
+# 1. Zero-shot Object-Centric Instruction Following: Integrating Foundation Models with Traditional Navigation
 本文是波士顿动力24年arvix的工作，关注Instruction Following，通过LLM大模型与传统的SLAM导航相结合的方式让具身导航智能体学会指令跟随。
 
 <div align="center">
@@ -33,7 +33,7 @@ toc: true
 * 演示[网页](https://sonia-raychaudhuri.github.io/nlslam/)
 
 
-# SLAM-Free Visual Navigation with Hierarchical Vision-Language Perception and Coarse-to-Fine Semantic Topological Planning
+# 2. SLAM-Free Visual Navigation with Hierarchical Vision-Language Perception and Coarse-to-Fine Semantic Topological Planning
 
 上一篇是VLN跟SLAM结合的，这篇则是要去除SLAM，两篇的观点正好相关hh
 
