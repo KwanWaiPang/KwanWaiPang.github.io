@@ -51,16 +51,13 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-|2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|---|消费级硬件上实时运行VLA<br>移动机械臂|
+|2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航+frontier-based探索|消费级硬件上实时运行VLA<br>移动机械臂|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|---|---|
 
 
 
 ## RT-1
-* [VLA论文阅读笔记之——《Rt-1: Robotics transformer for real-world control at scale》](https://kwanwaipang.github.io/VLA-RT1/)
-
-
-
+* 详细请见博客：[VLA论文阅读笔记之——《Rt-1: Robotics transformer for real-world control at scale》](https://kwanwaipang.github.io/VLA-RT1/)
 
 
 
@@ -74,7 +71,17 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 </figcaption>
 </div>
 
-* 对于交互：
+分为三个部分：
+1. 3D语义建图。通过雷达-惯性-视觉SLAM（Fast-LIVO2）构建3D点云地图，而语义部分来自于目标检测模块。
+2. 主导环境探索(Active Environment Exploration,AEE)，基于语言指令推导出的目标物体类来执行frontier-based exploration。一旦检测到目标对象并在语义图中定位，探索就会停止。而探索部分则是将LiDAR点云投影成2D栅格地图。
+3. VLA操作，采用的为fine-tune（在SO-101机械臂上训练）的SmolVLA模型。
+
+主体推理框架仍然采用预训练的VLM（对机器人轨迹数据和互联网规模的视觉语言任务进行联合微调）。
+而为了保证可移动性，利用了传统的navigation stacks。
+既利用了传统SLAM导航的鲁棒性，同时也利用了VLA模型对环境的泛化理解能力。
+属于传统方法跟VLA的结合版本。但个人认为只是让其可移动（Mobile manipulation），对于VLA任务本身，SLAM与导航似乎是不起任何帮助的😂
+
+其他补充：
 * 感知及VLA部分运行在Jetson Orin NX上，而SLAM，探索以及控制则是运行在Intel NUC上；
 * 任务成功率：46%
 * 目前项目还没开源，但后续应该是有开源的打算吧[Website](https://selfai-research.github.io/AnywhereVLA/), [Github](https://github.com/SelfAI-research/AnywhereVLA)
