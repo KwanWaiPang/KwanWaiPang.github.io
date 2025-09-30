@@ -49,9 +49,11 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
-| 年份 | 单位 | 方法 | 说明 |
-|:-----:|:-----:|:-----:|:-----:|
-|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|---|
+|  年份 |  单位  | 模型  |  方法  | 说明 |
+|:-----:|:-----:|:-----:|:-----:|:-----:|
+|2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|---|消费级硬件上实时运行VLA<br>移动机械臂|
+|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|---|---|
+
 
 
 ## RT-1
@@ -63,8 +65,6 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 
 ## AnywhereVLA
-* [PDF](https://arxiv.org/pdf/2509.21006)
-* 目前项目还没开源：[Website](https://selfai-research.github.io/AnywhereVLA/), [Github](https://github.com/SelfAI-research/AnywhereVLA)
 
 本文通过将微调的VLA操纵，与探索、SLAM等传统任务结合，实现了移动机械臂（Mobile manipulation）的VLA任务。
 系统架构如下图所示。
@@ -77,12 +77,41 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 * 对于交互：
 * 感知及VLA部分运行在Jetson Orin NX上，而SLAM，探索以及控制则是运行在Intel NUC上；
 * 任务成功率：46%
+* 目前项目还没开源，但后续应该是有开源的打算吧[Website](https://selfai-research.github.io/AnywhereVLA/), [Github](https://github.com/SelfAI-research/AnywhereVLA)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <br><br><br>
 
 ```bash
-未完待续。下面是待更新的论文：
+下面是待更新的论文：
 
 #Act
 Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware
@@ -145,7 +174,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 π0: A Vision-Language-Action Flow Model for General Robot Control
 
 ```
-
 
 
 
