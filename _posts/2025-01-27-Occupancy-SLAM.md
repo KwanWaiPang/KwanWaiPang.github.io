@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Occupancy-SLAM论文阅读"
+title: "论文阅读笔记之——Occupancy-SLAM"
 date:   2025-01-27
 tags: [SLAM, LiDAR]
 comments: true

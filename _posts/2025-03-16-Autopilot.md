@@ -2,7 +2,7 @@
 layout: post
 title: "智驾中的“无图”"
 date:   2025-03-16
-tags: [SLAM]
+tags: [Robotics]
 comments: true
 author: kwanwaipang
 toc: false #true
