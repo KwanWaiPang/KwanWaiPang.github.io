@@ -52,7 +52,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA<br>移动机械臂|
-|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|---|
+|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|首次用到实际机械臂|
 
 
 
@@ -60,7 +60,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 * 详细请见博客：[VLA论文阅读笔记之——《Rt-1: Robotics transformer for real-world control at scale》](https://kwanwaipang.github.io/VLA-RT1/)
 
 其架构如下图所示：
-1. 输入处理：图像和文本首先通过一个基于ImageNet预训练的EfficientNet进行处理。在FiLM层通过预训练的指令嵌入，进而提取与任务相关的视觉特征。
+1. 输入处理：图像和文本首先通过一个基于ImageNet预训练的EfficientNet进行处理。在FiLM层嵌入预训练的指令（将指令转换为嵌入向量），进而提取与任务相关的视觉特征。
 2. Token Learner：将提取的视觉特征转换为Token的形式；
 3. Transformer对获取的Token做一系列的attention操作生成action token；
 4. 最终输出的action包括：手臂的七个自由度的运动：xyz，rpy，双指夹持器开合。此外，action还需要包括移动地盘的xy和航向角（yaw）。并且还需控制手臂、控制底盘、终止，三个模块的切换。
@@ -80,6 +80,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 </figcaption>
 </div>
 
+RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务、多目标环境中的鲁棒性与泛化能力，在定量准确率和演示视频中均表现良好。
 
 
 
