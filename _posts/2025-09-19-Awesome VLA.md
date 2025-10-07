@@ -80,7 +80,39 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 </figcaption>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务、多目标环境中的鲁棒性与泛化能力，在定量准确率和演示视频中均表现良好。
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251007-154225.png" width="100%" />
+        RT-1 和baseline在seen任务上的整体性能、对unseen任务的泛化能力以及对干扰物和背景的鲁棒性
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251007-154149.png" width="100%" />
+        RT-1在各种指令下的轨迹
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 
 
