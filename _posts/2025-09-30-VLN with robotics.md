@@ -176,20 +176,69 @@ For example, the success rate improves by 10.5-35.5 compared to methods using mu
 <div align="center">
   <img src="../images/微信截图_20251009134724.png" width="80%" />
 <figcaption>  
-论文网站也有对应的demo视频
+论文网站也有对应的demo视频.且从demo中可以看出是连续的走动而非走下停下~
 </figcaption>
 </div>
 
 
+# 4. StreamVLN: Streaming Vision-and-Language Navigation via SlowFast Context Modeling
+* [PDF](https://arxiv.org/pdf/2507.05240)
+* [Github](https://github.com/InternRobotics/StreamVLN)
+* [Website](https://streamvln.github.io/)
+
+~~~
+PS：上一篇论文的滑动窗口部分应该是受到本文的启发~
+~~~
+
+## 理论部分
+
+对于VLN而言，保留长时间的信息（long-term context）以及实时相应都是很重要的。现有的做法有以下几种：
+1. 采样视频数据，但是降低了时间分辨率会导致预测low-level action不准确，并且对于需要精确的时间变化场景也满足不了。
+2. 将视觉token压缩为稀疏memory，但这会牺牲时间和视觉细节
+
+并且这些方法一般需要在每个action step更新LLM的对话文本，这也会导致训练与推理的计算冗余。
+
+本文提出了实现低延时的action 生成的StreamVLN框架。将Video-LLM（LLaVA-Video模型，采用的是Qwen2-7B）扩展为交错的视觉-语言-动作模型，进而实现多轮对话下与视频的连续交互。
+
+为了应对长期上下文管理和计算效率的挑战，StreamVLN采用混合的慢速-快速上下文建模策略（hybrid slow-fast context modeling strategy）：
+* 快速流式对话部分（fast-streaming dialogue context with a sliding-window KV cache）通过活动对话的滑动窗口促进响应式动作生成
+* 缓慢更新的内存部分（slow-updating memory context via token pruning）使用3D感知Token来修剪策略以及压缩历史视觉状态。这部分使得StreamVLN可以通过键值对的缓存重用，实现连贯的多回合对话（ coherent multi-turn dialogue）
+
+StreamVLN采用滑动窗口机制在固定数量的对话回合上缓存token的键/值状态（KV），以实现高度响应的动作解码。
+通过利用过去窗口的视觉语境（visual context）来增强长时间的推理。
+
+而为了控制内存的增量，StreamVLN采用temporal sampling以及剪枝策略（基于3D空间的相似性来减少token的冗余）
+
+<div align="center">
+  <img src="../images/微信截图_20251009165738.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
+## 实验部分
+
+下面是在连续环境下的R2R和RxR的对比效果：
+
+<div align="center">
+  <img src="../images/微信截图_20251009171009.png" width="80%" />
+<figcaption>  
+成功率都是60以内
+</figcaption>
+</div>
+
+
+采用的实验平台为Unitree Go2 robotic，输入为Intel® RealSense™ D455的RGB-D数据。
+StreamVLN在单张RTX4090 GPU的远程工作站上运行。
+至于在真实机器人上的效果此处就不截图了，网站和论文都有~
 
 
 
 
 # 总结
 
-已经开源的项目：
+写此博客时，已经开源的项目：
+* StreamVLN
 
 
 
