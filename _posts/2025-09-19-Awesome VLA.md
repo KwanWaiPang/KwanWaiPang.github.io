@@ -52,6 +52,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA<br>移动机械臂|
+|2023|Stanford|[ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer| ---|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|首次用到实际机械臂|
 
 
@@ -114,6 +115,54 @@ RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务
   </figcaption>
 </div>
 
+RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务、多目标环境中的鲁棒性与泛化能力，在定量准确率和演示视频中均表现良好。下面是其demo视频
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://robotics-transformer1.github.io/img/saycan_rt1_demo1_comp.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
+
+
+## ACT
+
+ACT 引入动作分块与时间集成机制，通过条件变分自编码器（CVAE）与Transformer 架构实现高效平滑的动作预测。
+
+
+ACT架构如下图所示。
+将ACT训练为条件变分自编码器（CVAE）。左侧：CVAE的编码器将动作序列和关节观测压缩为风格变量z。右侧：ACT的解码器使用Transformer编码器从多视角图像、关节位置和z中合成信息，并使用Transformer解码器预测动作。
+<div align="center">
+  <img src="../images/微信截图_20251009193129.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+ACT具体结构流程：
+1. 采样数据；
+2. 推断z，以获得CVAE解码器输入中的风格变量z；
+3. CVAE解码器预测动作序列
+<div align="center">
+  <img src="../images/微信截图_20251009193355.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+ACT 在ALOHA系统（一种低成本的开源硬件系统，用于双臂遥操作）上实现了对多种任务的学习与泛化，尤其在人类示范数据下表现出显著优于现有方法的性能和鲁棒性。
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 68%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20251009193552.png" width="100%" />
+        <img src="../images/微信截图_20251009193626.png" width="100%" />
+      </td>
+      <td style="width: 32%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20251009193930.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 
 ## AnywhereVLA
@@ -171,9 +220,6 @@ workflow通过语言指令作为输入，然后同时执行VLA模块实现基于
 
 ```bash
 下面是待更新的论文：
-
-#Act
-Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware
 
 # DexVLA
 DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control
