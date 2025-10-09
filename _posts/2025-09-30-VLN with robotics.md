@@ -125,7 +125,7 @@ toc: true
 为了保证模型对3D空间的理解能力，MLLM的visual encoders是通过pixel-3D point cloud pairs来训练，而非2D image-text data。因此嵌入了3D感知的先验。
 ~~~
 
-对于3D空间几何编码器采用的的是[VGGT](https://kwanwaipang.github.io/VGGT/)([Paper](https://arxiv.org/pdf/2503.11651))来编码场景的先验，实现从多视角图像中直接预测3D结构。
+对于3D空间几何编码器采用的的是[VGGT](https://kwanwaipang.github.io/VGGT/)([Paper](https://arxiv.org/pdf/2503.11651)，用VGGT的预训练编码器和融合解码器)来编码场景的先验，实现从多视角图像中直接预测3D结构。
 
 <div align="center">
   <img src="../images/微信截图_20251009110153.png" width="100%" />
@@ -135,7 +135,21 @@ toc: true
 
 对于缓存历史的键值对（由attention模块输出的），构成高层语义的抽象以及过去环境的结构表达。这也就是所谓的`Implicit neural representation`.
 而对于这个双隐式记忆，作者采用了两种混合的更新方式（`Hybrid incremental update`）而并非缓存所有的历史键值对。
+更新的策略分为两部分：
+1. 一个滑动窗口队列，，存储了n帧并遵循着first-in, first-out的方式。
+2. 永久保留开始的几帧。模型对这些初始帧表现出持续的高attention权重。这些权重为整个导航提供关键的全局锚点（anchors）。
 
+对于每一个新加入的帧，都计算其image token以及隐式memory的 cross-attention来直接检索历史信息，从而避免了对过去帧的冗余的特征提取。
+
+如下图所示。VGGT的推理时间随着帧数呈指数式上升，而本文提出的更新方式可以避免重新处理历史帧，进而实现推理时间仅略有增加，从而显示出卓越的效率。
+<div align="center">
+  <img src="../images/微信截图_20251009133240.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于2D语义编码器采用的是Qwen2.5-VL的原始的视觉编码器，3D空间几何编码器采用的的是VGGT预训练编码器和融合解码器。
+执行了fine-tune
 
 
 ## 实验部分
@@ -149,9 +163,22 @@ Extensive experiments demonstrate that JanusVLN outperforms over 20 recent metho
 For example, the success rate improves by 10.5-35.5 compared to methods using multiple data types as input and by 3.6-10.8 compared to methods using more RGB training data. 
 ~~~
 
+对于模拟器下测试，以连续环境的R2R为例（对于跟20多种SOTA对比），SR达到了60左右~
+<div align="center">
+  <img src="../images/微信截图_20251009134644.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
+对于实机实验，采用的是Unitree Go2，Insta360 X5相机捕获RGB，而JanusVLN运行在远程的一张A10 GPU上（处理RGB以及指令）返回推理结果给机器人执行。
 
+<div align="center">
+  <img src="../images/微信截图_20251009134724.png" width="80%" />
+<figcaption>  
+论文网站也有对应的demo视频
+</figcaption>
+</div>
 
 
 
