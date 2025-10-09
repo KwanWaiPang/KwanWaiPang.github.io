@@ -51,9 +51,9 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-|2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA<br>移动机械臂|
-|2023|Stanford|[ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer| ---|
-|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|首次用到实际机械臂|
+|2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
+|2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
+|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
 
 
@@ -124,19 +124,30 @@ RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务
 
 ## ACT
 
-ACT 引入动作分块与时间集成机制，通过条件变分自编码器（CVAE）与Transformer 架构实现高效平滑的动作预测。
+本研究中，作者致力于开发一种低成本、易获取且可复现的精细操作系统。为了实现这个目标引入了学习的机制。
+人类并不具备工业级的本体感知能力，却能够通过从闭环视觉反馈中学习，并主动补偿误差，来完成精细任务。受此启发，作者在系统中训练了一个端到端策略，能够直接将普通摄像头拍摄的RGB图像映射为机器人动作。
+而为了训练这个端到端的策略，作者构建了一个低成本（20K美金😂）但灵巧的数据采集遥操作系统
 
+ACT(Action Chunking with Transformers)通过模仿学习，从真人演示（遥操作）中掌握精细操作任务（Fine manipulation tasks）。
+为应对模仿学习存在的固有局限——例如策略误差随时间累积、人类示范行为不稳定等问题，研究者提出了基于Transformer的动作分块模型（ACT）。
 
+该方法创新地引入动作分块与时间集成机制，构建了一个动作序列的生成模型。实验证明，仅通过10分钟的示范数据，机器人就能学会6项复杂操作，如打开半透明调料杯、精准插装电池等，成功率高达80%–90%。
+
+本文的主要贡献是一种低成本的精细操作学习系统，包括遥操作系统和新型模仿学习（imitation learning）算法。所谓的新型模仿学习算法就是ACT引入动作分块机制。
+动作分块由Transformer 架构实现，然后将其训练成条件变分自编码器（conditional VAE，CVAE）来捕获人类数据，进而实现高效平滑的动作预测。
 ACT架构如下图所示。
-将ACT训练为条件变分自编码器（CVAE）。左侧：CVAE的编码器将动作序列和关节观测压缩为风格变量z。右侧：ACT的解码器使用Transformer编码器从多视角图像、关节位置和z中合成信息，并使用Transformer解码器预测动作。
+
 <div align="center">
   <img src="../images/微信截图_20251009193129.png" width="100%" />
 <figcaption>  
+将ACT训练为条件VAE，包含一个编码器和解码器。
+左侧：CVAE的编码器将动作序列和关节观测压缩为风格变量（style variable）z；
+右侧：ACT的解码器使用Transformer编码器从多视角图像、关节位置和z中合成信息，并使用Transformer解码器预测动作
 </figcaption>
 </div>
 
-ACT具体结构流程：
-1. 采样数据；
+结构流程：
+1. 采用ALOHA采样数据；记录leader robots（也就是人类操作者的输入）的关节位置。注意，记录的关节数据是leader的，而不是follower的。
 2. 推断z，以获得CVAE解码器输入中的风格变量z；
 3. CVAE解码器预测动作序列
 <div align="center">
@@ -146,7 +157,23 @@ ACT具体结构流程：
 </div>
 
 
-ACT 在ALOHA系统（一种低成本的开源硬件系统，用于双臂遥操作）上实现了对多种任务的学习与泛化，尤其在人类示范数据下表现出显著优于现有方法的性能和鲁棒性。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoperation, 一种低成本的开源硬件系统，用于双臂遥操作）上实现了对多种任务的学习与泛化，尤其在人类示范数据下表现出显著优于现有方法的性能和鲁棒性。
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
