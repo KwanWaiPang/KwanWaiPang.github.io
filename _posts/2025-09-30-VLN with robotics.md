@@ -95,6 +95,65 @@ toc: true
 </div>
 
 
+# 3. JanusVLN: Decoupling Semantics and Spatiality with Dual Implicit Memory for Vision-Language Navigation
+* [PDF](https://arxiv.org/pdf/2509.22548)
+* [Github](https://github.com/MIV-XJTU/JanusVLN)，阅读时还没正式开源
+* [Website](https://miv-xjtu.github.io/JanusVLN.github.io/)
+
+文字描述很难准确反映物体的空间关系及方位。
+同时，导航是一个3D物理空间的交互，而现有的VLA模型中的视觉编码器大多数都是继承自2D图像-文本对上预先训练的CLIP范式，这使得这些视觉编码器虽然可以较好的提取高层语义，但是难以理解3D几何结构以及空间信息。
+而人类对于2D静态图像的观测，一般是会恢复深度以及理解空间布局。但现有的VLN方法都忽视了这一点。
+
+<div align="center">
+  <img src="../images/微信截图_20251009110016.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+本文受到人类导航时隐式的场景表达的启发（“左脑的语义理解和右脑的空间认知”）。
+作者提出了一个新的VLN框架：双隐式神经网络记忆（dual implicit neural memory），将空间几何和视觉语义记忆建模为独立、紧凑和固定大小的特征表达。
+
+
+## 理论部分
+
+主要的贡献点：
+* 通过一个3D视觉基础模型（feed-forward 3D visual geometry foundation model）来扩展MLLM（Multimodal Large Language Models），实现从空间几何编码器中获取3D先验知识（用3D数据预训练），进而增强模型的空间理解能力（spatial reasoning capabilities，仅依赖于RGB输入）。
+* 而双隐式记忆(空间几何与视觉语义记忆)的历史键值对（caching historical key-value，KV）则是通过3D空间几何编码器（3D spatial geometry encoder）和MLLM的语义视觉编码器（semantic visual encoder）来分别提取。
+* 这个双隐式记忆（ dual implicit memory）通过初始窗口以及滑动窗口进行动态及增量式更新。能够逐步整合每个新帧的历史信息，而无需重新计算过去的帧（memory不会跟随着轨迹而增长）
+
+~~~
+为了保证模型对3D空间的理解能力，MLLM的visual encoders是通过pixel-3D point cloud pairs来训练，而非2D image-text data。因此嵌入了3D感知的先验。
+~~~
+
+对于3D空间几何编码器采用的的是[VGGT](https://kwanwaipang.github.io/VGGT/)([Paper](https://arxiv.org/pdf/2503.11651))来编码场景的先验，实现从多视角图像中直接预测3D结构。
+
+<div align="center">
+  <img src="../images/微信截图_20251009110153.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于缓存历史的键值对（由attention模块输出的），构成高层语义的抽象以及过去环境的结构表达。这也就是所谓的`Implicit neural representation`.
+而对于这个双隐式记忆，作者采用了两种混合的更新方式（`Hybrid incremental update`）而并非缓存所有的历史键值对。
+
+
+
+## 实验部分
+实现宣称超越了20中SOTA方法。当采用多数据输入时，成功率可以提升10.5~35.5；
+而采用更多的RGB训练数据可以带来3.6~10.8的性能提升。
+这里的confuse是需要更多的RGB训练数据才可以带来性能提升？这样的话对比是否公平呢？
+
+~~~
+原文：
+Extensive experiments demonstrate that JanusVLN outperforms over 20 recent methods to achieve SOTA performance. 
+For example, the success rate improves by 10.5-35.5 compared to methods using multiple data types as input and by 3.6-10.8 compared to methods using more RGB training data. 
+~~~
+
+
+
+
+
+
 
 
 
@@ -103,7 +162,7 @@ toc: true
 
 # 总结
 
-开源的项目：
+已经开源的项目：
 
 
 
