@@ -232,7 +232,7 @@ StreamVLN采用滑动窗口机制在固定数量的对话回合上缓存token的
 StreamVLN在单张RTX4090 GPU的远程工作站上运行。
 至于在真实机器人上的效果此处就不截图了，网站和论文都有~
 
-### 5. Navila: Legged robot vision-language-action model for navigation
+# 5. Navila: Legged robot vision-language-action model for navigation
 * [PDF](https://arxiv.org/pdf/2412.04453)
 * [website](https://navila-bot.github.io/)
 * [github](https://github.com/yang-zj1026/legged-loco)
