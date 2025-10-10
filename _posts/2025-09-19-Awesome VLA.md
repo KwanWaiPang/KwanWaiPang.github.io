@@ -299,7 +299,7 @@ PI整体架构：数据--->网络结构--->任务
 本文探索VLA训练的action representation；可以在高频数据上训练自回归 VLA。和diffusion的pi0相比，性能相当，但训练效率更快（时间减少5倍）。 FAST token化方案具有很少的超参数，并且可以高精度地重建动作，同时提供强大的压缩属性。
 
 所谓的FAST就是频率空间动作序列Token化（Frequency-space Action Sequence Tokenization，FAST）。能够通过简单的下一个token预测来训练自回归 VLA policy；
-* 动作信号需要在训练前进行压缩，以减少连续token之间的相关性；
+* 动作信号在训练前进行压缩,也就是进行action tokenization：将H个动作映射为k个离散的token；
 * 采用基于离散余弦变换discrete cosine transform (DCT) encoding；
 * DCT Tokenization 是一种将整段动作序列用频率信息表达的 token 化方法，它能更有效地压缩和建模连续动作序列，特别适合高频控制场景。
 * DCT其核心思想是：利用离散余弦变换（DCT）将整个序列转换到频域（frequency domain）
@@ -334,7 +334,7 @@ BPE每一步都将最常见的一对相邻数据单位替换为该数据中没�
 </figcaption>
 </div>
 
-
+此外论文还探讨了tokenization如何影响VLA的training，此处先略过~
 
 
 ## Hi robot 
@@ -496,5 +496,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [Helix 系列报告解读，Figure团队快慢双系统层级化范式](https://zhuanlan.zhihu.com/p/1921356994486472894)
 * [【VLA系列】 万字深度解析PI-0](https://zhuanlan.zhihu.com/p/1907535034941965833)
 * [【VLA系列】Pi0-FAST，统一具身智能的动作Tokenization训练加速5倍](https://zhuanlan.zhihu.com/p/1910755399646287695)
+* [Evaluating pi0 in the Wild: Strengths, Problems, and the Future of Generalist Robot Policies](https://penn-pal-lab.github.io/Pi0-Experiment-in-the-Wild/)
 
 
