@@ -192,6 +192,9 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
 </div>
 
 
+## Helix
+Helix是 Figure的专有视觉-语言-动作系统
+
 ## AnywhereVLA
 
 本文通过将微调的VLA操纵，与探索、SLAM等传统任务结合，实现了移动机械臂（Mobile manipulation）的VLA任务。

@@ -127,6 +127,28 @@ toc: true
 <video playsinline autoplay loop muted src="https://videos.ctfassets.net/qx5k8y1u9drj/5uOKAGkEqDISJXys5zl28i/f354a6ca801cd28966de775be3dfd919/APPLE_VIDEO.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
 </div>
 
+2025年10月，[Figure 03](https://www.figure.ai/news/introducing-figure-03) 发布。个人总结其亮点主要有以下：
+1. 每只手嵌入掌部广角摄像头，即使主视野被遮挡也能维持实时视觉反馈。
+2. 自研触觉传感器，灵敏度可检测3克压力，实现对滑动、脆弱物体的精细控制。采用柔顺、可自适应指尖，接触面积更大、握持更稳定；
+3. 机体覆盖多密度泡棉 + 柔性织物外壳；以确保安全性
+4. VLA——Helix 系统：Figure 03 配备了全新设计的感知组件与手部系统，专为 Figure 的专有视觉-语言-动作 AI「Helix」打造。
+
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://videos.ctfassets.net/qx5k8y1u9drj/5l4qb4dVZqbGwTjuhJo58S/53574b3b498a01a37df23d3cf982059c/F03_Head_Camera_Laundry_Loading_10825B.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://videos.ctfassets.net/qx5k8y1u9drj/3qKsEKxeLfgwZfRAW3Rh02/1aeaf213d3d35ae1f69917d1ba30f52a/Video_Dexterity_Tri-View_10825A.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
 ## 特斯拉Optimus
 
 * 环境感知与记忆：第二代的Optimus 集成的感知与定位传感器（包括摄像头、IMU 等）与特斯拉FSD 视觉神经网络深度融合，实现了实时环境建图与路径记忆。视频中机器人在室外行走时，能自主识别障碍物并规划避障路径，同时通过视觉特征点匹配技术完成环境记忆，二次行走时可直接调用历史路径数据。
@@ -221,4 +243,5 @@ toc: true
 * [具身智能创业项目信息汇总](https://github.com/FreesiaGPT/Embodied-AI)
 * [干货丨浅谈足式机器人的运动控制](https://mp.weixin.qq.com/s/9pprjWlu_ka5mXWZk9qgJQ?poc_token=HEiW1Gij26g5HoPZRv-jEH0tk4LLfFEc7JxP9TIC)
 * [领先特斯拉Optimus，全球首款商业可售的混动架构人形机器人正式启动量产！](https://mp.weixin.qq.com/s/hb_jZQCK2TSJ96UC4S01Tw)
+* [Figure 03 发布 | 面向家庭和生产的系统性重构与优化，自研触觉传感器，计划四年生产十万台](https://mp.weixin.qq.com/s/WF-1SP6eE1-fdgS2nBk9FQ)
 
