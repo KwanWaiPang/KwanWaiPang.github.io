@@ -51,6 +51,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+|2025|Figure AI |[Helix]()|  ---  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
@@ -133,7 +134,13 @@ ACT(Action Chunking with Transformers)通过模仿学习，从真人演示（遥
 
 该方法创新地引入动作分块与时间集成机制，构建了一个动作序列的生成模型。实验证明，仅通过10分钟的示范数据，机器人就能学会6项复杂操作，如打开半透明调料杯、精准插装电池等，成功率高达80%–90%。
 
-本文的主要贡献是一种低成本的精细操作学习系统，包括遥操作系统和新型模仿学习（imitation learning）算法。所谓的新型模仿学习算法就是ACT引入动作分块机制。
+<div align="center">
+  <img src="../images/微信截图_20251010085349.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+本文的主要贡献是一种低成本的精细操作学习系统，包括遥操作系统（如上图所示）和新型模仿学习（imitation learning）算法。所谓的新型模仿学习算法就是ACT引入动作分块机制。
 动作分块由Transformer 架构实现，然后将其训练成条件变分自编码器（conditional VAE，CVAE）来捕获人类数据，进而实现高效平滑的动作预测。
 ACT架构如下图所示。
 
@@ -146,10 +153,17 @@ ACT架构如下图所示。
 </figcaption>
 </div>
 
+对于CVAE分为两部分：编码器（上图4的左边）与解码器（上图4的右边）。
+编码器只有在训练解码器的时候用到，而推理/测试的时候是不用的。
+而CVAE编码器（BERT-like transformer encoder）预测风格变量（style variable）z分布的均值和方差（参数化为对角高斯分布）。
+而CVAE解码器（ResNet image encoders+transformer encoder+ transformer decoder），也就是policy，基于编码器给的z和当前观测（图像和关节位置）来预测动作序列。
+而在测试的时候，z被设定为先验分布的平均值，即零到确定性解码（ i.e.
+zero to deterministically decode）
+
 结构流程：
 1. 采用ALOHA采样数据；记录leader robots（也就是人类操作者的输入）的关节位置。注意，记录的关节数据是leader的，而不是follower的。
-2. 推断z，以获得CVAE解码器输入中的风格变量z；
-3. CVAE解码器预测动作序列
+2. 训练AVT来推理z，以获得CVAE解码器输入中的风格变量（style variable）z；
+3. CVAE解码器预测动作序列。此处每个action对应着两只机械臂下一刻的目标关节位置。而目标关节的位置则是由PID控制器实现的。
 <div align="center">
   <img src="../images/微信截图_20251009193355.png" width="100%" />
 <figcaption>  
@@ -193,7 +207,9 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
 
 
 ## Helix
-Helix是 Figure的专有视觉-语言-动作系统
+Helix是 Figure的专有视觉-语言-动作系统。
+* 首个能让两台机器人同时协同工作的VLA 模型；
+* 首个输出整个人形上半身高速连续控制的VLA模型，包括手腕、躯干、头部和单个手指。
 
 ## AnywhereVLA
 
