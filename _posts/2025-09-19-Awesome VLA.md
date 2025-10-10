@@ -51,8 +51,11 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-|2025|Figure AI |[Helix]()|  ---  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
+|2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
+|  --- |  Physical Intelligence  | [PI0-Fast]()  |  ---  | --- |
+|  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
+|  2024 |  Physical Intelligence  | [PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert  | 通才模型（generalist model） |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
@@ -206,10 +209,46 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
 </div>
 
 
-## Helix
-Helix是 Figure的专有视觉-语言-动作系统。
-* 首个能让两台机器人同时协同工作的VLA 模型；
-* 首个输出整个人形上半身高速连续控制的VLA模型，包括手腕、躯干、头部和单个手指。
+## π0/PI 0
+Pi0（还有后面的pi0.5/pi0-fast）。都是Physical Intelligence的经典工作。
+这类的方案具有多任务的泛化性与实时推理能力，也被称之为“Generalist Policy”（通才策略）
+
+对于通才模型（generalist model）需要考虑三个部分：
+1. 必须在非常大规模数据上进行，因为大规模预训练的效果在较小规模上并不存在（涌现问题）。
+2. 需要正确的模型架构，这种架构可以有效地利用不同的数据源，同时能够表示与复杂的物理场景交互所需的行为
+3. 需要正确的训练策略（可能是最重要的因素），通常 NLP 和CV的大模型在pre-training 和 post-training都需要比较合适的训练策略。（比如InstructGPT中的一些训练策略、用强化学习等）
+
+而PI0则是解决这三个瓶颈的学习框架:
+利用在互联网数据训练的VLM+action expert 组成一个VLA模型，这里结合开源+内部的机器人数据训练得到异构本体foundation model，然后可以在不同的本体/特定的任务上post-training，以完成多任务的泛化或某种复杂任务的灵巧操作。
+
+~~~
+对于VLM，PI0中采用PaliGemma（使用大量互联网文本图像数据预训练的VLM）。
+PaliGemma是在2024 年 Google I/O 活动上发布的。它是一种基于两个模型的组合多模态模型：视觉模型 SigLIP 和大型语言模型 Gemma，这意味着该模型是 Transformer 解码器和 Vision Transformer 图像编码器的组合。它将图像和文本作为输入，并生成文本作为输出，支持多种语言。
+~~~
+
+<div align="center">
+  <img src="../images/微信截图_20251010134351.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+训练阶段：Pre-training ->post-training
+* Pre-training：这里有面向于具身智能的专用数据集，如open x-embodiment dataset和 pi cross-embodiment robot datasets，这些数据中已经包含了大量场景的机器人操作数据。训练后可以得到foundation model，也就是一个可以统一所有任务/本体的基础模型，这样的模型具备初步的泛化性，但不一定在专项操作任务上有好的性能。
+* Post-training（也可以题解为fine-tuning）：根据上一个阶段的foundation model，进行fine-tuning, 这里分为两类任务的post-traing数据，以提高模型在某种任务表现的专门数据，包含unseen tasks（未见任务）、high dexterity task （高灵巧任务），一共包括20多项任务；
+
+
+
+
+
+
+
+## PI0.5
+
+
+## PI0-Fast
+
+
+
 
 ## AnywhereVLA
 
@@ -238,17 +277,27 @@ workflow通过语言指令作为输入，然后同时执行VLA模块实现基于
 
 
 
+## Helix
+Helix是 Figure的专有视觉-语言-动作系统。
+* 多机器人协作 (Multi-robot collaboration)：首个能让两台机器人同时协同工作的VLA 模型；
+* 全上身控制 (Full-upper-body control)：Helix 是第一个能够高频率、连续地控制机器人整个上半身的 VLA 模型，包括手腕、躯干、头部，甚至独立的每根手指。
+* 拾取任何物品 (Pick up anything)：解决了机器人“抓取泛化”的巨大挑战，大大提高了机器人的通用性和适应性，不再需要为每种新物品都进行特定训练。
+* 单一神经网络 (One neural network)：与以往需要针对不同任务训练不同 AI 模型的方法不同，Helix 使用一套神经网络权重就能学习并执行所有行为——无论是抓取放置、使用抽屉冰箱，还是机器人间的协作，无需针对特定任务进行微调。
 
+本质上就是利用了大模型LLM或VLM实现`即时泛化`，将VLM中抽象的“常识性知识”（比如“拿起物体需要张开手”）转化为“可泛化的机器人控制”（即具体的机械臂运动指令，并能适用于各种不同形状的物体）。将 VLM 的高级语义理解转化为机器人能够执行的低级物理动作，并且能够将这种理解泛化到新颖的环境和物体中。
 
+系统结构由两部分组成（快慢双系统，类似自动驾驶领域的 DirveVLM），S2与S1串联，异步推理：
+* 上层模型 S2：VLM，构建在开源的7B参数量的VLM模型上。处理单个机器人的图像以及机器人的状态信息（包括手腕姿势和手指位置），然后投影到视觉语言的embedding space。结合语言命令对应的目标动作，S2将所有语义任务相关的信息提炼为latent vector，然后传到S1来执行low-level action；
+* 下层模型 S1：latent-conditional visuomotor transformer，是一个80M参数的cross-attention encoder-decoder transformer用于实现底层控制。输入为跟S2一样的视觉与状态输入。对于视觉的输入采用全卷积以及多尺度的骨架。对于来自S2的latent vector投影到S1的token space上，然后跟视觉特征concatenated到一起。
+<div align="center">
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250919140752.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
+数据采集部分：采用自标签（auto-labeling）的VLM来生成指令，根据机器人机载camera获取的视频来生成指令。
 
-
-
-
-
-
-
-
+Helix以200HZ频率控制着35个自由度的动作空间，
 
 
 
@@ -321,9 +370,6 @@ TinyVLA: Towards Fast, Data-Efficient Vision-Language-Action Models for Robotic 
 # VoxPoser
 VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 
-# π0
-π0: A Vision-Language-Action Flow Model for General Robot Control
-
 ```
 
 
@@ -336,5 +382,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [A Survey on Vision-Language-Action Models: An Action Tokenization Perspective](https://arxiv.org/pdf/2507.01925)
 * [Blog for VLN](https://kwanwaipang.github.io/VLN/)
 * [论文阅读笔记之——《Vision-language-action models: Concepts, progress, applications and challenges》](https://kwanwaipang.github.io/VLA-survey-2025/)
+* [Helix 系列报告解读，Figure团队快慢双系统层级化范式](https://zhuanlan.zhihu.com/p/1921356994486472894)
 
 
