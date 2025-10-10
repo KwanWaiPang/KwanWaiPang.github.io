@@ -53,9 +53,9 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
-|  --- |  Physical Intelligence  | [PI0-Fast]()  |  ---  | --- |
 |  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
-|  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert  | 通才模型（generalist model）；预训练+task-specific微调策略 |
+|  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  自回归 | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
+|  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
@@ -285,12 +285,30 @@ PI整体架构：数据--->网络结构--->任务
   </figcaption>
 </div>
 
+
+
+## PI0-Fast/π₀-FAST
+
+本文探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍
+
+* 动作信号需要在训练前进行压缩，以减少连续token之间的相关性。采用基于离散余弦变换discrete cosine transform (DCT) encoding；
+* 提出名为频率空间动作序列Token化（Frequency-space Action Sequence Tokenization，FAST）。能够通过简单的下一个token预测来训练自回归 VLA policy；
+
+
+实验证明，该方法和pi0结合时，能够扩展到处理10k小时的机器人数据，性能上媲美当前diffusion VLA模型，同时训练时间减少了多达5倍。
+<div align="center">
+  <img src="../images/微信截图_20251010154520.png" width="60%" />
+<figcaption>  
+PI整体架构：数据--->网络结构--->任务
+</figcaption>
+</div>
+
+
+
+
+## Hi robot 
+
 ## PI0.5
-
-
-## PI0-Fast
-
-
 
 
 ## AnywhereVLA
