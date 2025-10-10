@@ -213,12 +213,14 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
 Pi0（还有后面的pi0.5/pi0-fast）。都是Physical Intelligence的经典工作。
 这类的方案具有多任务的泛化性与实时推理能力，也被称之为“Generalist Policy”（通才策略）
 
-对于通才模型（generalist model）需要考虑三个部分：
+<!-- 对于通才模型（generalist model）需要考虑三个部分：
 1. 必须在非常大规模数据上进行，因为大规模预训练的效果在较小规模上并不存在（涌现问题）。
 2. 需要正确的模型架构，这种架构可以有效地利用不同的数据源，同时能够表示与复杂的物理场景交互所需的行为
-3. 需要正确的训练策略（可能是最重要的因素），通常 NLP 和CV的大模型在pre-training 和 post-training都需要比较合适的训练策略。（比如InstructGPT中的一些训练策略、用强化学习等）
+3. 需要正确的训练策略（可能是最重要的因素），通常 NLP 和CV的大模型在pre-training 和 post-training都需要比较合适的训练策略。（比如InstructGPT中的一些训练策略、用强化学习等） -->
 
-而PI0则是解决这三个瓶颈的学习框架:
+<!-- 而PI0则是解决这三个瓶颈的学习框架: -->
+
+PI0是要实现通才模型（generalist model）的学习框架:
 利用在互联网数据训练的VLM+action expert 组成一个VLA模型，这里结合开源+内部的机器人数据训练得到异构本体foundation model，然后可以在不同的本体/特定的任务上post-training，以完成多任务的泛化或某种复杂任务的灵巧操作（以高达50HZ频率控制机器人）。
 
 * 对于VLM，PI0中采用PaliGemma（使用大量互联网文本图像数据预训练的VLM）。
@@ -230,6 +232,7 @@ PaliGemma是在2024 年 Google I/O 活动上发布的。它是一种基于两个
 <div align="center">
   <img src="../images/微信截图_20251010134351.png" width="100%" />
 <figcaption>  
+PI0架构网络
 </figcaption>
 </div>
 
@@ -250,6 +253,37 @@ PI0可以完成的任务类型：
 2. 用特定任务数据微调后的困难任务：这里重点提及的是柔性操作的任务，如叠衣服（不同类型/颜色/材质的衣服在以各样的形状散落在场景中）
 3. 高效fine-tuning后的未见任务：训练阶段、后训练阶段都没有见过的任务，但是最终训完的模型却具备的能力
 
+<div align="center">
+  <img src="../images/微信截图_20251010144547.png" width="100%" />
+<figcaption>  
+PI整体架构：数据--->网络结构--->任务
+</figcaption>
+</div>
+
+试验阶段。通过5种测评任务来进行对比验证：
+1. 衬衫折叠：机器人必须折叠T恤，T 恤开始时是压平的。
+2. 简单清理餐桌：机器人必须清洁桌子，将垃圾放入垃圾桶，将盘子放入洗碗机。该分数表示放置在正确容器中的对象数。
+3. 困难清理：具有更多目标和更具挑战性的配置，例如故意放置在垃圾目标上的器皿、相互阻碍的目标以及一些不在预训练数据集中的目标。
+4. 杂货装袋：机器人必须将所有杂货装袋，例如薯片、棉花糖和猫粮。
+5. 从烤面包机中取出吐司
+
+结果如下图7所示。π0 遥遥领先，在衬衫折叠和更轻松的餐桌整理上有近乎完美的成功率(接近100%)。
+
+图9则是指令跟随能力（但此处对比只是不同参数量的PI0）。每个任务的文本说明包括要选取的对象和放置这些对象的位置，以及长度约为 2 秒的语言标记段。
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.001; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20251010143100.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.001; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20251010143345.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 ## PI0.5
 
