@@ -289,17 +289,39 @@ PI整体架构：数据--->网络结构--->任务
 
 ## PI0-Fast/π₀-FAST
 
-本文探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍
+前面的PI0是采用diffusion decoding的形式，进行k步 预测噪声去噪得到最终的action输出。
+本文探索VLA训练的action representation；可以在高频数据上训练自回归 VLA。和diffusion的pi0相比，性能相当，但训练效率更快（时间减少5倍）。 FAST token化方案具有很少的超参数，并且可以高精度地重建动作，同时提供强大的压缩属性。
+
 
 * 动作信号需要在训练前进行压缩，以减少连续token之间的相关性。采用基于离散余弦变换discrete cosine transform (DCT) encoding；
 * 提出名为频率空间动作序列Token化（Frequency-space Action Sequence Tokenization，FAST）。能够通过简单的下一个token预测来训练自回归 VLA policy；
 
+采用BPE来对动作块的Token进行编码实现压缩
+
+~~~
+BPE是一种简单的数据压缩算法，它在 1994 年发表的文章“A New Algorithm for Data Compression”中被首次提出。
+BPE每一步都将最常见的一对相邻数据单位替换为该数据中没有出现过的一个新单位，反复迭代直到满足停止条件。
+
+例子：
+假设我们有需要编码（压缩）的数据 aaabdaaabac。
+
+相邻字节对（相邻数据单位在BPE中看作相邻字节对） aa 最常出现，因此我们将用一个新字节 Z 替换它。
+我们现在有了 ZabdZabac，其中 Z = aa。
+
+下一个常见的字节对是 ab，让我们用 Y 替换它。
+我们现在有 ZYdZYac，其中 Z = aa ，Y = ab。
+
+剩下的唯一字节对是 ac，它只有一个，所以我们不对它进行编码。
+
+我们可以递归地使用字节对编码将 ZY 编码为 X。我们的数据现在已转换为 XdXac，其中 X = ZY，Y = ab，Z = aa。
+
+它不能被进一步压缩，因为没有出现多次的字节对。那如何把压缩的编码复原呢？反向执行以上过程就行了。
+~~~
 
 实验证明，该方法和pi0结合时，能够扩展到处理10k小时的机器人数据，性能上媲美当前diffusion VLA模型，同时训练时间减少了多达5倍。
 <div align="center">
   <img src="../images/微信截图_20251010154520.png" width="60%" />
 <figcaption>  
-PI整体架构：数据--->网络结构--->任务
 </figcaption>
 </div>
 
@@ -308,7 +330,26 @@ PI整体架构：数据--->网络结构--->任务
 
 ## Hi robot 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ## PI0.5
+
+
+
+
+
+
+
 
 
 ## AnywhereVLA
