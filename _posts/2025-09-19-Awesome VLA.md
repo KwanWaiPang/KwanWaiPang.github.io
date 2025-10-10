@@ -55,7 +55,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  --- |  Physical Intelligence  | [PI0-Fast]()  |  ---  | --- |
 |  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
-|  2024 |  Physical Intelligence  | [PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert  | 通才模型（generalist model） |
+|  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
@@ -209,7 +209,7 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
 </div>
 
 
-## π0/PI 0
+## π0/PI0
 Pi0（还有后面的pi0.5/pi0-fast）。都是Physical Intelligence的经典工作。
 这类的方案具有多任务的泛化性与实时推理能力，也被称之为“Generalist Policy”（通才策略）
 
