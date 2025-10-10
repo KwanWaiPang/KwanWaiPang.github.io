@@ -220,6 +220,8 @@ Pi0（还有后面的pi0.5/pi0-fast）。都是Physical Intelligence的经典工
 
 <!-- 而PI0则是解决这三个瓶颈的学习框架: -->
 
+PI0是一个面向通用机器人的多模态控制模型，通过大规模多模态预训练和流匹配动作专家，构建了一个可扩展、可微调、可跨机器人部署的通用控制策略。
+
 PI0是要实现通才模型（generalist model）的学习框架:
 利用在互联网数据训练的VLM+action expert 组成一个VLA模型，这里结合开源+内部的机器人数据训练得到异构本体foundation model，然后可以在不同的本体/特定的任务上post-training，以完成多任务的泛化或某种复杂任务的灵巧操作（以高达50HZ频率控制机器人）。
 
@@ -233,6 +235,7 @@ PaliGemma是在2024 年 Google I/O 活动上发布的。它是一种基于两个
   <img src="../images/微信截图_20251010134351.png" width="100%" />
 <figcaption>  
 PI0架构网络
+主干使用PaliGemma初始化的视觉-语言模型，动作专家通过流匹配学习控制行为，最终形成具备强大泛化能力的通用策略网络。
 </figcaption>
 </div>
 
@@ -257,8 +260,11 @@ PI0可以完成的任务类型：
   <img src="../images/微信截图_20251010144547.png" width="100%" />
 <figcaption>  
 PI整体架构：数据--->网络结构--->任务
+通用机器人策略π₀结合预训练视觉语言模型和多样化跨机器人数据集，并通过流匹配的动作专家模块输出连续动作，实现精确灵巧的操作能力，可用于直接部署或进行复杂任务微调。
 </figcaption>
 </div>
+
+π₀在无需微调的开箱测试中已展现强大表现，经过微调后在复杂任务和语言理解方面更具优势，超越所有现有baseline。
 
 试验阶段。通过5种测评任务来进行对比验证：
 1. 衬衫折叠：机器人必须折叠T恤，T 恤开始时是压平的。
@@ -292,11 +298,14 @@ PI整体架构：数据--->网络结构--->任务
 前面的PI0是采用diffusion decoding的形式，进行k步 预测噪声去噪得到最终的action输出。
 本文探索VLA训练的action representation；可以在高频数据上训练自回归 VLA。和diffusion的pi0相比，性能相当，但训练效率更快（时间减少5倍）。 FAST token化方案具有很少的超参数，并且可以高精度地重建动作，同时提供强大的压缩属性。
 
-
-* 动作信号需要在训练前进行压缩，以减少连续token之间的相关性。采用基于离散余弦变换discrete cosine transform (DCT) encoding；
-* 提出名为频率空间动作序列Token化（Frequency-space Action Sequence Tokenization，FAST）。能够通过简单的下一个token预测来训练自回归 VLA policy；
-
-采用BPE来对动作块的Token进行编码实现压缩
+所谓的FAST就是频率空间动作序列Token化（Frequency-space Action Sequence Tokenization，FAST）。能够通过简单的下一个token预测来训练自回归 VLA policy；
+* 动作信号需要在训练前进行压缩，以减少连续token之间的相关性；
+* 采用基于离散余弦变换discrete cosine transform (DCT) encoding；
+* DCT Tokenization 是一种将整段动作序列用频率信息表达的 token 化方法，它能更有效地压缩和建模连续动作序列，特别适合高频控制场景。
+* DCT其核心思想是：利用离散余弦变换（DCT）将整个序列转换到频域（frequency domain）
+* 接下来对 DCT 系数矩阵进行离散化或量化，最终生成 token 序列；
+  * 先将Sparse frequency matrix转换为一组dense tokens。拉成一维向量，并把不同动作维度的频率值“交叉穿插”起来，形成一个长整数序列；
+  * 接下来采用BPE（Byte Pair Encoding）对这串整数进行无损压缩；
 
 ~~~
 BPE是一种简单的数据压缩算法，它在 1994 年发表的文章“A New Algorithm for Data Compression”中被首次提出。
@@ -486,5 +495,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [论文阅读笔记之——《Vision-language-action models: Concepts, progress, applications and challenges》](https://kwanwaipang.github.io/VLA-survey-2025/)
 * [Helix 系列报告解读，Figure团队快慢双系统层级化范式](https://zhuanlan.zhihu.com/p/1921356994486472894)
 * [【VLA系列】 万字深度解析PI-0](https://zhuanlan.zhihu.com/p/1907535034941965833)
+* [【VLA系列】Pi0-FAST，统一具身智能的动作Tokenization训练加速5倍](https://zhuanlan.zhihu.com/p/1910755399646287695)
 
 
