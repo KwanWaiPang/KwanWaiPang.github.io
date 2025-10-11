@@ -291,8 +291,6 @@ PI整体架构：数据--->网络结构--->任务
   </figcaption>
 </div>
 
-
-
 ## PI0-Fast/π₀-FAST
 
 前面的PI0是采用diffusion decoding的形式，进行k步 预测噪声去噪得到最终的action输出。
@@ -335,6 +333,14 @@ BPE每一步都将最常见的一对相邻数据单位替换为该数据中没�
 </div>
 
 此外论文还探讨了tokenization如何影响VLA的training，此处先略过~
+
+
+[博客](https://penn-pal-lab.github.io/Pi0-Experiment-in-the-Wild/) 是GRASP Lab 的一篇在复杂真实场景中（in the wild）评估PI0-FAST-DROID 的工作，在验证其强大性能的同时也发现一些缺点：
+1. VLM无法理解某些指令：与那些具有大量参数的商业聊天机器人不同，Pi0是基于 PaliGemma（一个非常小的 VLM 模型）构建的。它缺乏 LLM 可以用来识别不熟悉物体类别的常识性推理能力。当它无法理解命令时，就会卡住。
+2. 无记忆：Pi0是一种无记忆策略，这意味着它的下一步动作仅取决于当前的摄像头图像，它永远不会“记住”之前做过的事情。这适用于单次、快速的动作（例如拿起一个杯子），但当任务需要多个协调步骤时可能会失效。
+3. 空间推理不正确。 policy 缺乏一种精确的度量方法来确定夹持器与周围环境之间的距离。因此，在高度的空间推理方面存在困难。例如，当被要求拾取一个物体并将其放入容器中时，该策略无法将物体提升到足够高的高度以越过容器的高度。
+4. 纯粹基于图像的策略缺乏触觉反馈。在试验中，有时，机器人会对手指等精细物体施加过大的力，而对塑料瓶等较重物体施加的力又太小，无法牢牢抓住。
+5. 拾取和放置任务中，严重依赖腕部摄像头。即使侧摄像头被遮挡，仍然可以工作。腕部摄像头被遮挡，但侧面摄像头没有，效果会更差。
 
 
 ## Hi robot 
@@ -497,5 +503,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [【VLA系列】 万字深度解析PI-0](https://zhuanlan.zhihu.com/p/1907535034941965833)
 * [【VLA系列】Pi0-FAST，统一具身智能的动作Tokenization训练加速5倍](https://zhuanlan.zhihu.com/p/1910755399646287695)
 * [Evaluating pi0 in the Wild: Strengths, Problems, and the Future of Generalist Robot Policies](https://penn-pal-lab.github.io/Pi0-Experiment-in-the-Wild/)
+* [【VLA 系列】复杂真实场景中评估 PI0-Fast](https://zhuanlan.zhihu.com/p/1939407718214501517)
 
 
