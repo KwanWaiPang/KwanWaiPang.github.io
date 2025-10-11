@@ -51,10 +51,11 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-|2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
+|2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
-|  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  自回归 | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
+|  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
+|  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
@@ -345,11 +346,19 @@ BPE每一步都将最常见的一对相邻数据单位替换为该数据中没�
 
 ## Hi robot 
 
+对于VLA，不仅需要理解语言，还需要能够在当前上下文中放置命令并组合现有技能来解决新任务。
+这类似于 Kahneman 的快慢双系统。“快”系统 S 1 对应于能够通过触发预先学习的技能来执行简单命令的策略，而更具深思熟虑的系统 S2 涉及更高层次的推理，以解析复杂的长期任务、解释反馈并决定适当的行动方案。
 
+Hi Robot是基于 PI0 方案搭建的快慢双系统，作者团队也称之为分层交互式机器人学习系统（hierarchical interactive robot learning system）。
+Hi Robot系统在分层结构（hierarchical reasoning system）中使用 VLM，首先对复杂的提示和用户反馈通过VLM进行推理，以推断出合适的言语回应（verbal responses）与原子指令（atomic commands，例如抓住杯子），然后以传递到低级 policy中执行。
+该low-level policy就是一个 VLA 模型（finetuned的视觉语言模型来生成机器人的action）。
 
+此外，用原子命令（atomic commands ）注释的机器人演示不足以训练高级模型来遵循复杂的、开放式的提示（ complex, open-ended prompts），因此需要复杂指令跟随的代表性样本（representative examples of complex prompt
+following）。作者对机器人观察到的状态和采取的动作进行“合成标注（synthetically label）”，即给这些数据配上假设性的指令或人类的互动语句，这些语句是有可能在当时情境下出现的。
 
-
-
+本文主要的贡献点如下：
+* 分层交互式机器人学习系统（hierarchical interactive robot learning system，Hi Robot）。使用VLM不仅进行抽象的“思考”（高层推理），还能指导具体的“行动”（低层任务执行）
+* synthetic data generation scheme。合成数据生成方案来提升e low-level VLA policy性能。
 
 
 
@@ -504,5 +513,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [【VLA系列】Pi0-FAST，统一具身智能的动作Tokenization训练加速5倍](https://zhuanlan.zhihu.com/p/1910755399646287695)
 * [Evaluating pi0 in the Wild: Strengths, Problems, and the Future of Generalist Robot Policies](https://penn-pal-lab.github.io/Pi0-Experiment-in-the-Wild/)
 * [【VLA 系列】复杂真实场景中评估 PI0-Fast](https://zhuanlan.zhihu.com/p/1939407718214501517)
+* [【VLA 系列】Hi Robot, PI 团队的快慢双系统方案](https://zhuanlan.zhihu.com/p/1923178095663383789)
 
 
