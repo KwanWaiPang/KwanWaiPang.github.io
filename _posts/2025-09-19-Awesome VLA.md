@@ -351,7 +351,20 @@ BPE每一步都将最常见的一对相邻数据单位替换为该数据中没�
 
 Hi Robot是基于 PI0 方案搭建的快慢双系统，作者团队也称之为分层交互式机器人学习系统（hierarchical interactive robot learning system）。
 Hi Robot系统在分层结构（hierarchical reasoning system）中使用 VLM，首先对复杂的提示和用户反馈通过VLM进行推理，以推断出合适的言语回应（verbal responses）与原子指令（atomic commands，例如抓住杯子），然后以传递到低级 policy中执行。
-该low-level policy就是一个 VLA 模型（finetuned的视觉语言模型来生成机器人的action）。
+该low-level policy就是一个 VLA 模型,通过fine-tuned的视觉语言模型（VLM）来生成机器人的action（本文在PI0VLA上搭建的）。
+
+<div align="center">
+  <img src="../images/微信截图_20251011140637.png" width="70%" />
+<figcaption>  
+</figcaption>
+</div>
+
+如上图所示。作者将policy分为底层和高层推理两部分：
+* low-level policy：生成动作块的VLA（PI0，VLM+flow-matching），用以相应简单的、底层的语言指令
+* high-level policy：处理开放任务提示词（open-ended task prompt）的VLM，用以输出底层语言指令来做底层推理。
+
+这两个策略以不同的频率在运行，low-level policy以高频产生动作块，而high-level policy则是在设定时间后或收到新的语言反馈后调用（频率较低）。
+故此，也称呼为“快慢系统”
 
 此外，用原子命令（atomic commands ）注释的机器人演示不足以训练高级模型来遵循复杂的、开放式的提示（ complex, open-ended prompts），因此需要复杂指令跟随的代表性样本（representative examples of complex prompt
 following）。作者对机器人观察到的状态和采取的动作进行“合成标注（synthetically label）”，即给这些数据配上假设性的指令或人类的互动语句，这些语句是有可能在当时情境下出现的。
