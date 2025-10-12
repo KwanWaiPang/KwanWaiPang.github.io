@@ -47,8 +47,6 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 在深入看各种方法之前，先通过下面表格来总览VLA的发展脉络
 
-<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
-
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
@@ -57,9 +55,18 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
+|  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 基于Open x-embodiment训练的大型架构； 通用机器人模型的探索|
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
+
+
+VLA常用的数据集：
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+| Year | Venue | Paper Title | Repository | Note |
+|:----:|:-----:| ----------- |:----------:|:----:|
+|2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
 
 
 ## RT-1
@@ -210,6 +217,106 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Octo
+
+Octo是一个大型的，在 Open X-Embodiment 数据集的800K轨迹训练的，基于Transformer的policy。
+作者期待设计一个预练好的通用机器人策略，通过fine-tune来用于下游任务。
+因此，作者也宣称Octo是第一个通才机器人策略（generalist robot policies）可以通过fine-tuned到新的观测及action space。
+
+~~~
+Open X-Embodiment dataset:是一个由 DeepMind 创建并开源的超大规模机器人数据集，汇集了来自 22 种不同机器人类型的数据。简称OXE dataset。
+~~~
+
+Octo 的整体架构如下图所示。左侧展示输入端，语言指令通过预训练语言编码器进行编码，图像则经CNN编码为token;
+右侧上方为Transformer依次处理Task,观察token以及输出readout token（粉色的）；而readout token再通过head生成action。
+右侧下方为为通过分块注意结构灵活支持输入/输出扩展。
+<div align="center">
+  <img src="../images/WX20251012-101519.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+对于action的预测采用的是diffusion decoding，输出的是一系列的连续动作块（chunk）
+
+而加入新的task、观测、或者loss等下游时，可以retain或者fine-tune整个网络（而主干网络上可以复用的，不需要根据任务重新初始化），仅仅需要添加新的位置embedding，新的编码器或者动作空间需要的新的head（比如不同自由度的机械臂）
+
+
+
+## RT-2
+
+
+
+## OpenVLA
+
+
+
+## OpenVLA-OFT
+
+
+
+
+## OpenVLA-OFT+
+
+
+
+
+## TinyVLA
+
+
+
+
+
+
+## SayCan
+
+
+
+
+## DiVLA
+
+
+
+## DxVLA
+
+
+
+## VoxPoser
+
+
+
+## ReKep
+
+
+
+## GR-1
+
+
+
+## GR-2
+
+
+
+
+## LAPA
+
+
+## GO-1
+
+
+
 ## π0/PI0
 Pi0（还有后面的pi0.5/pi0-fast）。都是Physical Intelligence的经典工作。
 这类的方案具有多任务的泛化性与实时推理能力，也被称之为“Generalist Policy”（通才策略）
@@ -291,6 +398,9 @@ PI整体架构：数据--->网络结构--->任务
   <figcaption>
   </figcaption>
 </div>
+
+PI0在复杂真实任务中展现出前所未有的灵活性、恢复力与策略创新，标志着多模态机器人模型从“演示学习” 走向“自主通用”的关键转折点。
+
 
 ## PI0-Fast/π₀-FAST
 
@@ -424,6 +534,7 @@ workflow通过语言指令作为输入，然后同时执行VLA模块实现基于
 
 ## Helix
 Helix是 Figure的专有视觉-语言-动作系统。
+通过端到端联合训练的快系统(S1)与慢系统(S2)，实现了机器人在广泛任务中兼顾深度理解与快速响应，突破了以往通用性与实时性难以兼顾的瓶颈。
 * 多机器人协作 (Multi-robot collaboration)：首个能让两台机器人同时协同工作的VLA 模型；
 * 全上身控制 (Full-upper-body control)：Helix 是第一个能够高频率、连续地控制机器人整个上半身的 VLA 模型，包括手腕、躯干、头部，甚至独立的每根手指。
 * 拾取任何物品 (Pick up anything)：解决了机器人“抓取泛化”的巨大挑战，大大提高了机器人的通用性和适应性，不再需要为每种新物品都进行特定训练。
@@ -437,6 +548,8 @@ Helix是 Figure的专有视觉-语言-动作系统。
 <div align="center">
   <img src="https://r-c-group.github.io/blog_media/images/微信截图_20250919140752.png" width="100%" />
 <figcaption>  
+快系统与慢系统的组合。
+将一个大规模预训练的视觉语言模型(System 2, S2)和一个轻量快速的Transformer(System 1, S1)结合起来，分别处理深度语义推理与快速闭环控制，从而实现了同时具备通用性、语义理解能力和高频响应速度的机器人上身控制。
 </figcaption>
 </div>
 
@@ -484,9 +597,6 @@ LATENT ACTION PRETRAINING FROM VIDEOS
 
 # Moto
 Moto: Latent Motion Token as the Bridging Language for Learning Robot Manipulation from Videos
-
-# Octo
-Octo: An Open-Source Generalist Robot Policy
 
 # OpenVLA
 OpenVLA: An Open-Source Vision-Language-Action Model
