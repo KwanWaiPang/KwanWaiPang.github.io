@@ -56,7 +56,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 基于Open x-embodiment训练的大型架构； 通用机器人模型的探索|
-|  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | --- |
+|  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
@@ -264,6 +264,14 @@ Octo 的整体架构如下图所示。左侧展示输入端，语言指令通过
 使单个端到端训练模型能享受基于网络语言和视觉-语言数据进行大规模预训练的优势,因此，
 RT-2旨在将VLM的语义推理与语言生成能力引入机器人控制，通过统一token 格式，将动作作为“语言”进行训练与推理，实现更通用、更具泛化能力的机器人策略。
 
+作者提出提议对VLM模型进行联合微调，同时利用机器人轨迹数据和互联网规模的视觉-语言任务（如视觉问答）进行训练。
+而为了既满足自然语言相应任务又满足机器人action的需求，将action表达为text token的形式，将他们以跟语言token一样的方式合并到模型的训练集中。
+
+~~~
+本质上本文就是采用预先训练好的VLM到VLA任务上，并验证其可行性～
+而前人的做法还是重新训一个VLM for robot policy或者设计新的VLA结构。
+像RT-1还是将大型的视觉-语言框架在大尺度的数据上训练的，而本文则是已有的VLM在小尺度的数据上fine-tune
+~~~
 
 RT-2架构如下图所示。机器人动作被表示为文本 token，与语言 token 使用相同的格式，统一纳入 VLM 的训练 流程中，从而实现闭环控制。该设计允许模型同时从机器人轨迹数据和大规模视觉-语言数据中学习，实现 语义理解与控制策略的融合。
 
@@ -273,8 +281,13 @@ RT-2架构如下图所示。机器人动作被表示为文本 token，与语言 
 </figcaption>
 </div>
 
+* 采用的VLM模型高达55B参数量（用网络数据以及机器人轨迹训练好的）
+* 将action转换为蕾诗文本token用于fine-tune网络
+* 超过6K个机器人测试验证其效果。
+* 采用了两个VLM模型：PaLI-X和PaLM-E；
 
-RT-2 展现出显著的泛化能力和新兴推理能力，能够处理未见场景下的复杂任务，其背后依赖的是 VLM 中预训练语义知识的成功迁移与融合。
+
+RT-2展现出显著的泛化能力和新兴推理能力，能够处理未见场景下的复杂任务，其背后依赖的是 VLM 中预训练语义知识的成功迁移与融合。
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
