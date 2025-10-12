@@ -63,8 +63,10 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 
 VLA常用的数据集：
+
 <!-- |---|`arXiv`|---|---|---| -->
 <!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
+
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
