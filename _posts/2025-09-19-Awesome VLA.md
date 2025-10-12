@@ -107,11 +107,11 @@ RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251007-154225.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251007-154225.png" width="100%" />
         RT-1 和baseline在seen任务上的整体性能、对unseen任务的泛化能力以及对干扰物和背景的鲁棒性
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251007-154149.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251007-154149.png" width="100%" />
         RT-1在各种指令下的轨迹
       </td>
     </tr>
@@ -139,7 +139,7 @@ ACT(Action Chunking with Transformers)通过模仿学习，从真人演示（遥
 该方法创新地引入动作分块与时间集成机制，构建了一个动作序列的生成模型。实验证明，仅通过10分钟的示范数据，机器人就能学会6项复杂操作，如打开半透明调料杯、精准插装电池等，成功率高达80%–90%。
 
 <div align="center">
-  <img src="../images/微信截图_20251010085349.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251010085349.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -149,7 +149,7 @@ ACT(Action Chunking with Transformers)通过模仿学习，从真人演示（遥
 ACT架构如下图所示。
 
 <div align="center">
-  <img src="../images/微信截图_20251009193129.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009193129.png" width="100%" />
 <figcaption>  
 将ACT训练为条件VAE，包含一个编码器和解码器。
 左侧：CVAE的编码器将动作序列和关节观测压缩为风格变量（style variable）z；
@@ -169,7 +169,7 @@ zero to deterministically decode）
 2. 训练AVT来推理z，以获得CVAE解码器输入中的风格变量（style variable）z；
 3. CVAE解码器预测动作序列。此处每个action对应着两只机械臂下一刻的目标关节位置。而目标关节的位置则是由PID控制器实现的。
 <div align="center">
-  <img src="../images/微信截图_20251009193355.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009193355.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -197,11 +197,11 @@ ACT在ALOHA系统（A Low-cost Open-source Hardware System for Bimanual Teleoper
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 68%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251009193552.png" width="100%" />
-        <img src="../images/微信截图_20251009193626.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009193552.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009193626.png" width="100%" />
       </td>
       <td style="width: 32%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251009193930.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009193930.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -233,7 +233,7 @@ PaliGemma是在2024 年 Google I/O 活动上发布的。它是一种基于两个
   * flow matching：diffusion的一种变体，flow match是噪声等于零的特解，更简单直接。
 
 <div align="center">
-  <img src="../images/微信截图_20251010134351.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251010134351.png" width="100%" />
 <figcaption>  
 PI0架构网络
 主干使用PaliGemma初始化的视觉-语言模型，动作专家通过流匹配学习控制行为，最终形成具备强大泛化能力的通用策略网络。
@@ -258,7 +258,7 @@ PI0可以完成的任务类型：
 3. 高效fine-tuning后的未见任务：训练阶段、后训练阶段都没有见过的任务，但是最终训完的模型却具备的能力
 
 <div align="center">
-  <img src="../images/微信截图_20251010144547.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251010144547.png" width="100%" />
 <figcaption>  
 PI整体架构：数据--->网络结构--->任务
 通用机器人策略π₀结合预训练视觉语言模型和多样化跨机器人数据集，并通过流匹配的动作专家模块输出连续动作，实现精确灵巧的操作能力，可用于直接部署或进行复杂任务微调。
@@ -281,10 +281,10 @@ PI整体架构：数据--->网络结构--->任务
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.001; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251010143100.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251010143100.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.001; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251010143345.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251010143345.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -328,7 +328,7 @@ BPE每一步都将最常见的一对相邻数据单位替换为该数据中没�
 
 实验证明，该方法和pi0结合时，能够扩展到处理10k小时的机器人数据，性能上媲美当前diffusion VLA模型，同时训练时间减少了多达5倍。
 <div align="center">
-  <img src="../images/微信截图_20251010154520.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251010154520.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -354,7 +354,7 @@ Hi Robot系统在分层结构（hierarchical reasoning system）中使用 VLM，
 该low-level policy就是一个 VLA 模型,通过fine-tuned的视觉语言模型（VLM）来生成机器人的action（本文在PI0VLA上搭建的）。
 
 <div align="center">
-  <img src="../images/微信截图_20251011140637.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251011140637.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>

@@ -105,7 +105,7 @@ toc: true
 而人类对于2D静态图像的观测，一般是会恢复深度以及理解空间布局。但现有的VLN方法都忽视了这一点。
 
 <div align="center">
-  <img src="../images/微信截图_20251009110016.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009110016.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -128,7 +128,7 @@ toc: true
 对于3D空间几何编码器采用的的是[VGGT](https://kwanwaipang.github.io/VGGT/)([Paper](https://arxiv.org/pdf/2503.11651)，用VGGT的预训练编码器和融合解码器)来编码场景的先验，实现从多视角图像中直接预测3D结构。
 
 <div align="center">
-  <img src="../images/微信截图_20251009110153.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009110153.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -143,7 +143,7 @@ toc: true
 
 如下图所示。VGGT的推理时间随着帧数呈指数式上升，而本文提出的更新方式可以避免重新处理历史帧，进而实现推理时间仅略有增加，从而显示出卓越的效率。
 <div align="center">
-  <img src="../images/微信截图_20251009133240.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009133240.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -165,7 +165,7 @@ For example, the success rate improves by 10.5-35.5 compared to methods using mu
 
 对于模拟器下测试，以连续环境的R2R为例（对于跟20多种SOTA对比），SR达到了60左右~
 <div align="center">
-  <img src="../images/微信截图_20251009134644.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009134644.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -174,7 +174,7 @@ For example, the success rate improves by 10.5-35.5 compared to methods using mu
 对于实机实验，采用的是Unitree Go2，Insta360 X5相机捕获RGB，而JanusVLN运行在远程的一张A10 GPU上（处理RGB以及指令）返回推理结果给机器人执行。
 
 <div align="center">
-  <img src="../images/微信截图_20251009134724.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009134724.png" width="80%" />
 <figcaption>  
 论文网站也有对应的demo视频.且从demo中可以看出是连续的走动而非走下停下~
 </figcaption>
@@ -210,7 +210,7 @@ StreamVLN采用滑动窗口机制在固定数量的对话回合上缓存token的
 而为了控制内存的增量，StreamVLN采用temporal sampling以及剪枝策略（基于3D空间的相似性来减少token的冗余）
 
 <div align="center">
-  <img src="../images/微信截图_20251009165738.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009165738.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -221,7 +221,7 @@ StreamVLN采用滑动窗口机制在固定数量的对话回合上缓存token的
 下面是在连续环境下的R2R和RxR的对比效果：
 
 <div align="center">
-  <img src="../images/微信截图_20251009171009.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251009171009.png" width="80%" />
 <figcaption>  
 成功率都是60以内
 </figcaption>
