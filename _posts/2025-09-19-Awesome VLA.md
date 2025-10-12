@@ -56,8 +56,9 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 基于Open x-embodiment训练的大型架构； 通用机器人模型的探索|
+|  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | --- |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
-|2023|Google|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
+|2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
 
 
@@ -258,6 +259,58 @@ Octo 的整体架构如下图所示。左侧展示输入端，语言指令通过
 ## RT-2
 
 
+使单个端到端训练模型能享受基于网络语言和视觉-语言数据进行大规模预训练的优势,因此，
+RT-2旨在将VLM的语义推理与语言生成能力引入机器人控制，通过统一token 格式，将动作作为“语言”进行训练与推理，实现更通用、更具泛化能力的机器人策略。
+
+
+RT-2架构如下图所示。机器人动作被表示为文本 token，与语言 token 使用相同的格式，统一纳入 VLM 的训练 流程中，从而实现闭环控制。该设计允许模型同时从机器人轨迹数据和大规模视觉-语言数据中学习，实现 语义理解与控制策略的融合。
+
+<div align="center">
+  <img src="../images/WX20251012-112916.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+RT-2 展现出显著的泛化能力和新兴推理能力，能够处理未见场景下的复杂任务，其背后依赖的是 VLM 中预训练语义知识的成功迁移与融合。
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251012-113521.png" width="100%" />
+        RT-2 展现的新兴能力分为三个维度:符号理解、复杂推理以及以人为中心的语义识别任务，反映了 VLM 预训练知识的迁移效果。
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251012-113353.png" width="100%" />
+        RT-2 在不同泛化场景下的表现示例，包括未见物体、背景和环境
+        <img src="../images/WX20251012-113821.png" width="100%" />
+        模型泛化性能对比
+        结论：1. 完全重训性能较差；2.联合微调效果更好；3.模型越大，泛化能力越强
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+
+RT-2实验效果如下所示。在现实世界中评估RT-2，发现具有能够 泛化到未见过物体的能力，其中除了蓝 色立方体之外，其他物体都没有在训练 数据集中出现过。
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://robotics-transformer2.github.io/videos/langtable/successes/01_ketchup_mustard.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://robotics-transformer2.github.io/videos/rt2cot_comp.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 ## OpenVLA
 
@@ -612,9 +665,6 @@ TOWARDS SYNERGISTIC, GENERALIZED AND EFFICIENT DUAL-SYSTEM FOR ROBOTIC MANIPULAT
 
 # RoboFlamingo
 VISION-LANGUAGE FOUNDATION MODELS AS EFFECTIVE ROBOT IMITATORS
-
-# RT-2
-RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control
 
 # saycan
 Do As I Can, Not As I Say: Grounding Language in Robotic Affordances
