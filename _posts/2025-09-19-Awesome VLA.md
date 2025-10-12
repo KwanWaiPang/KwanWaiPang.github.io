@@ -55,10 +55,12 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
+|  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  ---  | 首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 基于Open x-embodiment训练的大型架构； 通用机器人模型的探索|
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
+
 
 
 
@@ -310,7 +312,7 @@ RT-2展现出显著的泛化能力和新兴推理能力，能够处理未见场�
 </div>
 
 
-RT-2实验效果如下所示。在现实世界中评估RT-2，发现具有能够 泛化到未见过物体的能力，其中除了蓝 色立方体之外，其他物体都没有在训练 数据集中出现过。
+RT-2实验效果如下所示。在现实世界中评估RT-2，发现具有能够泛化到未见过物体的能力（emergent capabilities/应急能力），其中除了蓝色立方体之外，其他物体都没有在训练数据集中出现过。
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
@@ -328,6 +330,8 @@ RT-2实验效果如下所示。在现实世界中评估RT-2，发现具有能够
 </div>
 
 ## OpenVLA
+
+OpenVLA 是首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构，具备强泛化能力和高可用性，适用于多机器人平台
 
 
 
@@ -666,8 +670,6 @@ LATENT ACTION PRETRAINING FROM VIDEOS
 # Moto
 Moto: Latent Motion Token as the Bridging Language for Learning Robot Manipulation from Videos
 
-# OpenVLA
-OpenVLA: An Open-Source Vision-Language-Action Model
 
 # OpenVLA-OFT
 Fine-Tuning Vision-Language-Action Models: Optimizing Speed and Success
