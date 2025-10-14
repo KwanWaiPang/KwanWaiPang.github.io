@@ -49,6 +49,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+| 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://github.com/InternRobotics/InternVLA-M1/blob/InternVLA-M1/assets/InternVLA_M1.pdf) |  ---  | --- |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
@@ -631,7 +632,7 @@ Helix以200HZ频率控制着35个自由度的动作空间，
 
 
 
-
+## InternVLA-M1
 
 
 
