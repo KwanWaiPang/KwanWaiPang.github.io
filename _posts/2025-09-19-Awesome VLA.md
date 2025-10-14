@@ -49,7 +49,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://github.com/InternRobotics/InternVLA-M1/blob/InternVLA-M1/assets/InternVLA_M1.pdf) |  ---  | --- |
+| 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://github.com/InternRobotics/InternVLA-M1/blob/InternVLA-M1/assets/InternVLA_M1.pdf) |  ---  | 空间指导的VLA训练 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
@@ -634,11 +634,22 @@ Helix以200HZ频率控制着35个自由度的动作空间，
 
 ## InternVLA-M1
 
+InternVLA-M1的核心是`spatially guided vision-language-action training`空间指导的VLA训练，分为两个pipeline：
+1. 超过2.3M空间推理数据下进行spatial grounding 的预训练，通过将指令与视觉、实施例无关的位置（embodiment-agnostic positions）进行对齐，进而实现“where to act”的决策；
+2. spatially guided action后训练，通过生成通过即插即用的空间提示生成感知实施例的动作（embodiment-aware actions），决定“how to act”
+
+此外，构建了一个仿真的engine收集了244K个拾取与放置的案例。
 
 
+实验结果发现，比起benchmark能提升10多个点。
+如下图所示，分别为在仿真及实操下跟SOTA的对比效果
 
-
-
+<div align="center">
+  <img src="../images/微信截图_20251014165119.png" width="80%" />
+  <img src="../images/微信截图_20251014165135.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
