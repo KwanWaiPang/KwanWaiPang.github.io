@@ -640,7 +640,16 @@ InternVLA-M1的核心是`spatially guided vision-language-action training`空间
 
 此外，构建了一个仿真的engine收集了244K个拾取与放置的案例。
 
-InternVLA-M1架构如下图所示：
+InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action expert之上的双系统框架。
+
+<div align="center">
+  <img src="../images/微信截图_20251015165755.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
 
 
 实验结果发现，比起benchmark能提升10多个点。
