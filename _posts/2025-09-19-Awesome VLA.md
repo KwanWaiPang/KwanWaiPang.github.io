@@ -651,7 +651,7 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 </div>
 
 
-
+<!-- 看到To achieve this, we construct over 3M multimodal -->
 
 
 实验结果发现，比起benchmark能提升10多个点。
