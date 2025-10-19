@@ -49,7 +49,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://github.com/InternRobotics/InternVLA-M1/blob/InternVLA-M1/assets/InternVLA_M1.pdf) |  ---  | 空间指导的VLA训练 |
+| 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
@@ -640,7 +640,9 @@ InternVLA-M1的核心是`spatially guided vision-language-action training`空间
 
 此外，构建了一个仿真的engine收集了244K个拾取与放置的案例。
 
-InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action expert之上的双系统框架。
+InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action expert（具体化的特定控制/embodiment-specific control）之上的双系统框架，将高级推理（high-level reasoning）与底层执行（grounded execution）相结合。
+* VLM planner负责推理语言指令以及空间关系的推理。（注意该VLM是采用了空间数据进行训练的）
+*  action expert 负责讲过VLM输出的representation转换为可执行的电机命令
 
 <div align="center">
   <img src="../images/微信截图_20251015165755.png" width="100%" />
