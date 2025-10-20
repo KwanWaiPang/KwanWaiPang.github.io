@@ -638,6 +638,7 @@ InternVLA-M1的核心是`spatially guided vision-language-action training`空间
 1. 超过2.3M空间推理数据下进行spatial grounding 的预训练，通过将指令与视觉、实施例无关的位置（embodiment-agnostic positions）进行对齐，进而实现“where to act”的决策；
 2. spatially guided action后训练，通过生成通过即插即用的空间提示生成感知实施例的动作（embodiment-aware actions），决定“how to act”
 
+作者采集了超过3M个多模态训练样本，其中包括了2.3M spatial grounding data以及0.7M 从网络、真实场景以及仿真资源收集的multimodal understanding data.
 此外，构建了一个仿真的engine收集了244K个拾取与放置的案例。
 
 InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action expert（具体化的特定控制/embodiment-specific control）之上的双系统框架，将高级推理（high-level reasoning）与底层执行（grounded execution）相结合。
@@ -651,7 +652,6 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 </div>
 
 
-<!-- 看到To achieve this, we construct over 3M multimodal -->
 
 
 实验结果发现，比起benchmark能提升10多个点。
