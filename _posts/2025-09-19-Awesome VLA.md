@@ -651,7 +651,26 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 </figcaption>
 </div>
 
+训练也是分为两个阶段（multimodal supervision 与 action supervision），进而实现高层语义以及底层运动控制：
+1. VLM的空间推理（spatial grounding）预训练，通过在points、boxes、traces的大尺度的多模态监督建立可迁移的空间理解。所采用的训练数据都是基于机器人的数据集，包含了bounding-box检测，轨迹预测、启示性识别、思维链推理等等，同时将其转换为QA形式的结构，这样使得跟传统VLM一样训练。
+2. 空间指导的运动后训练，通过联合监督训练，将先验应用于具体化的特定控制（embodiment-specific control）。Action Expert是基于机器人演示数据训练的，并且是跟VLM一起联合训练。
 
+模型的架构如下所示。经典的快慢双系统，跟Helix是相似的架构。
+对于System2，采用的是Qwen2.5-VL3B-instruct。
+对于System2采用的是diffusion policy，通过DINOv2作为视觉编码器和轻量级的状态编码器，来组成vision-action model。
+
+在推理阶段只需要单个RTX4090 GPU （用12GB左右的内存）。
+而采用FlashAttention，VLM可以进一步将推理速度加快将近10 FPS。
+
+<div align="center">
+  <img src="../images/微信截图_20251021084522.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+为了将VLM planner以及action expert联系在一起，作者提出了一个轻量级的querying transformer，进而实现将VLM输出的 latent planning embeddings转换为固定的可学习的query tokens。
+
+而为了显式激活学习到的空间感知的能力，作者还采用了一个spatial prompting（相当于与空间信息相关的提示词，如上图的绿色字所示）.直观上来讲，更像是对语言指令的增强。比如`store all toys into the toy box`--->`Identify all relevant toys and their spatial relationships to the container`
 
 
 实验结果发现，比起benchmark能提升10多个点。
