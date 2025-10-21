@@ -659,6 +659,7 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 对于System2，采用的是Qwen2.5-VL3B-instruct。
 对于System2采用的是diffusion policy，通过DINOv2作为视觉编码器和轻量级的状态编码器，来组成vision-action model。
 
+训练采用了16块A100GPU。
 在推理阶段只需要单个RTX4090 GPU （用12GB左右的内存）。
 而采用FlashAttention，VLM可以进一步将推理速度加快将近10 FPS。
 
@@ -682,6 +683,8 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 <figcaption>  
 </figcaption>
 </div>
+
+至于其他实验，似乎更多的是对比Visual Matching、Variant Aggregation。而instruction-following pick-and-place大部分的成功率都是70~80%左右。
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
