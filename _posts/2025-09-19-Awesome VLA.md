@@ -52,7 +52,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
-|  --- |  Physical Intelligence  | [PI0.5]()  |  ---  | --- |
+|  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  ---  | 多源联合训练 + 序列建模统一模态 + 层次规划推理；相当于PI0Z+PI-FAST+Hi Robot|
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
@@ -570,7 +570,8 @@ following）。作者对机器人观察到的状态和采取的动作进行“�
 
 ## PI0.5
 
-
+PI0.5 是 PI0、Hi robot 的进一步升级版本.
+核心的解决方案就是（多源联合训练 + 序列建模统一模态 + 层次规划推理 ）相当于是把 PI0Z+PI-FAST+Hi Robot 的方案进一步升级了
 
 
 
@@ -757,6 +758,7 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [Evaluating pi0 in the Wild: Strengths, Problems, and the Future of Generalist Robot Policies](https://penn-pal-lab.github.io/Pi0-Experiment-in-the-Wild/)
 * [【VLA 系列】复杂真实场景中评估 PI0-Fast](https://zhuanlan.zhihu.com/p/1939407718214501517)
 * [【VLA 系列】Hi Robot, PI 团队的快慢双系统方案](https://zhuanlan.zhihu.com/p/1923178095663383789)
+* [【VLA 系列】万字详解 PI0.5](https://zhuanlan.zhihu.com/p/1926658523783214119)
 * [Pure Vision Language Action (VLA) Models: A Comprehensive Survey](https://arxiv.org/pdf/2509.19012)
 
 
