@@ -52,7 +52,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
-|  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  ---  | 多源联合训练 + 序列建模统一模态 + 层次规划推理；相当于PI0Z+PI-FAST+Hi Robot|
+|  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0Z+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
@@ -475,7 +475,7 @@ PI整体架构：数据--->网络结构--->任务
 PI0在复杂真实任务中展现出前所未有的灵活性、恢复力与策略创新，标志着多模态机器人模型从“演示学习” 走向“自主通用”的关键转折点。
 
 
-## PI0-Fast/π₀-FAST
+## π₀-FAST/PI0-Fast
 
 前面的PI0是采用diffusion decoding的形式，进行k步 预测噪声去噪得到最终的action输出。
 本文探索VLA训练的action representation；可以在高频数据上训练自回归 VLA。和diffusion的pi0相比，性能相当，但训练效率更快（时间减少5倍）。 FAST token化方案具有很少的超参数，并且可以高精度地重建动作，同时提供强大的压缩属性。
@@ -568,15 +568,63 @@ following）。作者对机器人观察到的状态和采取的动作进行“�
 * 杂货购物 (Grocery shopping)：包括从杂货架上取下组合好的所需物品，放入购物篮中，并将购物篮放到附近的桌子上。这项任务需要控制一个双臂移动机械手（参见图 4），并解释涉及可变数量物品的细微语义。提示示例包括“嘿机器人，你能给我拿些薯片吗？我准备开电影之夜了”、“你能给我拿些甜的吗？”、“你能给我拿些喝的吗？”、“嘿机器人，你能给我拿些 Twix 和 Skittles 吗？”，以及干预指令例如“我还要一些 Kitkat”。
 
 
-## PI0.5
+
+
+## π0.5/PI0.5
 
 PI0.5 是 PI0、Hi robot 的进一步升级版本.
-核心的解决方案就是（多源联合训练 + 序列建模统一模态 + 层次规划推理 ）相当于是把 PI0Z+PI-FAST+Hi Robot 的方案进一步升级了
+核心的解决方案就是（多源联合训练 + 序列建模统一模态 + 层次规划推理 ）相当于是把 PI0Z+PI-FAST+Hi Robot 的方案进一步升级了。其架构如下图所示。
+
+<div align="center">
+  <img src="../images/微信截图_20251021094939.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
+π0.5就是在π0的基础上，通过采用异构的任务联合训练来获取更好的泛化能力。
+所谓的异构数据指的是：多个机器人、高层语义预测、网络数据，以及其他可以增强机器人泛化能力的数据。
+通过将不同模态联合到相同的序列化框架下，进而实现可以把机器人、语言、计算机视觉等数据都结合起来训练。
+
+数据包括：
+* 移动机械臂在不同的真实家庭环境下的数据（400 小时）
+* 非移动机器人，在实验室条件下采集的数据。
+  * 基于机器人观测的高层语义任务
+  * 人类监督员给机器人的语言指令。
+* 来自网络的多模态数据
+
+训练阶段，采用的仍然是类似双系统架构。：
+* 首先，模型首先通过标准的VLM（建立在PI0的基础上，也是采用的PaliGemma）来初始化权重。然后，在异构任务数据下，对模型进行预训练；
+* 然后基于底层运动样本和高层语义动作来联合微调机械臂；在post-training阶段，模型也需要跟π0一样有一个action expert，来以更精细的粒度表示动作，并为实时控制提供更高效的计算推理。
+
+模型架构如下图所示。
+<div align="center">
+  <img src="../images/微信截图_20251021102449.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
+而在推理阶段，模型首先预测语义子任务，基于任务结构以及场景语义来推断机器人的下一个要执行的行为。然后再预测基于该子任务的动作块。
+这为模型提供了通过长期行为（long horizon behaviors）推理的能力，并在低层次和高层次上利用不同的知识。
 
+PI0.5也是首个实现长期（long-horizon）及灵巧机械臂操作。这里的`long-horizon`理解是长时间的任务，比如在完全新的家庭内，清洁厨房和卧室等。
+
+
+下图展示了PI0.5在不同环境下的实验效果。从上到下，分别是：把物体放到柜子里；把碟子放到洗碗槽；把衣服放到洗衣篮。
+<div align="center">
+  <img src="../images/微信截图_20251021104138.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+下图则是PI0.5跟PI0和PI0-Fast的对比，用的衡量指标是任务的进度：
+
+<div align="center">
+  <img src="../images/微信截图_20251021104652.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 ## AnywhereVLA
