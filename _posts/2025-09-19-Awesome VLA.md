@@ -80,6 +80,9 @@ VLA常用的数据集：
 
 
 
+
+
+
 ## RT-1
 * 详细请见博客：[VLA论文阅读笔记之——《Rt-1: Robotics transformer for real-world control at scale》](https://kwanwaipang.github.io/VLA-RT1/)
 
