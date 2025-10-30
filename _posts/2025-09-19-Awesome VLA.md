@@ -60,8 +60,8 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  ---  | 首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构 |
-|  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 基于Open x-embodiment训练的大型架构； 通用机器人模型的探索|
-|  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
+|  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
+|  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
 |2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
@@ -251,6 +251,8 @@ Octo是一个大型的，在 Open X-Embodiment 数据集的800K轨迹训练的�
 作者期待设计一个预练好的通用机器人策略，通过fine-tune来用于下游任务。
 因此，作者也宣称Octo是第一个通才机器人策略（generalist robot policies）可以通过fine-tuned到新的观测及action space。
 
+此外，Octo也探索了采用diffusion model作为policy heads来实现连续的动作生成。
+
 ~~~
 Open X-Embodiment dataset:是一个由 DeepMind 创建并开源的超大规模机器人数据集，汇集了来自 22 种不同机器人类型的数据。简称OXE dataset。
 ~~~
@@ -272,6 +274,7 @@ Octo 的整体架构如下图所示。左侧展示输入端，语言指令通过
 
 ## RT-2
 
+RT-2是正式提出VLA概念以及采用VLM作为骨架。
 
 使单个端到端训练模型能享受基于网络语言和视觉-语言数据进行大规模预训练的优势,因此，
 RT-2旨在将VLM的语义推理与语言生成能力引入机器人控制，通过统一token 格式，将动作作为“语言”进行训练与推理，实现更通用、更具泛化能力的机器人策略。
@@ -341,7 +344,10 @@ RT-2实验效果如下所示。在现实世界中评估RT-2，发现具有能够
 
 ## OpenVLA
 
-<!-- OpenVLA 是首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构，具备强泛化能力和高可用性，适用于多机器人平台 -->
+OpenVLA 是首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构，具备强泛化能力和高可用性，适用于多机器人平台。
+
+采用SigLIP或者DNIO-v2作为视觉编码器来提取视觉特征，LLaMA tokenizer来进行文本指令的embedding，大语音模型（比如LLaMA-7B）作为高层推理。
+而LLM的输出则用于预测离散化action token。
 
 
 
