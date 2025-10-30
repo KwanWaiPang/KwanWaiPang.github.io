@@ -816,5 +816,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [【VLA 系列】Hi Robot, PI 团队的快慢双系统方案](https://zhuanlan.zhihu.com/p/1923178095663383789)
 * [【VLA 系列】万字详解 PI0.5](https://zhuanlan.zhihu.com/p/1926658523783214119)
 * [Pure Vision Language Action (VLA) Models: A Comprehensive Survey](https://arxiv.org/pdf/2509.19012)
+* [Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey](https://arxiv.org/pdf/2510.17111)
 
 
