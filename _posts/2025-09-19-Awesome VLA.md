@@ -45,7 +45,7 @@ VLA模型的巨大潜力主要体现在以下三大优势上：
 
 # VLA经典方法阅读
 
-VLA模型的分类方式有很多，比如：基于自回归（autoregression）的，基于diffusion的，基于强化学习的，混合的（双系统）等。
+VLA模型的分类方式有很多，比如：基于自回归（autoregression）的，基于diffusion的，基于强化学习的，混合的（双系统）等。详细请见survey paper——[Pure Vision Language Action (VLA) Models: A Comprehensive Survey](https://arxiv.org/pdf/2509.19012)
 
 在深入看各种方法之前，先通过下面表格来总览VLA的发展脉络。
 后续也是基于此表格来对各个算法进行展开阅读。
@@ -76,6 +76,7 @@ VLA常用的数据集：
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
+|2021|`arXiv`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata)|
 
 
 
@@ -797,6 +798,7 @@ TinyVLA: Towards Fast, Data-Efficient Vision-Language-Action Models for Robotic 
 VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 
 ```
+
 
 
 
