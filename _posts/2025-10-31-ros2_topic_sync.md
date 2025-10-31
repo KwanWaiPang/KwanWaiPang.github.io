@@ -281,47 +281,21 @@ class MultiTopicSyncNode(Node):
             except Exception as e:
                 self.get_logger().error(f'写入rosbag失败: {str(e)}')
     
-    def sync_callback(self, *args):
+    def sync_callback(self, color_image, depth_image, arm_status, left_hand_state, right_hand_state):
         """
         同步回调函数，当所有Topic的消息时间同步后调用
         """
         try:
-            # 动态处理参数，因为topic数量可能变化
-            msg_dict = {}
-            arg_index = 0
-            
-            # 根据确认的topic构建消息字典
-            if '/camera/color/image_raw' in self.confirmed_topics:
-                msg_dict['color_image'] = args[arg_index]
-                arg_index += 1
-                
-            if '/camera/depth/image_raw' in self.confirmed_topics:
-                msg_dict['depth_image'] = args[arg_index]
-                arg_index += 1
-                
-            if '/arm/status' in self.confirmed_topics:
-                msg_dict['arm_status'] = args[arg_index]
-                arg_index += 1
-                
-            if '/inspire_hand/state/left_hand' in self.confirmed_topics:
-                msg_dict['left_hand_state'] = args[arg_index]
-                arg_index += 1
-                
-            if '/inspire_hand/state/right_hand' in self.confirmed_topics:
-                msg_dict['right_hand_state'] = args[arg_index]
-                arg_index += 1
-            
-            # 获取时间戳（使用第一个消息的时间戳作为参考）
-            first_msg = next(iter(msg_dict.values()))
-            if hasattr(first_msg, 'header'):
-                sync_stamp = first_msg.header.stamp
-            else:
-                sync_stamp = self.get_clock().now().to_msg()
+            # 获取时间戳
+            sync_stamp = color_image.header.stamp
             
             # 如果启用录制，录制到rosbag
             if self.recording_enabled:
-                for topic_name, msg in zip(self.confirmed_topics.keys(), msg_dict.values()):
-                    self.write_to_bag(topic_name, msg)
+                self.write_to_bag('/camera/color/image_raw', color_image)
+                self.write_to_bag('/camera/depth/image_raw', depth_image)
+                self.write_to_bag('/arm/status', arm_status)
+                self.write_to_bag('/inspire_hand/state/left_hand', left_hand_state)
+                self.write_to_bag('/inspire_hand/state/right_hand', right_hand_state)
             
             self.sync_count += 1
             elapsed_time = time.time() - self.start_time
@@ -329,54 +303,11 @@ class MultiTopicSyncNode(Node):
             if self.sync_count % 10 == 0:  # 每10次同步打印一次统计
                 self.get_logger().info(
                     f'同步统计: {self.sync_count} 次同步, '
-                    f'频率: {self.sync_count/elapsed_time:.2f} Hz, '
-                    f'Topics: {len(self.confirmed_topics)}/{len(self.required_topics)}'
+                    f'频率: {self.sync_count/elapsed_time:.2f} Hz'
                 )
-            
-            # 处理同步数据
-            self.process_sync_data(**msg_dict, sync_stamp=sync_stamp)
             
         except Exception as e:
             self.get_logger().error(f'同步回调处理错误: {str(e)}')
-
-    def process_sync_data(self, **kwargs):
-        """
-        处理同步后的数据
-        根据实际需求实现具体的处理逻辑
-        """
-        try:
-            # 动态处理数据，因为topic数量可能变化
-            info_parts = []
-            
-            if 'color_image' in kwargs:
-                color_img = kwargs['color_image']
-                info_parts.append(f'彩色图: {color_img.width}x{color_img.height}')
-                
-            if 'depth_image' in kwargs:
-                depth_img = kwargs['depth_image']
-                info_parts.append(f'深度图: {depth_img.width}x{depth_img.height}')
-                
-            if 'arm_status' in kwargs:
-                arm_status = kwargs['arm_status']
-                # 根据MotorStatusMsg的实际结构显示信息
-                if hasattr(arm_status, 'status') and len(arm_status.status) > 0:
-                    info_parts.append(f'机械臂状态: {len(arm_status.status)}个关节')
-                else:
-                    info_parts.append('机械臂状态: 无关节数据')
-                
-            if 'left_hand_state' in kwargs:
-                left_hand = kwargs['left_hand_state']
-                info_parts.append(f'左手: {len(left_hand.position)}关节')
-                
-            if 'right_hand_state' in kwargs:
-                right_hand = kwargs['right_hand_state']
-                info_parts.append(f'右手: {len(right_hand.position)}关节')
-            
-            if info_parts:
-                self.get_logger().debug('同步数据: ' + ', '.join(info_parts))
-                
-        except Exception as e:
-            self.get_logger().error(f'处理同步数据错误: {str(e)}')
 
     def destroy_node(self):
         """重写销毁节点方法，确保正确关闭rosbag"""
