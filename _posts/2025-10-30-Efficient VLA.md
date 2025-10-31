@@ -61,8 +61,10 @@ toc: true
    * ​OpenHelix​​：提供主流双系统框架的系统回顾和评估，并提出了优化的模块化配置。具体来说，LLaVA-7B作为慢系统，3D Diffuser Actor作为快系统，通过可学习的`<ACT>`Token进行通信。
    * FiS将“快”和“慢”两种处理模式融入一个统一的神经网络结构中，而不是分离成两个独立的模型。它通过网络内部不同层次的功能划分来实现这种“隐式”的双系统。浅层（Shallow layers）​​负责处理输入信息，构建出中间的语义表示.最终层（Final layer）​利用这些语义表示来预测最终的动作。这可以看作是“快系统”的一部分，基于已有的语义信息快速做出决策。
    * Hume引入了一种级联双系统结构。慢系统在多个噪声尺度下生成候选动作块，而一个可学习的聚合 token 输入到一个 value query head，该query head对候选动作进行评分。最有希望的动作块随后由快系统进一步分解和去噪，以产生最终的动作序列。训练是联合进行的：policy head和快系统通过flow matching进行优化，并且policy head使用离线强化学习在带有奖励标注的数据集上进行训练。
+   * HyperVLA虽然不是传统的双系统的架构，但也是two-stage framework，HyperNetwork根据语言指令和视觉输入动态生成任务特定的基础策略（Base Policy）参数。而Base Policy接下来利用视觉特征以及可学习的action token生成单步动作。从而消除了对语言指令的需求，并降低了自回归（autoregressive）或基于diffusion的解码的计算成本。HyperVLA可以被视为一种参数传输的双系统VLA：超网络（系统2）将感知编码到基础策略（系统1）的参数中，从而实现高效且语义一致的动作生成。
+   * SP-VLA根据末端执行器速度区分直观(intuitive)动作和深思熟虑(deliberate)动作。直观动作由轻量级模型处理，而深思熟虑动作则由主要的VLA模型处理。轻量级路径仅在需要完整VLA级别处理的动作比例超过预定义阈值时才被激活，从而确保了响应性和可靠性。
 
-<!-- 阅读到：Recent research has explored non-standard dual-system architectures for Vision-Language-Action (VLA) models -->
+
 
 # 2. 感知特征压缩(Efficient Perception Feature)
 视觉模态输入通常构成最长的Token序列，是VLA模型最主要的计算开销来源。
@@ -109,6 +111,7 @@ toc: true
     * FastV, EfficientVLA, SP-VLA, FlashVLA, LightVLA, ADP, FASTDriveVLA, SpecPrune-VLA, SQAP-VLA​​：这些方法在感知特征维度中详细描述，它们通过剪枝视觉令牌来减少输入到下游策略网络的令牌序列长度，本质上也是一种剪枝策略，但侧重于输入数据而非模型结构本身
 2. 推理端聚焦于突破自回归瓶颈，实现并行化或混合解码。典型路径包括采用并行草案与一次验证的投机式解码、使用双向或部分并行注意力结构以增强吞吐，以及通过一致性蒸馏缩小训练与并行推理间的分布差，从而确保稳定性与收敛速度。
 
+# 总结
 
 * 补充说明：
   
@@ -131,7 +134,20 @@ toc: true
 * 推理部分包括：并行化或混合解码。
 ~~~
 
+## VLA成功率与实时性整理
 
+下面表格总结了一些VLA算法的成功率，及其在边端设备的实时性。
+
+
+<!-- |---|---|---|---|---|---| -->
+|  年份 |  单位  | 模型  |  成功率  | 边端设备实时性 | 说明 |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+|2024|Stanford University|[OpenVLA](https://arxiv.org/pdf/2406.09246?)|BridgeData V2平均为70.6%<br>在Google robot平均为85%<br>用于新的机器人上平均为63.8%|5HZ, A5000 GPU|[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示对于Jetson AGX Orin 64GB，FPS在1.1~2.9HZ左右，成功率可达85%|
+
+
+此外，关于在NVIDIA Jetson AGX Orin上运行大型视觉语言模型（VLM）的刷新率，有开发者论坛的[帖子](https://forums.developer.nvidia.com/t/vlm-refresh-rate/315785/4)提到，对于llava-v1.5-7b模型，刷新率约为​​0.2 FPS​​；对于VILA1.5-3b模型，刷新率约为​​0.8 FPS​​。VLA模型与VLM在结构和计算量上具有相似性，因此这个数据可以作为VLA抓取算法在Orin上可能达到的推理速度的一个粗略参考。
+
+更多NVIDIA 上AI推理时间可参考：[表格](https://www.jetson-ai-lab.com/benchmarks.html)
 
 # 参考资料
 * [你的VLA太慢了！？算力不够也能提速：这篇综述教你打造高效VLA新范式](https://mp.weixin.qq.com/s/JW6RHuSBPEbBWirK_Wk23A)
