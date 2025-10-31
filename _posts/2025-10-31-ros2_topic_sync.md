@@ -93,7 +93,7 @@ class MultiTopicSyncNode(Node):
     def create_bag_path(self):
         """创建rosbag存储路径"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        bag_dir = f"sync_data_bag_{timestamp}"
+        bag_dir = f"vla_sync_data_{timestamp}" #包的名字+时间
         os.makedirs(bag_dir, exist_ok=True)
         self.get_logger().info(f'Rosbag将保存到: {os.path.abspath(bag_dir)}')
         return bag_dir
