@@ -140,9 +140,11 @@ toc: true
 
 
 <!-- |---|---|---|---|---|---| -->
+
 |  年份 |  单位  | 模型  |  成功率  | 边端设备实时性 | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-|2024|Stanford University|[OpenVLA](https://arxiv.org/pdf/2406.09246?)|BridgeData V2平均为70.6%<br>在Google robot平均为85%<br>用于新的机器人上平均为63.8%|5HZ, A5000 GPU|[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示对于Jetson AGX Orin 64GB，FPS在1.1~2.9HZ左右，成功率可达85%|
+|2024|Stanford University|[OpenVLA](https://arxiv.org/pdf/2406.09246?)|BridgeData V2平均为70.6% <br> 在Google robot平均为85%<br>用于新的机器人上平均为63.8%|5HZ, A5000 GPU|[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示对于Jetson AGX Orin 64GB，FPS在1.1~2.9HZ左右，成功率可达85%|
+
 
 
 此外，关于在NVIDIA Jetson AGX Orin上运行大型视觉语言模型（VLM）的刷新率，有开发者论坛的[帖子](https://forums.developer.nvidia.com/t/vlm-refresh-rate/315785/4)提到，对于llava-v1.5-7b模型，刷新率约为​​0.2 FPS​​；对于VILA1.5-3b模型，刷新率约为​​0.8 FPS​​。VLA模型与VLM在结构和计算量上具有相似性，因此这个数据可以作为VLA抓取算法在Orin上可能达到的推理速度的一个粗略参考。
