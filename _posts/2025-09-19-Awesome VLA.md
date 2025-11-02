@@ -77,8 +77,15 @@ VLA常用的数据集：
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2024|`RSS`|[Droid: A large-scale in-the-wild robot manipulation dataset](https://arxiv.org/pdf/2403.12945)|---|[website](https://droid-dataset.github.io/)|
+|2023|`CoRL`|[Bridgedata v2: A dataset for robot learning at scale](https://proceedings.mlr.press/v229/walke23a/walke23a.pdf)|[![Github stars](https://img.shields.io/github/stars/rail-berkeley/bridge_data_v2.svg)](https://github.com/rail-berkeley/bridge_data_v2)|[website](https://rail-berkeley.github.io/bridgedata/)<br>WidowX|
 |2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
-|2021|`arXiv`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata)|
+|2023|`CoRL`|[Rt-2: Vision-language-action models transfer web knowledge to robotic control](https://robotics-transformer2.github.io/assets/rt2.pdf)|---|[Website](https://robotics-transformer2.github.io/)|
+|2022|`arXiv`|[Rt-1: Robotics transformer for real-world control at scale](https://arxiv.org/pdf/2212.06817)|[![Github stars](https://img.shields.io/github/stars/google-research/robotics_transformer.svg)](https://github.com/google-research/robotics_transformer)|[website](https://robotics-transformer1.github.io/) <br> Google robot|
+|2021|`arXiv`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata) <br> Google robot|
+
+
+
+
 
 
 
@@ -362,6 +369,9 @@ LLaMA 2是一个大型语言模型（LLM）,得益于互联网规模的预训练
 SigLIP是一个视觉语言模型（VLM），与单独使用CLIP或SigLIP编码器相比，融合DINOv2特征的SigLIP已被证明有助于改进空间推理能力，
 ~~~
 
+OpenVLA其实就构建在Prismatic-7B VLM（如下图2所示）的基础上的。Prismatic拥有一个6亿参数（600M-parameter）的视觉编码器、一个小巧的两层MLP投影器，以及一个70亿参数（7B-parameter）的Llama 2语言模型作为其核心骨干。
+Prismatic采用了双部分视觉编码器，由预训练的SigLIP和DinoV2模型组成。输入图像的补丁会分别通过这两个编码器进行处理，然后将生成的特征向量进行通道级联。
+与更常用的视觉编码器（如仅使用CLIP或SigLIP的编码器）不同，DinoV2特征的加入已被证明有助于提升空间推理能力，这对于机器人控制来说尤其重要。
 
 
 <div align="center">
@@ -381,6 +391,12 @@ SigLIP是一个视觉语言模型（VLM），与单独使用CLIP或SigLIP编码�
   </figcaption>
 </div>
 
+为了让VLM的语言模型骨干能够预测机器人动作，作者将连续的机器人动作映射到语言模型分词器使用的离散符号（token）来表示LLM输出空间中的动作：
+* ​​离散化处理​​：将机器人动作的每个维度独立地离散化为256个bin。
+* ​​bin宽度设定​​：每个动作维度的bin宽度是根据训练数据中动作的第1个百分位数到第99个百分位数之间的范围均匀划分的。
+* 避免异常值影响​​：采用分位数来设定边界。这样做是为了忽略数据中的异常值，因为异常值可能会大幅扩展离散化区间，从而降低动作离散化的有效粒度或精度。
+
+
 实验效果方面，OpenVLA 在多个泛化维度下表现出色，全面优于现有通用策略，展现了开源模型在真实机器人控制任务中的强大潜力。
 
 <div align="center">
@@ -389,6 +405,15 @@ SigLIP是一个视觉语言模型（VLM），与单独使用CLIP或SigLIP编码�
 OpenVLA 在多个泛化维度上的表现，包括视觉、运动、物理和语义泛化。在所有类别 中，OpenVLA 均取得了最优整体性能，甚至在语义泛化方面超越了闭源的 RT-2-X
 </figcaption>
 </div>
+
+对于New Robot Setups，同样展示较好的泛化能力
+
+<div align="center">
+  <img src="../images/WX20251102-135334.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
 
 此外，[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示：OpenVLA在Jetson AGX Orin 64GB，速率可达1.1~2.9FPS左右，成功率可达85%
 
