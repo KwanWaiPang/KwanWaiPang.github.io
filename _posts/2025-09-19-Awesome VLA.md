@@ -409,17 +409,15 @@ OpenVLA 在多个泛化维度上的表现，包括视觉、运动、物理和语
 对于New Robot Setups，同样展示较好的泛化能力
 
 <div align="center">
-  <img src="../images/WX20251102-135334.png" width="60%" />
+  <img src="../images/WX20251102-135334.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>
 
 
-此外，[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示：OpenVLA在Jetson AGX Orin 64GB，速率可达1.1~2.9FPS左右，成功率可达85%
+此外，[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示：OpenVLA在Jetson AGX Orin 64GB，速率可达1.1~2.9FPS左右，成功率可达85%.
 
-
-
-
+而论文在5.3和5.4节有介绍其Parameter-Efficient Fine-Tuning与 Memory-Efficient Inference via Quantization，涉及轻量化模型的话可以参考一下～
 
 
 
