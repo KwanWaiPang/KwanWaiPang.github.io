@@ -829,8 +829,6 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 
 ## NanoVLA
 
-
-
 NanoVLA 的突破思路是——“不单纯缩小模型，而是让计算‘按需分配’”：通过解耦静态指令与动态视觉(视觉-语言解耦+缓存机制)、分阶段规划动作(长短动作分块)、自适应选择骨干网络(动态路由)，在精度不损失的前提下，实现了高性能和低资源消耗，适配边缘设备的资源限制。
 既保留通用 VLA 模型的任务精度与泛化能力，又将推理速度提升 52 倍、参数量压缩 98%，首次实现 “在边缘设备上高效运行通用机器人策略” 的目标。
 
@@ -889,7 +887,7 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
 
 
 实验效果：NanoVLA在多个基准测试和实际部署中，与现有最先进的VLA模型相比，在边缘设备上的推理速度提高了52倍，参数减少了98%，同时保持或超越了其任务准确性和泛化能力；
-* 在LIBERO任务中，NanoVLA始终优于OpenVLA、πo、TraceVLA和SpatialVLA等数十亿参数的VLA模型，平均成功率提高了6.0%到12.3%，而总参数量不到10%；
+* 在LIBERO任务中，NanoVLA始终优于Octo、OpenVLA、πo、TraceVLA和SpatialVLA等数十亿参数的VLA模型。比 7.5B 参数量的 OpenVLA 高 7.6%，比 450M 参数量的 SmolVLA 高 5.5%；推理速度是 OpenVLA 的 52 倍，是 SmolVLA 的 8 倍，完全满足边缘设备实时性要求（≥10 FPS）。
 
 <div align="center">
   <img src="../images/WX20251102-145151.png" width="60%" />
@@ -897,11 +895,25 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
 </figcaption>
 </div>
 
-* NanoVLA-R在提高3.7%精度的同时，将OpenVLA-L的参数减少了43%；
-* 在Jetson Orin Nano Super Developer Kit上，NanoVLA的FPS比OpenVLA1高52倍，成功率提高了13.8%；
-* 与SmolVLA相比，NanoVLA在50个动作块（AC）步骤下，成功率略有下降（从约90%降至87.2%），但仍比SmolVLA高3.2%，同时FPS高43.8%；
+* 在低成本真实机器人 LeRobot（搭载 Jetson Orin Nano，1280×720 RGB 相机）上，测试 12 类真实任务（含刚性物体抓取、柔性物体操作、精密控制）：
+  * 简单抓取任务（如拿起 USB、牙膏）：NanoVLA-S（161M）成功率 92%-96%，超越 OpenVLA（7B）的 74%-90%；
+  * 柔性物体任务（如拿起香蕉、毛巾）：所有 NanoVLA 版本成功率均≥90%，超越SmolVLA ；
+  * 精密控制任务（如开盖、关盖）：NanoVLA-L 成功率 76%，比 OpenVLA 高 20%（56% vs 76%），且无物体损坏；
+  * 泛化能力：对未见过的物体（如护手霜）、未见过的指令（如 “移动新毛巾”），成功率仍达 84%，比模型高 26%。
 
+<div align="center">
+  <img src="../images/WX20251102-180030.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
 
+* 在边缘设备标杆 Jetson Orin Nano（8GB 内存，67 TOPS 算力）上，NanoVLA 的部署性能如下：
+
+<div align="center">
+  <img src="../images/WX20251102-180118.png" width="70%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
