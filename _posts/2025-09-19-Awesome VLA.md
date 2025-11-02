@@ -60,7 +60,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
-|  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  ---  | 首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构 |
+|  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  SigLIP与DNIO-v2作为视觉编码器，大语言模型（LLaMA-7B）作为高层推理| 首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
@@ -347,9 +347,13 @@ RT-2实验效果如下所示。在现实世界中评估RT-2，发现具有能够
 ## OpenVLA
 
 OpenVLA 是首个大规模开源的通用 VLA 模型，结合多模态编码与大语言模型架构，具备强泛化能力和高可用性，适用于多机器人平台。
+它在包含97万个机器人操作轨迹的Open X-Embodiment数据集上进行训练。
+该模型在多机器人控制和高效微调方面表现出色，其性能在29项任务中比参数量更大的封闭模型RT-2-X（550亿参数，OpenVLA为70亿参数，参数量少7倍）的绝对成功率高出16.5%。
 
-采用SigLIP或者DNIO-v2作为视觉编码器来提取视觉特征，LLaMA tokenizer来进行文本指令的embedding，大语音模型（比如LLaMA-7B）作为高层推理。
+采用SigLIP与DNIO-v2作为视觉编码器来提取视觉特征，LLaMA tokenizer来进行文本指令的embedding，大语言模型（LLaMA-7B）作为高层推理。
 而LLM的输出则用于预测离散化action token。
+
+OpenVLA支持通过低秩适应（LoRA）和模型量化在消费级GPU上进行计算高效的微调和推理，而不会影响下游任务的成功率。这使得OpenVLA模型能够在消费级GPU上进行适应，而不是依赖大型服务器节点，同时不影响性能。
 
 
 <div align="center">
@@ -371,13 +375,14 @@ OpenVLA 是首个大规模开源的通用 VLA 模型，结合多模态编码与�
 
 实验效果方面，OpenVLA 在多个泛化维度下表现出色，全面优于现有通用策略，展现了开源模型在真实机器人控制任务中的强大潜力。
 
-
 <div align="center">
   <img src="https://r-c-group.github.io/blog_media/images/WX20251102-110908.png" width="60%" />
 <figcaption>  
 OpenVLA 在多个泛化维度上的表现，包括视觉、运动、物理和语义泛化。在所有类别 中，OpenVLA 均取得了最优整体性能，甚至在语义泛化方面超越了闭源的 RT-2-X
 </figcaption>
 </div>
+
+此外，[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示：OpenVLA在Jetson AGX Orin 64GB，速率可达1.1~2.9FPS左右，成功率可达85%
 
 
 
