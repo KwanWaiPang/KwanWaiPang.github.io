@@ -227,7 +227,8 @@ VLA模型效率优化不仅依赖于模型架构设计、感知表示和动作�
 
 |  年份 |  单位  | 模型  |  成功率  | 边端设备实时性 | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-|2024|Stanford University|[OpenVLA](https://arxiv.org/pdf/2406.09246?)|BridgeData V2平均为70.6% <br> 在Google robot平均为85%<br>用于新的机器人上平均为63.8%|5HZ, A5000 GPU|[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示对于Jetson AGX Orin 64GB，FPS在1.1~2.9HZ左右，成功率可达85%|
+|2025|University of British Columbia|[NanoVLA](https://arxiv.org/pdf/2510.25122v1)|简单抓取任务 92%～96% <br>柔性物体90%<br>未见过物体84%|Jetson Orin Nano上实时性可达41.6FPS|---|
+|2024|Stanford University|[OpenVLA](https://arxiv.org/pdf/2406.09246?)|BridgeData V2平均为70.6% <br> 在Google robot平均为85%<br>用于新的机器人上平均为63.8%|5HZ, A5000 GPU|[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示对于Jetson AGX Orin 64GB，FPS在1.1~2.9FPS左右，成功率可达85%|
 
 
 
