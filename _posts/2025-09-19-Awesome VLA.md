@@ -51,8 +51,11 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 在深入看各种方法之前，先通过下面表格来总览VLA的发展脉络。
 后续也是基于此表格来对各个算法进行展开阅读。
 
+<!-- |  年份 |  单位  | 模型  |  方法  | 说明 | -->
+
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+|  2025 |  University of British Columbia  | [NanoVLA](https://arxiv.org/pdf/2510.25122v1)  |  VLM+action expert | 视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
@@ -77,6 +80,7 @@ VLA常用的数据集：
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2024|`RSS`|[Droid: A large-scale in-the-wild robot manipulation dataset](https://arxiv.org/pdf/2403.12945)|---|[website](https://droid-dataset.github.io/)|
+|2023|`NIPS`|[Libero: Benchmarking knowledge transfer for lifelong robot learning](https://proceedings.neurips.cc/paper_files/paper/2023/file/8c3c666820ea055a77726d66fc7d447f-Paper-Datasets_and_Benchmarks.pdf)|---|[website](https://libero-project.github.io/)<br>LIBERO|
 |2023|`CoRL`|[Bridgedata v2: A dataset for robot learning at scale](https://proceedings.mlr.press/v229/walke23a/walke23a.pdf)|[![Github stars](https://img.shields.io/github/stars/rail-berkeley/bridge_data_v2.svg)](https://github.com/rail-berkeley/bridge_data_v2)|[website](https://rail-berkeley.github.io/bridgedata/)<br>WidowX|
 |2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
 |2023|`CoRL`|[Rt-2: Vision-language-action models transfer web knowledge to robotic control](https://robotics-transformer2.github.io/assets/rt2.pdf)|---|[Website](https://robotics-transformer2.github.io/)|
@@ -827,6 +831,79 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 
 
 
+NanoVLA 的突破思路是——“不单纯缩小模型，而是让计算‘按需分配’”：通过解耦静态指令与动态视觉(视觉-语言解耦+缓存机制)、分阶段规划动作(长短动作分块)、自适应选择骨干网络(动态路由)，在精度不损失的前提下，实现了高性能和低资源消耗，适配边缘设备的资源限制。
+既保留通用 VLA 模型的任务精度与泛化能力，又将推理速度提升 52 倍、参数量压缩 98%，首次实现 “在边缘设备上高效运行通用机器人策略” 的目标。
+
+传统的VLA模型由于计算需求高，难以部署在资源受限的边缘设备上，尤其是在对功耗、延迟和计算资源有严格要求的实际场景中。
+NanoVLA通过重新组织模态融合方式、动作随时间展开方式以及何时调用更大的模型骨干网络，弥补了这一部署差距。
+<div align="center">
+  <img src="../images/WX20251102-140314.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分配方式。
+
+
+1. 视觉-语言解耦（Vision-Language Decoupling）​​：传统 VLA 模型的致命缺陷是 “每次控制步骤都需重新计算视觉与语言特征”，而 NanoVLA 通过 “解耦架构 + 缓存机制”，彻底消除冗余计算。将传统的VLM中视觉和语言的融合从早期融合推迟到后期阶段；
+   * （分离模态编码，延迟融合时机）将视觉和语言模态进行解耦，也就是就是分离到各自的编码器中。视觉编码器（如ResNet或ViT）提取紧凑的场景特征，而语言编码器（如BERT或Qwen）编码任务指令。此外，机器人本体感知（如机器人关节状态）则是通过轻量 MLP 投影融入；
+     * 这些编码器在训练过程中保持冻结，以保留其预训练的语义知识并避免灾难性遗忘。
+     * （后期阶段融合）仅仅在动作生成阶段，使用一个轻量级的Transformer来合并模态特定的嵌入（对 “视觉嵌入+语言嵌入+本体嵌入” 进行一次交叉注意力融合）。每一层首先对输出token应用自注意力机制，然后应用交叉注意力机制融合视觉和语言特征以生成动作。
+     * 这种设计通过仅在后期阶段执行一次跨模态注意力，显著减少了冗余计算，避免了VLM中常见的计算密集型早期跨模态纠缠。
+   * （缓存优化）除了解耦，另外一个关键是能够缓存中间特征————锁定静态特征，动态更新视觉。在交互任务中（如 “拿起维生素放入托盘”），指令通常固定不变，因此：
+     * 语言嵌入、本体状态嵌入仅需计算一次并缓存，后续步骤直接复用；
+     * 仅视觉嵌入需随每帧图像更新，计算量减少 62%（基于 Qwen 0.5B 骨干测试），边缘设备推理延迟显著降低。
+
+这部分的设计优势在于：预训练视觉 / 语言编码器的语义表征能力被完整保留，晚期融合还能避免早期模态干扰，实验证明——该设计在 LIBERO 任务中，用 52M 可训练参数量实现了超越 7B 参数量 OpenVLA 的精度。
+
+<div align="center">
+  <img src="../images/WX20251102-142441.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+
+
+
+
+2. 长短动作分块​（Long-Short Action Chunking，LSAC）​：在平滑、连贯的多步规划和实时响应能力之间取得平衡；为解决 “逐步预测抖动” 与 “固定长序列僵硬” 的矛盾，NanoVLA 提出 “训练时规划长序列，推理时执行短窗口” 的分块策略。
+   * NanoVLA的策略是生成一个较长的动作块，但只执行其中的一小部分，然后用新的观察结果重新规划；
+     * (训练阶段，学习长序列) 在训练期间，模型优化目标是预测长时程动作序列（如$H_{train}$ 50 步），通过监督回归学习动作间的时序连贯性，确保长任务中运动平滑，
+     * (推理阶段，根据高频反馈来调整，执行短窗口) 每次仅执<!--  -->行预测序列的前 h 步（h<<$H_{train}$ ，如 h=10），随后基于最新视觉观测重新规划；
+     * 既通过 “长规划” 保证动作连贯，又通过 “短执行 + 高频反馈” 适配环境变化（如物体位置偏移、抓取打滑）。将规划分摊到多个控制（推理）步骤中，同时保持行为的平滑性，并能适应新的视觉观测。
+
+
+这部分的设计优势在于：在 LIBERO 长任务中，长短分块策略比固定长序列执行的成功率高 16%（84% vs 68%），且动作抖动减少 30%，完全适配真实场景的动态需求。
+
+
+1. 动态路由（Dynamic Routing）​​：为解决 “单一骨干网络容量错配” 问题，NanoVLA 引入 “轻量级路由器”，根据任务复杂度自适应分配轻量级或重量级骨干网络，以优化推理效率；
+   * 动态路由模块根据任务的不确定性来选择最合适的模型。它通过贝叶斯成功建模来评估任务的复杂性；
+     * 用 Beta-二项分布建模不同骨干网络（如轻量 BERT-base、重量级 Qwen 0.5B）在各类任务上的成功率，通过蒙特卡洛估计（MCB）计算 “模型 - 任务” 匹配概率；
+   * 动态切换逻辑：在默认情况下，系统会使用小型骨干网络。只有当任务难度增加，导致不确定性超过预设阈值时，系统才会升级到更大的骨干网络。
+   * 这种机制确保了在简单任务中保持低计算成本，而在复杂任务中能够调用更强大的模型以保证性能。
+     * 简单任务（如短距离抓取）：轻量骨干占比超 80%，参数量仅 161M，推理速度提升 43%；
+     * 复杂任务（如多步组装）：自动切换到重量级骨干，精度不损失（甚至比固定重量级骨干高 3.7%）；
+     * 平均参数量降至 296M（仅为 OpenVLA 的 4%），边缘设备内存占用减少 92%。
+
+
+实验效果：NanoVLA在多个基准测试和实际部署中，与现有最先进的VLA模型相比，在边缘设备上的推理速度提高了52倍，参数减少了98%，同时保持或超越了其任务准确性和泛化能力；
+* 在LIBERO任务中，NanoVLA始终优于OpenVLA、πo、TraceVLA和SpatialVLA等数十亿参数的VLA模型，平均成功率提高了6.0%到12.3%，而总参数量不到10%；
+
+<div align="center">
+  <img src="../images/WX20251102-145151.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* NanoVLA-R在提高3.7%精度的同时，将OpenVLA-L的参数减少了43%；
+* 在Jetson Orin Nano Super Developer Kit上，NanoVLA的FPS比OpenVLA1高52倍，成功率提高了13.8%；
+* 与SmolVLA相比，NanoVLA在50个动作块（AC）步骤下，成功率略有下降（从约90%降至87.2%），但仍比SmolVLA高3.2%，同时FPS高43.8%；
+
+
+
+
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <br><br><br>
 
@@ -901,5 +978,6 @@ VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 * [【VLA 系列】万字详解 PI0.5](https://zhuanlan.zhihu.com/p/1926658523783214119)
 * [Pure Vision Language Action (VLA) Models: A Comprehensive Survey](https://arxiv.org/pdf/2509.19012)
 * [Efficient Vision-Language-Action Models for Embodied Manipulation: A Systematic Survey](https://arxiv.org/pdf/2510.17111)
+* [边缘设备上高效运行！NanoVLA ：保留 VLA 模型的精度与泛化能力，推理速度提升 52 倍](https://mp.weixin.qq.com/s/IcPUz9mHkTnMYctCtds8AA?poc_token=HMfFBmmjXPt_o7HqUWFeAlCxFBzR-kiKHiVu-fYP)
 
 
