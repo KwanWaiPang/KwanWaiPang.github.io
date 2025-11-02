@@ -29,7 +29,7 @@ toc: true
 对于高效的VLA架构，代表性工作的发展时间节点如下图所示：
 
 <div align="center">
-  <img src="../images/微信截图_20251030165215.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251030165215.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -77,10 +77,10 @@ VLA一般上多模态输入，包括了视觉感知、文本描述以及机器�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251101-144351.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251101-144351.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251101-144405.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251101-144405.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -185,7 +185,7 @@ VLA模型效率优化不仅依赖于模型架构设计、感知表示和动作�
      * ​​CEED-VLA​​：通过一致性蒸馏（consistency distillation）解决了这些挑战。在训练期间，它使用高质量教师模型在Jacobi解码下生成的轨迹作为监督，使学生模型能够学习从不完美状态中自我纠正并可靠地收敛。辅助的自回归损失进一步确保学生模型的输出分布与教师模型保持一致。为了提高效率，CEED-VLA还引入了提前退出机制，一旦更新低于预定义阈值，就停止细化。这使得模型对于更简单的任务只需几次迭代即可完成解码 
 
 <div align="center">
-  <img src="../images/WX20251102-103854.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-103854.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>

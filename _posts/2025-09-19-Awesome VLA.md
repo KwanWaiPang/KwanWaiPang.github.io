@@ -24,7 +24,7 @@ toc: true
 VLA即视觉-语言-动作，是一种将视觉感知与语言理解结合，实现自主操作决策的多模态任务。
 
 * [Paper List](https://github.com/KwanWaiPang/Awesome-VLN#VLA)
-* [Efficient VLA](https://kwanwaipang.github.io/Efficient-VLA/)
+* [论文调研——Efficient VLA](https://kwanwaipang.github.io/Efficient-VLA/)
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -263,7 +263,7 @@ Octo 的整体架构如下图所示。左侧展示输入端，语言指令通过
 右侧上方为Transformer依次处理Task,观察token以及输出readout token（粉色的）；而readout token再通过head生成action。
 右侧下方为为通过分块注意结构灵活支持输入/输出扩展。
 <div align="center">
-  <img src="../images/WX20251012-101519.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251012-101519.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -293,7 +293,7 @@ RT-2旨在将VLM的语义推理与语言生成能力引入机器人控制，通�
 RT-2架构如下图所示。机器人动作被表示为文本 token，与语言 token 使用相同的格式，统一纳入 VLM 的训练 流程中，从而实现闭环控制。该设计允许模型同时从机器人轨迹数据和大规模视觉-语言数据中学习，实现 语义理解与控制策略的融合。
 
 <div align="center">
-  <img src="../images/WX20251012-112916.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251012-112916.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -310,13 +310,13 @@ RT-2展现出显著的泛化能力和新兴推理能力，能够处理未见场�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251012-113521.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251012-113521.png" width="100%" />
         RT-2 展现的新兴能力分为三个维度:符号理解、复杂推理以及以人为中心的语义识别任务，反映了 VLM 预训练知识的迁移效果。
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251012-113353.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251012-113353.png" width="100%" />
         RT-2 在不同泛化场景下的表现示例，包括未见物体、背景和环境
-        <img src="../images/WX20251012-113821.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251012-113821.png" width="100%" />
         模型泛化性能对比
         结论：1. 完全重训性能较差；2.联合微调效果更好；3.模型越大，泛化能力越强
       </td>
@@ -350,6 +350,34 @@ OpenVLA 是首个大规模开源的通用 VLA 模型，结合多模态编码与�
 
 采用SigLIP或者DNIO-v2作为视觉编码器来提取视觉特征，LLaMA tokenizer来进行文本指令的embedding，大语音模型（比如LLaMA-7B）作为高层推理。
 而LLM的输出则用于预测离散化action token。
+
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251102-110547.png" width="100%" />
+        OpenVLA 可在多种机器人平台上直接部署，并支 持参数高效的快速微调。
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251102-110652.png" width="100%" />
+        OpenVLA模型结构:输入为图像观察和语言指令，输出为7维机器人控制动作。
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+实验效果方面，OpenVLA 在多个泛化维度下表现出色，全面优于现有通用策略，展现了开源模型在真实机器人控制任务中的强大潜力。
+
+
+<div align="center">
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-110908.png" width="60%" />
+<figcaption>  
+OpenVLA 在多个泛化维度上的表现，包括视觉、运动、物理和语义泛化。在所有类别 中，OpenVLA 均取得了最优整体性能，甚至在语义泛化方面超越了闭源的 RT-2-X
+</figcaption>
+</div>
 
 
 
@@ -593,7 +621,7 @@ PI0.5 是 PI0、Hi robot 的进一步升级版本.
 核心的解决方案就是（多源联合训练 + 序列建模统一模态 + 层次规划推理 ）相当于是把 PI0Z+PI-FAST+Hi Robot 的方案进一步升级了。其架构如下图所示。
 
 <div align="center">
-  <img src="../images/微信截图_20251021094939.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251021094939.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -616,7 +644,7 @@ PI0.5 是 PI0、Hi robot 的进一步升级版本.
 
 模型架构如下图所示。
 <div align="center">
-  <img src="../images/微信截图_20251021102449.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251021102449.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -630,7 +658,7 @@ PI0.5也是首个实现长期（long-horizon）及灵巧机械臂操作。这里
 
 下图展示了PI0.5在不同环境下的实验效果。从上到下，分别是：把物体放到柜子里；把碟子放到洗碗槽；把衣服放到洗衣篮。
 <div align="center">
-  <img src="../images/微信截图_20251021104138.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251021104138.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -638,7 +666,7 @@ PI0.5也是首个实现长期（long-horizon）及灵巧机械臂操作。这里
 下图则是PI0.5跟PI0和PI0-Fast的对比，用的衡量指标是任务的进度：
 
 <div align="center">
-  <img src="../images/微信截图_20251021104652.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251021104652.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -712,7 +740,7 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 *  action expert 负责讲过VLM输出的representation转换为可执行的电机命令
 
 <div align="center">
-  <img src="../images/微信截图_20251015165755.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251015165755.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -730,7 +758,7 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 而采用FlashAttention，VLM可以进一步将推理速度加快将近10 FPS。
 
 <div align="center">
-  <img src="../images/微信截图_20251021084522.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251021084522.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -744,13 +772,19 @@ InternVLA-M1架构如下图所示。建立在空间先验VLM planner和action ex
 如下图所示，分别为在仿真及实操下跟SOTA的对比效果
 
 <div align="center">
-  <img src="../images/微信截图_20251014165119.png" width="80%" />
-  <img src="../images/微信截图_20251014165135.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251014165119.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251014165135.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 至于其他实验，似乎更多的是对比Visual Matching、Variant Aggregation。而instruction-following pick-and-place大部分的成功率都是70~80%左右。
+
+
+
+
+## NanoVLA
+
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
