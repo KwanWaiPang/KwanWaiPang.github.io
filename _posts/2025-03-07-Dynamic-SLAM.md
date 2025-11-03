@@ -69,6 +69,7 @@ toc: false #true
 |2025|`arXiv`|[DynoSAM: Open-Source Smoothing and Mapping Framework for Dynamic SLAM](https://arxiv.org/pdf/2501.11893)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|---|
 |2025|`CVPR`|[Dynamic Camera Poses and Where to Find Them](https://arxiv.org/pdf/2504.17788)|---|[website](https://research.nvidia.com/labs/dir/dynpose-100k/)<br>[dataset](https://huggingface.co/datasets/nvidia/dynpose-100k)|
 |2025|`arXiv`|[Back on Track: Bundle Adjustment for Dynamic Scene Reconstruction](https://arxiv.org/pdf/2504.14516)|---|[website](https://wrchen530.github.io/projects/batrack/)|
+|2024|`arXiv`|[2FAST-2LAMAA: A Lidar-Inertial Localisation and Mapping Framework for Non-Static Environments](https://arxiv.org/pdf/2410.05433)|[![Github stars](https://img.shields.io/github/stars/UTS-RI/2fast2lamaa.svg)](https://github.com/UTS-RI/2fast2lamaa)|---|
 |2024|`IJRR`|[Multimotion visual odometry](https://journals.sagepub.com/doi/pdf/10.1177/02783649241229095)|---|---|
 |2024|`IROS`|[Visual Perception System for Autonomous Driving](https://arxiv.org/pdf/2303.02257)|---|---|
 |2024|`IROS`|[SDPL-SLAM: Introducing Lines in Dynamic Visual SLAM and Multi-Object Tracking](https://robotics.ntua.gr/wp-content/uploads/sites/2/2024_Manetas_IntroduceLinesInVisualSLAM-MultiObjectTrack_IROS.pdf)|---|---|
