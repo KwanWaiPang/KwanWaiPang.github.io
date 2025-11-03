@@ -81,9 +81,9 @@ class MultiTopicSyncNode(Node):
         self.sync_count = 0
         self.start_time = time.time()
         
-        # 如果启用录制，创建bag路径
-        if self.recording_enabled:
-            self.bag_path = self.create_bag_path()
+        # # 如果启用录制，创建bag路径
+        # if self.recording_enabled:
+        #     self.bag_path = self.create_bag_path()
         
         self.get_logger().info(f'开始确认topic可用性... 录制模式: {"启用" if self.recording_enabled else "禁用"}')
 
@@ -91,10 +91,10 @@ class MultiTopicSyncNode(Node):
         self.start_topic_confirmation()
         
     def create_bag_path(self):
-        """创建rosbag存储路径"""
+        """创建rosbag存储路径 - 修改为返回路径但不创建目录"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        bag_dir = f"vla_sync_data_{timestamp}" #包的名字+时间
-        os.makedirs(bag_dir, exist_ok=True)
+        bag_dir = f"vla_sync_data_{timestamp}"
+        # 移除了 os.makedirs(bag_dir, exist_ok=True)
         self.get_logger().info(f'Rosbag将保存到: {os.path.abspath(bag_dir)}')
         return bag_dir
         
@@ -230,6 +230,10 @@ class MultiTopicSyncNode(Node):
     def initialize_rosbag_recorder(self):
         """初始化rosbag录制器"""
         try:
+            # 在初始化录制器时才创建路径
+            if self.bag_path is None:
+                self.bag_path = self.create_bag_path()
+
             storage_options = StorageOptions(
                 uri=self.bag_path,
                 storage_id='sqlite3'
@@ -253,12 +257,13 @@ class MultiTopicSyncNode(Node):
             
             for topic in self.confirmed_topics:
                 if topic in topic_types:
-                    self.bag_writer.create_topic(
-                        topic,
-                        topic_types[topic],
-                        'cdr',
-                        ''
+                    # 创建 TopicMetadata 对象
+                    topic_metadata = rosbag2_py.TopicMetadata(
+                        name=topic,
+                        type=topic_types[topic],
+                        serialization_format='cdr'
                     )
+                    self.bag_writer.create_topic(topic_metadata)
             
             self.get_logger().info(f'✓ Rosbag录制已启动: {self.bag_path}')
             
@@ -270,16 +275,23 @@ class MultiTopicSyncNode(Node):
         """将消息写入rosbag"""
         if self.bag_writer is not None:
             try:
-                # 使用消息的时间戳作为rosbag记录的时间戳
+                # 序列化消息
+                from rclpy.serialization import serialize_message
+                serialized_msg = serialize_message(msg)
+                
+                # 获取时间戳（转换为纳秒）
                 if hasattr(msg, 'header') and hasattr(msg.header, 'stamp'):
                     timestamp = msg.header.stamp
+                    timestamp_ns = timestamp.sec * 10**9 + timestamp.nanosec
                 else:
-                    timestamp = self.get_clock().now().to_msg()
+                    now = self.get_clock().now()
+                    timestamp_ns = now.nanoseconds
                 
-                self.bag_writer.write(topic, msg, timestamp)
+                # 使用正确的参数格式写入
+                self.bag_writer.write(topic, serialized_msg, timestamp_ns)
                 
             except Exception as e:
-                self.get_logger().error(f'写入rosbag失败: {str(e)}')
+                self.get_logger().error(f'{str(topic)}写入rosbag失败')
     
     def sync_callback(self, color_image, depth_image, arm_status, left_hand_state, right_hand_state):
         """
@@ -368,7 +380,6 @@ def main(args=None):
         rclpy.shutdown()
     
     return 0
-
 
 if __name__ == '__main__':
     sys.exit(main())
