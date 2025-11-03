@@ -50,6 +50,16 @@ $p^{1}_{i}=T^{1}_{i} \cdot p^{i}_{i}$
   * 对于这部分的工作，去失真的精度依赖于上一步定位精度（` the undistortion accuracy is tied to the accuracy of the previous scan-matching steps`）。因此会存在`accumulating integration error over time`
 * 基于连续时间的运动校正
 
+此外，看到一个[Github Issue](https://github.com/elewu/2d_lidar_undistortion/issues/2)表述如下：
+
+~~~
+对于IMU的数据频率确实频率可以很高，但是IMU无法完成位移的矫正。相反，odom在50Hz的工作频率下可以完成位移和旋转矫正，而且效果还不错。
+
+不过有以下两点：
+1.旋转的畸变对算法影响较大，某些情况下可以优先校准旋转的畸变；2.不是所有机器人的里程计对于畸变校准都是可用的（比如频率低甚至没有的情况也是有的）。有可用的里程计数据当然是好的，条件允许的话甚至还可以用轮式里程计和imu融合后的数据。没有条件的话使用imu去除旋转畸变可能是最优，也是更通用的选择。
+~~~
+
+
 对LiDAR的运动补偿除了可以进行去失真以外还可以进行动态物体检测，下面介绍一些经典的工作
 
 
