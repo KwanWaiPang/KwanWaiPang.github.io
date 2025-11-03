@@ -44,7 +44,10 @@ $p^{1}_{i}=T^{1}_{i} \cdot p^{i}_{i}$
 实际上，一般都是通过测量LiDAR的运动信息，然后通过线性插值获得 $T^{1}_{i}$ 。
 其中，由于IMU可以提供高频运动，因此可以很好的被用作帧间点云的去失真。利用IMU做点云去失真有几种做法：
 * 仅仅对角度进行补偿，如LIO-SAM，并且这类工作都是假设在scan获取的过程速度是恒定的。
-* 除了IMU以外，还需要基于已有的传感器的pose以及速度进行运动补偿。比如Fast-LIO则是back-propagation technique（用已校正的IMU来去除运动失真）.对于这部分的工作，去失真的精度依赖于上一步定位精度（` the undistortion accuracy is tied to the accuracy of the previous scan-matching steps`）。因此会存在`accumulating integration error over time`
+* 除了IMU以外，还需要基于已有的传感器的pose以及速度进行运动补偿。
+  * LOAM基于估算的sensor pose，再采用与IMU松融合，并且假设帧间运动速度是不变的。
+  * 比如Fast-LIO则是back-propagation technique（用已校正的IMU来去除运动失真）.
+  * 对于这部分的工作，去失真的精度依赖于上一步定位精度（` the undistortion accuracy is tied to the accuracy of the previous scan-matching steps`）。因此会存在`accumulating integration error over time`
 * 基于连续时间的运动校正
 
 对LiDAR的运动补偿除了可以进行去失真以外还可以进行动态物体检测，下面介绍一些经典的工作
@@ -81,6 +84,13 @@ Fast-LIO提出了反向传播的方法来进行点云的运动去失真`a formal
 * [ICRA2023 PDF](https://arxiv.org/pdf/2203.03749)
 DLIO这篇工作则是通过恢复continuous-time trajectories
 
+<div align="center">
+  <img src="../images/微信截图_20251103101742.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+首先通过IMU测量的数值积分计算一组离散的姿态，随后通过分析的连续时间方程建立测量样本之间的平滑轨迹，以查询每个唯一的每点去偏变换。
 
 # 参考资料
 * Catkin package that provides lidar motion undistortion based on an external 6DoF pose estimation input, from [ETHZ ASL](https://github.com/ethz-asl/lidar_undistortion)
