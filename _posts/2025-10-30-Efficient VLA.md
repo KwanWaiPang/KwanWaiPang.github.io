@@ -227,7 +227,8 @@ VLA模型效率优化不仅依赖于模型架构设计、感知表示和动作�
 
 |  年份 |  单位  | 模型  |  成功率  | 边端设备实时性 | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-|2025|University of British Columbia|[NanoVLA](https://arxiv.org/pdf/2510.25122v1)|简单抓取任务 92%～96% <br>柔性物体90%<br>未见过物体84%|Jetson Orin Nano (8GB)上实时性可达41.6FPS|---|
+|2025|Dexmal|[Realtime-VLA](https://arxiv.org/pdf/2510.26742)|---|RTX 4090 GPU上pi0实现30HZ推理及480HZ轨迹生成|---|
+|2025|University of British Columbia|[NanoVLA](https://arxiv.org/pdf/2510.25122v1)|简单抓取任务 92%～96% <br>柔性物体90%<br>未见过物体84%|Jetson Orin Nano (8GB)上实时性可达41.6FPS|视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
 |2025|Sorbonne University|[Smolvla](https://arxiv.org/pdf/2506.01844)| LIBERO-Goal上约为85%|Jetson Orin Nano (8GB)上>25FPS|该结果为NanoVLA测试的|
 |2024|Stanford University|[OpenVLA](https://arxiv.org/pdf/2406.09246?)|BridgeData V2平均为70.6% <br> 在Google robot平均为85%<br>用于新的机器人上平均为63.8%|6HZ, RTX4090 GPU <br> 1.2~3HZ A5000 GPU|[网页](https://www.jetson-ai-lab.com/openvla.html#vla-architecture)显示对于Jetson AGX Orin 64GB，FPS在1.1~2.9FPS左右，成功率可达85%|
 
@@ -236,6 +237,8 @@ VLA模型效率优化不仅依赖于模型架构设计、感知表示和动作�
 此外，关于在NVIDIA Jetson AGX Orin上运行大型视觉语言模型（VLM）的刷新率，有开发者论坛的[帖子](https://forums.developer.nvidia.com/t/vlm-refresh-rate/315785/4)提到，对于llava-v1.5-7b模型，刷新率约为​​0.2 FPS​​；对于VILA1.5-3b模型，刷新率约为​​0.8 FPS​​。VLA模型与VLM在结构和计算量上具有相似性，因此这个数据可以作为VLA抓取算法在Orin上可能达到的推理速度的一个粗略参考。
 
 更多NVIDIA 上AI推理时间可参考：[表格](https://www.jetson-ai-lab.com/benchmarks.html)
+
+根据[Realtime-VLA](https://arxiv.org/pdf/2510.26742)中提到，实时运行的关键阈值是33ms以内的推理时间：这一指标能确保处理30 FPS的RGB视频流时不丢帧；若超过34ms，连续运行中必然出现帧丢失，若关键事件恰好发生在丢失帧，延迟会额外增加一帧时间（约33ms）。
 
 # 参考资料
 * [你的VLA太慢了！？算力不够也能提速：这篇综述教你打造高效VLA新范式](https://mp.weixin.qq.com/s/JW6RHuSBPEbBWirK_Wk23A)
