@@ -36,13 +36,16 @@ toc: true
 </figcaption>
 </div>
 
-1. 消除基础开销：初始基于PyTorch的朴素实现（naive torch）推理时间超100ms，首要优化是消除CPU与计算图的冗余开销。如上图2（2 views）所示，CUDA Graph将推理时间直接减半，naive pytorch的106.5ms降低到43.5ms。
-   * 【CUDA Graph】采用CUDA Graph来去除CPU内核启动开销：VLA模型（如π₀）单次推理需启动上千个CUDA内核，而Python代码驱动内核时会产生显著开销。通过CUDA Graph机制，先记录一次推理过程中的所有内核流，后续推理直接重放该流——此时内核由GPU和驱动直接启动，完全消除Python执行开销。
+## 1. 消除基础开销：
 
-  * 【简化计算图】通过等价变换重构计算图，去除冗余计算。如上图2（2 views）所示，将推理时间从53.9ms降低到45.8ms。包含三类变换：
-    * RMS归一化权重折叠：RMS归一化的 affine 参数与后续线性层均为线性操作，利用结合律修改线性层权重，将两步合并为一步；
-    * 动作-时间嵌入层折叠：动作值分支的两个连续线性层（无非线性）合并为一个内核；时间分支因推理时仅10个时间步，预计算线性层结果并融合至SiLU前的偏置向量，减少算子与MAC；
-    * QKV投影融合：将注意力机制中Q、K、V的三个独立矩阵，合并为一个大矩阵，计算后通过张量切片拆分结果，减少内核启动次数并提升并行度；同时将RoPE操作融合进矩阵乘法，预计算RoPE权重。
+初始基于PyTorch的朴素实现（naive torch）推理时间超100ms，首要优化是消除CPU与计算图的冗余开销。如上图2（2 views）所示，CUDA Graph将推理时间直接减半，naive pytorch的106.5ms降低到43.5ms。
+   
+* 【CUDA Graph】采用CUDA Graph来去除CPU内核启动开销：VLA模型（如π₀）单次推理需启动上千个CUDA内核，而Python代码驱动内核时会产生显著开销。通过CUDA Graph机制，先记录一次推理过程中的所有内核流，后续推理直接重放该流——此时内核由GPU和驱动直接启动，完全消除Python执行开销。
+
+* 【简化计算图】通过等价变换重构计算图，去除冗余计算。如上图2（2 views）所示，将推理时间从53.9ms降低到45.8ms。包含三类变换：
+  * RMS归一化权重折叠：RMS归一化的 affine 参数与后续线性层均为线性操作，利用结合律修改线性层权重，将两步合并为一步；
+  * 动作-时间嵌入层折叠：动作值分支的两个连续线性层（无非线性）合并为一个内核；时间分支因推理时仅10个时间步，预计算线性层结果并融合至SiLU前的偏置向量，减少算子与MAC；
+  * QKV投影融合：将注意力机制中Q、K、V的三个独立矩阵，合并为一个大矩阵，计算后通过张量切片拆分结果，减少内核启动次数并提升并行度；同时将RoPE操作融合进矩阵乘法，预计算RoPE权重。
 
 <div align="center">
   <table style="border: none; background-color: transparent;">
@@ -57,13 +60,26 @@ toc: true
       </td>
       <td style="width: 30%; border: none; padding: 0; background-color: transparent; vertical-align: middle;">
         <img src="../images/微信截图_20251104142014.png" width="100%" />
-        Fusing QKV
-as one weight matrix.
+        Fusing QKV as one weight matrix.
       </td>
     </tr>
   </table>
   <figcaption>
   </figcaption>
 </div>
+
+* 其他系统级开销优化
+  * 图像缩放：选择与模型输入（224×224）接近的相机输出分辨率（如240×320），避免过度缩放；手动实现缩放代码（JAX默认实现非最优），将缩放时间压至60μs以下（x86 CPU），且不计入推理时间；
+  * 内存与数据传输：使用固定内存（pinned memory）优化CPU-GPU数据传输；静态化CPU缓冲区减少抖动；采用零拷贝（zero-copy）处理相机帧，降低延迟。
+
+
+## 2. 内核深度优化
+在第一步的消除基础开销后，针对模型中24个GEMM类操作及关联标量算子，进行底层优化。
+
+
+
+
+# 参考资料
+* [Dexmal原力灵机发布实时VLA模型！消费级显卡上完成pi0模型30Hz以上推理](https://mp.weixin.qq.com/s/TNLmuukbsL2PiNtWoWLj_A)
 
 
