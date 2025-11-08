@@ -23,7 +23,7 @@ toc: true
 
 VLA即视觉-语言-动作，是一种将视觉感知与语言理解结合，实现自主操作决策的多模态任务。
 
-* [Paper List](https://github.com/KwanWaiPang/Awesome-VLN#VLA)
+* [Paper List](https://github.com/KwanWaiPang/Awesome-VLA)
 * [论文调研——Efficient VLA](https://kwanwaipang.github.io/Efficient-VLA/)
 
 
