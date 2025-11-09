@@ -16,7 +16,17 @@ author: kwanwaipang
 
 此前，博客也曾对高效VLA做过调研，包括[Efficient-VLA](https://kwanwaipang.github.io/Efficient-VLA/)对一篇高效VLA的survey paper进行阅读，而[NanoVLA](https://kwanwaipang.github.io/Awesome-VLA/#nanovla)也对基于orin上的高效VLA做分析。
 
-本博文对Dexmal发布的实时VLA模型，实现在消费级显卡（RTX4090）上完成pi0模型30HZ推理与480HZ动作生成。
+本博文对Dexmal发布的实时VLA模型进行解读，该工作在消费级显卡（RTX4090）上完成pi0模型：30HZ推理与480HZ动作生成。并且在抓落笔任务（grasping a falling pen task）成功率达到100%
+
+<div align="center">
+  <img src="../images/WX20251109-204320.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+~~~
+PS: 捉取落笔任务确实比较难，甚至连人类都难以做到😂
+~~~
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 # 引言
