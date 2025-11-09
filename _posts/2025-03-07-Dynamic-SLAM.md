@@ -56,6 +56,13 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`ICCV`|[DyGS-SLAM: Real-Time Accurate Localization and Gaussian Reconstruction for Dynamic Scenes](https://openaccess.thecvf.com/content/ICCV2025/papers/Hu_DyGS-SLAM_Real-Time_Accurate_Localization_and_Gaussian_Reconstruction_for_Dynamic_Scenes_ICCV_2025_paper.pdf)|---|---|
+|2025|`Proceedings of the 33rd ACM International Conference on Multimedia`|[SLAM-X: Generalizable Dynamic Removal for NeRF and Gaussian Splatting SLAM](https://dl.acm.org/doi/abs/10.1145/3746027.3754971)|---|---|
+|2025|`arXiv`|[VAR-SLAM: Visual Adaptive and Robust SLAM for Dynamic Environments](https://arxiv.org/pdf/2510.16205)|[![Github stars](https://img.shields.io/github/stars/iit-DLSLab/VAR-SLAM.svg)](https://github.com/iit-DLSLab/VAR-SLAM)|---|
+|2025|`TIM`|[SSE-SLAM: Semantic Visual SLAM Based on RGB-D Camera for High-Accuracy Pose Measurement in Dynamic Environments](https://ieeexplore.ieee.org/abstract/document/11218804/)|---|---|
+|2025|`IEEE IoT`|[DFusion-SLAM: A Lightweight Semantic Fusion Framework for Robust Visual SLAM in Dynamic Environments](https://ieeexplore.ieee.org/abstract/document/11218208/)|---|---|
+|2025|`International Conference on Machine Learning and Intelligent Computing`|[A Visual SLAM Algorithm for Indoor Dynamic Scenes Based on Semantic Feature Screening](https://raw.githubusercontent.com/mlresearch/v278/main/assets/wang25b/wang25b.pdf)|---|---|
+|2025|`Journal of Visual Communication and Image Representation`|[SegGeo-SLAM: A real-time Visual SLAM system for dynamic environments](https://www.sciencedirect.com/science/article/abs/pii/S104732032500241X)|---|
 |2025|`arXiv`|[DyPho-SLAM: Real-time Photorealistic SLAM in Dynamic Environments](https://arxiv.org/pdf/2509.00741)|---|---| 
 |2025|`Complex & Intelligent Systems`|[MAGSLAM: multi-modal adaptive generator-based semantic SLAM for enhanced robustness in dynamic environments](https://link.springer.com/content/pdf/10.1007/s40747-025-02058-6.pdf)|---|---|
 |2025|`ICCV`|[POMATO: Marrying Pointmap Matching with Temporal Motions for Dynamic 3D Reconstruction](https://arxiv.org/pdf/2504.05692)|[![Github stars](https://img.shields.io/github/stars/wyddmw/POMATO.svg)](https://github.com/wyddmw/POMATO)|---| 
