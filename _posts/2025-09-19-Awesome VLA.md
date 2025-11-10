@@ -60,6 +60,8 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0Z+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
+|  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
+|  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
@@ -79,6 +81,8 @@ VLA常用的数据集：
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`ICRA`|[Dexmimicgen: Automated data generation for bimanual dexterous manipulation via imitation learning](https://arxiv.org/pdf/2410.24185)|[![Github stars](https://img.shields.io/github/stars/NVlabs/dexmimicgen.svg)](https://github.com/NVlabs/dexmimicgen/)|[website](https://dexmimicgen.github.io/)<br>DexMimicGen|
+|2024|`RSS`|[Robocasa: Large-scale simulation of everyday tasks for generalist robots](https://arxiv.org/pdf/2406.02523)|[![Github stars](https://img.shields.io/github/stars/robocasa/robocasa.svg)](https://github.com/robocasa/robocasa)|[website](https://robocasa.ai/)|
 |2024|`RSS`|[Droid: A large-scale in-the-wild robot manipulation dataset](https://arxiv.org/pdf/2403.12945)|---|[website](https://droid-dataset.github.io/)|
 |2023|`NIPS`|[Libero: Benchmarking knowledge transfer for lifelong robot learning](https://proceedings.neurips.cc/paper_files/paper/2023/file/8c3c666820ea055a77726d66fc7d447f-Paper-Datasets_and_Benchmarks.pdf)|---|[website](https://libero-project.github.io/)<br>LIBERO|
 |2023|`CoRL`|[Bridgedata v2: A dataset for robot learning at scale](https://proceedings.mlr.press/v229/walke23a/walke23a.pdf)|[![Github stars](https://img.shields.io/github/stars/rail-berkeley/bridge_data_v2.svg)](https://github.com/rail-berkeley/bridge_data_v2)|[website](https://rail-berkeley.github.io/bridgedata/)<br>WidowX|
@@ -770,7 +774,40 @@ Helix以200HZ频率控制着35个自由度的动作空间，
 
 
 
-# GR00T
+## GR00T N1
+GR00T N1是NVIDIA Research提出的一个人形机器人的开源基础模型（VLA with dual-system architecture）。
+为了避免“data island/数据孤岛”问题。其训练是由异质的真实机器人轨迹、人类视频、合成/生成数据集。
+<div align="center">
+  <img src="../images/微信截图_20251110185914.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* System2（推理模块）：是预训练的VLM模型（NVIDIA Eagle-2 VLM），在单个 NVIDIA L40 GPU上跑10HZ。
+* System1（action模块）：是一个由flow-matching训练的Diffusion Transformer,宣称能以120HZ生成闭环的电机动作（closed-loop motor actions）
+
+<div align="center">
+  <img src="../images/微信截图_20251110190617.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 对于不同机器人本体不同维度的状态和action，采用一个MLP来投影为DiT标准的输入。
+* 采用action flow matching，通过迭代去噪来采样action；
+* NVIDIA Eagle-2 VLM：采用的是SmolLM2（作为LLM encoder）和SigLIP-2 （image encoder）来组成的。图像分辨率为224*224，
+
+推理时间对于16个actions的采样块为63.9ms；
+
+实验部分也在GR-1人形机器人上验证，而 GR00T-N1-2B模型(一共是2.2B参数，VLM部分占了1.34B)也开源了。
+
+
+## GR00T N1.5
+N1.5是N1的升级版本，主要的不一样的地方有两点：
+1. 预训练和finetuning的时候VLM都被冻住，且VLM模型更新至Eagle 2.5（具备更出色的定位能力和物理理解能力）；
+2. 连接视觉编码器与语言模型(LLM)的适配器多层感知机(MLP)被简化，并在输入到 LLM 的视觉和文本token嵌入中都添加了层归一化（layer normalization）；
+3. 除了 N1 所使用的流匹配损失外，对于 N1.5，作者还添加了未来潜在表示对齐(参见[FLARE](https://research.nvidia.com/labs/gear/flare/)项目)FLARE 并非生成性地对未来的帧进行建模，而是将模型与目标未来的嵌入进行对齐.
+4. [DreamGen](https://research.nvidia.com/labs/gear/dreamgen/)引入通过 DreamGen 生成的合成神经轨迹，从而能够泛化到超出遥操作数据的新行为和任务。
+
 
 
 ## InternVLA-M1
