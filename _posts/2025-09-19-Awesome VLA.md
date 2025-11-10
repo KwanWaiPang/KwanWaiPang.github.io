@@ -770,6 +770,9 @@ Helix以200HZ频率控制着35个自由度的动作空间，
 
 
 
+# GR00T
+
+
 ## InternVLA-M1
 
 InternVLA-M1的核心是`spatially guided vision-language-action training`空间指导的VLA训练，分为两个pipeline：
