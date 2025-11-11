@@ -55,6 +55,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+|  2025 |  Generalist  | [GEN-0](https://generalistai.com/blog/nov-04-2025-GEN-0)  |   Harmonic Reasoning模型被训练同时推理与action | 27万小时真实物理交互数据训练；（机器人领域）首次发现7B参数量以内模型会出现固化，而超过这个参数量，可展示良好Scaling Laws |
 |  2025 |  University of British Columbia  | [NanoVLA](https://arxiv.org/pdf/2510.25122v1)  |  VLM+action expert | 视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
@@ -954,6 +955,51 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
 <figcaption>  
 </figcaption>
 </div>
+
+
+## GEN-0
+Generalist 公司发布了GEN-0，其关键点在于：具身智能的基础模型，它的能力可预测地随物理交互数据（不仅仅是文本、图像、仿真，还有真实数据）增加而提升。
+其主要贡献点如下：
+* 超越智能阈值（7B参数量）：使用前所未有的大量数据，Generalist 观察到在 7B 参数上出现了一个「相变 (phase transition)」；较小的模型表现出「固化 (ossification) 」现象，而较大的模型性能则能持续提升。Generalist进一步将GEN-0扩展到10B+的模型规模，并观察到它们能以越来越少的后训练快速适应新任务。
+  * 1B 模型在预训练期间难以吸收复杂多样的感觉运动数据；模型权重随着时间推移无法吸收新信息。
+  * 6B 模型开始从预训练中受益，并显示出强大的多任务能力。
+  * 7B+ 模型能够内化大规模的机器人预训练数据，这些数据仅需几千步的后训练就能迁移到下游任务。
+
+<div align="center">
+  <img src="../images/微信截图_20251111143521.png" width="70%" />
+<figcaption> 
+这也是首次在机器人领域发现了模型的固化 
+</figcaption>
+</div>
+
+* Scaling Law：GEN-0 模型展现出了强大的 Scaling Law，即更多的预训练数据和算力，能够持续（且可预测地）提高模型在众多任务上的下游后训练性能（post-training performance）。
+  
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20251111144030.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/微信截图_20251111144041.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+随着预训练数据的增多（不同颜色），在所有 16 个任务集上，多任务模型在后训练期间的性能（以验证损失 (顶部) 和下一动作预测误差 (底部 4x4 网格) 衡量）均有改善。这些任务包括评估灵巧性、特定行业工作流和泛化能力。
+  </figcaption>
+</div>
+
+* Harmonic Reasoning：在异步、连续时间的「感知」和「行动」token 流之间建立了一种「Harmonic/和谐」的相互作用。这使模型能够扩展到非常大的规模，而无需依赖双系统（System1-System2） 架构或「推理时指导（ inference-time guidance）」;
+* Cross-Embodiment：GEN-0 架构通过设计使其适用于不同的机器人。Generalist 已经在 6 自由度 (6DoF)、7 自由度和 16+ 自由度的半人形机器人上成功测试了模型;
+* 不再受数据限制：GEN-0 在 Generalist 内部的机器人数据集上进行了预训练，该数据集包含超过 27 万小时的真实世界多样化操作数据，并以每周 1 万小时的速度增长;
+  * Mapping the Universe of Manipulation: 为了扩展 GEN-0 的能力，Generalist 正在构建有史以来最大、最多样化的真实世界操作数据集，包括人类能想到的每一项操作任务，涵盖家庭、面包店、自助洗衣店、仓库、工厂等。
+  * Infrastructure for Internet-Scale Robot Data: Generalist 与多家云服务商合作，构建了定制的上传机器，扩展到 O (10K) 级核心用于持续的多模态数据处理，压缩了数十 PB 的数据，并使用了前沿视频基础模型背后的数据加载技术，能够在每训练一天就吸收掉 6.85 年的真实世界操作经验。
+* 预训练的科学（The Science of Pretraining）：不同的预训练数据混合（来自不同来源，例如数据工厂）会产生具有不同特性的 GEN-0 模型。Generalist 分享一些在这种海量数据情景下的早期经验观察，以及这些观察如何追溯到特定的数据收集操作；
+  * 数据质量和多样性比纯粹的数量更重要，而且精心构建的数据混合可以带来具有不同特性的预训练模型.
+
+
+
 
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
