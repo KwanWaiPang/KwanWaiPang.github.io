@@ -420,7 +420,7 @@ OpenVLA 在多个泛化维度上的表现，包括视觉、运动、物理和语
 对于New Robot Setups，同样展示较好的泛化能力
 
 <div align="center">
-  <img src="../images/WX20251102-135334.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-135334.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -781,7 +781,7 @@ Helix以200HZ频率控制着35个自由度的动作空间，
 GR00T N1是NVIDIA Research提出的一个人形机器人的开源基础模型（VLA with dual-system architecture）。
 为了避免“data island/数据孤岛”问题。其训练是由异质的真实机器人轨迹、人类视频、合成/生成数据集。
 <div align="center">
-  <img src="../images/微信截图_20251110185914.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110185914.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -790,7 +790,7 @@ GR00T N1是NVIDIA Research提出的一个人形机器人的开源基础模型（
 * System1（action模块）：是一个由flow-matching训练的Diffusion Transformer,宣称能以120HZ生成闭环的电机动作（closed-loop motor actions）
 
 <div align="center">
-  <img src="../images/微信截图_20251110190617.png" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110190617.png" width="90%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -878,7 +878,7 @@ NanoVLA 的突破思路是——“不单纯缩小模型，而是让计算‘按
 传统的VLA模型由于计算需求高，难以部署在资源受限的边缘设备上，尤其是在对功耗、延迟和计算资源有严格要求的实际场景中。
 NanoVLA通过重新组织模态融合方式、动作随时间展开方式以及何时调用更大的模型骨干网络，弥补了这一部署差距。
 <div align="center">
-  <img src="../images/WX20251102-140314.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-140314.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -898,7 +898,7 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
 这部分的设计优势在于：预训练视觉 / 语言编码器的语义表征能力被完整保留，晚期融合还能避免早期模态干扰，实验证明——该设计在 LIBERO 任务中，用 52M 可训练参数量实现了超越 7B 参数量 OpenVLA 的精度。
 
 <div align="center">
-  <img src="../images/WX20251102-142441.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-142441.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -933,7 +933,7 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
 * 在LIBERO任务中，NanoVLA始终优于Octo、OpenVLA、πo、TraceVLA和SpatialVLA等数十亿参数的VLA模型。比 7.5B 参数量的 OpenVLA 高 7.6%，比 450M 参数量的 SmolVLA 高 5.5%；推理速度是 OpenVLA 的 52 倍，是 SmolVLA 的 8 倍，完全满足边缘设备实时性要求（≥10 FPS）。
 
 <div align="center">
-  <img src="../images/WX20251102-145151.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-145151.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -945,7 +945,7 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
   * 泛化能力：对未见过的物体（如护手霜）、未见过的指令（如 “移动新毛巾”），成功率仍达 84%，比模型高 26%。
 
 <div align="center">
-  <img src="../images/WX20251102-180030.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-180030.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -953,7 +953,7 @@ NonoVLA等“三大核心设计”:重构模态交互、动作规划与资源分
 * 在边缘设备标杆 Jetson Orin Nano（8GB 内存，67 TOPS 算力）上，NanoVLA 的部署性能如下：
 
 <div align="center">
-  <img src="../images/WX20251102-180118.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-180118.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -968,7 +968,7 @@ Generalist 公司发布了GEN-0，其关键点在于：具身智能的基础模�
   * 7B+ 模型能够内化大规模的机器人预训练数据，这些数据仅需几千步的后训练就能迁移到下游任务。
 
 <div align="center">
-  <img src="../images/微信截图_20251111143521.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251111143521.png" width="70%" />
 <figcaption> 
 这也是首次在机器人领域发现了模型的固化 
 </figcaption>
@@ -980,10 +980,10 @@ Generalist 公司发布了GEN-0，其关键点在于：具身智能的基础模�
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251111144030.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251111144030.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251111144041.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251111144041.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -1011,7 +1011,7 @@ Generalist 公司发布了GEN-0，其关键点在于：具身智能的基础模�
 RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理多模态的输入
 
 <div align="center">
-  <img src="../images/微信截图_20251114112057.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251114112057.png" width="100%" />
 <figcaption> 
 </figcaption>
 </div>

@@ -22,7 +22,7 @@ author: kwanwaipang
 这就像拍照时，如果手抖，照片就会模糊一样。这就是激光雷达的自运动畸变。
 
 <div align="center">
-  <img src="../images/WX20251102-210334.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251102-210334.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -31,7 +31,7 @@ author: kwanwaipang
 雷达运动畸变的本质就是对于一帧点云，其不同的点的坐标系是不一样的。如下左图所示，点P1~P3是LiDAR扫到的三个点，它们在世界坐标系下是共线的。此时，假如雷达剧烈的运动（如下中图所示），最终获得的点将不在共线（如下右图所示）
 
 <div align="center">
-  <img src="../images/微信截图_20251103083220.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251103083220.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -70,7 +70,7 @@ Fast-LIO提出了反向传播的方法来进行点云的运动去失真`a formal
 它并不是直接用于点云的去畸变，而是其优化框架中的一个关键组成部分，通过联合优化IMU测量和LiDAR点云来估计传感器在连续时间内的运动状态，从而间接实现点云的去畸变。
 
 <div align="center">
-  <img src="../images/微信截图_20251103100925.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251103100925.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -95,7 +95,7 @@ Fast-LIO提出了反向传播的方法来进行点云的运动去失真`a formal
 DLIO这篇工作则是通过恢复continuous-time trajectories
 
 <div align="center">
-  <img src="../images/微信截图_20251103101742.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251103101742.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>

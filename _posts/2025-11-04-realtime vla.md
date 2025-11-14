@@ -19,7 +19,7 @@ author: kwanwaipang
 本博文对Dexmal发布的实时VLA模型进行解读，该工作在消费级显卡（RTX4090）上完成pi0模型：30HZ推理与480HZ动作生成。并且在抓落笔任务（grasping a falling pen task）成功率达到100%
 
 <div align="center">
-  <img src="../images/WX20251109-204320.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251109-204320.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -39,7 +39,7 @@ PS: 捉取落笔任务确实比较难，甚至连人类都难以做到😂
 如下图所示，对于两输入视角（two input views），延时大约是27.3ms，而对于π₀原工作有较大的提升（106.5ms, 2 views, 单个RTX4090）。这一性能的增益主要是得益于推理pipeline的工程性实现。
 
 <div align="center">
-  <img src="../images/微信截图_20251104141052.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251104141052.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -72,15 +72,15 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 30%; border: none; padding: 0; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251104141950.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251104141950.png" width="100%" />
         Absorbing RMS affine parameters to the next linear layer
       </td>
       <td style="width: 30%; border: none; padding: 0; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251104141957.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251104141957.png" width="100%" />
         Folding linear layers in action-time embedding
       </td>
       <td style="width: 30%; border: none; padding: 0; background-color: transparent; vertical-align: middle;">
-        <img src="../images/微信截图_20251104142014.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251104142014.png" width="100%" />
         Fusing QKV as one weight matrix.
       </td>
     </tr>
@@ -99,7 +99,7 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
 
 
 <div align="center">
-  <img src="../images/微信截图_20251110141951.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110141951.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -129,7 +129,7 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
   * 估算的roofline值如下所示。
 
 <div align="center">
-  <img src="../images/微信截图_20251110143401.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110143401.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -141,7 +141,7 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
   * 软件屏障（software barrier）同步开销0.86ms（需匹配网格大小，但代码复杂度高）。
 
 <div align="center">
-  <img src="../images/微信截图_20251110143514.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110143514.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -149,7 +149,7 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
 * 最终下界与实际性能差距：叠加Roofline时间与同步开销（取0.86ms），如下图中的2views的理论下界为20.6ms，而论文实现的推理时间为27.3ms，差距仅30%，说明优化已接近硬件理论极限。
 
 <div align="center">
-  <img src="../images/微信截图_20251110143610.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110143610.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -158,7 +158,7 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
 为满足更高频率的机器人控制需求，研究提出全流推理框架（Full Streaming Inference），核心是通过“内核重叠执行”与“AE（action expert）角色重构”，实现多频率反馈环(如下图所示)。
 
 <div align="center">
-  <img src="../images/WX20251108-193647.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251108-193647.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -168,7 +168,7 @@ PI0基于PyTorch的朴素实现（naive torch）推理时间超100ms，因此，
   * 扩展潜力：1秒内可并行运行30个VLM（30Hz）与480个AE（480Hz），实现480Hz的轨迹生成频率（但这并不是实测的，则是理论能达到的）；
 
 <div align="center">
-  <img src="../images/微信截图_20251110143813.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251110143813.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
