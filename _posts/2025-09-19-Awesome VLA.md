@@ -55,6 +55,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+| 2025 |  美团  | [RoboTron-Mani](https://arxiv.org/pdf/2412.07215v1)  |  方法  | 3D 感知增强（RoboData数据集） + 多模态融合架构 |
 |  2025 |  Generalist  | [GEN-0](https://generalistai.com/blog/nov-04-2025-GEN-0)  |   Harmonic Reasoning模型被训练同时推理与action | 27万小时真实物理交互数据训练；（机器人领域）首次发现7B参数量以内模型会出现固化，而超过这个参数量，可展示良好Scaling Laws |
 |  2025 |  University of British Columbia  | [NanoVLA](https://arxiv.org/pdf/2510.25122v1)  |  VLM+action expert | 视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
@@ -83,6 +84,7 @@ VLA常用的数据集：
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`ICRA`|[Dexmimicgen: Automated data generation for bimanual dexterous manipulation via imitation learning](https://arxiv.org/pdf/2410.24185)|[![Github stars](https://img.shields.io/github/stars/NVlabs/dexmimicgen.svg)](https://github.com/NVlabs/dexmimicgen/)|[website](https://dexmimicgen.github.io/)<br>DexMimicGen|
+|2024|`ICRA`|[Rh20t: A comprehensive robotic dataset for learning diverse skills in one-shot](https://rh20t.github.io/static/RH20T_paper_compressed.pdf)|[![Github stars](https://img.shields.io/github/stars/rh20t/rh20t_api.svg)](https://github.com/rh20t/rh20t_api)|[website](https://rh20t.github.io/)| 
 |2024|`RSS`|[Robocasa: Large-scale simulation of everyday tasks for generalist robots](https://arxiv.org/pdf/2406.02523)|[![Github stars](https://img.shields.io/github/stars/robocasa/robocasa.svg)](https://github.com/robocasa/robocasa)|[website](https://robocasa.ai/)|
 |2024|`RSS`|[Droid: A large-scale in-the-wild robot manipulation dataset](https://arxiv.org/pdf/2403.12945)|---|[website](https://droid-dataset.github.io/)|
 |2023|`NIPS`|[Libero: Benchmarking knowledge transfer for lifelong robot learning](https://proceedings.neurips.cc/paper_files/paper/2023/file/8c3c666820ea055a77726d66fc7d447f-Paper-Datasets_and_Benchmarks.pdf)|---|[website](https://libero-project.github.io/)<br>LIBERO|
@@ -999,8 +1001,20 @@ Generalist 公司发布了GEN-0，其关键点在于：具身智能的基础模�
   * 数据质量和多样性比纯粹的数量更重要，而且精心构建的数据混合可以带来具有不同特性的预训练模型.
 
 
+## RoboTron-Mani
+
+以 “3D 感知增强 + 多模态融合架构” 为核心，通过构建涵盖多平台数据的RoboData数据集，实现了 “跨数据集、跨机器人、跨场景” 的全能操作：既通过相机参数与占用率（occupancy）监督强化 3D 空间理解，又借助大语言模型（OpenFlamingo）实现模态隔离掩码（Modality-Isolation-Mask）以及多模态解码块提升多模态融合精度，最终在模拟与真实场景中，成为首个超越专家模型的通用型机器人操作策略。
 
 
+* RoboData数据集似乎只是集成了9个不同的数据集：CALVIN, Meta-World, LIBERO, Robomimic, RoboCAS, ManiSkill2, RoboCasa, RLBench, and Colosseum。主要的工作则是把缺失的模态（深度图、相机参数）补充。
+
+RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理多模态的输入
+
+<div align="center">
+  <img src="../images/微信截图_20251114112057.png" width="100%" />
+<figcaption> 
+</figcaption>
+</div>
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <br><br><br>
