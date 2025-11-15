@@ -65,6 +65,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
 |  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
+|  2025 |  上海AI Lab与北京人形  | [TinyVLA](https://arxiv.org/pdf/2409.12514)  |  ViT+LLM  | 在OpenVLA基础上引入轻量VLM模型以及diffusion policy decoder | 
 |  2025 |  Stanford  | [OpenVLA-OFT/OpenVLA-OFT+](https://arxiv.org/pdf/2502.19645)  |  ViT+LLM  | 在OpenVLA基础上引入了并行解码、action chunking、连续的动作表示、简单的L1回归作为训练目标；其中OpenVLA-OFT+则是在SigLIP和DINOv2之间插入了FiLM |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
@@ -72,9 +73,8 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
+|  2023 |  Google Robotics  | [SayCan](https://proceedings.mlr.press/v205/ichter23a/ichter23a.pdf)  |  LLM  | 说明 |
 |2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
-
-
 
 
 VLA常用的数据集：
@@ -131,19 +131,6 @@ VLA常用的数据集：
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务、多目标环境中的鲁棒性与泛化能力，在定量准确率和演示视频中均表现良好。
 
 <div align="center">
@@ -168,6 +155,41 @@ RT-1 在真实机器人平台上进行了大量实验，展示了其在多任务
 <div align="center">
 <video playsinline autoplay loop muted src="https://robotics-transformer1.github.io/img/saycan_rt1_demo1_comp.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
 </div>
+
+
+
+
+
+
+## SayCan
+
+
+SayCan 在语言理解与机器人底层动作之间架起了一座桥梁。它通过将大型语言模型（LLM）的语义推理能力与机器人可执行技能的价值函数相融合，使机器人能够理解复杂的指令并执行相应操作。
+这属于早期的VLA工作，甚至在 VLA 概念尚未明确形成之前，就已开始探索如何利用 LLM 实现对机器人动作的控制。
+
+尽管 LLM 能够理解和生成复杂语言，但它缺乏与现实环境的直接交互经验。由于 LLM 生成的内容并未获得来自物理过程的反馈，它本身无法直接与物理世界互动。不过，LLM 确实掌握了大量常识性知识，因此本文研究如何从中提取有用信息，以指导机器人遵循高层级的文本指令。
+
+SayCan 借助预训练技能对应的价值函数，为 LLM 提供现实环境中的上下文信息，使其能够根据当前环境状态选择可行的机器人行为。
+需要注意的是，该系统中机器人已配备一系列学习好的“原子”行为技能，能够执行底层的运动控制。具体来说，LLM 的输出为每个技能生成对应完整指令的概率分布，系统基于最高概率执行具体动作。
+* 所谓的价值函数根据当前场景评估每个动作的可行性。例如，在包含红牛罐和苹果的场景中，“抓取红牛罐”和“抓取苹果”这两个动作会被赋予较高的价值；而在空旷场景中，所有抓取类动作的价值则会被调低。
+
+<div align="center">
+  <img src="../images/WX20251115-181230.png" width="80%" />
+<figcaption>  
+SayCan 将 LLM 输出的“任务相关性概率”与价值函数提供的“成功概率”相结合，从而选择出既语义相关又实际可行的动作技能。
+</figcaption>
+</div>
+
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://say-can.github.io/img/demo_sequence_compressed.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
+
+
+
+
+
+
 
 
 ## ACT
@@ -547,18 +569,46 @@ OpenVLA-OFT 全面优于多种预训练和从零训练的baseline
 
 
 
-<!-- ## TinyVLA -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## SayCan -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
+## TinyVLA
+TinyVLA是为了探索如何在保留现有VLA模型优势的情况下，让其推理跟快，而数据效率更高（data-efficient）；
+传统的VLA模型之所以推理延迟高主要有两个原因：
+1. 基于大的视觉语言模型（一般都超过7B参数量）；
+2. 通过自回归来生产离散的action token，这就要求对每个自由度进行重复推理；
+
+TinyVLA也是基于OpenVLA的，通过轻量架构（VLM模型<1B参数量）与diffusion policy方法，在显著降低推理延迟的同时，保持甚至超越了原本OpenVLA的性能。
+
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251115-172408.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251115-172558.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+TinyVLA的模型架构如上右图所示：左图为多模态预训练流程，右图为基于机器人任务的微调流程。采用视觉-语言编码器、LoRA微调技术与轻量解码器，高效实现策略输出。
+1. 采用鲁棒、高速的（轻量化的）多模态模型。首先用预训练的VLM模型初始化，然后在机器人数据上训练时，先freeze预训练部分，然后采用[LoRA](https://arxiv.org/pdf/2106.09685v1/1000)（一种参数高效的微调技术，parameter-efficient finetuning technique）实现需要训练的参数仅仅为整个模型的5%；采用的是Pythia作为语言模型的后端，而采用的VLM模型参数从70million～1.4B参数量。
+2. 在微调的时候引入diffusion策略来作为解码器，以获取更精确的robot action。不再使用下一个token预测的方式来独立预测动作token，而是将一个基于diffusion的head附加到预训练的多模态模型上，以直接输出机器人动作
+
+TinyVLA 在指令理解、物体变化以及视角迁移等多种泛化任务中均展现出优越的性能，说明即便是轻量模型也能具备强大的现实世界适应能力。
+
+<div align="center">
+  <img src="../images/WX20251115-174803.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+
+
 <!-- ## DiVLA -->
 <!--  -->
 <!--  -->
@@ -1185,12 +1235,6 @@ TOWARDS SYNERGISTIC, GENERALIZED AND EFFICIENT DUAL-SYSTEM FOR ROBOTIC MANIPULAT
 
 # RoboFlamingo
 VISION-LANGUAGE FOUNDATION MODELS AS EFFECTIVE ROBOT IMITATORS
-
-# saycan
-Do As I Can, Not As I Say: Grounding Language in Robotic Affordances
-
-# TinyVLA
-TinyVLA: Towards Fast, Data-Efficient Vision-Language-Action Models for Robotic Manipulation
 
 # VoxPoser
 VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
