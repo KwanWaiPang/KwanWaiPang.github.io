@@ -65,6 +65,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
 |  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
 |  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
+|  2025 |  Stanford  | [OpenVLA-OFT/OpenVLA-OFT+](https://arxiv.org/pdf/2502.19645)  |  ViT+LLM  | 在OpenVLA基础上引入了并行解码、action chunking、连续的动作表示、简单的L1回归作为训练目标；其中OpenVLA-OFT+则是在SigLIP和DINOv2之间插入了FiLM |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  SigLIP与DNIO-v2作为视觉编码器，大语言模型（LLaMA2-7B）作为高层推理| 首个全面开源的通用 VLA 模型，结合多模态编码与大语言模型架构；首次展示了通过低秩适应（LoRA）和模型量化等计算高效的微调方法，实现降低计算成本且不影响成功率 |
@@ -432,16 +433,120 @@ OpenVLA 在多个泛化维度上的表现，包括视觉、运动、物理和语
 
 
 
-<!-- ## OpenVLA-OFT -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## OpenVLA-OFT+ -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
+
+
+
+
+
+
+
+
+## OpenVLA-OFT/OpenVLA-OFT+
+OpenVLA-OFT是OpenVLA的优化及微调版本（Optimized Fine-Tuning, OFT），包括：不同的action解码方案（从原来的自回归解码变为并行解码）、不同的action 表征（原本是离散的变为连续动作表示）、以及微调的学习目标（采用L1回归）：
+* action decoding scheme (autoregressive vs. parallel generation): 使用动作分块的并行解码不仅提高了推理效率，还提高了下游任务的成功率，同时使模型的输入输出规范具有更大的灵活性；
+* action representation (discrete vs. continuous):连续的动作表达比起离散的可以进一步提升模型质量
+* learning objective (next-token prediction vs. L1 regression vs. diffusion)：相比起基于diffusion，L1更容易收敛，推理速度也更快；
+* 在OpenVLA-OFT基础上，引入语言增强模块（[FiLM](https://arxiv.org/pdf/1709.07871)），就是OpenVLA-OFT+, 成功执行灵巧的双手任务，如折叠衣服和根据用户提示操纵目标食物(如下图所示)
+
+
+<div align="center">
+  <img src="../images/WX20251115-161403.png" width="100%" />
+<figcaption>  
+OpenVLA-OFT+ 策略在双臂 ALOHA 机器人上的部署效果，支持高频率（25Hz）控制，实现真实世界的灵巧操作。
+其中，“+”表示集成了 FiLM 模块，增强语言理解对任务执行的调节作用。
+</figcaption>
+</div>
+
+~~~
+此处再次总结下OpenVLA：
+7B-参数量的 Prismatic VLM，在Open X-Embodiment dataset上1M个轨迹微调。
+采用自回归，在每个时间步预测7个离散机器人动作token：3个位置控制，3个方向控制，1个捉取控制；
+基于交叉熵损失（cross-entropy loss）来预测下一个token
+~~~
+
+
+
+下图左侧为自回归和并行解码的对比，实用并行解码的目的其实是为了可以使用action chunking更加高效；
+* 关于action chunking（动作分块），也就是在没有中间重新规划的情况下预测和执行一系列未来行动，可以很好的提升不同机械臂任务的policy success rate；
+但原本OpenVLA的自回归（autoregressive）生成方案使得动作分块并不实际，因为即使生成单个时间步的动作都需要将近0.33秒（NVIDIA A100 GPU）；
+而对于一个K时间步以及D维度的action所组成的块，OpenVLA需要KD此解码器前向递推，而不是只需要D次递推而不进行分块（requires KD sequential decoder forward passes versus just D passes without chunking），延迟的K倍使得在原始formulation下高频机器人的动作组块变得不切实际。因此作者采用并行生成方案而不使用自回归。
+* 对于自回归的VLA推理速度都比较慢（3-5HZ），不适合高频控制。所谓的autoregressive generation需要按顺序处理一个一个的token，而平板解码可以同时生成所有action，允许高效的action chunking
+
+<div align="center">
+  <img src="../images/WX20251115-161947.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+上图右侧为离散和连续动作L1或diffusion的对比；
+* 对于离散的动作（256bin）通过基于softmax的token预测，而连续的则是直接由MLP action head生成。
+
+而所谓的FiLM，即Feature-wise linear modulation (特征线性调制)，其架构如下图所示，插在SigLIP和DINOv2之间
+* 作者发现当采用ALOHA 机器人setup时，由于视觉输入中的虚假相关性，policy可能会在语言跟随方面遇到困难。因此为了增强对语言增强采用FiLM，而FiLM将语言embedding跟视觉表征相融合，这样模型就可以更关注语言的输入。
+
+<div align="center">
+  <img src="../images/WX20251115-162115.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+实验结果：在四个任务平均成功率从76.5%提升到97.1%，而action生成的吞吐量加快了26倍。而在ALOHA真实机器人实验中，超越其他VLA方法（π0 和RDT-1B）.
+* 如果配备25-时间步的动作块（25-timestep action chunks），OpenVLA-OFT+的吞吐量比OpenVLA快43倍
+
+<div align="center">
+  <img src="../images/WX20251115-171625.png" width="80%" />
+<figcaption>  
+OpenVLA-OFT 全面优于多种预训练和从零训练的baseline
+</figcaption>
+</div>
+
+* 如下视频对比（更多对比效果请见[网页](https://openvla-oft.github.io/)），OpenVLA-OFT+相比其他VLA策略展示更好的语言理解与任务执行能力：
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://openvla-oft.github.io/static/videos/act--scoop_raisins_into_bowl--rollout--5x.mov" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+        ACT
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://openvla-oft.github.io/static/videos/openvla_oft--scoop_raisins_into_bowl--rollout--5x.mov" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+        OpenVLA-OFT+
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+   把葡萄干舀进碗里
+  </figcaption>
+</div>
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://openvla-oft.github.io/static/videos/pi0--put_green_pepper_into_pot--rollout--5x.mov" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+        π0
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <video playsinline autoplay loop muted src="https://openvla-oft.github.io/static/videos/openvla_oft--put_green_pepper_into_pot--rollout--5x.mov" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="100%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+        OpenVLA-OFT+
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+   把青椒放进锅里
+  </figcaption>
+</div>
+
+<div align="center">
+  <img src="../images/WX20251115-171530.png" width="80%" />
+<figcaption>  
+在四项双臂 ALOHA 任务对比结果：OpenVLA-OFT+ 明显优于从零训练的 ACT 和 Diffusion Policy。
+</figcaption>
+</div>
+
+
+
 <!-- ## TinyVLA -->
 <!--  -->
 <!--  -->
@@ -1071,9 +1176,6 @@ LATENT ACTION PRETRAINING FROM VIDEOS
 # Moto
 Moto: Latent Motion Token as the Bridging Language for Learning Robot Manipulation from Videos
 
-
-# OpenVLA-OFT
-Fine-Tuning Vision-Language-Action Models: Optimizing Speed and Success
 
 # ReKep
 ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation
