@@ -632,6 +632,7 @@ reasoning injection module通过从推理组件（reasoning componen）的标记
 * DiVLA-2B可以可以运行82HZ（单个A6000 GPU）
 * 将模型从2B拓展到72B，发现：随着模型size的增加，泛化能力持续提升
 * zero-shot捉取任务，对102个未见物体实现63.7%的精度；
+* DiVLA 显著优于 Diffusion Policy、Octo、TinyVLA 和 OpenVLA，在平均成功率上领先 20.9%
 
 <div align="center">
   <img src="../images/WX20251115-193642.png" width="80%" />
