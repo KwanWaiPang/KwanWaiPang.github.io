@@ -55,7 +55,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| 2025 |  美团  | [RoboTron-Mani](https://arxiv.org/pdf/2412.07215v1)  |  方法  | 3D 感知增强（RoboData数据集） + 多模态融合架构 |
+| 2025 |  美团  | [RoboTron-Mani](https://arxiv.org/pdf/2412.07215v1)  | 3D 感知增强（RoboData数据集+3D感知架构） + 基于LLM的多模态融合架构  | 通过引入相机参数矫正及occupancy监督来增强3D空间感知能力 |
 |  2025 |  Generalist  | [GEN-0](https://generalistai.com/blog/nov-04-2025-GEN-0)  |   Harmonic Reasoning模型被训练同时推理与action | 27万小时真实物理交互数据训练；（机器人领域）首次发现7B参数量以内模型会出现固化，而超过这个参数量，可展示良好Scaling Laws |
 |  2025 |  University of British Columbia  | [NanoVLA](https://arxiv.org/pdf/2510.25122v1)  |  VLM+action expert | 视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
@@ -1008,13 +1008,38 @@ Generalist 公司发布了GEN-0，其关键点在于：具身智能的基础模�
 
 * RoboData数据集似乎只是集成了9个不同的数据集：CALVIN, Meta-World, LIBERO, Robomimic, RoboCAS, ManiSkill2, RoboCasa, RLBench, and Colosseum。主要的工作则是把缺失的模态（深度图、相机参数）补充。
 
-RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理多模态的输入
+RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理多模态的输入。主要包含一些部分：
+1. 视觉编码器模块：提取observation feature；
+2. 3D感知自适应模块（Adapter Block）：通过结合相机参数来增强物理空间的感知；采用RoboUniView的UVFormer（一个强大的3D环境感知模型）
+3. 基于LLM的特征融合解码器（Feature Fusion Decoder）：融合文本、视觉信息来输出多模态特征，同时采用模态隔离掩码（Modality-Isolation-Mask）来增强模态融合的灵活性；对于Feature Fusion Decoder，采用的是llaVA的自回归（AutoRegressive）机制，并且采用OpenFlamingo的cross-attention作为Feature Fusion Decoder。
+4. 多模态解码块（Multimodal Decoders）：通过多模态输出增强模型的细粒度感知（fine-grained perception）和理解。所谓的多模态解码器（如图4所示）,作者是根据不同的模态设计来对应的解码器：image、occupancy、action
 
 <div align="center">
   <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251114112057.png" width="100%" />
+  <img src="../images/WX20251115-151509.png" width="100%" />
 <figcaption> 
 </figcaption>
 </div>
+
+接下来看看实验结果。首先RoboMM− 指的是没有对齐的RoboData数据集（不同数据集具有不同的世界坐标，如果不做映射到相同的系统可能导致训练的过程3D恢复有问题）
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251115-152323.png" width="100%" />
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="../images/WX20251115-152331.png" width="100%" />
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+
+
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <br><br><br>

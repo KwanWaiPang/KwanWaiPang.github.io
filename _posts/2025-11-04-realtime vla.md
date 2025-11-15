@@ -14,7 +14,7 @@ author: kwanwaipang
 
 当前基于learning的机器人控制算法中，十亿参数级别的视觉-语言-动作（VLA）模型虽具备出色的泛化能力，但推理延迟过高成为瓶颈——传统VLA模型，无法满足动态任务（如抓取运动物体）的实时性需求。
 
-此前，博客也曾对高效VLA做过调研，包括[Efficient-VLA](https://kwanwaipang.github.io/Efficient-VLA/)对一篇高效VLA的survey paper进行阅读，而[NanoVLA](https://kwanwaipang.github.io/Awesome-VLA/#nanovla)也对基于orin上的高效VLA做分析。
+此前博客曾对高效VLA做过调研，包括[Efficient-VLA](https://kwanwaipang.github.io/Efficient-VLA/)对一篇高效VLA的survey paper进行阅读，而[NanoVLA](https://kwanwaipang.github.io/Awesome-VLA/#nanovla)也对基于orin上的高效VLA做分析。
 
 本博文对Dexmal发布的实时VLA模型进行解读，该工作在消费级显卡（RTX4090）上完成pi0模型：30HZ推理与480HZ动作生成。并且在抓落笔任务（grasping a falling pen task）成功率达到100%
 
