@@ -64,16 +64,16 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0Z+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
 |  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
 |  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
-|  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
+|  2025 |  美的  | [DiVLA](https://openreview.net/pdf?id=VdwdU81Uzy)  |  VLM+autoregressive+diffusion  | autoregressive进行推理，而diffusion进行动作生成以控制机器人 |
 |  2025 |  上海AI Lab与北京人形  | [TinyVLA](https://arxiv.org/pdf/2409.12514)  |  ViT+LLM  | 在OpenVLA基础上引入轻量VLM模型以及diffusion policy decoder | 
 |  2025 |  Stanford  | [OpenVLA-OFT/OpenVLA-OFT+](https://arxiv.org/pdf/2502.19645)  |  ViT+LLM  | 在OpenVLA基础上引入了并行解码、action chunking、连续的动作表示、简单的L1回归作为训练目标；其中OpenVLA-OFT+则是在SigLIP和DINOv2之间插入了FiLM |
+|  2025 |  Physical Intelligence  | [Hi Robot](https://arxiv.org/pdf/2502.19417)  |  PI0+快慢双系统（VLM+VLA）  | 分层交互式机器人学习系，可以执行高层推理与底层任务执行 |
 |  2025 |  Physical Intelligence  | [PI0-Fast/π₀-FAST](https://arxiv.org/pdf/2501.09747)  |  PI0+频率空间action Tokenization | 探索VLA训练的action representation；通过频域对动作序列的Token化，将训练时间减少5倍 |
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  SigLIP与DNIO-v2作为视觉编码器，大语言模型（LLaMA2-7B）作为高层推理| 首个全面开源的通用 VLA 模型，结合多模态编码与大语言模型架构；首次展示了通过低秩适应（LoRA）和模型量化等计算高效的微调方法，实现降低计算成本且不影响成功率 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
-|  2023 |  Google Robotics  | [SayCan](https://proceedings.mlr.press/v205/ichter23a/ichter23a.pdf)  |  LLM  | 说明 |
 |2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
 
@@ -609,10 +609,37 @@ TinyVLA 在指令理解、物体变化以及视角迁移等多种泛化任务中
 
 
 
-<!-- ## DiVLA -->
-<!--  -->
-<!--  -->
-<!--  -->
+## DiVLA
+
+DiVLA 采用自回归（autoregressive）和diffusion模型来实现自主推理和机器人策略学习。本文的核心是自回归推理（由预训练的VLM实现的任务分解和解释过程）来指导基于diffusio的action policy。
+* 自回归的VLA拥有较强推理能力（所谓自回归也就是next-token prediction，NTP），但是缺乏精确与鲁棒的动作生成，并且生成动作是不高效的（上面OpenVLA-OFT也提到了）
+* diffusion较好实现动作生成（将action序列建模为去噪的过程），但缺乏推理的能力。
+那么基于自回归和diffusion的优缺点，本文将`the reasoning power of autoregressive models`与 `the robustness of high frequency action generation offered by diffusion models`相结合。基于预训练的VLM模型，然后加入自回归的能力来进行重训以实现基于文本的推理。之后，再整合diffusion模型来通过去噪的过程学习机器人的actions。
+
+
+<div align="center">
+  <img src="../images/WX20251115-183026.png" width="100%" />
+<figcaption>  
+视觉编码器采用的SigLIP，而对于视觉-语言处理采用的Qwen2-VL模型（有2B，8B和72B参数）。
+</figcaption>
+</div>
+
+而为了将两者更加有机的结合，本文还提出了一个reasoning injection module：重用推理输出并将其直接嵌入到policy head中，从而用明确的推理信号丰富policy的学习过程。进而可以将推理融入到action生成中。
+reasoning injection module通过从推理组件（reasoning componen）的标记化（tokenized）输出中获取最终embedding，并通过Feature-wise Linear Modulation (FiLM)将其直接注入策略模型。
+
+
+实验效果：
+* DiVLA-2B可以可以运行82HZ（单个A6000 GPU）
+* 将模型从2B拓展到72B，发现：随着模型size的增加，泛化能力持续提升
+* zero-shot捉取任务，对102个未见物体实现63.7%的精度；
+
+<div align="center">
+  <img src="../images/WX20251115-193642.png" width="80%" />
+  <img src="../images/WX20251115-193725.png" width="60%" />
+<figcaption>  
+</figcaption>
+</div>
+
 <!-- ## DxVLA -->
 <!--  -->
 <!--  -->
@@ -1204,9 +1231,6 @@ RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理
 
 # DexVLA
 DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control
-
-# DiVLA
-Diffusion-VLA: Scaling Robot Foundation Models via Unified Diffusion and Autoregression
 
 # Go-1
 AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems
