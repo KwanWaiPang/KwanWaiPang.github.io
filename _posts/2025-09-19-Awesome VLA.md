@@ -73,6 +73,8 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  SigLIP与DNIO-v2作为视觉编码器，大语言模型（LLaMA2-7B）作为高层推理| 首个全面开源的通用 VLA 模型，结合多模态编码与大语言模型架构；首次展示了通过低秩适应（LoRA）和模型量化等计算高效的微调方法，实现降低计算成本且不影响成功率 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
+|  2024 |  字节  | [GR-2](https://arxiv.org/pdf/2410.06158?)  |  方法  | 说明 |
+|  2024 |  字节  | [GR-1](https://arxiv.org/pdf/2312.13139)  |  视频生成模型  | 通过GPT式生成模型的预训练（video generative pre-training model），结合机器人数据进行微调 |
 |  2024 |  Stanford  | [ReKep](https://arxiv.org/pdf/2409.01652)  |  ViT+VLM  | DINOv2提取3D关键点，VLM通过指令与图像生成关键点与空间的约束，通过求解优化获取机器人末端执行轨迹 |
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
@@ -96,6 +98,7 @@ VLA常用的数据集：
 |2023|`CoRL`|[Bridgedata v2: A dataset for robot learning at scale](https://proceedings.mlr.press/v229/walke23a/walke23a.pdf)|[![Github stars](https://img.shields.io/github/stars/rail-berkeley/bridge_data_v2.svg)](https://github.com/rail-berkeley/bridge_data_v2)|[website](https://rail-berkeley.github.io/bridgedata/)<br>WidowX|
 |2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
 |2023|`CoRL`|[Rt-2: Vision-language-action models transfer web knowledge to robotic control](https://robotics-transformer2.github.io/assets/rt2.pdf)|---|[Website](https://robotics-transformer2.github.io/)|
+|2022|`RAL`|[Calvin: A benchmark for language-conditioned policy learning for long-horizon robot manipulation tasks](https://arxiv.org/pdf/2112.03227)|[![Github stars](https://img.shields.io/github/stars/mees/calvin.svg)](https://github.com/mees/calvin)|[website](http://calvin.cs.uni-freiburg.de/)|
 |2022|`arXiv`|[Rt-1: Robotics transformer for real-world control at scale](https://arxiv.org/pdf/2212.06817)|[![Github stars](https://img.shields.io/github/stars/google-research/robotics_transformer.svg)](https://github.com/google-research/robotics_transformer)|[website](https://robotics-transformer1.github.io/) <br> Google robot|
 |2021|`arXiv`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata) <br> Google robot|
 
@@ -232,6 +235,20 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 
 <div align="center">
   <img src="../images/WX20251116-104557.png" width="100%" />
+  <img src="../images/WX20251116-110952.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+如上图所示，机器人需要抓握杯柄，在运送过程中始终保持杯身直立，将壶嘴对准目标容器（杯子），然后以特定角度倾斜杯子完成倾倒。此处的约束条件不仅编码了中间子目标（如对准壶嘴），还定义了过渡动作（如运送时保持杯身直立），这些约束共同规定了机器人动作在空间、时序及其他组合维度上与环境交互的要求。
+
+上述例子中所谓的“约束”就是本文要提取的。所谓的“ReKep”可以理解为一个python function，将一系列3D关键点映射到数值成本（numerical cost），而每个keypoint是场景中跟任务相关的，具有语义的3D点。
+* 视觉模型DINOv2用于提取关键点
+* VLM模型用于将约束写成python函数
+而获得了对应的约束后，通过优化求解就可以基于跟踪的关键点来生成robot actions。如下图所示，每个子action的坐标都可视化出来了：
+
+<div align="center">
+  <img src="../images/WX20251116-144945.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -241,6 +258,47 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 
 
 
+
+
+
+
+
+
+## GR-1
+
+作者认为，生成式预训练模型对基于视觉的机器人操作（visual robot manipulation）任务是有利的。也就是说：基于过去的图像和语言指令预测未来帧的能力使机器人能够预测即将发生的事件，进而生成相关的动作。
+因此，GR-1模型首先在大规模视频数据集上进行预训练，学习时空动态。随后，在机器人数据上微调，训练其根据环境感知生成合适动作并预测未来图像；
+
+GR-1本文说一个GPT类型的模型，将语言指令、一系列观测图像，机器人状态作为输入，输出为robot action以及未来的图像。如下图所示。
+
+<div align="center">
+  <img src="../images/WX20251116-150641.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+本文也是首次展示同意的GPT类型的transformer通过大尺度生成模型的预训练，可以有效地泛化到机器人操作任务上。
+GR-1模型细节如下所示。左侧为输入编码器；右侧为输出解码器，负责动作生成和未来图像预测。
+* 对于语言输入，采用CLIP的文本编码器
+* 对于视觉观测，采用的ViT
+* 对于机器人状态输入，采用线性MLP层
+
+<div align="center">
+  <img src="../images/WX20251116-151304.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+而实验效果则是主要在CALVIN 基准上成功率为76.4%～94。9%
+
+
+## GR-2
+
+GR-2通过大规模视频-语言预训练(Internet videos)和动作轨迹微调(video generation and action prediction using robot trajectories)，进一步提升了机器人多任务操作的精度、连贯性和泛化能力，相比GR-1实现了显著的提升(在超过100个task上的平均成功率达97.7%)。
+
+GR-2训练分为两个阶段：
+1. 进行视频-语言预训练，利用大规模互联网视频学习时空动态与语言描述的对应关系
+2. 进行机器人数据微调，不再仅生成单点动作，而是学习连续的动作轨迹，以完成复杂的机器人任务
 
 
 
@@ -996,18 +1054,6 @@ PI0.5也是首个实现长期（long-horizon）及灵巧机械臂操作。这里
 
 
 
-
-
-
-<!-- ## GR-1 -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## GR-2 -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
 <!-- ## LAPA -->
 <!--  -->
 <!--  -->
@@ -1348,12 +1394,6 @@ RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理
 
 # Go-1
 AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems
-
-# GR-1
-UNLEASHING LARGE-SCALE VIDEO GENERATIVE PRE-TRAINING FOR VISUAL ROBOT MANIPULATION
-
-# GR-2
-GR-2: A Generative Video-Language-Action Model with Web-Scale Knowledge for Robot Manipulation
 
 # HiRT
 HiRT: Enhancing Robotic Control with Hierarchical Robot Transformers
