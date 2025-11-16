@@ -190,7 +190,7 @@ SayCan 借助预训练技能对应的价值函数，为 LLM 提供现实环境�
 * 所谓的价值函数根据当前场景评估每个动作的可行性。例如，在包含红牛罐和苹果的场景中，“抓取红牛罐”和“抓取苹果”这两个动作会被赋予较高的价值；而在空旷场景中，所有抓取类动作的价值则会被调低。
 
 <div align="center">
-  <img src="../images/WX20251115-181230.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-181230.png" width="80%" />
 <figcaption>  
 SayCan 将 LLM 输出的“任务相关性概率”与价值函数提供的“成功概率”相结合，从而选择出既语义相关又实际可行的动作技能。
 </figcaption>
@@ -214,7 +214,7 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 红色区域就是约束，也就是要避开的障碍，代表high cost；value map中，机器人尽量往蓝色区域走，避开红色区域。
 
 <div align="center">
-  <img src="../images/WX20251116-102641.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-102641.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -222,7 +222,7 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 本质上，该工作就是通过语言生成代码并驱动机器人执行全过程，而生成的3D value maps就是为运动规划器的目标函数，生成轨迹。
 
 <div align="center">
-  <img src="../images/WX20251116-102849.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-102849.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -243,8 +243,8 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 整体流程如下图所示：DINOv2从RGB图像中获取场景中的3D关键点，并叠加在图像上。然后该图像与语言指令一并输入VLM模型（GPT-4o）中来生成一系列带约束的python代码。而所谓的约束其实就是3D关键点与不同时段任务的空间约束。最后约束转换为优化问题，通过求解优化问题来获得机器人末端的控制序列。
 
 <div align="center">
-  <img src="../images/WX20251116-104557.png" width="100%" />
-  <img src="../images/WX20251116-110952.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-104557.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-110952.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -257,7 +257,7 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 而获得了对应的约束后，通过优化求解就可以基于跟踪的关键点来生成robot actions。如下图所示，每个子action的坐标都可视化出来了：
 
 <div align="center">
-  <img src="../images/WX20251116-144945.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-144945.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -281,7 +281,7 @@ LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人�
 GR-1本文说一个GPT类型的模型，将语言指令、一系列观测图像，机器人状态作为输入，输出为robot action以及未来的图像。如下图所示。
 
 <div align="center">
-  <img src="../images/WX20251116-150641.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-150641.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -293,7 +293,7 @@ GR-1模型细节如下所示。左侧为输入编码器；右侧为输出解码�
 * 对于机器人状态输入，采用线性MLP层
 
 <div align="center">
-  <img src="../images/WX20251116-151304.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-151304.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -314,7 +314,7 @@ GR-2训练分为两个阶段：
 此外，通过whole-body control (WBC) algorithm来实现真实机器人部署的轨迹优化和实时运动跟踪。
 
 <div align="center">
-  <img src="../images/WX20251116-153901.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-153901.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -600,7 +600,7 @@ OpenVLA-OFT是OpenVLA的优化及微调版本（Optimized Fine-Tuning, OFT），
 
 
 <div align="center">
-  <img src="../images/WX20251115-161403.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-161403.png" width="100%" />
 <figcaption>  
 OpenVLA-OFT+ 策略在双臂 ALOHA 机器人上的部署效果，支持高频率（25Hz）控制，实现真实世界的灵巧操作。
 其中，“+”表示集成了 FiLM 模块，增强语言理解对任务执行的调节作用。
@@ -623,7 +623,7 @@ OpenVLA-OFT+ 策略在双臂 ALOHA 机器人上的部署效果，支持高频率
 * 对于自回归的VLA推理速度都比较慢（3-5HZ），不适合高频控制。所谓的autoregressive generation需要按顺序处理一个一个的token，而平板解码可以同时生成所有action，允许高效的action chunking
 
 <div align="center">
-  <img src="../images/WX20251115-161947.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-161947.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -635,7 +635,7 @@ OpenVLA-OFT+ 策略在双臂 ALOHA 机器人上的部署效果，支持高频率
 * 作者发现当采用ALOHA 机器人setup时，由于视觉输入中的虚假相关性，policy可能会在语言跟随方面遇到困难。因此为了增强对语言增强采用FiLM，而FiLM将语言embedding跟视觉表征相融合，这样模型就可以更关注语言的输入。
 
 <div align="center">
-  <img src="../images/WX20251115-162115.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-162115.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -644,7 +644,7 @@ OpenVLA-OFT+ 策略在双臂 ALOHA 机器人上的部署效果，支持高频率
 * 如果配备25-时间步的动作块（25-timestep action chunks），OpenVLA-OFT+的吞吐量比OpenVLA快43倍
 
 <div align="center">
-  <img src="../images/WX20251115-171625.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-171625.png" width="80%" />
 <figcaption>  
 OpenVLA-OFT 全面优于多种预训练和从零训练的baseline
 </figcaption>
@@ -689,7 +689,7 @@ OpenVLA-OFT 全面优于多种预训练和从零训练的baseline
 </div>
 
 <div align="center">
-  <img src="../images/WX20251115-171530.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-171530.png" width="80%" />
 <figcaption>  
 在四项双臂 ALOHA 任务对比结果：OpenVLA-OFT+ 明显优于从零训练的 ACT 和 Diffusion Policy。
 </figcaption>
@@ -710,10 +710,10 @@ TinyVLA也是基于OpenVLA的，通过轻量架构（VLM模型<1B参数量）与
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 40%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251115-172408.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251115-172408.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251115-172558.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251115-172558.png" width="100%" />
       </td>
     </tr>
   </table>
@@ -728,7 +728,7 @@ TinyVLA的模型架构如上右图所示：左图为多模态预训练流程，�
 TinyVLA 在指令理解、物体变化以及视角迁移等多种泛化任务中均展现出优越的性能，说明即便是轻量模型也能具备强大的现实世界适应能力。
 
 <div align="center">
-  <img src="../images/WX20251115-174803.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-174803.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -746,7 +746,7 @@ DiVLA 采用自回归（autoregressive）和diffusion模型来实现自主推理
 
 
 <div align="center">
-  <img src="../images/WX20251115-183026.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-183026.png" width="100%" />
 <figcaption>  
 视觉编码器采用的SigLIP，而对于视觉-语言处理采用的Qwen2-VL模型（有2B，8B和72B参数）。
 </figcaption>
@@ -763,8 +763,8 @@ reasoning injection module通过从推理组件（reasoning componen）的标记
 * DiVLA 显著优于 Diffusion Policy、Octo、TinyVLA 和 OpenVLA，在平均成功率上领先 20.9%
 
 <div align="center">
-  <img src="../images/WX20251115-193642.png" width="80%" />
-  <img src="../images/WX20251115-193725.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-193642.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-193725.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -795,7 +795,7 @@ DexVLA（Plug-in Diffusion Expert for Vision-Language-Action models）通过三�
 Stage2&3实际上就是实现：将训练好的diffusion expert与VLM融合
 
 <div align="center">
-  <img src="../images/WX20251116-093018.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-093018.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -807,7 +807,7 @@ Stage2&3实际上就是实现：将训练好的diffusion expert与VLM融合
 * 无需任务特定适配的示例，包括 简易抓取、T恤折叠与桌面清理。
 
 <div align="center">
-  <img src="../images/WX20251116-100411.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-100411.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -815,7 +815,7 @@ Stage2&3实际上就是实现：将训练好的diffusion expert与VLM融合
 * 新机器人上的新任务示例，包括包装（上）和倒饮料（下），这两个任务未曾出现在阶段1和2的训练数据中
 
 <div align="center">
-  <img src="../images/WX20251116-100509.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-100509.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -823,8 +823,8 @@ Stage2&3实际上就是实现：将训练好的diffusion expert与VLM融合
 * DexVLA 能够处理复杂的长时任务（比如laundry folding/洗衣折叠），远超Baseline。
 
 <div align="center">
-  <img src="../images/WX20251116-100000.png" width="80%" />
-  <img src="../images/WX20251116-100257.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-100000.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-100257.png" width="60%" />
 <figcaption> 
 DexVLA 能够自动将指令拆解为多步子任务（洗衣折叠（上）、烘干机取衣（中）和物品分类（下）），并基于视觉上下文执行复杂操作。
 </figcaption>
@@ -1084,7 +1084,7 @@ LAPA是首个通过无监督学习（没有真值机器人action label）来训�
 
 
 <div align="center">
-  <img src="../images/WX20251116-155420.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-155420.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -1159,7 +1159,7 @@ GO-1是一个层次视觉语言潜在动作框架（hierarchical Vision-Language
 
 
 <div align="center">
-  <img src="../images/WX20251116-181023.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-181023.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -1169,7 +1169,7 @@ GO-1是一个层次视觉语言潜在动作框架（hierarchical Vision-Language
 * Go-1相较于RDT-1B和去掉latent planner的对比效果：
 
 <div align="center">
-  <img src="../images/WX20251116-185043.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251116-185043.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -1473,7 +1473,7 @@ RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理
 
 <div align="center">
   <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251114112057.png" width="100%" />
-  <img src="../images/WX20251115-151509.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251115-151509.png" width="100%" />
 <figcaption> 
 </figcaption>
 </div>
@@ -1484,10 +1484,10 @@ RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理
   <table style="border: none; background-color: transparent;">
     <tr align="center">
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251115-152323.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251115-152323.png" width="100%" />
       </td>
       <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
-        <img src="../images/WX20251115-152331.png" width="100%" />
+        <img src="https://r-c-group.github.io/blog_media/images/WX20251115-152331.png" width="100%" />
       </td>
     </tr>
   </table>
