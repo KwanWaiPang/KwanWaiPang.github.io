@@ -73,8 +73,11 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  SigLIP与DNIO-v2作为视觉编码器，大语言模型（LLaMA2-7B）作为高层推理| 首个全面开源的通用 VLA 模型，结合多模态编码与大语言模型架构；首次展示了通过低秩适应（LoRA）和模型量化等计算高效的微调方法，实现降低计算成本且不影响成功率 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
+|  2024 |  Stanford  | [ReKep](https://arxiv.org/pdf/2409.01652)  |  ViT+VLM  | DINOv2提取3D关键点，VLM通过指令与图像生成关键点与空间的约束，通过求解优化获取机器人末端执行轨迹 |
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
+|  2023 |  Stanford  | [VoxPoser](https://arxiv.org/pdf/2307.05973)  |  LLM+VLM  | LLM进行代码生成驱动机器人完整操作任务，VLM获取3D价值地图获取实现任务的轨迹规划 |
+|  2023 |  Google  | [SayCan](https://proceedings.mlr.press/v205/ichter23a/ichter23a.pdf)  |  LLM  | 探索如何利用 LLM 实现对机器人动作的控制,通过预定义的运动（motion primitives）来与环境进行交互 |
 |2023|Google DeepMind|[RT-1](https://arxiv.org/pdf/2212.06817)|EfficientNet+Transformer|VLA任务首次用到实际机械臂|
 
 
@@ -185,6 +188,55 @@ SayCan 将 LLM 输出的“任务相关性概率”与价值函数提供的“�
 <div align="center">
 <video playsinline autoplay loop muted src="https://say-can.github.io/img/demo_sequence_compressed.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
 </div>
+
+
+
+## VoxPoser
+
+VoxPoser也属于早期的工作，同样的当时VLA的概念还没出来。
+LLM虽然已经被证明有大量丰富的actionable知识可以用于机器人操作的推理和规划，但是只能依赖于了预定义的运动（motion primitives）来与环境进行交互。
+因此本文首先合成了机器人轨迹（包括六自由度的末端的waypoint），包括了开放的指令和开放的物体。
+作者首先发现：LLM在语言指令下擅长推理affordances（可行性） 和 constraints（约束条件），更重要的是利用模型自动生成代码，并结合VLM模型，将自然语言中的可行性与约束条件映射为3D价值地图（3D value maps）。
+
+而该3D value maps就是将知识用到agent观测到的空间上。如下图所示。affordance maps中，蓝色区域就是要抓取操控的目标，代表high reward；constraint map中，
+红色区域就是约束，也就是要避开的障碍，代表high cost；value map中，机器人尽量往蓝色区域走，避开红色区域。
+
+<div align="center">
+  <img src="../images/WX20251116-102641.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+本质上，该工作就是通过语言生成代码并驱动机器人执行全过程，而生成的3D value maps就是为运动规划器的目标函数，生成轨迹。
+
+<div align="center">
+  <img src="../images/WX20251116-102849.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+
+
+
+
+## ReKep
+
+结合视觉模型DINOv2和多模态大模型GPT-4o，将自然语言任务转换为关键点之间的空间约束，通过优化求解生成机器人精确动作。
+
+本文同样的，也是VLA概念出来前的探索。
+它跟Voxposer是有点类似的，通过LLM将将自然语言任务转换为3D关键点之间的空间约束，通过优化求解生成机器人精确动作。
+而3D关键点点获取则是采用DINOv2。
+
+整体流程如下图所示：DINOv2从RGB图像中获取场景中的3D关键点，并叠加在图像上。然后该图像与语言指令一并输入VLM模型（GPT-4o）中来生成一系列带约束的python代码。而所谓的约束其实就是3D关键点与不同时段任务的空间约束。最后约束转换为优化问题，通过求解优化问题来获得机器人末端的控制序列。
+
+<div align="center">
+  <img src="../images/WX20251116-104557.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
 
 
 
@@ -704,28 +756,6 @@ DexVLA 能够自动将指令拆解为多步子任务（洗衣折叠（上）、�
 </div>
 
 
-<!-- ## VoxPoser -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## ReKep -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## GR-1 -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## GR-2 -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- ## LAPA -->
-<!--  -->
-<!--  -->
-<!-- ## GO-1 -->
-
 
 
 ## π0/PI0
@@ -963,6 +993,33 @@ PI0.5也是首个实现长期（long-horizon）及灵巧机械臂操作。这里
 <figcaption>  
 </figcaption>
 </div>
+
+
+
+
+
+
+<!-- ## GR-1 -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- ## GR-2 -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!-- ## LAPA -->
+<!--  -->
+<!--  -->
+<!-- ## GO-1 -->
+
+
+
+
+
+
+
+
 
 
 ## AnywhereVLA
@@ -1307,18 +1364,11 @@ LATENT ACTION PRETRAINING FROM VIDEOS
 # Moto
 Moto: Latent Motion Token as the Bridging Language for Learning Robot Manipulation from Videos
 
-
-# ReKep
-ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation
-
 # RoboDual
 TOWARDS SYNERGISTIC, GENERALIZED AND EFFICIENT DUAL-SYSTEM FOR ROBOTIC MANIPULATION
 
 # RoboFlamingo
 VISION-LANGUAGE FOUNDATION MODELS AS EFFECTIVE ROBOT IMITATORS
-
-# VoxPoser
-VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models
 
 ```
 
