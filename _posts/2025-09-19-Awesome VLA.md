@@ -61,9 +61,11 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 | 2025 |  Shanghai AI Lab  | [InternVLA-M1](https://arxiv.org/pdf/2510.13778) |  VLM planner+action expert双系统  | VLM是采用了空间数据进行训练的，action expert输出可执行的电机指令 |
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
+|  2025 |  AgiBot-World  | [GO-1](https://arxiv.org/pdf/2503.06669?)  |  VLM+Action Expert  | AgiBot World：5个场景下217个task对应的一百万条真实机器人轨迹；通过 latent action representations来提升机器人数据的利用； |
 |  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0Z+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
 |  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
 |  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
+|  2025 |  KAIST  | [LAPA](https://arxiv.org/pdf/2410.11758?)  |  VLM  | 首个通过无监督学习（没有真值机器人action label）来训练VLA模型的方法 |
 |  2025 |  美的  | [DexVLA](https://arxiv.org/pdf/2502.05855)  |  VLM+diffusion  | 1B参数量的diffusion expert with multi-head架构，实现不同实体形态的学习；三阶段的分离式训练策略；|
 |  2025 |  美的  | [DiVLA](https://openreview.net/pdf?id=VdwdU81Uzy)  |  VLM+autoregressive+diffusion  | autoregressive进行推理，而diffusion进行动作生成以控制机器人 |
 |  2025 |  上海AI Lab与北京人形  | [TinyVLA](https://arxiv.org/pdf/2409.12514)  |  ViT+LLM  | 在OpenVLA基础上引入轻量VLM模型以及diffusion policy decoder | 
@@ -73,8 +75,8 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2024 |  Physical Intelligence  | [π0/PI0](https://arxiv.org/pdf/2410.24164?)  |  VLM+action expert（diffusion）  | 通才模型（generalist model）；预训练+task-specific微调策略 |
 |  2024 |  Stanford  | [OpenVLA](https://arxiv.org/pdf/2406.09246?)  |  SigLIP与DNIO-v2作为视觉编码器，大语言模型（LLaMA2-7B）作为高层推理| 首个全面开源的通用 VLA 模型，结合多模态编码与大语言模型架构；首次展示了通过低秩适应（LoRA）和模型量化等计算高效的微调方法，实现降低计算成本且不影响成功率 |
 |  2024 |  UC Berkeley  | [Octo](https://arxiv.org/pdf/2405.12213)  |  Transformer  | 采用diffusion作为连续动作生成；基于Open x-embodiment训练的大型架构；通用机器人模型的探索|
-|  2024 |  字节  | [GR-2](https://arxiv.org/pdf/2410.06158?)  |  方法  | 说明 |
-|  2024 |  字节  | [GR-1](https://arxiv.org/pdf/2312.13139)  |  视频生成模型  | 通过GPT式生成模型的预训练（video generative pre-training model），结合机器人数据进行微调 |
+|  2024 |  字节  | [GR-2](https://arxiv.org/pdf/2410.06158?)  | GPT-style 视频生成模型   | GR-1的晋级版，用了更多、更diversity的数据来预训练 |
+|  2024 |  字节  | [GR-1](https://arxiv.org/pdf/2312.13139)  |  GPT-style 视频生成模型  | 通过GPT式生成模型的预训练（video generative pre-training model），结合机器人数据进行微调 |
 |  2024 |  Stanford  | [ReKep](https://arxiv.org/pdf/2409.01652)  |  ViT+VLM  | DINOv2提取3D关键点，VLM通过指令与图像生成关键点与空间的约束，通过求解优化获取机器人末端执行轨迹 |
 |  2023 |  Google DeepMind  | [RT-2](https://robotics-transformer2.github.io/assets/rt2.pdf)  |  VLM  | 正式提出VLA概念；采用VLM作为骨架；Internet-scale预训练VLM模型在机器人控制上展示良好的泛化性及语义推理；将action也表达成文本token的形式 |
 |2023|Stanford|[ALOHA/ACT](https://arxiv.org/pdf/2304.13705)|CVAE+Transformer|动作分块；用低成本平台实现精细操作,如线扎带、乒乓球|
@@ -90,19 +92,26 @@ VLA常用的数据集：
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`IROS`|[Agibot world colosseo: A large-scale manipulation platform for scalable and intelligent embodied systems](https://arxiv.org/pdf/2503.06669)|[![Github stars](https://img.shields.io/github/stars/OpenDriveLab/AgiBot-World.svg)](https://github.com/OpenDriveLab/AgiBot-World)|[website](https://agibot-world.com/) <br> AgiBot World dataset|
+|2025|`RSS`|[Robomind: Benchmark on multi-embodiment intelligence normative data for robot manipulation](https://arxiv.org/pdf/2412.13877)|[![Github stars](https://img.shields.io/github/stars/x-humanoid-robomind/x-humanoid-robomind.github.io.svg)](https://github.com/x-humanoid-robomind/x-humanoid-robomind.github.io)|[website](https://x-humanoid-robomind.github.io/)|
 |2025|`ICRA`|[Dexmimicgen: Automated data generation for bimanual dexterous manipulation via imitation learning](https://arxiv.org/pdf/2410.24185)|[![Github stars](https://img.shields.io/github/stars/NVlabs/dexmimicgen.svg)](https://github.com/NVlabs/dexmimicgen/)|[website](https://dexmimicgen.github.io/)<br>DexMimicGen|
 |2024|`ICRA`|[Rh20t: A comprehensive robotic dataset for learning diverse skills in one-shot](https://rh20t.github.io/static/RH20T_paper_compressed.pdf)|[![Github stars](https://img.shields.io/github/stars/rh20t/rh20t_api.svg)](https://github.com/rh20t/rh20t_api)|[website](https://rh20t.github.io/)| 
 |2024|`RSS`|[Robocasa: Large-scale simulation of everyday tasks for generalist robots](https://arxiv.org/pdf/2406.02523)|[![Github stars](https://img.shields.io/github/stars/robocasa/robocasa.svg)](https://github.com/robocasa/robocasa)|[website](https://robocasa.ai/)|
 |2024|`RSS`|[Droid: A large-scale in-the-wild robot manipulation dataset](https://arxiv.org/pdf/2403.12945)|---|[website](https://droid-dataset.github.io/)|
+|2024|`ICRA`|[Roboagent: Generalization and efficiency in robot manipulation via semantic augmentations and action chunking](https://arxiv.org/pdf/2309.01918)|[![Github stars](https://img.shields.io/github/stars/robopen/roboagent.svg)](https://github.com/robopen/roboagent/)|[website](https://robopen.github.io/)|
 |2023|`NIPS`|[Libero: Benchmarking knowledge transfer for lifelong robot learning](https://proceedings.neurips.cc/paper_files/paper/2023/file/8c3c666820ea055a77726d66fc7d447f-Paper-Datasets_and_Benchmarks.pdf)|---|[website](https://libero-project.github.io/)<br>LIBERO|
 |2023|`CoRL`|[Bridgedata v2: A dataset for robot learning at scale](https://proceedings.mlr.press/v229/walke23a/walke23a.pdf)|[![Github stars](https://img.shields.io/github/stars/rail-berkeley/bridge_data_v2.svg)](https://github.com/rail-berkeley/bridge_data_v2)|[website](https://rail-berkeley.github.io/bridgedata/)<br>WidowX|
 |2023|`CoRL`|[Open x-embodiment: Robotic learning datasets and rt-x models](https://arxiv.org/pdf/2310.08864)|[![Github stars](https://img.shields.io/github/stars/google-deepmind/open_x_embodiment.svg)](https://github.com/google-deepmind/open_x_embodiment)|[website](https://robotics-transformer-x.github.io/)|
 |2023|`CoRL`|[Rt-2: Vision-language-action models transfer web knowledge to robotic control](https://robotics-transformer2.github.io/assets/rt2.pdf)|---|[Website](https://robotics-transformer2.github.io/)|
 |2022|`RAL`|[Calvin: A benchmark for language-conditioned policy learning for long-horizon robot manipulation tasks](https://arxiv.org/pdf/2112.03227)|[![Github stars](https://img.shields.io/github/stars/mees/calvin.svg)](https://github.com/mees/calvin)|[website](http://calvin.cs.uni-freiburg.de/)|
 |2022|`arXiv`|[Rt-1: Robotics transformer for real-world control at scale](https://arxiv.org/pdf/2212.06817)|[![Github stars](https://img.shields.io/github/stars/google-research/robotics_transformer.svg)](https://github.com/google-research/robotics_transformer)|[website](https://robotics-transformer1.github.io/) <br> Google robot|
-|2021|`arXiv`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata) <br> Google robot|
+|2022|`CoRL`|[BC-Z: Zero-shot task generalization with robotic imitation learning](https://proceedings.mlr.press/v164/jang22a/jang22a.pdf)|---|[website](https://sites.google.com/view/bc-z/home)|
+|2022|`RSS`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata) <br> Google robot|
+|2019|`CoRL`|[Robonet: Large-scale multi-robot learning](https://arxiv.org/pdf/1910.11215)|---|[website](https://www.robonet.wiki/)|
 
 
+<!-- |---|`arXiv`|---|---|---| -->
+<!-- [![Github stars](https://img.shields.io/github/stars/***.svg)]() -->
 
 
 
@@ -294,13 +303,21 @@ GR-1模型细节如下所示。左侧为输入编码器；右侧为输出解码�
 
 ## GR-2
 
-GR-2通过大规模视频-语言预训练(Internet videos)和动作轨迹微调(video generation and action prediction using robot trajectories)，进一步提升了机器人多任务操作的精度、连贯性和泛化能力，相比GR-1实现了显著的提升(在超过100个task上的平均成功率达97.7%)。
+GR-2是GR-1的进化版本（直观来看就是在GR-1的基础上，用了更多的更diversity的数据来预训练）。同样地，也是基于视频生成模型，通过大规模视频-语言预训练(Internet videos)和动作轨迹微调(video generation and action prediction using robot trajectories)，进一步提升了机器人多任务操作的精度、连贯性和泛化能力，相比GR-1实现了显著的提升(在超过100个task上的平均成功率达97.7%)。
 
 GR-2训练分为两个阶段：
-1. 进行视频-语言预训练，利用大规模互联网视频学习时空动态与语言描述的对应关系
+1. 进行视频-语言预训练，利用大规模互联网视频学习时空动态与语言描述的对应关系，超过38 million文本-视频数据
 2. 进行机器人数据微调，不再仅生成单点动作，而是学习连续的动作轨迹，以完成复杂的机器人任务
 
 
+而为来将预训练获得的知识更好的转移到下游微调任务中，作者用了新的模型架构（但其实只是相比起GR-1换了text encoder，以及image部分采用了VQGAN）。
+此外，通过whole-body control (WBC) algorithm来实现真实机器人部署的轨迹优化和实时运动跟踪。
+
+<div align="center">
+  <img src="../images/WX20251116-153901.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 ## ACT
@@ -1054,13 +1071,108 @@ PI0.5也是首个实现长期（long-horizon）及灵巧机械臂操作。这里
 
 
 
-<!-- ## LAPA -->
-<!--  -->
-<!--  -->
-<!-- ## GO-1 -->
+## LAPA
+
+LAPA是首个通过无监督学习（没有真值机器人action label）来训练VLA模型的方法。而现有的大多数VLA工作都需要action label（一般是由人类操作员收集的），这大大限制了数据的来源以及尺度。
+因此，本文提出通过互联网视频数据（internet-scale videos ）来学习潜在动作（latent action）、并结合小规模机器人数据进行微调。
+
+下图为LAPA整体流程，包括三个阶段：
+* 潜在动作量化（Latent Action Quantization）模型的训练：通过VQ-VAE来学习图像帧之间的离散latent action，采用的量化模型为C-ViViT tokenizer的变种。
+* 潜在预训练（Latent Pretraining）：通过latent VLM model来根据观测和任务的描述生成latent action
+* 动作微调（Action Fine-tuning）：通过小规模的机器人操作数据来进行微调，实现将latent映射到机器人action上。
+三个阶段联合实现如何将互联网视频中隐含的行为知识转化为可用于机器人操作的技能模型。
+
+
+<div align="center">
+  <img src="../images/WX20251116-155420.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+下面是一些实验效果：
+* 用毛巾盖住甜甜圈：
+
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://latentactionpretraining.github.io/static/videos/real_videos/covering_unseen_donut_openvla_fail.gif" width="100%" />
+        OpenVLA
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://latentactionpretraining.github.io/static/videos/real_videos/covering_unseen_donut_lapa_success.gif" width="100%" />
+        LAPA
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
+
+* 敲击物体进行清洁：
+  
+<div align="center">
+  <table style="border: none; background-color: transparent;">
+    <tr align="center">
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://latentactionpretraining.github.io/static/videos/real_videos/knocking_semantic_clean_openvla_fail.gif" width="100%" />
+        OpenVLA
+      </td>
+      <td style="width: 50%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle;">
+        <img src="https://latentactionpretraining.github.io/static/videos/real_videos/knocking_semantic_clean_lapa_sucess.gif" width="100%" />
+        LAPA
+      </td>
+    </tr>
+  </table>
+  <figcaption>
+  </figcaption>
+</div>
 
 
 
+
+
+
+
+
+
+
+
+## GO-1
+
+该工作首先提出了AgiBot World，是一个大规模的机器人数据平台，包含5个场景下，217任务，超过一百万条机器人轨迹。在该数据集下预训练的policy比起在Open X-Embodiment上训练的能提升30%
+
+而在数据集的基础上，作者提出了Genie Operator-1 (GO-1)，通过利用 latent action representations来最大化数据利用。
+对于此前大部分的机器人基础模型都严重依赖于域内的机器人数据，而GO-1则是通过latent action representations来实现从异构数据中学习，并有效地将通用VLM模型与机器人顺序决策联系起来。
+通过对网络规模数据的统一预训练，将人类视频转换为我们的高质量机器人数据集，GO-1实现了卓越的泛化能力和灵活性。
+
+GO-1是一个层次视觉语言潜在动作框架（hierarchical Vision-Language-Latent-Action，ViLLA），如下图所示，传统的VLA模型是基于视觉-语言条件的action，而ViLLA模型预测的是latent action tokens，后续的机器人动作生成则是基于latent action tokens。
+* Stage1（Latent Action Model）：基于internet-scale的异构数据，训练一个encoder-decoder latent action model (LAM)，将连续的图像投影到latent action space。这使得latent action可以作为一个中间的表达来连接图-文输入和机器人action；
+  * 此步的目的其实就是把异构的真实数据集转换为通用的机器人知识；
+* Stage2（Latent Planner）:latent actions作为伪label来训练latent planner，进而实现与实例无关（embodiment-agnostic）的长程规划并利用预训练的VLM的通用能力。
+  * 此步采用的是 InternVL2.5-2B作为VLM的骨架，将LAM学到的机器人通用知识与VLM的通用能力相结合
+* Stage3（Action Expert）:结合action expert，跟latent planner进行联合训练。
+  * action expert采用的是diffusion来获取连续的底层action。
+  * action expert与latent planner共享相同的架构框架，但是它们的目标不同：latent planner通过掩码语言建模生成离散的潜在动作（discretized latent action
+）token，而action expert通过迭代去噪过程回归底层动作。
+
+
+<div align="center">
+  <img src="../images/WX20251116-181023.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+实验效果：
+* Go-1相较于RDT-1B和去掉latent planner的对比效果：
+
+<div align="center">
+  <img src="../images/WX20251116-185043.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 
@@ -1384,33 +1496,6 @@ RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理
 </div>
 
 
-
-
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<br><br><br>
-
-```bash
-下面是待更新的论文：
-
-# Go-1
-AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems
-
-# HiRT
-HiRT: Enhancing Robotic Control with Hierarchical Robot Transformers
-
-# LAPA
-LATENT ACTION PRETRAINING FROM VIDEOS
-
-# Moto
-Moto: Latent Motion Token as the Bridging Language for Learning Robot Manipulation from Videos
-
-# RoboDual
-TOWARDS SYNERGISTIC, GENERALIZED AND EFFICIENT DUAL-SYSTEM FOR ROBOTIC MANIPULATION
-
-# RoboFlamingo
-VISION-LANGUAGE FOUNDATION MODELS AS EFFECTIVE ROBOT IMITATORS
-
-```
 
 
 
