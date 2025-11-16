@@ -64,6 +64,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0Z+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
 |  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
 |  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
+|  2025 |  美的  | [DexVLA](https://arxiv.org/pdf/2502.05855)  |  VLM+diffusion  | 1B参数量的diffusion expert with multi-head架构，实现不同实体形态的学习；三阶段的分离式训练策略；|
 |  2025 |  美的  | [DiVLA](https://openreview.net/pdf?id=VdwdU81Uzy)  |  VLM+autoregressive+diffusion  | autoregressive进行推理，而diffusion进行动作生成以控制机器人 |
 |  2025 |  上海AI Lab与北京人形  | [TinyVLA](https://arxiv.org/pdf/2409.12514)  |  ViT+LLM  | 在OpenVLA基础上引入轻量VLM模型以及diffusion policy decoder | 
 |  2025 |  Stanford  | [OpenVLA-OFT/OpenVLA-OFT+](https://arxiv.org/pdf/2502.19645)  |  ViT+LLM  | 在OpenVLA基础上引入了并行解码、action chunking、连续的动作表示、简单的L1回归作为训练目标；其中OpenVLA-OFT+则是在SigLIP和DINOv2之间插入了FiLM |
@@ -641,10 +642,68 @@ reasoning injection module通过从推理组件（reasoning componen）的标记
 </figcaption>
 </div>
 
-<!-- ## DxVLA -->
-<!--  -->
-<!--  -->
-<!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## DexVLA
+
+DexVLA（Plug-in Diffusion Expert for Vision-Language-Action models）通过三阶段的分离式训练策略，将扩散动作生成与多模态感知有效融合。
+拟人的三阶段训练：
+* Stage1 (cross-embodiment pre-training): 单独在交叉实体数据集（cross-embodiment）下，训练diffusion expert。
+  * 对于diffusion expert，考虑到传统action expert的缺陷，提出一个新的diffusion expert（大约是1B参数量），该diffusion expert拥有多个head结构，每一个head对应a specific embodiment，进可以实现跨不同形态的有效学习。
+  * cross-embodiment pre-training是为了学习底层的，共性的运动技能；
+* Stage2 (embodiment-specific alignment):将VLA与具体的实体进行对齐;直观理解就是适应具体的身体；将视觉-语言表征跟特定机器人的物理约束相关联起来；仅仅此阶段就使模型能够完成各种任务，例如衬衫折叠、域内对象的垃圾箱拾取等
+* Stage3 (task-specific adaptation):快速适应到新的task的后训练;让机器人掌握复杂的任务，包括长程任务（long-horizon tasks）和泛化到新的物体。
+Stage2&3实际上就是实现：将训练好的diffusion expert与VLM融合
+
+<div align="center">
+  <img src="../images/WX20251116-093018.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* VLM模型采用的是Qwen2-VL
+
+实验部分：
+* 在单个A6000GPU上可以跑到60HZ
+* 无需任务特定适配的示例，包括 简易抓取、T恤折叠与桌面清理。
+
+<div align="center">
+  <img src="../images/WX20251116-100411.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 新机器人上的新任务示例，包括包装（上）和倒饮料（下），这两个任务未曾出现在阶段1和2的训练数据中
+
+<div align="center">
+  <img src="../images/WX20251116-100509.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* DexVLA 能够处理复杂的长时任务（比如laundry folding/洗衣折叠），远超Baseline。
+
+<div align="center">
+  <img src="../images/WX20251116-100000.png" width="80%" />
+  <img src="../images/WX20251116-100257.png" width="60%" />
+<figcaption> 
+DexVLA 能够自动将指令拆解为多步子任务（洗衣折叠（上）、烘干机取衣（中）和物品分类（下）），并基于视觉上下文执行复杂操作。
+</figcaption>
+</div>
+
+
 <!-- ## VoxPoser -->
 <!--  -->
 <!--  -->
@@ -1229,9 +1288,6 @@ RoboMM架构如下图所示。该模型具备3D环境感知的能力以及处理
 
 ```bash
 下面是待更新的论文：
-
-# DexVLA
-DexVLA: Vision-Language Model with Plug-In Diffusion Expert for General Robot Control
 
 # Go-1
 AgiBot World Colosseo: Large-scale Manipulation Platform for Scalable and Intelligent Embodied Systems
