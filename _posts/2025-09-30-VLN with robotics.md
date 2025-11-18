@@ -234,7 +234,7 @@ StreamVLN在单张RTX4090 GPU的远程工作站上运行。
 
 # 5. Navila: Legged robot vision-language-action model for navigation
 
-* 阅读及复现过程请见[博客]()
+* 阅读及复现过程请见[博客](https://kwanwaipang.github.io/NaVILA/)
 
 
 # 总结
