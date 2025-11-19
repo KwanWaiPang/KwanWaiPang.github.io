@@ -56,6 +56,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`TRO`|[PG-SLAM: Photo-realistic and Geometry-aware RGB-D SLAM in Dynamic Environments](https://arxiv.org/pdf/2411.15800)|---|---|
 |2025|`ICCV`|[DyGS-SLAM: Real-Time Accurate Localization and Gaussian Reconstruction for Dynamic Scenes](https://openaccess.thecvf.com/content/ICCV2025/papers/Hu_DyGS-SLAM_Real-Time_Accurate_Localization_and_Gaussian_Reconstruction_for_Dynamic_Scenes_ICCV_2025_paper.pdf)|---|---|
 |2025|`Proceedings of the 33rd ACM International Conference on Multimedia`|[SLAM-X: Generalizable Dynamic Removal for NeRF and Gaussian Splatting SLAM](https://dl.acm.org/doi/abs/10.1145/3746027.3754971)|---|---|
 |2025|`arXiv`|[VAR-SLAM: Visual Adaptive and Robust SLAM for Dynamic Environments](https://arxiv.org/pdf/2510.16205)|[![Github stars](https://img.shields.io/github/stars/iit-DLSLab/VAR-SLAM.svg)](https://github.com/iit-DLSLab/VAR-SLAM)|---|
