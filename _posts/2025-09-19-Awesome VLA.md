@@ -55,7 +55,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-|  2025 |  Physical Intelligence   | [PI0.6](https://www.pi.website/download/pistar06.pdf)  |  PI0.5（VLM+action expert）+RL  | VLA通过强化学习在现实部署中实现自我改进;基于经验与校正的优势条件策略强化学习(RECAP) |
+|  2025 |  Physical Intelligence   | [PI0.6](https://www.pi.website/download/pistar06.pdf)  |  PI0.5（VLM+action expert）+RL  | VLA通过强化学习在现实部署中实现自我改进;基于经验与校正的优势条件策略强化学习(RECAP) ；VLM模型采用Gemma 3 4B，动作专家860M参数量|
 | 2025 |  美团  | [RoboTron-Mani](https://arxiv.org/pdf/2412.07215v1)  | 3D 感知增强（RoboData数据集+3D感知架构） + 基于LLM的多模态融合架构  | 通过引入相机参数矫正及occupancy监督来增强3D空间感知能力 |
 |  2025 |  Generalist  | [GEN-0](https://generalistai.com/blog/nov-04-2025-GEN-0)  |   Harmonic Reasoning模型被训练同时推理与action | 27万小时真实物理交互数据训练；（机器人领域）首次发现7B参数量以内模型会出现固化，而超过这个参数量，可展示良好Scaling Laws |
 |  2025 |  University of British Columbia  | [NanoVLA](https://arxiv.org/pdf/2510.25122v1)  |  VLM+action expert | 视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
