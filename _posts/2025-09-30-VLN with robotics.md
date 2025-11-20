@@ -237,13 +237,29 @@ StreamVLN在单张RTX4090 GPU的远程工作站上运行。
 * 阅读及复现过程请见[博客](https://kwanwaipang.github.io/NaVILA/)
 
 
+# 6. VLN-Zero: Rapid Exploration and Cache-Enabled Neurosymbolic Vision-Language Planning for Zero-Shot Transfer in Robot Navigation
 
+VLN-Zero通过VLM构建symbolic scene graphs（符号场景图），进而可以实现zero-shot的neurosymbolic navigation（神经符号导航）。
+其架构如下图所示，分为两步：
+1. exploration phase（指导机器人在用户指定的约束下与环境交互）：基于结构的提示词指导VLM寻找有信息以及diverse轨迹，并且压缩场景图的表达。
+   * 所谓的探索，其实就是通过提示词，让VLM可以探索环境，生成场景图
+2. deployment phase：neurosymbolic planner（神经符号规划器）根据整个场景以及环境的观测来推理及生成执行动作。并且还有一个cache-enabled execution
+module（缓存的执行模块）通过重用此前计算的task-location轨迹来加速adaptation。
+  * 所谓的部署阶段，就是构建了一个规划器，使其能够根据场景图、视觉观测、任务提示来生成满足约束的动作
 
+<div align="center">
+  <img src="../images/微信截图_20251120100146.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
+至于实验效果的看上去效果还是不错的，比如在unseen场景下，跟其他SOTA对比：
 
-
-
-
+<div align="center">
+  <img src="../images/微信截图_20251120150214.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 
