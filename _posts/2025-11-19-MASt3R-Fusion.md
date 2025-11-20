@@ -81,10 +81,11 @@ make python-install -j12
 ```
 
 <div align="center">
-  <img src="./assets/微信截图_20251117143915.png" width="80%" />
+  <img src="https://github.com/R-C-Group/MASt3R-Fusion-comment/raw/main/assets/微信截图_20251117143915.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
+
 
 * 工程安装：
 
@@ -145,7 +146,6 @@ ldconfig -p | grep libavutil
 conda activate mast3r_fusion
 
 bash batch_kitti360_vi.sh # for real-time SLAM
-bash batch_kitti360_loop.sh # for global optimization
 
 #此外也可以选择下面的全指令方式 
 python main.py \
@@ -170,4 +170,55 @@ python main.py \
         --result_path "result.txt" \
         --save_h5 \
         --no-viz # for realtime visualization, comment this line 
+```
+
+实验效果如下所示：
+
+<div align="center">
+  <img src="../images/微信截图_20251120083718.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 接下来开启带回环的：
+
+```bash
+bash batch_kitti360_loop.sh # for global optimization
+```
+
+下面是带回环的轨迹：
+
+<div align="center">
+  <img src="../images/微信截图_20251120084850.png" width="60%" />
+  <img src="../images/微信截图_20251120085048.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+接下来验证估算的轨迹效果：
+
+```bash
+python evaluation/evaluate_kitti360.py
+```
+
+<div align="center">
+  <img src="../images/微信截图_20251120085540.png" width="100%" />
+<figcaption>  
+</figcaption>
+</div>
+
+可视化三维重建的效果：
+
+```bash
+python evaluation/check_h5.py --config config/base_kitti360.yaml \
+         --h5 data_0000.h5 \
+         --calib config/intrinsics_kitti360.yaml # using real-time poses
+         
+python evaluation/check_h5.py --config config/base_kitti360.yaml \
+         --h5 data_0000.h5 \
+         --calib config/intrinsics_kitti360.yaml \
+         --pose_file result_post_0000.txt  # using globally optimized poses
+         
+CUDA_VISIBLE_DEVICES=0,1 python evaluation/check_h5.py --config config/base_kitti360.yaml   --h5 data_0000.h5 --calib config/intrinsics_kitti360.yaml   --pose_file result_post_0000.txt 
+# 注意源码中需要在“keyframes = SharedKeyframes(manager, h, w,buffer=1024) ”前添加 h = 176 以及   w = 512
 ```
