@@ -55,6 +55,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+|  2025 |  Physical Intelligence   | [PI0.6](https://www.pi.website/download/pistar06.pdf)  |  PI0.5（VLM+action expert）+RL  | VLA通过强化学习在现实部署中实现自我改进;基于经验与校正的优势条件策略强化学习(RECAP) ；VLM模型采用Gemma 3 4B，动作专家860M参数量|
 | 2025 |  美团  | [RoboTron-Mani](https://arxiv.org/pdf/2412.07215v1)  | 3D 感知增强（RoboData数据集+3D感知架构） + 基于LLM的多模态融合架构  | 通过引入相机参数矫正及occupancy监督来增强3D空间感知能力 |
 |  2025 |  Generalist  | [GEN-0](https://generalistai.com/blog/nov-04-2025-GEN-0)  |   Harmonic Reasoning模型被训练同时推理与action | 27万小时真实物理交互数据训练；（机器人领域）首次发现7B参数量以内模型会出现固化，而超过这个参数量，可展示良好Scaling Laws |
 |  2025 |  University of British Columbia  | [NanoVLA](https://arxiv.org/pdf/2510.25122v1)  |  VLM+action expert | 视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
@@ -62,7 +63,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 |2025|Figure AI |[Helix](https://www.figure.ai/news/helix)| VLM+Transformer；快慢双系统  | 首个能让两台机器人同时协同工作的VLA 模型；控制人形上半身|
 |2025|Russia|[AnywhereVLA](https://arxiv.org/pdf/2509.21006)|SmolVLA+传统SLAM导航(Fast-LIVO2)+frontier-based探索|消费级硬件上实时运行VLA；移动机械臂|
 |  2025 |  AgiBot-World  | [GO-1](https://arxiv.org/pdf/2503.06669?)  |  VLM+Action Expert  | AgiBot World：5个场景下217个task对应的一百万条真实机器人轨迹；通过 latent action representations来提升机器人数据的利用； |
-|  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0Z+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
+|  2025 |  Physical Intelligence  | [PI0.5](https://openreview.net/pdf?id=vlhoswksBO)  |  PI0+PI-FAST+Hi Robot+多源异构数据  | 多源异构数据联合训练+序列建模统一模态+层次规划推理；首个实现长期及灵巧机械臂操作|
 |  2025 |  NVIDIA  | [GR00T N1.5](https://research.nvidia.com/labs/gear/gr00t-n1_5/)  |  双系统； NVIDIA Eagle2.5 VLM + Diffusion Transformer  | VLM在微调和预训练的时候都frozen |
 |  2025 |  NVIDIA  | [GR00T N1](https://arxiv.org/pdf/2503.14734)  |  双系统；VLM(NVIDIA Eagle-2 VLM)+flow-matching训练的Diffusion Transformer  |  heterogeneous training data |
 |  2025 |  KAIST  | [LAPA](https://arxiv.org/pdf/2410.11758?)  |  VLM  | 首个通过无监督学习（没有真值机器人action label）来训练VLA模型的方法 |
