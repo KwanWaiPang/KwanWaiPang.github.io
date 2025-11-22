@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "论文阅读及复现笔记之——《MASt3R-Fusion: Integrating Feed-Forward Visual Model with IMU, GNSS for High-Functionality SLAM》"
+title: "论文复现笔记之——《MASt3R-Fusion: Integrating Feed-Forward Visual Model with IMU, GNSS for High-Functionality SLAM》"
 date:   2025-11-19
-tags: [SLAM]
+tags: [SLAM,Deep Learning]
 comments: true
 author: kwanwaipang
 toc: true
@@ -18,9 +18,11 @@ toc: true
 
 
 * 本博文复现过程采用的代码及代码注释（如有）：[My github repository](https://github.com/R-C-Group/MASt3R-Fusion-comment)
+* [PDF](https://arxiv.org/pdf/2509.20757)
+* 原github：[Link](https://github.com/GREAT-WHU/MASt3R-Fusion)
 
 
-## 理论解读
+<!-- ## 理论解读 -->
 
 
 ## 实验配置
