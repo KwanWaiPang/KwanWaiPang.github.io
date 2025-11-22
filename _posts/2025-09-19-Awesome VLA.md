@@ -59,6 +59,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+|  2025 |  HKUST-GZ  | [Spatial Forcing](https://arxiv.org/pdf/2510.12276)  |  VGGT知识蒸馏+PI0  | 给VLA隐式赋予3D感知能力；LIBERO benchmark4个任务的平均成功率>98% |
 |  2025 |  北京大学  | [EvoVLA](https://arxiv.org/pdf/2511.16166)  |  OpenVLA-OFT（ViT+LLM）+自监督RL  | 三个组件：RL（阶段对齐奖励、基于位姿的物体探索）+长时程记忆模块（可查询的数据库）；解决了VLA模型的stage hallucination（即假装完成了某个任务阶段而获取奖励）；将长程任务（搭桥、堆叠、枣子入杯）的平均准确率提升到69.2% |
 |  2025 |  Physical Intelligence   | [PI0.6](https://www.pi.website/download/pistar06.pdf)  |  PI0.5（VLM+action expert）+RL  | VLA通过强化学习在现实部署中实现自我改进;基于经验与校正的优势条件策略强化学习(RECAP) ；VLM模型采用Gemma 3 4B，动作专家860M参数量|
 | 2025 |  美团  | [RoboTron-Mani](https://arxiv.org/pdf/2412.07215v1)  | 3D 感知增强（RoboData数据集+3D感知架构） + 基于LLM的多模态融合架构  | 通过引入相机参数矫正及occupancy监督来增强3D空间感知能力 |
