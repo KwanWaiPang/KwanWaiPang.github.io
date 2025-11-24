@@ -59,6 +59,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+| 2025 |  上海交大  | [Evo-1](https://arxiv.org/pdf/2511.04555)   |  VLM+cross-modulated diffusion transformer  | VLM(InternViT-300M+Qwen2.5-0.5B);仅0.77B参数在LIBERO上获取94.8%，MetaWorld（80.6%，PI0 47.9%）和RoboTwin（37.8%，PI0 30.9%）| 
 |  2025 |  HKUST-GZ  | [Spatial Forcing](https://arxiv.org/pdf/2510.12276)  |  VGGT+PI0（VLM+action expert） | 隐式地给VLA赋予3D感知能力；在中间层（相对较深但非最深）通过最大化余弦相似度，强制视觉token与3D特征的对齐；LIBERO benchmark4个任务的平均成功率>98% |
 |  2025 |  上海交大  | [Evo-0](https://arxiv.org/pdf/2507.00416?)  |  VGGT+PI0（VLM+action expert）  | 将VGGT的几何特征与VLM视觉特征通过融合模块（lightweight fusion model）进行融合；在真机捉取实验带来的提升28.53%->57.41% |
 |  2025 |  北京大学  | [EvoVLA](https://arxiv.org/pdf/2511.16166)  |  OpenVLA-OFT（ViT+LLM）+自监督RL  | 三个组件：RL（阶段对齐奖励、基于位姿的物体探索）+长时程记忆模块（可查询的数据库）；解决了VLA模型的stage hallucination（即假装完成了某个任务阶段而获取奖励）；将长程任务（搭桥、堆叠、枣子入杯）的平均准确率提升到69.2% |
@@ -105,6 +106,7 @@ PS: VLA的方法实在太多了，后续看到有意思的工作会及时更新�
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[Robotwin 2.0: A scalable data generator and benchmark with strong domain randomization for robust bimanual robotic manipulation](https://arxiv.org/pdf/2506.18088)|---|[website](https://robotwin-platform.github.io/)|
 |2025|`IROS`|[Agibot world colosseo: A large-scale manipulation platform for scalable and intelligent embodied systems](https://arxiv.org/pdf/2503.06669)|[![Github stars](https://img.shields.io/github/stars/OpenDriveLab/AgiBot-World.svg)](https://github.com/OpenDriveLab/AgiBot-World)|[website](https://agibot-world.com/) <br> AgiBot World dataset|
 |2025|`RSS`|[Robomind: Benchmark on multi-embodiment intelligence normative data for robot manipulation](https://arxiv.org/pdf/2412.13877)|[![Github stars](https://img.shields.io/github/stars/x-humanoid-robomind/x-humanoid-robomind.github.io.svg)](https://github.com/x-humanoid-robomind/x-humanoid-robomind.github.io)|[website](https://x-humanoid-robomind.github.io/)|
 |2025|`ICRA`|[Dexmimicgen: Automated data generation for bimanual dexterous manipulation via imitation learning](https://arxiv.org/pdf/2410.24185)|[![Github stars](https://img.shields.io/github/stars/NVlabs/dexmimicgen.svg)](https://github.com/NVlabs/dexmimicgen/)|[website](https://dexmimicgen.github.io/)<br>DexMimicGen|
@@ -120,6 +122,7 @@ PS: VLA的方法实在太多了，后续看到有意思的工作会及时更新�
 |2022|`arXiv`|[Rt-1: Robotics transformer for real-world control at scale](https://arxiv.org/pdf/2212.06817)|[![Github stars](https://img.shields.io/github/stars/google-research/robotics_transformer.svg)](https://github.com/google-research/robotics_transformer)|[website](https://robotics-transformer1.github.io/) <br> Google robot|
 |2022|`CoRL`|[BC-Z: Zero-shot task generalization with robotic imitation learning](https://proceedings.mlr.press/v164/jang22a/jang22a.pdf)|---|[website](https://sites.google.com/view/bc-z/home)|
 |2022|`RSS`|[Bridge data: Boosting generalization of robotic skills with cross-domain datasets](https://arxiv.org/pdf/2109.13396)|[![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_imitation_learning.svg)](https://github.com/yanlai00/bridge_data_imitation_learning) <br> [![Github stars](https://img.shields.io/github/stars/yanlai00/bridge_data_robot_infra.svg)](https://github.com/yanlai00/bridge_data_robot_infra) |[website](https://sites.google.com/view/bridgedata) <br> Google robot|
+|2025|`CoRL`|[Meta-world: A benchmark and evaluation for multi-task and meta reinforcement learning](https://proceedings.mlr.press/v100/yu20a/yu20a.pdf)|[![Github stars](https://img.shields.io/github/stars/Farama-Foundation/Metaworld.svg)](https://github.com/Farama-Foundation/Metaworld)|[website](https://metaworld.farama.org/)|
 |2019|`CoRL`|[Robonet: Large-scale multi-robot learning](https://arxiv.org/pdf/1910.11215)|---|[website](https://www.robonet.wiki/)|
 
 
