@@ -59,7 +59,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-| 2025 |  上海交大  | [Evo-1](https://arxiv.org/pdf/2511.04555)   |  VLM+cross-modulated diffusion transformer  | VLM(InternViT-300M+Qwen2.5-0.5B);仅0.77B参数在LIBERO上获取94.8%，MetaWorld（80.6%，PI0 47.9%）和RoboTwin（37.8%，PI0 30.9%）| 
+| 2025 |  上海交大  | [Evo-1](https://arxiv.org/pdf/2511.04555)   |  VLM+cross-modulated diffusion transformer  | VLM为Internvl3(InternViT-300M+Qwen2.5-0.5B);采用两阶段训练（freeze VLM训练action expert+ full-scale fine-tuning）；仅0.77B参数在LIBERO上获取94.8%，MetaWorld（80.6%，PI0 47.9%）和RoboTwin（37.8%，PI0 30.9%）| 
 |  2025 |  HKUST-GZ  | [Spatial Forcing](https://arxiv.org/pdf/2510.12276)  |  VGGT+PI0（VLM+action expert） | 隐式地给VLA赋予3D感知能力；在中间层（相对较深但非最深）通过最大化余弦相似度，强制视觉token与3D特征的对齐；LIBERO benchmark4个任务的平均成功率>98% |
 |  2025 |  上海交大  | [Evo-0](https://arxiv.org/pdf/2507.00416?)  |  VGGT+PI0（VLM+action expert）  | 将VGGT的几何特征与VLM视觉特征通过融合模块（lightweight fusion model）进行融合；在真机捉取实验带来的提升28.53%->57.41% |
 |  2025 |  北京大学  | [EvoVLA](https://arxiv.org/pdf/2511.16166)  |  OpenVLA-OFT（ViT+LLM）+自监督RL  | 三个组件：RL（阶段对齐奖励、基于位姿的物体探索）+长时程记忆模块（可查询的数据库）；解决了VLA模型的stage hallucination（即假装完成了某个任务阶段而获取奖励）；将长程任务（搭桥、堆叠、枣子入杯）的平均准确率提升到69.2% |
