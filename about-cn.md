@@ -37,7 +37,7 @@ permalink: /about-cn/
       机器人、SLAM，多模态融合感知、定位与导航、三维重建、VLN/VLA等
 
 </td>
-      <td style="width: 10%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle; text-align: right;">
+      <td style="width: 20%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle; text-align: right;">
         <img src="https://kwanwaipang.github.io/Poster_files/Image/Guan_Weipeng.jpg" width="100%" />
       </td>
     </tr>
