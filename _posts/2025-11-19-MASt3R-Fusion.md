@@ -177,7 +177,7 @@ python main.py \
 实验效果如下所示：
 
 <div align="center">
-  <img src="../images/微信截图_20251120083718.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251120083718.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -191,8 +191,8 @@ bash batch_kitti360_loop.sh # for global optimization
 下面是带回环的轨迹：
 
 <div align="center">
-  <img src="../images/微信截图_20251120084850.png" width="60%" />
-  <img src="../images/微信截图_20251120085048.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251120084850.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251120085048.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -204,7 +204,7 @@ python evaluation/evaluate_kitti360.py
 ```
 
 <div align="center">
-  <img src="../images/微信截图_20251120085540.png" width="100%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251120085540.png" width="100%" />
 <figcaption>  
 </figcaption>
 </div>
