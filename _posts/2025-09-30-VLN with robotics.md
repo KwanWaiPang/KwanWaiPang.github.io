@@ -183,7 +183,7 @@ For example, the success rate improves by 10.5-35.5 compared to methods using mu
 
 # 4. StreamVLN: Streaming Vision-and-Language Navigation via SlowFast Context Modeling
 * [PDF](https://arxiv.org/pdf/2507.05240)
-* [Github](https://github.com/InternRobotics/StreamVLN)
+* 代码已经开源：[Github](https://github.com/InternRobotics/StreamVLN)
 * [Website](https://streamvln.github.io/)
 
 ~~~
@@ -234,6 +234,7 @@ StreamVLN在单张RTX4090 GPU的远程工作站上运行。
 
 # 5. Navila: Legged robot vision-language-action model for navigation
 
+* 代码已经开源；
 * 阅读及复现过程请见[博客](https://kwanwaipang.github.io/NaVILA/)
 
 
@@ -263,11 +264,35 @@ module（缓存的执行模块）通过重用此前计算的task-location轨迹�
 
 
 
-# 总结
 
-写此博客时，已经开源的项目：
-* StreamVLN
-* Navila
+
+
+
+
+
+
+# 7. InternVLA-N1: An Open Dual-System Vision-Language Navigation Foundation Model with Learned Latent Plans
+* [PDF](https://internrobotics.github.io/internvla-n1.github.io/static/pdfs/InternVLA_N1.pdf)
+* 代码已经开源：[Github](https://github.com/InternRobotics/InternNav)
+* [Website](https://internrobotics.github.io/internvla-n1.github.io/)
+
+InternVLA-N1是首个开源的基于双系统VLN模型。
+主要贡献点如下：
+1. 首个开源的基于快慢双系统的VLN基础模型。System 2 用于执行多轮的基于语言指令、观测（视角感知）的精确规划。而System1则是负责在真实世界环境下，执行System2输出的规划。其中，学习到的latent plans作为中间表示，来实现两个系统之间的交互；
+   * System2 (pixel goal planner),利用多模态LLM作为骨架，利用其commonsense知识以及多模态感知能力；
+   * System1则是一个轻量级的，基于diffusion的视觉导航policy；
+   * 两个系统先进行预训练，然后通过fine-tuning phase来实现异步推理，增强两个系统之间中间目标接口（intermediate goal interface）的空间表示（spatial representation ）；
+2. InternData-N1，大型的导航数据集，包含了超过3000个场景的50 million的图像，一共4,839公里的机器人导航。
+
+
+此外实验还验证了，InternVLA-N1（仅仅用仿真数据训练）在轮式、足式、双足人形上的zero-shot泛化性。实现超过150m的长程规划，以及实时的决策（>30HZ）。
+
+
+# 总结
+<!--  -->
+<!-- 写此博客时，已经开源的项目： -->
+<!-- * StreamVLN -->
+<!-- * Navila -->
 
 
 
