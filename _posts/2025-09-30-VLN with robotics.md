@@ -279,13 +279,25 @@ module（缓存的执行模块）通过重用此前计算的task-location轨迹�
 InternVLA-N1是首个开源的基于双系统VLN模型。
 主要贡献点如下：
 1. 首个开源的基于快慢双系统的VLN基础模型。System 2 用于执行多轮的基于语言指令、观测（视角感知）的精确规划。而System1则是负责在真实世界环境下，执行System2输出的规划。其中，学习到的latent plans作为中间表示，来实现两个系统之间的交互；
-   * System2 (pixel goal planner),利用多模态LLM作为骨架，利用其commonsense知识以及多模态感知能力；
-   * System1则是一个轻量级的，基于diffusion的视觉导航policy；
+   * System2 (pixel goal planner),利用多模态LLM(一个7B的VLM，Qwen-VL-2.5)作为骨架，利用其commonsense知识以及多模态感知能力；VLM预测的微image space的pixel坐标。
+   * System1则是一个轻量级的，基于diffusion的视觉导航policy；该policy设计用于实时避障与路径规划，预测包括导航轨迹以及对应轨迹的安全分数（safety score）。输入可以是latent plan也可以支持输入显式的目标。训练的时候以image-goal and pixel-goal embeddings作为输入，采用point-goal作为label监督训练。
    * 两个系统先进行预训练，然后通过fine-tuning phase来实现异步推理，增强两个系统之间中间目标接口（intermediate goal interface）的空间表示（spatial representation ）；
-2. InternData-N1，大型的导航数据集，包含了超过3000个场景的50 million的图像，一共4,839公里的机器人导航。
+   * 【此部分只是一个拓展】此外，为了增强以及验证latent representation，作者训练的一个基于latent plan的世界模型来预测后续的观测序列（subsequent egocentric observation sequences）；
+2. InternData-N1，大型的导航数据集，包含了超过3000个场景的50 million的图像，一共4,839公里的机器人导航。分为VLN-N1（large-scale open-source 3D assets）、VLN-CE（一些现有的VLN-CE数据集）、VLN-PE（收集physics-based simulation数据）；
+
+
+<div align="center">
+  <img src="../images/WX20251130-152121.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 此外实验还验证了，InternVLA-N1（仅仅用仿真数据训练）在轮式、足式、双足人形上的zero-shot泛化性。实现超过150m的长程规划，以及实时的决策（>30HZ）。
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://internrobotics.github.io/internvla-n1.github.io/static/videos/v1.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
 
 
 # 总结
