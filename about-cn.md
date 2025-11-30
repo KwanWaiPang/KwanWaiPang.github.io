@@ -33,7 +33,7 @@ permalink: /about-cn/
       &emsp;<a href="https://github.com/KwanWaiPang">Github</a>
 
       <br> <br> <br> 
-      <span> 主要研究方向：</span>
+      <strong> 主要研究方向：</strong>
       机器人、SLAM，多模态融合感知、定位与导航、三维重建、VLN/VLA等
 
 </td>
