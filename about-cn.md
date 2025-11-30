@@ -33,12 +33,11 @@ permalink: /about-cn/
       &emsp;<a href="https://github.com/KwanWaiPang">Github</a>
 
       <br> <br> <br> 
-      <br> <br> <br> 
       <span style="font-size: 1.5em; font-weight: bold;">主要研究方向：</span>
       机器人、SLAM，多模态融合感知、定位与导航、三维重建、VLN/VLA等
 
 </td>
-      <td style="width: 20%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle; text-align: right;">
+      <td style="width: 16%; border: none; padding: 0.01; background-color: transparent; vertical-align: middle; text-align: right;">
         <img src="https://kwanwaipang.github.io/Poster_files/Image/Guan_Weipeng.jpg" width="100%" />
       </td>
     </tr>
@@ -79,13 +78,14 @@ permalink: /about-cn/
 - 国家级大学生创新创业训练计划优秀项目(暨[“国创计划十周年”庆典暨第十届全国大学生创新创业年会](https://kwanwaipang.github.io/ubuntu_md_blog/images/5a85df3f4a7b4277f24ed01addd734f2.png))《[基于Taguchi方法的通照一体化LED 阵列及其驱动电路的研究](http://gjcxcy.bjtu.edu.cn/ChengGuoZhanShiDetail.aspx?8A74309679375E0AE72BE8009D45FD33)》
 
 
-## <svg class="section-icon" viewBox="0 0 640 512"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> 学术成果
+## <svg class="section-icon" viewBox="0 0 640 512"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg> 学术经历
 
 - 发表论文70+篇：[Google Scholar](https://scholar.google.com/citations?user=fUU5Cv0AAAAJ)
 - 授权发明专利50+项：[专利列表](https://kwanwaipang.github.io/File/Representative_works/Granted_patents.html)
 - 2021，2022，2023年被斯坦福大学评选为世界前2%顶尖科学家 ([Profile](https://topresearcherslist.com/Home/Profile/755856))
 - 广东省光电技术协会科学技术奖-发明技术-一等奖《[通照、通显一体化可见光通信关键技术与应用](https://kwanwaipang.github.io/ubuntu_md_blog/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250213102955.jpg)》
 - 广东省第十五届“挑战杯”大学生课外学术科技作品竞赛-省决赛-特等奖《[基于可见光通信移动机器人定位技术的研究](https://r-c-group.github.io/blog_media/images/挑战杯省赛奖状背面.jpg)》
+- 期刊/会议论文审稿人：TRO、TIST、TII、TMM、TASE、TMECH、RAL、IROS、ICRA等；
 
 <br>
 
