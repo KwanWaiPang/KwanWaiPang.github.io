@@ -183,7 +183,7 @@ For example, the success rate improves by 10.5-35.5 compared to methods using mu
 
 # 4. StreamVLN: Streaming Vision-and-Language Navigation via SlowFast Context Modeling
 * [PDF](https://arxiv.org/pdf/2507.05240)
-* [Github](https://github.com/InternRobotics/StreamVLN)
+* 代码已经开源：[Github](https://github.com/InternRobotics/StreamVLN)
 * [Website](https://streamvln.github.io/)
 
 ~~~
@@ -234,6 +234,7 @@ StreamVLN在单张RTX4090 GPU的远程工作站上运行。
 
 # 5. Navila: Legged robot vision-language-action model for navigation
 
+* 代码已经开源；
 * 阅读及复现过程请见[博客](https://kwanwaipang.github.io/NaVILA/)
 
 
@@ -248,7 +249,7 @@ module（缓存的执行模块）通过重用此前计算的task-location轨迹�
   * 所谓的部署阶段，就是构建了一个规划器，使其能够根据场景图、视觉观测、任务提示来生成满足约束的动作
 
 <div align="center">
-  <img src="../images/微信截图_20251120100146.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251120100146.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -256,18 +257,54 @@ module（缓存的执行模块）通过重用此前计算的task-location轨迹�
 至于实验效果的看上去效果还是不错的，比如在unseen场景下，跟其他SOTA对比：
 
 <div align="center">
-  <img src="../images/微信截图_20251120150214.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251120150214.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 
 
-# 总结
 
-写此博客时，已经开源的项目：
-* StreamVLN
-* Navila
+
+
+
+
+
+
+# 7. InternVLA-N1: An Open Dual-System Vision-Language Navigation Foundation Model with Learned Latent Plans
+* [PDF](https://internrobotics.github.io/internvla-n1.github.io/static/pdfs/InternVLA_N1.pdf)
+* 代码已经开源：[Github](https://github.com/InternRobotics/InternNav)
+* [Website](https://internrobotics.github.io/internvla-n1.github.io/)
+
+InternVLA-N1是首个开源的基于双系统VLN模型。
+主要贡献点如下：
+1. 首个开源的基于快慢双系统的VLN基础模型。System 2 用于执行多轮的基于语言指令、观测（视角感知）的精确规划。而System1则是负责在真实世界环境下，执行System2输出的规划。其中，学习到的latent plans作为中间表示，来实现两个系统之间的交互；
+   * System2 (pixel goal planner),利用多模态LLM(一个7B的VLM，Qwen-VL-2.5)作为骨架，利用其commonsense知识以及多模态感知能力；VLM预测的微image space的pixel坐标。
+   * System1则是一个轻量级的，基于diffusion的视觉导航policy；该policy设计用于实时避障与路径规划，预测包括导航轨迹以及对应轨迹的安全分数（safety score）。输入可以是latent plan也可以支持输入显式的目标。训练的时候以image-goal and pixel-goal embeddings作为输入，采用point-goal作为label监督训练。
+   * 两个系统先进行预训练，然后通过fine-tuning phase来实现异步推理，增强两个系统之间中间目标接口（intermediate goal interface）的空间表示（spatial representation ）；
+   * 【此部分只是一个拓展】此外，为了增强以及验证latent representation，作者训练的一个基于latent plan的世界模型来预测后续的观测序列（subsequent egocentric observation sequences）；
+2. InternData-N1，大型的导航数据集，包含了超过3000个场景的50 million的图像，一共4,839公里的机器人导航。分为VLN-N1（large-scale open-source 3D assets）、VLN-CE（一些现有的VLN-CE数据集）、VLN-PE（收集physics-based simulation数据）；
+
+
+<div align="center">
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251130-152121.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+此外实验还验证了，InternVLA-N1（仅仅用仿真数据训练）在轮式、足式、双足人形上的zero-shot泛化性。实现超过150m的长程规划，以及实时的决策（>30HZ）。
+
+<div align="center">
+<video playsinline autoplay loop muted src="https://internrobotics.github.io/internvla-n1.github.io/static/videos/v1.mp4" poster="https://kwanwaipang.github.io/File/Representative_works/loading-icon.gif" alt="sym" width="80%" style="padding-top:0px;padding-bottom:0px;border-radius:15px;"></video>
+</div>
+
+
+# 总结
+<!--  -->
+<!-- 写此博客时，已经开源的项目： -->
+<!-- * StreamVLN -->
+<!-- * Navila -->
 
 
 
