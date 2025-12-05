@@ -17,9 +17,9 @@ toc: true
 本博文仅供本人学习记录用~
 
 
-好多年前针对`rrt_exploration`这个功能包写过一篇博客[ROS仿真笔记之——基于rrt_exploration的单个机器人自主探索建图](https://blog.csdn.net/gwplovekimi/article/details/119045783)
+好多年前针对`rrt_exploration`这个功能包写过一篇博客[ROS仿真笔记之——基于rrt_exploration的单个机器人自主探索建图](https://blog.csdn.net/gwplovekimi/article/details/119045783),此处对代码进行再次的复现，详细的原理请见原博客。
 
-
+* 测试使用的代码：[Github](https://github.com/R-C-Group/auto-slam-turtlebot3)
 
 * 代码下载
 
