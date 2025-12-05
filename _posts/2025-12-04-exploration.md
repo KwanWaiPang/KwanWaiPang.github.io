@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "实验笔记之——基于移动机器人的自主探索与地图构建"
-date:   2025-12-04
+date:  2025-12-04
 tags: [SLAM]
 comments: true
 author: kwanwaipang
