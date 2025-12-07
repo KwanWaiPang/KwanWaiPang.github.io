@@ -2,7 +2,7 @@
 layout: post
 title: "论文阅读笔记之——《Sensing, Social, and Motion Intelligence in Embodied Navigation: A Comprehensive Survey》"
 date:   2025-09-25
-tags: [Robotics]
+tags: [VLN/VLA]
 comments: true
 author: kwanwaipang
 toc: true
