@@ -2,7 +2,7 @@
 layout: post
 title: "实验笔记之——基于Android的VLP定位APP"
 date:   2025-02-11
-tags: [Android, LiFi]
+tags: [Coding, LiFi]
 comments: true
 author: kwanwaipang
 toc: true
