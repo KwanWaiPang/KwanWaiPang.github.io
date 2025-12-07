@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "算法学习笔记"
+title: "C++算法学习笔记"
 date:   2025-04-13
 tags: [Coding]
 comments: true
