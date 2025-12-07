@@ -26,6 +26,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`TPAMI`|[SNI-SLAM++: Tightly-Coupled Semantic Neural Implicit SLAM](https://ieeexplore.ieee.org/abstract/document/11260914/)|---|---|
 |2025|`CVPR`|[MNE-SLAM: Multi-Agent Neural SLAM for Mobile Robots](https://openaccess.thecvf.com//content/CVPR2025/papers/Deng_MNE-SLAM_Multi-Agent_Neural_SLAM_for_Mobile_Robots_CVPR_2025_paper.pdf)|[![Github stars](https://img.shields.io/github/stars/dtc111111/MNESLAM.svg)](https://github.com/dtc111111/MNESLAM)|---|
 |2025|`arXiv`|[MCN-SLAM: Multi-Agent Collaborative Neural SLAM with Hybrid Implicit Neural Scene Representation](https://arxiv.org/pdf/2506.18678)|[![Github stars](https://img.shields.io/github/stars/https://github.com/dtc111111/mcnslam.svg)](https://github.com/dtc111111/mcnslam)|[website](https://dtc111111.github.io/DES-dataset/)|
 |2025|`arXiv`|[LRSLAM: Low-rank Representation of Signed Distance Fields in Dense Visual SLAM System](https://arxiv.org/pdf/2506.10567)|---|---|
