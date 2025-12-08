@@ -42,7 +42,9 @@ author: kwanwaipang
 {% endraw %}
 
 {% raw %}
+
 $p^{1}_{i}=T^{1}_{i} \cdot p^{i}_{i}$
+
 {% endraw %}
 
 实际上，一般都是通过测量LiDAR的运动信息，然后通过线性插值获得 $T^{1}_{i}$ 。
