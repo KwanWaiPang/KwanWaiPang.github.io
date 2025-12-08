@@ -84,8 +84,6 @@ markdown: kramdown
 kramdown:
   math_engine: mathjax  # 指定使用MathJax处理数学公式
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    default_lang: html  # 这有助于避免一些语法高亮的冲突
 
 #
 # !! You don't need to change any of the configuration flags below !!
