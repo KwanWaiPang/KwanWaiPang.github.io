@@ -16,7 +16,7 @@
   <link rel="shortcut icon" href="{{ site.favicon }}">
   <!-- <link rel="shortcut icon" href="https://kwanwaipang.github.io/Poster_files/hku_logo.jpg"/> -->
 
-  <!-- 使用 MathJax 3 的简化配置，用于配置公式 -->
+  <!-- 使用 MathJax 3 的简化配置，用于配置数学公式 -->
   <script>
     MathJax = {
       tex: {
@@ -39,28 +39,6 @@
     })(document);
   </script>  
 
-
-<!-- 添加MathJax的脚本 -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    // 识别行内公式分隔符：$...$ 和 \(...\)
-    inlineMath: [ ['$','$'], ['\\(','\\)'] ],
-    // 识别块级公式分隔符：$$...$$ 和 \[...\]
-    displayMath: [ ['$$','$$'], ['\\[','\\]'] ],
-    // 跳过不对script等标签内的内容进行渲染
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-    processEscapes: true
-  },
-  TeX: {
-    equationNumbers: { autoNumber: "AMS" }
-  }
-});
-</script>
-<!-- 从CDN加载MathJax库 -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 
   <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
