@@ -188,7 +188,10 @@ git push -u origin main
 ~~~
 
 ## 避免Liquid转义
-* {% raw %} 用 `{% raw %}` 和 `{% endraw %}` 标签包裹代码。{% endraw %}
+
+{% raw %} 
+用 `{% raw %}` 和 `{% endraw %}` 标签包裹代码。
+{% endraw %}
 
 # markdown中的数学公式
 * a<sup>B</sup>  或  $a^B$
