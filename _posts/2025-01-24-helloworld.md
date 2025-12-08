@@ -187,6 +187,9 @@ git remote add origin YOUR_github_repository_name
 git push -u origin main
 ~~~
 
+## 避免Liquid转义
+* 用 `{% raw %}` 和 `{% endraw %}` 包裹
+
 # markdown中的数学公式
 * a<sup>B</sup>  或  $a^B$
 * a<sub>B</sub>  或  $a_B$
