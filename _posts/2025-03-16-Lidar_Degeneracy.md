@@ -2,7 +2,7 @@
 layout: post
 title: "Paper Survey之——LiDAR-SLAM中的退化检测"
 date:   2025-03-16
-tags: [SLAM]
+tags: [SLAM, LiDAR]
 comments: true
 author: kwanwaipang
 toc: false #true
