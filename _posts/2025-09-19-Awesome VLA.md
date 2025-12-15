@@ -59,6 +59,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
+|  2025 | National University of Singapore | [VLA-4D](https://arxiv.org/pdf/2511.17199)  |  4D+LLM  | 4D感知视觉表征，视觉特征（三维位置信息）+一维时间信息嵌入；时空动作表征（空间动作表征拓展了时序信息维度） |
 |  2025 |  University of Maryland  | [TraceGen](https://arxiv.org/pdf/2511.21690)  |  DINO（几何特征）+SigLIP（语义特征）+T5（编码指令）+flow-based model  | 引入“3D轨迹空间”（world model/VGGT），将视频转换为3D轨迹；把预测的3D轨迹，通过逆运动学转换成机器人的关节运动指令，直接驱动机器人执行。但真实机器人上的成功率仍然只有67.5% |
 | 2025 |  上海交大  | [Evo-1](https://arxiv.org/pdf/2511.04555)   |  VLM+cross-modulated diffusion transformer  | VLM为Internvl3(InternViT-300M+Qwen2.5-0.5B);采用两阶段训练（freeze VLM训练action expert+ full-scale fine-tuning）；仅0.77B参数在LIBERO上获取94.8%，MetaWorld（80.6%，PI0 47.9%）和RoboTwin（37.8%，PI0 30.9%）| 
 |  2025 |  HKUST-GZ  | [Spatial Forcing](https://arxiv.org/pdf/2510.12276)  |  VGGT+PI0（VLM+action expert） | 隐式地给VLA赋予3D感知能力；在中间层（相对较深但非最深）通过最大化余弦相似度，强制视觉token与3D特征的对齐；LIBERO benchmark4个任务的平均成功率>98% |
