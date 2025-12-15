@@ -18,7 +18,7 @@ author: kwanwaipang
 本博文仅供本人学习记录用~
 
 * [Github源码](https://github.com/gaoxiang12/lightning-lm)
-* 本博文复现过程采用的代码及代码注释（如有）：[My github repository]()
+* 本博文复现过程采用的代码及代码注释（如有）：[My github repository](https://github.com/R-C-Group/Lightning-LM)
 
 # 安装配置
 
@@ -30,6 +30,8 @@ mkdir -p colcon_ws/src
 cd ~/colcon_ws/src
 
 git clone https://github.com/gaoxiang12/lightning-lm.git
+# 或者采用我的代码
+git clone git@github.com:R-C-Group/Lightning-LM.git
 ```
 
 
