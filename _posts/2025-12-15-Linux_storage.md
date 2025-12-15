@@ -105,6 +105,8 @@ sudo mkfs.vfat /dev/sda -I
 最后记得按绿色的小勾确认才会开始处理~
 
 
+# 进行合并
+
 <div align="center">
   <img src="../images/微信图片_20251215104515_16_43.jpg" width="80%" />
 <figcaption>  
@@ -112,6 +114,23 @@ sudo mkfs.vfat /dev/sda -I
 </div>
 
 完成！然后打开ubuntu系统发现已经从400+G变为200+了，接下来进入windows系统进行分区合并
+
+* 重启进入Windows系统。
+* 打开"磁盘管理"（右键点击"此电脑"→"管理"→"磁盘管理"）。
+* 找到之前从Ubuntu释放的未分配空间（应为200GB）。
+
+<div align="center">
+  <img src="../images/微信图片_20251215105741_17_43.jpg" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
+
+此时出现一个关键问题，就是这个未分配的空间并不在C盘的隔壁，因此C盘无法选择扩展卷
+
+* 扩展Windows分区：
+* 右键点击Windows系统盘（如C:），选择"扩展卷"。
+* 按向导操作，将200GB未分配空间添加到Windows分区。
+* 点击"完成"应用更改。
 
 
 
