@@ -134,9 +134,23 @@ sudo mkfs.vfat /dev/sda -I
 
 因此，采用[傲梅分区助手](https://www.disktool.cn/download.html)
 * 找到Ubuntu释放的200GB未分配空间
-* 右键点击C盘（系统盘）→ 选择"调整大小/移动"
-* 用鼠标拖动C盘右侧的"小圆点"，将C盘向右拖动，直到与未分配空间相连
-* 点击"确定"→"提交"→"执行"（软件会提示重启，按提示操作即可）
+* 右键点击C盘（系统盘）→ 选择"合并分区"
+* 然后点击提交
+
+<div align="center">
+  <img src="../images/微信截图_20251215112316.png" width="80%" />
+  <img src="../images/微信截图_20251215112437.png" width="50%" />
+<figcaption>  
+</figcaption>
+</div>
+
+最终成功转移空间且没有影响ubuntu系统~
+
+<div align="center">
+  <img src="../images/微信截图_20251215132354.png" width="80%" />
+<figcaption>  
+</figcaption>
+</div>
 
 
 
