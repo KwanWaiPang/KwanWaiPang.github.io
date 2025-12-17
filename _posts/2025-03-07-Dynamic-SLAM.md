@@ -56,6 +56,7 @@ toc: false #true
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[VGGT4D: Mining Motion Cues in Visual Geometry Transformers for 4D Scene Reconstruction](https://arxiv.org/pdf/2511.19971)|[![Github stars](https://img.shields.io/github/stars/3DAgentWorld/VGGT4D.svg)](https://github.com/3DAgentWorld/VGGT4D)|[website](https://3dagentworld.github.io/vggt4d/)|
 |2025|`arXiv`|[Human3R: Everyone Everywhere All at Once](https://arxiv.org/pdf/2510.06219?)|[![Github stars](https://img.shields.io/github/stars/fanegg/Human3R.svg)](https://github.com/fanegg/Human3R)|[website](https://fanegg.github.io/Human3R/)|
 |2025|`TRO`|[PG-SLAM: Photo-realistic and Geometry-aware RGB-D SLAM in Dynamic Environments](https://arxiv.org/pdf/2411.15800)|---|---|
 |2025|`ICCV`|[DyGS-SLAM: Real-Time Accurate Localization and Gaussian Reconstruction for Dynamic Scenes](https://openaccess.thecvf.com/content/ICCV2025/papers/Hu_DyGS-SLAM_Real-Time_Accurate_Localization_and_Gaussian_Reconstruction_for_Dynamic_Scenes_ICCV_2025_paper.pdf)|---|---|
