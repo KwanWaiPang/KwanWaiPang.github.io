@@ -156,7 +156,8 @@ ros2 run lightning run_slam_online --config ./config/default_nclt.yaml
     - 启动建图程序:
       ```ros2 run lightning run_slam_online --config ./config/default_nclt.yaml```
     - 播放数据包
-    - 保存地图 ```ros2 service call /lightning/save_map lightning/srv/SaveMap "{map_id: new_map}"```
+      ```ros2 bag play /home/kwanwaipang/NCLT/20130110```
+    - 保存地图（保存地址为`data/new_map`） ```ros2 service call /lightning/save_map lightning/srv/SaveMap "{map_id: new_map}"```
 2. 离线建图（遍历跑数据，更快一些）
     - ```ros2 run lightning run_slam_offline --config ./config/default_nclt.yaml --input_bag 数据包```
     - 结束后会自动保存至data/new_map目录下
@@ -166,7 +167,24 @@ ros2 run lightning run_slam_online --config ./config/default_nclt.yaml
     - map.pgm存储了2D栅格地图信息
     - 请注意，在定位程序运行过程中或退出时，也可能在同目录存储动态图层的结果，所以文件可能会有更多。
 
-### 定位测试
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218084605.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+最后看看建图效果：
+
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218091851.png" width="90%" />
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218092013.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
+### 纯定位测试
 
 1. 实时定位
     - 将地图路径写到yaml中的 system-map_path 下，默认是new_map（和建图默认一致)
@@ -175,10 +193,72 @@ ros2 run lightning run_slam_online --config ./config/default_nclt.yaml
       ```ros2 run lightning run_loc_online --config ./config/default_nclt.yaml```
     - 播包或者输入传感器数据即可
 
+首先启动定位程序即可看到加载地图的情况
+
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218092519.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218094454.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+
 2. 离线定位
     - ```ros2 run lightning run_loc_offline --config ./config/default_nclt.yaml --input_bag 数据包```
 
 3. 接收定位结果
     - 定位程序输出与IMU同频的TF话题（50-100Hz）
 
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218094612.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
 
+# 算力分析
+
+Full SLAM情况下，查看CPU占用情况如下：
+
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218090051.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+* 处理器是11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)，机带RAM为32.0 GB
+* 【CPU占用分析】
+    * 程序使用了约1.2个物理核心（占用率为121.3%；100% = 1个CPU核心满负荷）【PS：对于i7-11800H（8核16线程）来说最大可达1600%】
+    * CPU使用情况：7.1% (其中run_slam_online占主要部分)
+* 【内存占用分析】：
+    * RES（常驻内存）：753,484 KB ≈ 736 MB【此处显示总内存15864.2 MiB（约16GB），占用约4.6%】
+
+
+
+存定位模式情况下，查看CPU占用情况如下：
+
+<div align="center">
+  <img src="https://github.com/R-C-Group/Lightning-LM/raw/main/doc/微信截图_20251218093856.png" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+那么同步到之前调研的[Thor](https://kwanwaipang.github.io/Thor/)上，两者架构差异如下：
+
+
+|指标 |当前x86性能|Thor 预测|
+|:-----:|:-----:|:-----:|
+| 架构 | x86-64 (Intel) |ARMv9 (Neoverse) |
+|核心数       | 8核16线程     |14核             |
+| 主频        | 2.3   | 2.6GHz           |
+| 内存带宽     | ~50GB/s       | ~300GB/s (预测)    |
+| SIMD指令集  | AVX2/AVX512    |SVE2 (可伸缩向量)   |
+|内存         |  16G（32G）           | 128G |
+|Full SLAM CPU占用情况   |  （121.3%）1.2个Intel核 | 假设ARM单核性能 ≈ 0.8×Intel，预测约为（110~130%）1.2个ARM核 |
+|Full SLAM 内存占用情况   |  736MB | 内存预测不变，约0.63%~0.86% |
+|纯定位模式CPU占用情况| 80%~90%| ---|
+|纯定位模式内存占用情况| 612MB| ---|
