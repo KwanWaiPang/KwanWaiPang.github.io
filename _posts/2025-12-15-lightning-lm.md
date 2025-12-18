@@ -250,9 +250,9 @@ Full SLAM情况下，查看CPU占用情况如下：
 那么同步到之前调研的[Thor](https://kwanwaipang.github.io/Thor/)上，两者架构差异如下：
 
 
-|指标 |当前x86性能|Thor 预测|
+|指标 |当前性能<br>11th Gen Intel(R) Core(TM) i7-11800H |预测性能 <br> Arm® Neoverse®-V3AE|
 |:-----:|:-----:|:-----:|
-| 架构 | x86-64 (Intel) |ARMv9 (Neoverse) |
+| 架构 | x86-64 (Intel) |ARMv9-64 (Neoverse) |
 |核心数       | 8核16线程     |14核             |
 | 主频        | 2.3   | 2.6GHz           |
 | 内存带宽     | ~50GB/s       | ~300GB/s (预测)    |
