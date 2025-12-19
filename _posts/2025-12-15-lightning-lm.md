@@ -230,7 +230,7 @@ Full SLAM情况下，查看CPU占用情况如下：
 </figcaption>
 </div>
 
-* 处理器是11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)，机带RAM为32.0 GB
+* 处理器是11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz (2.30 GHz)，机带RAM为32.0 GB（分到WSL中只有16GB）
 * 【CPU占用分析】
     * 程序使用了约1.2个物理核心（占用率为121.3%；100% = 1个CPU核心满负荷）【PS：对于i7-11800H（8核16线程）来说最大可达1600%】
     * CPU使用情况：7.1% (其中run_slam_online占主要部分)
