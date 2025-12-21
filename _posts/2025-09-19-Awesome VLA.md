@@ -59,7 +59,7 @@ VLA模型的分类方式有很多，比如：基于自回归（autoregression）
 
 |  年份 |  单位  | 模型  |  方法  | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|
-|  2025 |  复旦大学  | [WholeBodyVLA](https://arxiv.org/pdf/2512.11047)  |  方法  | 传统的将操作和导航视为独立任务；面向“移动（前进、转弯、下蹲）-操作”的RL策略 |
+|  2025 |  复旦大学  | [WholeBodyVLA](https://arxiv.org/pdf/2512.11047)  |  VLM+RL | 统一框架实现全身控制（下肢移动+上肢捉取）；LAM （Latent Action Model）+loco–manipulation–oriented (LMO) RL policy；提出面向“移动（前进、转弯、下蹲）+操作”的RL策略;从人类视频中学习“移动-操作”+AgiBot World数据集 |
 |  2025 |  阿里达摩院  | [RynnVLA-002](https://arxiv.org/pdf/2511.17502)  |  Action World Model  | 统一框架实现（VLA+World Model）；“双向增强” 逻辑：世界模型通过学习物理动态（预测/生成未来图像），可优化 VLA 模型的动作生成精度；而 VLA 模型的对视觉的理解，能提升世界模型的场景预测保真度；在LIBERO的成功率达97.4% | 
 |  2025 |  清华大学  | [X-VLA](https://arxiv.org/pdf/2510.10274?)  |  双系统  |  通过可学习的Soft-Prompt（编码硬件特性） 嵌入让模型“理解”不同机器人和环境的差异；0.9B参数量(LIBERO上平均SR为98.1%)；实现120分钟无辅助自主叠衣服 |
 |  2025 | National University of Singapore | [VLA-4D](https://arxiv.org/pdf/2511.17199)  |  4D(VGGT+时间维度)+VLM(Qwen2.5-VL-7B,vision encoder + LLM)  | 4D感知视觉表征，视觉特征（三维位置信息）+一维时间信息嵌入；时空动作表征（空间动作表征拓展了时序信息维度） |

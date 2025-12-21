@@ -2,7 +2,7 @@
 layout: post
 title: "实验笔记之——《Lightning-Speed Lidar Localization and Mapping》"
 date:   2025-12-15
-tags: [LiDAR，SLAM]
+tags: [LiDAR, SLAM]
 comments: true
 author: kwanwaipang
 # toc: true
