@@ -34,7 +34,7 @@ sudo gparted
 可以通过`df -h` 查看磁盘空间，然后删掉无用的资料，留出200+G空间（其中`df -h --max-depth=1`查看当前目录下文件大小）
 
 <div align="center">
-  <img src="../images/微信图片_20251215092233_3_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215092233_3_43.jpg" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -48,7 +48,7 @@ sudo gparted
 首先确认系统的版本为ubuntu 20.04.3 LTS，查看方法如下：
 
 <div align="center">
-  <img src="../images/微信图片_20251215095002_8_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215095002_8_43.jpg" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -64,7 +64,7 @@ lsblk
 ```
 
 <div align="center">
-  <img src="../images/微信图片_20251215093847_5_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215093847_5_43.jpg" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -91,13 +91,13 @@ sudo mkfs.vfat /dev/sda -I
 * 应用更改：点击绿色对勾图标确认操作，等待完成。
 
 <div align="center">
-<img src="../images/微信图片_20251215101146_9_43.jpg" width="80%" />
-  <img src="../images/微信图片_20251215101214_10_43.jpg" width="80%" />
-  <img src="../images/微信图片_20251215101356_11_43.jpg" width="80%" />
-  <img src="../images/微信图片_20251215101554_12_43.jpg" width="80%" />
-  <img src="../images/微信图片_20251215101657_13_43.jpg" width="80%" />
-  <img src="../images/微信图片_20251215101829_14_43.jpg" width="80%" />
-  <img src="../images/微信图片_20251215101937_15_43.jpg" width="80%" />
+<img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101146_9_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101214_10_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101356_11_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101554_12_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101657_13_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101829_14_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215101937_15_43.jpg" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -108,7 +108,7 @@ sudo mkfs.vfat /dev/sda -I
 # 进行合并
 
 <div align="center">
-  <img src="../images/微信图片_20251215104515_16_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215104515_16_43.jpg" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -120,7 +120,7 @@ sudo mkfs.vfat /dev/sda -I
 * 找到之前从Ubuntu释放的未分配空间（应为200GB）。
 
 <div align="center">
-  <img src="../images/微信图片_20251215105741_17_43.jpg" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251215105741_17_43.jpg" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -138,8 +138,8 @@ sudo mkfs.vfat /dev/sda -I
 * 然后点击提交
 
 <div align="center">
-  <img src="../images/微信截图_20251215112316.png" width="80%" />
-  <img src="../images/微信截图_20251215112437.png" width="50%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251215112316.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251215112437.png" width="50%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -147,7 +147,7 @@ sudo mkfs.vfat /dev/sda -I
 最终成功转移空间且没有影响ubuntu系统~
 
 <div align="center">
-  <img src="../images/微信截图_20251215132354.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251215132354.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
