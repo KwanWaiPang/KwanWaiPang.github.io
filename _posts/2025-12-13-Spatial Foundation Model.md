@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Spatial Foundation Model/通用 3D 基础模型/Spatial Intelligence"
-date:   2025-12-21
+date:   2025-12-13
 tags: [Deep Learning]
 comments: true
 author: kwanwaipang
