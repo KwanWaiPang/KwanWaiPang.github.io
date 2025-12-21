@@ -77,14 +77,31 @@ SFM的重要性体现在三个方面：
 * 技术深度：DUSt3R 将重建任务视为一个图像块(Patch)匹配与空间投影的联合学习过程。其输出不仅包括每张图的 3D 坐标，还包含一个置信度图(Confidence Map)，用于在后续的全局对齐过程中过滤噪声。模型采用对称编码器-解码器架构，通过交叉注意力机制交换信息，确保所有点图都统一在第一帧相机坐标系下，为多视图融合奠定基础。
 * 局限性：DUSt3R 主要针对双视图(Pairwise)，在处理多视图大规模场景时，其内存开销呈平方级增长。此外，它缺乏显式的特征匹配引导，在低纹理区域或大视差场景中重建精度受限。虽然能处理超过两张图像，但需依赖两两配对的全局对齐策略，难以高效扩展。
 
+<div align="center">
+  <img src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20241225154344.png" width="90%" />
+<figcaption> 
+</figcaption>
+</div>
 
 **MASt3R（2024年）**是对 DUSt3R 的针对性升级，旨在解决多视图一致性与匹配精度问题。
 * 核心创新：在 DUSt3R 的基础上引入了特征对齐（Matching）。
 * 技术深度：MASt3R 不再仅仅回归坐标，它同时学习具有几何意义的局部描述子。模型在极端视角变化下，其匹配能力远超传统的 SIFT 或 SuperPoint。
 
+<div align="center">
+  <img src="https://kwanwaipang.github.io/Poster_files/learning_algorithm/others/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20241226155105.png" width="90%" />
+<figcaption> 
+</figcaption>
+</div>
+
 **CUT3R（2025年）**解决了该系列模型在处理连续视频流时的“遗忘”与“计算冗余”问题。
 * 核心创新：将原本静态的 Transformer 架构转变为递归式（stateful recurrent model）架构，通过维护内部3D状态实现增量式更新，无需重新计算整个序列。
 * 技术深度：通过引入有状态的 Transformer，CUT3R 能够维持一个内部的 3D 空间表征。当新帧进入时，模型仅需增量式地更新状态，而无需重新计算整个序列。这赋予了 DUSt3R 家族处理 SLAM（实时定位与建图）任务的能力，真正实现了 3D 重建的实时化。
+
+<div align="center">
+  <img src="../images/WX20251221-183707.png" width="90%" />
+<figcaption> 
+</figcaption>
+</div>
 
 **VGGT（2025年）**代表了SFM技术路线的最新突破，由牛津大学视觉几何组（VGG）与Meta AI联合开发。作为CVPR 2025的最佳论文，是通往通用视觉几何的大统一。
 * 核心创新：引入了交替式注意力（Alternating Attention）机制，实现了处理图像数量从 2 张到数百张的跨越式突破。
@@ -93,6 +110,12 @@ SFM的重要性体现在三个方面：
   * 无交叉注意力设计：完全依赖自注意力机制，简化架构设计并提高计算效率。模型为每张图像添加专门的相机token和注册token，第一帧使用特殊可学习token区分参考坐标系，确保统一坐标系下的3D预测。
   * 多头预测架构：包含四个独立预测分支（相机头、深度头、点云头和跟踪头），通过冗余预测提升整体精度。实验表明，同时预测深度图和相机参数比仅预测点云头更准确，体现了多任务学习中任务间相互促进的效应。
 
+
+<div align="center">
+  <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20250318160240.png" width="90%" />
+<figcaption> 
+</figcaption>
+</div>
 
 # SFM在SLAM领域的应用前景
 
