@@ -98,7 +98,7 @@ SFM的重要性体现在三个方面：
 * 技术深度：通过引入有状态的 Transformer，CUT3R 能够维持一个内部的 3D 空间表征。当新帧进入时，模型仅需增量式地更新状态，而无需重新计算整个序列。这赋予了 DUSt3R 家族处理 SLAM（实时定位与建图）任务的能力，真正实现了 3D 重建的实时化。
 
 <div align="center">
-  <img src="../images/WX20251221-183707.png" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20251221-183707.png" width="90%" />
 <figcaption> 
 </figcaption>
 </div>
