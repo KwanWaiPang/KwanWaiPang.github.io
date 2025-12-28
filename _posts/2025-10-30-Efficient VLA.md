@@ -227,6 +227,7 @@ VLA模型效率优化不仅依赖于模型架构设计、感知表示和动作�
 
 |  年份 |  单位  | 模型  |  成功率  | 边端设备实时性 | 说明 |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+|  2025 |  极佳科技  | [SwiftVLA](https://arxiv.org/pdf/2512.00903) |  真机0.76（π0 0.48）；LIBERO成功率为95.1% | NVIDIA Jetson Ori,推理时间0.167s=5.98HZ |  4D transformer（StreamVGGT）实现从2D图像提取4D特征（2D+4D输入），以此来增强VLM（SmolVLM-0.5B）的特征，真机实验比7倍更大的VLA模型（π0）性能相当，在边端设备（NVIDIA Jetson Orin）上快18倍，内存消耗少12倍 |
 |2025|Dexmal|[Realtime-VLA](https://arxiv.org/pdf/2510.26742)|捉取落笔任务成功率100%|RTX 4090 GPU上pi0实现30HZ推理及480HZ轨迹生成|---|
 |2025|University of British Columbia|[NanoVLA](https://arxiv.org/pdf/2510.25122v1)|简单抓取任务 92%～96% <br>柔性物体90%<br>未见过物体84%|Jetson Orin Nano (8GB)上实时性可达41.6FPS|视觉-语言解耦（后期融合+特征缓存）+长短动作分块+自适应选择骨干网络；首次实现在边缘设备(Jetson Orin Nano)上高效运行VLA |
 |2025|Sorbonne University|[Smolvla](https://arxiv.org/pdf/2506.01844)| LIBERO-Goal上约为85%|Jetson Orin Nano (8GB)上>25FPS|该结果为NanoVLA测试的|
