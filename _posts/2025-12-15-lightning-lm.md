@@ -262,3 +262,17 @@ Full SLAM情况下，查看CPU占用情况如下：
 |Full SLAM 内存占用情况   |  736MB | 内存带宽更高。占用率可能会因为等待 I/O 的时间减少而进一步下降。 |
 |纯定位模式CPU占用情况| 80%~90%| ---|
 |纯定位模式内存占用情况| 612MB| ---|
+
+# 在Thor上配置安装
+
+而然，实测lightning-lm在Thor上运行的CPU占用率为2~2.8个物理核（一共14个，占总资源的不到30%），内存消耗约370+MB。
+
+<div align="center">
+  <img src="../images/微信图片_20251229143256.jpg" width="90%" />
+  <img src="../images/微信图片_20251229143308.jpg" width="90%" />
+  <img src="../images/微信图片_20251229143312.jpg" width="90%" />
+<figcaption>  
+</figcaption>
+</div>
+
+注意对于Thor由于采用的是ARM架构，编译可能存在某些依赖库的问题，注释掉即可（部分库ARM架构下没有）~
