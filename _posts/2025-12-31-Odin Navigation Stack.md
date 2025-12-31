@@ -229,8 +229,7 @@ author: kwanwaipang
    * 局部规划 (NeuPAN): 接收全局路径，结合实时激光雷达/深度图数据，使用神经网络模型进行动态避障，输出速度指令 /cmd_vel。
    * 执行 (Unitree): 接收速度指令，调用机器狗底层 SDK 执行运动。
 
-## 关于持续跟随
-
+* 关于持续跟随：
 `yolo_detector.py`中的`simple_avoidance_control`函数，该函数实现了基于视觉伺服的简单避障和目标跟随逻辑，但该实现并不安全
 
 # 关于局部避障
