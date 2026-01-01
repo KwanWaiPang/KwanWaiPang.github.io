@@ -23,7 +23,7 @@ If you find this blog is useful, a simple star (<a class="github-button"
   | <a href="/about-cn/">中文版</a> 
   </h3>
 
-<hr>
+<!-- <hr> -->
 
 <div id="dynamic-content-root">Loading...</div>
 
@@ -63,7 +63,7 @@ If you find this blog is useful, a simple star (<a class="github-button"
 #dynamic-content-root {
   min-height: 500px;
   width: 100%;
-  border: 1px solid #eee; /* 可选：给你的 index 区域加个边框 */
+  /*  border: 1px solid #eee; /* 可选：给你的 index 区域加个边框 */
   padding: 10px;
   border-radius: 8px;
   background: #fff;
