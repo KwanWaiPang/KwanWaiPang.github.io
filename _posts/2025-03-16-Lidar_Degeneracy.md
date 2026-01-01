@@ -16,11 +16,11 @@ toc: false #true
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <!-- # 引言 -->
 
-本博文主要介绍了一些用于检测和解决激光雷达SLAM中退化问题的算法。
+<!-- 本博文主要介绍了一些用于检测和解决激光雷达SLAM中退化问题的算法。 -->
 
-* 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/Degeneracy_for_lidar.html)
+<!-- * 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/Degeneracy_for_lidar.html) -->
 
-{% include_relative html_file/Degeneracy_for_lidar.html %}
+<!-- {% include_relative html_file/Degeneracy_for_lidar.html %} -->
 
 <!-- <style>
 /* 通过ID限定作用域 */
