@@ -9,16 +9,16 @@ toc: true
 excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 【核心：指定摘要分隔符】
 ---
 
-* 原[博客](https://kwanwaipang.github.io/File/Blogs/Poster/%E6%99%BA%E9%A9%BE%E4%B8%AD%E7%9A%84%E2%80%9C%E6%97%A0%E5%9B%BE%E2%80%9D.html)
+* [原博客](https://kwanwaipang.github.io/File/Blogs/Poster/%E6%99%BA%E9%A9%BE%E4%B8%AD%E7%9A%84%E2%80%9C%E6%97%A0%E5%9B%BE%E2%80%9D.html)
+
+
 
 <div id="target-content-placeholder">正在加载...</div>
 
 <script>
 (function() {
-  if (window.__LIDAR_BLOG_LOADED__) return;
-  if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) return;
-
-  window.__LIDAR_BLOG_LOADED__ = true;
+  if (window.__SLAM_BLOG_LOADED__) return;
+  window.__SLAM_BLOG_LOADED__ = true;
 
   const baseUrl = '/File/Blogs/Poster/'; 
   const filePath = baseUrl + '智驾中的“无图”.html';
@@ -29,15 +29,10 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 1. 提取并清理内容
-      const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
+      // 1. 彻底移除原 HTML 里的所有目录相关元素，防止干扰
+      // 增加常见目录 ID：#toc, .table-of-contents 等
+      const toRemove = ['header', '.navbar', '.post-header', 'footer', '#scrollToTocButton', '#toggleTocButton', '#newToc', '#toc', '.toc', '#markdown-toc'];
       toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
-
-      // 2. 预处理标题：为所有标题添加 ID，以便点击目录时可以跳转
-      const headings = doc.querySelectorAll('h1, h2, h3, h4');
-      headings.forEach((h, index) => {
-        h.setAttribute('id', 'content-heading-' + index);
-      });
 
       const rawBody = doc.body.innerHTML;
       const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
@@ -46,76 +41,70 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
           let href = s.getAttribute('href');
-          if (!href.startsWith('http') && !href.startsWith('/')) s.setAttribute('href', baseUrl + href);
+          if (href && !href.startsWith('http') && !href.startsWith('/')) s.setAttribute('href', baseUrl + href);
         }
         styleContent += s.outerHTML;
       });
 
-      // 3. 渲染到 Shadow DOM
       const target = document.getElementById('target-content-placeholder');
-      if (target) {
-        const shadow = target.attachShadow({ mode: 'open' });
-        shadow.innerHTML = styleContent + processedHtml;
-        target.childNodes[0].textContent = ""; 
+      const shadow = target.attachShadow({ mode: 'open' });
+      shadow.innerHTML = styleContent + processedHtml;
 
-        // 4. 动态生成 TOC 列表
-        renderDynamicTOC(headings, shadow);
-      }
-    });
+      // 2. --- 关键：将标题注入到 Jekyll 主题真实的 TOC 容器中 ---
+      setTimeout(() => {
+        // 定位 Jekyll 主题生成的标准目录容器
+        // 大多数 Jekyll 主题（如 Chirpy, Minima）使用 #markdown-toc 或 .book-toc
+        const jekyllToc = document.getElementById('markdown-toc') || 
+                          document.querySelector('.post-directory') ||
+                          document.querySelector('.toc');
+        
+        const headings = shadow.querySelectorAll('h1, h2, h3');
+        
+        if (jekyllToc && headings.length > 0) {
+          // 清空 Jekyll 自动生成（可能为空）的内容，由我们填充
+          jekyllToc.innerHTML = ''; 
+          const ul = document.createElement('ul');
 
-  // 辅助函数：构建目录并挂载到 Jekyll 的 TOC 区域
-  function renderDynamicTOC(headings, shadow) {
-    // 寻找 Jekyll 默认生成的 TOC 容器（通常是 .toc 或 #markdown-toc）
-    // 如果 Jekyll 只生成了“目录”两个字，通常下面会有一个空容器
-    const tocContainer = document.querySelector('.toc, #markdown-toc, .post__toc'); 
-    if (!tocContainer) return;
-
-    const ul = document.createElement('ul');
-    ul.style.listStyle = 'none';
-    ul.style.paddingLeft = '15px';
-
-    headings.forEach(h => {
-      const level = parseInt(h.tagName.substring(1));
-      const li = document.createElement('li');
-      li.style.marginLeft = (level - 1) * 15 + 'px';
-      li.style.fontSize = (16 - level) + 'px';
-      li.style.marginVertical = '5px';
-
-      const a = document.createElement('a');
-      a.textContent = h.textContent.trim();
-      a.href = "#";
-      a.style.textDecoration = 'none';
-      a.style.color = 'inherit';
-
-      // 核心点击事件：跨越 Shadow DOM 进行滚动
-      a.onclick = (e) => {
-        e.preventDefault();
-        const targetId = h.getAttribute('id');
-        const targetEl = shadow.getElementById(targetId);
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // --- 新增：插入一个空的占位项，用来抵消主题隐藏第一项的行为 ---
+          const placeholderLi = document.createElement('li');
+          placeholderLi.style.display = 'none'; // 设为隐藏，不影响视觉
+          ul.appendChild(placeholderLi);
+          // -------------------------------------------------------
+          
+          headings.forEach((h, index) => {
+            const id = `sec-${index}`;
+            h.id = id;
+            
+            const li = document.createElement('li');
+            // 保持 Jekyll 的 class 命名习惯
+            const level = h.tagName.toLowerCase();
+            
+            const a = document.createElement('a');
+            a.innerText = h.innerText;
+            a.href = "javascript:void(0);";
+            a.style.display = "block";
+            a.style.paddingLeft = (h.tagName === 'H2' ? '15px' : h.tagName === 'H3' ? '30px' : '0px');
+            
+            a.onclick = () => {
+              h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+            
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+          jekyllToc.appendChild(ul);
         }
-      };
-
-      li.appendChild(a);
-      ul.appendChild(li);
+      }, 300); // 稍微延长等待时间确保 Shadow DOM 渲染完毕
     });
-
-    // 清空原有的“只有目录两个字”的状态，并填入新列表
-    // 假设你的主题结构里目录文字在某个 div 里，这里直接 append
-    tocContainer.appendChild(ul);
-  }
 })();
 </script>
 
 <style>
-/* 隐藏多余的占位符（如果主题渲染了两次，第二次会被 JS 忽略并由 CSS 隐藏） */
-#target-content-placeholder:not(:first-of-type) {
-  display: none !important;
+/* 样式修饰：让注入的目录符合 Jekyll 常见样式 */
+#jekyll-toc-proxy ul {
+    list-style: none;
+    padding-left: 1.5rem;
+    border-left: 2px solid #eee;
 }
-#target-content-placeholder {
-  width: 100%;
-  position: relative;
-}
-</style>
 
+</style>
