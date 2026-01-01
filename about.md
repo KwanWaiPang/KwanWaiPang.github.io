@@ -23,6 +23,30 @@ If you find this blog is useful, a simple star (<a class="github-button"
   | <a href="/about-cn/">中文版</a> 
   </h3>
 
+
+<div id="shadow-root-container"></div>
+
+<div id="source-content" style="display:none;">
+  {% include_relative index.html %}
+</div>
+
+<script>
+  const container = document.getElementById('shadow-root-container');
+  const source = document.getElementById('source-content');
+  
+  // 创建 Shadow Root
+  const shadow = container.attachShadow({mode: 'open'});
+  
+  // 将 index.html 的内容移入 Shadow DOM
+  shadow.innerHTML = source.innerHTML;
+  
+  // 移除多余的原始节点
+  source.remove();
+</script>
+
+
+<!--
+
 <style>
 /* 内联样式隔离 */
 #iframe-wrapper {
@@ -44,7 +68,7 @@ If you find this blog is useful, a simple star (<a class="github-button"
 <div id="iframe-wrapper">
   <iframe 
     id="iframe-content"
-    src="./index.html" 
+    src="https://kwanwaipang.github.io/index.html" 
     onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
   ></iframe>
 </div>
@@ -65,6 +89,7 @@ document.getElementById('iframe-content').addEventListener('load', function() {
 });
 </script>
 
+-->
 
 <!-- # Hi~ 👋
 only for template
