@@ -11,11 +11,10 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
 
 * 原[博客](https://kwanwaipang.github.io/File/Blogs/Poster/%E6%99%BA%E9%A9%BE%E4%B8%AD%E7%9A%84%E2%80%9C%E6%97%A0%E5%9B%BE%E2%80%9D.html)
 
-<div id="target-content-placeholder">正在加载内容，请稍候...</div>
+<div id="target-content-placeholder">正在加载内容...</div>
 
 <script>
 (function() {
-  // 1. 防止重复加载
   if (window.__LIDAR_BLOG_LOADED__) return;
   if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) return;
   window.__LIDAR_BLOG_LOADED__ = true;
@@ -29,25 +28,31 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 2. 精准提取：只抓取 <article> 标签内的标题，避免抓到网页顶部的重复标题
-      const articleContent = doc.querySelector('article');
-      if (!articleContent) {
-          console.error("未找到 <article> 标签，请检查源 HTML 结构");
-          return;
-      }
-      
-      const headings = articleContent.querySelectorAll('h1, h2, h3, h4');
-      
-      // 3. 为标题添加 ID，用于后续跳转
-      headings.forEach((h, index) => {
-        h.setAttribute('id', 'dynamic-heading-' + index);
+      // 1. 彻底清理无关区域，只保留正文内容块
+      // 我们移除所有已知的导航、页眉、页脚和原有的目录组件
+      const selectorsToRemove = [
+        'header', 'nav', '.navbar', '.post-header', 
+        '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 
+        'footer', '.footer'
+      ];
+      selectorsToRemove.forEach(s => {
+        doc.querySelectorAll(s).forEach(el => el.remove());
       });
 
-      // 4. 清理干扰元素：移除源文件中的导航栏、页脚以及它自带的旧目录
-      const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
-      toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
+      // 2. 全文抓取标题 (H1-H4)
+      // 此时 doc.body 剩下的基本就是正文了
+      const headings = Array.from(doc.body.querySelectorAll('h1, h2, h3, h4'));
+      
+      // 为每个标题分配唯一 ID 供跳转使用
+      headings.forEach((h, index) => {
+        h.setAttribute('id', 'gh-heading-' + index);
+      });
 
-      // 5. 处理样式和路径
+      // 3. 资源路径修复
+      const rawBody = doc.body.innerHTML;
+      const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
+
+      // 4. 样式提取
       let styleContent = '';
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
@@ -57,65 +62,62 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
         styleContent += s.outerHTML;
       });
 
-      const processedHtml = doc.body.innerHTML.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
-
-      // 6. 渲染到 Shadow DOM
+      // 5. 挂载到 Shadow DOM
       const target = document.getElementById('target-content-placeholder');
       if (target) {
         const shadow = target.attachShadow({ mode: 'open' });
         shadow.innerHTML = styleContent + processedHtml;
-        target.textContent = ""; // 清除“正在加载”文字
+        target.textContent = ""; 
 
-        // 7. 渲染目录
+        // 6. 执行目录填充
         renderDynamicTOC(headings, shadow);
       }
-    })
-    .catch(err => {
-      console.error("加载博客内容失败:", err);
-      document.getElementById('target-content-placeholder').textContent = "内容加载失败，请刷新重试。";
     });
 
-  // 构建目录函数
   function renderDynamicTOC(headings, shadow) {
-    // 自动适配多种可能的 Jekyll TOC 容器选择器
-    const tocContainer = document.querySelector('.toc ul, #markdown-toc, .post__toc ul'); 
+    // 尝试寻找 Jekyll 渲染出来的各种可能的 TOC 容器
+    const tocContainer = document.querySelector('#markdown-toc, .toc ul, .post__toc ul, #toc ul'); 
+    
     if (!tocContainer) {
-        console.warn("未找到 Jekyll 生成的 TOC 容器 (ul)");
-        return;
+      console.warn("未找到目录挂载点，请检查 Jekyll 布局中是否存在 #markdown-toc");
+      return;
     }
 
-    // 清空 Jekyll 自动生成的空目录（如果有）
+    // 清空现有内容（通常只有“目录”两个字或一个空列表）
     tocContainer.innerHTML = '';
 
-    headings.forEach(h => {
+    headings.forEach((h, index) => {
+      const text = h.textContent.trim();
+      if (!text) return;
+
       const level = parseInt(h.tagName.substring(1));
       const li = document.createElement('li');
       
-      // 样式控制：根据 H1, H2, H3 层次缩进
-      li.style.marginLeft = (level - 1) * 18 + 'px';
+      // 样式微调：根据标题等级缩进
+      li.style.marginLeft = (level - 1) * 16 + 'px';
       li.style.listStyle = 'none';
-      li.style.marginBottom = '5px';
+      li.style.lineHeight = '1.6';
 
       const a = document.createElement('a');
-      a.textContent = h.textContent.trim();
+      a.textContent = text;
       a.href = "javascript:void(0);";
       a.style.textDecoration = 'none';
-      a.style.color = '#007bff'; // 设置为典型的链接蓝色
+      a.style.color = 'var(--link-color, #007bff)'; // 适配主题颜色或默认蓝
 
-      // 跨越 Shadow DOM 的点击跳转逻辑
+      // 跨越 Shadow DOM 的平滑滚动
       a.onclick = (e) => {
         e.preventDefault();
-        const targetId = h.getAttribute('id');
-        const targetEl = shadow.getElementById(targetId);
+        const targetEl = shadow.getElementById(h.getAttribute('id'));
         if (targetEl) {
-          // 关键：由于有 fixed navbar，需要计算偏移量
-          const headerOffset = 85; 
-          const elementPosition = targetEl.getBoundingClientRect().top;
-          const shadowHostPosition = shadow.host.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + shadowHostPosition + window.pageYOffset - headerOffset;
+          const navHeight = 80; // 这里的数值应根据你博客顶栏的高度调整
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = targetEl.getBoundingClientRect().top;
+          const shadowHostRect = shadow.host.getBoundingClientRect().top;
+          
+          const totalOffset = elementRect + shadowHostRect - bodyRect - navHeight;
 
           window.scrollTo({
-            top: offsetPosition,
+            top: totalOffset,
             behavior: 'smooth'
           });
         }
@@ -129,14 +131,15 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
 </script>
 
 <style>
-/* 隐藏多余的占位符（如果主题渲染了两次，第二次会被 JS 忽略并由 CSS 隐藏） */
-#target-content-placeholder:not(:first-of-type) {
-  width: 100%;
-  display: none !important;
-}
+/* 确保容器有足够高度防止抖动 */
 #target-content-placeholder {
-  width: 100%;
-  position: relative;
+  min-height: 600px;
+}
+
+/* 强制让 Jekyll 的 TOC 容器可见 */
+#markdown-toc, .toc ul {
+  display: block !important;
+  visibility: visible !important;
+  padding-left: 0;
 }
 </style>
-
