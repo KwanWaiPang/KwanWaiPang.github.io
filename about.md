@@ -23,6 +23,10 @@ If you find this blog is useful, a simple star (<a class="github-button"
   | <a href="/about-cn/">中文版</a> 
   </h3>
 
+
+{% include_relative index.html %}
+
+<!-- 
 <style>
 /* 内联样式隔离 */
 #iframe-wrapper {
@@ -65,6 +69,8 @@ document.getElementById('iframe-content').addEventListener('load', function() {
 });
 </script>
 
+
+-->
 
 <!-- # Hi~ 👋
 only for template
