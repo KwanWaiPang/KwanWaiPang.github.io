@@ -36,7 +36,7 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
       const doc = parser.parseFromString(html, 'text/html');
 
       // 移除干扰元素
-      const toRemove = ['header', '.navbar', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
+      const toRemove = ['.navbar', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
       toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
 
       // 路径转换
