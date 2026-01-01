@@ -5,7 +5,7 @@ date:   2025-03-16
 tags: [Event-based Vision]
 comments: true
 author: kwanwaipang
-toc: false #true
+toc: true
 excerpt: "本博文记录了本人实现多个事件相机时间同步的实验过程。" # 【核心：指定摘要分隔符】
 ---
 
@@ -26,15 +26,8 @@ excerpt: "本博文记录了本人实现多个事件相机时间同步的实验�
 
 <script>
 (function() {
-  // 1. 核心去重：检查全局变量，如果已存在则代表已经渲染过一次，立即销毁当前脚本
-  if (window.__LIDAR_BLOG_LOADED__) return;
-
-  // 2. 只有在详情页（即 URL 包含日期或标题）时才运行，防止首页误触发
-  // 如果你的首页 URL 也是这个，可以去掉这个判断
-  if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) return;
-
-  // 3. 锁定状态
-  window.__LIDAR_BLOG_LOADED__ = true;
+  if (window.__SLAM_BLOG_LOADED__) return;
+  window.__SLAM_BLOG_LOADED__ = true;
 
   const baseUrl = '/File/Blogs/Poster/'; 
   const filePath = baseUrl + 'Sensor_Synchronization.html';
@@ -45,44 +38,82 @@ excerpt: "本博文记录了本人实现多个事件相机时间同步的实验�
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 移除干扰元素
-      const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
+      // 1. 彻底移除原 HTML 里的所有目录相关元素，防止干扰
+      // 增加常见目录 ID：#toc, .table-of-contents 等
+      const toRemove = ['header', '.navbar', '.post-header', 'footer', '#scrollToTocButton', '#toggleTocButton', '#newToc', '#toc', '.toc', '#markdown-toc'];
       toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
 
-      // 路径转换
       const rawBody = doc.body.innerHTML;
       const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
 
-      // 样式提取
       let styleContent = '';
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
           let href = s.getAttribute('href');
-          if (!href.startsWith('http') && !href.startsWith('/')) s.setAttribute('href', baseUrl + href);
+          if (href && !href.startsWith('http') && !href.startsWith('/')) s.setAttribute('href', baseUrl + href);
         }
         styleContent += s.outerHTML;
       });
 
-      // 4. 精准挂载：始终寻找页面中的第一个占位符进行渲染
       const target = document.getElementById('target-content-placeholder');
-      if (target) {
-        const shadow = target.attachShadow({ mode: 'open' });
-        shadow.innerHTML = styleContent + processedHtml;
-        target.childNodes[0].textContent = ""; 
-      }
+      const shadow = target.attachShadow({ mode: 'open' });
+      shadow.innerHTML = styleContent + processedHtml;
+
+      // 2. --- 关键：将标题注入到 Jekyll 主题真实的 TOC 容器中 ---
+      setTimeout(() => {
+        // 定位 Jekyll 主题生成的标准目录容器
+        // 大多数 Jekyll 主题（如 Chirpy, Minima）使用 #markdown-toc 或 .book-toc
+        const jekyllToc = document.getElementById('markdown-toc') || 
+                          document.querySelector('.post-directory') ||
+                          document.querySelector('.toc');
+        
+        const headings = shadow.querySelectorAll('h1, h2, h3');
+        
+        if (jekyllToc && headings.length > 0) {
+          // 清空 Jekyll 自动生成（可能为空）的内容，由我们填充
+          jekyllToc.innerHTML = ''; 
+          const ul = document.createElement('ul');
+
+          // --- 新增：插入一个空的占位项，用来抵消主题隐藏第一项的行为 ---
+          const placeholderLi = document.createElement('li');
+          placeholderLi.style.display = 'none'; // 设为隐藏，不影响视觉
+          ul.appendChild(placeholderLi);
+          // -------------------------------------------------------
+          
+          headings.forEach((h, index) => {
+            const id = `sec-${index}`;
+            h.id = id;
+            
+            const li = document.createElement('li');
+            // 保持 Jekyll 的 class 命名习惯
+            const level = h.tagName.toLowerCase();
+            
+            const a = document.createElement('a');
+            a.innerText = h.innerText;
+            a.href = "javascript:void(0);";
+            a.style.display = "block";
+            a.style.paddingLeft = (h.tagName === 'H2' ? '15px' : h.tagName === 'H3' ? '30px' : '0px');
+            
+            a.onclick = () => {
+              h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+            
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+          jekyllToc.appendChild(ul);
+        }
+      }, 300); // 稍微延长等待时间确保 Shadow DOM 渲染完毕
     });
 })();
 </script>
 
 <style>
-/* 隐藏多余的占位符（如果主题渲染了两次，第二次会被 JS 忽略并由 CSS 隐藏） */
-#target-content-placeholder:not(:first-of-type) {
-  display: none !important;
+/* 样式修饰：让注入的目录符合 Jekyll 常见样式 */
+#jekyll-toc-proxy ul {
+    list-style: none;
+    padding-left: 1.5rem;
+    border-left: 2px solid #eee;
 }
-#target-content-placeholder {
-  width: 100%;
-  position: relative;
-}
+
 </style>
-
-
