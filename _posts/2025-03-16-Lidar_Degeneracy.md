@@ -7,43 +7,24 @@ comments: true
 author: kwanwaipang
 # toc: true
 # 强制定义摘要为纯文本，彻底隔绝脚本进入首页或摘要区
-excerpt: "本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Degeneracy Detection）与补偿（Mitigation）方法。通过分析 Hessian 矩阵的特征值分布及能观性指标。"
+excerpt: "本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Degeneracy Detection）与补偿（Mitigation）方法。"
 ---
 
 
-<!-- * 目录
-{:toc} -->
-
-<div id="unique-post-container" style="display:none;">
-  <div id="dynamic-content-root">加载中...</div>
-</div>
+<div id="target-content-placeholder">正在加载...</div>
 
 <script>
 (function() {
-  // 【核心逻辑】检查当前容器是否在“摘要”或“预览”类名下
-  // 很多主题会给摘要套上 .excerpt 或 .post-preview 类
-  const container = document.getElementById('unique-post-container');
-  if (!container) return;
+  // 1. 核心去重：检查全局变量，如果已存在则代表已经渲染过一次，立即销毁当前脚本
+  if (window.__LIDAR_BLOG_LOADED__) return;
 
-  // 1. 唯一性锁：防止脚本多次运行
-  if (window.HAS_LOADED_CONTENT) {
-    container.remove(); // 如果已经加载过，直接把这个多余的容器删掉
-    return;
-  }
+  // 2. 只有在详情页（即 URL 包含日期或标题）时才运行，防止首页误触发
+  // 如果你的首页 URL 也是这个，可以去掉这个判断
+  if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) return;
 
-  // 2. 环境检查：判断是否在首页或者详情页的摘要区
-  // 如果容器的父级包含 'excerpt' 相关的类名，通常就是多余的预览
-  const parentClasses = container.parentElement.className.toLowerCase();
-  if (parentClasses.includes('excerpt') || parentClasses.includes('summary')) {
-    container.remove();
-    return;
-  }
+  // 3. 锁定状态
+  window.__LIDAR_BLOG_LOADED__ = true;
 
-  // 确定这是正式的展示区域
-  window.HAS_LOADED_CONTENT = true;
-  container.style.display = 'block';
-
-  const shadow = document.getElementById('dynamic-content-root').attachShadow({ mode: 'open' });
   const baseUrl = '/File/Blogs/Poster/'; 
   const filePath = baseUrl + 'Degeneracy_for_lidar.html';
 
@@ -53,15 +34,15 @@ excerpt: "本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Dege
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 清理
+      // 移除干扰元素
       const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
       toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
 
-      // 路径修复
+      // 路径转换
       const rawBody = doc.body.innerHTML;
       const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
 
-      // 样式修复
+      // 样式提取
       let styleContent = '';
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
@@ -71,14 +52,25 @@ excerpt: "本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Dege
         styleContent += s.outerHTML;
       });
 
-      shadow.innerHTML = styleContent + processedHtml;
-      document.getElementById('dynamic-content-root').childNodes[0].textContent = "";
+      // 4. 精准挂载：始终寻找页面中的第一个占位符进行渲染
+      const target = document.getElementById('target-content-placeholder');
+      if (target) {
+        const shadow = target.attachShadow({ mode: 'open' });
+        shadow.innerHTML = styleContent + processedHtml;
+        target.childNodes[0].textContent = ""; 
+      }
     });
 })();
 </script>
 
 <style>
-#dynamic-content-root { width: 100%; display: block; }
+/* 隐藏多余的占位符（如果主题渲染了两次，第二次会被 JS 忽略并由 CSS 隐藏） */
+#target-content-placeholder:not(:first-of-type) {
+  display: none !important;
+}
+#target-content-placeholder {
+  width: 100%;
+}
 </style>
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
