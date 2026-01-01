@@ -23,10 +23,6 @@ If you find this blog is useful, a simple star (<a class="github-button"
   | <a href="/about-cn/">中文版</a> 
   </h3>
 
-
-{% include_relative index.html %}
-
-<!-- 
 <style>
 /* 内联样式隔离 */
 #iframe-wrapper {
@@ -48,7 +44,7 @@ If you find this blog is useful, a simple star (<a class="github-button"
 <div id="iframe-wrapper">
   <iframe 
     id="iframe-content"
-    src="https://kwanwaipang.github.io/index.html" 
+    src="./index.html" 
     onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
   ></iframe>
 </div>
@@ -69,8 +65,6 @@ document.getElementById('iframe-content').addEventListener('load', function() {
 });
 </script>
 
-
--->
 
 <!-- # Hi~ 👋
 only for template
