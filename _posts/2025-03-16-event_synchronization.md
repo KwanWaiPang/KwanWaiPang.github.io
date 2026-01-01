@@ -6,6 +6,7 @@ tags: [Event-based Vision]
 comments: true
 author: kwanwaipang
 toc: false #true
+excerpt: "本博文记录了本人实现多个事件相机时间同步的实验过程。" # 【核心：指定摘要分隔符】
 ---
 
 
@@ -19,62 +20,69 @@ toc: false #true
 本博文记录了本人实现多个事件相机时间同步的实验过程。
 * 原博客：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/Sensor_Synchronization.html)
 
+
+
+<div id="target-content-placeholder">正在加载...</div>
+
+<script>
+(function() {
+  // 1. 核心去重：检查全局变量，如果已存在则代表已经渲染过一次，立即销毁当前脚本
+  if (window.__LIDAR_BLOG_LOADED__) return;
+
+  // 2. 只有在详情页（即 URL 包含日期或标题）时才运行，防止首页误触发
+  // 如果你的首页 URL 也是这个，可以去掉这个判断
+  if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) return;
+
+  // 3. 锁定状态
+  window.__LIDAR_BLOG_LOADED__ = true;
+
+  const baseUrl = '/File/Blogs/Poster/'; 
+  const filePath = baseUrl + 'Sensor_Synchronization.html';
+
+  fetch(filePath)
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+
+      // 移除干扰元素
+      const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
+      toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
+
+      // 路径转换
+      const rawBody = doc.body.innerHTML;
+      const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
+
+      // 样式提取
+      let styleContent = '';
+      doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
+        if (s.tagName === 'LINK') {
+          let href = s.getAttribute('href');
+          if (!href.startsWith('http') && !href.startsWith('/')) s.setAttribute('href', baseUrl + href);
+        }
+        styleContent += s.outerHTML;
+      });
+
+      // 4. 精准挂载：始终寻找页面中的第一个占位符进行渲染
+      const target = document.getElementById('target-content-placeholder');
+      if (target) {
+        const shadow = target.attachShadow({ mode: 'open' });
+        shadow.innerHTML = styleContent + processedHtml;
+        target.childNodes[0].textContent = ""; 
+      }
+    });
+})();
+</script>
+
 <style>
-/* 通过ID限定作用域 */
-#iframe-wrapper-{{ page.url | slugify }} { /* 自动生成唯一ID */
-  --cut-top: 200px;    /* 当前页面专用变量 */
-  --cut-bottom: 60px;   /* 默认值 */
-
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  border: none;
-  height: calc(100vh - var(--cut-top));
+/* 隐藏多余的占位符（如果主题渲染了两次，第二次会被 JS 忽略并由 CSS 隐藏） */
+#target-content-placeholder:not(:first-of-type) {
+  display: none !important;
 }
-
-#iframe-content-{{ page.url | slugify }} {
+#target-content-placeholder {
   width: 100%;
-  overflow: hidden;
-  border: none;
-  position: absolute;
-  top: calc(-1 * var(--cut-top));
-  left: 0;
-  height: calc(100% + var(--cut-top) + var(--cut-bottom));
-  display: block; /* 消除 iframe 默认的 inline 空隙 */
+  position: relative;
 }
 </style>
 
-<div id="iframe-wrapper-{{ page.url | slugify }}">
-  <iframe 
-    id="iframe-content-{{ page.url | slugify }}"
-    src="https://kwanwaipang.github.io/File/Blogs/Poster/Sensor_Synchronization.html"
-    onload='
-      const frame = this;
-      const wrapper = frame.parentElement;
-      
-      const getCutValue = (name) => 
-        parseInt(getComputedStyle(wrapper)
-          .getPropertyValue(name).replace("px",""));
 
-      const update = () => {
-        try {
-          const doc = frame.contentWindow.document;
-          const fullHeight = Math.max(
-            doc.body.scrollHeight,
-            doc.documentElement.scrollHeight
-          );
-          
-          // 动态设置高度
-          wrapper.style.height = 
-            `${Math.max(fullHeight - getCutValue("--cut-top") - getCutValue("--cut-bottom"), 0)}px`;
-            
-          frame.style.height = `${fullHeight}px`;
-        } catch(e) {}
-      };
-      
-      update();
-      new ResizeObserver(update).observe(frame);
-      window.addEventListener("resize", update);
-    '
-  ></iframe>
-</div>
