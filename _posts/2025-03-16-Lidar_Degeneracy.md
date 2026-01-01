@@ -5,97 +5,75 @@ date:   2025-03-16
 tags: [SLAM, LiDAR]
 comments: true
 author: kwanwaipang
-toc: true
+# toc: true
+excerpt_separator: ""
 ---
 
 
 <!-- * 目录
 {:toc} -->
 
+本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Degeneracy Detection）与补偿（Mitigation）方法。通过分析 Hessian 矩阵的特征值分布及能观性指标，探讨了在隧道、长走廊等极端环境下的鲁棒定位方案。
 
-<div id="post-content-body">
-  <div id="dynamic-content-root">正在加载正文内容...</div>
-</div>
+<div id="dynamic-content-root" class="custom-content-container">正在加载正文内容...</div>
 
 <script>
 (function() {
-  // 1. 变量保护：防止脚本在部分主题预览中被重复触发
-  if (window.isPostAlreadyLoaded) return;
-  
   const container = document.getElementById('dynamic-content-root');
-  if (!container) return; // 如果在首页预览中找不到容器，则不执行脚本
   
-  window.isPostAlreadyLoaded = true;
+  // 1. 双重保护：如果已经加载过或者没有容器，直接退出
+  if (!container || container.dataset.loaded === 'true') return;
+  
+  // 标记为已加载，防止脚本重复执行
+  container.dataset.loaded = 'true';
 
-  // 2. 配置路径（确保末尾带斜杠）
   const baseUrl = '/File/Blogs/Poster/'; 
   const filePath = baseUrl + 'Degeneracy_for_lidar.html';
 
-  // 3. 异步获取内容
   fetch(filePath)
-    .then(response => {
-      if (!response.ok) throw new Error('File not found');
-      return response.text();
-    })
+    .then(response => response.text())
     .then(html => {
-      // 4. 解析 HTML 并进行“手术式”清理
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 剔除不需要展示的冗余组件（导航栏、原有的标题、TOC按钮等）
-      const toRemove = [
-        'header', '.navbar', '.post-header', 
-        '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 
-        'footer', '.nofixed-bottom'
-      ];
-      toRemove.forEach(selector => {
-        doc.querySelectorAll(selector).forEach(el => el.remove());
-      });
+      // 清理不需要的元素
+      const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
+      toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
 
-      // 5. 路径修复：将相对路径转换为基于 baseUrl 的绝对路径（针对图片和链接）
+      // 路径修复
       const rawBody = doc.body.innerHTML;
       const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
 
-      // 6. 提取样式：确保原 HTML 的样式只作用于 Shadow DOM
+      // 提取并处理样式
       let styleContent = '';
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
           let href = s.getAttribute('href');
-          if (!href.startsWith('http') && !href.startsWith('/')) {
-            s.setAttribute('href', baseUrl + href);
-          }
+          if (!href.startsWith('http') && !href.startsWith('/')) s.setAttribute('href', baseUrl + href);
         }
         styleContent += s.outerHTML;
       });
 
-      // 7. 注入隔离容器 (Shadow DOM)
+      // 注入 Shadow DOM
       const shadow = container.attachShadow({ mode: 'open' });
       shadow.innerHTML = styleContent + processedHtml;
-      
-      // 成功加载后移除提示文字
-      container.childNodes[0].textContent = "";
+      container.childNodes[0].textContent = ""; 
     })
     .catch(err => {
-      console.error('Content Load Error:', err);
-      container.innerHTML = `<p style="color:gray;">无法加载外部 HTML 内容，请确认路径是否正确：${filePath}</p>`;
+      container.innerHTML = "内容加载失败";
     });
 })();
 </script>
 
 <style>
-/* 确保容器不会被 Jekyll 默认样式挤压 */
+/* 强制容器宽度与博客正文一致 */
 #dynamic-content-root {
   display: block;
-  width: 100%;
-  min-height: 600px;
-  margin: 0;
-  padding: 0;
+  width: 100% !important;
+  margin: 0 auto;
   border: none;
-  background: transparent;
 }
 </style>
-
-
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <!-- # 引言 -->
