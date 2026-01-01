@@ -5,27 +5,17 @@ date:   2025-03-16
 tags: [Robotics]
 comments: true
 author: kwanwaipang
-# toc: true
+toc: true
 excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 【核心：指定摘要分隔符】
 ---
-
-
-* 目录
-{:toc} 
-
 
 <div id="target-content-placeholder">正在加载...</div>
 
 <script>
 (function() {
-  // 1. 核心去重：检查全局变量，如果已存在则代表已经渲染过一次，立即销毁当前脚本
   if (window.__LIDAR_BLOG_LOADED__) return;
-
-  // 2. 只有在详情页（即 URL 包含日期或标题）时才运行，防止首页误触发
-  // 如果你的首页 URL 也是这个，可以去掉这个判断
   if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) return;
 
-  // 3. 锁定状态
   window.__LIDAR_BLOG_LOADED__ = true;
 
   const baseUrl = '/File/Blogs/Poster/'; 
@@ -37,15 +27,19 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 移除干扰元素
+      // 1. 提取并清理内容
       const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
       toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
 
-      // 路径转换
+      // 2. 预处理标题：为所有标题添加 ID，以便点击目录时可以跳转
+      const headings = doc.querySelectorAll('h1, h2, h3, h4');
+      headings.forEach((h, index) => {
+        h.setAttribute('id', 'content-heading-' + index);
+      });
+
       const rawBody = doc.body.innerHTML;
       const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
 
-      // 样式提取
       let styleContent = '';
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
@@ -55,14 +49,60 @@ excerpt: "本博文记录了本人调研自动驾驶中无图的相关survey" # 
         styleContent += s.outerHTML;
       });
 
-      // 4. 精准挂载：始终寻找页面中的第一个占位符进行渲染
+      // 3. 渲染到 Shadow DOM
       const target = document.getElementById('target-content-placeholder');
       if (target) {
         const shadow = target.attachShadow({ mode: 'open' });
         shadow.innerHTML = styleContent + processedHtml;
         target.childNodes[0].textContent = ""; 
+
+        // 4. 动态生成 TOC 列表
+        renderDynamicTOC(headings, shadow);
       }
     });
+
+  // 辅助函数：构建目录并挂载到 Jekyll 的 TOC 区域
+  function renderDynamicTOC(headings, shadow) {
+    // 寻找 Jekyll 默认生成的 TOC 容器（通常是 .toc 或 #markdown-toc）
+    // 如果 Jekyll 只生成了“目录”两个字，通常下面会有一个空容器
+    const tocContainer = document.querySelector('.toc, #markdown-toc, .post__toc'); 
+    if (!tocContainer) return;
+
+    const ul = document.createElement('ul');
+    ul.style.listStyle = 'none';
+    ul.style.paddingLeft = '15px';
+
+    headings.forEach(h => {
+      const level = parseInt(h.tagName.substring(1));
+      const li = document.createElement('li');
+      li.style.marginLeft = (level - 1) * 15 + 'px';
+      li.style.fontSize = (16 - level) + 'px';
+      li.style.marginVertical = '5px';
+
+      const a = document.createElement('a');
+      a.textContent = h.textContent.trim();
+      a.href = "#";
+      a.style.textDecoration = 'none';
+      a.style.color = 'inherit';
+
+      // 核心点击事件：跨越 Shadow DOM 进行滚动
+      a.onclick = (e) => {
+        e.preventDefault();
+        const targetId = h.getAttribute('id');
+        const targetEl = shadow.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+
+    // 清空原有的“只有目录两个字”的状态，并填入新列表
+    // 假设你的主题结构里目录文字在某个 div 里，这里直接 append
+    tocContainer.appendChild(ul);
+  }
 })();
 </script>
 
