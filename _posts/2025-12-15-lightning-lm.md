@@ -268,9 +268,9 @@ Full SLAM情况下，查看CPU占用情况如下：
 而然，实测lightning-lm在Thor上运行的CPU占用率为2~2.8个物理核（一共14个，占总资源的不到30%），内存消耗约370+MB。
 
 <div align="center">
-  <img src="../images/微信图片_20251229143256.jpg" width="90%" />
-  <img src="../images/微信图片_20251229143308.jpg" width="90%" />
-  <img src="../images/微信图片_20251229143312.jpg" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251229143256.jpg" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251229143308.jpg" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信图片_20251229143312.jpg" width="90%" />
 <figcaption>  
 </figcaption>
 </div>

@@ -260,7 +260,7 @@ author: kwanwaipang
 系统支持自然语言转化为机器人运动指令，其核心在于 `object_query_node.py`。
 
 <div align="center">
-  <img src="../images/微信截图_20251231094216.png" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251231094216.png" width="90%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -308,7 +308,7 @@ Vosk 的 Python 封装非常精简，适合在嵌入式主板（如 Jetson Orin�
 ~~~
 
 <div align="center">
-  <img src="../images/微信截图_20251231095146.png" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20251231095146.png" width="90%" />
 <figcaption>  
 </figcaption>
 </div>
