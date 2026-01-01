@@ -23,26 +23,52 @@ If you find this blog is useful, a simple star (<a class="github-button"
   | <a href="/about-cn/">中文版</a> 
   </h3>
 
+<hr>
 
-<div id="shadow-root-container"></div>
-
-<div id="source-content" style="display:none;">
-  {% include_relative index.html %}
-</div>
+<div id="dynamic-content-root">Loading...</div>
 
 <script>
-  const container = document.getElementById('shadow-root-container');
-  const source = document.getElementById('source-content');
+(function() {
+  const container = document.getElementById('dynamic-content-root');
   
-  // 创建 Shadow Root
-  const shadow = container.attachShadow({mode: 'open'});
-  
-  // 将 index.html 的内容移入 Shadow DOM
-  shadow.innerHTML = source.innerHTML;
-  
-  // 移除多余的原始节点
-  source.remove();
+  // 1. 创建 Shadow Root 实现样式隔离
+  const shadow = container.attachShadow({ mode: 'open' });
+
+  // 2. 使用 fetch 获取 index.html 的内容
+  // 这里填写的路径是相对于当前 /about/ 页面的相对路径，或者直接写根路径 /index.html
+  fetch('/index.html')
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.text();
+    })
+    .then(html => {
+      // 3. 将完整的 html 注入 Shadow DOM
+      // Shadow DOM 会自动处理其中的 <html> <head> <body> 标签，
+      // 并将样式限制在影子容器内，不会污染外面的 Jekyll 主题
+      shadow.innerHTML = html;
+
+      // 如果 index.html 里有 inline 脚本需要运行，可以在这里处理
+      // 默认 innerHTML 不会执行 <script>，这是为了安全
+      container.style.display = 'block';
+      if(container.innerText === "加载中...") container.innerText = "";
+    })
+    .catch(error => {
+      console.error('Error loading index.html:', error);
+      container.innerHTML = `<p style="color:red;">内容加载失败，请访问 <a href="/">首页</a> 查看。</p>`;
+    });
+})();
 </script>
+
+<style>
+#dynamic-content-root {
+  min-height: 500px;
+  width: 100%;
+  border: 1px solid #eee; /* 可选：给你的 index 区域加个边框 */
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+}
+</style>
 
 
 <!--
