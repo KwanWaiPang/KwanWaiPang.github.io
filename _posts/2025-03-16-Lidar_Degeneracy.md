@@ -13,6 +13,41 @@ toc: false #true
 {:toc} -->
 
 
+<div id="dynamic-content-root">Loading...</div>
+
+<script>
+(function() {
+  const container = document.getElementById('dynamic-content-root');
+  const shadow = container.attachShadow({ mode: 'open' });
+
+  // 这里的路径确保指向你仓库根目录的 index.html
+  fetch('./File/Blogs/Poster/Degeneracy_for_lidar.html')
+    .then(response => response.text())
+    .then(html => {
+      // 直接注入全部代码，Shadow DOM 会自动处理其中的 <html> <body> 和 <style>
+      shadow.innerHTML = html;
+      container.childNodes[0].textContent = ""; // 加载成功后移除 "Loading..." 文字
+    })
+    .catch(err => {
+      console.error('Failed to load content:', err);
+      container.innerHTML = "Content load failed.";
+    });
+})();
+</script>
+
+<style>
+/* 仅保留必要的物理占位，不做任何视觉修饰 */
+#dynamic-content-root {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+</style>
+
+
+
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <!-- # 引言 -->
 
