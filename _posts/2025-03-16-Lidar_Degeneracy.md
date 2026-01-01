@@ -13,80 +13,85 @@ toc: true
 {:toc} -->
 
 
-<div id="dynamic-content-root">Loading...</div>
+<div id="post-content-body">
+  <div id="dynamic-content-root">正在加载正文内容...</div>
+</div>
 
 <script>
 (function() {
-  const container = document.getElementById('dynamic-content-root');
-  const shadow = container.attachShadow({ mode: 'open' });
+  // 1. 变量保护：防止脚本在部分主题预览中被重复触发
+  if (window.isPostAlreadyLoaded) return;
   
-  // 1. 设置基础路径（确保资源能找到）
+  const container = document.getElementById('dynamic-content-root');
+  if (!container) return; // 如果在首页预览中找不到容器，则不执行脚本
+  
+  window.isPostAlreadyLoaded = true;
+
+  // 2. 配置路径（确保末尾带斜杠）
   const baseUrl = '/File/Blogs/Poster/'; 
   const filePath = baseUrl + 'Degeneracy_for_lidar.html';
 
+  // 3. 异步获取内容
   fetch(filePath)
-    .then(response => response.text())
+    .then(response => {
+      if (!response.ok) throw new Error('File not found');
+      return response.text();
+    })
     .then(html => {
-      // 2. 将字符串解析为虚拟 DOM 对象，方便“手术式”删除元素
+      // 4. 解析 HTML 并进行“手术式”清理
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 3. 【精准剔除】不需要的部分
-      const selectorsToRemove = [
-        'header',               // 删除导航栏 (Nav bar)
-        '.post-header',         // 删除文章页头 (Title section)
-        '#toc',                 // 删除静态目录
-        '#newToc',              // 删除动态目录容器
-        '#toggleTocButton',     // 删除目录切换按钮
-        '#scrollToTocButton',   // 删除回到目录按钮
-        'footer'                // 删除页脚（可选）
+      // 剔除不需要展示的冗余组件（导航栏、原有的标题、TOC按钮等）
+      const toRemove = [
+        'header', '.navbar', '.post-header', 
+        '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 
+        'footer', '.nofixed-bottom'
       ];
-      
-      selectorsToRemove.forEach(selector => {
-        const elements = doc.querySelectorAll(selector);
-        elements.forEach(el => el.remove());
+      toRemove.forEach(selector => {
+        doc.querySelectorAll(selector).forEach(el => el.remove());
       });
 
-      // 4. 处理路径修复（图片和链接地址修复）
-      // 将所有 src/href 相对路径修复为绝对路径，防止图片 404
-      const content = doc.body.innerHTML;
-      let processedHtml = content.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
+      // 5. 路径修复：将相对路径转换为基于 baseUrl 的绝对路径（针对图片和链接）
+      const rawBody = doc.body.innerHTML;
+      const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
 
-      // 5. 注入 Shadow DOM
-      // 我们同时把原 HTML 的 <head> 里的样式也拿过来，确保字体和格式不变
-      const styles = doc.querySelectorAll('style, link[rel="stylesheet"]');
-      let styleHtml = '';
-      styles.forEach(s => {
-        // 修复外链 CSS 的路径
+      // 6. 提取样式：确保原 HTML 的样式只作用于 Shadow DOM
+      let styleContent = '';
+      doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
           let href = s.getAttribute('href');
           if (!href.startsWith('http') && !href.startsWith('/')) {
             s.setAttribute('href', baseUrl + href);
           }
         }
-        styleHtml += s.outerHTML;
+        styleContent += s.outerHTML;
       });
 
-      shadow.innerHTML = styleHtml + processedHtml;
-      container.childNodes[0].textContent = ""; 
+      // 7. 注入隔离容器 (Shadow DOM)
+      const shadow = container.attachShadow({ mode: 'open' });
+      shadow.innerHTML = styleContent + processedHtml;
+      
+      // 成功加载后移除提示文字
+      container.childNodes[0].textContent = "";
     })
     .catch(err => {
-      console.error('Error:', err);
-      container.innerHTML = "Content load failed.";
+      console.error('Content Load Error:', err);
+      container.innerHTML = `<p style="color:gray;">无法加载外部 HTML 内容，请确认路径是否正确：${filePath}</p>`;
     });
 })();
 </script>
 
 <style>
-/* 容器样式：确保宽度撑满，不留边框 */
+/* 确保容器不会被 Jekyll 默认样式挤压 */
 #dynamic-content-root {
   display: block;
   width: 100%;
+  min-height: 600px;
   margin: 0;
   padding: 0;
   border: none;
-  /* 解决可能出现的 Jekyll 样式冲突 */
-  line-height: normal; 
+  background: transparent;
 }
 </style>
 
