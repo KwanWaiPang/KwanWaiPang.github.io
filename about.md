@@ -27,7 +27,7 @@ If you find this blog is useful, a simple star (<a class="github-button"
 <div id="shadow-root-container"></div>
 
 <div id="source-content" style="display:none;">
-  {% include_relative index.html %}
+  {% include_relative ./index.html %}
 </div>
 
 <script>
