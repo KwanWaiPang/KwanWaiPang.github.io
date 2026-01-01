@@ -19,14 +19,35 @@ toc: false #true
 (function() {
   const container = document.getElementById('dynamic-content-root');
   const shadow = container.attachShadow({ mode: 'open' });
+  
+  // 【关键 1】定义该 HTML 文件所在的绝对根目录路径，用于修复图片和链接
+  const baseUrl = '/File/Blogs/Poster/'; 
+  const filePath = baseUrl + 'Degeneracy_for_lidar.html';
 
-  // 这里的路径确保指向你仓库根目录的 index.html
-  fetch('./File/Blogs/Poster/Degeneracy_for_lidar.html')
+  fetch(filePath)
     .then(response => response.text())
     .then(html => {
-      // 直接注入全部代码，Shadow DOM 会自动处理其中的 <html> <body> 和 <style>
-      shadow.innerHTML = html;
-      container.childNodes[0].textContent = ""; // 加载成功后移除 "Loading..." 文字
+      // 【关键 2】路径预处理：修复图片、CSS 和 锚点链接
+      // 将相对路径的 src/href 替换为绝对路径，防止 404
+      let processedHtml = html
+        .replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`) // 修复资源路径
+        .replace(/href="[^"]*?#([^"]+)"/g, 'href="#$1"'); // 修复 TOC 锚点路径
+
+      shadow.innerHTML = processedHtml;
+      container.childNodes[0].textContent = "";
+
+      // 【关键 3】处理 Shadow DOM 内部跳转
+      shadow.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.hash) {
+          const targetId = link.hash.substring(1);
+          const targetElement = shadow.getElementById(targetId);
+          if (targetElement) {
+            e.preventDefault(); // 阻止浏览器默认的 404 跳转
+            targetElement.scrollIntoView({ behavior: 'smooth' }); // 平滑滚动
+          }
+        }
+      });
     })
     .catch(err => {
       console.error('Failed to load content:', err);
@@ -36,7 +57,6 @@ toc: false #true
 </script>
 
 <style>
-/* 仅保留必要的物理占位，不做任何视觉修饰 */
 #dynamic-content-root {
   display: block;
   width: 100%;
