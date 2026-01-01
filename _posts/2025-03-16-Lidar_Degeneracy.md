@@ -6,37 +6,54 @@ tags: [SLAM, LiDAR]
 comments: true
 author: kwanwaipang
 # toc: true
-excerpt_separator: ""
+# 强制定义摘要为纯文本，彻底隔绝脚本进入首页或摘要区
+excerpt: "本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Degeneracy Detection）与补偿（Mitigation）方法。通过分析 Hessian 矩阵的特征值分布及能观性指标。"
 ---
 
 
 <!-- * 目录
 {:toc} -->
 
-本文系统性地综述了 LiDAR-SLAM 过程中的退化检测（Degeneracy Detection）与补偿（Mitigation）方法。通过分析 Hessian 矩阵的特征值分布及能观性指标，探讨了在隧道、长走廊等极端环境下的鲁棒定位方案。
-
-<div id="dynamic-content-root" class="custom-content-container">正在加载正文内容...</div>
+<div id="unique-post-container" style="display:none;">
+  <div id="dynamic-content-root">加载中...</div>
+</div>
 
 <script>
 (function() {
-  const container = document.getElementById('dynamic-content-root');
-  
-  // 1. 双重保护：如果已经加载过或者没有容器，直接退出
-  if (!container || container.dataset.loaded === 'true') return;
-  
-  // 标记为已加载，防止脚本重复执行
-  container.dataset.loaded = 'true';
+  // 【核心逻辑】检查当前容器是否在“摘要”或“预览”类名下
+  // 很多主题会给摘要套上 .excerpt 或 .post-preview 类
+  const container = document.getElementById('unique-post-container');
+  if (!container) return;
 
+  // 1. 唯一性锁：防止脚本多次运行
+  if (window.HAS_LOADED_CONTENT) {
+    container.remove(); // 如果已经加载过，直接把这个多余的容器删掉
+    return;
+  }
+
+  // 2. 环境检查：判断是否在首页或者详情页的摘要区
+  // 如果容器的父级包含 'excerpt' 相关的类名，通常就是多余的预览
+  const parentClasses = container.parentElement.className.toLowerCase();
+  if (parentClasses.includes('excerpt') || parentClasses.includes('summary')) {
+    container.remove();
+    return;
+  }
+
+  // 确定这是正式的展示区域
+  window.HAS_LOADED_CONTENT = true;
+  container.style.display = 'block';
+
+  const shadow = document.getElementById('dynamic-content-root').attachShadow({ mode: 'open' });
   const baseUrl = '/File/Blogs/Poster/'; 
   const filePath = baseUrl + 'Degeneracy_for_lidar.html';
 
   fetch(filePath)
-    .then(response => response.text())
+    .then(res => res.text())
     .then(html => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // 清理不需要的元素
+      // 清理
       const toRemove = ['header', '.navbar', '.post-header', '#toc', '#newToc', '#toggleTocButton', '#scrollToTocButton', 'footer'];
       toRemove.forEach(s => doc.querySelectorAll(s).forEach(el => el.remove()));
 
@@ -44,7 +61,7 @@ excerpt_separator: ""
       const rawBody = doc.body.innerHTML;
       const processedHtml = rawBody.replace(/(src|href)="(?!(http|https|\/|#))/g, `$1="${baseUrl}`);
 
-      // 提取并处理样式
+      // 样式修复
       let styleContent = '';
       doc.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
         if (s.tagName === 'LINK') {
@@ -54,25 +71,14 @@ excerpt_separator: ""
         styleContent += s.outerHTML;
       });
 
-      // 注入 Shadow DOM
-      const shadow = container.attachShadow({ mode: 'open' });
       shadow.innerHTML = styleContent + processedHtml;
-      container.childNodes[0].textContent = ""; 
-    })
-    .catch(err => {
-      container.innerHTML = "内容加载失败";
+      document.getElementById('dynamic-content-root').childNodes[0].textContent = "";
     });
 })();
 </script>
 
 <style>
-/* 强制容器宽度与博客正文一致 */
-#dynamic-content-root {
-  display: block;
-  width: 100% !important;
-  margin: 0 auto;
-  border: none;
-}
+#dynamic-content-root { width: 100%; display: block; }
 </style>
 
 <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
