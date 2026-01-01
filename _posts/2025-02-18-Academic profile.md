@@ -11,6 +11,7 @@ ORCID: "0000-0003-4518-7852"
 Clarivate: "AAV-2613-2020"
 Scopus_id: "56957694200"  # 👈 在这里填写你的Scopus ID
 ResearchGate: "Guan-Wp"
+excerpt: "" # 【指定摘要内容】
 ---
 
 

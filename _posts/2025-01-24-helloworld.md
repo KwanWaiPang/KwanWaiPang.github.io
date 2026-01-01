@@ -6,6 +6,7 @@ tags: [Coding]
 comments: true
 author: kwanwaipang
 toc: true
+excerpt: "本博客作为基于markdown的静态博客的第一篇博客，用于记录各类型指令以及进行测试" # 【指定摘要内容】
 ---
 
 
