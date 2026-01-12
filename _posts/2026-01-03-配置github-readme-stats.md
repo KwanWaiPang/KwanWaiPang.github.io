@@ -28,7 +28,7 @@ excerpt: "解决github-readme-stats过期或加载不出的问题" # 【指定�
 
 
 <div align="center">
-  <img src="../images/WX20260103-111621.png" width="60%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-111621.png" width="60%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -38,7 +38,7 @@ excerpt: "解决github-readme-stats过期或加载不出的问题" # 【指定�
 * read:user
 
 <div align="center">
-  <img src="../images/WX20260103-111936.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-111936.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -50,8 +50,8 @@ excerpt: "解决github-readme-stats过期或加载不出的问题" # 【指定�
 接下来到[网站](https://vercel.com/)，先用邮箱进行登录注册，然后链接github：
 
 <div align="center">
-  <img src="../images/WX20260103-112338.png" width="70%" />
-  <img src="../images/WX20260103-113051.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-112338.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-113051.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -60,9 +60,9 @@ excerpt: "解决github-readme-stats过期或加载不出的问题" # 【指定�
 
 
 <div align="center">
-  <img src="../images/WX20260103-113325.png" width="70%" />
-  <img src="../images/WX20260103-113556.png" width="70%" />
-  <img src="../images/WX20260103-113634.png" width="50%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-113325.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-113556.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-113634.png" width="50%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -70,7 +70,7 @@ excerpt: "解决github-readme-stats过期或加载不出的问题" # 【指定�
 然后再对应的位置上填上创建的token
 
 <div align="center">
-  <img src="../images/WX20260103-113745.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-113745.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -78,7 +78,7 @@ excerpt: "解决github-readme-stats过期或加载不出的问题" # 【指定�
 然后点击`deploy`接下来应该就可以使用自己的api了～
 
 <div align="center">
-  <img src="../images/WX20260103-113951.png" width="70%" />
+  <img src="https://r-c-group.github.io/blog_media/images/WX20260103-113951.png" width="70%" />
 <figcaption>  
 </figcaption>
 </div>

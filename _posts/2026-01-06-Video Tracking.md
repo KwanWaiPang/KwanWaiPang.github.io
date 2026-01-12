@@ -55,7 +55,7 @@ excerpt: "系统梳理视频目标跟踪（VOT）与机器人人员跟随（Pers
 
 
 <div align="center">
-  <img src="../images/微信截图_20260107095759.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/微信截图_20260107095759.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
