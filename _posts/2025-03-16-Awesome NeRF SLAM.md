@@ -5,7 +5,7 @@ date:   2025-03-16
 tags: [SLAM,Deep Learning]
 comments: true
 author: kwanwaipang
-toc: true
+toc: false #true
 excerpt: "" # 【指定摘要内容】
 ---
 
@@ -48,8 +48,6 @@ NeRF SLAM（Neural Radiance Fields Simultaneous Localization and Mapping）是�
 <ol><li>SLAM为NeRF训练提供位姿，然后建立稠密细腻的三维场景。简而言之就是NeRF只做mapping</li><li>在NeRF里建立各种损失函数反过来优化pose和depth。 简而言之就是full slam</li></ol> 
 <p>那么基于这两个方向，目前的NeRF SLAM的工作主要分为以下三类：仅优化NeRF、仅优化位姿、位姿和NeRF联合优化。与此同时，本文也把最新的3D Gaussian Splatting也加入调研序列中。每个工作介绍的时候都会给出论文的下载链接、<span class="edu-hl hl hl-1" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;word\&quot;:\&quot;源代码\&quot;}&quot;}" data-report-click="{&quot;spm&quot;:&quot;1001.2101.3001.7020&quot;,&quot;extra&quot;:&quot;{\&quot;word\&quot;:\&quot;源代码\&quot;}&quot;}" data-tit="源代码" data-pretit="源代码">源代码</span>（如有）、demo video（如有）</p> 
 <p>本博文，意在记录本人调研NeRF-SLAM的时候做的学习记录，部分资料来源于网络，本博文仅仅供本人学习记录用~</p> 
-
-<!--  
 <p></p> 
 <p id="main-toc"><strong>目录</strong></p> 
 <p id="" style="margin: 0px 0px 2px; padding-left: 24px;"><a href="#t0" rel="nofollow" target="_self">什么是NeRF？</a></p> 
@@ -88,9 +86,6 @@ NeRF SLAM（Neural Radiance Fields Simultaneous Localization and Mapping）是�
 <p id="" style="margin: 0px 0px 2px 48px; padding-left: 24px;"><a href="#t33" rel="nofollow" target="_self">LONER&nbsp;</a></p> 
 <hr id="hr-toc"> 
 <p></p> 
--->
-
-
 <h2 id="%E4%BB%80%E4%B9%88%E6%98%AFNeRF%EF%BC%9F"><a name="t0"></a>什么是NeRF？</h2> 
 <p>NeRF 所做的任务是 Novel View Synthesis（新视角合成），即在若干已知视角下对场景进行一系列的观测（相机内外参、图像、Pose 等），合成任意新视角下的图像。传统方法中，通常这一任务采用三维重建再渲染的方式实现，NeRF 希望不进行显式的三维重建过程，仅根据内外参直接得到新视角渲染的图像。为了实现这一目的，NeRF 使用用<span class="words-blog hl-git-1" data-report-view="{&quot;spm&quot;:&quot;1001.2101.3001.10283&quot;,&quot;extra&quot;:&quot;{\&quot;words\&quot;:\&quot;神经网络\&quot;}&quot;}" data-tit="神经网络" data-pretit="神经网络">神经网络</span>作为一个 3D 场景的隐式表达，代替传统的点云、网格、体素、TSDF 等方式，通过这样的网络可以直接渲染任意角度任意位置的投影图像。</p> 
 <p align="center"><img alt="" height="191" src="https://kwanwaipang.github.io/awesome_NeRF_SLAM/学习笔记之——NeRF SLAM（基于神经辐射场的SLAM）-CSDN博客_files/e450bb5bc6c952ea509e9701625dfbdf.gif" width="500"></p> 
