@@ -57,6 +57,11 @@ excerpt: "" # 【指定摘要内容】
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2026|`Pattern Recognition`|[RGD-SLAM: Robust Gaussian Splatting SLAM for Dynamic Environments](https://www.sciencedirect.com/science/article/pii/S0031320326000348)|[![Github stars](https://img.shields.io/github/stars/RGD-SLAM.svg)](https://github.com/00Haocheng/RGD-SLAM)|---|
+|2025|`RAL`|[Freeze-Frame With StaticNeRF: Uncertainty-Guided NeRF Map Reconstruction in Dynamic Scenes](https://ieeexplore.ieee.org/abstract/document/11242041/)|---|---|
+|2025|`Sensor`|[Dynamic SLAM by Combining Rigid Feature Point Set Modeling and YOLO](https://www.mdpi.com/1424-8220/26/1/235)|---|---|
+|2025|`RAL`|[DOGL-SLAM: Dynamic Object-Level SLAM via Joint Gaussian-Landmark Tracking](https://ieeexplore.ieee.org/abstract/document/11278733/)|---|---|
+|2025|`TIV`|[RSG-SLAM: A Robust, Enhanced Semantic and Geometric Visual SLAM for Dynamic Environments](https://ieeexplore.ieee.org/abstract/document/11266931/)|---|---|
 |2025|`International Journal of Computer Assisted Radiology and Surgery`|[DyEndoVO: scene dynamics-aware pose estimation of endoscope in minimally invasive surgery](https://link.springer.com/content/pdf/10.1007/s11548-025-03549-0.pdf)|---|---|
 |2025|`arXiv`|[VGGT4D: Mining Motion Cues in Visual Geometry Transformers for 4D Scene Reconstruction](https://arxiv.org/pdf/2511.19971)|[![Github stars](https://img.shields.io/github/stars/3DAgentWorld/VGGT4D.svg)](https://github.com/3DAgentWorld/VGGT4D)|[website](https://3dagentworld.github.io/vggt4d/)|
 |2025|`arXiv`|[Human3R: Everyone Everywhere All at Once](https://arxiv.org/pdf/2510.06219?)|[![Github stars](https://img.shields.io/github/stars/fanegg/Human3R.svg)](https://github.com/fanegg/Human3R)|[website](https://fanegg.github.io/Human3R/)|
