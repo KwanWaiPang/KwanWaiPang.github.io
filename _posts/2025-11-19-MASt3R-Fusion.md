@@ -26,7 +26,7 @@ excerpt: "" # 【指定摘要内容】
 <!-- ## 理论解读 -->
 
 
-## 实验配置
+# 实验配置
 
 * 环境配置
 
@@ -226,5 +226,5 @@ CUDA_VISIBLE_DEVICES=0,1 python evaluation/check_h5.py --config config/base_kitt
 # 注意源码中需要在“keyframes = SharedKeyframes(manager, h, w,buffer=1024) ”前添加 h = 176 以及   w = 512
 ```
 
-## NAVIDA Thor配置
+# NAVIDA Thor配置
 
