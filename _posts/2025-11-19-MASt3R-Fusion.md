@@ -225,3 +225,6 @@ python evaluation/check_h5.py --config config/base_kitti360.yaml \
 CUDA_VISIBLE_DEVICES=0,1 python evaluation/check_h5.py --config config/base_kitti360.yaml   --h5 data_0000.h5 --calib config/intrinsics_kitti360.yaml   --pose_file result_post_0000.txt 
 # 注意源码中需要在“keyframes = SharedKeyframes(manager, h, w,buffer=1024) ”前添加 h = 176 以及   w = 512
 ```
+
+## NAVIDA Thor配置
+
