@@ -377,14 +377,14 @@ CPU占用约44.1%（占整体），GPU显存消耗18G左右
     - **惯性因子**: 处理 IMU 预积分，通过 `solve_VI_init` 进行视觉惯性对齐。
     - **滑动窗口与边缘化**: 通过 `solve_GN_calib` 实现高效的滑动窗口优化，并对旧帧进行边缘化处理。
 
-### 4. 数据结构与检索
+4. 其他，如数据结构与检索
 - `frame.py`: 定义了 `Frame` 对象及其在共享内存中的存储方式 (`SharedKeyframes`)。支持多种 point cloud 融合模式（如加权平均、球面平均）。
 - `retrieval_database.py`: 基于 ASMK 的图像检索库，用于重定位和回环检测，增强系统的鲁棒性。
 
 
 * 运行流程图:
 
-```mermaid
+<div class="mermaid">
 graph TD
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
@@ -394,5 +394,5 @@ graph TD
     E --> F[结果保存与可视化]
     C --> G[retrieval_database.py 重定位/回环]
     G --> C
-```
+</div>
 
