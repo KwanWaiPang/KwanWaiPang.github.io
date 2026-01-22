@@ -357,3 +357,42 @@ bash batch_kitti360_vi.sh # for real-time SLAM
 
 CPU占用约44.1%（占整体），GPU显存消耗18G左右
 
+
+# 代码架构梳理
+
+1. 系统入口与初始化
+- `batch_kitti360_vi.sh`: 脚本入口，配置数据集、内参、IMU 时间偏移等参数，并启动 `main.py`。
+- `main.py`: 实际代码入口。负责初始化 MAST3R 模型、多进程共享状态、加载数据集，并协调前端追踪与后端优化的运行。
+
+2. 前端追踪 (Front-end Tracking)
+- `tracker.py`: 负责即时位姿估计。
+    - 使用 `mast3r_match_asymmetric` 进行当前帧与参考关键帧的特征匹配(data association)。
+    - 通过 `opt_pose_calib_sim3`（重投影误差）或 `opt_pose_ray_dist_sim3`（光线距离）优化 Sim3 位姿。
+    - **关键帧选择**: 当匹配质量下降时，触发新关键帧的建立。
+
+3. 后端优化 (Back-end Optimization)
+- `global_opt.py`: 管理全局一致性。
+    - 基于 **Gtsam** 构建因子图。
+    - **视觉因子**: 维护多帧之间的对称匹配约束。
+    - **惯性因子**: 处理 IMU 预积分，通过 `solve_VI_init` 进行视觉惯性对齐。
+    - **滑动窗口与边缘化**: 通过 `solve_GN_calib` 实现高效的滑动窗口优化，并对旧帧进行边缘化处理。
+
+### 4. 数据结构与检索
+- `frame.py`: 定义了 `Frame` 对象及其在共享内存中的存储方式 (`SharedKeyframes`)。支持多种 point cloud 融合模式（如加权平均、球面平均）。
+- `retrieval_database.py`: 基于 ASMK 的图像检索库，用于重定位和回环检测，增强系统的鲁棒性。
+
+
+* 运行流程图:
+
+```mermaid
+graph TD
+    A[数据输入 IMU/Image] --> B[main.py 初始化]
+    B --> C[tracker.py 前端追踪]
+    C --> D{是否为关键帧?}
+    D -- 是 --> E[global_opt.py 后端优化]
+    D -- 否 --> C
+    E --> F[结果保存与可视化]
+    C --> G[retrieval_database.py 重定位/回环]
+    G --> C
+```
+
