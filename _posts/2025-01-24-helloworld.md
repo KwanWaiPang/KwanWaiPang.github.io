@@ -349,7 +349,7 @@ site:https://kwanwaipang.github.io/
 
 ```md
 {% raw %}
-<div class="mermaid">
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
@@ -365,7 +365,7 @@ graph TD
 
 * 效果如下图所示：
 
-<div class="mermaid">
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
