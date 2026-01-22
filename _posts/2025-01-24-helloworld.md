@@ -330,12 +330,26 @@ site:https://kwanwaipang.github.io/
 * 飞书文档转markdown:[Arya - 在线 Markdown 编辑器](https://markdown.lovejade.cn/)
 
 # 可视化mermaid流程图
+首先在`_layouts\default.html`中添加：每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。
 
-使用下面代码：
+```html
+{% raw %}
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true, 
+    theme: 'default',
+    securityLevel: 'loose'
+  });
+</script>
+{% endraw %} 
+```
+
+接下来使用下面代码：
 
 ```md
 {% raw %}
-<div align="center" class="mermaid">
+<div class="mermaid">
 graph TD
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
@@ -351,7 +365,7 @@ graph TD
 
 * 效果如下图所示：
 
-<div align="center" class="mermaid">
+<div class="mermaid">
 graph TD
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
