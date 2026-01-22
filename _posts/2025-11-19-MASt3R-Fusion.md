@@ -384,7 +384,7 @@ CPU占用约44.1%（占整体），GPU显存消耗18G左右
 
 * 运行流程图:
 
-<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
+<div class="mermaid" style="display: flex; justify-content: center; width: 100%; margin: 0 auto;">
 graph TD
     %% 定义全局样式类：透明背景、黑边、黑字
     classDef plain fill:none,stroke:#000,stroke-width:2px,color:#000;

@@ -351,6 +351,9 @@ site:https://kwanwaipang.github.io/
 {% raw %}
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
+    %% 定义全局样式类：透明背景、黑边、黑字
+    classDef plain fill:none,stroke:#000,stroke-width:2px,color:#000;
+
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
     C --> D{是否为关键帧?}
@@ -359,6 +362,9 @@ graph TD
     E --> F[结果保存与可视化]
     C --> G[retrieval_database.py 重定位/回环]
     G --> C
+
+    %% 将样式应用到所有节点
+    class A,B,C,D,E,F,G plain;
 </div>
 {% endraw %} 
 ```
@@ -367,6 +373,9 @@ graph TD
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
+    %% 定义全局样式类：透明背景、黑边、黑字
+    classDef plain fill:none,stroke:#000,stroke-width:2px,color:#000;
+
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
     C --> D{是否为关键帧?}
@@ -375,6 +384,9 @@ graph TD
     E --> F[结果保存与可视化]
     C --> G[retrieval_database.py 重定位/回环]
     G --> C
+
+    %% 将样式应用到所有节点
+    class A,B,C,D,E,F,G plain;
 </div>
 
 
