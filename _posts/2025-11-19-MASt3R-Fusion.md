@@ -384,7 +384,7 @@ CPU占用约44.1%（占整体），GPU显存消耗18G左右
 
 * 运行流程图:
 
-<div class="mermaid">
+<div align="center" class="mermaid">
 graph TD
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
