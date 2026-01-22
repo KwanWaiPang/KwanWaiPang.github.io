@@ -329,6 +329,40 @@ site:https://kwanwaipang.github.io/
 # markdown转换器
 * 飞书文档转markdown:[Arya - 在线 Markdown 编辑器](https://markdown.lovejade.cn/)
 
+# 可视化mermaid流程图
+
+使用下面代码：
+
+```md
+{% raw %}
+<div align="center" class="mermaid">
+graph TD
+    A[数据输入 IMU/Image] --> B[main.py 初始化]
+    B --> C[tracker.py 前端追踪]
+    C --> D{是否为关键帧?}
+    D -- 是 --> E[global_opt.py 后端优化]
+    D -- 否 --> C
+    E --> F[结果保存与可视化]
+    C --> G[retrieval_database.py 重定位/回环]
+    G --> C
+</div>
+{% endraw %} 
+```
+
+* 效果如下图所示：
+
+<div align="center" class="mermaid">
+graph TD
+    A[数据输入 IMU/Image] --> B[main.py 初始化]
+    B --> C[tracker.py 前端追踪]
+    C --> D{是否为关键帧?}
+    D -- 是 --> E[global_opt.py 后端优化]
+    D -- 否 --> C
+    E --> F[结果保存与可视化]
+    C --> G[retrieval_database.py 重定位/回环]
+    G --> C
+</div>
+
 
 # 参考资料
 * [lemonchann的博客](https://lemonchann.github.io/blog/create_blog_with_github_pages/)
