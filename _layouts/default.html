@@ -30,25 +30,24 @@
       });
     </script> -->
 
-<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 
 <script type="module">
-  // 引入 Mermaid 10
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 
   // 1. 初始化 Mermaid
   mermaid.initialize({ 
-    startOnLoad: false, // 必须关闭自动加载
+    startOnLoad: false, 
     theme: 'default',
     securityLevel: 'loose',
     flowchart: { 
-        htmlLabels: true,     // 开启 HTML 标签支持 (<br>)
-        useMaxWidth: false,   // 防止图表被过度压缩
-        curve: 'basis'        // 曲线风格
+        htmlLabels: true,     // 必须开启
+        useMaxWidth: false,
+        curve: 'basis'
     }
   });
 
-  // 辅助函数：解码 HTML 实体 (修复 Jekyll 转义问题)
+  // 辅助函数：解码 HTML 实体
   function decodeHtmlEntities(text) {
     const txt = document.createElement("textarea");
     txt.innerHTML = text;
@@ -56,47 +55,44 @@
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    // 找到所有 mermaid 容器
     const elements = document.querySelectorAll('.mermaid');
     
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
       const id = `mermaid-svg-${i}`;
 
-      // --- 关键修复步骤 ---
-      // 1. 获取原始内容
-      let graphDefinition = element.textContent;
+      // --- 核心修复：处理换行符 ---
+      // 1. 获取 HTML 内容而非纯文本，保留 <br> 标签结构
+      let graphDefinition = element.innerHTML;
       
-      // 2. 清洗代码：解码 HTML 实体（把 &gt; 变回 >）
-      graphDefinition = decodeHtmlEntities(graphDefinition);
+      // 2. 将被 Jekyll 转义的 &lt;br&gt; 或 &lt;br/&gt; 还原为真正的换行
+      // 同时处理Markdown中可能的实体编码
+      graphDefinition = graphDefinition
+        .replace(/&lt;br\s*\/?&gt;/gi, '<br/>')  // 修复转义的 br
+        .replace(/&amp;/g, '&')                 // 修复 & 符号
+        .replace(/&quot;/g, '"');               // 修复双引号
       
-      // 3. (可选) 临时移除 elk 布局，如果 elk 导致崩溃，可以取消下面这行的注释来测试
-      // graphDefinition = graphDefinition.replace(/layout:\s*elk/g, ''); 
+      // 3. 清理掉多余的 HTML 标签（如果 Jekyll 在里面自动加了 <p> 等）
+      // 只保留纯文本和我们需要的 <br>
+      graphDefinition = decodeHtmlEntities(graphDefinition); 
 
       try {
-        // 4. 手动渲染
-        // 注意：mermaid.render 返回的是对象 { svg }
         const { svg } = await mermaid.render(id, graphDefinition);
-        
-        // 5. 插入 SVG
         element.innerHTML = svg;
 
-        // 6. 获取 SVG DOM 元素
         const svgElement = element.querySelector('svg');
-
-        // 7. 设置容器样式 (必须设置，否则 svg-pan-zoom 无法计算)
+        
+        // 样式设置
         element.style.height = "700px"; 
-        element.style.border = "1px solid #e0e0e0";
-        element.style.overflow = "hidden"; // 隐藏溢出
+        element.style.border = "1px solid #eee";
+        element.style.overflow = "hidden";
         element.style.position = "relative";
         element.style.cursor = "grab";
 
-        // 8. 设置 SVG 样式
         svgElement.style.width = "100%";
         svgElement.style.height = "100%";
-        svgElement.style.maxWidth = "none"; // 解除宽度限制
+        svgElement.style.maxWidth = "none";
 
-        // 9. 启用缩放插件
         svgPanZoom(svgElement, {
           zoomEnabled: true,
           controlIconsEnabled: true,
@@ -107,9 +103,9 @@
         });
 
       } catch (error) {
-        // 如果出错，在页面上显示错误信息，方便调试
-        console.error("Mermaid Render Failed:", error);
-        element.innerHTML = `<p style="color:red; padding:10px;">渲染失败: ${error.message}</p><pre>${graphDefinition}</pre>`;
+        console.error("渲染失败:", error);
+        // 出错时保留原文以便调试
+        element.style.border = "1px solid red";
       }
     }
   });
