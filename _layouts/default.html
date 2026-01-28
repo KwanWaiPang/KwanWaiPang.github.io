@@ -39,8 +39,12 @@
     startOnLoad: false, 
     theme: 'default',
     securityLevel: 'loose',
-    // 强制保持原始字体和线条粗细，不随容器过度缩放
-    flowchart: { useMaxWidth: false, htmlLabels: true } 
+    // 关键：开启 HTML 标签支持和禁用最大宽度限制
+    flowchart: { 
+        htmlLabels: true, 
+        useMaxWidth: false,
+        curve: 'basis' 
+    }
   });
 
   document.addEventListener('DOMContentLoaded', async () => {
@@ -48,39 +52,39 @@
     
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
-      const graphDefinition = element.textContent;
+      // 获取原始内容并去掉可能存在的 HTML 编码字符
+      const graphDefinition = element.innerText.trim(); 
       const id = `mermaid-svg-${i}`;
       
-      // 1. 渲染 SVG
-      const { svg } = await mermaid.render(id, graphDefinition);
-      element.innerHTML = svg;
+      try {
+        // 渲染 SVG
+        const { svg } = await mermaid.render(id, graphDefinition);
+        element.innerHTML = svg;
 
-      const svgElement = element.querySelector('svg');
-      
-      // 2. 样式修正：移除默认的 max-width 限制，允许它超出容器
-      svgElement.style.maxWidth = 'none';
-      svgElement.style.width = '100%';
-      svgElement.style.height = '100%';
-      
-      element.style.height = "600px"; 
-      element.style.border = "1px solid #f0f0f0";
-      element.style.cursor = "grab";
-      element.style.overflow = "hidden";
-      element.style.position = "relative";
+        const svgElement = element.querySelector('svg');
+        
+        // 样式修正
+        svgElement.style.maxWidth = 'none';
+        svgElement.style.width = '100%';
+        svgElement.style.height = '100%';
+        
+        element.style.height = "700px"; 
+        element.style.border = "1px solid #eee";
+        element.style.cursor = "grab";
+        element.style.overflow = "hidden";
 
-      // 3. 初始化控制
-      const panZoom = svgPanZoom(svgElement, {
-        zoomEnabled: true,
-        controlIconsEnabled: true,
-        fit: false,    // 修改点：不再强行挤进窗口
-        center: true,  // 依然保持居中
-        minZoom: 0.05,
-        maxZoom: 20,
-        mouseWheelZoomEnabled: true
-      });
-
-      // 4. 可选：如果加载后还是觉得太小，手动设置初始缩放倍率
-      // panZoom.zoom(1.5); 
+        // 初始化缩放
+        svgPanZoom(svgElement, {
+          zoomEnabled: true,
+          controlIconsEnabled: true,
+          fit: true,
+          center: true,
+          minZoom: 0.1,
+          maxZoom: 10
+        });
+      } catch (e) {
+        console.error("Mermaid render failed:", e);
+      }
     }
   });
 </script>
