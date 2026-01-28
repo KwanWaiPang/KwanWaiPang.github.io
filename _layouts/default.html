@@ -29,20 +29,21 @@
         securityLevel: 'loose'
       });
     </script> -->
+
     <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
   
-  // 1. 初始化，关闭 startOnLoad，我们要手动控制渲染时机
   mermaid.initialize({ 
     startOnLoad: false, 
     theme: 'default',
-    securityLevel: 'loose'
+    securityLevel: 'loose',
+    // 强制保持原始字体和线条粗细，不随容器过度缩放
+    flowchart: { useMaxWidth: false, htmlLabels: true } 
   });
 
   document.addEventListener('DOMContentLoaded', async () => {
-    // 2. 找到页面中所有的 mermaid div
     const elements = document.querySelectorAll('.mermaid');
     
     for (let i = 0; i < elements.length; i++) {
@@ -50,32 +51,36 @@
       const graphDefinition = element.textContent;
       const id = `mermaid-svg-${i}`;
       
-      // 3. 手动渲染 SVG
+      // 1. 渲染 SVG
       const { svg } = await mermaid.render(id, graphDefinition);
       element.innerHTML = svg;
 
-      // 4. 获取生成的 SVG 元素并注入缩放功能
       const svgElement = element.querySelector('svg');
       
-      // 设置容器样式，确保有足够的高度和“可抓取”的鼠标指针
+      // 2. 样式修正：移除默认的 max-width 限制，允许它超出容器
+      svgElement.style.maxWidth = 'none';
+      svgElement.style.width = '100%';
+      svgElement.style.height = '100%';
+      
       element.style.height = "600px"; 
       element.style.border = "1px solid #f0f0f0";
       element.style.cursor = "grab";
-      element.style.overflow = "hidden"; // 隐藏溢出部分
-      
-      svgElement.style.width = "100%";
-      svgElement.style.height = "100%";
+      element.style.overflow = "hidden";
+      element.style.position = "relative";
 
-      // 5. 初始化缩放控制
-      svgPanZoom(svgElement, {
+      // 3. 初始化控制
+      const panZoom = svgPanZoom(svgElement, {
         zoomEnabled: true,
-        controlIconsEnabled: true, // 右下角会出现放大缩小按钮
-        fit: true,
-        center: true,
-        minZoom: 0.1,
-        maxZoom: 10,
+        controlIconsEnabled: true,
+        fit: false,    // 修改点：不再强行挤进窗口
+        center: true,  // 依然保持居中
+        minZoom: 0.05,
+        maxZoom: 20,
         mouseWheelZoomEnabled: true
       });
+
+      // 4. 可选：如果加载后还是觉得太小，手动设置初始缩放倍率
+      // panZoom.zoom(1.5); 
     }
   });
 </script>
