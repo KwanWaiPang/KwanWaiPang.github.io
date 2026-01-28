@@ -369,7 +369,7 @@ graph TD
 {% endraw %} 
 ```
 
-* 效果如下图所示：
+* 效果如下图所示，也可将代码复制到[在线的Mermaid编辑器](https://mermaid.live/)中测试效果：
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
