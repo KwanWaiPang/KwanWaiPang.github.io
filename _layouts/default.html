@@ -21,14 +21,69 @@
     {% include analytics.html %}
 
     <!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
-    <script type="module">
+    <!-- <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ 
         startOnLoad: true, 
         theme: 'default',
         securityLevel: 'loose'
       });
-    </script>
+    </script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  
+  mermaid.initialize({ 
+    startOnLoad: false, 
+    theme: 'default',
+    securityLevel: 'loose',
+    // 强制保持原始字体和线条粗细，不随容器过度缩放
+    flowchart: { useMaxWidth: false, htmlLabels: true } 
+  });
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const elements = document.querySelectorAll('.mermaid');
+    
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+      const graphDefinition = element.textContent;
+      const id = `mermaid-svg-${i}`;
+      
+      // 1. 渲染 SVG
+      const { svg } = await mermaid.render(id, graphDefinition);
+      element.innerHTML = svg;
+
+      const svgElement = element.querySelector('svg');
+      
+      // 2. 样式修正：移除默认的 max-width 限制，允许它超出容器
+      svgElement.style.maxWidth = 'none';
+      svgElement.style.width = '100%';
+      svgElement.style.height = '100%';
+      
+      element.style.height = "600px"; 
+      element.style.border = "1px solid #f0f0f0";
+      element.style.cursor = "grab";
+      element.style.overflow = "hidden";
+      element.style.position = "relative";
+
+      // 3. 初始化控制
+      const panZoom = svgPanZoom(svgElement, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: false,    // 修改点：不再强行挤进窗口
+        center: true,  // 依然保持居中
+        minZoom: 0.05,
+        maxZoom: 20,
+        mouseWheelZoomEnabled: true
+      });
+
+      // 4. 可选：如果加载后还是觉得太小，手动设置初始缩放倍率
+      // panZoom.zoom(1.5); 
+    }
+  });
+</script>
 
   </body>
 
