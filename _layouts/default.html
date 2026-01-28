@@ -30,50 +30,73 @@
       });
     </script> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 
 <script type="module">
+  // 引入 Mermaid 10
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-  
+
+  // 1. 初始化 Mermaid
   mermaid.initialize({ 
-    startOnLoad: false, 
+    startOnLoad: false, // 必须关闭自动加载
     theme: 'default',
     securityLevel: 'loose',
-    // 关键：开启 HTML 标签支持和禁用最大宽度限制
     flowchart: { 
-        htmlLabels: true, 
-        useMaxWidth: false,
-        curve: 'basis' 
+        htmlLabels: true,     // 开启 HTML 标签支持 (<br>)
+        useMaxWidth: false,   // 防止图表被过度压缩
+        curve: 'basis'        // 曲线风格
     }
   });
 
+  // 辅助函数：解码 HTML 实体 (修复 Jekyll 转义问题)
+  function decodeHtmlEntities(text) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = text;
+    return txt.value;
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
+    // 找到所有 mermaid 容器
     const elements = document.querySelectorAll('.mermaid');
     
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i];
-      // 获取原始内容并去掉可能存在的 HTML 编码字符
-      const graphDefinition = element.innerText.trim(); 
       const id = `mermaid-svg-${i}`;
+
+      // --- 关键修复步骤 ---
+      // 1. 获取原始内容
+      let graphDefinition = element.textContent;
       
+      // 2. 清洗代码：解码 HTML 实体（把 &gt; 变回 >）
+      graphDefinition = decodeHtmlEntities(graphDefinition);
+      
+      // 3. (可选) 临时移除 elk 布局，如果 elk 导致崩溃，可以取消下面这行的注释来测试
+      // graphDefinition = graphDefinition.replace(/layout:\s*elk/g, ''); 
+
       try {
-        // 渲染 SVG
+        // 4. 手动渲染
+        // 注意：mermaid.render 返回的是对象 { svg }
         const { svg } = await mermaid.render(id, graphDefinition);
+        
+        // 5. 插入 SVG
         element.innerHTML = svg;
 
+        // 6. 获取 SVG DOM 元素
         const svgElement = element.querySelector('svg');
-        
-        // 样式修正
-        svgElement.style.maxWidth = 'none';
-        svgElement.style.width = '100%';
-        svgElement.style.height = '100%';
-        
-        element.style.height = "700px"; 
-        element.style.border = "1px solid #eee";
-        element.style.cursor = "grab";
-        element.style.overflow = "hidden";
 
-        // 初始化缩放
+        // 7. 设置容器样式 (必须设置，否则 svg-pan-zoom 无法计算)
+        element.style.height = "700px"; 
+        element.style.border = "1px solid #e0e0e0";
+        element.style.overflow = "hidden"; // 隐藏溢出
+        element.style.position = "relative";
+        element.style.cursor = "grab";
+
+        // 8. 设置 SVG 样式
+        svgElement.style.width = "100%";
+        svgElement.style.height = "100%";
+        svgElement.style.maxWidth = "none"; // 解除宽度限制
+
+        // 9. 启用缩放插件
         svgPanZoom(svgElement, {
           zoomEnabled: true,
           controlIconsEnabled: true,
@@ -82,8 +105,11 @@
           minZoom: 0.1,
           maxZoom: 10
         });
-      } catch (e) {
-        console.error("Mermaid render failed:", e);
+
+      } catch (error) {
+        // 如果出错，在页面上显示错误信息，方便调试
+        console.error("Mermaid Render Failed:", error);
+        element.innerHTML = `<p style="color:red; padding:10px;">渲染失败: ${error.message}</p><pre>${graphDefinition}</pre>`;
       }
     }
   });
