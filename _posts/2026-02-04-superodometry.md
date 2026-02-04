@@ -168,6 +168,7 @@ SuperOdom目前开源的代码仅仅是LiDAR-only and LiDAR–inertial odometry�
 传统的ICP (Iterative Closest Point) 算法虽然能够估计位姿，但无法量化估计的可靠性。在特征稀疏或退化环境中，ICP可能给出看似收敛但实际不可靠的结果。
 
 **对齐风险预测**通过计算位姿估计的**不确定性**和**条件数**，量化ICP对齐的风险程度，为后续的传感器融合或决策提供依据。
+（注意，代码中并没有进一步使用`this->LocalizationUncertainty`大概率是因为没有根图像等其他传感器融合吧）
 
 ### 1.2 核心方法：协方差分析
 
@@ -264,7 +265,7 @@ $$
 
 ### 1.3 核心代码实现
 
-核心函数：[`EstimateRegistrationError`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L860-978)
+核心函数：`EstimateRegistrationError`
 
 ```cpp
 LidarSLAM::RegistrationError LidarSLAM::EstimateRegistrationError(
@@ -273,8 +274,10 @@ LidarSLAM::RegistrationError LidarSLAM::EstimateRegistrationError(
 
 #### 实现流程
 
-```mermaid
+<div class="mermaid" style="height: 400px; display: flex; justify-content: center; width: 100%; margin: 0 auto;">
 graph TD
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
     A[开始] --> B[配置协方差计算选项]
     B --> C[使用DENSE_SVD算法]
     C --> D[计算6x6协方差矩阵Σ]
@@ -290,7 +293,8 @@ graph TD
     J --> M
     K --> M
     L --> M
-```
+</div>
+
 
 #### 代码详解
 
@@ -317,7 +321,7 @@ err.PosInverseConditionNum = std::sqrt(eigPosition.eigenvalues()(0)) /
 
 ### 1.4 LocalizationUncertainty的使用
 
-`LocalizationUncertainty` 在优化收敛后计算，存储为成员变量。详见代码注释：[代码位置](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L147-L170)
+`LocalizationUncertainty` 在优化收敛后计算，存储为成员变量。
 
 **主要用途**：
 1. **调试和分析**：了解每帧位姿估计的可靠性
@@ -340,11 +344,7 @@ err.PosInverseConditionNum = std::sqrt(eigPosition.eigenvalues()(0)) /
 
 ### 2.2 核心方法：特征可观测性分析
 
-SuperOdom采用**特征可观测性分析**方法来检测环境退化。与ICP风险预测不同，这种方法：
-
-- **计算成本低**：基于简单的几何计算和统计
-- **实时性好**：可以在特征匹配期间同步计算
-- **细粒度高**：为每个自由度独立量化不确定性
+SuperOdom采用**特征可观测性分析**方法来检测环境退化。与ICP风险预测不同，这种方法是在特征匹配期间同步计算
 
 #### 数学原理
 
@@ -413,23 +413,23 @@ $$
 > - $u_x = 1.0$：X方向**可观测性好**，不确定性**低**
 > - $u_x = 0.0$：X方向**不可观**，不确定性**高**
 
-我推测作者可能把这个量理解为"可观测性分数"而非"不确定性"。实际应用时需注意语义。
+推测作者可能把这个量理解为"可观测性分数"而非"不确定性"。实际应用时需注意语义。
 
 ### 2.4 核心代码实现
 
 #### 2.4.1 特征可观测性分析
 
-参见详细注释：[`FeatureObservabilityAnalysis`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L580-L652)
+参见详细注释：`FeatureObservabilityAnalysis`
 
 #### 2.4.2 不确定性量化
 
-参见详细注释：[`EstimateLidarUncertainty`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L1008-L1113)
+参见详细注释：`EstimateLidarUncertainty`
 
 ### 2.5 权重调整机制
 
 当检测到退化时，系统通过**信息矩阵**调整多传感器融合权重。
 
-参见代码：[`addAbsolutePoseConstraints`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L291-L303)
+参见代码：`addAbsolutePoseConstraints`
 
 ```cpp
 void LidarSLAM::addAbsolutePoseConstraints(...) {
@@ -460,8 +460,10 @@ void LidarSLAM::addAbsolutePoseConstraints(...) {
 
 "平面特征"是指点云中具有局部平面几何结构的点。完整流程：
 
-```mermaid
+<div class="mermaid" style="height: 400px; display: flex; justify-content: center; width: 100%; margin: 0 auto;">
 graph TD
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
     A[原始点云] -->|featureExtraction节点| B[均匀采样提取特征点]
     B --> C[发布到topic: planner_points]
     C -->|LidarSlam订阅| D[PlanarsPoints点云]
@@ -477,12 +479,326 @@ graph TD
     L --> N[提取法向量=v₀]
     N --> O[计算点到平面距离]
     O --> P[添加到优化约束]
-```
+</div>
 
 详细实现参见：
-1. 特征点提取：[`uniformFeatureExtraction`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/FeatureExtraction/featureExtraction.cpp#L504-L525)
-2. PCA平面拟合：[`computePCAForFeature`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L875-L951)
-3. 可观测性分析：[`FeatureObservabilityAnalysis`](file://wsl.localhost/Ubuntu-22.04/home/kwanwaipang/SuperOdom_ws/src/SuperOdom/super_odometry/src/LidarProcess/LidarSlam.cpp#L580-L652)
+1. 特征点提取：`uniformFeatureExtraction`
+2. PCA平面拟合：`computePCAForFeature`
+3. 可观测性分析：`FeatureObservabilityAnalysis`
+
+
+### 函数一：computePCAForFeature - PCA平面拟合
+
+**函数位置**
+
+#### 函数签名
+
+```cpp
+bool computePCAForFeature(
+    const std::vector<Point> &nearest_pts,  // 输入：K近邻点集
+    Eigen::Vector3d &mean,                  // 输出：质心
+    Eigen::Vector3d &eigenvalues,           // 输出：特征值
+    Eigen::Matrix3d &eigenvectors,          // 输出：特征向量
+    OptimizationParameter &result,          // 输出：结果状态
+    FeatureType feature_type                // 输入：特征类型
+)
+```
+
+#### 数学原理
+
+**1. 协方差矩阵计算**
+
+给定K个邻近点 $\{\mathbf{p}_i\}_{i=1}^K$，首先计算质心：
+
+$$
+\bar{\mathbf{p}} = \frac{1}{K} \sum_{i=1}^{K} \mathbf{p}_i
+$$
+
+然后构建去中心化的数据矩阵 $\mathbf{X} \in \mathbb{R}^{K \times 3}$：
+
+$$
+\mathbf{X}_i = \mathbf{p}_i - \bar{\mathbf{p}}
+$$
+
+协方差矩阵为：
+
+$$
+\mathbf{C} = \frac{1}{K} \mathbf{X}^T \mathbf{X} = \frac{1}{K} \sum_{i=1}^{K} (\mathbf{p}_i - \bar{\mathbf{p}})(\mathbf{p}_i - \bar{\mathbf{p}})^T
+$$
+
+**2. 特征值分解**
+
+对协方差矩阵进行特征值分解：
+
+$$
+\mathbf{C} = \mathbf{V} \mathbf{\Lambda} \mathbf{V}^T
+$$
+
+其中：
+- $\mathbf{\Lambda} = \text{diag}(\lambda_0, \lambda_1, \lambda_2)$，且 $\lambda_0 \leq \lambda_1 \leq \lambda_2$（Eigen库升序）
+- $\mathbf{V} = [\mathbf{v}_0 | \mathbf{v}_1 | \mathbf{v}_2]$ 是特征向量矩阵
+
+**3. 几何解释**
+
+特征值和特征向量揭示了点集的几何形状：
+
+| 特征值分布 | 几何形状 | 典型比例 |
+|-----------|---------|---------|
+| $\lambda_2 \gg \lambda_1 \approx \lambda_0$ | 线性（边缘） | $\lambda_2/\lambda_1 > 10$ |
+| $\lambda_2 \approx \lambda_1 \gg \lambda_0$ | 平面 | $\lambda_1/\lambda_2 > 0.1, \lambda_0 \ll \lambda_1$ |
+| $\lambda_2 \approx \lambda_1 \approx \lambda_0$ | 球形（散点） | $\lambda_0/\lambda_2 > 0.3$ |
+
+**特征向量的几何意义**：
+- $\mathbf{v}_0$：**最小方差方向** = 平面法向量（平面垂直方向）
+- $\mathbf{v}_1$：**中等方差方向** = 平面次主方向
+- $\mathbf{v}_2$：**最大方差方向** = 平面主方向（点分布最分散的方向）
+
+#### 代码流程分析
+
+**第一步：数据准备**
+
+```cpp
+Eigen::MatrixXd data(nearest_pts.size(), 3);
+for (size_t k = 0; k < nearest_pts.size(); k++) {
+    data.row(k) << pt.x, pt.y, pt.z;
+}
+```
+
+将K个点存储为 $K \times 3$ 矩阵。
+
+**第二步：PCA计算**
+
+```cpp
+auto eig = utils::ComputePCA(data, mean);
+eigenvalues = eig.eigenvalues();    // [λ₀, λ₁, λ₂] 升序
+eigenvectors = eig.eigenvectors();  // [v₀, v₁, v₂]
+```
+
+`utils::ComputePCA`内部执行：
+1. 计算质心并去中心化
+2. 计算协方差矩阵 $\mathbf{C}$
+3. 对 $\mathbf{C}$ 进行特征值分解
+
+**第三步：几何验证**
+
+**平面特征验证**：
+
+```cpp
+if (eigenvalues(0) < 1e-6 || eigenvalues(1) / eigenvalues(2) < 0.1) {
+    return false;  // 拒绝
+}
+```
+
+验证条件：
+1. $\lambda_0 \geq 10^{-6}$：确保不是退化到线（$\lambda_0 \approx 0$）或点（$\lambda_0, \lambda_1 \approx 0$）
+2. $\frac{\lambda_1}{\lambda_2} \geq 0.1$：确保两个大特征值相近（平面的两个主方向都有足够分布）
+
+**边缘特征验证**：
+
+```cpp
+if (eigenvalues(2) < K * eigenvalues(1)) {
+    return false;  // 拒绝
+}
+```
+
+验证条件：$\lambda_2 \geq K \cdot \lambda_1$，确保是明显的线性结构。
+
+#### 输出结果
+
+成功的PCA分析提供：
+- **质心** $\bar{\mathbf{p}}$：局部平面的中心
+- **法向量** $\mathbf{v}_0$：用于构建点到平面距离约束
+- **特征值** $\lambda_0, \lambda_1, \lambda_2$：用于计算平面度等几何指标
+
+**点到平面距离约束**：
+
+$$
+r = (\mathbf{p}_{\text{curr}} - \bar{\mathbf{p}}) \cdot \mathbf{v}_0
+$$
+
+这个残差 $r$ 被添加到Ceres优化问题中，用于估计位姿。
+
+---
+
+### 函数二：FeatureObservabilityAnalysis - 特征可观测性分析
+
+#### 函数签名
+
+```cpp
+void FeatureObservabilityAnalysis(
+    pcaFeature &feature,                     // 输出：特征可观测性结果
+    const Eigen::Vector3d &pFinal,          // 输入：特征点世界坐标
+    const Eigen::Vector3d &eigenvalues,     // 输入：PCA特征值
+    const Eigen::Vector3d &normal_direction,    // 输入：平面法向量
+    const Eigen::Vector3d &principal_direction  // 输入：平面主方向
+)
+```
+
+#### 核心思想
+
+该函数量化一个平面特征对6-DoF运动（3平移+3旋转）的**约束能力**，为退化检测提供基础数据。
+
+#### 详细流程分析
+
+**第一步：初始化与归一化** 
+
+```cpp
+feature.pt = pFinal;  // 存储点位置
+feature.vectors.normalDirection = normal_direction.normalized();
+feature.vectors.principalDirection = principal_direction.normalized();
+```
+
+**第二步：计算几何属性** 
+
+调用`computeEigenProperties`计算：
+
+$$
+\text{planar} = \frac{\lambda_1 - \lambda_0}{\lambda_2}
+$$
+
+$$
+\text{linear} = \frac{\lambda_2 - \lambda_1}{\lambda_2}
+$$
+
+$$
+\text{spherical} = \frac{\lambda_0}{\lambda_2}
+$$
+
+$$
+\text{curvature} = \frac{\lambda_0}{\lambda_0 + \lambda_1 + \lambda_2}
+$$
+
+其中 $\text{planar}$ 是最关键的指标，表示平面性强度。
+
+**第三步：计算旋转可观测性** 
+
+首先获取当前LiDAR坐标系的三个轴在世界坐标系中的方向：
+
+$$
+\mathbf{a}_x^w = \mathbf{R}_{wl} \begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}, \quad
+\mathbf{a}_y^w = \mathbf{R}_{wl} \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}, \quad
+\mathbf{a}_z^w = \mathbf{R}_{wl} \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+$$
+
+然后计算力矩向量：
+
+$$
+\mathbf{m} = \mathbf{r} \times \mathbf{n}
+$$
+
+其中 $\mathbf{r}$ 是点位置，$\mathbf{n}$ 是法向量。
+
+对各旋转轴的约束能力：
+
+$$
+\begin{aligned}
+o_{r_x} &= \mathbf{m} \cdot \mathbf{a}_x^w \\
+o_{r_y} &= \mathbf{m} \cdot \mathbf{a}_y^w \\
+o_{r_z} &= \mathbf{m} \cdot \mathbf{a}_z^w
+\end{aligned}
+$$
+
+**物理意义**：基于刚体运动学 $\mathbf{v} = \boldsymbol{\omega} \times \mathbf{r}$，平面约束法向量方向的运动，因此：
+
+$$
+|o_{r_i}| = |\mathbf{n} \cdot (\boldsymbol{\omega}_i \times \mathbf{r})| = |(\mathbf{r} \times \mathbf{n}) \cdot \boldsymbol{\omega}_i|
+$$
+
+表示该平面能多大程度约束绕第 $i$ 轴的旋转。
+
+**第四步：计算平移可观测性** 
+
+$$
+\begin{aligned}
+o_{t_x} &= \text{planar}^2 \cdot |\mathbf{n} \cdot \mathbf{a}_x^w| \\
+o_{t_y} &= \text{planar}^2 \cdot |\mathbf{n} \cdot \mathbf{a}_y^w| \\
+o_{t_z} &= \text{planar}^2 \cdot |\mathbf{n} \cdot \mathbf{a}_z^w|
+\end{aligned}
+$$
+
+**物理意义**：
+- $\mathbf{n} \cdot \mathbf{a}_i$ 是法向量在第 $i$ 轴上的投影
+- 投影越大，该方向的平移运动越容易被该平面检测到
+- $\text{planar}^2$ 是置信度权重，只有清晰的平面才有高约束能力
+
+**第五步：排序与归类** 
+调用`analyzeFeatureObservability`对9个可观测性值排序：
+
+```cpp
+std::vector<QualityPair> all_quality = {
+    {tx_dot, Feature_observability::tx_dot},
+    {ty_dot, Feature_observability::ty_dot},
+    {tz_dot, Feature_observability::tz_dot},
+    {rx_cross, Feature_observability::rx_cross},
+    {ry_cross, Feature_observability::ry_cross},
+    {rz_cross, Feature_observability::rz_cross},
+    {neg_rx_cross, Feature_observability::neg_rx_cross},
+    {neg_ry_cross, Feature_observability::neg_ry_cross},
+    {neg_rz_cross, Feature_observability::neg_rz_cross}
+};
+
+std::sort(all_quality.begin(), all_quality.end(), 
+          [](const auto& a, const auto& b) { return a.first > b.first; });
+```
+
+选择**前3个最强约束**的自由度，更新直方图：
+
+```cpp
+for (int i = 0; i < 3; i++) {
+    int index = static_cast<int>(all_quality[i].second);
+    PlaneFeatureHistogramObs[index]++;
+}
+```
+
+#### 直方图统计
+
+`PlaneFeatureHistogramObs`是一个长度为9的数组，累积所有特征的约束分布：
+
+| 索引 | 含义 | 对应自由度 |
+|-----|------|-----------|
+| 0, 1 | 绕X轴旋转(Roll)的正负约束 | $rx, -rx$ |
+| 2, 3 | 绕Y轴旋转(Pitch)的正负约束 | $ry, -ry$ |
+| 4, 5 | 绕Z轴旋转(Yaw)的正负约束 | $rz, -rz$ |
+| 6 | X方向平移约束 | $t_x$ |
+| 7 | Y方向平移约束 | $t_y$ |
+| 8 | Z方向平移约束 | $t_z$ |
+
+#### 退化检测应用
+
+通过分析直方图，可以识别哪些自由度缺乏约束：
+
+**走廊场景示例**：
+
+```
+PlaneFeatureHistogramObs[0] (rx) = 120   ✓ 充足
+PlaneFeatureHistogramObs[2] (ry) = 115   ✓ 充足  
+PlaneFeatureHistogramObs[4] (rz) = 5     ✗ 严重不足 → Yaw退化
+PlaneFeatureHistogramObs[6] (tx) = 8     ✗ 不足 → X平移退化
+PlaneFeatureHistogramObs[7] (ty) = 125   ✓ 充足
+PlaneFeatureHistogramObs[8] (tz) = 110   ✓ 充足
+```
+
+**结论**：走廊环境下Yaw角和前进方向X不可观，需增加其他传感器权重。
+
+#### 可视化示例
+
+<div class="mermaid" style="height: 400px; display: flex; justify-content: center; width: 100%; margin: 0 auto;">
+graph TD
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+    A[平面特征<br/>法向量n<br/>位置r] --> B[计算几何属性<br/>planar, linear]
+    A --> C[计算旋转约束<br/>r×n·axis]
+    A --> D[计算平移约束<br/>n·axis]
+    B --> E[加权]
+    C --> F[9个可观测性值]
+    D --> F
+    E --> F
+    F --> G[排序取Top3]
+    G --> H[更新直方图<br/>PlaneFeatureHistogramObs]
+    H --> I[统计各自由度<br/>约束特征数]
+    I --> J[退化判断<br/>不确定性量化]
+</div>
+
 
 ---
 
@@ -527,7 +843,7 @@ graph TD
 
 ## 基于可观测性的定位质量分数
 
-**可以！**可观测性直方图是很好的定位质量指标。
+可观测性直方图是很好的定位质量指标。
 
 **改进建议**：
 
@@ -552,11 +868,6 @@ $$
 **物理意义**：
 - $Q \approx 1$：所有自由度都有充足约束，定位质量高
 - $Q \approx 0$：某些自由度严重缺乏约束，定位质量低
-
-**应用**：
-- 运动规划：避免在低质量区域快速运动
-- 回环检测：低质量帧不参与回环
-- 传感器切换：质量低时切换到其他传感器
 
 ---
 
