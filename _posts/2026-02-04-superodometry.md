@@ -377,7 +377,7 @@ $$
 **物理意义**：
 - $\mathbf{r} \times \mathbf{n}$ 是"力矩"方向
 - 力矩与旋转轴的点乘表示约束强度
-- 离旋转轴越远（ $|\mathbf{r}|$ 大），约束越强
+- 离旋转轴越远（ $$|\mathbf{r}|$$ 大），约束越强
 
 ### 2.3 不确定性量化
 
@@ -698,7 +698,7 @@ o_{r_z} &= \mathbf{m} \cdot \mathbf{a}_z^w
 \end{aligned}
 $$
 
-**物理意义**：基于刚体运动学 $\mathbf{v} = \boldsymbol{\omega} \times \mathbf{r}$，平面约束法向量方向的运动，因此：
+**物理意义**：基于刚体运动学 $$\mathbf{v} = \boldsymbol{\omega} \times \mathbf{r}$$，平面约束法向量方向的运动，因此：
 
 $$
 |o_{r_i}| = |\mathbf{n} \cdot (\boldsymbol{\omega}_i \times \mathbf{r})| = |(\mathbf{r} \times \mathbf{n}) \cdot \boldsymbol{\omega}_i|
