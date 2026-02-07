@@ -402,7 +402,7 @@ $$
 **为什么乘以3？**
 
 归一化因子3的作用：
-- 当所有有效特征都约束X方向时： $\mathcal{H}_{t_{x}} = \mathcal{H}_{\text{total}}$
+- 当所有有效特征都约束X方向时： $$\mathcal{H}_{t_{x}} = \mathcal{H}_{\text{total}}$$
   - $u_x = 3 \cdot 1 = 3$ → 截断到1.0（完全可观的）
 - 当只有1/3的特征约束X时：$\mathcal{H}_{t_{x}} = \frac{1}{3}\mathcal{H}_{\text{total}}$
   - $u_x = 3 \cdot \frac{1}{3} = 1$ → 1.0（高不确定性）
