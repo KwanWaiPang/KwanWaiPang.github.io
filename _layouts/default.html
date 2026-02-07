@@ -21,65 +21,61 @@
     {% include analytics.html %}
 
 <!-- 识别latex公式并渲染 -->
+<!-- 识别latex公式并渲染 -->
 <script>
   window.MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
       displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true
+      processEscapes: true,
+      // 加载额外的宏包
+      packages: {'[+]': ['boldsymbol', 'ams']},
+      macros: {
+        boldsymbol: ['\\boldsymbol{#1}', 1],
+        bm: ['\\boldsymbol{#1}', 1]  // 也支持 \bm 命令
+      }
+    },
+    loader: {
+      load: ['[tex]/boldsymbol', '[tex]/ams']
     },
     options: {
-      ignoreHtmlClass: 'mermaid|highlight',
-      processHtmlClass: 'arithmatex'
+      ignoreHtmlClass: 'mermaid|highlight'
     },
     startup: {
       pageReady: () => {
-        // 在 MathJax 处理前，修复所有被 Jekyll 破坏的公式
+        // 修复 Jekyll 破坏的下划线
         return MathJax.startup.defaultPageReady().then(() => {
-          // 查找所有文本节点
           const fixFormulas = (node) => {
-            if (node.nodeType === Node.TEXT_NODE) {
-              // 检查是否包含数学公式
-              if (node.textContent.includes('$')) {
-                let parent = node.parentElement;
-                let html = parent.innerHTML;
-                
-                // 修复行内公式中的 <em> 标签
-                html = html.replace(/\$([^\$]+)\$/g, (match, formula) => {
-                  // 将公式内的 <em> 和 </em> 还原为下划线
-                  let fixed = formula
-                    .replace(/<em>/gi, '_')
-                    .replace(/<\/em>/gi, '_')
-                    .replace(/&lt;/g, '<')
-                    .replace(/&gt;/g, '>')
-                    .replace(/&amp;/g, '&');
-                  return '$' + fixed + '$';
-                });
-                
-                // 修复块级公式中的 <em> 标签
-                html = html.replace(/\$\$([^\$]+)\$\$/g, (match, formula) => {
-                  let fixed = formula
-                    .replace(/<em>/gi, '_')
-                    .replace(/<\/em>/gi, '_')
-                    .replace(/&lt;/g, '<')
-                    .replace(/&gt;/g, '>')
-                    .replace(/&amp;/g, '&');
-                  return '$$' + fixed + '$$';
-                });
-                
-                if (html !== parent.innerHTML) {
-                  parent.innerHTML = html;
-                }
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('$')) {
+              let parent = node.parentElement;
+              let html = parent.innerHTML;
+              
+              // 修复行内公式
+              html = html.replace(/\$([^\$]+)\$/g, (match, formula) => {
+                let fixed = formula
+                  .replace(/<em>/gi, '_')
+                  .replace(/<\/em>/gi, '_');
+                return '$' + fixed + '$';
+              });
+              
+              // 修复块级公式
+              html = html.replace(/\$\$([^\$]+)\$\$/gs, (match, formula) => {
+                let fixed = formula
+                  .replace(/<em>/gi, '_')
+                  .replace(/<\/em>/gi, '_');
+                return '$$' + fixed + '$$';
+              });
+              
+              if (html !== parent.innerHTML) {
+                parent.innerHTML = html;
               }
             } else if (node.nodeType === Node.ELEMENT_NODE && 
                        !node.classList.contains('mermaid') &&
                        !node.classList.contains('highlight')) {
-              // 递归处理子节点
               Array.from(node.childNodes).forEach(fixFormulas);
             }
           };
           
-          // 处理主内容区域
           const content = document.querySelector('.wrapper-content');
           if (content) {
             fixFormulas(content);
@@ -90,7 +86,7 @@
   };
 </script>
 <script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js">
 </script>
 
 <!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
