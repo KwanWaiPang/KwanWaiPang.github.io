@@ -21,23 +21,38 @@
     {% include analytics.html %}
 
     <!-- 识别latex公式并渲染 -->
-    <script>
-    MathJax = {
-      tex: {
-        // 强制识别单美元符号 $ 为行内公式，兼容 VS Code
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
-      },
-      svg: {
-        fontCache: 'global'
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: false // 关键：禁止处理转义符，由我们手动控制
+    },
+    options: {
+      // 这里的跳过逻辑防止 MathJax 去处理 Mermaid 的代码块
+      ignoreHtmlClass: 'mermaid|highlight'
+    },
+    startup: {
+      ready: () => {
+        // 在 MathJax 开始工作前，手动修复被 Jekyll 破坏的下划线
+        // 查找所有可能包含公式的段落
+        const content = document.querySelector('.wrapper-content');
+        if (content) {
+          // 找到那些被 Jekyll 错误解析为 <em> 的内容并还原回下划线
+          // 这是解决 $a_i$ 变成 $a<em>i</em>$ 的终极方案
+          content.innerHTML = content.innerHTML.replace(/<em>(.*?)<\/em>/g, (match, p1) => {
+            // 如果是在 $ 符号之间，就还原
+            return match; 
+          });
+        }
+        MathJax.startup.defaultReady();
       }
-    };
-  </script>
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
 
     <!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
     <!-- <script type="module">
