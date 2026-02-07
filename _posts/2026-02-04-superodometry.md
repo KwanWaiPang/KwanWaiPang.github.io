@@ -361,12 +361,12 @@ $$
 其中 $\text{planar} \in [0,1]$ 是平面度（从PCA特征值计算）。
 
 **物理意义**：
-- $\mathbf{n} \parallel \mathbf{a}_i$ 时，$o_{t_i} \approx \text{planar}^2 \approx 1$：该方向平移被强约束
-- $\mathbf{n} \perp \mathbf{a}_i$ 时，$o_{t_i} \approx 0$：该方向平移不可观
+- $$\mathbf{n} \parallel \mathbf{a}_i$$ 时，$$o_{t_i} \approx \text{planar}^2 \approx 1$$ ：该方向平移被强约束
+- $$\mathbf{n} \perp \mathbf{a}_i$$ 时，$$o_{t_i} \approx 0$$ ：该方向平移不可观
 
 **旋转可观测性**：
 
-基于刚体运动学，旋转$\boldsymbol{\omega}$在点$\mathbf{r}$产生的线速度为$\mathbf{v} = \boldsymbol{\omega} \times \mathbf{r}$。
+基于刚体运动学，旋转 $$\boldsymbol{\omega}$$在点$$\mathbf{r}$$产生的线速度为 $$\mathbf{v} = \boldsymbol{\omega} \times \mathbf{r}$$。
 
 平面约束法向量方向的运动，因此约束能力为：
 
@@ -404,7 +404,7 @@ $$
 归一化因子3的作用：
 - 当所有有效特征都约束X方向时： $$\mathcal{H}_{t_{x}} = \mathcal{H}_{\text{total}}$$
   - $u_x = 3 \cdot 1 = 3$ → 截断到1.0（完全可观的）
-- 当只有1/3的特征约束X时：$\mathcal{H}_{t_{x}} = \frac{1}{3}\mathcal{H}_{\text{total}}$
+- 当只有1/3的特征约束X时：$$\mathcal{H}_{t_{x}} = \frac{1}{3}\mathcal{H}_{\text{total}}$$
   - $u_x = 3 \cdot \frac{1}{3} = 1$ → 1.0（高不确定性）
 - 当没有特征约束X时： $\mathcal{H}_{t_x} = 0$
   - $u_x = 0$ → 0.0（完全不可观）
