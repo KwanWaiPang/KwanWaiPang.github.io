@@ -20,64 +20,8 @@
     <!-- Google Analytics -->
     {% include analytics.html %}
 
-    <!-- 识别latex公式并渲染 -->
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true
-    },
-    options: {
-      ignoreHtmlClass: 'mermaid|highlight'
-    },
-    startup: {
-      ready: () => {
-        // 在 MathJax 渲染前修复被 Jekyll 破坏的内容
-        const walker = document.createTreeWalker(
-          document.body,
-          NodeFilter.SHOW_TEXT,
-          null,
-          false
-        );
-        
-        const nodesToFix = [];
-        let node;
-        
-        // 收集所有包含 $ 的文本节点
-        while (node = walker.nextNode()) {
-          if (node.textContent.includes('$')) {
-            nodesToFix.push(node);
-          }
-        }
-        
-        // 修复这些节点的父元素中被错误处理的 <em> 标签
-        nodesToFix.forEach(textNode => {
-          let parent = textNode.parentElement;
-          if (parent) {
-            let html = parent.innerHTML;
-            // 在 $ 符号之间，将 <em> 和 </em> 还原为下划线
-            html = html.replace(/\$([^$]*)\$/g, (match) => {
-              return match
-                .replace(/<em>/g, '_')
-                .replace(/<\/em>/g, '_');
-            });
-            parent.innerHTML = html;
-          }
-        });
-        
-        MathJax.startup.defaultReady();
-      }
-    }
-  };
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-</script>
-
 <!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
 <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
-
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 
