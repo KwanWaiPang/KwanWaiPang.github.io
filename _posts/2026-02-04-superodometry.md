@@ -6,7 +6,6 @@ tags: [LiDAR, SLAM]
 comments: true
 author: kwanwaipang
 toc: true
-mathjax: true  # 启用 MathJax
 excerpt: "CMU 的SRO论文,雷达进行退化检测与预测，博客包含测试与代码解读" # 【指定摘要内容】
 ---
 

@@ -20,6 +20,25 @@
     <!-- Google Analytics -->
     {% include analytics.html %}
 
+    <!-- 识别latex公式并渲染 -->
+    <script>
+    MathJax = {
+      tex: {
+        // 强制识别单美元符号 $ 为行内公式，兼容 VS Code
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+
     <!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
     <!-- <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
