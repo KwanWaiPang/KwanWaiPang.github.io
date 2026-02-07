@@ -26,25 +26,46 @@
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
       displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: false // 关键：禁止处理转义符，由我们手动控制
+      processEscapes: true
     },
     options: {
-      // 这里的跳过逻辑防止 MathJax 去处理 Mermaid 的代码块
       ignoreHtmlClass: 'mermaid|highlight'
     },
     startup: {
       ready: () => {
-        // 在 MathJax 开始工作前，手动修复被 Jekyll 破坏的下划线
-        // 查找所有可能包含公式的段落
-        const content = document.querySelector('.wrapper-content');
-        if (content) {
-          // 找到那些被 Jekyll 错误解析为 <em> 的内容并还原回下划线
-          // 这是解决 $a_i$ 变成 $a<em>i</em>$ 的终极方案
-          content.innerHTML = content.innerHTML.replace(/<em>(.*?)<\/em>/g, (match, p1) => {
-            // 如果是在 $ 符号之间，就还原
-            return match; 
-          });
+        // 在 MathJax 渲染前修复被 Jekyll 破坏的内容
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
+        
+        const nodesToFix = [];
+        let node;
+        
+        // 收集所有包含 $ 的文本节点
+        while (node = walker.nextNode()) {
+          if (node.textContent.includes('$')) {
+            nodesToFix.push(node);
+          }
         }
+        
+        // 修复这些节点的父元素中被错误处理的 <em> 标签
+        nodesToFix.forEach(textNode => {
+          let parent = textNode.parentElement;
+          if (parent) {
+            let html = parent.innerHTML;
+            // 在 $ 符号之间，将 <em> 和 </em> 还原为下划线
+            html = html.replace(/\$([^$]*)\$/g, (match) => {
+              return match
+                .replace(/<em>/g, '_')
+                .replace(/<\/em>/g, '_');
+            });
+            parent.innerHTML = html;
+          }
+        });
+        
         MathJax.startup.defaultReady();
       }
     }
@@ -54,17 +75,8 @@
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
-    <!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
-    <!-- <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ 
-        startOnLoad: true, 
-        theme: 'default',
-        securityLevel: 'loose'
-      });
-    </script> -->
-
-    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<!-- 每当页面检测到 Mermaid 代码块时，浏览器会自动将其渲染为流程图。 -->
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
