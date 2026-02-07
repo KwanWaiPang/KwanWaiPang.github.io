@@ -218,7 +218,7 @@ $$
 
 其中：
 - $\mathbf{\Lambda}_t = \text{diag}(\lambda_0, \lambda_1, \lambda_2)$ 且 $\lambda_0 \leq \lambda_1 \leq \lambda_2$ （**Eigen库默认升序排列**）
-- $\mathbf{V} = [\mathbf{v}_0 \; | \; \mathbf{v}_1 \; | \; \mathbf{v}_2]$ 是特征向量矩阵
+- $\mathbf{V} = [\mathbf{v}_0 \mid \mathbf{v}_1 \mid \mathbf{v}_2]$ 是特征向量矩阵
 
 **最大误差估计**：
 
@@ -508,7 +508,7 @@ bool computePCAForFeature(
 
 **1. 协方差矩阵计算**
 
-给定K个邻近点 ${\mathbf{p}_i}_{i=1}^K$，首先计算质心：
+给定K个邻近点 $${\mathbf{p}_i}_{i=1}^K$$，首先计算质心：
 
 $$
 \bar{\mathbf{p}} = \frac{1}{K} \sum_{i=1}^{K} \mathbf{p}_i
