@@ -82,8 +82,11 @@ baseurl: "" # 若非子目录，留空
 # Jekyll 默认使用 kramdown 作为 Markdown 解析器，需确保启用数学公式支持：
 markdown: kramdown
 kramdown:
-  math_engine: mathjax  # 指定使用MathJax处理数学公式
+  input: GFM
+  math_engine: mathjax # 指定使用MathJax处理数学公式
   syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
 
 #
 # !! You don't need to change any of the configuration flags below !!
@@ -94,16 +97,6 @@ paginate_path: "/home/page:num/" #/page:num/ #指定分页页面的目标路径(
 
 # The release of Jekyll Now that you're using
 version: v1.2.0
-
-# Jekyll 3 now only supports Kramdown for Markdown
-kramdown:
-  # Use GitHub flavored markdown, including triple backtick fenced code blocks
-  input: GFM
-  # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
-  syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    # Use existing pygments syntax highlighting css
-    css_class: 'highlight'
 
 # Set the Sass partials directory, as we're using @imports
 sass:
