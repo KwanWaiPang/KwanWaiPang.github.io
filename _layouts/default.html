@@ -21,19 +21,13 @@
     {% include analytics.html %}
 
 <!-- 识别latex公式并渲染 -->
-<!-- 识别latex公式并渲染 -->
 <script>
   window.MathJax = {
     tex: {
       inlineMath: [['$', '$'], ['\\(', '\\)']],
       displayMath: [['$$', '$$'], ['\\[', '\\]']],
       processEscapes: true,
-      // 加载额外的宏包
-      packages: {'[+]': ['boldsymbol', 'ams']},
-      macros: {
-        boldsymbol: ['\\boldsymbol{#1}', 1],
-        bm: ['\\boldsymbol{#1}', 1]  // 也支持 \bm 命令
-      }
+      packages: {'[+]': ['boldsymbol', 'ams']}
     },
     loader: {
       load: ['[tex]/boldsymbol', '[tex]/ams']
@@ -42,44 +36,69 @@
       ignoreHtmlClass: 'mermaid|highlight'
     },
     startup: {
-      pageReady: () => {
-        // 修复 Jekyll 破坏的下划线
-        return MathJax.startup.defaultPageReady().then(() => {
-          const fixFormulas = (node) => {
-            if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('$')) {
-              let parent = node.parentElement;
-              let html = parent.innerHTML;
-              
-              // 修复行内公式
-              html = html.replace(/\$([^\$]+)\$/g, (match, formula) => {
-                let fixed = formula
-                  .replace(/<em>/gi, '_')
-                  .replace(/<\/em>/gi, '_');
-                return '$' + fixed + '$';
-              });
-              
-              // 修复块级公式
-              html = html.replace(/\$\$([^\$]+)\$\$/gs, (match, formula) => {
-                let fixed = formula
-                  .replace(/<em>/gi, '_')
-                  .replace(/<\/em>/gi, '_');
-                return '$$' + fixed + '$$';
-              });
-              
-              if (html !== parent.innerHTML) {
-                parent.innerHTML = html;
-              }
-            } else if (node.nodeType === Node.ELEMENT_NODE && 
-                       !node.classList.contains('mermaid') &&
-                       !node.classList.contains('highlight')) {
-              Array.from(node.childNodes).forEach(fixFormulas);
-            }
-          };
+      ready: () => {
+        MathJax.startup.defaultReady();
+        
+        // 在 DOM 加载完成后，但在 MathJax 渲染前修复公式
+        MathJax.startup.promise.then(() => {
+          // 查找并修复所有被 Jekyll 破坏的公式
+          const content = document.querySelector('.wrapper-content') || document.body;
           
-          const content = document.querySelector('.wrapper-content');
-          if (content) {
-            fixFormulas(content);
+          // 使用 TreeWalker 遍历所有文本节点
+          const walker = document.createTreeWalker(
+            content,
+            NodeFilter.SHOW_TEXT,
+            {
+              acceptNode: function(node) {
+                // 只处理包含 $ 符号的文本节点
+                if (node.textContent.includes('$') && 
+                    !node.parentElement.closest('.mermaid, .highlight')) {
+                  return NodeFilter.FILTER_ACCEPT;
+                }
+                return NodeFilter.FILTER_SKIP;
+              }
+            }
+          );
+          
+          const nodesToFix = [];
+          let node;
+          while (node = walker.nextNode()) {
+            nodesToFix.push(node);
           }
+          
+          // 修复这些节点
+          nodesToFix.forEach(textNode => {
+            let parent = textNode.parentElement;
+            let html = parent.innerHTML;
+            let originalHtml = html;
+            
+            // 修复行内公式 $...$
+            html = html.replace(/\$([^\$]*?)\$/g, (match, formula) => {
+              let fixed = formula
+                .replace(/<em>/gi, '_')
+                .replace(/<\/em>/gi, '_')
+                .replace(/<strong>/gi, '')
+                .replace(/<\/strong>/gi, '');
+              return '$' + fixed + '$';
+            });
+            
+            // 修复块级公式 $$...$$
+            html = html.replace(/\$\$([^\$]*?)\$\$/gs, (match, formula) => {
+              let fixed = formula
+                .replace(/<em>/gi, '_')
+                .replace(/<\/em>/gi, '_')
+                .replace(/<strong>/gi, '')
+                .replace(/<\/strong>/gi, '');
+              return '$$' + fixed + '$$';
+            });
+            
+            if (html !== originalHtml) {
+              parent.innerHTML = html;
+            }
+          });
+          
+          // 修复完成后，重新渲染 MathJax
+          MathJax.typesetPromise([content]).catch((err) => console.log('MathJax 渲染错误:', err));
         });
       }
     }
