@@ -202,6 +202,7 @@ git push -u origin main
 * $\dot{a}$   一阶导数
 * $\ddot{a}$  二阶导数
 * $\xi \in so(3)$
+* $\mid$ 竖杆在markdown会引起格式出错，可以用`\mid`代替
 
 更多markdown符号[Link](https://blog.csdn.net/konglongdanfo1/article/details/85204312)
 
