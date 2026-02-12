@@ -19,5 +19,6 @@ excerpt: "ROS Navigation Stack如何创建自己的代价地图层" # 【指定�
 
 
 # 参考资料
+* [Nav2 Costmap_2d](https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/README.md)
 * [Writing a New Costmap2D Plugin](https://docs.nav2.org/plugin_tutorials/docs/writing_new_costmap2d_plugin.html)
 <!-- 中文版：http://dev.nav2.fishros.com/doc/plugin_tutorials/docs/writing_new_costmap2d_plugin.html -->
