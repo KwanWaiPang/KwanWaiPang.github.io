@@ -34,11 +34,29 @@ If you find this blog is useful, a simple star (<a class="github-button"
   fetch('/index.html')
     .then(response => response.text())
     .then(html => {
+
+      // 定义样式重置，解决行距和字体变大的问题
+      // 这里使用 template 字符串，确保样式优先加载
+      const resetStyle = `
+        <style>
+          :host {
+            all: initial; /* 强行切断 Jekyll 所有的外部样式干扰 */
+            display: block;
+            line-height: 1.2 !important;
+            font-family: 'Titillium Web', Verdana, Helvetica, sans-serif !important;
+            font-size: 16px !important;
+            color: #000;
+          }
+          /* 确保 Shadow DOM 内部的 table 能够撑开宽度 */
+          table { width: 100%; border-spacing: 0; }
+        </style>
+      `;
+
       // 直接注入全部代码
-      shadow.innerHTML = html;
+      shadow.innerHTML = resetStyle+html;
       container.childNodes[0].textContent = ""; // 加载成功后移除 "Loading..." 文字
 
-      // --- 新增代码：动态修复 Shadow DOM 内部的相对路径 ---
+      // 动态修复 Shadow DOM 内部的相对路径 
       const elements = shadow.querySelectorAll('[href], [src]');
       elements.forEach(el => {
         ['href', 'src'].forEach(attr => {
@@ -62,7 +80,6 @@ If you find this blog is useful, a simple star (<a class="github-button"
           }
         });
       });
-      // ---------------------------------------------------
     })
     .catch(err => {
       console.error('Failed to load content:', err);
