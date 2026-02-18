@@ -34,9 +34,35 @@ If you find this blog is useful, a simple star (<a class="github-button"
   fetch('/index.html')
     .then(response => response.text())
     .then(html => {
-      // 直接注入全部代码，Shadow DOM 会自动处理其中的 <html> <body> 和 <style>
+      // 直接注入全部代码
       shadow.innerHTML = html;
       container.childNodes[0].textContent = ""; // 加载成功后移除 "Loading..." 文字
+
+      // --- 新增代码：动态修复 Shadow DOM 内部的相对路径 ---
+      const elements = shadow.querySelectorAll('[href], [src]');
+      elements.forEach(el => {
+        ['href', 'src'].forEach(attr => {
+          const val = el.getAttribute(attr);
+          
+          // 排除掉绝对路径、协议自适应链接、页面锚点和邮箱
+          if (val && 
+              !val.startsWith('http') && 
+              !val.startsWith('//') && 
+              !val.startsWith('mailto:') && 
+              !val.startsWith('#')) {
+            
+            // 如果是以 "./" 开头，例如 "./home/"，将其修正为 "/home/"
+            if (val.startsWith('./')) {
+              el.setAttribute(attr, val.replace(/^\.\//, '/'));
+            } 
+            // 如果是纯相对路径，例如 "File/..."，将其修正为 "/File/..."
+            else if (!val.startsWith('/')) {
+              el.setAttribute(attr, '/' + val);
+            }
+          }
+        });
+      });
+      // ---------------------------------------------------
     })
     .catch(err => {
       console.error('Failed to load content:', err);
@@ -55,60 +81,3 @@ If you find this blog is useful, a simple star (<a class="github-button"
   border: none;
 }
 </style>
-
-
-<!--
-
-<style>
-/* 内联样式隔离 */
-#iframe-wrapper {
-  width: 100%;
-  overflow: hidden;
-  border: none;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-#iframe-content {
-  width: 100%;
-  border: none;
-  display: block; /* 消除 iframe 默认的 inline 空隙 */
-}
-</style>
-
-<div id="iframe-wrapper">
-  <iframe 
-    id="iframe-content"
-    src="https://kwanwaipang.github.io/index.html" 
-    onload="this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px'"
-  ></iframe>
-</div>
-
-<script>
-// 纯当前页面运行的脚本
-document.getElementById('iframe-content').addEventListener('load', function() {
-  try {
-    const contentHeight = this.contentWindow.document.documentElement.scrollHeight;
-    this.style.height = contentHeight +100+ 'px';//增加了高度
-    // 添加窗口变化监听
-    window.addEventListener('resize', () => {
-      this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
-    });
-  } catch (error) {
-    console.log('跨域保护机制触发，请确保被嵌入页面与本站同源');
-  }
-});
-</script>
-
--->
-
-<!-- # Hi~ 👋
-only for template
-
-## 版权声明
-
-博客文章是我原创文章，存档于_posts 文件夹下，版权归我所有，转载请与我联系获得授权许可。
-
-This blog is my original work, archived in the _posts folder, and all rights are reserved. 
-Please contact me for authorization before reusing or reposting. -->
