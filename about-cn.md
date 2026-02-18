@@ -1,8 +1,20 @@
 ---
 layout: page
-title: Hi~ 👋
+title: 简介
 permalink: /about-cn/
 ---
+
+
+# Hi~ 👋
+
+博客文章是我原创文章，存档于`_posts`文件夹下，版权归我所有，转载请与我联系获得授权许可。
+
+如果博客对你有帮助，请点赞 (<a class="github-button" 
+  href="https://github.com/KwanWaiPang/KwanWaiPang.github.io" 
+  data-icon="octicon-star" 
+  data-size="large"
+  data-show-count="true" 
+  aria-label="Star it on GitHub">Star on Github</a>)😊
 
 
 [comment]: <> (  <h2 align="center">PAPER</h2>)
