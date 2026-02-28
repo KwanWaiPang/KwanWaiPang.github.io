@@ -348,8 +348,13 @@ if __name__ == '__main__':
 
 ---
 
+<!-- 
 
+## speed_filter（限速层）
+SpeedFilter 是 Nav2 中的限速区域过滤层：它订阅一张 OccupancyGrid 掩膜地图（speed mask），在每个 costmap 更新周期查询机器人当前位置对应的 mask 格子值，然后计算速度限制 `speed_limit = data × multiplier + base`，通过 topic 发布供控制器使用。
 
+本次移植的目标是将该层从 ROS2 Nav2 架构适配到现有 ROS1 costmap_2d 插件框架，**与之前移植 KeepoutFilter 的方式保持一致**。
+ -->
 
 
 # 参考资料
