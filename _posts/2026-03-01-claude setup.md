@@ -18,7 +18,6 @@ excerpt: "" # 【指定摘要内容】
 
 > **Claude Code** 是 Anthropic 推出的一款智能代码助手，它直接运行在你的终端（Terminal）中，能够理解整个代码库，通过自然语言指令帮你完成编码、调试、重构、Git 管理等开发任务。
 
----
 
 ## 一、什么是 Claude Code？
 
@@ -45,7 +44,6 @@ Claude Code 不是普通的代码补全工具，它是一个**具备自主行动
 > 给 /api/users 接口写单元测试
 ```
 
----
 
 ## 二、系统要求
 
@@ -57,7 +55,6 @@ Claude Code 不是普通的代码补全工具，它是一个**具备自主行动
 | 账户 | Claude Pro / Max / Teams / Enterprise / Console 账户（**免费版不支持**） |
 | Shell | Bash、Zsh、PowerShell 或 CMD |
 
----
 
 ## 三、安装教程
 
@@ -93,41 +90,6 @@ claude --version
 </figcaption>
 </div>
 
----
-
-### 方式二：通过 npm 安装（旧方式，仍可用）
-
-> ⚠️ npm 安装方式已被官方标记为**不推荐（deprecated）**，建议优先使用原生安装。
-
-```bash
-npm install -g @anthropic-ai/claude-code
-```
-
-macOS 注意：建议使用 `nvm` 管理 Node.js，避免权限问题。
-
-```bash
-# 安装 nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
-# 安装 Node.js LTS
-nvm install --lts
-
-# 再安装 Claude Code
-npm install -g @anthropic-ai/claude-code
-```
-
----
-
-### 方式三：Homebrew（macOS）
-
-```bash
-brew install claude-code
-
-# 后续手动更新
-brew upgrade claude-code
-```
-
----
 
 ## 四、配置与认证
 
@@ -203,7 +165,6 @@ opencode
 </figcaption>
 </div>
 
----
 
 
 ## 参考资料
