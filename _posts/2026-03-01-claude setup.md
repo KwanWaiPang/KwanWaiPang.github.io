@@ -76,7 +76,7 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_192955_884.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_192955_884.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -88,7 +88,7 @@ claude --version
 ```
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_193552_139.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_193552_139.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -143,13 +143,13 @@ claude
 首次运行会引导你完成浏览器 OAuth 登录（使用你的 Claude 账户）。
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_193720_841.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_193720_841.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_194003_194.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_194003_194.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -176,8 +176,8 @@ opencode
 
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_194706_712.png" width="80%" />
-  <img src="../images/ScreenShot_2026-03-01_194952_855.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_194706_712.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_194952_855.png" width="80%" />
 <figcaption>  
 </figcaption>
 </div>
@@ -189,7 +189,7 @@ opencode
 
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_195857_287.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_195857_287.png" width="80%" />
 <figcaption>
 模型情况（PS大部分需要购买）  
 </figcaption>
@@ -198,7 +198,7 @@ opencode
 测试过程：
 
 <div align="center">
-  <img src="../images/ScreenShot_2026-03-01_200158_989.png" width="80%" />
+  <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-03-01_200158_989.png" width="80%" />
 <figcaption> 
 </figcaption>
 </div>
