@@ -234,15 +234,15 @@ local_costmap:
 
 **简化方案**：不依赖 nav2 的 `CostmapFilterInfo` 双阶段订阅机制，直接订阅一个 OccupancyGrid topic。
 
-### [新增] `include/costmap_2d/keepout_filter.h`
-- 继承自 `costmap_2d::CostmapLayer`
-- 成员变量包括：mask topic 名称、mask 数据指针、lethal 阈值
+* [新增] `include/costmap_2d/keepout_filter.h`
+  - 继承自 `costmap_2d::CostmapLayer`
+  - 成员变量包括：mask topic 名称、mask 数据指针、lethal 阈值
 
-### [新增] `plugins/keepout_filter.cpp`
-- `onInitialize()`: 用 `nh.param()` 读取 mask_topic，并订阅之
-- `maskCallback()`: 接收并存储最新掩膜
-- `updateBounds()`: 有掩膜更新时标记更新区域
-- `updateCosts()`: 将掩膜中值 ≥ `lethal_threshold` 的 Cell 设置为 LETHAL_OBSTACLE
+* [新增] `plugins/keepout_filter.cpp`
+  - `onInitialize()`: 用 `nh.param()` 读取 mask_topic，并订阅之
+  - `maskCallback()`: 接收并存储最新掩膜
+  - `updateBounds()`: 有掩膜更新时标记更新区域
+  - `updateCosts()`: 将掩膜中值 ≥ `lethal_threshold` 的 Cell 设置为 LETHAL_OBSTACLE
 
 接下来通过节点发布禁行区域（注意，当前模拟原点周围一个2*2方形区域为禁行区域）：
 
