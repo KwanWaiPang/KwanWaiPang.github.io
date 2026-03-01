@@ -167,7 +167,7 @@ opencode
 
 
 
-# 参考资料
+# 五、参考资料
 * [Claude Code overview](https://code.claude.com/docs/en/overview)
 * [opencode.ai](https://opencode.ai/)
 * [OpenCode简介](https://opencode.ai/docs/zh-cn)
