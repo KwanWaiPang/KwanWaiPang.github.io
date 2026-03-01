@@ -185,7 +185,7 @@ opencode
 一些命令说明：
 * `/connect`:选择任意的任意 LLM 提供商（推荐选用OpenCode Zen）
 * `/models`：选择模型
-* `/init`来初始化
+* 输入`/`即有一系列命令说明
 
 
 <div align="center">
