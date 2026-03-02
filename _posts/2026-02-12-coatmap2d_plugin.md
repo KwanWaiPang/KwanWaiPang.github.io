@@ -359,5 +359,5 @@ SpeedFilter 是 Nav2 中的限速区域过滤层：它订阅一张 OccupancyGrid
 
 # 参考资料
 * [Nav2 Costmap_2d](https://github.com/ros-navigation/navigation2/blob/main/nav2_costmap_2d/README.md)
-* [Writing a New Costmap2D Plugin](https://docs.nav2.org/plugin_tutorials/docs/writing_new_costmap2d_plugin.html)
-<!-- 中文版：http://dev.nav2.fishros.com/doc/plugin_tutorials/docs/writing_new_costmap2d_plugin.html -->
+* [Writing a New Costmap2D Plugin](https://docs.nav2.org/plugin_tutorials/docs/writing_new_costmap2d_plugin.html)
+* [ROS2 NAV2中文版介绍](http://dev.nav2.fishros.com/doc/plugin_tutorials/docs/writing_new_costmap2d_plugin.html)
