@@ -163,6 +163,13 @@ int main() {
 print("Hello, World")
 ```
 
+## 插入增减代码高亮
+
+```diff
+-       删除代码行
++       添加代码行
+```
+
 ## 插入bash代码
 
 ```bash
