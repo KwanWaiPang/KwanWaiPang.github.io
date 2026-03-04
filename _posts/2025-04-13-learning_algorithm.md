@@ -29,7 +29,7 @@ excerpt: "" # 【指定摘要内容】
 | 二分法 | [link](../File/Blogs/Poster/二分法.html) | C++ |
 | 二叉树 | [link](../File/Blogs/Poster/二叉树类题目.html) | C++ |
 | 回溯算法 | [link](../File/Blogs/Poster/回溯算法.html) | C++ |
-| 递归算法 | [link](../File/Blogs/Poster/递归算法.html) | C++ |
+| 递归算法 | [link](../File/Blogs/Poster/递归类题目.html) | C++ |
 | 动态规划算法 | [link](../File/Blogs/Poster/动态规划.html) | C++ |
 | 贪心算法 | [link](../File/Blogs/Poster/贪心算法.html) | C++ |
 | 模拟算法 | [link](../File/Blogs/Poster/模拟算法.html) | C++ |
