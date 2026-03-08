@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "基于MacBook配置Claude"
+title: "基于MacBook配置Claude Code"
 date:   2026-03-01
 tags: [Coding]
 comments: true
 author: kwanwaipang
 toc: true
-excerpt: "" # 【指定摘要内容】
+excerpt: "Claude Code与opencode配置说明" # 【指定摘要内容】
 ---
 
 
