@@ -20,6 +20,7 @@ excerpt: "" # 【指定摘要内容】
 
 * [Github源码](https://github.com/gaoxiang12/lightning-lm)
 * 本博文复现过程采用的代码及代码注释（如有）：[My github repository](https://github.com/R-C-Group/Lightning-LM)
+* 基于ROS1的版本：[link](https://github.com/KwanWaiPang/GRG-Cortex-Omni)
 
 
 # 安装配置
