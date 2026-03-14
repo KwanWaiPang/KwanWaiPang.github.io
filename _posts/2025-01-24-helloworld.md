@@ -359,8 +359,8 @@ site:https://kwanwaipang.github.io/
 {% raw %}
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
-    %% 定义全局样式类：透明背景、黑边、黑字
-    classDef plain fill:none,stroke:#000,stroke-width:2px,color:#000;
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
 
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
@@ -372,7 +372,7 @@ graph TD
     G --> C
 
     %% 将样式应用到所有节点
-    class A,B,C,D,E,F,G plain;
+    %% class A,B,C,D,E,F,G plain;
 </div>
 {% endraw %} 
 ```
@@ -381,8 +381,8 @@ graph TD
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
-    %% 定义全局样式类：透明背景、黑边、黑字
-    classDef plain fill:none,stroke:#000,stroke-width:2px,color:#000;
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
 
     A[数据输入 IMU/Image] --> B[main.py 初始化]
     B --> C[tracker.py 前端追踪]
@@ -394,7 +394,7 @@ graph TD
     G --> C
 
     %% 将样式应用到所有节点
-    class A,B,C,D,E,F,G plain;
+    %% class A,B,C,D,E,F,G plain;
 </div>
 
 

@@ -59,8 +59,11 @@ Lightning 的 LIO 管线（`laser_mapping.cc`）存在以下局限：
 
 ImMesh 的核心不仅仅是地图数据结构的改进，而是一条**完整的不确定性传播链路**，从雷达物理噪声模型到最终的 IEKF 更新，贯穿定位与建图全流程：
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+    
     A["① 雷达噪声模型<br/>calcBodyVar()"] --> B["② 协方差传播到世界系<br/>融合状态不确定性"]
     B --> C["③ 平面不确定性累积<br/>init_plane() → plane_var (6×6)"]
     C --> D["④ 概率匹配检验<br/>build_single_residual()<br/>σ_l = J * plane_var * J^T"]
@@ -68,7 +71,7 @@ graph TD
     E --> F["⑥ IEKF 更新<br/>每个点独立加权"]
     F --> G["⑦ 建图时带协方差更新<br/>map_incremental_grow()"]
     G --> C
-```
+</div>
 
 #### 噪声传播 5 个关键环节详解
 
