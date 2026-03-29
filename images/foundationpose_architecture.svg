@@ -1,0 +1,113 @@
+<svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="900" height="440" fill="#0f1923" rx="12"/>
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" fill="#e0f0ff" font-size="15" font-weight="bold">FoundationPose 整体架构（CVPR 2024 Highlight, NVIDIA）</text>
+
+  <defs>
+    <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#42a5f5"/>
+    </marker>
+  </defs>
+
+  <!-- Input branch 1: CAD Model -->
+  <rect x="20" y="50" width="120" height="55" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="80" y="72" text-anchor="middle" fill="#90caf9" font-size="10" font-weight="bold">CAD 模型输入</text>
+  <text x="80" y="88" text-anchor="middle" fill="#bbdefb" font-size="9">(Model-based)</text>
+  <text x="80" y="100" text-anchor="middle" fill="#bbdefb" font-size="9">.obj / .ply file</text>
+
+  <!-- Input branch 2: Reference Images -->
+  <rect x="20" y="120" width="120" height="55" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="80" y="142" text-anchor="middle" fill="#90caf9" font-size="10" font-weight="bold">参考图像输入</text>
+  <text x="80" y="158" text-anchor="middle" fill="#bbdefb" font-size="9">(Model-free)</text>
+  <text x="80" y="170" text-anchor="middle" fill="#bbdefb" font-size="9">~16 reference views</text>
+
+  <!-- Neural Field -->
+  <rect x="175" y="75" width="140" height="80" rx="8" fill="#0d2137" stroke="#9C27B0" stroke-width="2"/>
+  <text x="245" y="98" text-anchor="middle" fill="#ce93d8" font-size="11" font-weight="bold">Neural Implicit</text>
+  <text x="245" y="113" text-anchor="middle" fill="#ce93d8" font-size="11" font-weight="bold">Representation</text>
+  <text x="245" y="130" text-anchor="middle" fill="#e1bee7" font-size="9">NeRF-based Rendering</text>
+  <text x="245" y="143" text-anchor="middle" fill="#e1bee7" font-size="9">Novel View Synthesis</text>
+
+  <line x1="140" y1="77" x2="175" y2="105" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="140" y1="147" x2="175" y2="128" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Observation Input -->
+  <rect x="20" y="220" width="120" height="55" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="80" y="242" text-anchor="middle" fill="#90caf9" font-size="10" font-weight="bold">观测输入</text>
+  <text x="80" y="258" text-anchor="middle" fill="#bbdefb" font-size="9">RGBD Image</text>
+  <text x="80" y="270" text-anchor="middle" fill="#bbdefb" font-size="9">+ Segmentation Mask</text>
+
+  <!-- LLM-aided training data gen -->
+  <rect x="175" y="205" width="140" height="80" rx="8" fill="#0d2137" stroke="#FF9800" stroke-width="2"/>
+  <text x="245" y="228" text-anchor="middle" fill="#ffb74d" font-size="11" font-weight="bold">大规模合成数据</text>
+  <text x="245" y="244" text-anchor="middle" fill="#ffe0b2" font-size="9">LLM-aided Generation</text>
+  <text x="245" y="259" text-anchor="middle" fill="#ffe0b2" font-size="9">Omniverse / Isaac Sim</text>
+  <text x="245" y="274" text-anchor="middle" fill="#ffe0b2" font-size="9">百万量级场景</text>
+
+  <line x1="140" y1="247" x2="175" y2="247" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Render Pool -->
+  <rect x="360" y="60" width="160" height="70" rx="8" fill="#0d2137" stroke="#4CAF50" stroke-width="2"/>
+  <text x="440" y="83" text-anchor="middle" fill="#81c784" font-size="11" font-weight="bold">Pose Hypothesis Pool</text>
+  <text x="440" y="99" text-anchor="middle" fill="#c8e6c9" font-size="9">均匀采样 SO(3) 空间</text>
+  <text x="440" y="115" text-anchor="middle" fill="#c8e6c9" font-size="9">生成 ~1000 候选姿态</text>
+  <text x="440" y="122" text-anchor="middle" fill="#c8e6c9" font-size="9">H = {T₁, T₂, ..., Tₙ}</text>
+
+  <line x1="315" y1="115" x2="360" y2="100" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Refinement Network -->
+  <rect x="360" y="165" width="160" height="100" rx="8" fill="#0d2137" stroke="#F44336" stroke-width="2"/>
+  <text x="440" y="188" text-anchor="middle" fill="#ef9a9a" font-size="11" font-weight="bold">Pose Refinement</text>
+  <text x="440" y="204" text-anchor="middle" fill="#ef9a9a" font-size="10" font-weight="bold">Network</text>
+  <text x="440" y="220" text-anchor="middle" fill="#ffcdd2" font-size="9">Transformer-based</text>
+  <text x="440" y="235" text-anchor="middle" fill="#ffcdd2" font-size="9">Render &amp; Compare</text>
+  <text x="440" y="250" text-anchor="middle" fill="#ffcdd2" font-size="9">Contrastive Learning</text>
+
+  <line x1="440" y1="130" x2="440" y2="165" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="315" y1="247" x2="360" y2="220" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Pose Selection -->
+  <rect x="360" y="295" width="160" height="70" rx="8" fill="#0d2137" stroke="#00BCD4" stroke-width="2"/>
+  <text x="440" y="315" text-anchor="middle" fill="#80deea" font-size="11" font-weight="bold">Pose Selection</text>
+  <text x="440" y="332" text-anchor="middle" fill="#e0f7fa" font-size="9">Scoring Network</text>
+  <text x="440" y="347" text-anchor="middle" fill="#e0f7fa" font-size="9">Best T* = argmax Score(Tᵢ)</text>
+  <text x="440" y="358" text-anchor="middle" fill="#e0f7fa" font-size="9">Contrastive Score</text>
+
+  <line x1="440" y1="265" x2="440" y2="295" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Tracking mode -->
+  <rect x="570" y="165" width="150" height="80" rx="8" fill="#0d2137" stroke="#FF9800" stroke-width="2"/>
+  <text x="645" y="187" text-anchor="middle" fill="#ffb74d" font-size="11" font-weight="bold">Tracking Mode</text>
+  <text x="645" y="203" text-anchor="middle" fill="#ffe0b2" font-size="9">~32 Hz 实时追踪</text>
+  <text x="645" y="218" text-anchor="middle" fill="#ffe0b2" font-size="9">仅用 Refinement</text>
+  <text x="645" y="233" text-anchor="middle" fill="#ffe0b2" font-size="9">无需重新初始化</text>
+
+  <line x1="520" y1="215" x2="570" y2="215" stroke="#ff9800" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Output -->
+  <rect x="570" y="295" width="150" height="85" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="645" y="320" text-anchor="middle" fill="#90caf9" font-size="11" font-weight="bold">最终输出</text>
+  <text x="645" y="338" text-anchor="middle" fill="#bbdefb" font-size="9">T* = [R | t] ∈ SE(3)</text>
+  <text x="645" y="354" text-anchor="middle" fill="#bbdefb" font-size="9">BOP Leaderboard #1</text>
+  <text x="645" y="370" text-anchor="middle" fill="#bbdefb" font-size="9">(2024/03, model-based)</text>
+
+  <line x1="520" y1="330" x2="570" y2="330" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <!-- Two setup labels -->
+  <rect x="760" y="55" width="125" height="60" rx="6" fill="#1b5e20" fill-opacity="0.4" stroke="#66bb6a" stroke-width="1"/>
+  <text x="822" y="78" text-anchor="middle" fill="#a5d6a7" font-size="10" font-weight="bold">Model-based</text>
+  <text x="822" y="95" text-anchor="middle" fill="#c8e6c9" font-size="9">CAD 模型 → NeRF</text>
+  <text x="822" y="108" text-anchor="middle" fill="#c8e6c9" font-size="9">render novel views</text>
+
+  <rect x="760" y="130" width="125" height="60" rx="6" fill="#0d47a1" fill-opacity="0.4" stroke="#42a5f5" stroke-width="1"/>
+  <text x="822" y="153" text-anchor="middle" fill="#90caf9" font-size="10" font-weight="bold">Model-free</text>
+  <text x="822" y="170" text-anchor="middle" fill="#bbdefb" font-size="9">Few-shot refs → NeRF</text>
+  <text x="822" y="183" text-anchor="middle" fill="#bbdefb" font-size="9">same downstream</text>
+
+  <!-- Bottom legend -->
+  <rect x="20" y="390" width="860" height="40" rx="8" fill="#1a2940" stroke="#263238" stroke-width="1"/>
+  <text x="290" y="413" text-anchor="middle" fill="#90a4ae" font-size="9">① LLM辅助大规模合成训练数据生成</text>
+  <text x="545" y="413" text-anchor="middle" fill="#90a4ae" font-size="9">② 统一框架支持 model-based + model-free 双模式</text>
+  <text x="790" y="413" text-anchor="middle" fill="#90a4ae" font-size="9">③ Contrastive Learning 提升泛化</text>
+</svg>

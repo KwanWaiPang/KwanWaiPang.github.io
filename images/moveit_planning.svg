@@ -1,0 +1,108 @@
+<svg viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="900" height="360" fill="#0f1923" rx="12"/>
+  <text x="450" y="26" text-anchor="middle" fill="#e0f0ff" font-size="14" font-weight="bold">MoveIt 2 运动规划系统架构</text>
+
+  <defs>
+    <marker id="arr6" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#42a5f5"/>
+    </marker>
+  </defs>
+
+  <!-- Pose input -->
+  <rect x="20" y="50" width="110" height="60" rx="7" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="75" y="73" text-anchor="middle" fill="#90caf9" font-size="10" font-weight="bold">目标姿态输入</text>
+  <text x="75" y="90" text-anchor="middle" fill="#bbdefb" font-size="9">T_target [R|t]</text>
+  <text x="75" y="104" text-anchor="middle" fill="#bbdefb" font-size="9">6D Pose</text>
+
+  <line x1="130" y1="80" x2="155" y2="80" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr6)"/>
+
+  <!-- IK Solver -->
+  <rect x="155" y="50" width="120" height="60" rx="7" fill="#0d2137" stroke="#9C27B0" stroke-width="2"/>
+  <text x="215" y="73" text-anchor="middle" fill="#ce93d8" font-size="10" font-weight="bold">逆运动学求解</text>
+  <text x="215" y="90" text-anchor="middle" fill="#e1bee7" font-size="9">IK Solver (KDL)</text>
+  <text x="215" y="104" text-anchor="middle" fill="#e1bee7" font-size="9">joint angles θ</text>
+
+  <line x1="275" y1="80" x2="300" y2="80" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr6)"/>
+
+  <!-- move_group central node -->
+  <rect x="300" y="35" width="200" height="270" rx="10" fill="#0d2137" stroke="#F44336" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" fill="#ef9a9a" font-size="13" font-weight="bold">move_group Node</text>
+  <text x="400" y="76" text-anchor="middle" fill="#ffcdd2" font-size="9">MoveIt 核心调度节点</text>
+
+  <!-- Planning Scene sub -->
+  <rect x="313" y="85" width="175" height="45" rx="6" fill="#b71c1c" fill-opacity="0.3" stroke="#ef5350" stroke-width="1"/>
+  <text x="400" y="103" text-anchor="middle" fill="#ffcdd2" font-size="9" font-weight="bold">Planning Scene Monitor</text>
+  <text x="400" y="118" text-anchor="middle" fill="#ffcdd2" font-size="9">环境感知 + 障碍物更新 (Octomap)</text>
+
+  <!-- OMPL planning sub -->
+  <rect x="313" y="138" width="175" height="55" rx="6" fill="#b71c1c" fill-opacity="0.3" stroke="#ef5350" stroke-width="1"/>
+  <text x="400" y="157" text-anchor="middle" fill="#ffcdd2" font-size="9" font-weight="bold">OMPL 运动规划</text>
+  <text x="400" y="172" text-anchor="middle" fill="#ffcdd2" font-size="9">RRT / RRTConnect / PRM</text>
+  <text x="400" y="184" text-anchor="middle" fill="#ffcdd2" font-size="9">随机采样 → 无碰撞路径</text>
+
+  <!-- Collision checking sub -->
+  <rect x="313" y="201" width="175" height="45" rx="6" fill="#b71c1c" fill-opacity="0.3" stroke="#ef5350" stroke-width="1"/>
+  <text x="400" y="219" text-anchor="middle" fill="#ffcdd2" font-size="9" font-weight="bold">碰撞检测</text>
+  <text x="400" y="234" text-anchor="middle" fill="#ffcdd2" font-size="9">FCL + 自碰撞检测 SRDF</text>
+
+  <!-- Time param sub -->
+  <rect x="313" y="253" width="175" height="38" rx="6" fill="#b71c1c" fill-opacity="0.3" stroke="#ef5350" stroke-width="1"/>
+  <text x="400" y="271" text-anchor="middle" fill="#ffcdd2" font-size="9" font-weight="bold">轨迹时间参数化</text>
+  <text x="400" y="284" text-anchor="middle" fill="#ffcdd2" font-size="9">速度/加速度约束插值</text>
+
+  <!-- Sensor input -->
+  <rect x="155" y="200" width="120" height="60" rx="7" fill="#0d2137" stroke="#FF9800" stroke-width="2"/>
+  <text x="215" y="222" text-anchor="middle" fill="#ffb74d" font-size="10" font-weight="bold">传感器感知</text>
+  <text x="215" y="238" text-anchor="middle" fill="#ffe0b2" font-size="9">PointCloud / RGBD</text>
+  <text x="215" y="252" text-anchor="middle" fill="#ffe0b2" font-size="9">Octomap 环境建模</text>
+
+  <line x1="275" y1="230" x2="300" y2="115" stroke="#ff9800" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr6)"/>
+
+  <!-- Arrow out to trajectory execution -->
+  <line x1="500" y1="165" x2="535" y2="165" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr6)"/>
+
+  <!-- Trajectory execution -->
+  <rect x="535" y="50" width="160" height="120" rx="8" fill="#0d2137" stroke="#4CAF50" stroke-width="2"/>
+  <text x="615" y="74" text-anchor="middle" fill="#81c784" font-size="11" font-weight="bold">轨迹执行</text>
+  <text x="615" y="92" text-anchor="middle" fill="#c8e6c9" font-size="9">FollowJointTrajectory</text>
+  <text x="615" y="107" text-anchor="middle" fill="#c8e6c9" font-size="9">ros2_control</text>
+  <text x="615" y="122" text-anchor="middle" fill="#c8e6c9" font-size="9">PID / Torque Control</text>
+  <text x="615" y="137" text-anchor="middle" fill="#c8e6c9" font-size="9">关节空间插值</text>
+  <text x="615" y="160" text-anchor="middle" fill="#81c784" font-size="9">→ 硬件驱动</text>
+
+  <!-- Robot arm (actual) -->
+  <rect x="535" y="200" width="160" height="80" rx="8" fill="#0d2137" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="615" y="225" text-anchor="middle" fill="#90caf9" font-size="11" font-weight="bold">机械臂硬件</text>
+  <text x="615" y="242" text-anchor="middle" fill="#bbdefb" font-size="9">UR5 / UR10 / Franka</text>
+  <text x="615" y="257" text-anchor="middle" fill="#bbdefb" font-size="9">KUKA / ABB Robot</text>
+  <text x="615" y="272" text-anchor="middle" fill="#bbdefb" font-size="9">抓取执行 ✓</text>
+
+  <line x1="615" y1="170" x2="615" y2="200" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr6)"/>
+
+  <!-- Grasp planning -->
+  <rect x="720" y="50" width="155" height="230" rx="8" fill="#0d2137" stroke="#00BCD4" stroke-width="2"/>
+  <text x="797" y="73" text-anchor="middle" fill="#80deea" font-size="11" font-weight="bold">抓取规划</text>
+  <text x="797" y="90" text-anchor="middle" fill="#e0f7fa" font-size="9">Grasp Generation</text>
+
+  <rect x="730" y="98" width="135" height="38" rx="5" fill="#006064" fill-opacity="0.4" stroke="#00acc1" stroke-width="1"/>
+  <text x="797" y="114" text-anchor="middle" fill="#e0f7fa" font-size="9" font-weight="bold">GraspIt! / GPD</text>
+  <text x="797" y="128" text-anchor="middle" fill="#b2ebf2" font-size="9">点云抓取姿态生成</text>
+
+  <rect x="730" y="143" width="135" height="38" rx="5" fill="#006064" fill-opacity="0.4" stroke="#00acc1" stroke-width="1"/>
+  <text x="797" y="159" text-anchor="middle" fill="#e0f7fa" font-size="9" font-weight="bold">GraspNet-1Billion</text>
+  <text x="797" y="173" text-anchor="middle" fill="#b2ebf2" font-size="9">深度学习抓取估计</text>
+
+  <rect x="730" y="188" width="135" height="38" rx="5" fill="#006064" fill-opacity="0.4" stroke="#00acc1" stroke-width="1"/>
+  <text x="797" y="204" text-anchor="middle" fill="#e0f7fa" font-size="9" font-weight="bold">AnyGrasp / Contact-GraspNet</text>
+  <text x="797" y="218" text-anchor="middle" fill="#b2ebf2" font-size="9">新生代通用抓取</text>
+
+  <rect x="730" y="233" width="135" height="38" rx="5" fill="#006064" fill-opacity="0.4" stroke="#00acc1" stroke-width="1"/>
+  <text x="797" y="249" text-anchor="middle" fill="#e0f7fa" font-size="9" font-weight="bold">输出抓取位姿</text>
+  <text x="797" y="263" text-anchor="middle" fill="#b2ebf2" font-size="9">T_grasp → MoveIt goal</text>
+
+  <!-- Bottom legend -->
+  <rect x="20" y="315" width="860" height="35" rx="8" fill="#1a2940" stroke="#263238" stroke-width="1"/>
+  <text x="225" y="336" text-anchor="middle" fill="#90a4ae" font-size="9">① MoveIt 集成 OMPL/CHOMP/Pilz 多种规划器</text>
+  <text x="490" y="336" text-anchor="middle" fill="#90a4ae" font-size="9">② FCL 碰撞检测 + Octomap 环境表示</text>
+  <text x="745" y="336" text-anchor="middle" fill="#90a4ae" font-size="9">③ 抓取规划与路径规划分层解耦</text>
+</svg>

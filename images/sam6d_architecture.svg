@@ -1,0 +1,103 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="900" height="420" fill="#0f1923" rx="12"/>
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" fill="#e0f0ff" font-size="15" font-weight="bold">SAM-6D 整体架构（CVPR 2024）</text>
+
+  <!-- Input box -->
+  <rect x="20" y="50" width="110" height="80" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="75" y="75" text-anchor="middle" fill="#90caf9" font-size="11" font-weight="bold">输入</text>
+  <text x="75" y="93" text-anchor="middle" fill="#bbdefb" font-size="9">RGB Image</text>
+  <text x="75" y="107" text-anchor="middle" fill="#bbdefb" font-size="9">Depth Map</text>
+  <text x="75" y="121" text-anchor="middle" fill="#bbdefb" font-size="9">CAD Model</text>
+
+  <!-- Arrow to ISM -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#42a5f5"/>
+    </marker>
+  </defs>
+  <line x1="130" y1="90" x2="155" y2="90" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ISM Box (large) -->
+  <rect x="155" y="40" width="290" height="290" rx="10" fill="#0d2137" stroke="#4CAF50" stroke-width="2"/>
+  <text x="300" y="65" text-anchor="middle" fill="#81c784" font-size="13" font-weight="bold">ISM: Instance Segmentation Model</text>
+
+  <!-- SAM sub-box -->
+  <rect x="170" y="78" width="120" height="60" rx="7" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="230" y="98" text-anchor="middle" fill="#a5d6a7" font-size="10" font-weight="bold">SAM Backbone</text>
+  <text x="230" y="113" text-anchor="middle" fill="#c8e6c9" font-size="9">ViT-H Encoder</text>
+  <text x="230" y="126" text-anchor="middle" fill="#c8e6c9" font-size="9">Mask Decoder</text>
+
+  <!-- DINOv2 sub-box -->
+  <rect x="305" y="78" width="125" height="60" rx="7" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="367" y="98" text-anchor="middle" fill="#a5d6a7" font-size="10" font-weight="bold">DINOv2 Features</text>
+  <text x="367" y="113" text-anchor="middle" fill="#c8e6c9" font-size="9">Semantic Score</text>
+  <text x="367" y="126" text-anchor="middle" fill="#c8e6c9" font-size="9">Visual Features</text>
+
+  <!-- Object Matching Score -->
+  <rect x="170" y="155" width="260" height="65" rx="7" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="300" y="175" text-anchor="middle" fill="#a5d6a7" font-size="10" font-weight="bold">Object Matching Score</text>
+  <text x="300" y="190" text-anchor="middle" fill="#c8e6c9" font-size="9">S = λ₁·S_sem + λ₂·S_app + λ₃·S_geo</text>
+  <text x="300" y="207" text-anchor="middle" fill="#c8e6c9" font-size="9">Semantics · Appearance · Geometry</text>
+
+  <!-- Proposal Filtering -->
+  <rect x="170" y="235" width="260" height="50" rx="7" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="300" y="255" text-anchor="middle" fill="#a5d6a7" font-size="10" font-weight="bold">Proposal Filtering + NMS</text>
+  <text x="300" y="273" text-anchor="middle" fill="#c8e6c9" font-size="9">Valid Instance Masks 输出</text>
+
+  <!-- Arrow down inside ISM -->
+  <line x1="230" y1="138" x2="230" y2="155" stroke="#66bb6a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="367" y1="138" x2="367" y2="155" stroke="#66bb6a" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="300" y1="220" x2="300" y2="235" stroke="#66bb6a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Arrow ISM → PEM -->
+  <line x1="445" y1="200" x2="470" y2="200" stroke="#42a5f5" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="457" y="193" text-anchor="middle" fill="#90caf9" font-size="8">Masks</text>
+
+  <!-- PEM Box (large) -->
+  <rect x="470" y="40" width="290" height="290" rx="10" fill="#0d2137" stroke="#FF9800" stroke-width="2"/>
+  <text x="615" y="65" text-anchor="middle" fill="#ffb74d" font-size="13" font-weight="bold">PEM: Pose Estimation Model</text>
+
+  <!-- Point Cloud Projection -->
+  <rect x="485" y="78" width="260" height="45" rx="7" fill="#3e2723" fill-opacity="0.7" stroke="#fb8c00" stroke-width="1.5"/>
+  <text x="615" y="99" text-anchor="middle" fill="#ffe0b2" font-size="10" font-weight="bold">Point Cloud Generation</text>
+  <text x="615" y="115" text-anchor="middle" fill="#ffccbc" font-size="9">RGBD → Partial Point Cloud (observed + CAD)</text>
+
+  <!-- CPM stage -->
+  <rect x="485" y="133" width="260" height="55" rx="7" fill="#3e2723" fill-opacity="0.7" stroke="#fb8c00" stroke-width="1.5"/>
+  <text x="615" y="153" text-anchor="middle" fill="#ffe0b2" font-size="10" font-weight="bold">Coarse Point Matching (CPM)</text>
+  <text x="615" y="168" text-anchor="middle" fill="#ffccbc" font-size="9">Background Tokens + Transformer</text>
+  <text x="615" y="182" text-anchor="middle" fill="#ffccbc" font-size="9">初步 3D-3D 对应 → 粗略姿态 T_coarse</text>
+
+  <!-- FPM stage -->
+  <rect x="485" y="200" width="260" height="55" rx="7" fill="#3e2723" fill-opacity="0.7" stroke="#fb8c00" stroke-width="1.5"/>
+  <text x="615" y="220" text-anchor="middle" fill="#ffe0b2" font-size="10" font-weight="bold">Fine Point Matching (FPM)</text>
+  <text x="615" y="235" text-anchor="middle" fill="#ffccbc" font-size="9">Sparse-to-Dense Point Transformer</text>
+  <text x="615" y="249" text-anchor="middle" fill="#ffccbc" font-size="9">精细密集对应 → 精确姿态 T_final</text>
+
+  <!-- Output pose -->
+  <rect x="485" y="268" width="260" height="40" rx="7" fill="#bf360c" fill-opacity="0.4" stroke="#ff7043" stroke-width="1.5"/>
+  <text x="615" y="284" text-anchor="middle" fill="#ffccbc" font-size="10" font-weight="bold">Output: T = [R | t] ∈ SE(3)</text>
+  <text x="615" y="299" text-anchor="middle" fill="#ffccbc" font-size="9">6D 姿态矩阵（旋转 + 平移）</text>
+
+  <!-- Arrows inside PEM -->
+  <line x1="615" y1="123" x2="615" y2="133" stroke="#fb8c00" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="615" y1="188" x2="615" y2="200" stroke="#fb8c00" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="615" y1="255" x2="615" y2="268" stroke="#fb8c00" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Output box -->
+  <rect x="785" y="160" width="100" height="80" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="835" y="185" text-anchor="middle" fill="#90caf9" font-size="10" font-weight="bold">输出</text>
+  <text x="835" y="202" text-anchor="middle" fill="#bbdefb" font-size="9">Instance Masks</text>
+  <text x="835" y="217" text-anchor="middle" fill="#bbdefb" font-size="9">6D Poses</text>
+  <text x="835" y="232" text-anchor="middle" fill="#bbdefb" font-size="9">[R | t] per obj</text>
+  <line x1="760" y1="200" x2="785" y2="200" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Bottom legend -->
+  <rect x="20" y="355" width="860" height="50" rx="8" fill="#1a2940" stroke="#263238" stroke-width="1"/>
+  <text x="450" y="375" text-anchor="middle" fill="#78909c" font-size="11" font-weight="bold">核心创新点</text>
+  <text x="180" y="393" text-anchor="middle" fill="#90a4ae" font-size="9">① 零样本泛化：SAM zero-shot 分割能力</text>
+  <text x="450" y="393" text-anchor="middle" fill="#90a4ae" font-size="9">② 语义+外观+几何三重匹配评分</text>
+  <text x="730" y="393" text-anchor="middle" fill="#90a4ae" font-size="9">③ Background Tokens 处理遮挡问题</text>
+</svg>

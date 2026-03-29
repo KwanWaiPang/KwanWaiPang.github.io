@@ -1,0 +1,108 @@
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="900" height="400" fill="#0f1923" rx="12"/>
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" fill="#e0f0ff" font-size="15" font-weight="bold">MegaPose 整体架构（CoRL 2022，NVIDIA + INRIA）</text>
+
+  <defs>
+    <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#42a5f5"/>
+    </marker>
+  </defs>
+
+  <!-- Phase 1: Training Data -->
+  <rect x="20" y="50" width="160" height="120" rx="8" fill="#0d2137" stroke="#9C27B0" stroke-width="2"/>
+  <text x="100" y="73" text-anchor="middle" fill="#ce93d8" font-size="11" font-weight="bold">大规模合成训练集</text>
+  <text x="100" y="90" text-anchor="middle" fill="#e1bee7" font-size="9">Google Scanned Objects</text>
+  <text x="100" y="104" text-anchor="middle" fill="#e1bee7" font-size="9">ShapeNet (~1M 3D objects)</text>
+  <text x="100" y="118" text-anchor="middle" fill="#e1bee7" font-size="9">Photorealistic Rendering</text>
+  <text x="100" y="132" text-anchor="middle" fill="#e1bee7" font-size="9">百万级 RGB 场景图</text>
+  <text x="100" y="148" text-anchor="middle" fill="#e1bee7" font-size="9">多样物体 shape + texture</text>
+  <text x="100" y="162" text-anchor="middle" fill="#ce93d8" font-size="9" font-weight="bold">OFFLINE 训练阶段</text>
+
+  <!-- Phase 2: Test-time input -->
+  <rect x="20" y="195" width="160" height="80" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="100" y="218" text-anchor="middle" fill="#90caf9" font-size="11" font-weight="bold">测试输入（新物体）</text>
+  <text x="100" y="235" text-anchor="middle" fill="#bbdefb" font-size="9">① ROI: 物体裁剪区域</text>
+  <text x="100" y="249" text-anchor="middle" fill="#bbdefb" font-size="9">② CAD 模型 (新物体)</text>
+  <text x="100" y="263" text-anchor="middle" fill="#bbdefb" font-size="9">无需重新训练 ✓</text>
+
+  <!-- Arrow to Coarse -->
+  <line x1="180" y1="235" x2="215" y2="235" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- Coarse Estimator -->
+  <rect x="215" y="50" width="200" height="260" rx="8" fill="#0d2137" stroke="#FF9800" stroke-width="2"/>
+  <text x="315" y="74" text-anchor="middle" fill="#ffb74d" font-size="12" font-weight="bold">Coarse Estimator</text>
+  <text x="315" y="90" text-anchor="middle" fill="#ffe0b2" font-size="9">粗略姿态估计模块</text>
+
+  <!-- Multi-view rendering sub -->
+  <rect x="228" y="100" width="175" height="55" rx="6" fill="#3e2723" fill-opacity="0.7" stroke="#fb8c00" stroke-width="1.5"/>
+  <text x="315" y="118" text-anchor="middle" fill="#ffe0b2" font-size="9" font-weight="bold">多视角渲染</text>
+  <text x="315" y="132" text-anchor="middle" fill="#ffccbc" font-size="9">均匀采样 N 个候选姿态 Tⱼ</text>
+  <text x="315" y="146" text-anchor="middle" fill="#ffccbc" font-size="9">渲染 CAD model → Synthetic Views</text>
+
+  <!-- Feature extraction -->
+  <rect x="228" y="163" width="175" height="50" rx="6" fill="#3e2723" fill-opacity="0.7" stroke="#fb8c00" stroke-width="1.5"/>
+  <text x="315" y="181" text-anchor="middle" fill="#ffe0b2" font-size="9" font-weight="bold">双流特征提取</text>
+  <text x="315" y="196" text-anchor="middle" fill="#ffccbc" font-size="9">Real image branch + Render branch</text>
+  <text x="315" y="208" text-anchor="middle" fill="#ffccbc" font-size="9">共享 ResNet / ViT Encoder</text>
+
+  <!-- Score classifier -->
+  <rect x="228" y="220" width="175" height="55" rx="6" fill="#3e2723" fill-opacity="0.7" stroke="#fb8c00" stroke-width="1.5"/>
+  <text x="315" y="238" text-anchor="middle" fill="#ffe0b2" font-size="9" font-weight="bold">可修正性分类器</text>
+  <text x="315" y="253" text-anchor="middle" fill="#ffccbc" font-size="9">Score: can refiner correct?</text>
+  <text x="315" y="267" text-anchor="middle" fill="#ffccbc" font-size="9">Top-K 候选姿态筛选</text>
+
+  <line x1="315" y1="155" x2="315" y2="163" stroke="#fb8c00" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <line x1="315" y1="213" x2="315" y2="220" stroke="#fb8c00" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- Arrow to Refiner -->
+  <line x1="415" y1="235" x2="450" y2="235" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <text x="432" y="228" text-anchor="middle" fill="#90caf9" font-size="8">T_init</text>
+
+  <!-- Refiner -->
+  <rect x="450" y="50" width="200" height="260" rx="8" fill="#0d2137" stroke="#4CAF50" stroke-width="2"/>
+  <text x="550" y="74" text-anchor="middle" fill="#81c784" font-size="12" font-weight="bold">Pose Refiner</text>
+  <text x="550" y="90" text-anchor="middle" fill="#c8e6c9" font-size="9">姿态精细化迭代模块</text>
+
+  <!-- Render-Compare sub -->
+  <rect x="463" y="100" width="175" height="55" rx="6" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="550" y="118" text-anchor="middle" fill="#a5d6a7" font-size="9" font-weight="bold">Render &amp; Compare</text>
+  <text x="550" y="132" text-anchor="middle" fill="#c8e6c9" font-size="9">以 T_init 渲染 CAD → Synth.</text>
+  <text x="550" y="146" text-anchor="middle" fill="#c8e6c9" font-size="9">与真实 ROI 图像对比</text>
+
+  <!-- Transformer refine sub -->
+  <rect x="463" y="163" width="175" height="55" rx="6" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="550" y="181" text-anchor="middle" fill="#a5d6a7" font-size="9" font-weight="bold">Pose Update Transformer</text>
+  <text x="550" y="196" text-anchor="middle" fill="#c8e6c9" font-size="9">Cross-attention (real vs synth)</text>
+  <text x="550" y="210" text-anchor="middle" fill="#c8e6c9" font-size="9">输出 ΔT 迭代更新姿态</text>
+
+  <!-- Iterative sub -->
+  <rect x="463" y="225" width="175" height="50" rx="6" fill="#0a3a1e" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="550" y="243" text-anchor="middle" fill="#a5d6a7" font-size="9" font-weight="bold">迭代精化（K 步）</text>
+  <text x="550" y="258" text-anchor="middle" fill="#c8e6c9" font-size="9">T_k+1 = ΔT_k · T_k</text>
+  <text x="550" y="271" text-anchor="middle" fill="#c8e6c9" font-size="9">收敛即为 T_final</text>
+
+  <line x1="550" y1="155" x2="550" y2="163" stroke="#66bb6a" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <line x1="550" y1="218" x2="550" y2="225" stroke="#66bb6a" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+  <!-- Arrow to output -->
+  <line x1="650" y1="235" x2="685" y2="235" stroke="#42a5f5" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <text x="667" y="228" text-anchor="middle" fill="#90caf9" font-size="8">T_final</text>
+
+  <!-- Output box -->
+  <rect x="685" y="165" width="175" height="140" rx="8" fill="#1a2940" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="772" y="190" text-anchor="middle" fill="#90caf9" font-size="11" font-weight="bold">输出 &amp; 性能</text>
+  <text x="772" y="208" text-anchor="middle" fill="#bbdefb" font-size="9">T = [R | t] ∈ SE(3)</text>
+  <text x="772" y="225" text-anchor="middle" fill="#bbdefb" font-size="9">6D 姿态矩阵</text>
+  <text x="772" y="245" text-anchor="middle" fill="#a5d6a7" font-size="9">✓ SOTA on YCB-V</text>
+  <text x="772" y="260" text-anchor="middle" fill="#a5d6a7" font-size="9">✓ SOTA on ModelNet</text>
+  <text x="772" y="275" text-anchor="middle" fill="#a5d6a7" font-size="9">✓ BOP 7-core datasets</text>
+  <text x="772" y="293" text-anchor="middle" fill="#ffe0b2" font-size="9">无需目标物体参与训练</text>
+
+  <!-- Bottom legend -->
+  <rect x="20" y="350" width="860" height="40" rx="8" fill="#1a2940" stroke="#263238" stroke-width="1"/>
+  <text x="280" y="373" text-anchor="middle" fill="#90a4ae" font-size="9">① 百万级合成数据保障泛化性能</text>
+  <text x="545" y="373" text-anchor="middle" fill="#90a4ae" font-size="9">② Coarse + Refine 两阶段解耦设计</text>
+  <text x="790" y="373" text-anchor="middle" fill="#90a4ae" font-size="9">③ 仅需 CAD 模型，无需微调</text>
+</svg>

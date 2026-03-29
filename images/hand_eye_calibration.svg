@@ -1,0 +1,110 @@
+<svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="860" height="340" fill="#0f1923" rx="12"/>
+  <text x="430" y="26" text-anchor="middle" fill="#e0f0ff" font-size="14" font-weight="bold">手眼标定两种配置：Eye-in-Hand vs Eye-to-Hand</text>
+  
+  <defs>
+    <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64b5f6"/>
+    </marker>
+    <marker id="arr5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef9a9a"/>
+    </marker>
+  </defs>
+
+  <!-- ===== Eye-in-Hand ===== -->
+  <rect x="20" y="42" width="390" height="280" rx="10" fill="#0d1f33" stroke="#2196F3" stroke-width="2"/>
+  <text x="215" y="65" text-anchor="middle" fill="#64b5f6" font-size="13" font-weight="bold">Eye-in-Hand（随动式）</text>
+
+  <!-- Robot base -->
+  <rect x="135" y="240" width="80" height="35" rx="4" fill="#1565c0" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="175" y="262" text-anchor="middle" fill="#bbdefb" font-size="10" font-weight="bold">Base {B}</text>
+
+  <!-- Robot arm -->
+  <line x1="175" y1="240" x2="230" y2="170" stroke="#64b5f6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="230" y1="170" x2="270" y2="120" stroke="#64b5f6" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- End effector -->
+  <rect x="252" y="98" width="50" height="32" rx="4" fill="#0d47a1" stroke="#42a5f5" stroke-width="1.5"/>
+  <text x="277" y="117" text-anchor="middle" fill="#bbdefb" font-size="9">End-Eff {E}</text>
+
+  <!-- Camera on end-effector -->
+  <rect x="290" y="85" width="48" height="28" rx="4" fill="#1b5e20" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="314" y="101" text-anchor="middle" fill="#c8e6c9" font-size="9">Camera {C}</text>
+
+  <!-- Calibration target on table -->
+  <rect x="60" y="205" width="65" height="40" rx="4" fill="#37474f" stroke="#90a4ae" stroke-width="1.5"/>
+  <text x="92" y="220" text-anchor="middle" fill="#eceff1" font-size="8">Calib.</text>
+  <text x="92" y="234" text-anchor="middle" fill="#eceff1" font-size="8">Target {O}</text>
+
+  <!-- Table -->
+  <line x1="40" y1="246" x2="250" y2="246" stroke="#546e7a" stroke-width="3"/>
+
+  <!-- Transformations -->
+  <!-- T_BE (base to end-effector): known from FK -->
+  <text x="195" y="185" text-anchor="middle" fill="#42a5f5" font-size="8" transform="rotate(-50,195,185)">T_BE (FK已知)</text>
+  <!-- T_EC: unknown (hand-eye) -->
+  <text x="305" y="100" text-anchor="middle" fill="#ef9a9a" font-size="8">T_EC (未知 X)</text>
+  <!-- T_CO: camera to target -->
+  <line x1="314" y1="113" x2="110" y2="200" stroke="#ef9a9a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr5)"/>
+  <text x="195" y="150" text-anchor="middle" fill="#ef9a9a" font-size="8">T_CO (相机观测已知)</text>
+
+  <!-- AX=XB label -->
+  <rect x="40" y="75" width="200" height="60" rx="6" fill="#0a1929" stroke="#1565c0" stroke-width="1"/>
+  <text x="140" y="97" text-anchor="middle" fill="#90caf9" font-size="11" font-weight="bold">求解方程</text>
+  <text x="140" y="117" text-anchor="middle" fill="#bbdefb" font-size="12" font-weight="bold">A·X = X·B</text>
+  <text x="140" y="130" text-anchor="middle" fill="#78909c" font-size="8">移动机械臂多次，获得约束方程组</text>
+
+  <!-- ===== Eye-to-Hand ===== -->
+  <rect x="450" y="42" width="390" height="280" rx="10" fill="#0d1f33" stroke="#F44336" stroke-width="2"/>
+  <text x="645" y="65" text-anchor="middle" fill="#ef9a9a" font-size="13" font-weight="bold">Eye-to-Hand（固定式）</text>
+
+  <!-- Robot base -->
+  <rect x="545" y="240" width="80" height="35" rx="4" fill="#b71c1c" stroke="#ef5350" stroke-width="1.5"/>
+  <text x="585" y="262" text-anchor="middle" fill="#ffcdd2" font-size="10" font-weight="bold">Base {B}</text>
+
+  <!-- Robot arm -->
+  <line x1="585" y1="240" x2="540" y2="170" stroke="#ef9a9a" stroke-width="3" stroke-linecap="round"/>
+  <line x1="540" y1="170" x2="510" y2="120" stroke="#ef9a9a" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- End effector -->
+  <rect x="490" y="98" width="50" height="32" rx="4" fill="#b71c1c" stroke="#ef5350" stroke-width="1.5"/>
+  <text x="515" y="117" text-anchor="middle" fill="#ffcdd2" font-size="9">End-Eff {E}</text>
+
+  <!-- Fixed camera (not on robot) -->
+  <rect x="700" y="68" width="48" height="28" rx="4" fill="#1b5e20" stroke="#66bb6a" stroke-width="1.5"/>
+  <text x="724" y="83" text-anchor="middle" fill="#c8e6c9" font-size="9">Camera {C}</text>
+  <text x="724" y="93" text-anchor="middle" fill="#c8e6c9" font-size="8">Fixed</text>
+  <!-- Camera stand -->
+  <line x1="724" y1="96" x2="724" y2="246" stroke="#455a64" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- Calibration target on end-effector -->
+  <rect x="472" y="73" width="50" height="28" rx="4" fill="#37474f" stroke="#90a4ae" stroke-width="1.5"/>
+  <text x="497" y="85" text-anchor="middle" fill="#eceff1" font-size="8">Calib.</text>
+  <text x="497" y="95" text-anchor="middle" fill="#eceff1" font-size="8">Target</text>
+
+  <!-- Table -->
+  <line x1="460" y1="246" x2="750" y2="246" stroke="#546e7a" stroke-width="3"/>
+
+  <!-- Object to grasp -->
+  <rect x="600" y="210" width="50" height="36" rx="4" fill="#e65100" fill-opacity="0.6" stroke="#ff9800" stroke-width="1.5"/>
+  <text x="625" y="230" text-anchor="middle" fill="#ffe0b2" font-size="8">目标</text>
+  <text x="625" y="242" text-anchor="middle" fill="#ffe0b2" font-size="8">物体</text>
+
+  <!-- Transformations -->
+  <!-- Camera to world -->
+  <line x1="724" y1="96" x2="497" y2="100" stroke="#ef9a9a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr5)"/>
+  <text x="610" y="90" text-anchor="middle" fill="#ef9a9a" font-size="8">T_CB (未知 X)</text>
+
+  <!-- Camera observes object -->
+  <line x1="724" y1="96" x2="630" y2="210" stroke="#66bb6a" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="695" y="165" text-anchor="middle" fill="#a5d6a7" font-size="8" transform="rotate(-60,695,165)">T_CO (观测)</text>
+
+  <!-- AX=ZB label for eye-to-hand -->
+  <rect x="455" y="75" width="200" height="60" rx="6" fill="#0a1929" stroke="#b71c1c" stroke-width="1"/>
+  <text x="555" y="97" text-anchor="middle" fill="#ef9a9a" font-size="11" font-weight="bold">求解方程</text>
+  <text x="555" y="117" text-anchor="middle" fill="#ffcdd2" font-size="12" font-weight="bold">A·X = Z·B</text>
+  <text x="555" y="130" text-anchor="middle" fill="#78909c" font-size="8">求 T_cam→base 变换矩阵</text>
+
+  <!-- Bottom info bar -->
+  <rect x="20" y="330" width="820" height="0" rx="0" fill="none"/>
+</svg>
