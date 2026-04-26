@@ -57,6 +57,7 @@ excerpt: "" # 【指定摘要内容】
 
 | Year | Venue | Paper Title | Repository | Note |
 |:----:|:-----:| ----------- |:----------:|:----:|
+|2025|`arXiv`|[Dynamic Visual SLAM using a General 3D Prior](https://arxiv.org/pdf/2512.06868)|[![Github stars](https://img.shields.io/github/stars/PRBonn/Pi3MOS-SLAM.svg)](https://github.com/PRBonn/Pi3MOS-SLAM)|---|
 |2026|`Pattern Recognition`|[RGD-SLAM: Robust Gaussian Splatting SLAM for Dynamic Environments](https://www.sciencedirect.com/science/article/pii/S0031320326000348)|[![Github stars](https://img.shields.io/github/stars/RGD-SLAM.svg)](https://github.com/00Haocheng/RGD-SLAM)|---|
 |2025|`RAL`|[Freeze-Frame With StaticNeRF: Uncertainty-Guided NeRF Map Reconstruction in Dynamic Scenes](https://ieeexplore.ieee.org/abstract/document/11242041/)|---|---|
 |2025|`Sensor`|[Dynamic SLAM by Combining Rigid Feature Point Set Modeling and YOLO](https://www.mdpi.com/1424-8220/26/1/235)|---|---|
