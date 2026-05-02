@@ -216,7 +216,7 @@ graph TD
 
 ### `filterBBoxes`：几何融合与 YOLO label
 
-接上后面的 **`is_human`**。流程是：对每个 UV 框找 DBSCAN 框的 **IoU 最佳互匹配**（双边都要互为最佳匹配且 IoU 大于 **`boxIOUThresh_`**），用 ** xmax/xmin 取并的外包** 做保守融合，点云簇沿用 DB 一侧。注释写得很直白：**YOLO 不参与几何 ensemble**，只负责动态语义——把融合框投到彩色相机平面得到 2D 矩形，再与当前 **`yoloDetectionResults_`** 逐框算 IoU，**大于 0.5** 就把对应融合框打上 **`is_dynamic` + `is_human`**（仿真若不跑 YOLO，CASE I 永远不会触发）。
+接上后面的 **`is_human`**（由yolo检测）。流程是：对每个 UV 框找 DBSCAN 框的 **IoU 最佳互匹配**（双边都要互为最佳匹配且 IoU 大于 **`boxIOUThresh_`**），用 ** xmax/xmin 取并的外包** 做保守融合，点云簇沿用 DB 一侧。注释写得很直白：**YOLO 不参与几何 ensemble**，只负责动态语义——把融合框投到彩色相机平面得到 2D 矩形，再与当前 **`yoloDetectionResults_`** 逐框算 IoU，**大于 0.5** 就把对应融合框打上 **`is_dynamic` + `is_human`**（仿真若不跑 YOLO，CASE I 永远不会触发）。
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph LR
