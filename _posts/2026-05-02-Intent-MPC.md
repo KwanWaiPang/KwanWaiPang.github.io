@@ -38,8 +38,6 @@ excerpt: "意图预测驱动的导航框架" # 【指定摘要内容】
 
 下图概括数据流：定位与 RGB-D → 静态占据栅格 + 动态检测跟踪（含视场外补偿）→ 意图概率与多意图轨迹预测 → 多场景 MPC 生成与评分选轨 → 控制器跟踪。
 
-*也可将下方 Mermaid 复制到 [mermaid.live](https://mermaid.live/) 中查看。*
-
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
     %% 定义全局样式类
@@ -78,13 +76,13 @@ graph TD
 
 # 代码梳理（读代码笔记）
 
-读 Intent-MPC 时，我把整条链路想成：**地图线程在一直融传感器、抠动态；检测定时器在产框；预测定时器在读历史；导航线程在抢 MPC 解并把轨迹交给底层跟踪**。下面按模块记我顺着调用栈啃下来的印象；图尽量和源码一致，和我最初想当然不一致的地方也写出来。
+整条链路想成：**地图线程在一直融传感器、抠动态；检测定时器在产框；预测定时器在读历史；导航线程在抢 MPC 解并把轨迹交给底层跟踪**。
 
 ---
 
-## 先从 launch 建立直觉
+## intent_mpc_demo.launch
 
-`intent_mpc_demo.launch` 只起了两个核心进程：**跟踪节点**和 **`mpc_navigation_node`**。地图、检测器、预测器并不是六个独立 ROS node——它们在 `mpcNavigation` 里 `reset` 成共享指针，跑在同一进程。弄清这一点，总览就不会画成「一堆节点手拉手」。
+`intent_mpc_demo.launch` 只起了两个核心进程：**跟踪节点**和 **`mpc_navigation_node`**。地图、检测器、预测器并不是六个独立 ROS node——它们在 `mpcNavigation` 里 `reset` 成共享指针，跑在同一进程。
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph TD
@@ -113,11 +111,11 @@ graph TD
 
 ---
 
-## `autonomous_flight`：线程怎么分工
+## `autonomous_flight`：
 
 `flightBase` 管 MAVROS 解锁起飞、`Target` 发布线程、RViz 点目标这类共性逻辑；和论文对应的是 **`mpcNavigation`**。
 
-我读 `mpcNavigation.cpp` 的主线：**独立线程里 `mpcCB`** 用的是 `ros::Rate(10)`，也就是 10 Hz；**`replanCheckCB`**、**`trajExeCB`** 都是 10 ms。碰撞检查 `mpcHasCollision` / `hasDynamicCollision` 在检查定时器里做，用的是占据图和当前 MPC 轨迹采样点——和求解线程不同步，调试时要心里有数，但代码意图就是：**规划线程求轨，定时器决定要不要停、要不要把 `mpcReplan_` 拉起来**。
+`mpcNavigation.cpp` 的主线：**独立线程里 `mpcCB`** 用的是 `ros::Rate(10)`，也就是 10 Hz；**`replanCheckCB`**、**`trajExeCB`** 都是 10 ms。碰撞检查 `mpcHasCollision` / `hasDynamicCollision` 在检查定时器里做，用的是占据图和当前 MPC 轨迹采样点——和求解线程不同步，调试时要心里有数，但代码意图就是：**规划线程求轨，定时器决定要不要停、要不要把 `mpcReplan_` 拉起来**。
 
 参考轨迹第一次就绪的路径：`refTrajReady_` 为假时走文件 `use_predefined_goal`、或 `use_global_planner` 时 RRT 再 `polyTrajOccMap` 离散采样 `updatePath`，或起点终点直连多项式；这一趟只做 **`mpc_->updatePath`**，还不会进入后面密集的带障碍求解。
 
@@ -179,9 +177,9 @@ graph LR
 
 ---
 
-## `onboard_detector`：定时器链条（顺序以源码为准）
+## `onboard_detector`：定时器链条
 
-**`detectionCB` 里的调用顺序是：`dbscanDetect()` → `uvDetect()` → `yoloDetectionTo3D()` → `filterBBoxes()`**，不是先 UV 再 DBSCAN——我对着行号核对过，避免和论文叙述打架。
+**`detectionCB` 里的调用顺序是：`dbscanDetect()` → `uvDetect()` → `yoloDetectionTo3D()` → `filterBBoxes()`**，不是先 UV 再 DBSCAN
 
 检测、跟踪、分类三个定时器都用同一个 **`dt_`**：**`trackingCB`** 做 `boxAssociation` + `kalmanFilterAndUpdateHist`；**`classificationCB`** 从历史 `pcHist_` / `boxHist_` 里投票得到 **`dynamicBBoxes_`**。外推、`is_estimated`、`boxOOR` 等分支都在关联和 Kalman 里展开，比一张图细，但数据流就是：**同步回调只缓存深度与位姿 → 检测定时器产框 → 跟踪定时器滤波 → 分类定时器输出动态集合**。
 
@@ -216,9 +214,9 @@ graph TD
     trkT --> clsT
 </div>
 
-### `filterBBoxes`：几何融合与 YOLO 打标
+### `filterBBoxes`：几何融合与 YOLO label
 
-读这一段是为了接上后面的 **`is_human`**。流程是：对每个 UV 框找 DBSCAN 框的 **IoU 最佳互匹配**（双边都要互为最佳匹配且 IoU 大于 **`boxIOUThresh_`**），用 ** xmax/xmin 取并的外包** 做保守融合，点云簇沿用 DB 一侧。注释写得很直白：**YOLO 不参与几何 ensemble**，只负责动态语义——把融合框投到彩色相机平面得到 2D 矩形，再与当前 **`yoloDetectionResults_`** 逐框算 IoU，**大于 0.5** 就把对应融合框打上 **`is_dynamic` + `is_human`**（仿真若不跑 YOLO，CASE I 永远不会触发）。
+接上后面的 **`is_human`**。流程是：对每个 UV 框找 DBSCAN 框的 **IoU 最佳互匹配**（双边都要互为最佳匹配且 IoU 大于 **`boxIOUThresh_`**），用 ** xmax/xmin 取并的外包** 做保守融合，点云簇沿用 DB 一侧。注释写得很直白：**YOLO 不参与几何 ensemble**，只负责动态语义——把融合框投到彩色相机平面得到 2D 矩形，再与当前 **`yoloDetectionResults_`** 逐框算 IoU，**大于 0.5** 就把对应融合框打上 **`is_dynamic` + `is_human`**（仿真若不跑 YOLO，CASE I 永远不会触发）。
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 graph LR
