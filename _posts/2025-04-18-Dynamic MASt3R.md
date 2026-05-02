@@ -169,7 +169,7 @@ frame28 与 frame30 的匹配效果
 至于测试有宠物奔跑的场景发现，MASt3R倾向于将静态部分的信息保留下来~
 
 <div align="center">
-  <img src="https://github.com/KwanWaiPang/Easi3R/raw/main/assert/dog-gooses_depth_maps.gif" width="60%" />
+  <img src="https://github.com/R-C-Group/Easi3R/raw/main/assert/dog-gooses_depth_maps.gif" width="60%" />
 <figcaption> 
 dog-gooses
 </figcaption>
