@@ -2,11 +2,12 @@
   <header class="sidebar clearfix">
     <div class="site-info">
 
-      <!-- confi文件中插入的图片 -->
+      <!-- config.yml 中插入的图片 -->
       {% if site.avatar %}
         <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
       {% endif %} 
 
+      <!-- config.yml 中插入的访客地球仪 -->
       {% if site.visitor_globe %}
       <div class="site-avatar">
         <script type="text/javascript" id="mmvst_globe" src="{{ site.visitor_globe }}"></script>
