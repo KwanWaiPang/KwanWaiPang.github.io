@@ -12,7 +12,8 @@ description: "Personal Blog"
 #
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: # //clustrmaps.com/map_v2.png?cl=ffffff&w=924&t=tt&d=fgDHbdr1jwhscwH6bcYS87rhy0jSPyRggFZvP4jIinM
+avatar: //mapmyvisitors.com/globe.js?d=pfq4HcYythaK7xPUY-yazVwRhXv3lQdTsbEkBaUeDLs
+# //clustrmaps.com/map_v2.png?cl=ffffff&w=924&t=tt&d=fgDHbdr1jwhscwH6bcYS87rhy0jSPyRggFZvP4jIinM
 # https://avatars.githubusercontent.com/u/44108932?s=400&u=dbbb2abcd70a8baf00fe0ec6e6563e223cb58a0d&v=4
 # avatar不输入那么就不会显示，改为输入访客地图
 
