@@ -70,7 +70,7 @@
 
   const FOCUS = { lat: 23.02, lng: 113.12 };
 
-  // globe.gl 缩放（与之前 COBE/globe 阶段一致）
+  // globe.gl 缩放
   // altitude 越大越远（地球越小），越小越近（地球越大）
   const ZOOM = {
     initialAltitude: 2.2, // 原始视图
@@ -184,30 +184,30 @@
 
   function createLabelElement(place) {
     const anchor = document.createElement('div');
-    anchor.className = 'cobe-city-label-anchor';
+    anchor.className = 'globe-label-anchor';
 
     const el = document.createElement('div');
     el.dataset.placeId = place.id;
-    el.className = 'cobe-city-label';
+    el.className = 'globe-label';
 
     if (place.tz) {
-      el.classList.add('cobe-city-label--time');
+      el.classList.add('globe-label--time');
     }
 
     if (place.labelOffset) {
-      el.classList.add('cobe-city-label--offset');
-      el.style.setProperty('--cobe-label-x', `${place.labelOffset.x}px`);
-      el.style.setProperty('--cobe-label-y', `${place.labelOffset.y}px`);
+      el.classList.add('globe-label--offset');
+      el.style.setProperty('--globe-label-x', `${place.labelOffset.x}px`);
+      el.style.setProperty('--globe-label-y', `${place.labelOffset.y}px`);
     }
 
     const nameEl = document.createElement('span');
-    nameEl.className = 'cobe-city-label-name';
+    nameEl.className = 'globe-label-name';
     nameEl.textContent = place.name;
     el.appendChild(nameEl);
 
     if (place.tz) {
       const timeEl = document.createElement('span');
-      timeEl.className = 'cobe-city-label-time';
+      timeEl.className = 'globe-label-time';
       timeEl.textContent = formatCityTime(place.tz);
       el.appendChild(timeEl);
     }
@@ -224,7 +224,7 @@
       }
     });
 
-    container.querySelectorAll('.cobe-city-label-time').forEach((timeEl) => {
+    container.querySelectorAll('.globe-label-time').forEach((timeEl) => {
       const placeId = timeEl.closest('[data-place-id]')?.dataset.placeId;
       const tz = timeLookup.get(placeId);
       if (tz) {

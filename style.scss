@@ -376,11 +376,11 @@ img {
       border-radius: 2px;
     }
 
-    &.cobe-globe {
+    &.sidebar-globe {
       width: 70%;
       margin: 0 auto 4px;
 
-      .cobe-globe-wrap {
+      .globe-wrap {
         position: relative;
         width: 100%;
         margin: 0 auto;
@@ -405,12 +405,12 @@ img {
         }
       }
 
-      .cobe-city-label-anchor {
+      .globe-label-anchor {
         pointer-events: none;
         transition: opacity 0.15s ease;
       }
 
-      .cobe-city-label {
+      .globe-label {
         position: relative;
         transform: translate(-50%, calc(-100% - 6px));
         padding: 2px 6px;
@@ -427,7 +427,7 @@ img {
         z-index: 2;
 
         &--offset {
-          transform: translate(calc(-50% + var(--cobe-label-x, 0px)), calc(-100% - 6px + var(--cobe-label-y, 0px)));
+          transform: translate(calc(-50% + var(--globe-label-x, 0px)), calc(-100% - 6px + var(--globe-label-y, 0px)));
         }
 
         &--time {
@@ -454,7 +454,7 @@ img {
     }
   }
 
-  .cobe-globe + .site-name {
+  .sidebar-globe + .site-name {
     margin-top: 10px;
     position: relative;
     z-index: 3;
