@@ -13,7 +13,7 @@ const TIME_CITIES = [
 ];
 
 // 到过的省份/地区；放大后显示 cities 中的具体城市（只需维护此列表）
-// 北京、香港、澳门为省级，无下级城市；labelOffset / markerLat·markerLng 可错开重叠标签
+// 北京、香港、澳门为省级，无下级城市；可选 tz 仅显示时钟（无五角星；五角星仅用于 TIME_CITIES）
 const REGIONAL = [
   {
     id: 'yn',
@@ -112,6 +112,7 @@ const REGIONAL = [
     lng: 116.4074,
     size: 0.05,
     color: [1, 0.62, 0.22],
+    tz: 'Asia/Shanghai',
   },
   {
     id: 'hk',
@@ -177,6 +178,7 @@ function flattenRegionalPlaces() {
       level: 'province',
       alwaysShow: !region.cities?.length,
       labelOffset: region.labelOffset,
+      tz: region.tz,
     });
 
     region.cities?.forEach((city) => {
@@ -233,10 +235,12 @@ function buildMarkers(scale) {
     const hasCities = Boolean(region.cities?.length);
     const showProvince = !hasCities || !showCities;
 
+    const provinceMarkerSize = showProvince ? region.size / scale : 0.001;
+
     markers.push({
       id: region.id,
       location: regionMarkerLocation(region),
-      size: showProvince ? region.size / scale : 0.001,
+      size: provinceMarkerSize,
       color: region.color,
     });
 
@@ -263,7 +267,8 @@ function buildMarkers(scale) {
 }
 
 function setupRegionalLabel(label, place) {
-  if (place.tz) {
+  // 国际时钟城市（TIME_CITIES）不在此处理
+  if (place.tz && place.level !== 'province') {
     return;
   }
 
@@ -324,7 +329,7 @@ function createCityLabels(anchorRoot, places) {
   anchorRoot.querySelectorAll('.cobe-city-label, .cobe-city-star').forEach((el) => el.remove());
 
   return places.map((place) => {
-    if (place.tz) {
+    if (place.tz && place.level !== 'province') {
       const star = document.createElement('span');
       star.className = 'cobe-city-star';
       star.style.positionAnchor = `--cobe-${place.id}`;
