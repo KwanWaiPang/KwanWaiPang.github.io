@@ -29,6 +29,9 @@ const ALL_CITIES = [...REGIONAL, ...TIME_CITIES];
 const FOCUS = { lat: 23.02, lng: 113.12 };
 
 const DPR = 2;
+const SCALE_MIN = 0.65;
+const SCALE_MAX = 1.75;
+const SCALE_DEFAULT = 1;
 
 function focusOnLocation(lat, lng) {
   return {
@@ -93,9 +96,16 @@ function initCobeGlobe(canvas) {
   let labelEntries = [];
   let displaySize = 0;
   let lastTimeRefresh = 0;
+  let scale = SCALE_DEFAULT;
 
   canvas.style.touchAction = 'none';
   canvas.style.cursor = 'grab';
+
+  function updateGlobeState() {
+    if (globe) {
+      globe.update({ phi, theta, scale });
+    }
+  }
 
   function measureDisplaySize() {
     displaySize = Math.max(Math.round(container.getBoundingClientRect().width), 120);
@@ -114,7 +124,7 @@ function initCobeGlobe(canvas) {
     }));
 
     if (globe) {
-      globe.update({ width: size, height: size, phi, theta, markers });
+      globe.update({ width: size, height: size, phi, theta, scale, markers });
       return;
     }
 
@@ -124,6 +134,7 @@ function initCobeGlobe(canvas) {
       height: size,
       phi,
       theta,
+      scale,
       dark: 0.38,
       diffuse: 2.3,
       mapSamples: 32000,
@@ -148,7 +159,7 @@ function initCobeGlobe(canvas) {
     }
 
     if (globe) {
-      globe.update({ phi, theta });
+      updateGlobeState();
     }
 
     if (!lastTimeRefresh || now - lastTimeRefresh > 30000) {
@@ -193,6 +204,17 @@ function initCobeGlobe(canvas) {
 
   canvas.addEventListener('pointerup', stopDragging);
   canvas.addEventListener('pointercancel', stopDragging);
+
+  canvas.addEventListener(
+    'wheel',
+    (event) => {
+      event.preventDefault();
+      const delta = event.deltaY > 0 ? -0.06 : 0.06;
+      scale = Math.max(SCALE_MIN, Math.min(SCALE_MAX, scale + delta));
+      updateGlobeState();
+    },
+    { passive: false },
+  );
 
   requestAnimationFrame(() => {
     createGlobeInstance();

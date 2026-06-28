@@ -341,7 +341,7 @@ img {
 }
 
 .sidebar {
-  padding: 20px 0;
+  padding: 8px 0;
 
   @include mobile {
     text-align: center;
@@ -378,6 +378,7 @@ img {
 
     &.cobe-globe {
       width: 80%;
+      margin: 0 auto 4px;
 
       .cobe-globe-wrap {
         position: relative;
@@ -385,6 +386,7 @@ img {
         margin: 0 auto;
         overflow: visible;
         aspect-ratio: 1;
+        line-height: 0;
 
         > div {
           position: relative;
@@ -396,6 +398,7 @@ img {
       canvas {
         display: block;
         margin: 0 auto;
+        vertical-align: top;
       }
 
       .cobe-city-label {
@@ -439,6 +442,10 @@ img {
         }
       }
     }
+  .cobe-globe + .site-name {
+    margin-top: 10px;
+    position: relative;
+    z-index: 3;
   }
 }
 
