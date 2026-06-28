@@ -1,8 +1,7 @@
 import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@2.0.1/+esm';
 
-// COBE 标记位置用 lat/lng；tz 仅用于显示当地时间（IANA 时区名，不是地理坐标）
-// 北京、上海同属 UTC+8，IANA 官方名称是 Asia/Shanghai（不存在 Asia/Beijing）
-const CITIES = [
+// 带时间的城市（tz 为 IANA 时区名，仅用于显示当地时间，不是地理坐标）
+const TIME_CITIES = [
   { id: 'bj', name: '北京', lat: 39.9042, lng: 116.4074, tz: 'Asia/Shanghai', size: 0.07, color: [1, 0.62, 0.22] },
   { id: 'tky', name: '东京', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', size: 0.06, color: [0.92, 0.58, 1] },
   { id: 'nyc', name: '纽约', lat: 40.7128, lng: -74.006, tz: 'America/New_York', size: 0.06, color: [0.42, 0.82, 1] },
@@ -10,7 +9,20 @@ const CITIES = [
   { id: 'sg', name: '新加坡', lat: 1.3521, lng: 103.8198, tz: 'Asia/Singapore', size: 0.055, color: [0.35, 0.98, 0.78] },
 ];
 
-const FOCUS = { lat: 35, lng: 105 };
+// 国内城市/省份（省会坐标；仅显示地名，不显示时间）
+const REGIONAL = [
+  { id: 'fs', name: '佛山', lat: 23.0218, lng: 113.1219, size: 0.058, color: [1, 0.78, 0.28] },
+  { id: 'gz', name: '广州', lat: 23.1291, lng: 113.2644, size: 0.05, color: [1, 0.5, 0.35] },
+  { id: 'hk', name: '香港', lat: 22.3193, lng: 114.1694, size: 0.05, color: [1, 0.42, 0.38] },
+  { id: 'sz', name: '深圳', lat: 22.5431, lng: 114.0579, size: 0.05, color: [1, 0.55, 0.4] },
+  { id: 'gx', name: '广西', lat: 22.817, lng: 108.3665, size: 0.045, color: [0.55, 0.92, 0.55] },
+  { id: 'hn', name: '湖南', lat: 28.2282, lng: 112.9388, size: 0.045, color: [0.95, 0.55, 0.55] },
+  { id: 'sc', name: '四川', lat: 30.5728, lng: 104.0668, size: 0.045, color: [0.85, 0.6, 1] },
+  { id: 'fj', name: '福建', lat: 26.0745, lng: 119.2965, size: 0.045, color: [0.5, 0.85, 0.95] },
+];
+
+const ALL_CITIES = [...REGIONAL, ...TIME_CITIES];
+const FOCUS = { lat: 23.02, lng: 113.12 };
 
 const DPR = 2;
 
@@ -39,7 +51,7 @@ function createCityLabels(anchorRoot, cities) {
 
   return cities.map((city) => {
     const label = document.createElement('span');
-    label.className = 'cobe-city-label cobe-city-label--time';
+    label.className = city.tz ? 'cobe-city-label cobe-city-label--time' : 'cobe-city-label';
     label.style.positionAnchor = `--cobe-${city.id}`;
     label.style.setProperty('opacity', `var(--cobe-visible-${city.id}, 0)`);
 
@@ -48,10 +60,13 @@ function createCityLabels(anchorRoot, cities) {
     nameEl.textContent = city.name;
     label.appendChild(nameEl);
 
-    const timeEl = document.createElement('span');
-    timeEl.className = 'cobe-city-label-time';
-    timeEl.textContent = formatCityTime(city.tz);
-    label.appendChild(timeEl);
+    let timeEl = null;
+    if (city.tz) {
+      timeEl = document.createElement('span');
+      timeEl.className = 'cobe-city-label-time';
+      timeEl.textContent = formatCityTime(city.tz);
+      label.appendChild(timeEl);
+    }
 
     anchorRoot.appendChild(label);
     return { timeEl, city };
@@ -87,9 +102,15 @@ function initCobeGlobe(canvas) {
 
   function createGlobeInstance() {
     const size = measureDisplaySize();
+    const markers = ALL_CITIES.map((city) => ({
+      id: city.id,
+      location: [city.lat, city.lng],
+      size: city.size,
+      color: city.color,
+    }));
 
     if (globe) {
-      globe.update({ width: size, height: size, phi, theta });
+      globe.update({ width: size, height: size, phi, theta, markers });
       return;
     }
 
@@ -99,26 +120,21 @@ function initCobeGlobe(canvas) {
       height: size,
       phi,
       theta,
-      dark: 0.5,
-      diffuse: 1.8,
-      mapSamples: 24000,
-      mapBrightness: 11,
-      mapBaseBrightness: 0.04,
-      baseColor: [0.1, 0.52, 0.78],
+      dark: 0.28,
+      diffuse: 2.05,
+      mapSamples: 26000,
+      mapBrightness: 14,
+      mapBaseBrightness: 0.1,
+      baseColor: [0.28, 0.74, 0.96],
       markerColor: [1, 0.72, 0.42],
-      glowColor: [0.38, 0.8, 0.98],
+      glowColor: [0.58, 0.9, 1],
       markerElevation: 0.05,
-      markers: CITIES.map((city) => ({
-        id: city.id,
-        location: [city.lat, city.lng],
-        size: city.size,
-        color: city.color,
-      })),
+      markers,
     });
 
     const anchorRoot = canvas.parentElement;
     if (anchorRoot) {
-      labelEntries = createCityLabels(anchorRoot, CITIES);
+      labelEntries = createCityLabels(anchorRoot, ALL_CITIES);
     }
   }
 
@@ -134,7 +150,9 @@ function initCobeGlobe(canvas) {
     if (!lastTimeRefresh || now - lastTimeRefresh > 30000) {
       lastTimeRefresh = now;
       labelEntries.forEach(({ timeEl, city }) => {
-        timeEl.textContent = formatCityTime(city.tz);
+        if (timeEl && city.tz) {
+          timeEl.textContent = formatCityTime(city.tz);
+        }
       });
     }
 
