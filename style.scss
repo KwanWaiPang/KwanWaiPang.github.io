@@ -396,9 +396,9 @@ img {
         left: 0;
         top: 0;
         transform: translate(-50%, -115%);
-        padding: 1px 5px;
+        padding: 2px 6px;
         font-size: 9px;
-        line-height: 1.3;
+        line-height: 1.25;
         font-weight: 600;
         color: #fff;
         background: rgba(16, 88, 130, 0.9);
@@ -413,63 +413,29 @@ img {
         &.is-visible {
           opacity: 1;
         }
+
+        &--time {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1px;
+          padding: 3px 6px;
+        }
+
+        &-name {
+          display: block;
+        }
+
+        &-time {
+          display: block;
+          font-family: $code-font;
+          font-size: 8px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.92);
+          letter-spacing: 0.3px;
+        }
       }
     }
-  }
-}
-
-.cobe-section {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.cobe-world-clock {
-  margin-top: 10px;
-  text-align: left;
-
-  &-title {
-    margin-bottom: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    color: $base-lighten-color;
-    text-align: center;
-    letter-spacing: 0.5px;
-  }
-
-  &-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-height: 220px;
-    overflow-y: auto;
-  }
-
-  &-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    padding: 3px 2px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    font-size: 11px;
-    line-height: 1.4;
-  }
-
-  &-name {
-    color: $base-color;
-    font-weight: 500;
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &-time {
-    font-family: $code-font;
-    font-size: 11px;
-    color: $link-color;
-    flex-shrink: 0;
   }
 }
 

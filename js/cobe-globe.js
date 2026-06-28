@@ -1,37 +1,44 @@
 import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@2.0.1/+esm';
 
-const CHINA_CENTER = { lat: 35, lng: 104 };
+const FOSHAN = { id: 'fs', name: '佛山', lat: 23.02, lng: 113.12, size: 0.085, color: [1, 0.78, 0.28] };
 
-const WORLD_CITIES = [
-  { id: 'tky', name: '东京', lat: 35.68, lng: 139.69, tz: 'Asia/Tokyo', size: 0.055, color: [0.92, 0.58, 1] },
-  { id: 'del', name: '德里', lat: 28.61, lng: 77.21, tz: 'Asia/Kolkata', size: 0.045, color: [1, 0.72, 0.35] },
-  { id: 'sh', name: '上海', lat: 31.23, lng: 121.47, tz: 'Asia/Shanghai', size: 0.065, color: [1, 0.92, 0.38] },
-  { id: 'sao', name: '圣保罗', lat: -23.55, lng: -46.63, tz: 'America/Sao_Paulo', size: 0.045, color: [0.45, 0.95, 0.55] },
-  { id: 'mex', name: '墨西哥城', lat: 19.43, lng: -99.13, tz: 'America/Mexico_City', size: 0.045, color: [0.95, 0.55, 0.45] },
-  { id: 'cai', name: '开罗', lat: 30.04, lng: 31.24, tz: 'Africa/Cairo', size: 0.045, color: [1, 0.85, 0.35] },
-  { id: 'bom', name: '孟买', lat: 19.08, lng: 72.88, tz: 'Asia/Kolkata', size: 0.045, color: [1, 0.6, 0.25] },
-  { id: 'bj', name: '北京', lat: 39.9, lng: 116.4, tz: 'Asia/Shanghai', size: 0.075, color: [1, 0.45, 0.35] },
-  { id: 'osa', name: '大阪', lat: 34.69, lng: 135.5, tz: 'Asia/Tokyo', size: 0.04, color: [0.85, 0.5, 0.95] },
+const VISITED = [
+  { id: 'gz', name: '广州', lat: 23.13, lng: 113.26, size: 0.06, color: [1, 0.5, 0.35] },
+  { id: 'sz', name: '深圳', lat: 22.54, lng: 114.06, size: 0.058, color: [1, 0.55, 0.4] },
+  { id: 'hk', name: '香港', lat: 22.28, lng: 114.15, size: 0.058, color: [1, 0.42, 0.38] },
+  { id: 'bj', name: '北京', lat: 39.9, lng: 116.4, size: 0.062, color: [1, 0.62, 0.22], tz: 'Asia/Shanghai' },
+  { id: 'gx', name: '广西', lat: 22.82, lng: 108.37, size: 0.052, color: [0.55, 0.92, 0.55] },
+  { id: 'hn', name: '湖南', lat: 28.23, lng: 112.94, size: 0.052, color: [0.95, 0.55, 0.55] },
+  { id: 'sc', name: '四川', lat: 30.57, lng: 104.07, size: 0.052, color: [0.85, 0.6, 1] },
+  { id: 'fj', name: '福建', lat: 26.08, lng: 119.3, size: 0.052, color: [0.5, 0.85, 0.95] },
+];
+
+const TIME_CITIES = [
+  { id: 'tky', name: '东京', lat: 35.68, lng: 139.69, tz: 'Asia/Tokyo', size: 0.05, color: [0.92, 0.58, 1] },
   { id: 'nyc', name: '纽约', lat: 40.71, lng: -74.01, tz: 'America/New_York', size: 0.05, color: [0.42, 0.82, 1] },
-  { id: 'kar', name: '卡拉奇', lat: 24.86, lng: 67.01, tz: 'Asia/Karachi', size: 0.04, color: [0.55, 0.9, 0.75] },
-  { id: 'bue', name: '布宜诺斯艾利斯', lat: -34.6, lng: -58.38, tz: 'America/Argentina/Buenos_Aires', size: 0.04, color: [0.6, 0.85, 1] },
-  { id: 'ist', name: '伊斯坦布尔', lat: 41.01, lng: 28.98, tz: 'Europe/Istanbul', size: 0.045, color: [0.75, 0.65, 1] },
-  { id: 'kol', name: '加尔各答', lat: 22.57, lng: 88.36, tz: 'Asia/Kolkata', size: 0.04, color: [1, 0.7, 0.5] },
-  { id: 'mnl', name: '马尼拉', lat: 14.6, lng: 120.98, tz: 'Asia/Manila', size: 0.04, color: [0.95, 0.45, 0.55] },
-  { id: 'lag', name: '拉各斯', lat: 6.52, lng: 3.38, tz: 'Africa/Lagos', size: 0.04, color: [0.5, 0.95, 0.65] },
-  { id: 'rio', name: '里约', lat: -22.91, lng: -43.17, tz: 'America/Sao_Paulo', size: 0.045, color: [0.4, 0.9, 0.6] },
-  { id: 'gz', name: '广州', lat: 23.13, lng: 113.26, tz: 'Asia/Shanghai', size: 0.055, color: [1, 0.78, 0.28] },
-  { id: 'la', name: '洛杉矶', lat: 34.05, lng: -118.24, tz: 'America/Los_Angeles', size: 0.05, color: [0.35, 0.78, 1] },
-  { id: 'mow', name: '莫斯科', lat: 55.75, lng: 37.62, tz: 'Europe/Moscow', size: 0.05, color: [0.55, 0.92, 0.62] },
+  { id: 'par', name: '巴黎', lat: 48.86, lng: 2.35, tz: 'Europe/Paris', size: 0.048, color: [0.75, 0.65, 1] },
+  { id: 'ldn', name: '伦敦', lat: 51.51, lng: -0.13, tz: 'Europe/London', size: 0.048, color: [0.52, 0.96, 0.62] },
+  { id: 'sg', name: '新加坡', lat: 1.35, lng: 103.82, tz: 'Asia/Singapore', size: 0.048, color: [0.35, 0.98, 0.78] },
+  { id: 'la', name: '洛杉矶', lat: 34.05, lng: -118.24, tz: 'America/Los_Angeles', size: 0.048, color: [0.35, 0.78, 1] },
+  { id: 'mow', name: '莫斯科', lat: 55.75, lng: 37.62, tz: 'Europe/Moscow', size: 0.048, color: [0.55, 0.92, 0.62] },
 ];
 
-const ARCS = [
-  { from: 'bj', to: 'nyc' },
-  { from: 'bj', to: 'tky' },
-  { from: 'bj', to: 'mow' },
-  { from: 'sh', to: 'sao' },
-  { from: 'gz', to: 'la' },
-];
+function mergeMarkers() {
+  const map = new Map();
+  [FOSHAN, ...VISITED, ...TIME_CITIES].forEach((city) => {
+    const existing = map.get(city.id);
+    if (existing) {
+      map.set(city.id, { ...existing, ...city, size: Math.max(existing.size, city.size) });
+    } else {
+      map.set(city.id, { ...city });
+    }
+  });
+  return Array.from(map.values());
+}
+
+const MARKERS = mergeMarkers();
+
+const ARCS = VISITED.map((city) => ({ from: FOSHAN.id, to: city.id }));
 
 function focusOnLocation(lat, lng) {
   return {
@@ -97,38 +104,27 @@ function formatCityTime(timezone) {
 function createCityLabels(container, cities) {
   return cities.map((city) => {
     const label = document.createElement('span');
-    label.className = 'cobe-city-label';
-    label.textContent = city.name;
-    container.appendChild(label);
-    return { el: label, city };
-  });
-}
+    label.className = city.tz ? 'cobe-city-label cobe-city-label--time' : 'cobe-city-label';
 
-function createWorldClock(listEl, cities) {
-  listEl.innerHTML = cities
-    .map(
-      (city) => `
-        <li class="cobe-world-clock-item" data-tz="${city.tz}">
-          <span class="cobe-world-clock-name">${city.name}</span>
-          <span class="cobe-world-clock-time">--:--</span>
-        </li>
-      `
-    )
-    .join('');
-}
+    const nameEl = document.createElement('span');
+    nameEl.className = 'cobe-city-label-name';
+    nameEl.textContent = city.name;
+    label.appendChild(nameEl);
 
-function updateWorldClock(listEl) {
-  listEl.querySelectorAll('.cobe-world-clock-item').forEach((item) => {
-    const timezone = item.dataset.tz;
-    const timeEl = item.querySelector('.cobe-world-clock-time');
-    if (timezone && timeEl) {
-      timeEl.textContent = formatCityTime(timezone);
+    if (city.tz) {
+      const timeEl = document.createElement('span');
+      timeEl.className = 'cobe-city-label-time';
+      timeEl.textContent = formatCityTime(city.tz);
+      label.appendChild(timeEl);
     }
+
+    container.appendChild(label);
+    return { el: label, city, timeEl: label.querySelector('.cobe-city-label-time') };
   });
 }
 
 function updateCityLabels(labelEntries, phi, theta, displaySize) {
-  labelEntries.forEach(({ el, city }) => {
+  labelEntries.forEach(({ el, city, timeEl }) => {
     const pos = projectMarker(city.lat, city.lng, phi, theta, displaySize);
     if (pos) {
       el.style.left = `${pos.x}px`;
@@ -137,17 +133,20 @@ function updateCityLabels(labelEntries, phi, theta, displaySize) {
     } else {
       el.classList.remove('is-visible');
     }
+
+    if (timeEl && city.tz) {
+      timeEl.textContent = formatCityTime(city.tz);
+    }
   });
 }
 
 function initCobeGlobe(canvas) {
   const container = canvas.closest('.cobe-globe-wrap');
-  const clockList = document.getElementById('cobe-world-clock-list');
-  if (!container || !clockList) {
+  if (!container) {
     return;
   }
 
-  const focus = focusOnLocation(CHINA_CENTER.lat, CHINA_CENTER.lng);
+  const focus = focusOnLocation(FOSHAN.lat, FOSHAN.lng);
   let phi = focus.phi;
   let theta = focus.theta;
   let isDragging = false;
@@ -156,14 +155,11 @@ function initCobeGlobe(canvas) {
   let globe = null;
   let resizeTimer = null;
   let displaySize = 0;
+  let lastTimeUpdate = 0;
 
   const DPR = 2;
-  const labelEntries = createCityLabels(container, WORLD_CITIES);
-  const arcs = buildArcs(WORLD_CITIES, ARCS);
-
-  createWorldClock(clockList, WORLD_CITIES);
-  updateWorldClock(clockList);
-  setInterval(() => updateWorldClock(clockList), 30000);
+  const labelEntries = createCityLabels(container, MARKERS);
+  const arcs = buildArcs(MARKERS, ARCS);
 
   canvas.style.touchAction = 'none';
   canvas.style.cursor = 'grab';
@@ -202,7 +198,7 @@ function initCobeGlobe(canvas) {
       markerColor: [1, 0.72, 0.42],
       glowColor: [0.58, 0.92, 1],
       markerElevation: 0.05,
-      markers: WORLD_CITIES.map((city) => ({
+      markers: MARKERS.map((city) => ({
         id: city.id,
         location: [city.lat, city.lng],
         size: city.size,
@@ -210,18 +206,27 @@ function initCobeGlobe(canvas) {
       })),
       arcs,
       arcColor: [1, 0.86, 0.55],
-      arcWidth: 0.32,
-      arcHeight: 0.22,
+      arcWidth: 0.34,
+      arcHeight: 0.2,
     });
   }
 
-  function animate() {
+  function animate(now) {
     if (!isDragging) {
       phi += 0.004;
     }
 
     if (globe) {
       globe.update({ phi, theta });
+    }
+
+    if (!lastTimeUpdate || now - lastTimeUpdate > 30000) {
+      lastTimeUpdate = now;
+      labelEntries.forEach(({ timeEl, city }) => {
+        if (timeEl && city.tz) {
+          timeEl.textContent = formatCityTime(city.tz);
+        }
+      });
     }
 
     updateCityLabels(labelEntries, phi, theta, displaySize);
@@ -261,7 +266,7 @@ function initCobeGlobe(canvas) {
   canvas.addEventListener('pointercancel', stopDragging);
 
   createGlobeInstance();
-  animate();
+  requestAnimationFrame(animate);
 
   new ResizeObserver(() => {
     clearTimeout(resizeTimer);
