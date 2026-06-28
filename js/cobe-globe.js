@@ -40,6 +40,7 @@ const FOCUS = { lat: 23.02, lng: 113.12 };
 // REGIONAL 中的城市标签自动错峰浮动（只需维护 REGIONAL 列表）
 const FLOAT_DURATION = 4;
 const FLOAT_DELAY_STEP = 1;
+const FLOAT_SCALE_THRESHOLD = 3;
 const REGIONAL_FLOAT_INDEX = new Map(REGIONAL.map((city, index) => [city.id, index]));
 
 function getRegionalFloatStyle(cityId) {
@@ -58,7 +59,7 @@ function getRegionalFloatStyle(cityId) {
 
 const DPR = 2;
 const SCALE_MIN = 0.65;
-const SCALE_MAX = 6;
+const SCALE_MAX = 3;
 const SCALE_DEFAULT = 1;
 
 function rgbFromColor([r, g, b]) {
@@ -75,17 +76,21 @@ function buildMarkers(scale) {
   }));
 }
 
-function applyFloatLabelStyle(label, city) {
+function setupRegionalLabel(label, city) {
   const floatStyle = getRegionalFloatStyle(city.id);
   if (!floatStyle || city.tz) {
     return;
   }
 
-  label.classList.add('cobe-city-label--float');
+  label.classList.add('cobe-city-label--regional');
   label.style.animationDelay = `${floatStyle.delay}s`;
   label.style.setProperty('--cobe-float-duration', `${floatStyle.duration}s`);
   label.style.setProperty('--cobe-float-x', `${floatStyle.amplitudeX}px`);
   label.style.setProperty('--cobe-float-y', `${floatStyle.amplitudeY}px`);
+}
+
+function syncRegionalLabelFloat(container, zoomScale) {
+  container.classList.toggle('cobe-regional-float-active', zoomScale >= FLOAT_SCALE_THRESHOLD);
 }
 
 function focusOnLocation(lat, lng) {
@@ -142,7 +147,7 @@ function createCityLabels(anchorRoot, cities) {
     }
 
     anchorRoot.appendChild(label);
-    applyFloatLabelStyle(label, city);
+    setupRegionalLabel(label, city);
     return { timeEl, city, label };
   });
 }
@@ -172,6 +177,7 @@ function initCobeGlobe(canvas) {
     if (globe) {
       globe.update({ phi, theta, scale, markers: buildMarkers(scale) });
     }
+    syncRegionalLabelFloat(container, scale);
   }
 
   function measureDisplaySize() {
@@ -187,6 +193,7 @@ function initCobeGlobe(canvas) {
 
     if (globe) {
       globe.update({ width: size, height: size, phi, theta, scale, markers });
+      syncRegionalLabelFloat(container, scale);
       return;
     }
 
@@ -212,6 +219,7 @@ function initCobeGlobe(canvas) {
     const anchorRoot = canvas.parentElement;
     if (anchorRoot) {
       labelEntries = createCityLabels(anchorRoot, ALL_CITIES);
+      syncRegionalLabelFloat(container, scale);
     }
   }
 

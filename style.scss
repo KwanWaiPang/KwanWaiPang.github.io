@@ -440,8 +440,8 @@ img {
         transition: opacity 0.15s ease;
         z-index: 2;
 
-        &--float {
-          animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;
+        &--regional {
+          transition: opacity 0.15s ease, translate 0.2s ease;
         }
 
         &--time {
@@ -463,6 +463,12 @@ img {
           font-weight: 500;
           color: rgba(255, 255, 255, 0.92);
           letter-spacing: 0.3px;
+        }
+      }
+
+      &.cobe-regional-float-active {
+        .cobe-city-label--regional {
+          animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;
         }
       }
     }
@@ -494,7 +500,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cobe-globe .cobe-city-label--float {
+  .cobe-globe-wrap.cobe-regional-float-active .cobe-city-label--regional {
     animation: none;
   }
 }
