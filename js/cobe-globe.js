@@ -2,11 +2,11 @@ import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@2.0.1/+esm';
 
 // 带时间的城市（tz 为 IANA 时区名，仅用于显示当地时间，不是地理坐标）
 const TIME_CITIES = [
-  { id: 'bj', name: '北京', lat: 39.9042, lng: 116.4074, tz: 'Asia/Shanghai', size: 0.07, color: [1, 0.62, 0.22] },
-  { id: 'tky', name: '东京', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', size: 0.06, color: [0.92, 0.58, 1] },
-  { id: 'nyc', name: '纽约', lat: 40.7128, lng: -74.006, tz: 'America/New_York', size: 0.06, color: [0.42, 0.82, 1] },
-  { id: 'ldn', name: '伦敦', lat: 51.5074, lng: -0.1278, tz: 'Europe/London', size: 0.06, color: [0.52, 0.96, 0.62] },
-  { id: 'sg', name: '新加坡', lat: 1.3521, lng: 103.8198, tz: 'Asia/Singapore', size: 0.055, color: [0.35, 0.98, 0.78] },
+  { id: 'bj', name: 'Beijing', lat: 39.9042, lng: 116.4074, tz: 'Asia/Shanghai', size: 0.07, color: [1, 0.62, 0.22] },
+  { id: 'tky', name: 'Tokyo', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', size: 0.06, color: [0.92, 0.58, 1] },
+  { id: 'nyc', name: 'New York', lat: 40.7128, lng: -74.006, tz: 'America/New_York', size: 0.06, color: [0.42, 0.82, 1] },
+  { id: 'ldn', name: 'London', lat: 51.5074, lng: -0.1278, tz: 'Europe/London', size: 0.06, color: [0.52, 0.96, 0.62] },
+  { id: 'sg', name: 'Singapore', lat: 1.3521, lng: 103.8198, tz: 'Asia/Singapore', size: 0.055, color: [0.35, 0.98, 0.78] },
 ];
 
 // 国内城市/省份（省会坐标；仅显示地名，不显示时间）
