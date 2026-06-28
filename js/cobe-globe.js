@@ -1,4 +1,8 @@
 import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@2.0.1/+esm';
+import { GEO_BOUNDARIES, GEO_LABELS, polylineToArcs } from './cobe-geo-data.js';
+
+const BOUNDARY_ARCS = polylineToArcs(GEO_BOUNDARIES);
+const GLOBE_SURFACE = 0.8;
 
 // 带时间的城市（tz 为 IANA 时区名，仅用于显示当地时间，不是地理坐标）
 const TIME_CITIES = [
@@ -35,6 +39,79 @@ function focusOnLocation(lat, lng) {
     phi: Math.PI - (lng * Math.PI) / 180,
     theta: ((lat * Math.PI) / 180) * 0.42,
   };
+}
+
+function latLngToUnit([lat, lng]) {
+  const latRad = (lat * Math.PI) / 180;
+  const lngRad = (lng * Math.PI) / 180 - Math.PI;
+  const cosLat = Math.cos(latRad);
+  return [-cosLat * Math.cos(lngRad), Math.sin(latRad), cosLat * Math.sin(lngRad)];
+}
+
+function projectLatLng(lat, lng, phi, theta, size, scale = 1, offset = [0, 0], elevation = 0.02) {
+  const unit = latLngToUnit([lat, lng]);
+  const radius = GLOBE_SURFACE + elevation;
+  const point = [unit[0] * radius, unit[1] * radius, unit[2] * radius];
+
+  const cosTheta = Math.cos(theta);
+  const cosPhi = Math.cos(phi);
+  const sinTheta = Math.sin(theta);
+  const sinPhi = Math.sin(phi);
+
+  const cx = cosPhi * point[0] + sinPhi * point[2];
+  const sy = sinPhi * cosTheta * point[0] + cosTheta * point[1] - cosPhi * cosTheta * point[2];
+  const depth = -sinPhi * cosTheta * point[0] + sinTheta * point[1] + cosPhi * sinTheta * point[2];
+
+  const xNorm = (cx * scale + offset[0] * scale / size + 1) / 2;
+  const yNorm = (-sy * scale + offset[1] * scale / size + 1) / 2;
+  const visible = depth >= 0 || cx * cx + sy * sy >= 0.64;
+
+  return {
+    x: xNorm * size,
+    y: yNorm * size,
+    visible,
+  };
+}
+
+function createGeoOverlay(container) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'cobe-geo-overlay');
+  svg.setAttribute('aria-hidden', 'true');
+
+  const labelLayer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  labelLayer.setAttribute('class', 'cobe-geo-labels');
+
+  const labelNodes = GEO_LABELS.map((label) => {
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('class', `cobe-geo-label cobe-geo-label--${label.kind}`);
+    text.textContent = label.name;
+    labelLayer.appendChild(text);
+    return { label, text };
+  });
+
+  svg.appendChild(labelLayer);
+  container.appendChild(svg);
+
+  return { svg, labelNodes };
+}
+
+function updateGeoOverlay(overlay, phi, theta, size, container) {
+  const containerWidth = container.getBoundingClientRect().width;
+  const offsetX = Math.max((containerWidth - size) / 2, 0);
+
+  overlay.svg.setAttribute('width', size);
+  overlay.svg.setAttribute('height', size);
+  overlay.svg.style.width = `${size}px`;
+  overlay.svg.style.height = `${size}px`;
+  overlay.svg.style.left = `${offsetX}px`;
+  overlay.svg.style.top = '0';
+
+  overlay.labelNodes.forEach(({ label, text }) => {
+    const point = projectLatLng(label.lat, label.lng, phi, theta, size);
+    text.setAttribute('x', point.x.toFixed(2));
+    text.setAttribute('y', point.y.toFixed(2));
+    text.style.opacity = point.visible ? '1' : '0';
+  });
 }
 
 function formatCityTime(timezone) {
@@ -91,6 +168,7 @@ function initCobeGlobe(canvas) {
   let lastPointerY = 0;
   let globe = null;
   let labelEntries = [];
+  let geoOverlay = null;
   let displaySize = 0;
   let lastTimeRefresh = 0;
 
@@ -114,7 +192,10 @@ function initCobeGlobe(canvas) {
     }));
 
     if (globe) {
-      globe.update({ width: size, height: size, phi, theta, markers });
+      globe.update({ width: size, height: size, phi, theta, markers, arcs: BOUNDARY_ARCS });
+      if (geoOverlay) {
+        updateGeoOverlay(geoOverlay, phi, theta, size, container);
+      }
       return;
     }
 
@@ -133,12 +214,22 @@ function initCobeGlobe(canvas) {
       markerColor: [1, 0.72, 0.42],
       glowColor: [0.68, 0.94, 1],
       markerElevation: 0.05,
+      arcColor: [0.72, 0.88, 1],
+      arcWidth: 0.32,
+      arcHeight: 0.015,
       markers,
+      arcs: BOUNDARY_ARCS,
     });
 
     const anchorRoot = canvas.parentElement;
+    if (anchorRoot && !geoOverlay) {
+      geoOverlay = createGeoOverlay(anchorRoot);
+    }
     if (anchorRoot) {
       labelEntries = createCityLabels(anchorRoot, ALL_CITIES);
+    }
+    if (geoOverlay) {
+      updateGeoOverlay(geoOverlay, phi, theta, size, container);
     }
   }
 
@@ -149,6 +240,10 @@ function initCobeGlobe(canvas) {
 
     if (globe) {
       globe.update({ phi, theta });
+    }
+
+    if (geoOverlay && displaySize) {
+      updateGeoOverlay(geoOverlay, phi, theta, displaySize, container);
     }
 
     if (!lastTimeRefresh || now - lastTimeRefresh > 30000) {

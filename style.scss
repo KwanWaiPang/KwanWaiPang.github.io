@@ -438,6 +438,39 @@ img {
           letter-spacing: 0.3px;
         }
       }
+
+      .cobe-geo-overlay {
+        position: absolute;
+        top: 0;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 1;
+
+        .cobe-geo-label {
+          fill: rgba(255, 255, 255, 0.88);
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.4px;
+          text-anchor: middle;
+          dominant-baseline: middle;
+          paint-order: stroke fill;
+          stroke: rgba(8, 48, 78, 0.85);
+          stroke-width: 2.5px;
+          stroke-linejoin: round;
+          transition: opacity 0.12s ease;
+
+          &--continent {
+            font-size: 12px;
+            fill: rgba(255, 255, 255, 0.92);
+          }
+
+          &--ocean {
+            font-size: 10px;
+            fill: rgba(210, 235, 255, 0.82);
+            stroke: rgba(8, 48, 78, 0.75);
+          }
+        }
+      }
     }
   }
 }
