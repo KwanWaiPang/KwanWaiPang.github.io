@@ -73,13 +73,18 @@
   // globe.gl 缩放（与之前 COBE/globe 阶段一致）
   // altitude 越大越远（地球越小），越小越近（地球越大）
   const ZOOM = {
-    initialAltitude: 2.2, // 原始视图：页面加载时正常看到整个地球仪
-    minAltitude: 0.55,  // 滚轮放大上限：约为原始的 3 倍
-    speed: 0.3,         // 滚轮缩放速度
+    initialAltitude: 2.2, // 原始视图
+    maxMagnification: 6,  // 最多放大 6 倍（相对 initialAltitude）
+    speed: 0.3,
   };
 
   function getZoomAltitudeLimits() {
-    return { minAlt: ZOOM.minAltitude, maxAlt: ZOOM.initialAltitude };
+    const maxAlt = ZOOM.initialAltitude;
+    // 与之前 3 倍时 minAltitude=0.55 同一线性比例，外推到 maxMagnification
+    const minAt3x = 0.55;
+    const step = (maxAlt - minAt3x) / (3 - 1);
+    const minAlt = Math.max(0.01, maxAlt - (ZOOM.maxMagnification - 1) * step);
+    return { minAlt, maxAlt };
   }
 
   function distanceFromAltitude(altitude, globeRadius) {
@@ -99,26 +104,19 @@
     return { lat: place.markerLat ?? place.lat, lng: place.markerLng ?? place.lng };
   }
 
-  function getAllPlaces() {
-    const visited = VISITED.map((place) => {
+  function getVisitedPlaces() {
+    return VISITED.map((place) => {
       const { lat, lng } = markerLocation(place);
-      return {
-        ...place,
-        lat,
-        lng,
-        pointRadius: 0.18,
-      };
+      return { ...place, lat, lng };
     });
-
-    const intl = TIME_CITIES.map((city) => ({
-      ...city,
-      pointRadius: 0.2,
-    }));
-
-    return [...visited, ...intl];
   }
 
-  const ALL_PLACES = getAllPlaces();
+  function getLabelPlaces() {
+    return [...getVisitedPlaces(), ...TIME_CITIES];
+  }
+
+  const VISITED_PLACES = getVisitedPlaces();
+  const LABEL_PLACES = getLabelPlaces();
 
   function rgbFromColor([r, g, b]) {
     return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
@@ -220,7 +218,7 @@
 
   function refreshTimes(container) {
     const timeLookup = new Map();
-    ALL_PLACES.forEach((place) => {
+    LABEL_PLACES.forEach((place) => {
       if (place.tz) {
         timeLookup.set(place.id, place.tz);
       }
@@ -237,13 +235,12 @@
 
   function applyPlaces(globe) {
     globe
-      .htmlElementsData(ALL_PLACES)
+      .htmlElementsData(LABEL_PLACES)
       .pointsData(
-        ALL_PLACES.map((place) => ({
+        VISITED_PLACES.map((place) => ({
           lat: place.lat,
           lng: place.lng,
           color: rgbFromColor(place.color),
-          radius: place.pointRadius ?? 0.2,
         })),
       );
   }
@@ -273,9 +270,10 @@
         .showAtmosphere(true)
         .atmosphereColor('lightskyblue')
         .atmosphereAltitude(0.18)
-        .pointAltitude(0.01)
+        .pointAltitude(0)
         .pointColor('color')
-        .pointRadius('radius')
+        .pointRadius(0.06)
+        .pointsMerge(true)
         .htmlLat('lat')
         .htmlLng('lng')
         .htmlAltitude(0.015)
