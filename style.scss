@@ -376,6 +376,28 @@ img {
       border-radius: 2px;
     }
   }
+
+  .cobe-globe {
+    margin: 0 auto 8px;
+    width: 72%;
+    max-width: 220px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mobile {
+      width: 45%;
+      max-width: 160px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 220px;
+      max-height: 220px;
+    }
+  }
 }
 
 .site-name {

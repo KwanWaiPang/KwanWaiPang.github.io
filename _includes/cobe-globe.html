@@ -1,0 +1,52 @@
+<div class="cobe-globe">
+  <canvas id="cobe-globe-canvas" aria-hidden="true"></canvas>
+</div>
+
+<script type="module">
+  import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe/+esm';
+
+  const canvas = document.getElementById('cobe-globe-canvas');
+  if (canvas) {
+    let phi = 0;
+    const size = 600;
+
+    canvas.width = size;
+    canvas.height = size;
+
+    createGlobe(canvas, {
+      devicePixelRatio: 2,
+      width: size,
+      height: size,
+      phi: 0,
+      theta: 0.25,
+      dark: 0,
+      diffuse: 1.25,
+      mapSamples: 16000,
+      mapBrightness: 6,
+      baseColor: [0.88, 0.9, 0.96],
+      markerColor: [0.18, 0.42, 0.92],
+      glowColor: [0.78, 0.86, 1],
+      markers: [
+        { location: [22.28, 114.15], size: 0.055 },
+        { location: [39.9, 116.4], size: 0.04 },
+        { location: [31.23, 121.47], size: 0.038 },
+        { location: [37.78, -122.44], size: 0.032 },
+        { location: [51.51, -0.13], size: 0.032 },
+        { location: [35.68, 139.69], size: 0.032 },
+        { location: [1.35, 103.82], size: 0.03 },
+      ],
+      arcs: [
+        { from: [22.28, 114.15], to: [37.78, -122.44] },
+        { from: [22.28, 114.15], to: [51.51, -0.13] },
+        { from: [22.28, 114.15], to: [35.68, 139.69] },
+      ],
+      arcColor: [0.35, 0.55, 0.95],
+      arcWidth: 0.35,
+      arcHeight: 0.25,
+      onRender: (state) => {
+        state.phi = phi;
+        phi += 0.004;
+      },
+    });
+  }
+</script>
