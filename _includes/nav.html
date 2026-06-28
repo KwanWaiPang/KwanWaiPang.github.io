@@ -31,6 +31,14 @@
     </nav>
   </div>
 
+  {% if site.visitor_map %}
+  <div class="visitor-map">
+    <a href="{{ site.visitor_map_link }}" title="Visit tracker">
+      <img src="{{ site.visitor_map }}" alt="Visitor map" />
+    </a>
+  </div>
+  {% endif %}
+
   <div class="wrapper-footer-desktop">
     <footer class="footer">
       {% include footer.html %}

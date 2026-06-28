@@ -427,6 +427,22 @@ nav {
   }
 }
 
+.visitor-map {
+  margin: 24px auto 0;
+  padding: 0 16px;
+  text-align: center;
+
+  a {
+    display: inline-block;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 2px;
+  }
+}
+
 // content
 
 .wrapper-content {
