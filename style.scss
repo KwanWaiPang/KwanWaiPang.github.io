@@ -440,6 +440,10 @@ img {
         transition: opacity 0.15s ease;
         z-index: 2;
 
+        &--float {
+          animation: cobe-label-float var(--cobe-float-duration, 3.2s) ease-in-out infinite;
+        }
+
         &--time {
           display: flex;
           flex-direction: column;
@@ -468,6 +472,22 @@ img {
     margin-top: 10px;
     position: relative;
     z-index: 3;
+  }
+}
+
+@keyframes cobe-label-float {
+  0%, 100% {
+    translate: -50% 0;
+  }
+
+  50% {
+    translate: -50% calc(-1 * var(--cobe-float-amplitude, 16px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cobe-globe .cobe-city-label--float {
+    animation: none;
   }
 }
 

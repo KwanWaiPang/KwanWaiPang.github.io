@@ -37,6 +37,24 @@ const ALL_CITIES = [
 ];
 const FOCUS = { lat: 23.02, lng: 113.12 };
 
+// REGIONAL 中的城市标签自动错峰浮动（只需维护 REGIONAL 列表）
+const FLOAT_DURATION = 3.2;
+const FLOAT_DELAY_STEP = 0.85;
+const REGIONAL_FLOAT_INDEX = new Map(REGIONAL.map((city, index) => [city.id, index]));
+
+function getRegionalFloatStyle(cityId) {
+  const index = REGIONAL_FLOAT_INDEX.get(cityId);
+  if (index === undefined) {
+    return null;
+  }
+
+  return {
+    delay: index * FLOAT_DELAY_STEP,
+    amplitude: 14 + (index % 4) * 2,
+    duration: FLOAT_DURATION,
+  };
+}
+
 const DPR = 2;
 const SCALE_MIN = 0.65;
 const SCALE_MAX = 6;
@@ -54,6 +72,18 @@ function buildMarkers(scale) {
     size: city.tz ? 0.001 : city.size / scale,
     color: city.color,
   }));
+}
+
+function applyFloatLabelStyle(label, city) {
+  const floatStyle = getRegionalFloatStyle(city.id);
+  if (!floatStyle || city.tz) {
+    return;
+  }
+
+  label.classList.add('cobe-city-label--float');
+  label.style.animationDelay = `${floatStyle.delay}s`;
+  label.style.setProperty('--cobe-float-duration', `${floatStyle.duration}s`);
+  label.style.setProperty('--cobe-float-amplitude', `${floatStyle.amplitude}px`);
 }
 
 function focusOnLocation(lat, lng) {
@@ -110,7 +140,8 @@ function createCityLabels(anchorRoot, cities) {
     }
 
     anchorRoot.appendChild(label);
-    return { timeEl, city };
+    applyFloatLabelStyle(label, city);
+    return { timeEl, city, label };
   });
 }
 
