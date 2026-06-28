@@ -377,6 +377,8 @@ img {
     }
 
     &.cobe-globe {
+      width: 66%;
+
       .cobe-globe-wrap {
         position: relative;
         width: 100%;
@@ -399,8 +401,8 @@ img {
         line-height: 1.4;
         font-weight: 600;
         color: #fff;
-        background: rgba(8, 56, 92, 0.82);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(16, 88, 130, 0.88);
+        border: 1px solid rgba(255, 255, 255, 0.35);
         border-radius: 4px;
         white-space: nowrap;
         pointer-events: none;
@@ -461,20 +463,19 @@ nav {
 }
 
 .visitor-map {
-  margin:0 auto;
-  display: block;
+  margin: 24px auto 0;
+  padding: 0 16px;
+  text-align: center;
   width: 80%;
-  height: auto;
-  // max-width: 200px;
-  // max-height: 200px;
 
-  @include mobile {
-    max-width: 120px;
-    max-height: 120px;
+  a {
+    display: inline-block;
+    width: 100%;
   }
 
   img {
-    display: inline-block;
+    width: 100%;
+    height: auto;
     border-radius: 2px;
   }
 }
