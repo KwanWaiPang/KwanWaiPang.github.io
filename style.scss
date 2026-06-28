@@ -441,7 +441,7 @@ img {
         z-index: 2;
 
         &--float {
-          animation: cobe-label-float var(--cobe-float-duration, 3.2s) ease-in-out infinite;
+          animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;
         }
 
         &--time {
@@ -480,8 +480,16 @@ img {
     translate: -50% 0;
   }
 
+  25% {
+    translate: calc(-50% + var(--cobe-float-x, 12px)) calc(-1 * var(--cobe-float-y, 14px));
+  }
+
   50% {
-    translate: -50% calc(-1 * var(--cobe-float-amplitude, 16px));
+    translate: calc(-50% - var(--cobe-float-x, 12px)) var(--cobe-float-y, 14px);
+  }
+
+  75% {
+    translate: calc(-50% + var(--cobe-float-x, 12px)) var(--cobe-float-y, 14px);
   }
 }
 
