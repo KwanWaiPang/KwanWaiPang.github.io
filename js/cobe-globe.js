@@ -30,8 +30,17 @@ const FOCUS = { lat: 23.02, lng: 113.12 };
 
 const DPR = 2;
 const SCALE_MIN = 0.65;
-const SCALE_MAX = 1.75;
+const SCALE_MAX = 3;
 const SCALE_DEFAULT = 1;
+
+function buildMarkers(scale) {
+  return ALL_CITIES.map((city) => ({
+    id: city.id,
+    location: [city.lat, city.lng],
+    size: city.size / scale,
+    color: city.color,
+  }));
+}
 
 function focusOnLocation(lat, lng) {
   return {
@@ -103,7 +112,7 @@ function initCobeGlobe(canvas) {
 
   function updateGlobeState() {
     if (globe) {
-      globe.update({ phi, theta, scale });
+      globe.update({ phi, theta, scale, markers: buildMarkers(scale) });
     }
   }
 
@@ -116,12 +125,7 @@ function initCobeGlobe(canvas) {
 
   function createGlobeInstance() {
     const size = measureDisplaySize();
-    const markers = ALL_CITIES.map((city) => ({
-      id: city.id,
-      location: [city.lat, city.lng],
-      size: city.size,
-      color: city.color,
-    }));
+    const markers = buildMarkers(scale);
 
     if (globe) {
       globe.update({ width: size, height: size, phi, theta, scale, markers });
