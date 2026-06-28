@@ -377,9 +377,35 @@ img {
     }
 
     &.cobe-globe {
+      .cobe-globe-wrap {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+      }
+
       canvas {
         display: block;
         margin: 0 auto;
+      }
+
+      .cobe-city-label {
+        position: absolute;
+        bottom: anchor(top);
+        left: anchor(center);
+        translate: -50% 0;
+        margin-bottom: 3px;
+        padding: 1px 6px;
+        font-size: 10px;
+        line-height: 1.4;
+        font-weight: 600;
+        color: #fff;
+        background: rgba(8, 56, 92, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 4px;
+        white-space: nowrap;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+        z-index: 2;
       }
     }
   }

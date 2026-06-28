@@ -1,7 +1,17 @@
 import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@2.0.1/+esm';
 
+const CITIES = [
+  { id: 'hk', location: [22.28, 114.15], size: 0.09, color: [1, 0.38, 0.32] },
+  { id: 'bj', location: [39.9, 116.4], size: 0.07, color: [1, 0.62, 0.18] },
+  { id: 'sh', location: [31.23, 121.47], size: 0.07, color: [1, 0.88, 0.22] },
+  { id: 'sf', location: [37.78, -122.44], size: 0.065, color: [0.35, 0.82, 1] },
+  { id: 'ldn', location: [51.51, -0.13], size: 0.065, color: [0.45, 0.92, 0.55] },
+  { id: 'tky', location: [35.68, 139.69], size: 0.065, color: [0.88, 0.52, 1] },
+  { id: 'sg', location: [1.35, 103.82], size: 0.06, color: [0.28, 0.95, 0.72] },
+];
+
 function initCobeGlobe(canvas) {
-  const container = canvas.parentElement;
+  const container = canvas.closest('.cobe-globe-wrap');
   if (!container) {
     return;
   }
@@ -16,9 +26,17 @@ function initCobeGlobe(canvas) {
   let resizeTimer = null;
 
   const DPR = 2;
+  const hk = CITIES[0].location;
 
   canvas.style.touchAction = 'none';
   canvas.style.cursor = 'grab';
+
+  container.querySelectorAll('.cobe-city-label').forEach((label) => {
+    const cityId = label.dataset.city;
+    if (cityId) {
+      label.style.opacity = `var(--cobe-visible-${cityId}, 0)`;
+    }
+  });
 
   function getDimensions() {
     const display = Math.max(Math.round(container.getBoundingClientRect().width), 120);
@@ -45,30 +63,29 @@ function initCobeGlobe(canvas) {
       height,
       phi,
       theta,
-      dark: 1,
-      diffuse: 1.35,
-      mapSamples: 20000,
-      mapBrightness: 9,
-      baseColor: [0.12, 0.18, 0.38],
-      markerColor: [0.35, 0.72, 1],
-      glowColor: [0.22, 0.48, 0.95],
-      markers: [
-        { location: [22.28, 114.15], size: 0.055 },
-        { location: [39.9, 116.4], size: 0.04 },
-        { location: [31.23, 121.47], size: 0.038 },
-        { location: [37.78, -122.44], size: 0.032 },
-        { location: [51.51, -0.13], size: 0.032 },
-        { location: [35.68, 139.69], size: 0.032 },
-        { location: [1.35, 103.82], size: 0.03 },
-      ],
+      dark: 0.45,
+      diffuse: 1.75,
+      mapSamples: 24000,
+      mapBrightness: 12,
+      mapBaseBrightness: 0.03,
+      baseColor: [0.08, 0.48, 0.72],
+      markerColor: [1, 0.55, 0.28],
+      glowColor: [0.35, 0.78, 0.98],
+      markerElevation: 0.05,
+      markers: CITIES.map((city) => ({
+        id: city.id,
+        location: city.location,
+        size: city.size,
+        color: city.color,
+      })),
       arcs: [
-        { from: [22.28, 114.15], to: [37.78, -122.44] },
-        { from: [22.28, 114.15], to: [51.51, -0.13] },
-        { from: [22.28, 114.15], to: [35.68, 139.69] },
+        { from: hk, to: CITIES[3].location },
+        { from: hk, to: CITIES[4].location },
+        { from: hk, to: CITIES[5].location },
       ],
-      arcColor: [0.45, 0.68, 1],
-      arcWidth: 0.4,
-      arcHeight: 0.28,
+      arcColor: [1, 0.72, 0.38],
+      arcWidth: 0.38,
+      arcHeight: 0.26,
     });
   }
 
