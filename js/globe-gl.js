@@ -1,4 +1,8 @@
-import Globe from 'https://esm.sh/globe.gl@2.43.0';
+const Globe = window.Globe;
+
+if (!Globe) {
+  throw new Error('globe.gl UMD bundle not loaded');
+}
 
 // 带时间的国际城市（tz 为 IANA 时区名）
 const TIME_CITIES = [
@@ -470,6 +474,12 @@ function initGlobe(container) {
 
   initGlobeInstance();
 
+  requestAnimationFrame(() => {
+    if (globe && measureSize() > 0) {
+      initGlobeInstance();
+    }
+  });
+
   new ResizeObserver(() => {
     if (globe) {
       initGlobeInstance();
@@ -479,8 +489,14 @@ function initGlobe(container) {
 
 function boot() {
   const container = document.getElementById('globe-root');
-  if (container) {
+  if (!container) {
+    return;
+  }
+
+  try {
     initGlobe(container);
+  } catch (error) {
+    console.error('[globe-gl] init failed:', error);
   }
 }
 
