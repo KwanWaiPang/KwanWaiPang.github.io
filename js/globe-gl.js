@@ -272,7 +272,7 @@
         .atmosphereAltitude(0.18)
         .pointAltitude(0)
         .pointColor('color')
-        .pointRadius(0.06)
+        .pointRadius(0.14)
         .pointsMerge(true)
         .htmlLat('lat')
         .htmlLng('lng')
