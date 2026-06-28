@@ -16,7 +16,7 @@ avatar: #https://avatars.githubusercontent.com/u/44108932?s=400&u=dbbb2abcd70a8b
 # avatar 不输入则不会显示头像图片
 
 # 访客地球仪（MapMyVisitors globe.js 地址）
-visitor_globe: #//mapmyvisitors.com/globe.js?d=qAAbVjlo9WWMB5wmuf9D9eWuQQR6RJ_v_zyIbWldNR4
+visitor_globe: //mapmyvisitors.com/globe.js?d=qAAbVjlo9WWMB5wmuf9D9eWuQQR6RJ_v_zyIbWldNR4
 
 # 访客地图（显示在侧边栏导航下方）
 visitor_map: https://mapmyvisitors.com/map.png?cl=ffffff&w=900&t=tt&d=lrhHkw37oj7lEdFXpI6fnTvg82h9jRMMHjNDrU-AUJA
