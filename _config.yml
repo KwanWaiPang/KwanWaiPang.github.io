@@ -12,7 +12,7 @@ description: "Personal Blog"
 #
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://avatars.githubusercontent.com/u/44108932?s=400&u=dbbb2abcd70a8baf00fe0ec6e6563e223cb58a0d&v=4
+avatar: #https://avatars.githubusercontent.com/u/44108932?s=400&u=dbbb2abcd70a8baf00fe0ec6e6563e223cb58a0d&v=4
 # avatar 不输入则不会显示头像图片
 
 # 访客地球仪（MapMyVisitors globe.js 地址）
