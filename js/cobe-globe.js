@@ -13,37 +13,185 @@ const TIME_CITIES = [
   { id: 'cbr', name: 'Canberra', lat: -35.2809, lng: 149.13, tz: 'Australia/Canberra', size: 0.05, color: [0.95, 0.55, 0.45] },
 ];
 
-// 国内城市/省份（省会坐标；仅显示地名，不显示时间）
+// 到过的省份/地区；放大后显示 cities 中的具体城市（只需维护此列表）
+// 北京见 TIME_CITIES；香港、澳门为省级，无下级城市
 const REGIONAL = [
-  { id: 'fs', name: '佛山', lat: 23.0218, lng: 113.1219, size: 0.058, color: [1, 0.78, 0.28] },
-  { id: 'gz', name: '广州', lat: 23.1291, lng: 113.2644, size: 0.05, color: [1, 0.5, 0.35] },
-  { id: 'hk', name: '香港', lat: 22.3193, lng: 114.1694, size: 0.05, color: [1, 0.42, 0.38] },
-  { id: 'sz', name: '深圳', lat: 22.5431, lng: 114.0579, size: 0.05, color: [1, 0.55, 0.4] },
-  { id: 'bj', name: '北京', lat: 39.9042, lng: 116.4074, size: 0.05, color: [1, 0.62, 0.22] },
-  { id: 'gx', name: '广西', lat: 22.817, lng: 108.3665, size: 0.045, color: [0.55, 0.92, 0.55] },
-  { id: 'hn', name: '湖南', lat: 28.2282, lng: 112.9388, size: 0.045, color: [0.95, 0.55, 0.55] },
-  { id: 'sc', name: '四川', lat: 30.5728, lng: 104.0668, size: 0.045, color: [0.85, 0.6, 1] },
-  { id: 'fj', name: '福建', lat: 26.0745, lng: 119.2965, size: 0.045, color: [0.5, 0.85, 0.95] },
+  {
+    id: 'yn',
+    name: '云南',
+    lat: 25.04,
+    lng: 101.55,
+    size: 0.048,
+    color: [0.55, 0.92, 0.58],
+    cities: [
+      { id: 'lj', name: '丽江', lat: 26.8558, lng: 100.2277 },
+      { id: 'km', name: '昆明', lat: 25.0389, lng: 102.7183 },
+    ],
+  },
+  {
+    id: 'gx',
+    name: '广西',
+    lat: 24.05,
+    lng: 110.65,
+    size: 0.048,
+    color: [0.55, 0.92, 0.55],
+    cities: [
+      { id: 'gl', name: '桂林', lat: 25.2736, lng: 110.29 },
+      { id: 'hz', name: '贺州', lat: 24.4141, lng: 111.5665 },
+      { id: 'wz', name: '梧州', lat: 23.485, lng: 111.279 },
+    ],
+  },
+  {
+    id: 'hn',
+    name: '湖南',
+    lat: 27.2,
+    lng: 112.8,
+    size: 0.048,
+    color: [0.95, 0.55, 0.55],
+    cities: [
+      { id: 'ss', name: '韶山', lat: 27.915, lng: 112.526 },
+      { id: 'xt', name: '湘潭', lat: 27.8297, lng: 112.9444 },
+      { id: 'cz', name: '郴州', lat: 25.7706, lng: 113.0149 },
+    ],
+  },
+  {
+    id: 'jx',
+    name: '江西',
+    lat: 29.2,
+    lng: 115.9,
+    size: 0.048,
+    color: [0.95, 0.65, 0.45],
+    cities: [
+      { id: 'jj', name: '九江', lat: 29.705, lng: 115.9928 },
+      { id: 'nc', name: '南昌', lat: 28.682, lng: 115.8579 },
+    ],
+  },
+  {
+    id: 'fj',
+    name: '福建',
+    lat: 25.6,
+    lng: 118.7,
+    size: 0.048,
+    color: [0.5, 0.85, 0.95],
+    cities: [
+      { id: 'np', name: '南平', lat: 26.6418, lng: 118.1777 },
+      { id: 'fz', name: '福州', lat: 26.0745, lng: 119.2965 },
+      { id: 'qz', name: '泉州', lat: 24.8741, lng: 118.6757 },
+    ],
+  },
+  {
+    id: 'sc',
+    name: '四川',
+    lat: 30.15,
+    lng: 103.92,
+    size: 0.048,
+    color: [0.85, 0.6, 1],
+    cities: [
+      { id: 'cd', name: '成都', lat: 30.5728, lng: 104.0668 },
+      { id: 'ls', name: '乐山', lat: 29.5521, lng: 103.7654 },
+    ],
+  },
+  {
+    id: 'gd',
+    name: '广东',
+    lat: 23.02,
+    lng: 113.4,
+    size: 0.05,
+    color: [1, 0.62, 0.35],
+    cities: [
+      { id: 'fs', name: '佛山', lat: 23.0218, lng: 113.1219 },
+      { id: 'gz', name: '广州', lat: 23.1291, lng: 113.2644 },
+      { id: 'sz', name: '深圳', lat: 22.5431, lng: 114.0579 },
+      { id: 'zh', name: '珠海', lat: 22.2707, lng: 113.5767 },
+      { id: 'hy', name: '河源', lat: 23.7465, lng: 114.6978 },
+    ],
+  },
+  {
+    id: 'hk',
+    name: '香港',
+    lat: 22.3193,
+    lng: 114.1694,
+    size: 0.05,
+    color: [1, 0.42, 0.38],
+  },
+  {
+    id: 'mo',
+    name: '澳门',
+    lat: 22.1987,
+    lng: 113.5439,
+    size: 0.05,
+    color: [1, 0.48, 0.52],
+  },
 ];
 
-function cityLocationKey(city) {
-  return `${city.lat.toFixed(3)},${city.lng.toFixed(3)}`;
-}
-
-const TIME_CITY_LOCATIONS = new Set(TIME_CITIES.map(cityLocationKey));
-const ALL_CITIES = [
-  ...REGIONAL.filter((city) => !TIME_CITY_LOCATIONS.has(cityLocationKey(city))),
-  ...TIME_CITIES,
-];
 const FOCUS = { lat: 23.02, lng: 113.12 };
 
-// REGIONAL 中的城市标签自动错峰浮动（只需维护 REGIONAL 列表）
+const DPR = 2;
+const SCALE_MIN = 1;
+const SCALE_MAX = 3;
+const SCALE_DEFAULT = 1;
+const SCALE_CITY_THRESHOLD = 2;
+
 const FLOAT_DURATION = 4;
 const FLOAT_DELAY_STEP = 1;
-const REGIONAL_FLOAT_INDEX = new Map(REGIONAL.map((city, index) => [city.id, index]));
 
-function getRegionalFloatStyle(cityId) {
-  const index = REGIONAL_FLOAT_INDEX.get(cityId);
+const REGIONAL_FLOAT_INDEX = new Map();
+let regionalFloatIndex = 0;
+REGIONAL.forEach((region) => {
+  region.cities?.forEach((city) => {
+    REGIONAL_FLOAT_INDEX.set(city.id, regionalFloatIndex++);
+  });
+});
+
+function flattenRegionalPlaces() {
+  const places = [];
+
+  REGIONAL.forEach((region) => {
+    places.push({
+      id: region.id,
+      name: region.name,
+      lat: region.lat,
+      lng: region.lng,
+      size: region.size,
+      color: region.color,
+      level: 'province',
+      alwaysShow: !region.cities?.length,
+    });
+
+    region.cities?.forEach((city) => {
+      places.push({
+        id: city.id,
+        name: city.name,
+        lat: city.lat,
+        lng: city.lng,
+        size: region.size * 0.85,
+        color: region.color,
+        level: 'city',
+        regionId: region.id,
+      });
+    });
+  });
+
+  return places;
+}
+
+const REGIONAL_PLACES = flattenRegionalPlaces();
+const ALL_LABEL_PLACES = [...REGIONAL_PLACES, ...TIME_CITIES];
+
+function rgbFromColor([r, g, b]) {
+  return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
+}
+
+function isCityZoom(zoomScale) {
+  return zoomScale >= SCALE_CITY_THRESHOLD;
+}
+
+function isRegionalFloatActive(zoomScale) {
+  return isCityZoom(zoomScale) && zoomScale >= SCALE_MAX - 0.001;
+}
+
+function getRegionalFloatStyle(placeId) {
+  const index = REGIONAL_FLOAT_INDEX.get(placeId);
   if (index === undefined) {
     return null;
   }
@@ -56,43 +204,73 @@ function getRegionalFloatStyle(cityId) {
   };
 }
 
-const DPR = 2;
-const SCALE_MIN = 1; //设置最小为1，原本是0.65
-const SCALE_MAX = 3;
-const SCALE_DEFAULT = 1;
-
-function rgbFromColor([r, g, b]) {
-  return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
-}
-
 function buildMarkers(scale) {
-  return ALL_CITIES.map((city) => ({
-    id: city.id,
-    location: [city.lat, city.lng],
-    // 带时钟城市用 DOM 五角星，WebGL 圆点隐藏但保留锚点
-    size: city.tz ? 0.001 : city.size / scale,
-    color: city.color,
-  }));
+  const showCities = isCityZoom(scale);
+  const markers = [];
+
+  REGIONAL.forEach((region) => {
+    const hasCities = Boolean(region.cities?.length);
+    const showProvince = !hasCities || !showCities;
+
+    markers.push({
+      id: region.id,
+      location: [region.lat, region.lng],
+      size: showProvince ? region.size / scale : 0.001,
+      color: region.color,
+    });
+
+    region.cities?.forEach((city) => {
+      markers.push({
+        id: city.id,
+        location: [city.lat, city.lng],
+        size: showCities ? (region.size * 0.85) / scale : 0.001,
+        color: region.color,
+      });
+    });
+  });
+
+  TIME_CITIES.forEach((city) => {
+    markers.push({
+      id: city.id,
+      location: [city.lat, city.lng],
+      size: 0.001,
+      color: city.color,
+    });
+  });
+
+  return markers;
 }
 
-function setupRegionalLabel(label, city) {
-  const floatStyle = getRegionalFloatStyle(city.id);
-  if (!floatStyle || city.tz) {
+function setupRegionalLabel(label, place) {
+  if (place.tz) {
     return;
   }
 
   label.classList.add('cobe-city-label--regional');
+
+  if (place.level === 'province') {
+    label.classList.add('cobe-city-label--province');
+    if (place.alwaysShow) {
+      label.classList.add('cobe-city-label--always');
+    }
+    return;
+  }
+
+  label.classList.add('cobe-city-label--city');
+
+  const floatStyle = getRegionalFloatStyle(place.id);
+  if (!floatStyle) {
+    return;
+  }
+
   label.style.animationDelay = `${floatStyle.delay}s`;
   label.style.setProperty('--cobe-float-duration', `${floatStyle.duration}s`);
   label.style.setProperty('--cobe-float-x', `${floatStyle.amplitudeX}px`);
   label.style.setProperty('--cobe-float-y', `${floatStyle.amplitudeY}px`);
 }
 
-function isRegionalFloatActive(zoomScale) {
-  return zoomScale >= SCALE_MAX - 0.001;
-}
-
-function syncRegionalLabelFloat(container, zoomScale) {
+function syncZoomDisplay(container, zoomScale) {
+  container.classList.toggle('cobe-show-cities', isCityZoom(zoomScale));
   container.classList.toggle('cobe-regional-float-active', isRegionalFloatActive(zoomScale));
 }
 
@@ -116,42 +294,42 @@ function formatCityTime(timezone) {
   }
 }
 
-function createCityLabels(anchorRoot, cities) {
+function createCityLabels(anchorRoot, places) {
   anchorRoot.querySelectorAll('.cobe-city-label, .cobe-city-star').forEach((el) => el.remove());
 
-  return cities.map((city) => {
-    if (city.tz) {
+  return places.map((place) => {
+    if (place.tz) {
       const star = document.createElement('span');
       star.className = 'cobe-city-star';
-      star.style.positionAnchor = `--cobe-${city.id}`;
-      star.style.setProperty('opacity', `var(--cobe-visible-${city.id}, 0)`);
-      star.style.setProperty('--cobe-star-color', rgbFromColor(city.color));
+      star.style.positionAnchor = `--cobe-${place.id}`;
+      star.style.setProperty('opacity', `var(--cobe-visible-${place.id}, 0)`);
+      star.style.setProperty('--cobe-star-color', rgbFromColor(place.color));
       star.innerHTML =
         '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.87 5.81 6.41.93-4.64 4.52 1.1 6.38L12 17.77l-5.74 3.02 1.1-6.38-4.64-4.52 6.41-.93L12 2.5z"/></svg>';
       anchorRoot.appendChild(star);
     }
 
     const label = document.createElement('span');
-    label.className = city.tz ? 'cobe-city-label cobe-city-label--time' : 'cobe-city-label';
-    label.style.positionAnchor = `--cobe-${city.id}`;
-    label.style.setProperty('opacity', `var(--cobe-visible-${city.id}, 0)`);
+    label.className = place.tz ? 'cobe-city-label cobe-city-label--time' : 'cobe-city-label';
+    label.style.positionAnchor = `--cobe-${place.id}`;
+    label.style.setProperty('opacity', `var(--cobe-visible-${place.id}, 0)`);
 
     const nameEl = document.createElement('span');
     nameEl.className = 'cobe-city-label-name';
-    nameEl.textContent = city.name;
+    nameEl.textContent = place.name;
     label.appendChild(nameEl);
 
     let timeEl = null;
-    if (city.tz) {
+    if (place.tz) {
       timeEl = document.createElement('span');
       timeEl.className = 'cobe-city-label-time';
-      timeEl.textContent = formatCityTime(city.tz);
+      timeEl.textContent = formatCityTime(place.tz);
       label.appendChild(timeEl);
     }
 
     anchorRoot.appendChild(label);
-    setupRegionalLabel(label, city);
-    return { timeEl, city, label };
+    setupRegionalLabel(label, place);
+    return { timeEl, place, label };
   });
 }
 
@@ -180,7 +358,7 @@ function initCobeGlobe(canvas) {
     if (globe) {
       globe.update({ phi, theta, scale, markers: buildMarkers(scale) });
     }
-    syncRegionalLabelFloat(container, scale);
+    syncZoomDisplay(container, scale);
   }
 
   function measureDisplaySize() {
@@ -196,7 +374,7 @@ function initCobeGlobe(canvas) {
 
     if (globe) {
       globe.update({ width: size, height: size, phi, theta, scale, markers });
-      syncRegionalLabelFloat(container, scale);
+      syncZoomDisplay(container, scale);
       return;
     }
 
@@ -221,8 +399,8 @@ function initCobeGlobe(canvas) {
 
     const anchorRoot = canvas.parentElement;
     if (anchorRoot) {
-      labelEntries = createCityLabels(anchorRoot, ALL_CITIES);
-      syncRegionalLabelFloat(container, scale);
+      labelEntries = createCityLabels(anchorRoot, ALL_LABEL_PLACES);
+      syncZoomDisplay(container, scale);
     }
   }
 
@@ -237,9 +415,9 @@ function initCobeGlobe(canvas) {
 
     if (!lastTimeRefresh || now - lastTimeRefresh > 30000) {
       lastTimeRefresh = now;
-      labelEntries.forEach(({ timeEl, city }) => {
-        if (timeEl && city.tz) {
-          timeEl.textContent = formatCityTime(city.tz);
+      labelEntries.forEach(({ timeEl, place }) => {
+        if (timeEl && place.tz) {
+          timeEl.textContent = formatCityTime(place.tz);
         }
       });
     }

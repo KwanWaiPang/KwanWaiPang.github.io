@@ -395,9 +395,27 @@ img {
         }
 
         &.cobe-regional-float-active {
-          .cobe-city-label--regional {
+          .cobe-city-label--regional.cobe-city-label--city {
             animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;
           }
+        }
+
+        &.cobe-show-cities {
+          .cobe-city-label--city {
+            visibility: visible;
+          }
+
+          .cobe-city-label--province:not(.cobe-city-label--always) {
+            visibility: hidden;
+          }
+        }
+
+        .cobe-city-label--city {
+          visibility: hidden;
+        }
+
+        .cobe-city-label--always {
+          visibility: visible;
         }
       }
 
@@ -500,7 +518,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cobe-globe-wrap.cobe-regional-float-active .cobe-city-label--regional {
+  .cobe-globe-wrap.cobe-regional-float-active .cobe-city-label--regional.cobe-city-label--city {
     animation: none;
   }
 }
