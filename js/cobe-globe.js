@@ -19,13 +19,22 @@ const REGIONAL = [
   { id: 'gz', name: '广州', lat: 23.1291, lng: 113.2644, size: 0.05, color: [1, 0.5, 0.35] },
   { id: 'hk', name: '香港', lat: 22.3193, lng: 114.1694, size: 0.05, color: [1, 0.42, 0.38] },
   { id: 'sz', name: '深圳', lat: 22.5431, lng: 114.0579, size: 0.05, color: [1, 0.55, 0.4] },
+  { id: 'bj', name: '北京', lat: 39.9042, lng: 116.4074, size: 0.05, color: [1, 0.62, 0.22] },
   { id: 'gx', name: '广西', lat: 22.817, lng: 108.3665, size: 0.045, color: [0.55, 0.92, 0.55] },
   { id: 'hn', name: '湖南', lat: 28.2282, lng: 112.9388, size: 0.045, color: [0.95, 0.55, 0.55] },
   { id: 'sc', name: '四川', lat: 30.5728, lng: 104.0668, size: 0.045, color: [0.85, 0.6, 1] },
   { id: 'fj', name: '福建', lat: 26.0745, lng: 119.2965, size: 0.045, color: [0.5, 0.85, 0.95] },
 ];
 
-const ALL_CITIES = [...REGIONAL, ...TIME_CITIES];
+function cityLocationKey(city) {
+  return `${city.lat.toFixed(3)},${city.lng.toFixed(3)}`;
+}
+
+const TIME_CITY_LOCATIONS = new Set(TIME_CITIES.map(cityLocationKey));
+const ALL_CITIES = [
+  ...REGIONAL.filter((city) => !TIME_CITY_LOCATIONS.has(cityLocationKey(city))),
+  ...TIME_CITIES,
+];
 const FOCUS = { lat: 23.02, lng: 113.12 };
 
 const DPR = 2;
@@ -33,11 +42,16 @@ const SCALE_MIN = 0.65;
 const SCALE_MAX = 6;
 const SCALE_DEFAULT = 1;
 
+function rgbFromColor([r, g, b]) {
+  return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
+}
+
 function buildMarkers(scale) {
   return ALL_CITIES.map((city) => ({
     id: city.id,
     location: [city.lat, city.lng],
-    size: city.size / scale,
+    // 带时钟城市用 DOM 五角星，WebGL 圆点隐藏但保留锚点
+    size: city.tz ? 0.001 : city.size / scale,
     color: city.color,
   }));
 }
@@ -63,9 +77,20 @@ function formatCityTime(timezone) {
 }
 
 function createCityLabels(anchorRoot, cities) {
-  anchorRoot.querySelectorAll('.cobe-city-label').forEach((el) => el.remove());
+  anchorRoot.querySelectorAll('.cobe-city-label, .cobe-city-star').forEach((el) => el.remove());
 
   return cities.map((city) => {
+    if (city.tz) {
+      const star = document.createElement('span');
+      star.className = 'cobe-city-star';
+      star.style.positionAnchor = `--cobe-${city.id}`;
+      star.style.setProperty('opacity', `var(--cobe-visible-${city.id}, 0)`);
+      star.style.setProperty('--cobe-star-color', rgbFromColor(city.color));
+      star.innerHTML =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.87 5.81 6.41.93-4.64 4.52 1.1 6.38L12 17.77l-5.74 3.02 1.1-6.38-4.64-4.52 6.41-.93L12 2.5z"/></svg>';
+      anchorRoot.appendChild(star);
+    }
+
     const label = document.createElement('span');
     label.className = city.tz ? 'cobe-city-label cobe-city-label--time' : 'cobe-city-label';
     label.style.positionAnchor = `--cobe-${city.id}`;

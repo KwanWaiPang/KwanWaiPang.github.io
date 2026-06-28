@@ -401,6 +401,26 @@ img {
         vertical-align: top;
       }
 
+      .cobe-city-star {
+        position: absolute;
+        top: anchor(center);
+        left: anchor(center);
+        translate: -50% -50%;
+        width: 9px;
+        height: 9px;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+        z-index: 1;
+        filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.85));
+
+        svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          fill: var(--cobe-star-color, #ffb347);
+        }
+      }
+
       .cobe-city-label {
         position: absolute;
         bottom: anchor(top);
