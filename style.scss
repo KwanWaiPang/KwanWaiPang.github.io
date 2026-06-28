@@ -399,6 +399,11 @@ img {
           height: 100% !important;
         }
 
+        > div {
+          width: 100%;
+          height: 100%;
+        }
+
         &.cobe-regional-float-active {
           .cobe-city-label--regional.cobe-city-label--city {
             animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;

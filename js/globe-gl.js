@@ -1,10 +1,7 @@
-const Globe = window.Globe;
+(function () {
+  'use strict';
 
-if (!Globe) {
-  throw new Error('globe.gl UMD bundle not loaded');
-}
-
-// 带时间的国际城市（tz 为 IANA 时区名）
+  // 带时间的国际城市（tz 为 IANA 时区名）
 const TIME_CITIES = [
   { id: 'tky', name: 'Tokyo', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', color: [0.92, 0.58, 1] },
   { id: 'nyc', name: 'New York', lat: 40.7128, lng: -74.006, tz: 'America/New_York', color: [0.42, 0.82, 1] },
@@ -152,7 +149,7 @@ REGIONAL.forEach((region) => {
 });
 
 const GLOBE_TEXTURE =
-  'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg';
+  '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg';
 
 function rgbFromColor([r, g, b]) {
   return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
@@ -421,7 +418,7 @@ function initGlobe(container) {
       return;
     }
 
-    globe = Globe(container)
+    globe = new Globe(container, { animateIn: false })
       .width(size)
       .height(size)
       .backgroundColor('rgba(0,0,0,0)')
@@ -435,7 +432,7 @@ function initGlobe(container) {
       .htmlLat('lat')
       .htmlLng('lng')
       .htmlAltitude(0.015)
-      .htmlElement(createLabelElement)
+      .htmlElement((place) => createLabelElement(place))
       .htmlTransitionDuration(200);
 
     globe.controls().autoRotate = true;
@@ -493,6 +490,11 @@ function boot() {
     return;
   }
 
+  if (typeof Globe === 'undefined') {
+    console.error('[globe-gl] Globe is not loaded. Check CDN script.');
+    return;
+  }
+
   try {
     initGlobe(container);
   } catch (error) {
@@ -505,3 +507,4 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
+})();
