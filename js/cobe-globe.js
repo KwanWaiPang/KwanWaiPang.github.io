@@ -37,7 +37,6 @@ function mergeMarkers() {
 }
 
 const MARKERS = mergeMarkers();
-
 const ARCS = VISITED.map((city) => ({ from: FOSHAN.id, to: city.id }));
 
 function focusOnLocation(lat, lng) {
@@ -93,12 +92,16 @@ function projectMarker(lat, lng, phi, theta, size) {
 }
 
 function formatCityTime(timezone) {
-  return new Intl.DateTimeFormat('zh-CN', {
-    timeZone: timezone,
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  }).format(new Date());
+  try {
+    return new Intl.DateTimeFormat('zh-CN', {
+      timeZone: timezone,
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).format(new Date());
+  } catch (error) {
+    return '--:--';
+  }
 }
 
 function createCityLabels(container, cities) {
@@ -124,7 +127,7 @@ function createCityLabels(container, cities) {
 }
 
 function updateCityLabels(labelEntries, phi, theta, displaySize) {
-  labelEntries.forEach(({ el, city, timeEl }) => {
+  labelEntries.forEach(({ el, city }) => {
     const pos = projectMarker(city.lat, city.lng, phi, theta, displaySize);
     if (pos) {
       el.style.left = `${pos.x}px`;
@@ -132,10 +135,6 @@ function updateCityLabels(labelEntries, phi, theta, displaySize) {
       el.classList.add('is-visible');
     } else {
       el.classList.remove('is-visible');
-    }
-
-    if (timeEl && city.tz) {
-      timeEl.textContent = formatCityTime(city.tz);
     }
   });
 }
@@ -155,10 +154,9 @@ function initCobeGlobe(canvas) {
   let globe = null;
   let resizeTimer = null;
   let displaySize = 0;
-  let lastTimeUpdate = 0;
+  let labelEntries = [];
 
   const DPR = 2;
-  const labelEntries = createCityLabels(container, MARKERS);
   const arcs = buildArcs(MARKERS, ARCS);
 
   canvas.style.touchAction = 'none';
@@ -179,59 +177,61 @@ function initCobeGlobe(canvas) {
   function createGlobeInstance() {
     if (globe) {
       globe.destroy();
+      globe = null;
     }
 
     const { width, height } = getDimensions();
 
-    globe = createGlobe(canvas, {
-      devicePixelRatio: DPR,
-      width,
-      height,
-      phi,
-      theta,
-      dark: 0.18,
-      diffuse: 2.15,
-      mapSamples: 26000,
-      mapBrightness: 15,
-      mapBaseBrightness: 0.08,
-      baseColor: [0.24, 0.7, 0.95],
-      markerColor: [1, 0.72, 0.42],
-      glowColor: [0.58, 0.92, 1],
-      markerElevation: 0.05,
-      markers: MARKERS.map((city) => ({
-        id: city.id,
-        location: [city.lat, city.lng],
-        size: city.size,
-        color: city.color,
-      })),
-      arcs,
-      arcColor: [1, 0.86, 0.55],
-      arcWidth: 0.34,
-      arcHeight: 0.2,
-    });
+    try {
+      globe = createGlobe(canvas, {
+        devicePixelRatio: DPR,
+        width,
+        height,
+        phi,
+        theta,
+        dark: 0.18,
+        diffuse: 2.15,
+        mapSamples: 26000,
+        mapBrightness: 15,
+        mapBaseBrightness: 0.08,
+        baseColor: [0.24, 0.7, 0.95],
+        markerColor: [1, 0.72, 0.42],
+        glowColor: [0.58, 0.92, 1],
+        markerElevation: 0.05,
+        markers: MARKERS.map((city) => ({
+          id: city.id,
+          location: [city.lat, city.lng],
+          size: city.size,
+          color: city.color,
+        })),
+        arcs,
+        arcColor: [1, 0.86, 0.55],
+        arcWidth: 0.34,
+        arcHeight: 0.2,
+        onRender: (state) => {
+          if (!isDragging) {
+            phi += 0.004;
+          }
+          state.phi = phi;
+          state.theta = theta;
+        },
+      });
+    } catch (error) {
+      console.error('COBE globe init failed:', error);
+    }
   }
 
-  function animate(now) {
-    if (!isDragging) {
-      phi += 0.004;
-    }
-
-    if (globe) {
-      globe.update({ phi, theta });
-    }
-
-    if (!lastTimeUpdate || now - lastTimeUpdate > 30000) {
-      lastTimeUpdate = now;
-      labelEntries.forEach(({ timeEl, city }) => {
-        if (timeEl && city.tz) {
-          timeEl.textContent = formatCityTime(city.tz);
-        }
-      });
-    }
-
+  function animateLabels() {
     updateCityLabels(labelEntries, phi, theta, displaySize);
+    requestAnimationFrame(animateLabels);
+  }
 
-    requestAnimationFrame(animate);
+  function refreshTimes() {
+    labelEntries.forEach(({ timeEl, city }) => {
+      if (timeEl && city.tz) {
+        timeEl.textContent = formatCityTime(city.tz);
+      }
+    });
   }
 
   canvas.addEventListener('pointerdown', (event) => {
@@ -265,8 +265,14 @@ function initCobeGlobe(canvas) {
   canvas.addEventListener('pointerup', stopDragging);
   canvas.addEventListener('pointercancel', stopDragging);
 
-  createGlobeInstance();
-  requestAnimationFrame(animate);
+  labelEntries = createCityLabels(container, MARKERS);
+  refreshTimes();
+  setInterval(refreshTimes, 30000);
+
+  requestAnimationFrame(() => {
+    createGlobeInstance();
+    animateLabels();
+  });
 
   new ResizeObserver(() => {
     clearTimeout(resizeTimer);
@@ -274,7 +280,15 @@ function initCobeGlobe(canvas) {
   }).observe(container);
 }
 
-const canvas = document.getElementById('cobe-globe-canvas');
-if (canvas) {
-  initCobeGlobe(canvas);
+function boot() {
+  const canvas = document.getElementById('cobe-globe-canvas');
+  if (canvas) {
+    initCobeGlobe(canvas);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
 }
