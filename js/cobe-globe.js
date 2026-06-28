@@ -58,7 +58,7 @@ function getRegionalFloatStyle(cityId) {
 }
 
 const DPR = 2;
-const SCALE_MIN = 0.65;
+const SCALE_MIN = 1; //设置最小为1，原本是0.65
 const SCALE_MAX = 3;
 const SCALE_DEFAULT = 1;
 
