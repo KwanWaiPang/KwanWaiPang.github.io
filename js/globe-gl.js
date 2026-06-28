@@ -150,6 +150,31 @@ REGIONAL.forEach((region) => {
 
 const GLOBE_TEXTURE =
   '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg';
+const BUMP_TEXTURE =
+  '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png';
+const CLOUDS_TEXTURE =
+  '//cdn.jsdelivr.net/gh/vasturiano/globe.gl@master/example/clouds/clouds.png';
+const CLOUDS_ALT = 0.004;
+const CLOUDS_ROTATION_SPEED = -0.006;
+
+function addCloudLayer(globe) {
+  if (typeof THREE === 'undefined') {
+    return;
+  }
+
+  new THREE.TextureLoader().load(CLOUDS_TEXTURE, (cloudsTexture) => {
+    const clouds = new THREE.Mesh(
+      new THREE.SphereGeometry(globe.getGlobeRadius() * (1 + CLOUDS_ALT), 75, 75),
+      new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true }),
+    );
+    globe.scene().add(clouds);
+
+    (function rotateClouds() {
+      clouds.rotation.y += (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
+      requestAnimationFrame(rotateClouds);
+    })();
+  });
+}
 
 function rgbFromColor([r, g, b]) {
   return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
@@ -299,9 +324,6 @@ function createLabelElement(place) {
 
   if (place.tz) {
     el.classList.add('cobe-city-label--time');
-    if (place.level === 'intl') {
-      el.classList.add('cobe-city-label--intl');
-    }
   }
 
   if (place.level === 'province' || place.level === 'city') {
@@ -330,14 +352,6 @@ function createLabelElement(place) {
     el.classList.add('cobe-city-label--offset');
     el.style.setProperty('--cobe-label-x', `${place.labelOffset.x}px`);
     el.style.setProperty('--cobe-label-y', `${place.labelOffset.y}px`);
-  }
-
-  if (place.tz && place.level === 'intl') {
-    const star = document.createElement('span');
-    star.className = 'cobe-city-label-star';
-    star.style.color = rgbFromColor(place.color);
-    star.textContent = '★';
-    el.appendChild(star);
   }
 
   const nameEl = document.createElement('span');
@@ -403,10 +417,11 @@ function initGlobe(container) {
     syncZoomDisplay(container, currentScale);
   }
 
-  function setScale(scale) {
-    const nextScale = clampScale(scale);
-    globe.pointOfView({ altitude: scaleToAltitude(nextScale) }, 200);
-    applyVisiblePlaces(nextScale);
+  function updateZoomLevel(altitude) {
+    const scale = clampScale(altitudeToScale(altitude));
+    if (Math.abs(scale - currentScale) > 0.03) {
+      applyVisiblePlaces(scale);
+    }
   }
 
   function initGlobeInstance() {
@@ -423,9 +438,10 @@ function initGlobe(container) {
       .height(size)
       .backgroundColor('rgba(0,0,0,0)')
       .globeImageUrl(GLOBE_TEXTURE)
+      .bumpImageUrl(BUMP_TEXTURE)
       .showAtmosphere(true)
-      .atmosphereColor('rgba(120, 200, 255, 0.55)')
-      .atmosphereAltitude(0.12)
+      .atmosphereColor('lightskyblue')
+      .atmosphereAltitude(0.18)
       .pointAltitude(0.01)
       .pointColor('color')
       .pointRadius('radius')
@@ -433,36 +449,21 @@ function initGlobe(container) {
       .htmlLng('lng')
       .htmlAltitude(0.015)
       .htmlElement((place) => createLabelElement(place))
-      .htmlTransitionDuration(200);
+      .htmlTransitionDuration(200)
+      .onZoom(({ altitude }) => updateZoomLevel(altitude));
 
-    globe.controls().autoRotate = true;
-    globe.controls().autoRotateSpeed = 0.5;
-    globe.controls().enableZoom = false;
+    const controls = globe.controls();
+    const globeRadius = globe.getGlobeRadius();
+
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.35;
+    controls.enableZoom = true;
+    controls.minDistance = globeRadius * ALTITUDE_MIN;
+    controls.maxDistance = globeRadius * ALTITUDE_MAX;
 
     globe.pointOfView({ lat: FOCUS.lat, lng: FOCUS.lng, altitude: scaleToAltitude(SCALE_MIN) }, 0);
 
-    globe.controls().addEventListener('change', () => {
-      const pov = globe.pointOfView();
-      const clampedAlt = Math.max(ALTITUDE_MIN, Math.min(ALTITUDE_MAX, pov.altitude));
-      if (Math.abs(clampedAlt - pov.altitude) > 0.001) {
-        globe.pointOfView({ altitude: clampedAlt }, 0);
-      }
-
-      const scale = clampScale(altitudeToScale(clampedAlt));
-      if (Math.abs(scale - currentScale) > 0.04) {
-        applyVisiblePlaces(scale);
-      }
-    });
-
-    container.addEventListener(
-      'wheel',
-      (event) => {
-        event.preventDefault();
-        const delta = event.deltaY > 0 ? -0.12 : 0.12;
-        setScale(currentScale + delta);
-      },
-      { passive: false },
-    );
+    addCloudLayer(globe);
 
     applyVisiblePlaces(SCALE_MIN);
 
