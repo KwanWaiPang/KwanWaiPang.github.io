@@ -6,21 +6,19 @@ const VISITED = [
   { id: 'gz', name: '广州', lat: 23.13, lng: 113.26, size: 0.06, color: [1, 0.5, 0.35] },
   { id: 'sz', name: '深圳', lat: 22.54, lng: 114.06, size: 0.058, color: [1, 0.55, 0.4] },
   { id: 'hk', name: '香港', lat: 22.28, lng: 114.15, size: 0.058, color: [1, 0.42, 0.38] },
-  { id: 'bj', name: '北京', lat: 39.9, lng: 116.4, size: 0.062, color: [1, 0.62, 0.22], tz: 'Asia/Shanghai' },
+  { id: 'bj', name: '北京', lat: 39.9, lng: 116.4, size: 0.062, color: [1, 0.62, 0.22] },
   { id: 'gx', name: '广西', lat: 22.82, lng: 108.37, size: 0.052, color: [0.55, 0.92, 0.55] },
   { id: 'hn', name: '湖南', lat: 28.23, lng: 112.94, size: 0.052, color: [0.95, 0.55, 0.55] },
   { id: 'sc', name: '四川', lat: 30.57, lng: 104.07, size: 0.052, color: [0.85, 0.6, 1] },
   { id: 'fj', name: '福建', lat: 26.08, lng: 119.3, size: 0.052, color: [0.5, 0.85, 0.95] },
 ];
 
+// 四大城市：仅这 4 个在地球上显示时间
 const TIME_CITIES = [
+  { id: 'bj', name: '北京', lat: 39.9, lng: 116.4, tz: 'Asia/Shanghai', size: 0.062, color: [1, 0.62, 0.22] },
   { id: 'tky', name: '东京', lat: 35.68, lng: 139.69, tz: 'Asia/Tokyo', size: 0.05, color: [0.92, 0.58, 1] },
   { id: 'nyc', name: '纽约', lat: 40.71, lng: -74.01, tz: 'America/New_York', size: 0.05, color: [0.42, 0.82, 1] },
-  { id: 'par', name: '巴黎', lat: 48.86, lng: 2.35, tz: 'Europe/Paris', size: 0.048, color: [0.75, 0.65, 1] },
-  { id: 'ldn', name: '伦敦', lat: 51.51, lng: -0.13, tz: 'Europe/London', size: 0.048, color: [0.52, 0.96, 0.62] },
-  { id: 'sg', name: '新加坡', lat: 1.35, lng: 103.82, tz: 'Asia/Singapore', size: 0.048, color: [0.35, 0.98, 0.78] },
-  { id: 'la', name: '洛杉矶', lat: 34.05, lng: -118.24, tz: 'America/Los_Angeles', size: 0.048, color: [0.35, 0.78, 1] },
-  { id: 'mow', name: '莫斯科', lat: 55.75, lng: 37.62, tz: 'Europe/Moscow', size: 0.048, color: [0.55, 0.92, 0.62] },
+  { id: 'ldn', name: '伦敦', lat: 51.51, lng: -0.13, tz: 'Europe/London', size: 0.05, color: [0.52, 0.96, 0.62] },
 ];
 
 function mergeMarkers() {
@@ -37,6 +35,7 @@ function mergeMarkers() {
 }
 
 const MARKERS = mergeMarkers();
+const LABEL_CITIES = [FOSHAN, ...TIME_CITIES];
 const ARCS = VISITED.map((city) => ({ from: FOSHAN.id, to: city.id }));
 
 function focusOnLocation(lat, lng) {
@@ -154,10 +153,11 @@ function initCobeGlobe(canvas) {
   let globe = null;
   let resizeTimer = null;
   let displaySize = 0;
-  let labelEntries = [];
+  let lastTimeRefresh = 0;
 
   const DPR = 2;
   const arcs = buildArcs(MARKERS, ARCS);
+  const labelEntries = createCityLabels(container, LABEL_CITIES);
 
   canvas.style.touchAction = 'none';
   canvas.style.cursor = 'grab';
@@ -182,56 +182,54 @@ function initCobeGlobe(canvas) {
 
     const { width, height } = getDimensions();
 
-    try {
-      globe = createGlobe(canvas, {
-        devicePixelRatio: DPR,
-        width,
-        height,
-        phi,
-        theta,
-        dark: 0.18,
-        diffuse: 2.15,
-        mapSamples: 26000,
-        mapBrightness: 15,
-        mapBaseBrightness: 0.08,
-        baseColor: [0.24, 0.7, 0.95],
-        markerColor: [1, 0.72, 0.42],
-        glowColor: [0.58, 0.92, 1],
-        markerElevation: 0.05,
-        markers: MARKERS.map((city) => ({
-          id: city.id,
-          location: [city.lat, city.lng],
-          size: city.size,
-          color: city.color,
-        })),
-        arcs,
-        arcColor: [1, 0.86, 0.55],
-        arcWidth: 0.34,
-        arcHeight: 0.2,
-        onRender: (state) => {
-          if (!isDragging) {
-            phi += 0.004;
-          }
-          state.phi = phi;
-          state.theta = theta;
-        },
-      });
-    } catch (error) {
-      console.error('COBE globe init failed:', error);
-    }
-  }
-
-  function animateLabels() {
-    updateCityLabels(labelEntries, phi, theta, displaySize);
-    requestAnimationFrame(animateLabels);
-  }
-
-  function refreshTimes() {
-    labelEntries.forEach(({ timeEl, city }) => {
-      if (timeEl && city.tz) {
-        timeEl.textContent = formatCityTime(city.tz);
-      }
+    globe = createGlobe(canvas, {
+      devicePixelRatio: DPR,
+      width,
+      height,
+      phi,
+      theta,
+      dark: 0.5,
+      diffuse: 1.8,
+      mapSamples: 24000,
+      mapBrightness: 11,
+      mapBaseBrightness: 0.04,
+      baseColor: [0.1, 0.52, 0.78],
+      markerColor: [1, 0.72, 0.42],
+      glowColor: [0.38, 0.8, 0.98],
+      markerElevation: 0.05,
+      markers: MARKERS.map((city) => ({
+        id: city.id,
+        location: [city.lat, city.lng],
+        size: city.size,
+        color: city.color,
+      })),
+      arcs,
+      arcColor: [1, 0.86, 0.55],
+      arcWidth: 0.32,
+      arcHeight: 0.2,
     });
+  }
+
+  function animate(now) {
+    if (!isDragging) {
+      phi += 0.004;
+    }
+
+    if (globe) {
+      globe.update({ phi, theta });
+    }
+
+    if (!lastTimeRefresh || now - lastTimeRefresh > 30000) {
+      lastTimeRefresh = now;
+      labelEntries.forEach(({ timeEl, city }) => {
+        if (timeEl && city.tz) {
+          timeEl.textContent = formatCityTime(city.tz);
+        }
+      });
+    }
+
+    updateCityLabels(labelEntries, phi, theta, displaySize);
+    requestAnimationFrame(animate);
   }
 
   canvas.addEventListener('pointerdown', (event) => {
@@ -265,13 +263,9 @@ function initCobeGlobe(canvas) {
   canvas.addEventListener('pointerup', stopDragging);
   canvas.addEventListener('pointercancel', stopDragging);
 
-  labelEntries = createCityLabels(container, MARKERS);
-  refreshTimes();
-  setInterval(refreshTimes, 30000);
-
   requestAnimationFrame(() => {
     createGlobeInstance();
-    animateLabels();
+    requestAnimationFrame(animate);
   });
 
   new ResizeObserver(() => {
