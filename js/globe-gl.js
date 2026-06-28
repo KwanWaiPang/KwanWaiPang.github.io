@@ -70,12 +70,21 @@
 
   const FOCUS = { lat: 23.02, lng: 113.12 };
 
-  // 缩放：altitude 越小越近（放大），越大越远（缩小）
+  // globe.gl 缩放（与之前 COBE/globe 阶段一致）
+  // altitude 越大越远（地球越小），越小越近（地球越大）
   const ZOOM = {
-    initial: 1,            // 初始 = 原始尺寸（1 倍）
-    maxMagnification: 3,   // 最多放大到 3 倍；缩小下限也是 initial（不能再小）
-    speed: 0.3,            // 滚轮缩放速度
+    initialAltitude: 2.2, // 原始视图：页面加载时正常看到整个地球仪
+    minAltitude: 0.55,  // 滚轮放大上限：约为原始的 3 倍
+    speed: 0.3,         // 滚轮缩放速度
   };
+
+  function getZoomAltitudeLimits() {
+    return { minAlt: ZOOM.minAltitude, maxAlt: ZOOM.initialAltitude };
+  }
+
+  function distanceFromAltitude(altitude, globeRadius) {
+    return globeRadius * (1 + altitude);
+  }
 
   const GLOBE_TEXTURE =
     '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg';
@@ -276,15 +285,16 @@
 
       const controls = globe.controls();
       const globeRadius = globe.getGlobeRadius();
+      const { minAlt, maxAlt } = getZoomAltitudeLimits();
 
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.35;
       controls.enableZoom = true;
       controls.zoomSpeed = ZOOM.speed;
-      controls.minDistance = globeRadius * (ZOOM.initial / ZOOM.maxMagnification);
-      controls.maxDistance = globeRadius * ZOOM.initial;
+      controls.minDistance = distanceFromAltitude(minAlt, globeRadius);
+      controls.maxDistance = distanceFromAltitude(maxAlt, globeRadius);
 
-      globe.pointOfView({ lat: FOCUS.lat, lng: FOCUS.lng, altitude: ZOOM.initial }, 0);
+      globe.pointOfView({ lat: FOCUS.lat, lng: FOCUS.lng, altitude: maxAlt }, 0);
 
       applyPlaces(globe);
 
