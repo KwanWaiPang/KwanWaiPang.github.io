@@ -30,7 +30,7 @@ const FOCUS = { lat: 23.02, lng: 113.12 };
 
 const DPR = 2;
 const SCALE_MIN = 0.65;
-const SCALE_MAX = 3;
+const SCALE_MAX = 6;
 const SCALE_DEFAULT = 1;
 
 function buildMarkers(scale) {
