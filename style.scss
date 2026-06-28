@@ -393,6 +393,12 @@ img {
           width: 100%;
           height: 100%;
         }
+
+        &.cobe-regional-float-active {
+          .cobe-city-label--regional {
+            animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;
+          }
+        }
       }
 
       canvas {
@@ -463,12 +469,6 @@ img {
           font-weight: 500;
           color: rgba(255, 255, 255, 0.92);
           letter-spacing: 0.3px;
-        }
-      }
-
-      &.cobe-regional-float-active {
-        .cobe-city-label--regional {
-          animation: cobe-label-float var(--cobe-float-duration, 4s) ease-in-out infinite;
         }
       }
     }

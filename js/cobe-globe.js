@@ -40,7 +40,6 @@ const FOCUS = { lat: 23.02, lng: 113.12 };
 // REGIONAL 中的城市标签自动错峰浮动（只需维护 REGIONAL 列表）
 const FLOAT_DURATION = 4;
 const FLOAT_DELAY_STEP = 1;
-const FLOAT_SCALE_THRESHOLD = 3;
 const REGIONAL_FLOAT_INDEX = new Map(REGIONAL.map((city, index) => [city.id, index]));
 
 function getRegionalFloatStyle(cityId) {
@@ -89,8 +88,12 @@ function setupRegionalLabel(label, city) {
   label.style.setProperty('--cobe-float-y', `${floatStyle.amplitudeY}px`);
 }
 
+function isRegionalFloatActive(zoomScale) {
+  return zoomScale >= SCALE_MAX - 0.001;
+}
+
 function syncRegionalLabelFloat(container, zoomScale) {
-  container.classList.toggle('cobe-regional-float-active', zoomScale >= FLOAT_SCALE_THRESHOLD);
+  container.classList.toggle('cobe-regional-float-active', isRegionalFloatActive(zoomScale));
 }
 
 function focusOnLocation(lat, lng) {
