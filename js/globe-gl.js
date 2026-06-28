@@ -70,6 +70,13 @@
 
   const FOCUS = { lat: 23.02, lng: 113.12 };
 
+  // 缩放：altitude 越小越近（放大），越大越远（缩小）
+  const ZOOM = {
+    initial: 1,            // 初始 = 原始尺寸（1 倍）
+    maxMagnification: 3,   // 最多放大到 3 倍；缩小下限也是 initial（不能再小）
+    speed: 0.3,            // 滚轮缩放速度
+  };
+
   const GLOBE_TEXTURE =
     '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg';
   const BUMP_TEXTURE =
@@ -268,11 +275,16 @@
         .onGlobeReady(() => addCloudLayer(globe));
 
       const controls = globe.controls();
+      const globeRadius = globe.getGlobeRadius();
+
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.35;
       controls.enableZoom = true;
+      controls.zoomSpeed = ZOOM.speed;
+      controls.minDistance = globeRadius * (ZOOM.initial / ZOOM.maxMagnification);
+      controls.maxDistance = globeRadius * ZOOM.initial;
 
-      globe.pointOfView({ lat: FOCUS.lat, lng: FOCUS.lng, altitude: 2.2 }, 0);
+      globe.pointOfView({ lat: FOCUS.lat, lng: FOCUS.lng, altitude: ZOOM.initial }, 0);
 
       applyPlaces(globe);
 
