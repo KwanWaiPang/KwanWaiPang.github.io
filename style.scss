@@ -468,6 +468,10 @@ img {
           transition: opacity 0.15s ease, translate 0.2s ease;
         }
 
+        &--offset {
+          translate: calc(-50% + var(--cobe-label-x, 0px)) var(--cobe-label-y, 0px);
+        }
+
         &--time {
           display: flex;
           flex-direction: column;

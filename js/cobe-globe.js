@@ -2,7 +2,6 @@ import createGlobe from 'https://cdn.jsdelivr.net/npm/cobe@2.0.1/+esm';
 
 // 带时间的城市（tz 为 IANA 时区名，仅用于显示当地时间，不是地理坐标）
 const TIME_CITIES = [
-  { id: 'bj', name: 'Beijing', lat: 39.9042, lng: 116.4074, tz: 'Asia/Shanghai', size: 0.07, color: [1, 0.62, 0.22] },
   { id: 'tky', name: 'Tokyo', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', size: 0.06, color: [0.92, 0.58, 1] },
   { id: 'nyc', name: 'New York', lat: 40.7128, lng: -74.006, tz: 'America/New_York', size: 0.06, color: [0.42, 0.82, 1] },
   { id: 'ldn', name: 'London', lat: 51.5074, lng: -0.1278, tz: 'Europe/London', size: 0.06, color: [0.52, 0.96, 0.62] },
@@ -14,7 +13,7 @@ const TIME_CITIES = [
 ];
 
 // 到过的省份/地区；放大后显示 cities 中的具体城市（只需维护此列表）
-// 北京见 TIME_CITIES；香港、澳门为省级，无下级城市
+// 北京、香港、澳门为省级，无下级城市；labelOffset / markerLat·markerLng 可错开重叠标签
 const REGIONAL = [
   {
     id: 'yn',
@@ -107,10 +106,21 @@ const REGIONAL = [
     ],
   },
   {
+    id: 'bj',
+    name: '北京',
+    lat: 39.9042,
+    lng: 116.4074,
+    size: 0.05,
+    color: [1, 0.62, 0.22],
+  },
+  {
     id: 'hk',
     name: '香港',
     lat: 22.3193,
     lng: 114.1694,
+    markerLat: 22.36,
+    markerLng: 114.24,
+    labelOffset: { x: -20, y: -14 },
     size: 0.05,
     color: [1, 0.42, 0.38],
   },
@@ -119,6 +129,9 @@ const REGIONAL = [
     name: '澳门',
     lat: 22.1987,
     lng: 113.5439,
+    markerLat: 22.16,
+    markerLng: 113.48,
+    labelOffset: { x: 22, y: 12 },
     size: 0.05,
     color: [1, 0.48, 0.52],
   },
@@ -131,6 +144,7 @@ const SCALE_MIN = 1;
 const SCALE_MAX = 3;
 const SCALE_DEFAULT = 1;
 const SCALE_CITY_THRESHOLD = 2;
+const SCALE_FLOAT_THRESHOLD = 3;
 
 const FLOAT_DURATION = 4;
 const FLOAT_DELAY_STEP = 1;
@@ -143,19 +157,26 @@ REGIONAL.forEach((region) => {
   });
 });
 
+function regionMarkerLocation(region) {
+  return [region.markerLat ?? region.lat, region.markerLng ?? region.lng];
+}
+
 function flattenRegionalPlaces() {
   const places = [];
 
   REGIONAL.forEach((region) => {
+    const [markerLat, markerLng] = regionMarkerLocation(region);
+
     places.push({
       id: region.id,
       name: region.name,
-      lat: region.lat,
-      lng: region.lng,
+      lat: markerLat,
+      lng: markerLng,
       size: region.size,
       color: region.color,
       level: 'province',
       alwaysShow: !region.cities?.length,
+      labelOffset: region.labelOffset,
     });
 
     region.cities?.forEach((city) => {
@@ -187,7 +208,7 @@ function isCityZoom(zoomScale) {
 }
 
 function isRegionalFloatActive(zoomScale) {
-  return isCityZoom(zoomScale) && zoomScale >= SCALE_MAX - 0.001;
+  return zoomScale >= SCALE_FLOAT_THRESHOLD - 0.001;
 }
 
 function getRegionalFloatStyle(placeId) {
@@ -214,7 +235,7 @@ function buildMarkers(scale) {
 
     markers.push({
       id: region.id,
-      location: [region.lat, region.lng],
+      location: regionMarkerLocation(region),
       size: showProvince ? region.size / scale : 0.001,
       color: region.color,
     });
@@ -252,6 +273,11 @@ function setupRegionalLabel(label, place) {
     label.classList.add('cobe-city-label--province');
     if (place.alwaysShow) {
       label.classList.add('cobe-city-label--always');
+    }
+    if (place.labelOffset) {
+      label.classList.add('cobe-city-label--offset');
+      label.style.setProperty('--cobe-label-x', `${place.labelOffset.x}px`);
+      label.style.setProperty('--cobe-label-y', `${place.labelOffset.y}px`);
     }
     return;
   }
