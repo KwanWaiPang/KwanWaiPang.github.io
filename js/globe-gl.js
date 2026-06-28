@@ -91,160 +91,14 @@
     return globeRadius * (1 + altitude);
   }
 
-  const DAY_TEXTURE =
+  const GLOBE_TEXTURE =
     '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg';
-  const NIGHT_TEXTURE =
-    '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg';
+  const BUMP_TEXTURE =
+    '//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png';
   const CLOUDS_TEXTURE =
     '//cdn.jsdelivr.net/gh/vasturiano/globe.gl@master/example/clouds/clouds.png';
   const CLOUDS_ALT = 0.004;
   const CLOUDS_ROTATION_SPEED = -0.006;
-  const DAY_NIGHT_UPDATE_MS = 60000;
-
-  const DAY_NIGHT_SHADER = {
-    vertexShader: `
-      varying vec3 vNormal;
-      varying vec2 vUv;
-      void main() {
-        vNormal = normalize(normalMatrix * normal);
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      #define PI 3.141592653589793
-      uniform sampler2D dayTexture;
-      uniform sampler2D nightTexture;
-      uniform vec2 sunPosition;
-      uniform vec2 globeRotation;
-      varying vec3 vNormal;
-      varying vec2 vUv;
-
-      float toRad(in float a) {
-        return a * PI / 180.0;
-      }
-
-      vec3 polarToCartesian(in vec2 c) {
-        float theta = toRad(90.0 - c.x);
-        float phi = toRad(90.0 - c.y);
-        return vec3(
-          sin(phi) * cos(theta),
-          cos(phi),
-          sin(phi) * sin(theta)
-        );
-      }
-
-      void main() {
-        float invLon = toRad(globeRotation.x);
-        float invLat = -toRad(globeRotation.y);
-        mat3 rotX = mat3(
-          1.0, 0.0, 0.0,
-          0.0, cos(invLat), -sin(invLat),
-          0.0, sin(invLat), cos(invLat)
-        );
-        mat3 rotY = mat3(
-          cos(invLon), 0.0, sin(invLon),
-          0.0, 1.0, 0.0,
-          -sin(invLon), 0.0, cos(invLon)
-        );
-        vec3 sunDirection = rotX * rotY * polarToCartesian(sunPosition);
-        float intensity = dot(normalize(vNormal), normalize(sunDirection));
-        vec4 dayColor = texture2D(dayTexture, vUv);
-        vec4 nightColor = texture2D(nightTexture, vUv);
-        float blendFactor = smoothstep(-0.1, 0.1, intensity);
-        gl_FragColor = mix(nightColor, dayColor, blendFactor);
-      }
-    `,
-  };
-
-  function toAbsoluteUrl(url) {
-    return url.startsWith('//') ? `https:${url}` : url;
-  }
-
-  function loadScriptOnce(src) {
-    return new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src="${src}"]`)?.dataset.loaded === 'true') {
-        resolve();
-        return;
-      }
-
-      const existing = document.querySelector(`script[src="${src}"]`);
-      if (existing) {
-        existing.addEventListener('load', () => resolve(), { once: true });
-        existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = src;
-      script.onload = () => {
-        script.dataset.loaded = 'true';
-        resolve();
-      };
-      script.onerror = () => reject(new Error(`Failed to load ${src}`));
-      document.head.appendChild(script);
-    });
-  }
-
-  function sunPositionAt(date) {
-    if (typeof solar === 'undefined') {
-      const hours = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
-      return [hours * 15 - 180, 0];
-    }
-
-    const dt = +date;
-    const day = new Date(dt).setUTCHours(0, 0, 0, 0);
-    const t = solar.century(dt);
-    const longitude = ((day - dt) / 864e5) * 360 - 180;
-    return [longitude - solar.equationOfTime(t) / 4, solar.declination(t)];
-  }
-
-  function setupDayNightMaterial(globe) {
-    return loadScriptOnce('//cdn.jsdelivr.net/npm/three/build/three.min.js')
-      .then(() => {
-        if (!window.THREE) {
-          throw new Error('THREE is unavailable');
-        }
-
-        const { TextureLoader, ShaderMaterial, Vector2 } = window.THREE;
-        const loader = new TextureLoader();
-
-        return Promise.all([
-          loader.loadAsync(toAbsoluteUrl(DAY_TEXTURE)),
-          loader.loadAsync(toAbsoluteUrl(NIGHT_TEXTURE)),
-        ]).then(([dayTexture, nightTexture]) => {
-          const material = new ShaderMaterial({
-            uniforms: {
-              dayTexture: { value: dayTexture },
-              nightTexture: { value: nightTexture },
-              sunPosition: { value: new Vector2(...sunPositionAt(new Date())) },
-              globeRotation: { value: new Vector2() },
-            },
-            vertexShader: DAY_NIGHT_SHADER.vertexShader,
-            fragmentShader: DAY_NIGHT_SHADER.fragmentShader,
-          });
-
-          globe.globeMaterial(material);
-
-          const pov = globe.pointOfView();
-          material.uniforms.globeRotation.value.set(pov.lng, pov.lat);
-
-          function updateSun() {
-            material.uniforms.sunPosition.value.set(...sunPositionAt(new Date()));
-          }
-
-          updateSun();
-          setInterval(updateSun, DAY_NIGHT_UPDATE_MS);
-
-          return material;
-        });
-      })
-      .catch((error) => {
-        console.warn('[globe-gl] day/night shader skipped:', error);
-        globe.globeImageUrl(DAY_TEXTURE);
-        return null;
-      });
-  }
 
   function markerLocation(place) {
     return { lat: place.markerLat ?? place.lat, lng: place.markerLng ?? place.lng };
@@ -393,7 +247,6 @@
 
   function initGlobe(container) {
     let globe = null;
-    let dayNightMaterial = null;
 
     function measureSize() {
       return Math.max(Math.round(container.getBoundingClientRect().width), 120);
@@ -412,6 +265,8 @@
         .width(size)
         .height(size)
         .backgroundColor('rgba(0,0,0,0)')
+        .globeImageUrl(GLOBE_TEXTURE)
+        .bumpImageUrl(BUMP_TEXTURE)
         .showAtmosphere(true)
         .atmosphereColor('lightskyblue')
         .atmosphereAltitude(0.18)
@@ -424,17 +279,7 @@
         .htmlAltitude(0.015)
         .htmlElement((place) => createLabelElement(place))
         .htmlTransitionDuration(0)
-        .onZoom(({ lng, lat }) => {
-          if (dayNightMaterial) {
-            dayNightMaterial.uniforms.globeRotation.value.set(lng, lat);
-          }
-        })
-        .onGlobeReady(() => {
-          setupDayNightMaterial(globe).then((material) => {
-            dayNightMaterial = material;
-            addCloudLayer(globe);
-          });
-        });
+        .onGlobeReady(() => addCloudLayer(globe));
 
       const controls = globe.controls();
       const globeRadius = globe.getGlobeRadius();
