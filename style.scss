@@ -429,6 +429,11 @@ img {
         }
       }
 
+      .cobe-city-label-anchor {
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+      }
+
       .cobe-city-label {
         position: relative;
         transform: translate(-50%, calc(-100% - 6px));
@@ -444,10 +449,6 @@ img {
         pointer-events: none;
         transition: opacity 0.15s ease;
         z-index: 2;
-
-        &--regional {
-          transition: opacity 0.15s ease, transform 0.2s ease;
-        }
 
         &--offset {
           transform: translate(calc(-50% + var(--cobe-label-x, 0px)), calc(-100% - 6px + var(--cobe-label-y, 0px)));

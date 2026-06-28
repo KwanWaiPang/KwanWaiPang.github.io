@@ -157,23 +157,51 @@ const CLOUDS_TEXTURE =
 const CLOUDS_ALT = 0.004;
 const CLOUDS_ROTATION_SPEED = -0.006;
 
-function addCloudLayer(globe) {
-  if (typeof THREE === 'undefined') {
-    return;
-  }
-
-  new THREE.TextureLoader().load(CLOUDS_TEXTURE, (cloudsTexture) => {
-    const clouds = new THREE.Mesh(
-      new THREE.SphereGeometry(globe.getGlobeRadius() * (1 + CLOUDS_ALT), 75, 75),
-      new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true }),
-    );
-    globe.scene().add(clouds);
-
-    (function rotateClouds() {
-      clouds.rotation.y += (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
-      requestAnimationFrame(rotateClouds);
-    })();
+function findGlobeMesh(scene) {
+  let mesh = null;
+  scene.traverse((obj) => {
+    if (!mesh && obj.isMesh && obj.material && obj.material.map && obj.geometry) {
+      mesh = obj;
+    }
   });
+  return mesh;
+}
+
+function addCloudLayer(globe) {
+  try {
+    const scene = globe.scene();
+    const globeMesh = findGlobeMesh(scene);
+    if (!globeMesh) {
+      return;
+    }
+
+    const { constructor: SphereGeometry } = globeMesh.geometry;
+    const { constructor: Mesh } = globeMesh;
+    const { constructor: MeshPhongMaterial } = globeMesh.material;
+    const { constructor: Texture } = globeMesh.material.map;
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const cloudsTexture = new Texture(img);
+      cloudsTexture.needsUpdate = true;
+
+      const clouds = new Mesh(
+        new SphereGeometry(globe.getGlobeRadius() * (1 + CLOUDS_ALT), 75, 75),
+        new MeshPhongMaterial({ map: cloudsTexture, transparent: true, opacity: 0.4 }),
+      );
+      scene.add(clouds);
+
+      (function rotateClouds() {
+        clouds.rotation.y += (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
+        requestAnimationFrame(rotateClouds);
+      })();
+    };
+    img.onerror = () => {};
+    img.src = CLOUDS_TEXTURE.startsWith('//') ? `https:${CLOUDS_TEXTURE}` : CLOUDS_TEXTURE;
+  } catch (error) {
+    console.warn('[globe-gl] cloud layer skipped:', error);
+  }
 }
 
 function rgbFromColor([r, g, b]) {
@@ -318,6 +346,9 @@ function getVisiblePlaces(scale) {
 }
 
 function createLabelElement(place) {
+  const anchor = document.createElement('div');
+  anchor.className = 'cobe-city-label-anchor';
+
   const el = document.createElement('div');
   el.dataset.placeId = place.id;
   el.className = 'cobe-city-label';
@@ -366,7 +397,8 @@ function createLabelElement(place) {
     el.appendChild(timeEl);
   }
 
-  return el;
+  anchor.appendChild(el);
+  return anchor;
 }
 
 function refreshTimes(container) {
@@ -449,8 +481,9 @@ function initGlobe(container) {
       .htmlLng('lng')
       .htmlAltitude(0.015)
       .htmlElement((place) => createLabelElement(place))
-      .htmlTransitionDuration(200)
-      .onZoom(({ altitude }) => updateZoomLevel(altitude));
+      .htmlTransitionDuration(0)
+      .onZoom(({ altitude }) => updateZoomLevel(altitude))
+      .onGlobeReady(() => addCloudLayer(globe));
 
     const controls = globe.controls();
     const globeRadius = globe.getGlobeRadius();
@@ -462,8 +495,6 @@ function initGlobe(container) {
     controls.maxDistance = globeRadius * ALTITUDE_MAX;
 
     globe.pointOfView({ lat: FOCUS.lat, lng: FOCUS.lng, altitude: scaleToAltitude(SCALE_MIN) }, 0);
-
-    addCloudLayer(globe);
 
     applyVisiblePlaces(SCALE_MIN);
 
