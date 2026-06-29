@@ -11,6 +11,15 @@
     { id: 'par', name: 'Paris', lat: 48.8566, lng: 2.3522, tz: 'Europe/Paris', color: [0.75, 0.65, 1] },
     { id: 'mow', name: 'Moscow', lat: 55.7558, lng: 37.6173, tz: 'Europe/Moscow', color: [0.55, 0.92, 0.62] },
     { id: 'cbr', name: 'Canberra', lat: -35.2809, lng: 149.13, tz: 'Australia/Canberra', color: [0.95, 0.55, 0.45] },
+    {
+      id: 'pek',
+      name: 'Beijing',
+      lat: 39.9042,
+      lng: 116.4074,
+      tz: 'Asia/Shanghai',
+      color: [1, 0.62, 0.22],
+      labelOffset: { x: 32, y: 0 },
+    },
   ];
 
   // 去过的城市（只需维护此列表）
@@ -47,7 +56,7 @@
     { id: 'hy', name: '河源', lat: 23.7465, lng: 114.6978, color: [1, 0.62, 0.35] },
     { id: 'yd', name: '英德', lat: 24.207, lng: 113.4012, color: [1, 0.62, 0.35] },
     // 北京
-    { id: 'bj', name: '北京', lat: 39.9042, lng: 116.4074, color: [1, 0.62, 0.22], tz: 'Asia/Shanghai' },
+    { id: 'bj', name: '北京', lat: 39.9042, lng: 116.4074, color: [1, 0.62, 0.22] },
     // 香港
     {
       id: 'hk',
