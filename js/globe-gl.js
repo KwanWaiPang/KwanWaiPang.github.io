@@ -18,7 +18,7 @@
       lng: 116.4074,
       tz: 'Asia/Shanghai',
       color: [1, 0.62, 0.22],
-      labelOffset: { x: 32, y: 0 },
+      labelOffset: { x: 52, y: -22 },
     },
   ];
 
