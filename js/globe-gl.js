@@ -3,14 +3,6 @@
 
   // 带时间的国际城市（tz 为 IANA 时区名）
   const TIME_CITIES = [
-    { id: 'tky', name: 'Tokyo', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', color: [0.92, 0.58, 1] },
-    { id: 'nyc', name: 'New York', lat: 40.7128, lng: -74.006, tz: 'America/New_York', color: [0.42, 0.82, 1] },
-    { id: 'ldn', name: 'London', lat: 51.5074, lng: -0.1278, tz: 'Europe/London', color: [0.52, 0.96, 0.62] },
-    { id: 'sg', name: 'Singapore', lat: 1.3521, lng: 103.8198, tz: 'Asia/Singapore', color: [0.35, 0.98, 0.78] },
-    { id: 'la', name: 'Los Angeles', lat: 34.0522, lng: -118.2437, tz: 'America/Los_Angeles', color: [0.35, 0.78, 1] },
-    { id: 'par', name: 'Paris', lat: 48.8566, lng: 2.3522, tz: 'Europe/Paris', color: [0.75, 0.65, 1] },
-    { id: 'mow', name: 'Moscow', lat: 55.7558, lng: 37.6173, tz: 'Europe/Moscow', color: [0.55, 0.92, 0.62] },
-    { id: 'cbr', name: 'Canberra', lat: -35.2809, lng: 149.13, tz: 'Australia/Canberra', color: [0.95, 0.55, 0.45] },
     {
       id: 'pek',
       name: 'Beijing',
@@ -20,6 +12,16 @@
       color: [1, 0.62, 0.22],
       labelOffset: { x: 52, y: -22 },
     },
+    { id: 'nyc', name: 'New York', lat: 40.7128, lng: -74.006, tz: 'America/New_York', color: [0.42, 0.82, 1] },
+    { id: 'ldn', name: 'London', lat: 51.5074, lng: -0.1278, tz: 'Europe/London', color: [0.52, 0.96, 0.62] },
+    { id: 'sg', name: 'Singapore', lat: 1.3521, lng: 103.8198, tz: 'Asia/Singapore', color: [0.35, 0.98, 0.78] },
+    { id: 'la', name: 'Los Angeles', lat: 34.0522, lng: -118.2437, tz: 'America/Los_Angeles', color: [0.35, 0.78, 1] },
+    { id: 'par', name: 'Paris', lat: 48.8566, lng: 2.3522, tz: 'Europe/Paris', color: [0.75, 0.65, 1] },
+    { id: 'mow', name: 'Moscow', lat: 55.7558, lng: 37.6173, tz: 'Europe/Moscow', color: [0.55, 0.92, 0.62] },
+    { id: 'cai', name: 'Cairo', lat: 30.0444, lng: 31.2357, tz: 'Africa/Cairo', color: [0.95, 0.78, 0.35] },
+    { id: 'rio', name: 'Rio de Janeiro', lat: -22.9068, lng: -43.1729, tz: 'America/Sao_Paulo', color: [0.45, 0.88, 0.55] },
+    { id: 'cbr', name: 'Canberra', lat: -35.2809, lng: 149.13, tz: 'Australia/Canberra', color: [0.95, 0.55, 0.45] },
+    { id: 'tky', name: 'Tokyo', lat: 35.6762, lng: 139.6503, tz: 'Asia/Tokyo', color: [0.92, 0.58, 1] },
   ];
 
   // 去过的城市（只需维护此列表）
