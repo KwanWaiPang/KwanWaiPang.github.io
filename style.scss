@@ -511,10 +511,10 @@ nav {
 }
 
 .visitor-map {
-  margin: 16px auto 0;
-  padding: 0 16px;
+  margin: 0 auto 0; //上下为0，左右自动分配
+  padding: 0 16px; //上下为0，左右为16
   text-align: center;
-  width: 60%;
+  width: 80%;
 
   a {
     display: inline-block;
@@ -524,7 +524,7 @@ nav {
   img {
     width: 100%;
     height: auto;
-    border-radius: 2px;
+    border-radius: 2px; //半角
   }
 }
 
