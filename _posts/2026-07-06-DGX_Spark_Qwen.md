@@ -18,7 +18,7 @@ excerpt: "记录在 NVIDIA DGX Spark 上部署 Qwen3.5 122B-A10B 模型，并通
 
 大语言模型（LLM）的本地化部署正成为越来越多场景的刚需——无论是数据隐私、离线推理还是定制化开发。然而，像 Qwen3.5-122B 这样参数量高达 1220 亿的 MoE 模型，对硬件平台提出了极高要求。
 
-本文记录了在 **NVIDIA DGX Spark** 这一桌面级 AI 工作站上，从零开始部署 **Qwen3.5-122B-A10B** 模型的完整过程。更关键的是，我们参考开源项目实现了一系列模型加速优化手段，将推理速度从基线的 **15.44 tok/s（NVFP4）提升至 46.88 tok/s（hybrid-int4fp8）**，实现了显著的性能增益，且无质量损失。
+本文记录了在 **NVIDIA DGX Spark** 这一桌面级 AI 工作站上，从零开始部署 **Qwen3.5-122B-A10B** 模型的完整过程。更关键的是，通过参考开源项目并引入一系列模型加速优化手段，将推理速度从基线的 **15.44 tok/s（NVFP4）提升至 46.88 tok/s（hybrid-int4fp8）**，实现了显著的性能增益，且无质量损失。
 
 本文将从以下四个方面展开：
 1. NVIDIA DGX Spark 的硬件介绍与基本配置
@@ -225,7 +225,7 @@ curl -X POST 10.1.50.7:8004/v1/chat/completions -H "Content-Type: application/js
 
 # 三、模型加速优化——技术原理分析
 
-在基线配置（vLLM 0.19 + AutoRound INT4 + FlashInfer）下，Qwen3.5-122B-A10B 在 DGX Spark 上的推理速度为 **28.3 tok/s**。我们参考开源加速项目 [DGX_Spark_Qwen3.5-122B-A10B-AR-INT4](https://github.com/albond/DGX_Spark_Qwen3.5-122B-A10B-AR-INT4) 实现了混合 INT4+FP8 量化、MTP-2 推测解码与 Triton INT8 LM Head v2 等级联优化，最终在本地测得 **46.88 tok/s** 的生成速度，相比基线提升了 **+65.6%**（详见第四节测试结果）。
+在基线配置（vLLM 0.19 + AutoRound INT4 + FlashInfer）下，Qwen3.5-122B-A10B 在 DGX Spark 上的推理速度为 **28.3 tok/s**。通过参考开源加速项目 [DGX_Spark_Qwen3.5-122B-A10B-AR-INT4](https://github.com/albond/DGX_Spark_Qwen3.5-122B-A10B-AR-INT4) 引入混合 INT4+FP8 量化、MTP-2 推测解码与 Triton INT8 LM Head v2 等级联优化，最终在本地测得 **46.88 tok/s** 的生成速度，相比基线提升了 **+65.6%**（详见第四节测试结果）。
 
 本节对该项目中所使用的核心加速技术进行深入的原理剖析与源码解读。
 
@@ -503,7 +503,7 @@ sequenceDiagram
 
 ### 为什么选择内置 MTP 模块而不是其他草稿模型？
 
-我们在设计加速方案时，对比分析了三种不同的推测解码路径：
+在评估推测解码方案时，对比分析了三种不同的推测解码路径：
 
 1. **EAGLE-3 外置草稿模型**：EAGLE 需要下载并加载一个独立的 5GB 左右的草稿模型。这在推理时会引入额外的算子调度和显存交互开销，且需要进行二次对齐，在测试中其虽然有 10% 的提升，但性能和易用性均不及 MTP。
 2. **KnapSpec 剪层自推测（Self-Speculative）**：KnapSpec 通过跳过主模型的部分层来作为草稿模型。但由于 Qwen3.5 是 MoE 架构，跳过层前向传播仍然需要读取约 **75%** 的模型权重，导致带宽极度吃紧，在带宽受限的 DGX Spark 上性能反而下降。
@@ -702,7 +702,7 @@ autotune 的开销是每个唯一的 `(M, K, NUM_BATCH)` 组合约 1.6 秒，首
 
 **效果：+0.76%（累积 +2.0%）**
 
-这是 vLLM 上游的一个 PR，为 SM120 系列添加了 "swapAB" CUTLASS dispatch（B-major weight layout），在 `M ≤ 64 || M % 4 != 0` 的条件下自动激活——这恰好是我们 `shared_expert` FP8 层在 batch 1-4 时的形状。
+这是 vLLM 上游的一个 PR，为 SM120 系列添加了 "swapAB" CUTLASS dispatch（B-major weight layout），在 `M ≤ 64 || M % 4 != 0` 的条件下自动激活——这恰好是 `shared_expert` FP8 层在 batch 1-4 时的形状。
 
 该优化通过在构建 vLLM base image 时 cherry-pick PR #38325 的 diff 来应用：
 
@@ -820,7 +820,7 @@ python patches/04-turboquant/generate_tq_metadata.py \
 
 ## 4.1 基线 NVFP4 模型测试指标
 
-我们在本地 DGX Spark 设备上，使用 `qwen_throughout.py` 脚本对基线的 NVFP4 部署进行了吞吐量测试。测试使用的 Prompt 长度为 15，输出 Token 长度为 281。测试日志输出如下：
+在本地 DGX Spark 设备上，使用 `qwen_throughout.py` 脚本对基线的 NVFP4 部署进行了吞吐量测试。测试使用的 Prompt 长度为 15，输出 Token 长度为 281。测试日志输出如下：
 
 ```
 Current usage: CompletionUsage(completion_tokens=281, prompt_tokens=15, total_tokens=296, completion_tokens_details=None, prompt_tokens_details=None)
@@ -848,7 +848,7 @@ True
 
 ## 4.2 不同模型精度与配置对比
 
-我们在本地 DGX Spark 设备（需要 16 分片或 14 分片加载）以及更高规格的双卡 Thor 设备上，针对不同的模型精度和部署配置进行了详细的对比测试。本地真实测试指标汇总如下：
+在本地 DGX Spark 设备（需要 16 分片或 14 分片加载）以及更高规格的双卡 Thor 设备上，针对不同的模型精度 and 部署配置进行了详细的对比测试。本地真实测试指标汇总如下：
 
 | Qwen3.5 模型参数量    | 模型精度                        | 模型分片 | 显存占用   | 处理输入 token 速度 (tokens/s) - 首次 | 处理输入 token 速度 (tokens/s) - 后续 | 首字延迟 (TTFT) - 首次 | 首字延迟 (TTFT) - 后续 | 生成 token 速度 (tokens/s) | 300 token 回复总耗时 |
 | --------------------- | ------------------------------- | -------- | ---------- | ------------------------------------- | ------------------------------------- | ---------------------- | ---------------------- | -------------------------- | -------------------- |
