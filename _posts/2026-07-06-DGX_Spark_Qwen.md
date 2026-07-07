@@ -314,6 +314,20 @@ flowchart LR
     style S2 fill:#69db7c,color:#fff
 ```
 
+### 核心设计考量
+
+#### 1. 为什么混合量化比纯 INT4 基线更快？
+在自回归解码（Decode）阶段，对于纯 INT4 权重，GPU 的 Tensor Cores 无法直接对其进行矩阵乘法计算，必须在运行时首先调用反量化（De-quantization）算子，将 4-bit 权重还原为 FP16/BF16，然后再与激活值做矩阵乘法。这引入了额外的反量化计算开销和寄存器压力。
+
+而 NVIDIA DGX Spark 搭载的 Blackwell 架构（SM121）具有**原生 FP8 Tensor Cores 硬件加速**，能够直接执行 FP8 矩阵乘法，**完全省去了运行时的反量化开销**。将每次推理都会 100% 激活的共享专家密集层（Shared Expert）和注意力映射层替换为 FP8，可以直接借助 SM121 原生的 CUTLASS FP8 算子进行极速计算。因此，其执行速度比存在反量化瓶颈的纯 INT4 Marlin 内核更快，速度从 28.3 tok/s 提升到 30.8 tok/s，提升了 **8.8%**。
+
+#### 2. 既然 FP8 硬件加速更快，为什么不全用 FP8？
+这完全受限于 DGX Spark 的**显存容量瓶颈**（128 GB 统一内存的物理天花板）。
+* **全用 FP8 的显存灾难**：Qwen3.5-122B-A10B 参数量高达 1220 亿，如果全部使用 FP8 量化（1 字节/参数），单是模型权重就要占用近 **122 GB** 显存。这会导致 128 GB 的统一内存在加载完模型后仅剩 6 GB 左右的空间，根本无法分配 vLLM 运行所必须的 KV Cache（键值缓存），导致推理时瞬间发生 OOM（显存溢出）。
+* **混合量化的“甜点区”**：256 个 MoE 专家权重极其庞大，用 **INT4** Marlin 格式量化（0.5 字节/参数）能够最大限度缩减体积；而常驻计算的密集层则采用 **FP8** 原生计算。混合量化后的模型权重仅占约 **84 GB** 显存，能为 vLLM 留出高达 **44 GB** 的富余显存来存放 KV Cache。
+
+因此，**“INT4 缩减体积保显存，FP8 原生计算提速度”** 的混合量化方案，是在 128GB 内存限制下部署 122B 级 MoE 模型的最佳平衡解。
+
 ### 源码分析：Checkpoint 构建流程
 
 混合 checkpoint 的构建逻辑在 [build-hybrid-checkpoint.py](https://github.com/albond/DGX_Spark_Qwen3.5-122B-A10B-AR-INT4/blob/master/patches/01-hybrid-int4-fp8/build-hybrid-checkpoint.py) 中，整个流程分 5 步完成：
