@@ -178,14 +178,11 @@ python split_llm_model.py
 ### 进入 Docker 镜像环境
 
 ```bash
-docker run -it --rm \
-  --gpus all \
-  -v /home/grgbot/xieweiyang/QWen_checkpoint:/app/models \
-  -p 8000:8000 \
-  --ipc=host \
-  --name vllm-server \
-  --entrypoint /bin/bash \
-  vllm/vllm-openai:nightly
+docker run -it --name vllm-qwen35 \
+    --gpus all --net=host --ipc=host \
+    -v /home/grgbot/models:/models \
+    --entrypoint /bin/bash \
+    vllm-qwen35-v2
 ```
 
 ### 启动推理服务
@@ -193,22 +190,14 @@ docker run -it --rm \
 进入 Docker 容器后，执行：
 
 ```bash
-nohup vllm serve /app/models/Sehyo--Qwen3.5-122B-A10B-NVFP4-split \
-  --host 0.0.0.0 \
-  --port 8000 \
-  --quantization compressed-tensors \
-  --language-model-only \
-  --tensor-parallel-size 1 \
-  --gpu-memory-utilization 0.65 \
-  --max-model-len 32768 \
-  --max-num-seqs 1 \
-  --enforce-eager \
-  --mm-processor-cache-gb 0 \
-  --trust-remote-code \
-  > vllm.log 2>&1 &
-
-# 查看启动日志
-tail -f vllm.log
+vllm serve /models/qwen35-122b-hybrid-int4fp8 \
+    --served-model-name qwen \
+    --port 8004 \
+    --max-model-len 32768 \
+    --gpu-memory-utilization 0.65 \
+    --reasoning-parser qwen3 \
+    --attention-backend FLASHINFER \
+    --speculative-config '{"method":"mtp","num_speculative_tokens":2}'
 ```
 
 看到如下输出即表示启动成功：
@@ -220,15 +209,16 @@ tail -f vllm.log
 ### 测试服务
 
 ```bash
-curl http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "/app/models/Sehyo--Qwen3.5-122B-A10B-NVFP4-split",
-    "messages": [{"role": "user", "content": "请给出辣椒炒蛋的步骤"}],
-    "max_tokens": 100,
-    "temperature": 0,
-    "chat_template_kwargs": {"enable_thinking": false}
-  }'
+# curl http://localhost:8000/v1/chat/completions \
+#   -H "Content-Type: application/json" \
+#   -d '{
+#     "model": "/app/models/Sehyo--Qwen3.5-122B-A10B-NVFP4-split",
+#     "messages": [{"role": "user", "content": "请给出辣椒炒蛋的步骤"}],
+#     "max_tokens": 100,
+#     "temperature": 0,
+#     "chat_template_kwargs": {"enable_thinking": false}
+#   }'
+curl -X POST 10.1.50.7:8004/v1/chat/completions -H "Content-Type: application/json" -d '{"model":"qwen","messages":[{"role":"user","content":"输出一个字"}],"chat_template_kwargs":{"enable_thinking":false}}'
 ```
 
 ---
