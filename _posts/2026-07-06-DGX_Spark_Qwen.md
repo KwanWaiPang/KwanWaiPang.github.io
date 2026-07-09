@@ -820,7 +820,7 @@ python patches/04-turboquant/generate_tq_metadata.py \
 
 ## 4.1 基线 NVFP4 模型测试指标
 
-在本地 DGX Spark 设备上，使用 `qwen_throughout.py` 脚本对基线的 NVFP4 部署进行了吞吐量测试。测试使用的 Prompt 长度为 15，输出 Token 长度为 281。测试日志输出如下：
+在本地 DGX Spark 设备上，对基线的 NVFP4 部署进行了吞吐量测试。测试使用的 Prompt 长度为 15，输出 Token 长度为 281。测试日志输出如下：
 
 ```
 Current usage: CompletionUsage(completion_tokens=281, prompt_tokens=15, total_tokens=296, completion_tokens_details=None, prompt_tokens_details=None)
@@ -847,8 +847,6 @@ True
 * **Total tokens per second**：总吞吐速率（输入+输出的总 token / 总耗时）。
 
 ## 4.2 不同模型精度与配置对比
-
-在本地 DGX Spark 设备（需要 16 分片或 14 分片加载）以及更高规格的双卡 Thor 设备上，针对不同的模型精度 and 部署配置进行了详细的对比测试。本地真实测试指标汇总如下：
 
 | Qwen3.5 模型参数量    | 模型精度                        | 模型分片 | 显存占用   | 处理输入 token 速度 (tokens/s) - 首次 | 处理输入 token 速度 (tokens/s) - 后续 | 首字延迟 (TTFT) - 首次 | 首字延迟 (TTFT) - 后续 | 生成 token 速度 (tokens/s) | 300 token 回复总耗时 |
 | --------------------- | ------------------------------- | -------- | ---------- | ------------------------------------- | ------------------------------------- | ---------------------- | ---------------------- | -------------------------- | -------------------- |
