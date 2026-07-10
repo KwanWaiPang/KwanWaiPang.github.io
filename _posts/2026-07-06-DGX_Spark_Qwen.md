@@ -878,8 +878,3 @@ True
 # 致谢
 
 * 本博客特别致谢 [@shuttle999](https://github.com/shuttle999) 提供的技术支持。
-  <a class="github-button" 
-    href="https://github.com/shuttle999" 
-    data-size="large"
-    data-show-count="true" 
-    aria-label="Follow @shuttle999 on GitHub">Follow @shuttle999</a>
