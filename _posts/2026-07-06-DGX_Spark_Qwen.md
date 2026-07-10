@@ -252,8 +252,11 @@ curl -X POST 10.1.50.7:8004/v1/chat/completions -H "Content-Type: application/js
 
 * 整体加速流程概览
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 flowchart TD
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+
     A["基线: 28.3 tok/s<br>vLLM 0.19 + INT4 + FlashInfer"] --> B
     B["优化1: FlashInfer 注意力后端<br>24→28.3 tok/s (+16%)"] --> C
     C["优化2: 混合 INT4+FP8 量化<br>28.3→30.8 tok/s (+8.8%)"] --> D
@@ -263,7 +266,7 @@ flowchart TD
 
     style A fill:#ff6b6b,color:#fff
     style F fill:#51cf66,color:#fff
-```
+</div>
 
 下面逐一分析每项优化的技术原理和源码实现。
 
@@ -298,8 +301,11 @@ Qwen3.5-122B-A10B 是 MoE（Mixture of Experts）架构。MoE 层中有两类权
 - **MoE 专家权重**保持 INT4 量化（Marlin 内核，0.5 bytes/param）
 - **共享专家的密集层权重**替换为 FP8（1 byte/param，使用 SM121 原生 CUTLASS FP8 block-128 内核）
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 flowchart LR
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+
     subgraph 原始["原始 INT4 Checkpoint"]
         E1["Expert 权重<br>INT4 (Marlin)"]
         S1["Shared Expert 权重<br>BF16 (未量化)"]
@@ -315,7 +321,7 @@ flowchart LR
 
     style S1 fill:#ff8787,color:#fff
     style S2 fill:#69db7c,color:#fff
-```
+</div>
 
 * 核心设计考量
 
@@ -335,13 +341,16 @@ flowchart LR
 
 混合 checkpoint 的构建逻辑在 [build-hybrid-checkpoint.py](https://github.com/albond/DGX_Spark_Qwen3.5-122B-A10B-AR-INT4/blob/master/patches/01-hybrid-int4-fp8/build-hybrid-checkpoint.py) 中，整个流程分 5 步完成：
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 flowchart LR
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+
     S1["1. 获取 FP8<br>非专家层清单"] --> S2["2. 下载所需<br>FP8 分片"]
     S2 --> S3["3. 提取 FP8<br>tensor"]
     S3 --> S4["4. 逐分片替换<br>BF16-FP8"]
     S4 --> S5["5. 重建索引<br>更新 config"]
-```
+</div>
 
 **步骤 1：获取 FP8 非专家层清单** — 通过读取 FP8 checkpoint 的 `model.safetensors.index.json`，过滤出不含 `.experts.` 的权重（即密集层权重）：
 
@@ -491,7 +500,7 @@ def _is_layer_fp8(self, prefix: str) -> bool:
 
 Qwen3.5-122B-A10B 原生内置了 **MTP（Multi-Token Prediction，多 token 预测）** 模块。MTP-2 (`num_speculative_tokens:2`) 表示在解码步骤中同时推测未来 2 个 token。本地测试表明，位置 2 的草稿 token 接受率高达约 **80%**。
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 sequenceDiagram
     participant MTP as "内置 MTP Head (4.8GB, 4.4% 权重)"
     participant Target as "Qwen3.5 122B 主模型 (113GB)"
@@ -510,7 +519,7 @@ sequenceDiagram
     else 均被拒绝
         Note over Target: 本步实际生成 1 个 Token (主模型生成的基准 Token)
     end
-```
+</div>
 
 * 为什么选择内置 MTP 模块而不是其他草稿模型？
 
@@ -557,8 +566,11 @@ LM Head 是模型的输出层，负责将隐藏状态映射到词表概率。Qwe
 
 在解码阶段（batch=1），每生成一个 token 都要完整读取这个 1.5 GB 的矩阵。这是一个典型的 **GEMV（矩阵-向量乘法）** 操作，属于极度带宽受限的场景。默认的 BF16 matmul 在 GEMV 形状下只能达到约 **24% 的内存带宽利用率**。
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 flowchart TB
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+
     subgraph 默认["默认 BF16 LM Head"]
         direction TB
         W1["权重矩阵: 248320×3072<br>BF16 = 1.5 GB"]
@@ -585,7 +597,7 @@ flowchart TB
 
     style BW1 fill:#ff8787,color:#fff
     style BW2 fill:#69db7c,color:#fff
-```
+</div>
 
 * 源码深度分析
 
@@ -651,8 +663,11 @@ def _k_v2(out_ptr, w_ptr, x_ptr, s_ptr, M, K,
 
 其核心设计如下图所示：
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 flowchart TB
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+
     subgraph Grid["Triton Grid (1D)"]
         B0["Block 0<br>rows [0:BLOCK_M)"]
         B1["Block 1<br>rows [BLOCK_M:2*BLOCK_M)"]
@@ -677,7 +692,7 @@ flowchart TB
     BN --> Block
 
     style WT fill:#4dabf7,color:#fff
-```
+</div>
 
 关键优化点总结：
 
@@ -729,8 +744,11 @@ cp patches/05-pr38325-swapab/pr38325-swapab-fp8-sm120.diff local-pr38325.diff
 
 整个加速方案的最终产物是一个定制的 Docker 镜像 `vllm-qwen35-v2`，其构建过程如下：
 
-```mermaid
+<div class="mermaid" style="display: flex; justify-content: center; width: 90%; margin: 0 auto;">
 flowchart TB
+    %% 定义全局样式类
+    classDef default fill:#fff,stroke:#333,stroke-width:1px,color:#000,rx:2,ry:2;
+
     subgraph Step3["Step 3: 构建 SM121 基础镜像"]
         BASE["nvidia/cuda:13.2.0-devel-ubuntu24.04"] --> VLLM["编译 vLLM for SM121<br>TORCH_CUDA_ARCH_LIST=12.1a"]
         VLLM --> FI["编译 FlashInfer for SM121"]
@@ -747,7 +765,7 @@ flowchart TB
     subgraph Launch["Step 5: 启动"]
         V2 --> RUN["docker run --gpus all<br>--attention-backend FLASHINFER<br>--speculative-config MTP-2"]
     end
-```
+</div>
 
 最终启动命令：
 
