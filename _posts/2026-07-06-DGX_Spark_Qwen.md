@@ -108,7 +108,7 @@ DGX Spark 包含如下配件：
 
 在 DGX Spark 上进行开发推荐使用 Docker，可以最大限度保持底层系统的稳定与纯净。DGX Spark **已默认预装 Docker 及 NVIDIA Container Toolkit**，开箱即用。
 
-### 用户组设置
+* 用户组设置
 
 默认执行 Docker 命令需要 `sudo` 权限，通过以下命令修改权限：
 
@@ -117,7 +117,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-### Docker 镜像源配置（国内网络）
+* Docker 镜像源配置（国内网络）
 
 ```bash
 sudo mkdir -p /etc/docker
@@ -138,7 +138,7 @@ sudo systemctl restart docker
 
 vLLM 是目前主流的 LLM 推理引擎，支持 PagedAttention、连续批处理等技术。安装有两种方式：
 
-### 方式一：Docker 拉取（推荐）
+* 方式一：Docker 拉取（推荐）
 
 ```bash
 docker pull vllm/vllm-openai:nightly
@@ -146,7 +146,7 @@ docker pull vllm/vllm-openai:nightly
 
 > 注意：Docker 镜像大小约 19.6 GB。
 
-### 方式二：虚拟环境编译安装
+* 方式二：虚拟环境编译安装
 
 ```bash
 # 拉取最新的 vllm 仓库
@@ -169,11 +169,11 @@ pip install --no-build-isolation -e .
 
 ## 2.3 模型下载与切分
 
-### 下载 NVFP4 模型权重
+* 下载 NVFP4 模型权重
 
 从 [Hugging Face](https://huggingface.co/Sehyo/Qwen3.5-122B-A10B-NVFP4) 下载 Qwen3.5-122B-A10B NVFP4 模型权重。
 
-### 模型切分
+* 模型切分
 
 由于原始下载的模型分片文件较大（单个最高 50GB），直接加载会导致显存瞬间激增引发 OOM。需要对模型进行切分：
 
@@ -185,7 +185,7 @@ python split_llm_model.py
 
 ## 2.4 启动推理服务
 
-### 进入 Docker 镜像环境
+* 进入 Docker 镜像环境
 
 ```bash
 docker run -it --name vllm-qwen35 \
@@ -195,7 +195,7 @@ docker run -it --name vllm-qwen35 \
     vllm-qwen35-v2
 ```
 
-### 启动推理服务
+* 启动推理服务
 
 进入 Docker 容器后，执行：
 
@@ -216,7 +216,7 @@ vllm serve /models/qwen35-122b-hybrid-int4fp8 \
 (APIServer pid=662) INFO:     Application startup complete.
 ```
 
-### 测试服务
+* 测试服务
 
 ```bash
 # curl http://localhost:8000/v1/chat/completions \
@@ -249,7 +249,7 @@ curl -X POST 10.1.50.7:8004/v1/chat/completions -H "Content-Type: application/js
 | + INT8 LM Head v2                                   | **51**   | +80%         |
 | + @triton.autotune + PR #38325 swapAB（v2.4）       | **52**   | **+82%**     |
 
-## 整体加速流程概览
+* 整体加速流程概览
 
 ```mermaid
 flowchart TD
@@ -286,7 +286,7 @@ vLLM 默认在 SM121 上使用 `FLASH_ATTN` 后端。FlashInfer 针对 Blackwell
 
 **效果：28.3 → 30.8 tok/s（+8.8%）**
 
-### 核心思路
+* 核心思路
 
 Qwen3.5-122B-A10B 是 MoE（Mixture of Experts）架构。MoE 层中有两类权重：
 
@@ -316,21 +316,21 @@ flowchart LR
     style S2 fill:#69db7c,color:#fff
 ```
 
-### 核心设计考量
+* 核心设计考量
 
-#### 1. 为什么混合量化比纯 INT4 基线更快？
+1. 为什么混合量化比纯 INT4 基线更快？
 在自回归解码（Decode）阶段，对于纯 INT4 权重，GPU 的 Tensor Cores 无法直接对其进行矩阵乘法计算，必须在运行时首先调用反量化（De-quantization）算子，将 4-bit 权重还原为 FP16/BF16，然后再与激活值做矩阵乘法。这引入了额外的反量化计算开销和寄存器压力。
 
 而 NVIDIA DGX Spark 搭载的 Blackwell 架构（SM121）具有**原生 FP8 Tensor Cores 硬件加速**，能够直接执行 FP8 矩阵乘法，**完全省去了运行时的反量化开销**。将每次推理都会 100% 激活的共享专家密集层（Shared Expert）和注意力映射层替换为 FP8，可以直接借助 SM121 原生的 CUTLASS FP8 算子进行极速计算。因此，其执行速度比存在反量化瓶颈的纯 INT4 Marlin 内核更快，速度从 28.3 tok/s 提升到 30.8 tok/s，提升了 **8.8%**。
 
-#### 2. 既然 FP8 硬件加速更快，为什么不全用 FP8？
+2. 既然 FP8 硬件加速更快，为什么不全用 FP8？
 这完全受限于 DGX Spark 的**显存容量瓶颈**（128 GB 统一内存的物理天花板）。
 * **全用 FP8 的显存灾难**：Qwen3.5-122B-A10B 参数量高达 1220 亿，如果全部使用 FP8 量化（1 字节/参数），单是模型权重就要占用近 **122 GB** 显存。这会导致 128 GB 的统一内存在加载完模型后仅剩 6 GB 左右的空间，根本无法分配 vLLM 运行所必须的 KV Cache（键值缓存），导致推理时瞬间发生 OOM（显存溢出）。
 * **混合量化的“甜点区”**：256 个 MoE 专家权重极其庞大，用 **INT4** Marlin 格式量化（0.5 字节/参数）能够最大限度缩减体积；而常驻计算的密集层则采用 **FP8** 原生计算。混合量化后的模型权重仅占约 **84 GB** 显存，能为 vLLM 留出高达 **44 GB** 的富余显存来存放 KV Cache。
 
 因此，**“INT4 缩减体积保显存，FP8 原生计算提速度”** 的混合量化方案，是在 128GB 内存限制下部署 122B 级 MoE 模型的最佳平衡解。
 
-### 源码分析：Checkpoint 构建流程
+* 源码分析：Checkpoint 构建流程
 
 混合 checkpoint 的构建逻辑在 [build-hybrid-checkpoint.py](https://github.com/albond/DGX_Spark_Qwen3.5-122B-A10B-AR-INT4/blob/master/patches/01-hybrid-int4-fp8/build-hybrid-checkpoint.py) 中，整个流程分 5 步完成：
 
@@ -388,7 +388,7 @@ def update_safetensors_index(output_dir: Path) -> None:
     index = {"metadata": {"total_size": total_size}, "weight_map": weight_map}
 ```
 
-### 源码分析：vLLM 推理时的混合量化分派（inc.py）
+* 源码分析：vLLM 推理时的混合量化分派（inc.py）
 
 混合量化在推理时需要 vLLM 能自动识别哪些层是 FP8、哪些是 INT4。这通过修改 `inc.py`（Intel Neural Compressor 量化模块）实现。`INCConfig` 类新增了三个关键属性和方法。
 
@@ -482,7 +482,7 @@ def _is_layer_fp8(self, prefix: str) -> bool:
 
 **效果：30.8 → 38.4 tok/s（+25%）**
 
-### 技术原理
+* 技术原理
 
 在大语言模型自回归解码（Decode）阶段，每次生成一个 token 都必须将高达千亿参数的权重矩阵从显存（统一内存）中读取一遍。这种机制导致计算单元（Tensor Cores）大部分时间都在等待数据传输，使得推理速度极度受限于内存带宽（Memory Bandwidth Bound）。
 
@@ -511,7 +511,7 @@ sequenceDiagram
     end
 ```
 
-### 为什么选择内置 MTP 模块而不是其他草稿模型？
+* 为什么选择内置 MTP 模块而不是其他草稿模型？
 
 在评估推测解码方案时，对比分析了三种不同的推测解码路径：
 
@@ -525,7 +525,7 @@ sequenceDiagram
 | **KnapSpec**         | 无（剪层）                     | 需读取主模型约 75% 的权重，内存饱和            | 带宽瓶颈严重，甚至变慢        |
 | **MTP Head（内置）** | **仅 4.8 GB（占主模型 4.4%）** | **内存开销极小，零额外调度成本，无需二次校准** | **最优选，推测速度提升 +25%** |
 
-### 源码实现与注册
+* 源码实现与注册
 
 Intel AutoRound 分发的 checkpoint 中，MTP 权重文件 `model_extra_tensors.safetensors`（约 4.8GB）是物理存在的，但因为其在 `model.safetensors.index.json` 中**没有被列出**，导致 vLLM 默认发现并无法加载它们。
 
@@ -550,7 +550,7 @@ with open(target_index, "w") as f:
 
 **效果：38.4 → 51 tok/s（+33%）——这是所有优化中增益最大的一项**
 
-### 问题分析
+* 问题分析
 
 LM Head 是模型的输出层，负责将隐藏状态映射到词表概率。Qwen3.5 的词表大小为 248,320，隐藏维度为 3,072，因此 LM Head 权重矩阵的大小为 `248320 × 3072`，在默认的 BF16 下占用 **1.5 GB** 的显存空间。
 
@@ -586,11 +586,11 @@ flowchart TB
     style BW2 fill:#69db7c,color:#fff
 ```
 
-### 源码深度分析
+* 源码深度分析
 
 INT8 LM Head v2 的核心实现在 [patch_int8_lmhead.py](https://github.com/albond/DGX_Spark_Qwen3.5-122B-A10B-AR-INT4/blob/master/patches/03-int8-lm-head/patch_int8_lmhead.py) 中。它通过文本替换的方式修改 vLLM 的 `logits_processor.py`，注入自定义的 Triton 内核。
 
-#### 第一步：运行时 BF16 → INT8 量化
+* 第一步：运行时 BF16 → INT8 量化
 
 ```python
 # 首次推理时进行一次性量化（per-channel）
@@ -607,7 +607,7 @@ lm_head.weight.data = torch.empty(0, ...)  # 释放原始权重
 
 这里采用的是 **per-channel 量化**（每行一个 scale），因为 LM Head 的不同行对应不同的词表 token，各行的数值范围差异较大。per-channel 量化能很好地保持 top-k token 排名的一致性，不会降低输出质量。
 
-#### 第二步：Triton GEMV 内核（v2 核心创新）
+* 第二步：Triton GEMV 内核（v2 核心创新）
 
 v1 版本的内核存在一个致命问题：**Python 层面的 for 循环**为 batch 中的每个 token 逐一发射内核，导致多次权重读取。
 
@@ -687,7 +687,7 @@ flowchart TB
 | 带宽利用率   | ~49%           | **~84%**       |
 | 预计耗时     | ~11.34 ms/step | **~3 ms/step** |
 
-#### 第三步：@triton.autotune 自动调参
+* 第三步：@triton.autotune 自动调参
 
 v2.4 版本新增了 `@triton.autotune` 装饰器，让 Triton 在 8 种配置组合中自动选择最优的 `BLOCK_M`、`BLOCK_K`、`num_warps`、`num_stages` 参数：
 
@@ -787,7 +787,7 @@ docker run -d --name vllm-qwen35 \
 
 在超长上下文（例如 256K 或更高）或高并发服务场景下，KV Cache（键值缓存）会占用大量的显存，甚至超过模型权重本身。为了解决显存瓶颈，项目中引入了 Google 提出的 **TurboQuant (TQ)** 压缩技术。
 
-### 技术原理
+* 技术原理
 
 TurboQuant 将 KV Cache 的隐藏向量从标准的 BF16（每个元素 2 字节）压缩至 **~3.5 bits**（约 4.27 倍压缩，从 512 字节/位置压缩至 120 字节/位置），其核心包含以下两项压缩机制：
 
@@ -804,7 +804,7 @@ TurboQuant 将 KV Cache 的隐藏向量从标准的 BF16（每个元素 2 字节
   - Regular Group (128维): 32B MSE索引 + 16B QJL符号 + 4B 范数 = 52 字节
 ```
 
-### 为什么速度会下降 22%？
+* 为什么速度会下降 22%？
 
 使用 TurboQuant 可以获得 **4 倍的 KV 缓存容量**（在单卡上支持的 KV token 缓存从 35.5 万提升至 140 万），但其生成速度会从 51 tok/s 下降至约 39 tok/s（下降 22%）。这主要是由于硬件与软件架构的限制：
 
@@ -814,7 +814,7 @@ TurboQuant 将 KV Cache 的隐藏向量从标准的 BF16（每个元素 2 字节
 
 因此，**TurboQuant 是一种“空间换时间”的折中方案**。在并发不高、上下文在 256K 以内的场景下，不推荐使用它；而在超长文本高并发时，它是避免 OOM 的利器。
 
-### TurboQuant 预热配置
+* TurboQuant 预热配置
 
 ```bash
 # 生成不同压缩策略的 TQ 元数据（以 TQ35 为例）
@@ -866,7 +866,7 @@ True
 | **122B-A10B (Spark)** | **INT4**                        | 14段     | **84.73G** | 9.51                                  | **62.90**                             | 1.50s                  | **0.238s**             | **28.30**                  | **10.3s**            |
 | **122B-A10B (Spark)** | **hybrid-int4fp8 (本优化方案)** | 14段     | **113G**   | 11.00                                 | **53.20**                             | 1.35s                  | **0.280s**             | **46.88**                  | **5.48s**            |
 
-### 核心结论
+* 核心结论：
 
 1. **加速效果显著**：在相同的 **NVIDIA DGX Spark** 设备上，经过混合 FP8 量化、MTP-2 推测解码和 Triton INT8 LM Head 等多重优化后的 `hybrid-int4fp8` 方案，其解码生成速度达到了 **46.88 tokens/s**。相比于 INT4 基线的 **28.30 tokens/s** 提升了 **65.6%**；相比于开箱默认的 NVFP4 部署方案（**15.44 tokens/s**）则更是提升了 **203.6%**！
 2. **延迟与耗时的全面缩短**：生成 300 个 token 的完整时间从 17.0 秒（NVFP4）缩短至仅 **5.48 秒**，已经完全能够满足桌面级端侧 AI 助理的实时交互体验。
