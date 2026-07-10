@@ -873,3 +873,13 @@ True
 - [vLLM Docker 安装教程](https://immwind.com/deploy-qwen3-5-122b-with-vllm-on-nvidia-dgx-spark/)
 - [Qwen vLLM 部署官方教程](https://qwen.readthedocs.io/zh-cn/latest/deployment/vllm.html)
 - [TurboQuant: Redefining AI Efficiency with Extreme Compression (Google Research, ICLR 2026)](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/)
+
+
+# 致谢
+
+* 本博客特别致谢 [@shuttle999](https://github.com/shuttle999) 提供的技术支持。
+  <a class="github-button" 
+    href="https://github.com/shuttle999" 
+    data-size="large"
+    data-show-count="true" 
+    aria-label="Follow @shuttle999 on GitHub">Follow @shuttle999</a>
