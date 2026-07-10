@@ -64,13 +64,13 @@ DGX Spark 包含如下配件：
 - 快速入门指南手册
 
 <div align="center">
-<img src="../images/dgx_spark_unbox.png" width="50%">
+<img src="https://r-c-group.github.io/blog_media/images/dgx_spark_unbox.png" width="50%">
 </div>
 
 接口布局如下图所示，注意**电源只能插在最左侧 Type-C 口（Power）**。QSFP56 接口为四通道小型可插拔光模块接口，总传输速率可达 200Gbps。
 
 <div align="center">
-<img src="../images/dgx_spark_ports.png" width="60%">
+<img src="https://r-c-group.github.io/blog_media/images/dgx_spark_ports.png" width="60%">
 </div>
 
 ## 1.3 首次启动、初始设置与硬件信息查看
@@ -85,7 +85,7 @@ DGX Spark 包含如下配件：
 6. **登录与硬件验证**：登录系统后，可以通过 `nvidia-smi` 查看显卡驱动和 GPU 运行信息（驱动已默认预装，CUDA 版本为 13.0，GPU 架构为 Blackwell SM121，配备 128 GB 统一内存）。
 
 <div align="center">
-<img src="../images/dgx_spark_nvidia_smi.jpg" width="70%">
+<img src="https://r-c-group.github.io/blog_media/images/dgx_spark_nvidia_smi.jpg" width="70%">
 </div>
 
 ---
