@@ -2,5 +2,12 @@
 .DS_Store
 .vscode
 
+# Jekyll / Bundler local dev artifacts
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+.bundle-gems/
+
 # 先不push未完成的post
 _posts/doing*.md
