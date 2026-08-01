@@ -19,8 +19,8 @@ avatar: #https://avatars.githubusercontent.com/u/44108932?s=400&u=dbbb2abcd70a8b
 sidebar_globe: true
 
 # 访客地图（显示在侧边栏导航下方）
-visitor_map: https://mapmyvisitors.com/map.png?cl=ffffff&w=900&t=tt&d=lrhHkw37oj7lEdFXpI6fnTvg82h9jRMMHjNDrU-AUJA
-visitor_map_link: https://mapmyvisitors.com/web/1c5e9
+visitor_map: #https://mapmyvisitors.com/map.png?cl=ffffff&w=900&t=tt&d=lrhHkw37oj7lEdFXpI6fnTvg82h9jRMMHjNDrU-AUJA
+visitor_map_link: #https://mapmyvisitors.com/web/1c5e9
 
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
 favicon: https://kwanwaipang.github.io/Poster_files/hku_logo.jpg
