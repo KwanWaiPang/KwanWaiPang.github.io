@@ -27,9 +27,14 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 1280px; // 无目录时正文可更充分利用右侧区域；有目录时配合 .withtoc 靠左排布
-  padding: 0 28px;
+  max-width: 1560px; // 有目录时上限；无目录见下方 :not(.withtoc)
+  padding: 0 36px;
   width: 100%;
+}
+
+// 无目录时：正文铺满右侧内容区，只保留两侧内边距
+.wrapper-content:not(.withtoc) > .container {
+  max-width: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
