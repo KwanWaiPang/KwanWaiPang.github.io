@@ -647,8 +647,14 @@ nav {
 }
 
 @media screen and (max-width:6600px) and (min-width:1200px){
+  // 有目录时：为固定 TOC 留位，并取消 .container 水平居中，避免目录与正文之间出现大块空白
   .withtoc{
-    padding-left: 260px;
+    padding-left: 220px;
+
+    .container {
+      margin-left: 0;
+      margin-right: auto;
+    }
   }
 
   /* 仅添加滚动条功能，不改变布局 */
