@@ -27,8 +27,8 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 1000px;
-  padding: 0 20px;
+  max-width: 1280px; // 无目录时正文可更充分利用右侧区域；有目录时配合 .withtoc 靠左排布
+  padding: 0 28px;
   width: 100%;
 }
 
@@ -620,12 +620,12 @@ nav {
 // TOC(目录样式)
 
 .toc {
-  width: 240px;
+  width: 200px;
   height: 100%;
   left: 25%;
   position: fixed;
   z-index: 4;
-  padding: 60px 20px 0 20px;
+  padding: 60px 12px 0 12px;
   
   &:before{
     content:"目录";
