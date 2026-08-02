@@ -27,14 +27,14 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 1560px; // 有目录时上限；无目录见下方 :not(.withtoc)
-  padding: 0 36px;
+  max-width: 60vw; // 正文宽度约为屏幕的 60%，两侧自然留白
+  padding: 0 3vw;  // 两侧内边距各约屏幕的 3%
   width: 100%;
-}
 
-// 无目录时：正文铺满右侧内容区，只保留两侧内边距
-.wrapper-content:not(.withtoc) > .container {
-  max-width: none;
+  @include mobile {
+    max-width: 100%;
+    padding: 0 20px;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
