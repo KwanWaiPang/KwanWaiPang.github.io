@@ -319,7 +319,7 @@ img {
 //
 
 .wrapper-sidebar {
-  width: 30%;
+  width: 25%;
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: $background-color;
@@ -377,7 +377,7 @@ img {
     }
 
     &.sidebar-globe {
-      width: 70%;
+      width: 85%;
       margin: 0 auto 4px;
 
       .globe-wrap {
@@ -532,7 +532,7 @@ nav {
 
 .wrapper-content {
   float: right;
-  width: 70%;
+  width: 75%;
 
   @include mobile {
     float: none;
@@ -622,7 +622,7 @@ nav {
 .toc {
   width: 240px;
   height: 100%;
-  left: 30%;
+  left: 25%;
   position: fixed;
   z-index: 4;
   padding: 60px 20px 0 20px;
