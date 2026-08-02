@@ -31,27 +31,11 @@ excerpt: "从 Graph / State / Node / Edge 讲起，顺着 Hello World、持久�
 
 线性 Chain（以及许多只支持 DAG 的编排）不太擅长这类「有环、有状态、可中断」的流程。LangChain 生态中的 **LangGraph**，就是用来编排这类工作流的框架：用**图**描述步骤与走向，用**共享状态**在步骤间传递数据。
 
-本文按「要解决什么问题 → 四个核心组件 → 最小可运行示例 → 持久化与人机交互 → 两个复杂案例」展开。结构参考公开课程[《从零吃透 LangGraph 全套实战》](https://www.bilibili.com/video/BV12hJM6XEHS/)（Bilibili：BV12hJM6XEHS），表述为本人整理与改写。
+本文按「要解决什么问题 → 四个核心组件 → 最小可运行示例 → 持久化与人机交互 → 两个复杂案例」展开，便于先建立整体图景，再按需深入。部分例子与讲解脉络参考了公开课程[《从零吃透 LangGraph 全套实战》](https://www.bilibili.com/video/BV12hJM6XEHS/)，表述为本人整理与改写。
 
 相关前文：
 
 * [什么是Agent？：从 LLM 到 Skill / MCP / RAG](/Agent基本概念梳理/)
-
-
-## 本文与课程结构的对应
-
-| 课程分 P | 主题 | 本文位置 |
-|---|---|---|
-| P1 | 课程总览：组件、持久化、人机交互、两类 Agent 案例 | 引言 + 全文结构 |
-| P2 | 核心能力与文档学习路径 | 「一句话理解」+ 参考资料 |
-| P3–P4 | Hello World：流程图 + 代码实现 | 「最小应用」+ 图 3 |
-| P5 | Graph / `StateGraph` / 编译 | 「Graph」一节 |
-| P6 | State、Reducer、节点与共享状态 | 「State」「Node」两节 |
-| P7 | 普通边、条件边、入口点、条件入口点 | 「Edge」一节 |
-| P8 | Checkpoint / MemorySaver / SQLite | 「持久化」 |
-| P9 | `interrupt_before` 人机交互 | 「人机交互」 |
-| P10 | 多 Agent 协作（检索 + 画图） | 「多 Agent 协作」 |
-| P11 | 计划执行（Plan / Act / Replan） | 「计划执行」 |
 
 
 # 一句话理解 LangGraph
@@ -73,7 +57,7 @@ State 在节点之间共享上下文。
 * **Edge（边）**：节点之间的转移；普通边固定跳转，条件边由路由函数决定；
 * **State（状态）**：全图共享的数据；每个节点可读，并通过返回值更新。
 
-持久化时，框架会把 State 的快照存成 **Checkpoint（检查点）**。课程里常用「游戏存档」作类比：执行到某一步留下快照，下次用同一会话标识继续。
+持久化时，框架会把 State 的快照存成 **Checkpoint（检查点）**。也可以把它理解成存档：执行到某一步留下快照，下次用同一会话标识继续。
 
 
 # LangGraph 和 LangChain 是什么关系？
@@ -465,7 +449,7 @@ flowchart LR
 
 # 选型与学习顺序
 
-建议按下面顺序学习，与课程推进方式一致：
+若按由浅入深来学，可以参考下面顺序：
 
 <div class="mermaid" style="display: flex; justify-content: center; width: 100%; margin: 0 auto;">
 flowchart BT
@@ -521,5 +505,5 @@ LangGraph 把后者整理成可复用的编排结构。
 
 * [LangGraph 官方文档](https://langchain-ai.github.io/langgraph/)
 * [LangGraph GitHub](https://github.com/langchain-ai/langgraph)
-* 公开课程：[从零吃透 LangGraph 全套实战（BV12hJM6XEHS）](https://www.bilibili.com/video/BV12hJM6XEHS/)（结构参考，本文为改写）
+* 公开课程：[从零吃透 LangGraph 全套实战（BV12hJM6XEHS）](https://www.bilibili.com/video/BV12hJM6XEHS/)（部分例子参考，本文为改写）
 * 前文：[什么是Agent？：从 LLM 到 Skill / MCP / RAG](/Agent基本概念梳理/)
