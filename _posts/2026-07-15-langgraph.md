@@ -2,7 +2,7 @@
 layout: post
 title: "什么是LangGraph？"
 date:   2026-07-15
-tags: ['Coding']
+tags: [LLM/VLM]
 comments: true
 author: kwanwaipang
 toc: true

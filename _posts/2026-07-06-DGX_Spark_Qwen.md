@@ -2,7 +2,7 @@
 layout: post
 title: "NVIDIA DGX Spark上对Qwen3.5 122B-A10B进行加速"
 date:   2026-07-06
-tags: [Hardware]
+tags: [Hardware, LLM/VLM]
 comments: true
 author: kwanwaipang
 toc: true
