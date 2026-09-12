@@ -18,7 +18,7 @@ excerpt: "" # 【指定摘要内容】
 
 * Keep update the paper list in: [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
 
-之前[博客](https://kwanwaipang.github.io/File/Blogs/Poster/Learning_based_VO.html)已经较为系统的介绍了基于learning的VO以及VIO工作。
+之前[博客](https://kwanwaipang.github.io/Learning-based-VO-VIO/)已经较为系统的介绍了基于learning的VO以及VIO工作。
 但是对于使用learning的方法来handle IMU bias仍然没有调研。
 为此，写下本博客，作为本人学习相关工作的学习笔记。
 本博客仅供本人学习记录用~
