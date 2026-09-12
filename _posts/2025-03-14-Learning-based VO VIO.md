@@ -15,7 +15,6 @@ excerpt: "This blog is about the paper survey and analysis for learning-based VO
 
 
 ## Abstract
-{: #abstract }
 
 This blog is about the paper survey and analysis for learning-based VO, VIO and SLAM.
 This blog is based on the paper reading and my personal understanding, which is only for self-record rather than any commercial purposes.
@@ -23,7 +22,6 @@ This blog is based on the paper reading and my personal understanding, which is 
 Keep update the paper list in: [Awesome-Learning-based-VO-VIO](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO)
 
 ## Learning-based VO
-{: #learning-based-vo }
 
 As shown in following figure, a classic VO pipeline, which typically consists of camera calibration, feature detection, feature matching (or tracking), outlier rejection (e.g., RANSAC), motion estimation, scale estimation and local optimization (Bundle Adjustment), has been developed and broadly considered as a golden rule to follow.
 However, the traditional VO pipeline is not robust enough to handle the challenging scenarios, such as dynamic environments, illumination changes, textureless scenes, etc.
@@ -36,7 +34,6 @@ The framework of the traditional VO system.
 </div>
 
 ### [Deepvo: Towards end-to-end visual odometry with deep recurrent convolutional neural networks](https://arxiv.org/pdf/1709.08429)
-{: #deepvo-towards-end-to-end-visual-odometry-with-deep-recurrent-convolutional-neural-networks }
 
 ICRA2017
 
@@ -103,7 +100,6 @@ Experiments:
 * worse than the traditional methods.
 
 ### [UnDeepVO: Monocular Visual Odometry through Unsupervised Deep Learning](https://arxiv.org/pdf/1709.06841)
-{: #undeepvo-monocular-visual-odometry-through-unsupervised-deep-learning }
 
 ICRA2018
 
@@ -232,7 +228,7 @@ Experiments:
 * better than ORB-SLAM2 in KITTI dataset.
 
 ### [Recurrent neural network for (un-) supervised learning of monocular video visual odometry and depth](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_Recurrent_Neural_Network_for_Un-Supervised_Learning_of_Monocular_Video_Visual_CVPR_2019_paper.pdf)
-{: #recurrent-neural-network-for-(un-)-supervised-learning-of-monocular-video-visual-odometry-and-depth }
+
 
 CVPR2019
 
@@ -296,7 +292,7 @@ Network architecture of the proposed method. Very similar to the UnDeepVO, but w
 </div>
 
 ### [DROID-SLAM: Deep Visual SLAM for Monocular,Stereo, and RGB-D Cameras](https://proceedings.neurips.cc/paper/2021/file/89fcd07f20b6785b92134bd6c1d0fa42-Paper.pdf)
-{: #droid-slam-deep-visual-slam-for-monocular,stereo,-and-rgb-d-cameras }
+
 
 NIPS2021
 
@@ -336,7 +332,6 @@ Experiments:
 * outperform the ORB-SLAM3 in EuRoC using monocular or stereo input
 
 ### [Tartanvo: A generalizable learning-based vo](https://proceedings.mlr.press/v155/wang21h/wang21h.pdf)
-{: #tartanvo-a-generalizable-learning-based-vo }
 
 CoRL2021
 
@@ -364,7 +359,6 @@ Contributions:
 </div>
 
 ### [Diffposenet: Direct differentiable camera pose estimation](https://openaccess.thecvf.com/content/CVPR2022/papers/Parameshwara_DiffPoseNet_Direct_Differentiable_Camera_Pose_Estimation_CVPR_2022_paper.pdf)
-{: #diffposenet-direct-differentiable-camera-pose-estimation }
 
 CVPR2022
 
@@ -388,7 +382,6 @@ The NFlowNet and the PoseNet are trained firstly. Then the whole network is trai
 </div>
 
 ### [Deep patch visual odometry](https://proceedings.neurips.cc/paper_files/paper/2023/file/7ac484b0f1a1719ad5be9aa8c8455fbb-Paper-Conference.pdf)
-{: #deep-patch-visual-odometry }
 
 NIPS2024
 
@@ -419,14 +412,14 @@ An extension of DROID-SLAM through using sparse VO, which achieves similar accur
 </details>
 
 ## Learning-based VIO
-{: #learning-based-vio }
+
 
 The above mentioned methods are learning-based VO that use only the visual information.
 It is wellknown that including an additional inertial measurement unit (IMU) can enhance the robustness of visual SLAM methods.
 What's more, the IMU can estimate the absolute scale of the motion, it is easier to estimate the up-to-scale pose.
 
 ### [Vinet: Visual-inertial odometry as a sequence-to-sequence learning problem](https://ojs.aaai.org/index.php/AAAI/article/view/11215)
-{: #vinet-visual-inertial-odometry-as-a-sequence-to-sequence-learning-problem }
+
 
 AAAI2017
 
@@ -445,7 +438,7 @@ LSTM processing the pose output at camera-rate and an IMU LSTM processing data a
 </div>
 
 ### [Deepvio: Self-supervised deep learning of monocular visual inertial odometry using 3d geometric constraints](https://arxiv.org/pdf/1906.11435)
-{: #deepvio-self-supervised-deep-learning-of-monocular-visual-inertial-odometry-using-3d-geometric-constraints }
+
 
 IROS2019
 
@@ -524,7 +517,7 @@ builds based on DROID-SLAM and extends it to a multi-camera VI-SLAM system.
 * marginalization is not considered.
 
 ### [DVI-SLAM: A dual visual inertial SLAM network](https://arxiv.org/pdf/2309.13814)
-{: #dvi-slam-a-dual-visual-inertial-slam-network }
+
 
 Contributions:
 
@@ -614,7 +607,7 @@ For the monocular visual and inertial streams, the absolute scale is also initia
 Finally, minimize re-projection residual, feature-metric residual, and inertial residual with DBA layer to refine camera pose, motion, and inverse depth.
 
 ### [DBA-Fusion: Tightly Integrating Deep Dense Visual Bundle Adjustment with Multiple Sensors for Large-Scale Localization and Mapping](https://arxiv.org/pdf/2403.13714)
-{: #dba-fusion-tightly-integrating-deep-dense-visual-bundle-adjustment-with-multiple-sensors-for-large-scale-localization-and-mapping }
+
 
 RAL2024
 
@@ -656,7 +649,7 @@ Experiments, no bad~:
 </div>
 
 ### [Adaptive VIO: Deep Visual-Inertial Odometry with Online Continual Learning](https://arxiv.org/pdf/2405.16754)
-{: #adaptive-vio-deep-visual-inertial-odometry-with-online-continual-learning }
+
 
 Motivations:
 
@@ -694,7 +687,7 @@ Methodology:
 * The visual network requires pre-training, while the IMU bias network does not. (since it has the online continual learning).
 
 # Reference or Marks
-{: #reference-or-marks }
+
 
 * [what is Normalization](https://blog.csdn.net/gwplovekimi/article/details/84647354)
 * [different kinds of Normalization](https://blog.csdn.net/gwplovekimi/article/details/84539021)
