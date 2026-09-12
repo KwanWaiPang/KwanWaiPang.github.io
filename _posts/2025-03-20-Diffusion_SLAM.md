@@ -79,7 +79,7 @@ or 3D reconstruction
 * Survey for Learning-based VO,VIO,IO：[Paper List](https://github.com/KwanWaiPang/Awesome-Learning-based-VO-VIO) and [Blog](https://kwanwaipang.github.io/Learning-based-VO-VIO/)
 * Survey for Transformer-based SLAM：[Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) and [Blog](https://kwanwaipang.github.io/Transformer_SLAM/)
 * Survey for NeRF-based SLAM：[Blog](https://kwanwaipang.github.io/Awesome-NeRF-SLAM/)
-* Survey for 3DGS-based SLAM: [Blog](https://kwanwaipang.github.io/File/Blogs/Poster/survey_3DGS_SLAM.html)
+* Survey for 3DGS-based SLAM：[Paper List](https://github.com/KwanWaiPang/Awesome-3DGS-SLAM) and [Blog](https://kwanwaipang.github.io/3DGS-SLAM/)
 * [Awesome-Diffusion-Models](https://github.com/diff-usion/Awesome-Diffusion-Models)
 * Some basic paper for Diffusion Model:
 

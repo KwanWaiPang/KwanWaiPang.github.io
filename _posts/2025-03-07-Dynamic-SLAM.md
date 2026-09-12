@@ -46,7 +46,6 @@ excerpt: "" # 【指定摘要内容】
 <br>
 
 * 😁原创不易，如果使用请给出引用以及给个star <a class="github-button"   href="https://github.com/KwanWaiPang/KwanWaiPang.github.io"   data-icon="octicon-star"   data-size="large"  data-show-count="true"  aria-label="Star 你的用户名/你的仓库名 on GitHub">Star</a>谢谢😊
-* Previous Survey for Dynamic-SLAM: [Blog](https://kwanwaipang.github.io/File/Blogs/Poster/survey_dynamic_SLAM.html)
 * 基于3DGS以及Transformer的也有大量跟Dynamic-SLAM相关的工作，具体请见：
   * Awesome-Transformer-based-SLAM: [Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) 
   * Awesome-3DGS-SLAM: [Paper List](https://github.com/KwanWaiPang/Awesome-3DGS-SLAM)
