@@ -23,17 +23,17 @@ excerpt: "" # 【指定摘要内容】
 
 | Title | Link | Note |
 |:----:|:-----:|:----:|
-| 堆栈  | [link](../File/Blogs/Poster/栈类型题目.html) | C++ |
-| 双指针| [链表](../File/Blogs/Poster/双指针链表解法.html) <br> [数组/Vector](../File/Blogs/Poster/双指针数组解法.html) | C++ |
-| 滑动窗口算法 | [link](../File/Blogs/Poster/滑动窗口算法.html) | C++ |
-| 二分法 | [link](../File/Blogs/Poster/二分法.html) | C++ |
-| 二叉树 | [link](../File/Blogs/Poster/二叉树类题目.html) | C++ |
-| 回溯算法 | [link](../File/Blogs/Poster/回溯算法.html) | C++ |
-| 递归算法 | [link](../File/Blogs/Poster/递归类题目.html) | C++ |
-| 动态规划算法 | [link](../File/Blogs/Poster/动态规划.html) | C++ |
-| 贪心算法 | [link](../File/Blogs/Poster/贪心算法.html) | C++ |
-| 模拟算法 | [link](../File/Blogs/Poster/模拟算法.html) | C++ |
-| 图论 | [link](../File/Blogs/Poster/图论.html) | C++ |
-| string/Hash Table及其它特殊函数的使用 | [link](../File/Blogs/Poster/其他算法题汇总.html) | C++ |
-| 位运算| [link](../File/Blogs/Poster/位运算.html) | C++ |
-| 算法的复杂度分析| [link](../File/Blogs/Poster/算法的复杂度分析.html) | C++ |
+| 堆栈  | [link](/栈类型题目/) | C++ |
+| 双指针| [链表](/双指针链表解法/) <br> [数组/Vector](/双指针数组解法/) | C++ |
+| 滑动窗口算法 | [link](/滑动窗口算法/) | C++ |
+| 二分法 | [link](/二分法/) | C++ |
+| 二叉树 | [link](/二叉树类题目/) | C++ |
+| 回溯算法 | [link](/回溯算法/) | C++ |
+| 递归算法 | [link](/递归类题目/) | C++ |
+| 动态规划算法 | [link](/动态规划/) | C++ |
+| 贪心算法 | [link](/贪心算法/) | C++ |
+| 模拟算法 | [link](/模拟算法/) | C++ |
+| 图论 | [link](/图论/) | C++ |
+| string/Hash Table及其它特殊函数的使用 | [link](/其他算法题汇总/) | C++ |
+| 位运算| [link](/位运算/) | C++ |
+| 算法的复杂度分析| [link](/算法的复杂度分析/) | C++ |
