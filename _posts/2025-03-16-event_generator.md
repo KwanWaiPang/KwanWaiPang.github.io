@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "从图像数据集中生成事件数据"
+title: "实验笔记之——基于ESIM及Gazebo生成合成的事件数据"
 date:   2025-03-16
-tags: [Deep Learning,Event-based Vision]
+tags: [Event-based Vision]
 comments: true
 author: kwanwaipang
 toc: true
