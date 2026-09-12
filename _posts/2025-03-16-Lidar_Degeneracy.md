@@ -60,8 +60,10 @@ ICP匹配转换成最小二乘问题，而上面的公式3中的A也就是优化
 
 * Degeneracy awareness：通过分析优化的Hessian矩阵的最小特征值，识别退化方向，也就是下面几个工作中主要介绍到的进行奇异值分解，然后判断特征值大小的方法(感觉跟上面一种很像，虽然有些文献分为四类，但是其实三类也可)
 
-## [Selective Kalman Filter: When and How to Fuse Multi-Sensor Information to Overcome Degeneracy in SLAM](https://arxiv.org/pdf/2412.17235)
+## Selective Kalman Filter: When and How to Fuse Multi-Sensor Information to Overcome Degeneracy in SLAM
 {: #selective-kalman-filter-when-and-how-to-fuse-multi-sensor-information-to-overcome-degeneracy-in-slam }
+
+*[链接]（https://arxiv.org/pdf/2412.17235）
 
 这篇论文主要的思路是:多传感器融合确实是可以解决SLAM退化的问题,但是不应该"all in"的融合,而是应该根据传感器的退化情况来选择性的融合,这样可以减少计算量(less processing visual data),提高精度(introduce fewer errors from visual measurement)。也就是"when"与"how"的问题。
 
@@ -154,8 +156,10 @@ For instance, a high variance indicates significant uncertainty in the estimatio
 
 最后分别设置两个阈值来判断是否退化.而退化的时候仅仅更新对应位置的状态(详细过程见原文,推导并不复杂).
 
-## [Degeneracy-aware factors with applications to underwater slam](https://www.cs.cmu.edu/~kaess/pub/Hinduja19iros.pdf)
+## Degeneracy-aware factors with applications to underwater slam
 {: #degeneracy-aware-factors-with-applications-to-underwater-slam }
+
+*[链接]（https://www.cs.cmu.edu/~kaess/pub/Hinduja19iros.pdf）
 
 **IROS2019**
 本文是针对基于ICP（scan matching）方法的退化感知问题（degeneracy-aware ICP algorithm），然后基于感知的退化结果（剔除掉退化的部分用来做回环约束），采用a partially constrained loop closure factor来整合到图优化SLAM中。
@@ -197,8 +201,10 @@ For instance, a high variance indicates significant uncertainty in the estimatio
 </figcaption>
 </div>
 
-## [Lion: Lidar-inertial observability-aware navigator for vision-denied environments](https://arxiv.org/pdf/2102.03443)
+## Lion: Lidar-inertial observability-aware navigator for vision-denied environments
 {: #lion-lidar-inertial-observability-aware-navigator-for-vision-denied-environments }
+
+*[链接]（https://arxiv.org/pdf/2102.03443）
 
 **Experimental robotics: The 17th international symposium**
 这篇工作主要其实是提出一个LIO系统（带有在线lidar-imu外参估计），且该算法获得了second and first places in the Tunnel and Urban circuits （DARPA Subterranean Challenge） in August 2019 and February 2020, respectively.
@@ -225,8 +231,10 @@ For instance, a high variance indicates significant uncertainty in the estimatio
 </figcaption>
 </div>
 
-## [X-icp: Localizability-aware lidar registration for robust localization in extreme environments](https://arxiv.org/pdf/2211.16335)
+## X-icp: Localizability-aware lidar registration for robust localization in extreme environments
 {: #x-icp-localizability-aware-lidar-registration-for-robust-localization-in-extreme-environments }
+
+*[链接]（https://arxiv.org/pdf/2211.16335）
 
 **IEEE Transactions on Robotics (2023)**
 
@@ -259,8 +267,10 @@ X-ICP整体的系统框架如下：
 
 * Active degeneracy mitigation:主动退化补偿方法直接修改优化过程，以减少退化对估计结果的影响。这些方法通过引入额外的约束、调整优化目标函数或使用正则化项等方式，主动地改变优化过程中的退化情况。
 
-## [Informed, constrained, aligned: A field analysis on degeneracy-aware point cloud registration in the wild](https://arxiv.org/pdf/2408.11809)
+## Informed, constrained, aligned: A field analysis on degeneracy-aware point cloud registration in the wild
 {: #informed,-constrained,-aligned-a-field-analysis-on-degeneracy-aware-point-cloud-registration-in-the-wild }
+
+*[链接]（https://arxiv.org/pdf/2408.11809）
 
 [Github Page](https://github.com/leggedrobotics/perfectlyconstrained)
 

@@ -33,7 +33,9 @@ The framework of the traditional VO system.
 </figcaption>
 </div>
 
-## [Deepvo: Towards end-to-end visual odometry with deep recurrent convolutional neural networks](https://arxiv.org/pdf/1709.08429)
+## Deepvo: Towards end-to-end visual odometry with deep recurrent convolutional neural networks
+
+*[链接]（https://arxiv.org/pdf/1709.08429）
 
 ICRA2017
 
@@ -99,7 +101,9 @@ Experiments:
 * only done on the KITTI dataset.
 * worse than the traditional methods.
 
-## [UnDeepVO: Monocular Visual Odometry through Unsupervised Deep Learning](https://arxiv.org/pdf/1709.06841)
+## UnDeepVO: Monocular Visual Odometry through Unsupervised Deep Learning
+
+*[链接]（https://arxiv.org/pdf/1709.06841）
 
 ICRA2018
 
@@ -227,8 +231,9 @@ Experiments:
 
 * better than ORB-SLAM2 in KITTI dataset.
 
-## [Recurrent neural network for (un-) supervised learning of monocular video visual odometry and depth](https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_Recurrent_Neural_Network_for_Un-Supervised_Learning_of_Monocular_Video_Visual_CVPR_2019_paper.pdf)
+## Recurrent neural network for (un-) supervised learning of monocular video visual odometry and depth
 
+*[链接]（https://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_Recurrent_Neural_Network_for_Un-Supervised_Learning_of_Monocular_Video_Visual_CVPR_2019_paper.pdf）
 
 CVPR2019
 
@@ -291,8 +296,9 @@ Network architecture of the proposed method. Very similar to the UnDeepVO, but w
 </figcaption>
 </div>
 
-## [DROID-SLAM: Deep Visual SLAM for Monocular,Stereo, and RGB-D Cameras](https://proceedings.neurips.cc/paper/2021/file/89fcd07f20b6785b92134bd6c1d0fa42-Paper.pdf)
+## DROID-SLAM: Deep Visual SLAM for Monocular,Stereo, and RGB-D Cameras
 
+*[链接]（https://proceedings.neurips.cc/paper/2021/file/89fcd07f20b6785b92134bd6c1d0fa42-Paper.pdf）
 
 NIPS2021
 
@@ -331,7 +337,9 @@ Experiments:
 * high robustness and good generalization ability: EuRoC, TUM-RGND, TartanAir, ETH-3D
 * outperform the ORB-SLAM3 in EuRoC using monocular or stereo input
 
-### [Tartanvo: A generalizable learning-based vo](https://proceedings.mlr.press/v155/wang21h/wang21h.pdf)
+### Tartanvo: A generalizable learning-based vo
+
+*[链接]（https://proceedings.mlr.press/v155/wang21h/wang21h.pdf）
 
 CoRL2021
 
@@ -358,7 +366,9 @@ Contributions:
 </figcaption>
 </div>
 
-## [Diffposenet: Direct differentiable camera pose estimation](https://openaccess.thecvf.com/content/CVPR2022/papers/Parameshwara_DiffPoseNet_Direct_Differentiable_Camera_Pose_Estimation_CVPR_2022_paper.pdf)
+## Diffposenet: Direct differentiable camera pose estimation
+
+*[链接]（https://openaccess.thecvf.com/content/CVPR2022/papers/Parameshwara_DiffPoseNet_Direct_Differentiable_Camera_Pose_Estimation_CVPR_2022_paper.pdf）
 
 CVPR2022
 
@@ -381,7 +391,9 @@ The NFlowNet and the PoseNet are trained firstly. Then the whole network is trai
 </figcaption>
 </div>
 
-### [Deep patch visual odometry](https://proceedings.neurips.cc/paper_files/paper/2023/file/7ac484b0f1a1719ad5be9aa8c8455fbb-Paper-Conference.pdf)
+### Deep patch visual odometry
+
+*[链接]（https://proceedings.neurips.cc/paper_files/paper/2023/file/7ac484b0f1a1719ad5be9aa8c8455fbb-Paper-Conference.pdf）
 
 NIPS2024
 
@@ -418,8 +430,9 @@ The above mentioned methods are learning-based VO that use only the visual infor
 It is wellknown that including an additional inertial measurement unit (IMU) can enhance the robustness of visual SLAM methods.
 What's more, the IMU can estimate the absolute scale of the motion, it is easier to estimate the up-to-scale pose.
 
-## [Vinet: Visual-inertial odometry as a sequence-to-sequence learning problem](https://ojs.aaai.org/index.php/AAAI/article/view/11215)
+## Vinet: Visual-inertial odometry as a sequence-to-sequence learning problem
 
+*[链接]（https://ojs.aaai.org/index.php/AAAI/article/view/11215）
 
 AAAI2017
 
@@ -437,8 +450,9 @@ LSTM processing the pose output at camera-rate and an IMU LSTM processing data a
 </figcaption>
 </div>
 
-## [Deepvio: Self-supervised deep learning of monocular visual inertial odometry using 3d geometric constraints](https://arxiv.org/pdf/1906.11435)
+## Deepvio: Self-supervised deep learning of monocular visual inertial odometry using 3d geometric constraints
 
+*[链接]（https://arxiv.org/pdf/1906.11435）
 
 IROS2019
 
@@ -491,8 +505,10 @@ Methodology:
 </div>
 </details>
 
-## [Bamf-slam: bundle adjusted multi-fisheye visual-inertial slam using recurrent field transforms](https://arxiv.org/pdf/2306.01173)
+## Bamf-slam: bundle adjusted multi-fisheye visual-inertial slam using recurrent field transforms
 {: #bamf-slam-bundle-adjusted-multi-fisheye-visual-inertial-slam-using-recurrent-field-transforms }
+
+*[链接]（https://arxiv.org/pdf/2306.01173）
 
 ICRA2023
 
@@ -516,8 +532,9 @@ builds based on DROID-SLAM and extends it to a multi-camera VI-SLAM system.
 * The IMU initialization is adopted from ORB-SLAM3.
 * marginalization is not considered.
 
-## [DVI-SLAM: A dual visual inertial SLAM network](https://arxiv.org/pdf/2309.13814)
+## DVI-SLAM: A dual visual inertial SLAM network
 
+*[链接]（https://arxiv.org/pdf/2309.13814）
 
 Contributions:
 
@@ -606,8 +623,9 @@ For the monocular visual and inertial streams, the absolute scale is also initia
 
 Finally, minimize re-projection residual, feature-metric residual, and inertial residual with DBA layer to refine camera pose, motion, and inverse depth.
 
-## [DBA-Fusion: Tightly Integrating Deep Dense Visual Bundle Adjustment with Multiple Sensors for Large-Scale Localization and Mapping](https://arxiv.org/pdf/2403.13714)
+## DBA-Fusion: Tightly Integrating Deep Dense Visual Bundle Adjustment with Multiple Sensors for Large-Scale Localization and Mapping
 
+*[链接]（https://arxiv.org/pdf/2403.13714）
 
 RAL2024
 
@@ -648,8 +666,9 @@ Experiments, no bad~:
 </figcaption>
 </div>
 
-## [Adaptive VIO: Deep Visual-Inertial Odometry with Online Continual Learning](https://arxiv.org/pdf/2405.16754)
+## Adaptive VIO: Deep Visual-Inertial Odometry with Online Continual Learning
 
+*[链接]（https://arxiv.org/pdf/2405.16754）
 
 Motivations:
 
