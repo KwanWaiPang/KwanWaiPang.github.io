@@ -98,6 +98,14 @@ markdown: kramdown
 permalink: /:title/
 paginate_path: "/home/page:num/" #/page:num/ #指定分页页面的目标路径(若博客主页不在根目录下，需修改)
 
+# 前汉演义各回放在 File/ 下，不进入 site.posts；网址仍保持 /前汉演义01/
+defaults:
+  - scope:
+      path: "File/前汉演义"
+    values:
+      layout: post
+      permalink: /:basename/
+
 # The release of Jekyll Now that you're using
 version: v1.2.0
 
