@@ -256,4 +256,4 @@ excerpt: "本博文记录了本人学习 Coursera Deep Learning 专项课程的�
 * [deep learning 深度学习专项 4/5 吴恩达 DeepLearning.AI](https://www.bilibili.com/video/BV1qP411e7GJ/?spm_id_from=333.999.0.0&vd_source=a88e426798937812a8ffc1a9be5a3cb7)
 * [deep learning 深度学习专项 5/5 吴恩达 DeepLearning.AI](https://www.bilibili.com/video/BV1Th411A738/?spm_id_from=333.999.0.0&vd_source=a88e426798937812a8ffc1a9be5a3cb7)
 * [deep learning- 吴恩达（Andrew Ng）](https://www.youtube.com/playlist?list=PLM5hlczGTln79kN5Z_8J_s20k5-vRbKpE)
-* [Stanford CS230: Deep Learning | Autumn 2018](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb)
+* [Stanford CS230: Deep Learning  Autumn 2018](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb)

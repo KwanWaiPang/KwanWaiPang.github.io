@@ -1686,7 +1686,7 @@ ANI vs AGI
 {: #参考资料 }
 
 * [机器学习（Machine Learning）- 吴恩达（Andrew Ng）](https://www.youtube.com/playlist?list=PLOXON7BTL9IW7Ggbc09jLqGmzkwPI4-3V)
-* [2024公认最好的 | 吴恩达机器学习](https://www.youtube.com/playlist?list=PLULgBZmS3YWRXpqgJTOq9m_nU4oyEVyj4)
+* [2024公认最好的  吴恩达机器学习](https://www.youtube.com/playlist?list=PLULgBZmS3YWRXpqgJTOq9m_nU4oyEVyj4)
 * [B站更全的2022-Machine-Learning-Specialization](https://www.bilibili.com/video/BV19B4y1W76i)
 * [Stanford CS229: Machine Learning Full Course taught by Andrew Ng | Autumn 2018](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU)
 * [机器学习笔记目录](http://www.ai-start.com/ml2014/)
@@ -1695,6 +1695,6 @@ ANI vs AGI
 * [2022-Machine-Learning-Specialization](https://github.com/kaieye/2022-Machine-Learning-Specialization)
 * [Machine-Learning-Specialization-Coursera](https://github.com/greyhatguy007/Machine-Learning-Specialization-Coursera)
 * [deep learning- 吴恩达（Andrew Ng）](https://www.youtube.com/playlist?list=PLM5hlczGTln79kN5Z_8J_s20k5-vRbKpE)
-* [Stanford CS230: Deep Learning | Autumn 2018](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb)
+* [Stanford CS230: Deep Learning  Autumn 2018](https://www.youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb)
 * [coursera-deep-learning-specialization](https://github.com/amanchadha/coursera-deep-learning-specialization)
 * [深度学习笔记目录](http://www.ai-start.com/dl2017/)
