@@ -123,6 +123,13 @@
   const CLOUDS_ALT = 0.004;
   const CLOUDS_ROTATION_SPEED = -0.006;
 
+  // 只提亮地球表面，不改城市点、标签、大气和交互
+  const GLOBE_BRIGHTNESS = {
+    ambientScale: 1.45,
+    emissive: [0.16, 0.18, 0.2],
+    emissiveIntensity: 0.65,
+  };
+
   function markerLocation(place) {
     return { lat: place.markerLat ?? place.lat, lng: place.markerLng ?? place.lng };
   }
@@ -143,6 +150,32 @@
 
   function rgbFromColor([r, g, b]) {
     return `rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)})`;
+  }
+
+  function brightenGlobeSurface(globe) {
+    const material = typeof globe.globeMaterial === 'function' ? globe.globeMaterial() : null;
+    if (material) {
+      if (material.color && typeof material.color.setHex === 'function') {
+        material.color.setHex(0xffffff);
+      }
+      if (material.emissive && typeof material.emissive.setRGB === 'function') {
+        material.emissive.setRGB(
+          GLOBE_BRIGHTNESS.emissive[0],
+          GLOBE_BRIGHTNESS.emissive[1],
+          GLOBE_BRIGHTNESS.emissive[2],
+        );
+      }
+      if ('emissiveIntensity' in material) {
+        material.emissiveIntensity = GLOBE_BRIGHTNESS.emissiveIntensity;
+      }
+    }
+
+    const lights = typeof globe.lights === 'function' ? globe.lights() : [];
+    lights.forEach((light) => {
+      if (light && light.isAmbientLight) {
+        light.intensity *= GLOBE_BRIGHTNESS.ambientScale;
+      }
+    });
   }
 
   function findGlobeMesh(scene) {
@@ -302,7 +335,10 @@
         .htmlAltitude(0.015)
         .htmlElement((place) => createLabelElement(place))
         .htmlTransitionDuration(0)
-        .onGlobeReady(() => addCloudLayer(globe));
+        .onGlobeReady(() => {
+          brightenGlobeSurface(globe);
+          addCloudLayer(globe);
+        });
 
       const controls = globe.controls();
       const globeRadius = globe.getGlobeRadius();
