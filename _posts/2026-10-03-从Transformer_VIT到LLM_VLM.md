@@ -58,7 +58,7 @@ $$
 $q$ 去和每一个 $k$ 做匹配，匹配越大，$v$ 的权重越大。$Q$、$K$、$V$ 都来自同一条序列，这就是自注意力。如果 $Q$ 来自一条序列，$K$ 和 $V$ 来自另一条，那是交叉注意力。VLM 里两种都有，放到最后一节再说。
 
 <div align="center">
-  <img src="/images/attn_qkv.png" width="92%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/attn_qkv.png" width="92%" />
 </div>
 
 上图底部的权重是示意，用来看「小明」会比「书包」大很多，不是这句真算出来的数。
@@ -77,7 +77,7 @@ $$
 4. 用这个权重去加权 $V$。相关的内容多拿一点，不相关的少拿一点。
 
 <div align="center">
-  <img src="/images/attn_four_steps.png" width="92%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/attn_four_steps.png" width="92%" />
 </div>
 
 为什么要除以 $\sqrt{d_k}$。假设 $q$、$k$ 的每个分量均值是 0、方差是 1，而且互相独立，点积的方差会随 $d_k$ 变大，标准差就是 $\sqrt{d_k}$。向量一宽，原始分数就容易很大。softmax 对尺度很敏感，分数太大时，最大的那一项权重会贴到 1，其余贴到 0，梯度也几乎没了，训练开头学不动。除掉根号，是把初始时的分数尺度拉回来。这个假设只在初始化附近成立，训练久了分数还是可能慢慢变大。
@@ -101,7 +101,7 @@ $$
 默认情况下，每个位置能看到整段输入。翻译的编码器、BERT、ViT 可以这样，因为输入在算之前就已经到齐。生成不行。模型正在写第 $t$ 个词，右边那个词就是它要预测的答案。训练时如果让它看见右边，就变成抄答案。所以在 softmax 之前把未来位置的分数设成一个很大的负数，权重就变成 0。这是因果掩码。加上之后，第 $t$ 个位置只依赖左边。
 
 <div align="center">
-  <img src="/images/attn_causal_mask.png" width="62%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/attn_causal_mask.png" width="62%" />
 </div>
 
 Attention 本身不管顺序。两个 token 换位置，如果没有额外的位置信息，点积并不知道谁在前。语言里词序会改意思，图像里 patch 的行列也会改意思，所以要另加位置编码。原论文用的是正弦函数，加到 token 上。ViT 用的是一张可学习的位置表，和 token 直接相加。现在的大语言模型更常用 RoPE，把位置写成 Query 和 Key 上的旋转，点积就能感到两个位置差多远。训练长度以内这比较好用；拉到远超训练长度，外推还是会差，那是长上下文要另外处理的问题。
@@ -192,7 +192,7 @@ $$
 $x_{<t}$ 是位置 $t$ 左边的全部 token。训练取负对数，再按位置平均。正确的下一个词概率越接近 1，这一项越小。
 
 <div align="center">
-  <img src="/images/llm_next_token.png" width="88%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/llm_next_token.png" width="88%" />
 </div>
 
 已经有「今天」「天气」「很」，模型给下一个词一组概率。选中「好」之后，再把它接到后面继续预测。图里的概率同样是示意。
@@ -292,7 +292,7 @@ ViT 让 Transformer 能看图，但图和语言还是分开的。接下来要做
 * 把它们当成一段视觉 token，插进文本里。损失还是下一个词，通常只算在回答上。
 
 <div align="center">
-  <img src="/images/vlm_llava.png" width="92%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/vlm_llava.png" width="92%" />
 </div>
 
 拼进同一条序列之后，第一节的 Attention 就够用了。问题里每个字的 Query 可以去和图像 patch 的 Key 比，相关的 Value 加进这些字的表示。图被读到，是因为历史里多了一种 token。
@@ -321,7 +321,7 @@ ViT 让 Transformer 能看图，但图和语言还是分开的。接下来要做
 | 结构 | 只要编码器 | 还要一条能解码回图像的路 |
 
 <div align="center">
-  <img src="/images/vlm_two_tokenizers.png" width="92%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/vlm_two_tokenizers.png" width="92%" />
 </div>
 
 理解要的是「这是不是一只猫」。生成要的是毛边、光、背景像素。一个把细节收成语义，一个把细节留住才能画回来。一个是连续向量，一个常常是码本里的整数。要把理解和生成放进同一个模型，冲突就在这里。
@@ -335,7 +335,7 @@ ViT 让 Transformer 能看图，但图和语言还是分开的。接下来要做
 **注意力共享，别的参数按任务分开。** BAGEL 走的是这一条。理解侧仍然是 SigLIP2 的 ViT，经两层 MLP 进语言模型；生成侧用 FLUX 的 VAE 把图像压到潜空间，再切成 token。两边共用自注意力：理解专家处理文本和 ViT token，生成专家处理 VAE token。token 能在注意力里互相看见，前馈则分开。公开权重是大约 14B 总参数、7B 激活，语言模型来自 Qwen2.5。它统一的是 Transformer 里面的那次混合，视觉前端还是两套，并没有把 ViT 拿掉。
 
 <div align="center">
-  <img src="/images/vlm_three_routes.png" width="92%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/vlm_three_routes.png" width="92%" />
 </div>
 
 还有更激进的做法：图像 patch 直接进出一个解码器，外面不再挂 ViT。那和 BAGEL 不是同一件事。看一个模型时，分开看三件事：前端有几套，注意力共不共享，生成预测的是离散码还是连续潜变量。
