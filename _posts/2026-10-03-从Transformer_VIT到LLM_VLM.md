@@ -359,20 +359,16 @@ ViT 让 Transformer 能看图，但图和语言还是分开的。后面这条线
 
 # 参考材料
 
-* Vaswani et al., [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
-* Dosovitskiy et al., [An Image is Worth 16x16 Words](https://arxiv.org/abs/2010.11929)
-* Radford et al., [CLIP](https://arxiv.org/abs/2103.00020)
-* Zhai et al., [SigLIP](https://arxiv.org/abs/2303.15343)
-* Liu et al., [LLaVA](https://arxiv.org/abs/2304.08485)
-* Alayrac et al., [Flamingo](https://arxiv.org/abs/2204.14198)
-* Chameleon Team, [Chameleon](https://arxiv.org/abs/2405.09818)
-* Chen et al., [Janus-Pro](https://arxiv.org/abs/2501.17811)
-* Deng et al., [BAGEL](https://arxiv.org/abs/2505.14683)
-* Berglund et al., [The Reversal Curse](https://arxiv.org/abs/2309.12288)
-* 杨保华，[大模型原理与架构](https://github.com/yeasy/llm_internals)，在线阅读见 [GitBook](https://yeasy.gitbook.io/llm_internals/)
-* 胡一征，[DeepSeek V4：长上下文时代的大模型技术革新](https://mp.weixin.qq.com/s/HTudCZAFM0fsNwSe9WN5Eg)
-* 云原生 Dream，[从 ViT 到多模态 Qwen](https://mp.weixin.qq.com/s/CSYMymCscW-KsRJdvggkDw)
-
-旧笔记里的截图仍用原来的地址。这篇新画的 8 张示意图放在仓库的 `images/` 下，文中写成 `/images/文件名.png`。之后如果迁到 `https://kwanwaipang.github.io/ubuntu_md_blog/images/`，文件名可以保持不变，只改链接前缀。
-
-配图里旧的部分来自 [Transformer / ViT 笔记](/Transformer/) 和 [CLIP 笔记](/CLIP/)。
+* [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+* [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
+* [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
+* [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343)
+* [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485)
+* [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)
+* [Chameleon: Mixed-Modal Early-Fusion Foundation Models](https://arxiv.org/abs/2405.09818)
+* [Janus-Pro: Unified Multimodal Understanding and Generation with Data and Model Scaling](https://arxiv.org/abs/2501.17811)
+* [Emerging Properties in Unified Multimodal Pretraining](https://arxiv.org/abs/2505.14683)
+* [The Reversal Curse: LLMs trained on "A is B" fail to learn "B is A"](https://arxiv.org/abs/2309.12288)
+* [大模型原理与架构](https://github.com/yeasy/llm_internals)
+* [DeepSeek V4：长上下文时代的大模型技术革新](https://mp.weixin.qq.com/s/HTudCZAFM0fsNwSe9WN5Eg)
+* [从ViT到多模态Qwen，一文读懂2020-2026多模态大模型进化史](https://mp.weixin.qq.com/s/CSYMymCscW-KsRJdvggkDw)
