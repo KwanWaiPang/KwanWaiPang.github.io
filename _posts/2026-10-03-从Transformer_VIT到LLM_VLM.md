@@ -38,7 +38,7 @@ excerpt: "从 Attention 讲起，看图像怎么变成 token，语言模型怎�
 Attention 做的就是类似的事。当前位置不会把全部历史机械地读一遍，而是先判断哪些历史 token 更相关，再把相关的信息取回来。
 
 <div align="center">
-  <img src="/images/attn_sentence.png" width="92%" />
+  <img src="https://r-c-group.github.io/blog_media/VIT_VLM/attn_sentence.png" width="92%" />
 </div>
 
 ## Q、K、V
