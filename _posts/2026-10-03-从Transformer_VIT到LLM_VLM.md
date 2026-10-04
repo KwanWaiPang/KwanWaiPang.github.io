@@ -18,19 +18,6 @@ excerpt: "把 Transformer 的 Attention、ViT、LLM、VLM 按一条线重新整�
 
 之前写过 [Transformer 和 ViT](/Transformer/)，也写过 [CLIP](/CLIP/)。后来看多模态模型，老是 ViT、LLM、VLM 混在一起。这篇就把这几块按顺序放回一条线上：先把 Attention 讲清楚，再看 ViT 怎么把图切成 token，然后看 LLM 怎么靠「预测下一个词」把这套结构用起来，最后看 VLM 怎么把图和文接到同一次 Attention 里。
 
-本博文仅供本人学习记录。几处来源先写在这里，正文是在这些材料上改写的，不是原文照搬：
-
-* Attention 这一节，改写自胡一征[《DeepSeek V4：长上下文时代的大模型技术革新》](https://mp.weixin.qq.com/s/HTudCZAFM0fsNwSe9WN5Eg)里讲「人怎么读句子、Q/K/V 是什么」的那一段。后面 DeepSeek 的 MLA、DSA 没有往下抄。
-* LLM 这一节，改写自杨保华[《大模型原理与架构》](https://github.com/yeasy/llm_internals)里自回归、因果掩码、解码器为什么成为主流、KV cache 这几条主线。书里的例题和表格没有搬过来。
-* ViT、VLM 对照了云原生 Dream 的[《从 ViT 到多模态 Qwen》](https://mp.weixin.qq.com/s/CSYMymCscW-KsRJdvggkDw)，图和形状用的是我自己旧笔记里的。推文里有一处和论文对不上，BAGEL 那段我按论文改过，下面会标出来。
-
-相关旧笔记：
-
-* [What is Transformer? Form NLP to CV](/Transformer/)
-* [论文阅读笔记之——CLIP](/CLIP/)
-* [如何从大模型参数量估算显存占用](/大模型参数量与显存估算/)
-* [What is Teacher and Student Learning?](/teacher-and-student-forcing/)
-
 
 # 一、Transformer：Attention 到底在取什么
 
@@ -40,7 +27,7 @@ excerpt: "把 Transformer 的 Attention、ViT、LLM、VLM 按一条线重新整�
 
 ## 先看人怎么读一句话
 
-理解 Attention，比较直观的办法是先看人读句子。下面这个例子来自上面那篇文章，我按自己的理解重写了一遍。
+理解 Attention，比较直观的办法是先看人读句子。
 
 > 小明把书放进书包，因为他明天要考试。
 
@@ -368,13 +355,6 @@ ViT 让 Transformer 能看图，但图和语言还是分开的。后面这条线
 | 2023–2024，多模态理解 | LLM 能看图并写回答 | LLaVA、Qwen-VL、InternVL |
 | 2024–2025，理解和生成 | 同一个模型既看懂也生成 | Chameleon、Janus-Pro、BAGEL |
 | 再往后，更多模态 | 声音、视频也进序列 | GPT-4o、Qwen-Omni 这一类 |
-
-
-# 和自己其他笔记的关系
-
-VLM 把语义接进了序列，距离和能不能走过去并没有因此变成可度量的数。之前写 [空间基础模型](/Spatial-Foundation-Model/) 时想过这件事：语言 token 是一维的，机器人用的几何是三维的。
-
-导航和操作是在这条链路外面或里面再接动作。[具身智能导航](/具身智能导航/) 和 [VLA 综述](/VLA-survey-2025/) 里，视觉编码器经常还是 ViT，语言模型还是上面的解码器。动作有的变成额外 token，有的交给一个更小的控制模块。骨架没换，损失从「下一个词」变成了「下一个词，或者下一段轨迹」。
 
 
 # 参考材料
