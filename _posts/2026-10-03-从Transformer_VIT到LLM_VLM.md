@@ -131,7 +131,7 @@ Attention 需要的输入是一串向量。图像的形状是 `[高, 宽, 通道
   <img src="https://kwanwaipang.github.io/ubuntu_md_blog/images/b3b87535b91b51d80adc759455531f14.gif" width="88%" />
 </div>
 
-下图按步骤展开切块、嵌入，以及加入 class token 的过程。
+上图按步骤展开切块、嵌入，以及加入 class token 的过程。
 
 ## 以 ViT-B/16 为例
 
