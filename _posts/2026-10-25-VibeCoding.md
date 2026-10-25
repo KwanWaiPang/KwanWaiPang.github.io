@@ -88,6 +88,12 @@ Work_Space/
 | `ROADMAP.md`         | 未来计划与开发任务     | 未来准备实现的功能 |
 | `TASK_HANDOFF.md`    | 最近一次任务的开发交接 | 某次任务开发到一半、遇到什么问题 |
 
+接下来，你可能需要更改里面的部分规则，修改后，建议你补充下面的提示词
+
+```bash
+我已调整项目长期维护文档。请阅读并遵循最新的 AGENTS.md、PROJECT_CONTEXT.md、ROADMAP.md 和 docs/TASK_HANDOFF.md。
+```
+
 
 # 开始新任务
 
