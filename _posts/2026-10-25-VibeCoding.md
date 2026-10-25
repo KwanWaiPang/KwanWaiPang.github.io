@@ -45,7 +45,7 @@ excerpt: "以Codex为例，简述如何开启一个Vibe Coding的项目" # 【�
 
 * 提示词 A：项目首次初始化（适用于第一次打开已有代码仓库，或接手长期研发项目）
 
-```text
+```bash
 你将作为当前代码仓库的长期研发助手。
 
 请首先分析仓库结构、Git 状态、核心模块、
@@ -68,7 +68,7 @@ excerpt: "以Codex为例，简述如何开启一个Vibe Coding的项目" # 【�
 
 初始化后，建议你的仓库先保持这种简单结构：
 
-```text
+```bash
 Work_Space/
 ├── AGENTS.md
 ├── PROJECT_CONTEXT.md
@@ -94,7 +94,7 @@ Work_Space/
 
 如果你之后手动修改了这些文档，可以用下面的提示词让 AI 重新读取：
 
-```text
+```bash
 我已手动更新项目维护文档。
 请重新读取 AGENTS.md，并按需核对 PROJECT_CONTEXT.md、ROADMAP.md 和 docs/TASK_HANDOFF.md。
 
@@ -109,7 +109,7 @@ Work_Space/
 
 * 提示词 B：新任务开始（商量方案）
 
-```text
+```bash
 开始新任务：***
 
 请遵循 AGENTS.md，按任务需要读取 PROJECT_CONTEXT.md、ROADMAP.md 和 docs/TASK_HANDOFF.md，并检查当前 Git 与源码状态。
@@ -129,7 +129,7 @@ Work_Space/
 
 * 提示词 C：任务执行（开始写代码）
 
-```text
+```bash
 我同意上述开发方案，请开始实施。
 
 要求：
@@ -154,7 +154,7 @@ Work_Space/
 
 * 提示词 D：任务结束与交接
 
-```text
+```bash
 本轮任务准备收尾，请执行开发交接。
 
 1. 对照最初目标，区分已完成、未完成和待用户验证的内容。
@@ -174,7 +174,7 @@ Work_Space/
 
 * 提示词 E：下一个任务启动 
 
-```text
+```bash
 现在开始新的独立开发任务： ****
 
 请遵循 AGENTS.md，按需阅读 PROJECT_CONTEXT.md、ROADMAP.md 和 docs/TASK_HANDOFF.md，并以当前实际源码及 Git 状态为准。
@@ -206,7 +206,7 @@ Work_Space/
 
 日常开发时，我还会使用一些更简短的指令。
     
-```text
+```bash
 • 你对于我的这个需求还有没有什么不明白的，有的话你就提出来。如果没有的话，你先给我列一下实现这个需求的任务列表
 • 你对于我的这个需求还有没有什么不明白的，有的话你就提出来。如果没有的话，你开始执行吧（请注意，修改了代码后，不需要编译和运行，请先进行静态检查，我来编译验证）
 • 你对于我的这个需求还有没有什么不明白的，有的话你就提出来。如果没有的话，你开始执行吧（请注意，先分析，先不改代码）
