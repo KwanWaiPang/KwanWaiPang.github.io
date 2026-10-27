@@ -82,6 +82,28 @@ permalink: /about-cn/
 
 ## <svg class="section-icon" viewBox="0 0 576 512"><path d="M572.1 82.38C569.5 71.59 559.8 64 548.7 64h-100.8c.2422-12.45 .1078-23.7-.1559-33.02C447.3 13.63 433.2 0 415.8 0H160.2C142.8 0 128.7 13.63 128.2 30.98C127.1 40.3 127.8 51.55 128.1 64H27.26C16.16 64 6.537 71.59 3.912 82.38C3.1 85.78-15.71 167.2 37.07 245.9c37.44 55.82 100.6 95.03 187.5 117.4c18.7 4.805 31.41 22.06 31.41 41.37C256 428.5 236.5 448 212.6 448H208c-26.51 0-47.99 21.49-47.99 48c0 8.836 7.163 16 15.1 16h223.1c8.836 0 15.1-7.164 15.1-16c0-26.51-21.48-48-47.99-48h-4.644c-23.86 0-43.36-19.5-43.36-43.35c0-19.31 12.71-36.57 31.41-41.37c86.96-22.34 150.1-61.55 187.5-117.4C591.7 167.2 572.9 85.78 572.1 82.38zM77.41 219.8C49.47 178.6 47.01 140.4 48.81 112h80.34c-1.135 34.1 3.773 68.24 16.41 101.7C110.4 215.5 91.91 210.9 77.41 219.8zM498.6 219.8c-14.5-8.918-33.07-3.68-48.3 1.799C462.8 188.1 467.9 153.1 466.9 112h80.34C548.1 140.4 546.5 178.6 498.6 219.8z"/></svg> 项目经历
 
+{% comment %}
+产业化项目台账（YAML 格式，仅保留客户、年份、产品、金额四字段）
+以下记录通过 Liquid capture 存储在本页面中，不在博客正文显示。
+金额单位：万元；新增项目时按相同四字段格式追加即可。
+{% endcomment %}
+{% capture industrial_projects_yaml %}
+- customer: 广州农商银行
+  year: 2026
+  product: 智能厅堂助手硬件智能机器人
+  amount_wan: 170.5
+{% endcapture %}
+{% assign industrial_total_wan = 0 %}
+{% assign industrial_lines = industrial_projects_yaml | newline_to_br | split: '<br />' %}
+{% for line in industrial_lines %}
+  {% assign fragments = line | strip | split: ':' %}
+  {% assign field_name = fragments | first | strip %}
+  {% if field_name == 'amount_wan' %}
+    {% assign amount_value = fragments | last | strip | plus: 0 %}
+    {% assign industrial_total_wan = industrial_total_wan | plus: amount_value %}
+  {% endif %}
+{% endfor %}
+- 参与及主导研发的项目累计销售金额 **{{ industrial_total_wan | round: 2 }} 万元**。
 - 中山市重大科技专项资金项目（200万资助）《可见光通信高带宽全光谱LED封装关键技术攻关与产业化》
 - 广东大学生科技创新培育专项资金项目(一般项目，2万资助)《[基于机器学习的视觉可见光通信LED-ID的识别与检测算法的研究](https://www.gdcyl.org/xxb/ShowArticle.asp?ArticleID=237103)》
 - 广东大学生科技创新培育专项资金项目(重点项目，6万资助)《[基于视觉可见光通信的移动机器人室内高精度定位与导航的研究](https://www.gdcyl.org/xxb/ShowArticle.asp?ArticleID=230724)》
