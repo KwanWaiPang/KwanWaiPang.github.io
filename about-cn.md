@@ -104,7 +104,7 @@ permalink: /about-cn/
   {% endif %}
 {% endfor %}
 
-- 主导及参与的项目累计销售金额 **{{ industrial_total_wan | round: 3 }} 万元**。
+- 主导及参与研发的项目/产品累计销售金额 > **{{ industrial_total_wan | round: 3 }} 万元**。
 - 中山市重大科技专项资金项目（200万资助）《可见光通信高带宽全光谱LED封装关键技术攻关与产业化》
 - 广东大学生科技创新培育专项资金项目(一般项目，2万资助)《[基于机器学习的视觉可见光通信LED-ID的识别与检测算法的研究](https://www.gdcyl.org/xxb/ShowArticle.asp?ArticleID=237103)》
 - 广东大学生科技创新培育专项资金项目(重点项目，6万资助)《[基于视觉可见光通信的移动机器人室内高精度定位与导航的研究](https://www.gdcyl.org/xxb/ShowArticle.asp?ArticleID=230724)》
