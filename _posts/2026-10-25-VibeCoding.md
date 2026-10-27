@@ -19,6 +19,7 @@ excerpt: "以Codex为例，简述如何开启一个Vibe Coding的项目" # 【�
 >
 > 1. 重要任务先规划，再修改代码。
 > 2. Git 是长期维护的安全底座。
+> > GPT生成的完整文档：[从零建立 AI 项目的协作与规范](https://kwanwaipang.github.io/AgentCoding/)
 
 # 引言
 
