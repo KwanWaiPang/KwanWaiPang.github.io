@@ -52,7 +52,7 @@ excerpt: "" # 【指定摘要内容】
 * Transformer-based SLAM[Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM)
 * Awesome VLA[Paper List](https://github.com/KwanWaiPang/Awesome-VLA)
 * Awesome VLN[Paper List](https://github.com/KwanWaiPang/Awesome-VLN)
-* [论文阅读笔记之《MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors》](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html)
+* [论文阅读笔记之《MASt3R-SLAM: Real-Time Dense SLAM with 3D Reconstruction Priors》](https://kwanwaipang.github.io/MASt3R/)
 * [论文学习及实验笔记之——《VGGT: Visual Geometry Grounded Transformer》](https://kwanwaipang.github.io/VGGT/)
 
 

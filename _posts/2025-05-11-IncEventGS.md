@@ -123,7 +123,7 @@ pip install -U "transformers<=4.48.1"
 ```
 
 * 下载数据集及预训练模型[link](https://westlakeu-my.sharepoint.com/:f:/g/personal/cvgl_westlake_edu_cn/EooEsF6LJPJHnEqbTYo4qO0B4-dlbznGZlLy9BDLPAx_og?e=wmqeFP)
-* 下载ondrive数据[blog](https://kwanwaipang.github.io/File/Blogs/Poster/ubuntu%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE.html)
+* 下载ondrive数据[blog](https://kwanwaipang.github.io/ubuntu命令行下载数据/)
 
 ## 实验测试
 

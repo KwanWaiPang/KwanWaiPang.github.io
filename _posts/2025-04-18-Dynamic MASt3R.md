@@ -25,7 +25,7 @@ excerpt: "" # 【指定摘要内容】
 
 
 相关的资料：
-* MASt3R的复现：[blog](https://kwanwaipang.github.io/File/Blogs/Poster/MASt3R-SLAM.html#mast3r%E5%AE%9E%E9%AA%8C%E6%B5%8B%E8%AF%95)
+* MASt3R的复现：[blog](https://kwanwaipang.github.io/MASt3R/#mast3r%E5%AE%9E%E9%AA%8C%E6%B5%8B%E8%AF%95)
 * MASt3R-SLAM的复现：[blog](https://kwanwaipang.github.io/MASt3R-SLAM/)
 * Survey for Transformer-based SLAM：[Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) and [Blog](https://kwanwaipang.github.io/Transformer_SLAM/)
 * 博客：[What is Transformer? Form NLP to CV](https://kwanwaipang.github.io/Transformer/)

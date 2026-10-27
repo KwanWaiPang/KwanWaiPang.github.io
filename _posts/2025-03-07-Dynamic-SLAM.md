@@ -46,7 +46,6 @@ excerpt: "" # 【指定摘要内容】
 <br>
 
 * 😁原创不易，如果使用请给出引用以及给个star <a class="github-button"   href="https://github.com/KwanWaiPang/KwanWaiPang.github.io"   data-icon="octicon-star"   data-size="large"  data-show-count="true"  aria-label="Star 你的用户名/你的仓库名 on GitHub">Star</a>谢谢😊
-* Previous Survey for Dynamic-SLAM: [Blog](https://kwanwaipang.github.io/File/Blogs/Poster/survey_dynamic_SLAM.html)
 * 基于3DGS以及Transformer的也有大量跟Dynamic-SLAM相关的工作，具体请见：
   * Awesome-Transformer-based-SLAM: [Paper List](https://github.com/KwanWaiPang/Awesome-Transformer-based-SLAM) 
   * Awesome-3DGS-SLAM: [Paper List](https://github.com/KwanWaiPang/Awesome-3DGS-SLAM)
@@ -59,6 +58,7 @@ excerpt: "" # 【指定摘要内容】
 |:----:|:-----:| ----------- |:----------:|:----:|
 |2025|`arXiv`|[Dynamic Visual SLAM using a General 3D Prior](https://arxiv.org/pdf/2512.06868)|[![Github stars](https://img.shields.io/github/stars/PRBonn/Pi3MOS-SLAM.svg)](https://github.com/PRBonn/Pi3MOS-SLAM)|采用patch-based bundle adjustment（DPV-SLAM）与前馈模型（π³mos）相结合的方式实现SLAM，通过前馈模型来过滤动态区域，然后用深度预测来进行inpainting；π³mos是基于π³的，先通过DINOv2来提取语义（移动物体）|
 |2026|`Pattern Recognition`|[RGD-SLAM: Robust Gaussian Splatting SLAM for Dynamic Environments](https://www.sciencedirect.com/science/article/pii/S0031320326000348)|[![Github stars](https://img.shields.io/github/stars/RGD-SLAM.svg)](https://github.com/00Haocheng/RGD-SLAM)|---|
+|2026|`RAL`|[Online Dynamic SLAM with Incremental Smoothing and Mapping](https://ieeexplore.ieee.org/abstract/document/11358721/)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|提出 Hybrid 因子图，把物体中心的点表示和世界中心的刚体运动合在一起：动态点作为静态变量放在物体首次观测时固定的嵌入坐标系中，运动估计为把该坐标系及其全部点从首次观测时刻送到当前帧的世界系刚体变换。由此显式保持刚体约束，使因子图更稀疏并可用 iSAM2 增量求解，同时直接恢复各帧物体位姿、体坐标速度和累积物体地图；相机位姿与物体运动精度和 DynoSAM 的世界中心结果相当|
 |2025|`RAL`|[Freeze-Frame With StaticNeRF: Uncertainty-Guided NeRF Map Reconstruction in Dynamic Scenes](https://ieeexplore.ieee.org/abstract/document/11242041/)|---|---|
 |2025|`Sensor`|[Dynamic SLAM by Combining Rigid Feature Point Set Modeling and YOLO](https://www.mdpi.com/1424-8220/26/1/235)|---|---|
 |2025|`RAL`|[DOGL-SLAM: Dynamic Object-Level SLAM via Joint Gaussian-Landmark Tracking](https://ieeexplore.ieee.org/abstract/document/11278733/)|---|---|
@@ -84,7 +84,7 @@ excerpt: "" # 【指定摘要内容】
 |2025|`TASE`|[SDS-SLAM: VSLAM Fusing Static and Dynamic Semantic Information for Driving Scenarios](https://ieeexplore.ieee.org/abstract/document/11015815)|---|---|
 |2025|`TIM`|[DOG-SLAM: Enhancing Dynamic Visual SLAM Precision Through GMM-Based Dynamic Object Removal and ORB-Boost](https://ieeexplore.ieee.org/abstract/document/10908975/)|---|---|
 |2025|`arXiv`|[DynaGSLAM: Real-Time Gaussian-Splatting SLAM for Online Rendering, Tracking, Motion Predictions of Moving Objects in Dynamic Scenes](https://arxiv.org/pdf/2503.11979)|[![Github stars](https://img.shields.io/github/stars/BlarkLee/DynaGSLAM_official.svg)](https://github.com/BlarkLee/DynaGSLAM_official)|[website](https://blarklee.github.io/dynagslam/)| 
-|2025|`arXiv`|[DynoSAM: Open-Source Smoothing and Mapping Framework for Dynamic SLAM](https://arxiv.org/pdf/2501.11893)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|---|
+|2025|`TRO`|[DynoSAM: Open-Source Smoothing and Mapping Framework for Dynamic SLAM](https://ieeexplore.ieee.org/abstract/document/11288097/)|[![Github stars](https://img.shields.io/github/stars/ACFR-RPG/DynOSAM.svg)](https://github.com/ACFR-RPG/DynOSAM)|---|
 |2025|`CVPR`|[Dynamic Camera Poses and Where to Find Them](https://arxiv.org/pdf/2504.17788)|---|[website](https://research.nvidia.com/labs/dir/dynpose-100k/)<br>[dataset](https://huggingface.co/datasets/nvidia/dynpose-100k)|
 |2025|`arXiv`|[Back on Track: Bundle Adjustment for Dynamic Scene Reconstruction](https://arxiv.org/pdf/2504.14516)|---|[website](https://wrchen530.github.io/projects/batrack/)|
 |2024|`arXiv`|[2FAST-2LAMAA: A Lidar-Inertial Localisation and Mapping Framework for Non-Static Environments](https://arxiv.org/pdf/2410.05433)|[![Github stars](https://img.shields.io/github/stars/UTS-RI/2fast2lamaa.svg)](https://github.com/UTS-RI/2fast2lamaa)|---|

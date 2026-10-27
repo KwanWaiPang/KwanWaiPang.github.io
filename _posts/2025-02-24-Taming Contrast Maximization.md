@@ -43,7 +43,7 @@ pip install -r requirements.txt
 # 数据的下载
 
 * 数据链接：[here](https://1drv.ms/u/s!Ah0kx0CRKrAZjxMxBx4z5HN1CjWv?e=UiayaL) 并且将数据下载到 `/datasets/`文件夹内（在文件夹内下载然后解压~）.
-* 用OneDrive下载数据到服务器可以参考：[Link](https://kwanwaipang.github.io/File/Blogs/Poster/ubuntu%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE.html#onedrive)
+* 用OneDrive下载数据到服务器可以参考：[Link](https://kwanwaipang.github.io/ubuntu命令行下载数据/#onedrive)
 
 # 预训练模型的下载
 * 预训练模型：[here](https://1drv.ms/u/s!Ah0kx0CRKrAZjxSwx8-UTUAncgg3?e=yM2g0i), 并放在文件夹 `mlruns/`（下载后直接解压即可）.

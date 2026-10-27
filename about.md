@@ -47,14 +47,45 @@ If you find this blog is useful, a simple star (<a class="github-button"
             font-size: 16px !important;
             color: #000;
           }
-          /* 确保 Shadow DOM 内部的 table 能够撑开宽度 */
-          table { width: 100%; border-spacing: 0; }
+          *, *::before, *::after { box-sizing: border-box; }
+          /* fixed 才能真正吃到 td 的 30%/70%，避免头像按图片固有宽度把简介挤窄 */
+          table {
+            width: 100%;
+            border-spacing: 0;
+            table-layout: fixed;
+          }
+          /* 与学术主页 index.html 的 900px 版心对齐 */
+          table[width="900"] {
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          td { vertical-align: top; }
+          img, video { max-width: 100%; height: auto; }
+          table.intro-profile > tbody > tr > td:first-child,
+          table.intro-profile > tr > td:first-child { width: 30%; }
+          table.intro-profile > tbody > tr > td:last-child,
+          table.intro-profile > tr > td:last-child { width: 70%; }
+          table.intro-profile img {
+            width: 100%;
+            height: auto;
+            display: block;
+          }
         </style>
       `;
 
       // 直接注入全部代码
       shadow.innerHTML = resetStyle+html;
       container.childNodes[0].textContent = ""; // 加载成功后移除 "Loading..." 文字
+
+      // 锁定「头像 | 简介」那一张表的 30/70，与图2（学术主页）一致
+      const introTable = Array.from(shadow.querySelectorAll('table')).find((table) => {
+        const row = table.querySelector('tr');
+        if (!row) return false;
+        const cells = row.querySelectorAll(':scope > td');
+        return cells.length === 2 && cells[0].querySelector('img[src*="Guan_Weipeng"]');
+      });
+      if (introTable) introTable.classList.add('intro-profile');
 
       // 动态修复 Shadow DOM 内部的相对路径 
       const elements = shadow.querySelectorAll('[href], [src]');
@@ -96,5 +127,14 @@ If you find this blog is useful, a simple star (<a class="github-button"
   margin: 0;
   padding: 0;
   border: none;
+}
+
+/* About 正文略加宽，让嵌入的学术主页能接近原 900px 版心（侧栏桌面布局） */
+@media screen and (min-width: 1201px) {
+  .wrapper-content > .container {
+    max-width: min(920px, calc(100% - 16px));
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }
 </style>

@@ -94,7 +94,7 @@ permalink: /about-cn/
 
 - 发表论文70+篇：[Google Scholar](https://scholar.google.com/citations?user=fUU5Cv0AAAAJ)
 - 授权发明专利50+项：[专利列表](https://kwanwaipang.github.io/File/Representative_works/Granted_patents.html)
-- 2021，2022，2023年被斯坦福大学评选为世界前2%顶尖科学家 ([Profile](https://topresearcherslist.com/Home/Profile/755856))
+- 2021，2022，2023，2026年被斯坦福大学评选为世界前2%顶尖科学家 ([Profile](https://topresearcherslist.com/Home/Profile/755856))
 - 广东省光电技术协会科学技术奖-发明技术-一等奖《[通照、通显一体化可见光通信关键技术与应用](https://kwanwaipang.github.io/ubuntu_md_blog/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250213102955.jpg)》
 - 广东省第十五届“挑战杯”大学生课外学术科技作品竞赛-省决赛-特等奖《[基于可见光通信移动机器人定位技术的研究](https://r-c-group.github.io/blog_media/images/挑战杯省赛奖状背面.jpg)》
 - 期刊/会议论文审稿人：TRO、TIST、TII、TMM、TASE、TMECH、RAL、IROS、ICRA等

@@ -244,5 +244,5 @@ excerpt: "" # 【指定摘要内容】
 * [具身智能创业项目信息汇总](https://github.com/FreesiaGPT/Embodied-AI)
 * [干货丨浅谈足式机器人的运动控制](https://mp.weixin.qq.com/s/9pprjWlu_ka5mXWZk9qgJQ?poc_token=HEiW1Gij26g5HoPZRv-jEH0tk4LLfFEc7JxP9TIC)
 * [领先特斯拉Optimus，全球首款商业可售的混动架构人形机器人正式启动量产！](https://mp.weixin.qq.com/s/hb_jZQCK2TSJ96UC4S01Tw)
-* [Figure 03 发布 | 面向家庭和生产的系统性重构与优化，自研触觉传感器，计划四年生产十万台](https://mp.weixin.qq.com/s/WF-1SP6eE1-fdgS2nBk9FQ)
+* [Figure 03 发布 面向家庭和生产的系统性重构与优化，自研触觉传感器，计划四年生产十万台](https://mp.weixin.qq.com/s/WF-1SP6eE1-fdgS2nBk9FQ)
 

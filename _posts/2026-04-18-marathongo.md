@@ -33,7 +33,6 @@ Marathongo 是朗毅机器人开源的一个面向人形机器人马拉松等**�
   </table>
   <figcaption>运行演示</figcaption>
 </div>
-
   
 
 # 一、总体架构

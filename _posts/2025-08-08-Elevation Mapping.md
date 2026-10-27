@@ -14,7 +14,7 @@ excerpt: "" # 【指定摘要内容】
 {:toc} -->
 
 
-之前[博客](https://kwanwaipang.github.io/File/Blogs/Poster/%E8%A7%86%E8%A7%89SLAM.html#slam%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E5%9C%B0%E5%9B%BE%E8%A1%A8%E8%BE%BE%E6%96%B9%E5%BC%8F)调研过SLAM的各种地图表征，本博文深入调研一下Elevation Map。
+之前[博客](https://kwanwaipang.github.io/视觉SLAM/#slam%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E5%9C%B0%E5%9B%BE%E8%A1%A8%E8%BE%BE%E6%96%B9%E5%BC%8F)调研过SLAM的各种地图表征，本博文深入调研一下Elevation Map。
 
 传统导航技术在轮式平台上的应用（如扫地机器人、AGV 和自动驾驶汽车等）已经相当成熟，能够在结构化场景中实现稳定运行。
 然而，足式机器人的高动态特性和复杂环境的干扰，使得传统导航方法的表现大打折扣:
