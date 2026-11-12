@@ -92,6 +92,17 @@ permalink: /about-cn/
   year: 2026
   product: 智能厅堂助手硬件智能机器人
   amount_wan: 170.5
+
+- customer: 安哥拉（运通国际）
+  year: 2026
+  product: 智能厅堂助手硬件智能机器人
+  amount_wan: 25
+
+- customer: 罗马尼亚（运通国际）
+  year: 2026
+  product: 智能厅堂助手硬件智能机器人
+  amount_wan: 25
+
 {% endcapture %}
 {% assign industrial_total_wan = 0 %}
 {% assign industrial_lines = industrial_projects_yaml | newline_to_br | split: '<br />' %}
