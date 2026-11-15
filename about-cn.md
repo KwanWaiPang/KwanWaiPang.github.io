@@ -133,6 +133,10 @@ permalink: /about-cn/
 - 广东省光电技术协会科学技术奖-发明技术-一等奖《[通照、通显一体化可见光通信关键技术与应用](https://kwanwaipang.github.io/ubuntu_md_blog/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250213102955.jpg)》
 - 广东省第十五届“挑战杯”大学生课外学术科技作品竞赛-省决赛-特等奖《[基于可见光通信移动机器人定位技术的研究](https://r-c-group.github.io/blog_media/images/挑战杯省赛奖状背面.jpg)》
 
+<!-- 
+- 第三届广东省宋庆龄奖学金（[Link](http://www.gdsclf.org/xwzx/jjhxm/xmjj/gdssqljxj/201108/466.html)） 
+-->
+
 <br>
 
 
