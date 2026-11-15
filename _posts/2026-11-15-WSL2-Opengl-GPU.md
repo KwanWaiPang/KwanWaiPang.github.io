@@ -22,7 +22,7 @@ excerpt: "记录 Ubuntu 20.04 + ROS Noetic + WSLg 环境下，OpenGL 默认使�
 
 之前博客[解决 WSL2 中 RViz 使用 CPU 渲染的问题](https://kwanwaipang.github.io/WSL2-rviz/)通过配置`rviz-gpu`实现了使用gpu来加速rviz，但还是治标不治本，opengl还是没有真正实现用GPU加速，而且每次的适配都会比较麻烦，本博文通过更新安装`sudo apt install libgl1-mesa-dri libglx-mesa0 libegl-mesa0 libgbm1 mesa-vulkan-drivers`最终实现opengl的GPU加速
 
-最终效果如下所示：
+最终效果如下所示，运行`glxinfo -B | grep -E 'Device:|Accelerated:|OpenGL renderer'`：
 
 <div align="center">
   <img src="https://r-c-group.github.io/blog_media/images/ScreenShot_2026-11-15_192742_322.png" width="90%" />
