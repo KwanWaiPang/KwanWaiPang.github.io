@@ -152,7 +152,7 @@ Inner Monologue 的核心价值，是把环境反馈重新引入规划过程。�
 下面这张图将本文讨论的核心关系放在一起：任务级和大脑级感知面向认知，技能级感知面向动作；大脑通过执行反馈理解小脑的行为，并在必要时调整策略。
 
 <div align="center">
-  <img src="./images/embodied_architecture_overview.png" width="90%" />
+  <img src="https://r-c-group.github.io/blog_media/images/embodied_architecture_overview.png" width="90%" />
   <figcaption>
     图：具身智能中的任务级 / 大脑级 / 技能级分层感知与协同闭环。
   </figcaption>
